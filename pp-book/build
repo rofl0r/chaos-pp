@@ -1,0 +1,37 @@
+# $1 == library specification file
+# $2 == source path
+# $3 == destination path
+# $4 == regular expression
+
+clear
+
+echo expanding library...
+msxsl "$1" library.xsl -o .library.xml source="$2"
+
+echo generating symbol table...
+msxsl .library.xml symbol.xsl -o .symbol.xsl
+
+echo copying support files...
+mkdir -p "$3"
+cp style.css "$3"/style.css
+cp background.gif "$3"/background.gif
+
+echo creating indices...
+msxsl .library.xml index.xsl -o "$3"/documents.html source="$2"
+msxsl .library.xml index.xsl -m headers -o "$3"/headers.html source="$2"
+msxsl .library.xml index.xsl -m primary -o "$3"/primary.html source="$2"
+msxsl .library.xml index.xsl -m secondary -o "$3"/secondary.html source="$2"
+
+echo generating meta-transformations...
+msxsl "$1" meta.xsl -o .meta.xsl source="$2"
+
+echo generating script...
+msxsl "$1" script.xsl -o .script
+chmod +rx .script
+
+echo executing script...
+echo "" > .temp.xml
+./.script $@
+
+echo deleting temporary files...
+rm .library.xml .meta.xsl .script .symbol.xsl .temp.xml

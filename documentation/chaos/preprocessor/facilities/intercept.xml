@@ -4,7 +4,7 @@
 	The <self/> header defines a macro that intercepts the concatenation of a numeric value.
 </overview>
 
-<macro id="INTERCEPT">
+<macro id="INTERCEPT" type="object">
 	<abstract>
 		The <INTERCEPT/> macro expands to an entity that expands to nothing when a number is concatenated to it.
 	</abstract>

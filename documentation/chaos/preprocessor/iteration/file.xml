@@ -84,6 +84,7 @@
 	<para>
 		The <ITERATION_PARAMS/> macro must be defined prior to initiating a <link id="file-iteration"/>.
 	</para>
+	<x-reference id="ITERATION_PARAMS"/>
 	<listing>
 		// file.h
 		#if !<IS_ITERATING/>
@@ -114,7 +115,6 @@
 		
 		#endif
 	</listing>
-	<x-reference id="ITERATION_PARAMS"/>
 	<derivative id="ITERATE_ID"/>
 	<derivative id="ITERATE_" lang="C99"/>
 </macro>

@@ -12,10 +12,10 @@
 # ifndef CHAOS_PREPROCESSOR_ARBITRARY_EQUAL_H
 # define CHAOS_PREPROCESSOR_ARBITRARY_EQUAL_H
 #
-# include <chaos/_preprocessor/arbitrary/detail/fix.h>
-# include <chaos/_preprocessor/arbitrary/detail/merge.h>
-# include <chaos/_preprocessor/arbitrary/detail/scan.h>
-# include <chaos/_preprocessor/arbitrary/sign.h>
+# include <chaos/preprocessor/arbitrary/detail/fix.h>
+# include <chaos/preprocessor/arbitrary/detail/merge.h>
+# include <chaos/preprocessor/arbitrary/detail/scan.h>
+# include <chaos/preprocessor/arbitrary/sign.h>
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/detection/is_unary.h>
 # include <chaos/preprocessor/facilities/empty.h>

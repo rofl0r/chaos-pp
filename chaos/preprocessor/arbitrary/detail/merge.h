@@ -12,10 +12,10 @@
 # ifndef CHAOS_PREPROCESSOR_ARBITRARY_DETAIL_MERGE_H
 # define CHAOS_PREPROCESSOR_ARBITRARY_DETAIL_MERGE_H
 #
-# include <chaos/_preprocessor/arbitrary/detail/is_shorter.h>
-# include <chaos/_preprocessor/arbitrary/detail/scan.h>
-# include <chaos/_preprocessor/arbitrary/detail/special.h>
-# include <chaos/_preprocessor/arbitrary/detail/swap.h>
+# include <chaos/preprocessor/arbitrary/detail/is_shorter.h>
+# include <chaos/preprocessor/arbitrary/detail/scan.h>
+# include <chaos/preprocessor/arbitrary/detail/special.h>
+# include <chaos/preprocessor/arbitrary/detail/swap.h>
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/control/iif.h>
 # include <chaos/preprocessor/facilities/empty.h>

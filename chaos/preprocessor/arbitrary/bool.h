@@ -12,8 +12,8 @@
 # ifndef CHAOS_PREPROCESSOR_ARBITRARY_BOOL_H
 # define CHAOS_PREPROCESSOR_ARBITRARY_BOOL_H
 #
-# include <chaos/_preprocessor/arbitrary/detail/fix.h>
-# include <chaos/_preprocessor/arbitrary/sign.h>
+# include <chaos/preprocessor/arbitrary/detail/fix.h>
+# include <chaos/preprocessor/arbitrary/sign.h>
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/control/inline_when.h>
 # include <chaos/preprocessor/detection/is_nullary.h>

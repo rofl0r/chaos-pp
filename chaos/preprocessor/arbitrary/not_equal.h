@@ -12,7 +12,7 @@
 # ifndef CHAOS_PREPROCESSOR_ARBITRARY_NOT_EQUAL_H
 # define CHAOS_PREPROCESSOR_ARBITRARY_NOT_EQUAL_H
 #
-# include <chaos/_preprocessor/arbitrary/equal.h>
+# include <chaos/preprocessor/arbitrary/equal.h>
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/logical/compl.h>

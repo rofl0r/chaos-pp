@@ -12,7 +12,7 @@
 # ifndef CHAOS_PREPROCESSOR_ARBITRARY_LITERAL_H
 # define CHAOS_PREPROCESSOR_ARBITRARY_LITERAL_H
 #
-# include <chaos/_preprocessor/arbitrary/detail/fix.h>
+# include <chaos/preprocessor/arbitrary/detail/fix.h>
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/control/iif.h>
 # include <chaos/preprocessor/control/inline_when.h>

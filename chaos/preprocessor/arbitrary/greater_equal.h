@@ -12,7 +12,7 @@
 # ifndef CHAOS_PREPROCESSOR_ARBITRARY_GREATER_EQUAL_H
 # define CHAOS_PREPROCESSOR_ARBITRARY_GREATER_EQUAL_H
 #
-# include <chaos/_preprocessor/arbitrary/less_equal.h>
+# include <chaos/preprocessor/arbitrary/less_equal.h>
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/lambda/ops.h>
 #

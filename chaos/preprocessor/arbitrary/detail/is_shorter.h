@@ -12,8 +12,8 @@
 # ifndef CHAOS_PREPROCESSOR_ARBITRARY_DETAIL_IS_SHORTER_H
 # define CHAOS_PREPROCESSOR_ARBITRARY_DETAIL_IS_SHORTER_H
 #
-# include <chaos/_preprocessor/arbitrary/detail/scan.h>
-# include <chaos/_preprocessor/arbitrary/detail/special.h>
+# include <chaos/preprocessor/arbitrary/detail/scan.h>
+# include <chaos/preprocessor/arbitrary/detail/special.h>
 # include <chaos/preprocessor/detection/is_unary.h>
 # include <chaos/preprocessor/punctuation/paren.h>
 # include <chaos/preprocessor/recursion/basic.h>

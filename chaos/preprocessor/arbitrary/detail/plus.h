@@ -12,7 +12,7 @@
 # ifndef CHAOS_PREPROCESSOR_ARBITRARY_DETAIL_PLUS_H
 # define CHAOS_PREPROCESSOR_ARBITRARY_DETAIL_PLUS_H
 #
-# include <chaos/_preprocessor/arbitrary/detail/lookup.h>
+# include <chaos/preprocessor/arbitrary/detail/lookup.h>
 # include <chaos/preprocessor/cat.h>
 # include <chaos/preprocessor/facilities/binary.h>
 # include <chaos/preprocessor/facilities/indirect.h>

@@ -12,8 +12,8 @@
 # ifndef CHAOS_PREPROCESSOR_ARBITRARY_DETAIL_FIX_H
 # define CHAOS_PREPROCESSOR_ARBITRARY_DETAIL_FIX_H
 #
-# include <chaos/_preprocessor/arbitrary/bool.h>
-# include <chaos/_preprocessor/arbitrary/sign.h>
+# include <chaos/preprocessor/arbitrary/bool.h>
+# include <chaos/preprocessor/arbitrary/sign.h>
 # include <chaos/preprocessor/control/if.h>
 # include <chaos/preprocessor/control/iif.h>
 # include <chaos/preprocessor/control/inline_unless.h>

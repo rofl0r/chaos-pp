@@ -12,13 +12,13 @@
 # ifndef CHAOS_PREPROCESSOR_ARBITRARY_ADD_H
 # define CHAOS_PREPROCESSOR_ARBITRARY_ADD_H
 #
-# include <chaos/_preprocessor/arbitrary/detail/fix.h>
-# include <chaos/_preprocessor/arbitrary/detail/merge.h>
-# include <chaos/_preprocessor/arbitrary/detail/plus.h>
-# include <chaos/_preprocessor/arbitrary/detail/scan.h>
-# include <chaos/_preprocessor/arbitrary/less_equal.h>
-# include <chaos/_preprocessor/arbitrary/sign.h>
-# include <chaos/_preprocessor/arbitrary/sub.h>
+# include <chaos/preprocessor/arbitrary/detail/fix.h>
+# include <chaos/preprocessor/arbitrary/detail/merge.h>
+# include <chaos/preprocessor/arbitrary/detail/plus.h>
+# include <chaos/preprocessor/arbitrary/detail/scan.h>
+# include <chaos/preprocessor/arbitrary/less_equal.h>
+# include <chaos/preprocessor/arbitrary/sign.h>
+# include <chaos/preprocessor/arbitrary/sub.h>
 # include <chaos/preprocessor/cat.h>
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/control/iif.h>

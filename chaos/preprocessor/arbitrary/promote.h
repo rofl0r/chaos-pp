@@ -12,7 +12,7 @@
 # ifndef CHAOS_PREPROCESSOR_ARBITRARY_PROMOTE_H
 # define CHAOS_PREPROCESSOR_ARBITRARY_PROMOTE_H
 #
-# include <chaos/_preprocessor/arbitrary/detail/fix.h>
+# include <chaos/preprocessor/arbitrary/detail/fix.h>
 # include <chaos/preprocessor/cat.h>
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/control/iif.h>

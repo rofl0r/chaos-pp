@@ -12,11 +12,11 @@
 # ifndef CHAOS_PREPROCESSOR_ARBITRARY_DEC_H
 # define CHAOS_PREPROCESSOR_ARBITRARY_DEC_H
 #
-# include <chaos/_preprocessor/arbitrary/detail/fix.h>
-# include <chaos/_preprocessor/arbitrary/detail/scan.h>
-# include <chaos/_preprocessor/arbitrary/detail/special.h>
-# include <chaos/_preprocessor/arbitrary/inc.h>
-# include <chaos/_preprocessor/arbitrary/sign.h>
+# include <chaos/preprocessor/arbitrary/detail/fix.h>
+# include <chaos/preprocessor/arbitrary/detail/scan.h>
+# include <chaos/preprocessor/arbitrary/detail/special.h>
+# include <chaos/preprocessor/arbitrary/inc.h>
+# include <chaos/preprocessor/arbitrary/sign.h>
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/facilities/empty.h>
 # include <chaos/preprocessor/facilities/split.h>

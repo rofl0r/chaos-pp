@@ -28,4 +28,21 @@
 #    define CHAOS_PP_VARIADICS 0
 # endif
 #
+# /* CHAOS_PP_NO_PREFIX */
+#
+# if CHAOS_PP_VARIADICS
+#    if !defined CHAOS_PP_NO_PREFIX
+#        define CHAOS_PP_NO_PREFIX 0
+#    elif !CHAOS_PP_NO_PREFIX + 1 < 2
+#        undef CHAOS_PP_NO_PREFIX
+#        define CHAOS_PP_NO_PREFIX 1
+#    else
+#        undef CHAOS_PP_NO_PREFIX
+#        define CHAOS_PP_NO_PREFIX 0
+#    endif
+# else
+#    undef CHAOS_PP_NO_PREFIX
+#    define CHAOS_PP_NO_PREFIX 0
+# endif
+#
 # endif

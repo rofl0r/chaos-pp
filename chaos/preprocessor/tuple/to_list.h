@@ -71,7 +71,7 @@
 #
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_TUPLE_TO_LIST_ALT_BYPASS(s, tuple) \
-        CHAOS_PP_EXPR_S(s)(CHAOS_IP_TUPLE_TO_LIST_ALT_0( \
+        CHAOS_PP_EXPR_S(s)(CHAOS_IP_TUPLE_TO_LIST_ALT_I( \
             CHAOS_PP_OBSTRUCT(), CHAOS_PP_PREV(s), tuple \
         )) \
         /**/
@@ -80,33 +80,20 @@
 # endif
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_IP_TUPLE_TO_LIST_ALT_INDIRECT(n) CHAOS_IP_TUPLE_TO_LIST_ALT_ ## n
-#    define CHAOS_IP_TUPLE_TO_LIST_ALT_0(_, s, tuple) \
-        CHAOS_PP_IIF _(CHAOS_PP_TUPLE_IS_BATCH(10, tuple))( \
-            CHAOS_PP_EXPR_S _(s)(CHAOS_PP_OBSTRUCT(CHAOS_IP_TUPLE_TO_LIST_ALT_I)( \
-                CHAOS_PP_TUPLE_REM_CTOR _(10, CHAOS_PP_TUPLE_BATCH _(10, tuple)), \
-                CHAOS_PP_EXPR_S _(s)(CHAOS_IP_TUPLE_TO_LIST_ALT_INDIRECT _(0)( \
-                    CHAOS_PP_OBSTRUCT _(), CHAOS_PP_PREV(s), CHAOS_PP_TUPLE_SANS_BATCH _(10, tuple) \
+#    define CHAOS_IP_TUPLE_TO_LIST_ALT_INDIRECT() CHAOS_IP_TUPLE_TO_LIST_ALT_I
+#    define CHAOS_IP_TUPLE_TO_LIST_ALT_I(_, s, tuple) \
+        CHAOS_PP_IIF _(CHAOS_PP_TUPLE_IS_BATCH(25, tuple))( \
+            CHAOS_PP_EXPR_S _(s)(CHAOS_PP_OBSTRUCT(CHAOS_IP_TUPLE_TO_LIST_ALT_II)( \
+                CHAOS_PP_TUPLE_REM_CTOR _(?, CHAOS_PP_TUPLE_BATCH _(25, tuple)), \
+                CHAOS_PP_EXPR_S _(s)(CHAOS_IP_TUPLE_TO_LIST_ALT_INDIRECT _()( \
+                    CHAOS_PP_OBSTRUCT _(), CHAOS_PP_PREV(s), CHAOS_PP_TUPLE_SANS_BATCH _(25, tuple) \
                 )) \
             )), \
-            CHAOS_PP_EXPR_S _(s)(CHAOS_IP_TUPLE_TO_LIST_ALT_INDIRECT _(1)( \
-                CHAOS_PP_OBSTRUCT _(), CHAOS_PP_PREV(s), tuple \
-            )) \
+            CHAOS_PP_TUPLE_TO_LIST _(CHAOS_PP_TUPLE_BATCH_FORK _(25, tuple), tuple) \
         ) \
         /**/
-#    define CHAOS_IP_TUPLE_TO_LIST_ALT_1(_, s, tuple) \
-        CHAOS_PP_IIF _(CHAOS_PP_TUPLE_IS_CONS(tuple))( \
-            ( \
-                CHAOS_PP_TUPLE_FIRST _(tuple), \
-                CHAOS_PP_EXPR_S _(s)(CHAOS_IP_TUPLE_TO_LIST_ALT_INDIRECT _(1)( \
-                    CHAOS_PP_OBSTRUCT _(), CHAOS_PP_PREV(s), CHAOS_PP_TUPLE_REST _(tuple) \
-                )) \
-            ), \
-            ... \
-        ) \
-        /**/
-#    define CHAOS_IP_TUPLE_TO_LIST_ALT_I(a, b, c, d, e, f, g, h, i, j, tail) \
-        (a, (b, (c, (d, (e, (f, (g, (h, (i, (j, tail)))))))))) \
+#    define CHAOS_IP_TUPLE_TO_LIST_ALT_II(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z) \
+        (a, (b, (c, (d, (e, (f, (g, (h, (i, (j, (k, (l, (m, (n, (o, (p, (q, (r, (s, (t, (u, (v, (w, (x, (y, z))))))))))))))))))))))))) \
         /**/
 # endif
 #

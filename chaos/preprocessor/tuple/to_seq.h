@@ -71,7 +71,7 @@
 #
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_TUPLE_TO_SEQ_ALT_BYPASS(s, tuple) \
-        CHAOS_PP_EXPR_S(s)(CHAOS_IP_TUPLE_TO_SEQ_ALT_0( \
+        CHAOS_PP_EXPR_S(s)(CHAOS_IP_TUPLE_TO_SEQ_ALT_I( \
             CHAOS_PP_OBSTRUCT(), CHAOS_PP_PREV(s), tuple \
         )) \
         /**/
@@ -80,24 +80,14 @@
 # endif
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_IP_TUPLE_TO_SEQ_ALT_INDIRECT(n) CHAOS_IP_TUPLE_TO_SEQ_ALT_ ## n
-#    define CHAOS_IP_TUPLE_TO_SEQ_ALT_0(_, s, tuple) \
-        CHAOS_PP_IIF _(CHAOS_PP_TUPLE_IS_BATCH(10, tuple))( \
-            CHAOS_PP_TUPLE_TO_SEQ _(10, CHAOS_PP_TUPLE_BATCH _(10, tuple)) \
-            CHAOS_PP_EXPR_S _(s)(CHAOS_IP_TUPLE_TO_SEQ_ALT_INDIRECT _(0)( \
-                CHAOS_PP_OBSTRUCT _(), CHAOS_PP_PREV(s), CHAOS_PP_TUPLE_SANS_BATCH _(10, tuple) \
+#    define CHAOS_IP_TUPLE_TO_SEQ_ALT_INDIRECT() CHAOS_IP_TUPLE_TO_SEQ_ALT_I
+#    define CHAOS_IP_TUPLE_TO_SEQ_ALT_I(_, s, tuple) \
+        CHAOS_PP_IIF _(CHAOS_PP_TUPLE_IS_BATCH(25, tuple))( \
+            CHAOS_PP_TUPLE_TO_SEQ _(25, CHAOS_PP_TUPLE_BATCH _(25, tuple)) \
+            CHAOS_PP_EXPR_S _(s)(CHAOS_IP_TUPLE_TO_SEQ_ALT_INDIRECT _()( \
+                CHAOS_PP_OBSTRUCT _(), CHAOS_PP_PREV(s), CHAOS_PP_TUPLE_SANS_BATCH _(25, tuple) \
             )), \
-            CHAOS_PP_EXPR_S _(s)(CHAOS_IP_TUPLE_TO_SEQ_ALT_INDIRECT _(1)( \
-                CHAOS_PP_OBSTRUCT _(), CHAOS_PP_PREV(s), tuple \
-            )) \
-        ) \
-        /**/
-#    define CHAOS_IP_TUPLE_TO_SEQ_ALT_1(_, s, tuple) \
-        CHAOS_PP_INLINE_WHEN _(CHAOS_PP_TUPLE_IS_CONS(tuple))( \
-            (CHAOS_PP_TUPLE_FIRST _(tuple)) \
-            CHAOS_PP_EXPR_S _(s)(CHAOS_IP_TUPLE_TO_SEQ_ALT_INDIRECT _(1)( \
-                CHAOS_PP_OBSTRUCT _(), CHAOS_PP_PREV(s), CHAOS_PP_TUPLE_REST _(tuple) \
-            )) \
+            CHAOS_PP_TUPLE_TO_SEQ _(CHAOS_PP_TUPLE_BATCH_FORK _(25, tuple), tuple) \
         ) \
         /**/
 # endif

@@ -1,0 +1,38 @@
+# /* *************************************************************************
+#  *                                                                         *
+#  *    (C) Copyright Paul Mensonides 2003.                                  *
+#  *                                                                         *
+#  *    Use, modification, and distribution are subject to Version 1.0 of    *
+#  *    the Boost Software License.  (See accompanying file LICENSE.)        *
+#  *                                                                         *
+#  *    See http://chaos-pp.sourceforge.net for most recent version.         *
+#  *                                                                         *
+#  ************************************************************************* */
+#
+# ifndef CHAOS_PREPROCESSOR_LOGICAL_NOT_H
+# define CHAOS_PREPROCESSOR_LOGICAL_NOT_H
+#
+# include <chaos/preprocessor/cat.h>
+# include <chaos/preprocessor/config.h>
+# include <chaos/preprocessor/detection/is_nullary.h>
+# include <chaos/preprocessor/lambda/ops.h>
+# include <chaos/preprocessor/names.h>
+#
+# /* CHAOS_PP_NOT */
+#
+# define CHAOS_PP_NOT(x) CHAOS_PP_IS_NULLARY(CHAOS_PP_PRIMITIVE_CAT(CHAOS_IP_NOT_, x))
+# define CHAOS_PP_NOT_ID() CHAOS_PP_NOT
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_PP_NOT_ CHAOS_PP_LAMBDA(CHAOS_PP_NOT)
+# endif
+#
+# define CHAOS_IP_NOT_0 ()
+#
+# if CHAOS_PP_NO_PREFIX
+#    define NOT    CHAOS_PP_PREFIX(NOT)
+#    define NOT_   CHAOS_PP_PREFIX(NOT_)
+#    define NOT_ID CHAOS_PP_PREFIX(NOT_ID)
+# endif
+#
+# endif

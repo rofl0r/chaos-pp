@@ -15,6 +15,7 @@
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/control/iif.h>
 # include <chaos/preprocessor/detection/is_variadic.h>
+# include <chaos/preprocessor/facilities/binary.h>
 # include <chaos/preprocessor/facilities/optional.h>
 # include <chaos/preprocessor/generics/core.h>
 # include <chaos/preprocessor/generics/typeof.h>
@@ -59,7 +60,7 @@
     /**/
 # define CHAOS_IP_FILTER_II(_, s, o, pred, _p, type, g, pd) \
     CHAOS_PP_IIF _(_p()(o, pred, CHAOS_PP_ITEM(type, CHAOS_PP_FIRST(g)) CHAOS_PP_EXPOSE(pd)))( \
-        CHAOS_PP_CONS, CHAOS_IP_FILTER_III \
+        CHAOS_PP_CONS, CHAOS_PP_BINARY(0) \
     )( \
         CHAOS_PP_DEFER(CHAOS_PP_EXPR_S(s))(CHAOS_PP_DEFER(CHAOS_IP_FILTER_INDIRECT)()( \
             CHAOS_PP_NEXT(s), o, pred, _p, type, CHAOS_PP_REST(g), pd \
@@ -67,10 +68,5 @@
         CHAOS_PP_FIRST(g) \
     ) \
     /**/
-# if CHAOS_PP_VARIADICS
-#    define CHAOS_IP_FILTER_III(g, ...) g
-# else
-#    define CHAOS_IP_FILTER_III(g, x) g
-# endif
 #
 # endif

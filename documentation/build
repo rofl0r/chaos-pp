@@ -1,0 +1,37 @@
+clear
+
+destination=chaos-pp
+library=Chaos,Preprocessor,Library
+prefix=CHAOS_PP_
+source=../chaos-pp/documentation
+url=http://chaos-pp.sourceforge.net
+
+paramset="destination=$destination library=$library prefix=$prefix source=$source url=$url"
+
+echo expanding library...
+msxsl $source/library.xml library.xsl -o .library.xml $paramset
+
+echo generating symbol table...
+msxsl .library.xml symbol.xsl -o .symbol.xsl $paramset
+
+echo initializing registry...
+msxsl $source/register.xml register.xsl -o .register.xsl $paramset
+
+echo copying support files...
+mkdir -p $destination
+cp -u style.css $destination/style.css
+cp -u background.gif $destination/background.gif
+
+echo creating indices...
+msxsl .library.xml index.xsl -o $destination/headers.html $paramset
+msxsl .library.xml index.xsl -m primary -o $destination/macros.html $paramset
+msxsl .library.xml index.xsl -m secondary -o $destination/master.html $paramset
+
+echo generating build script...
+msxsl $source/library.xml script.xsl -o .script $paramset
+chmod +rx .script
+
+echo
+./.script $paramset
+
+rm .library.xml .symbol.xsl .register.xsl .script

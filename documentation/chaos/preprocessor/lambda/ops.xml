@@ -283,7 +283,7 @@
 	<abstract>
 		The <PLACEHOLDERS/> macro is used to define and undefine the <link id="λ placeholders"/>.
 	</abstract>
-	<usage lang="C99">
+	<usage>
 		<syntax>??=include <PLACEHOLDERS/>(bit)</syntax>
 		<param id="bit">
 			The value that determines whether the <link id="λ placeholders"/> should be defined or undefined.
@@ -291,8 +291,12 @@
 		</param>
 	</usage>
 	<para>
-		If <var>bit</var> expands to <code>1</code>, the <link id="λ placeholders"/> (e.g. <code>_0</code>, <code>_1</code>, etc.) are defined by the library.
+		In C99, if <var>bit</var> expands to <code>1</code>, the <link id="λ placeholders"/> (e.g. <code>_0</code>, <code>_1</code>, etc.) are defined by the library.
 		Otherwise, they are undefined.
+	</para>
+	<para>
+		In C (prior to C99) and C++, the <PLACEHOLDERS/> macro expands to <code><NULL/>()</code>.
+		Thus, using it has no effect on translation.
 	</para>
 	<para>
 		It is important that the definitions of the <link id="λ placeholders"/> only exist temporarily because they are unprefixed macro definitions that will interfere with any other use of those identifiers.

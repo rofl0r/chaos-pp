@@ -15,9 +15,9 @@
 # include <chaos/preprocessor/arithmetic/inc.h>
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/control/iif.h>
+# include <chaos/preprocessor/generics/type.h>
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/limits.h>
-# include <chaos/preprocessor/generics/type.h>
 # include <chaos/preprocessor/recursion/basic.h>
 # include <chaos/preprocessor/recursion/expr.h>
 #

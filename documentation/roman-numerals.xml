@@ -46,9 +46,9 @@
 				#include <chaos-preprocessor-recursion-expr.h/>
 				#include <chaos-preprocessor-seq-elem.h/>
 				#include <chaos-preprocessor-string-spec.h/>
-			    
-			    #if <VARIADICS/>
-			    
+				
+				#if <VARIADICS/>
+				
 				#define ROMAN(string) ROMAN_S(<STATE/>(), string)
 				#define ROMAN_S(s, string) \
 				    <EXPR/>(<FOR_EACH_I/>( \
@@ -68,6 +68,7 @@
 				        ) \
 				    ) \
 				    /**/
+				
 				#define PATTERN(a, b, c) \
 				    ( \
 				        ()(a)(a a)(a a a)(a b)(b)(b a)(b a a)(b a a a)(a c) \
@@ -167,6 +168,7 @@
 				    /**/
 				
 				#define PRED(s, first, rest, x) <STRING_IS_CONS/>(rest)
+				
 				#define OP(s, first, rest, x) \
 				    <STRING_FIRST/>(rest), <STRING_REST/>(rest), \
 				    <IIF/>( \
@@ -178,6 +180,7 @@
 				        <SUB_AP_S/>, <ADD_AP_S/> \
 				    )(s, x, TABLE(1, first)) \
 				    /**/
+				
 				#define TABLE(n, letter) \
 				    <VARIADIC_ELEM/>( \
 				        n, \

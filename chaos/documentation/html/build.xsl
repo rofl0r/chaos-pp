@@ -9,7 +9,8 @@
 
 <xsl:template match="/lookup/header">
 echo <xsl:value-of select="@src"/>.html
-msxsl ../data/reference/<xsl:value-of select="@src"/>.xml h-transform.xsl -o reference/<xsl:value-of select="@src"/>.html
+del reference\<xsl:value-of select="@src"/>.html 2> nul
+msxsl ../data/reference/<xsl:value-of select="@src"/>.xml h-transform.xsl -o reference/<xsl:value-of select="@src"/>.html 2> nul
 </xsl:template>
 
 </xsl:stylesheet>

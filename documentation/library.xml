@@ -25,7 +25,6 @@
 	<document id="arrays">
 		<item value="array"/>
 		<item value="arrays"/>
-		<item value="Arrays"/>
 	</document>
 	<document id="binary-literals"/>
 	<document id="bypass-semantics">
@@ -113,7 +112,6 @@
 	<document id="lists">
 		<item value="list"/>
 		<item value="lists"/>
-		<item value="Lists"/>
 	</document>
 	<document id="local-iteration">
 		<item value="local-iteration"/>
@@ -157,7 +155,6 @@
 	<document id="sequences">
 		<item value="sequence"/>
 		<item value="sequences"/>
-		<item value="Sequences"/>
 		<item value="variadic sequence"/>
 		<item value="variadic sequences"/>
 	</document>
@@ -167,7 +164,6 @@
 	<document id="strings">
 		<item value="string"/>
 		<item value="strings"/>
-		<item value="Strings"/>
 	</document>
 	<document id="true-optionals">
 		<item value="true-optional argument"/>
@@ -178,7 +174,6 @@
 	<document id="tuples">
 		<item value="tuple"/>
 		<item value="tuples"/>
-		<item value="Tuples"/>
 	</document>
 	<document id="tutorial"/>
 

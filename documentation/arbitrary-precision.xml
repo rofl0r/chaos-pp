@@ -37,9 +37,9 @@
 			The following table summarizes these operations and their equivalents in C or C++:
 			<table>
 				<row><column><code><ARBITRARY_ADD/>(x, y)</code></column><column align="center"><code>x + y</code></column></row>
-				<row><column><code><ARBITRARY_DEC/>(x)</code></column><column align="center"><code>--x</code></column></row>
+				<row><column><code><ARBITRARY_DEC/>(x)</code></column><column align="center"><code>x - 1</code></column></row>
 				<row><column><code><ARBITRARY_DIV/>(x, y)</code></column><column align="center"><code>x / y</code></column></row>
-				<row><column><code><ARBITRARY_INC/>(x)</code></column><column align="center"><code>++x</code></column></row>
+				<row><column><code><ARBITRARY_INC/>(x)</code></column><column align="center"><code>x + 1</code></column></row>
 				<row><column><code><ARBITRARY_MUL/>(x, y)</code></column><column align="center"><code>x * y</code></column></row>
 				<row><column><code><ARBITRARY_MOD/>(x, y)</code></column><column align="center"><code>x % y</code></column></row>
 				<row><column><code><ARBITRARY_NEG/>(x)</code></column><column align="center"><code>-x</code></column></row>

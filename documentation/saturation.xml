@@ -1,6 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document id="Saturation Arithmetic" author="Paul Mensonides" date="2003-2004">
 	<section>
-		<para>...</para>
+		<para>
+			The <link id="saturation arithmetic"/> component supports arithmetic, relational, and equality operations on integer literals (without suffixes) ranging from <code>0</code> to <LIMIT_MAG/>.
+		</para>
+		<para>
+			<link id="Saturation"/> occurs when an operation attempts to decrease a <code>0</code> value or increase a <LIMIT_MAG/> value.
+			In both cases, the decrease or increase becomes an identity--i.e. an attempt to decrease <code>0</code>, such as
+			<snippet>
+				<DEC/>(0)
+			</snippet>
+			results in <code>0</code>, and an attempt to increase <LIMIT_MAG/>, such as
+			<snippet>
+				<INC/>(<LIMIT_MAG/>)
+			</snippet>
+			results in <LIMIT_MAG/>.
+		</para>
+		<para>
+			The <IN_RANGE/> predicate can be used to test whether an integer literal is in range (i.e. is greater than or equal to <code>0</code> and less than or equal to <LIMIT_MAG/>).
+			<snippet>
+				<IN_RANGE/>(23)      // 1
+				<IN_RANGE/>(1000000) // 0
+			</snippet>
+		</para>
+		<para>
+			It should be reinforced that the <link id="saturation arithmetic"/> facilities operate on integer literals (without suffixes), not integral constant expressions such as <code>a + b</code>.
+		</para>
+	</section>
+	<section id="Arithmetic Operators">
+		<para>
+			The following table summarizes the arithmetic operations and their equivalents in C or C++:
+			<table>
+				<row><column><code><ADD/>(x, y)</code></column><column align="center">
+					<code>x + y &gt; <LIMIT_MAG/> ? <LIMIT_MAG/> : x + y</code>
+				</column></row>
+				<row><column><code><DEC/>(x)</code></column><column align="center">
+					<code>x - 1 &lt; 0 ? 0 : x - 1</code>
+				</column></row>
+				<row><column><code><DIV/>(x, y)</code></column><column align="center">
+					<code>x / y</code>
+				</column></row>
+				<row><column><code><INC/>(x)</code></column><column align="center">
+					<code>x + 1 &gt; <LIMIT_MAG/> ? <LIMIT_MAG/> : x + 1</code>
+				</column></row>
+				<row><column><code><MUL/>(x, y)</code></column><column align="center">
+					<code>x * y &gt; <LIMIT_MAG/> ? <LIMIT_MAG/> : x * y</code>
+				</column></row>
+				<row><column><code><MOD/>(x, y)</code></column><column align="center">
+					<code>x % y</code>
+				</column></row>
+				<row><column><code><SUB/>(x, y)</code></column><column align="center">
+					<code>x - y &lt; 0 ? 0 : x - y</code>
+				</column></row>
+			</table>
+		</para>
+	</section>
+	<section id="Equality &amp; Relational Operators">
+		<para>
+			The following table summarizes the equality and relational operations and their equivalents in C or C++.
+			<table>
+				<row><column><code><EQUAL/>(x, y)</code></column><column align="center"><code>x == y</code></column></row>
+				<row><column><code><GREATER/>(x, y)</code></column><column align="center"><code>x &gt; y</code></column></row>
+				<row><column><code><GREATER_EQUAL/>(x, y)</code></column><column align="center"><code>x &gt;= y</code></column></row>
+				<row><column><code><LESS/>(x, y)</code></column><column align="center"><code>x &lt; y</code></column></row>
+				<row><column><code><LESS_EQUAL/>(x, y)</code></column><column align="center"><code>x &lt;= y</code></column></row>
+				<row><column><code><NOT_EQUAL/>(x, y)</code></column><column align="center"><code>x != y</code></column></row>
+			</table>
+		</para>
 	</section>
 </document>

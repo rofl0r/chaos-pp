@@ -4,7 +4,7 @@
 	The <self/> header defines a macro that converts an <link id="array"/> to a <link id="tuple"/>.
 </overview>
 
-<macro id="ARRAY_TO_TUPLE" type="indirect" group="conversion">
+<macro id="ARRAY_TO_TUPLE" type="indirect" group="conversion(array-tuple) conversion(array)">
 	<abstract>
 		The <ARRAY_TO_TUPLE/> macro converts an <link id="array"/> to a <link id="tuple"/>.
 	</abstract>
@@ -17,6 +17,7 @@
 	<para>
 		This macro expands to a <link id="tuple"/> containing the elements of <var>array</var>.
 	</para>
+	<x-reference id="CAST"/>
 	<listing>
 		#include <chaos-preprocessor-array-to_tuple.h/>
 		

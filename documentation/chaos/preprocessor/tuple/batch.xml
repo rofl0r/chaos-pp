@@ -26,7 +26,7 @@
 		The primary utility of this macro is to determine if <var>tuple</var> can be unrolled by a factor of <var>n</var>.
 	</para>
 	<para>
-		This macro operates on the nil-<link id="tuple"/> representation used by the core <link id="tuple"/> operations defined in <chaos-preprocessor-tuple-core.h/>.
+		This macro operates on the nil <link id="tuple"/> representation used by the core <link id="tuple"/> operations defined in <chaos-preprocessor-tuple-core.h/>.
 		Specifically, <code>()</code> is a one-element <link id="tuple"/>, not a zero-element <link id="tuple"/>.
 	</para>
 	<listing>
@@ -69,7 +69,7 @@
 		The primary utility of this macro is to unroll <link id="tuple"/> operations by processing <var>n</var> elements at a time.
 	</para>
 	<para>
-		This macro operates on the nil-<link id="tuple"/> representation used by the core <link id="tuple"/> operations defined in <chaos-preprocessor-tuple-core.h/>.
+		This macro operates on the nil <link id="tuple"/> representation used by the core <link id="tuple"/> operations defined in <chaos-preprocessor-tuple-core.h/>.
 		Specifically, <code>()</code> is a one-element <link id="tuple"/>, not a zero-element <link id="tuple"/>.
 	</para>
 	<listing>
@@ -149,7 +149,7 @@
 		This macro expands to a <link id="tuple"/> containing all but the first <var>n</var> elements of <var>tuple</var>.
 	</para>
 	<para>
-		This macro operates on the nil-<link id="tuple"/> representation used by the core <link id="tuple"/> operations defined in <chaos-preprocessor-tuple-core.h/>.
+		This macro operates on the nil <link id="tuple"/> representation used by the core <link id="tuple"/> operations defined in <chaos-preprocessor-tuple-core.h/>.
 		Specifically, <code>()</code> is a one-element <link id="tuple"/>, not a zero-element <link id="tuple"/>.
 	</para>
 	<derivative id="TUPLE_SANS_BATCH_ID" lang="C99"/>

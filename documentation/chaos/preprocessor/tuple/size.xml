@@ -23,7 +23,7 @@
 		The asymptotic upper and lower bounds are <assoc id="complexity/size.gif">Θ</assoc>, where <x-var>n</x-var> is the number of elements in <var>tuple</var>.
 	</para>
 	<para>
-		This macro operates on the nil-<link id="tuple"/> representation used by the core <link id="tuple"/> operations defined in <chaos-preprocessor-tuple-core.h/>.
+		This macro operates on the nil <link id="tuple"/> representation used by the core <link id="tuple"/> operations defined in <chaos-preprocessor-tuple-core.h/>.
 		Specifically, <code>()</code> is a one-element <link id="tuple"/>, not a zero-element <link id="tuple"/>.
 	</para>
 	<para>

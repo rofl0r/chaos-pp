@@ -4,7 +4,7 @@
 	The <self/> header defines a macro that converts a <link id="sequence"/> to a <link id="list"/>.
 </overview>
 
-<macro id="SEQ_TO_LIST" type="indirect" group="conversion">
+<macro id="SEQ_TO_LIST" type="indirect" group="conversion(list-sequence) conversion(sequence)">
 	<abstract>
 		The <SEQ_TO_LIST/> macro converts a <link id="sequence"/> to a <link id="list"/>.
 	</abstract>
@@ -31,6 +31,7 @@
 		</snippet>
 		This macro makes no attempt to diagnose that situation.
 	</para>
+	<x-reference id="CAST"/>
 	<listing>
 		#include <chaos-preprocessor-seq-to_list.h/>
 		

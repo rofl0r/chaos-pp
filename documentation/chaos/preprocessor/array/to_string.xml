@@ -4,7 +4,7 @@
 	The <self/> header defines a macro that converts an <link id="array"/> to a <link id="string"/>.
 </overview>
 
-<macro id="ARRAY_TO_STRING" type="indirect" group="conversion">
+<macro id="ARRAY_TO_STRING" type="indirect" group="conversion(array-string) conversion(array)">
 	<abstract>
 		The <ARRAY_TO_STRING/> macro converts an <link id="array"/> to a <link id="string"/>.
 	</abstract>
@@ -27,6 +27,7 @@
 			<ARRAY_TO_STRING/>((2, (+, -))) // invalid
 		</snippet>
 	</para>
+	<x-reference id="CAST"/>
 	<listing>
 		#include <chaos-preprocessor-array-to_string.h/>
 		

@@ -4,7 +4,7 @@
 	The <self/> header defines a macro that converts a <link id="tuple"/> to a <link id="list"/>.
 </overview>
 
-<macro id="TUPLE_TO_LIST" type="indirect" group="conversion">
+<macro id="TUPLE_TO_LIST" type="indirect" group="conversion(list-tuple) conversion(tuple)">
 	<abstract>
 		The <TUPLE_TO_LIST/> macro converts a <link id="tuple"/> to a <link id="list"/>.
 	</abstract>
@@ -21,6 +21,7 @@
 	<para>
 		This macro expands to a <link id="list"/> containing the elements of <var>tuple</var>.
 	</para>
+	<x-reference id="CAST"/>
 	<listing>
 		#include <chaos-preprocessor-tuple-to_list.h/>
 		
@@ -30,6 +31,43 @@
 	</listing>
 	<derivative id="TUPLE_TO_LIST_ID"/>
 	<derivative id="TUPLE_TO_LIST_" lang="C99"/>
+</macro>
+
+<macro id="TUPLE_TO_LIST_ALT" type="indirect" group="conversion(list-tuple) conversion(tuple)">
+	<abstract>
+		The <TUPLE_TO_LIST_ALT/> macro converts a <link id="tuple"/> to a <link id="list"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><TUPLE_TO_LIST_ALT/>(tuple)</syntax>
+		<param id="tuple" optional="1">
+			The <link id="tuple"/> to be converted.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="list"/> containing the elements of <var>tuple</var>.
+	</para>
+	<para>
+		The running time of <TUPLE_TO_LIST_ALT/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
+		The asymptotic upper and lower bounds are <assoc id="complexity/to_list_alt.gif">Θ</assoc>, where <x-var>n</x-var> is the number of elements in <var>tuple</var>.
+	</para>
+	<para>
+		This macro operates on the nil <link id="tuple"/> representation used by the core <link id="tuple"/> operations defined in <chaos-preprocessor-tuple-core.h/>.
+		Specifically, <code>()</code> is a one-element <link id="tuple"/>, not a zero-element <link id="tuple"/>.
+	</para>
+	<para>
+		This macro uses <link id="bypass semantics"/>.
+		If <link id="bypass semantics"/> are already in effect, <TUPLE_TO_LIST_ALT_BYPASS/> must be used instead.
+	</para>
+	<x-reference id="CAST"/>
+	<derivative id="TUPLE_TO_LIST_ALT_ID" lang="C99"/>
+	<derivative id="TUPLE_TO_LIST_ALT_" lang="C99"/>
+	<derivative id="TUPLE_TO_LIST_ALT_BYPASS">
+		<usage lang="C99">
+			<syntax><TUPLE_TO_LIST_ALT_BYPASS/>(s, tuple)</syntax>
+		</usage>
+		<derivative id="TUPLE_TO_LIST_ALT_BYPASS_ID" lang="C99"/>
+		<derivative id="TUPLE_TO_LIST_ALT_BYPASS_" lang="C99"/>
+	</derivative>
 </macro>
 
 </header>

@@ -592,6 +592,9 @@
 			<directory name="tuple">
 				<directory name="complexity">
 					<binary-file name="size.gif"/>
+					<binary-file name="to_list_alt.gif"/>
+					<binary-file name="to_seq_alt.gif"/>
+					<binary-file name="to_string_alt.gif"/>
 				</directory>
 				<header name="batch.h"/>
 				<header name="core.h"/>

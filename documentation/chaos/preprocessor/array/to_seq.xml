@@ -4,7 +4,7 @@
 	The <self/> header defines a macro that converts an <link id="array"/> to a <link id="sequence"/>.
 </overview>
 
-<macro id="ARRAY_TO_SEQ" type="indirect" group="conversion">
+<macro id="ARRAY_TO_SEQ" type="indirect" group="conversion(array-sequence) conversion(array)">
 	<abstract>
 		The <ARRAY_TO_SEQ/> macro converts an <link id="array"/> to a <link id="sequence"/>.
 	</abstract>
@@ -20,6 +20,7 @@
 	<para>
 		The <var>array</var> argument must be an <link id="array"/> containing no more than <LIMIT_TUPLE/> elements.
 	</para>
+	<x-reference id="CAST"/>
 	<listing>
 		#include <chaos-preprocessor-array-to_seq.h/>
 		

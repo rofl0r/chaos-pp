@@ -4,7 +4,7 @@
 	The <self/> header defines a macro that converts a <link id="sequence"/> to a <link id="tuple"/>.
 </overview>
 
-<macro id="SEQ_TO_TUPLE" type="indirect" group="conversion">
+<macro id="SEQ_TO_TUPLE" type="indirect" group="conversion(sequence-tuple) conversion(sequence)">
 	<abstract>
 		The <SEQ_TO_TUPLE/> macro converts a <link id="sequence"/> to a <link id="tuple"/>.
 	</abstract>
@@ -30,6 +30,7 @@
 			<SEQ_TO_TUPLE/>((a, b)(c)) // (a, b, c)
 		</snippet>
 	</para>
+	<x-reference id="CAST"/>
 	<listing>
 		#include <chaos-preprocessor-seq-to_tuple.h/>
 		

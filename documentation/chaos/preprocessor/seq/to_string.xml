@@ -4,7 +4,7 @@
 	The <self/> header defines a macro that converts a <link id="sequence"/> to a <link id="string"/>.
 </overview>
 
-<macro id="SEQ_TO_STRING" type="indirect" group="conversion">
+<macro id="SEQ_TO_STRING" type="indirect" group="conversion(sequence-string) conversion(sequence)">
 	<abstract>
 		The <SEQ_TO_STRING/> macro converts a <link id="sequence"/> to a <link id="string"/>.
 	</abstract>
@@ -38,6 +38,7 @@
 		</snippet>
 		This macro makes no attempt to diagnose such a situation.
 	</para>
+	<x-reference id="CAST"/>
 	<listing>
 		#include <chaos-preprocessor-seq-to_string.h/>
 		

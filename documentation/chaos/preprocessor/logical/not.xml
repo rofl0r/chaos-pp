@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <header name="chaos/preprocessor/logical/not.h" author="Paul Mensonides" date="2003-2004">
 <overview>
-	The <self/> header defines a logical "not" operator.
+	The <self/> header defines a logical NOT operator.
 </overview>
 
 <macro id="NOT" group="not">

@@ -17,6 +17,7 @@
 # include <chaos/preprocessor/tuple/core.h>
 # include <chaos/preprocessor/tuple/eat.h>
 # include <chaos/preprocessor/tuple/elem.h>
+# include <chaos/preprocessor/tuple/filter.h>
 # include <chaos/preprocessor/tuple/rem.h>
 # include <chaos/preprocessor/tuple/reverse.h>
 # include <chaos/preprocessor/tuple/size.h>

@@ -592,6 +592,7 @@
 			<directory name="tuple">
 				<directory name="complexity">
 					<binary-file name="concat.gif"/>
+					<binary-file name="filter.gif"/>
 					<binary-file name="size.gif"/>
 					<binary-file name="to_list_alt.gif"/>
 					<binary-file name="to_seq_alt.gif"/>
@@ -602,6 +603,7 @@
 				<header name="core.h"/>
 				<header name="eat.h"/>
 				<header name="elem.h"/>
+				<header name="filter.h"/>
 				<header name="rem.h"/>
 				<header name="reverse.h"/>
 				<header name="size.h"/>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/tuple/filter.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an algorithm that filters elements from a <link id="tuple"/> according to a user-specified criteria.
+</overview>
+
+<macro id="TUPLE_FILTER" type="indirect" group="filtration">
+	<abstract>
+		The <TUPLE_FILTER/> macro filters elements from its second argument according to the criteria specified by its first argument.
+	</abstract>
+	<usage lang="C99">
+		<syntax><EXPR/>(<TUPLE_FILTER/>(pred, tuple))</syntax>
+		<param id="pred">
+			The predicate that determines whether an element is to remain in the resulting <link id="tuple"/>.
+			This predicate must be either a <link id="λ expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			<snippet>
+				pred(s, elem)
+			</snippet>
+		</param>
+		<param id="tuple" optional="1">
+			The <link id="tuple"/> to be filtered.
+		</param>
+	</usage>
+	<usage lang="C99">
+		<syntax><EXPR/>(<TUPLE_FILTER/>(pred, tuple, ...))</syntax>
+		<param id="pred">
+			<para>
+				The predicate that determines whether an element is to remain in the resulting <link id="tuple"/>.
+				This predicate must be either a <link id="λ expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				<snippet>
+					pred(s, elem, data<sup>‡</sup>)
+				</snippet>
+			</para>
+			<para>
+				<sup>‡</sup>
+				The <var>data</var> pseudo-parameter must be either <code>...</code> or the number of parameters that corresponds to the number of arguments in the auxiliary data, <code>__VA_ARGS__</code>.
+			</para>
+		</param>
+		<param id="tuple" optional="1">
+			The <link id="tuple"/> to be filtered.
+		</param>
+		<param id="..." optional="1">
+			Auxiliary data to be passed through the algorithm to the predicate.
+		</param>
+	</usage>
+	<para>
+		The <TUPLE_FILTER/> macro itself expands to a <link id="deferred expression"/> in terms of <code><NEXT/>(s)</code>.
+		This <link id="deferred expression"/>, when invoked by <EXPR/>, expands to a <link id="tuple"/> that contains the elements for which the predicate expands to <code>1</code>.
+	</para>
+	<para>
+		The predicate is invoked for each element in <var>tuple</var> with the current <link id="recursion state"/> (<var>s</var>), the current element (<var>elem</var>), and, if it exists, the auxiliary data (<code>__VA_ARGS__</code>).
+		This invocation must expand to <code>0</code>, <code>1</code>, or a <link id="deferred expression"/> in terms of <code><NEXT/>(s)</code> that expands to either <code>0</code> or <code>1</code>.
+		Expansion to a <link id="deferred expression"/> allows the predicate to recurse on itself if necessary.
+	</para>
+	<para>
+		It is possible to omit the auxiliary data argument altogether.
+		This is different than passing "nothing" as the auxiliary data.
+		<snippet>
+			#define D (a, b, c)
+			
+			<EXPR/>(
+			    <TUPLE_FILTER/>(PRED, D,) // #1
+			    <TUPLE_FILTER/>(PRED, D)  // #2
+			)
+		</snippet>
+		The first line passes "nothing" as the auxiliary data, which causes <code>PRED</code> to be invoked as (e.g.)...
+		<snippet>
+			PRED(s, a,)
+		</snippet>
+		The second line omits the auxiliary data, which causes <code>PRED</code> to be invoked as (e.g.)...
+		<snippet>
+			PRED(s, a)
+		</snippet>
+		The fundamental difference is that, in the first line, the auxiliary data is empty (which might have a valid meaning as data), but, in the second line, <em>there is no auxiliary data</em>.
+		Hence, the algorithm is overloaded on a <link id="true-optional parameter"/>.
+	</para>
+	<para>
+		Invocations of the predicate are trampolined such that each invocation is invoked with <code><NEXT/>(s)</code>, where <var>s</var> is the original <link id="recursion state"/> at the beginning of the algorithm (i.e. <code><STATE/>()</code>).
+		This maximizes the utility of the <link id="recursion backend"/>.
+	</para>
+	<para>
+		Ignoring the complexity of <var>pred</var> (which is invoked once for each element in <var>tuple</var>), the running time of <TUPLE_FILTER/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
+		The asymptotic upper and lower bounds are <assoc id="complexity/filter.gif">Θ</assoc>, where <x-var>n</x-var> is the number of elements in <var>tuple</var>.
+	</para>
+	<para>
+		This macro operates on the nil <link id="tuple"/> representation used by the core <link id="tuple"/> operations defined in <chaos-preprocessor-tuple-core.h/>.
+		Specifically, <code>()</code> is a one-element <link id="tuple"/>, not a zero-element <link id="tuple"/>.
+	</para>
+	<para>
+		This macro deduces the current <link id="recursion state"/> and invokes <TUPLE_FILTER_S/>.
+		If the current <link id="recursion state"/> is already known, direct use of <TUPLE_FILTER_S/> is more efficient.
+	</para>
+	<para>
+		This macro may not be used if <link id="bypass semantics"/> are in effect.
+	</para>
+	<derivative id="TUPLE_FILTER_ID" lang="C99"/>
+	<derivative id="TUPLE_FILTER_" lang="C99"/>
+	<derivative id="TUPLE_FILTER_S">
+		<usage lang="C99">
+			<syntax><EXPR_S/>(s)(<TUPLE_FILTER_S/>(s, pred, tuple))</syntax>
+		</usage>
+		<usage lang="C99">
+			<syntax><EXPR_S/>(s)(<TUPLE_FILTER_S/>(s, pred, tuple, ...))</syntax>
+		</usage>
+		<derivative id="TUPLE_FILTER_S_ID" lang="C99"/>
+		<derivative id="TUPLE_FILTER_S_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

@@ -20,7 +20,9 @@
 # include <chaos/preprocessor/algorithm/filter.h>
 # include <chaos/preprocessor/algorithm/first_n.h>
 # include <chaos/preprocessor/algorithm/fold_left.h>
+# include <chaos/preprocessor/algorithm/fold_left_aux.h>
 # include <chaos/preprocessor/algorithm/fold_right.h>
+# include <chaos/preprocessor/algorithm/fold_right_aux.h>
 # include <chaos/preprocessor/algorithm/for_each.h>
 # include <chaos/preprocessor/algorithm/for_each_i.h>
 # include <chaos/preprocessor/algorithm/for_each_product.h>

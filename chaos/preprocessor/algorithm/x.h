@@ -14,7 +14,9 @@
 #
 # include <chaos/preprocessor/algorithm/x/filter.h>
 # include <chaos/preprocessor/algorithm/x/fold_left.h>
+# include <chaos/preprocessor/algorithm/x/fold_left_aux.h>
 # include <chaos/preprocessor/algorithm/x/fold_right.h>
+# include <chaos/preprocessor/algorithm/x/fold_right_aux.h>
 # include <chaos/preprocessor/algorithm/x/for_each.h>
 # include <chaos/preprocessor/algorithm/x/for_each_i.h>
 # include <chaos/preprocessor/algorithm/x/for_each_product.h>

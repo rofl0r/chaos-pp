@@ -85,10 +85,10 @@
 <xsl:template match="section/para">
 	<xsl:choose>
 		<xsl:when test="count(../@id)">
-			<div><xsl:apply-templates/></div>
+			<DIV><xsl:apply-templates/></DIV>
 		</xsl:when>
 		<xsl:otherwise>
-			<div class="TOP"><xsl:apply-templates/></div>
+			<DIV class="TOP"><xsl:apply-templates/></DIV>
 		</xsl:otherwise>
 	</xsl:choose>
 </xsl:template>

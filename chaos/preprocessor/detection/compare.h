@@ -31,7 +31,7 @@
 # /* CHAOS_PP_PRIMITIVE_COMPARE */
 #
 # define CHAOS_PP_PRIMITIVE_COMPARE(a, b) \
-    CHAOS_PP_IIF( \
+    CHAOS_PP_IIF_SHADOW( \
         CHAOS_PP_BITAND \
             (CHAOS_PP_IS_NULLARY(CHAOS_PP_COMPARE_ ## a(()))) \
             (CHAOS_PP_IS_NULLARY(CHAOS_PP_COMPARE_ ## b(()))) \

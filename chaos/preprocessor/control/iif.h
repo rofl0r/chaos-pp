@@ -30,4 +30,14 @@
 #    define CHAOS_IP_IIF_1(t, f) t
 # endif
 #
+# define CHAOS_PP_IIF_SHADOW(bit) CHAOS_PP_PRIMITIVE_CAT_SHADOW(CHAOS_IP_IIF_SHADOW_, bit)
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_IP_IIF_SHADOW_0(t, ...) __VA_ARGS__
+#    define CHAOS_IP_IIF_SHADOW_1(t, ...) t
+# else
+#    define CHAOS_IP_IIF_SHADOW_0(t, f) f
+#    define CHAOS_IP_IIF_SHADOW_1(t, f) t
+# endif
+#
 # endif

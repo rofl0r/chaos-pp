@@ -22,7 +22,7 @@
 # /* CHAOS_PP_IS_FLAG */
 #
 # define CHAOS_PP_IS_FLAG(id) \
-    CHAOS_PP_IIF(CHAOS_PP_IS_EMPTY(id CHAOS_PP_EMPTY()))( \
+    CHAOS_PP_IIF_SHADOW(CHAOS_PP_IS_EMPTY(id CHAOS_PP_EMPTY()))( \
         1, CHAOS_PP_IS_ONE(id) \
     ) \
     /**/

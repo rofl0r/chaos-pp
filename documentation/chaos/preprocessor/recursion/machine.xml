@@ -6,7 +6,7 @@
 
 <macro id="MACHINE" type="indirect">
 	<abstract>
-		The <MACHINE/> macro defines an entry point into the <link id="continuation machine"/>.
+		The <MACHINE/> macro invokes the <link id="continuation machine"/>.
 	</abstract>
 	<usage lang="C99">
 		<syntax><EXPR/>(<MACHINE/>(k))</syntax>
@@ -18,11 +18,7 @@
 		This macro executes the <link id="continuation"/> specified by <var>k</var>.
 	</para>
 	<para>
-		This macro deduces the current <link id="recursion state"/> and invokes <MACHINE_S/>.
-		If the current <link id="recursion state"/> is already known, direct use of <MACHINE_S/> is more efficient.
-	</para>
-	<para>
-		This macro may not be used if <link id="bypass semantics"/> are in effect.
+		This macro may not be used inside a <link id="continuation machine instruction"/>.
 	</para>
 	<listing>
 		#include <chaos-preprocessor-arithmetic-dec.h/>
@@ -34,19 +30,16 @@
 		
 		#if <VARIADICS/>
 		
-		#define CHAOS_PP_INSTRUCTION_0xADD(s, p, x, y, k, ...) \
+		#define CHAOS_PP_INSTRUCTION_add(p, x, y, ...) \
 		    <IF/>(y)( \
-		        ( \
-		            , 0xADD, <INC/>(x), <DEC/>(y), \
-		            k, p ## __VA_ARGS__ \
-		        ), \
-		        (, k, x, p ## __VA_ARGS__) \
+		        (, <INC/>(x), (add), <DEC/>(y), p ## __VA_ARGS__), \
+		        (, x, p ## __VA_ARGS__) \
 		    ) \
 		    /**/
 		
 		#define ADD(x, y) \
 		    <EXPR/>(<MACHINE/>( \
-		        (, 0xADD, x, y, 0xCHAOS(0xSTOP),) \
+		        (, x, (add), y, (0xchaos)(0xstop),) \
 		    )) \
 		    /**/
 		
@@ -56,57 +49,6 @@
 	</listing>
 	<derivative id="MACHINE_ID" lang="C99"/>
 	<derivative id="MACHINE_" lang="C99"/>
-	<derivative id="MACHINE_S">
-		<usage lang="C99">
-			<syntax><EXPR_S/>(s)(<MACHINE_S/>(s, k))</syntax>
-		</usage>
-		<listing>
-			#include <chaos-preprocessor-arithmetic-dec.h/>
-			#include <chaos-preprocessor-arithmetic-inc.h/>
-			#include <chaos-preprocessor-config.h/>
-			#include <chaos-preprocessor-control-if.h/>
-			#include <chaos-preprocessor-recursion-expr.h/>
-			#include <chaos-preprocessor-recursion-machine.h/>
-			
-			#if <VARIADICS/>
-			
-			#define CHAOS_PP_INSTRUCTION_0xADD(s, p, x, y, k, ...) \
-			    <IF/>(y)( \
-			        ( \
-			            , 0xADD, <INC/>(x), <DEC/>(y), \
-			            k, p ## __VA_ARGS__ \
-			        ), \
-			        (, k, x, p ## __VA_ARGS__) \
-			    ) \
-			    /**/
-			
-			#define CHAOS_PP_INSTRUCTION_0xMUL(s, p, x, y, k, ...) \
-			    (, 0xMUL2, 0, x, y, k, p ## __VA_ARGS__) \
-			    /**/
-			#define CHAOS_PP_INSTRUCTION_0xMUL2(s, p, r, x, y, k, ...) \
-			    <IF/>(y)( \
-			        ( \
-			            , 0xADD, r, x, 0xMUL2, x, <DEC/>(y), \
-			            k, p ## __VA_ARGS__ \
-			        ), \
-			        (, k, r, p ## __VA_ARGS__) \
-			    ) \
-			    /**/
-			
-			#define MUL(x, y) MUL_S(<STATE/>(), x, y)
-			#define MUL_S(s, x, y) \
-			    <EXPR_S/>(s)(<MACHINE_S/>( \
-			        s, (, 0xMUL, x, y, 0xCHAOS(0xSTOP),) \
-			    )) \
-			    /**/
-			
-			MUL(13, 28) // 364
-			
-			#endif
-		</listing>
-		<derivative id="MACHINE_S_ID" lang="C99"/>
-		<derivative id="MACHINE_S_" lang="C99"/>
-	</derivative>
 </macro>
 
 </header>

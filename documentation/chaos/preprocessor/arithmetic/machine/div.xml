@@ -27,11 +27,11 @@
 		This macro behaves identically to <DIV/> except that it is implemented with the <link id="continuation machine"/>, which can yield significant performance improvements.
 	</para>
 	<para>
-		This macro is a <link id="second-tier"/> algorithm that deduces the current <link id="recursion state"/> and invokes <DIV_MACHINE_S/>.
-		If the current <link id="recursion state"/> is already known, direct use of <DIV_MACHINE_S/> is more efficient.
-	</para>
-	<para>
-		This macro may not be used if <link id="bypass semantics"/> are in effect.
+		This macro may not be used inside a <link id="continuation machine instruction"/>.
+		However, the instruction upon which this macro is built, <code>(0xchaos)(0xdiv)</code>, may be used inside a <link id="continuation"/>.
+		<snippet>
+			<MACHINE/>(, 22, (0xchaos)(0xdiv), 7, (0xchaos)(0xstop),) // 3
+		</snippet>
 	</para>
 	<listing>
 		#include <chaos-preprocessor-arithmetic-machine-div.h/>
@@ -45,13 +45,6 @@
 	</listing>
 	<derivative id="DIV_MACHINE_ID" lang="C99"/>
 	<derivative id="DIV_MACHINE_" lang="C99"/>
-	<derivative id="DIV_MACHINE_S">
-		<usage lang="C99">
-			<syntax><DIV_MACHINE_S/>(s, x, y)</syntax>
-		</usage>
-		<derivative id="DIV_MACHINE_S_ID" lang="C99"/>
-		<derivative id="DIV_MACHINE_S_" lang="C99"/>
-	</derivative>
 </macro>
 
 </header>

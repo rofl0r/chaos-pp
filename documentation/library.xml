@@ -40,6 +40,8 @@
 		<item value="continuation"/>
 		<item value="continuations"/>
 		<item value="continuation machine"/>
+		<item value="continuation machine instruction"/>
+		<item value="continuation machine instructions"/>
 	</document>
 	<document id="conventions"/>
 	<document id="cpp-intro"/>

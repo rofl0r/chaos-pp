@@ -84,6 +84,8 @@
 		This macro uses <link id="sequential iteration"/>.
 		As a result, the running time of <SEQ_FOLD_RIGHT_AUX/>, described in terms of the number of <link id="recursion steps"/> required to complete the algorithm and ignoring the complexity of <var>op</var>, is a constant Θ(2).
 		As such, the algorithm is theoretically capable of processing <link id="sequences"/> containing an <em>unrestricted</em> number of elements.
+		(Note that this is a description in terms of the number of <link id="recursion steps"/>.
+		The actual running time of the algorithm depends on the length of <var>seq</var>.)
 	</para>
 	<para>
 		This macro deduces the current <link id="recursion state"/> and invokes <SEQ_FOLD_RIGHT_AUX_S/>.

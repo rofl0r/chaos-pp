@@ -19,7 +19,11 @@
 			<header name="fold_right_aux.h"/>
 			<header name="for_each.h"/>
 			<header name="for_each_i.h"/>
-			<header name="for_each_product.h"><assoc id="complexity.gif"/><assoc id="efficiency.gif"/><assoc id="functional.gif"/></header>
+			<header name="for_each_product.h">
+				<assoc id="complexity.gif"/>
+				<assoc id="efficiency.gif"/>
+				<assoc id="functional.gif"/>
+			</header>
 			<header name="insert.h"/>
 			<header name="parametric.h"/>
 			<directory name="parametric">
@@ -39,13 +43,26 @@
 			<header name="transform.h"/>
 			<header name="x.h"/>
 			<directory name="x">
-				<header name="filter.h"><assoc id="best.gif"/><assoc id="worst.gif"/></header>
-				<header name="fold_left.h"><assoc id="complexity.gif"/></header>
-				<header name="fold_right.h"><assoc id="complexity.gif"/></header>
-				<header name="for_each.h"><assoc id="complexity.gif"/></header>
-				<header name="for_each_i.h"><assoc id="complexity.gif"/></header>
+				<header name="filter.h">
+					<assoc id="best.gif"/>
+					<assoc id="worst.gif"/>
+				</header>
+				<header name="fold_left.h">
+					<assoc id="complexity.gif"/>
+				</header>
+				<header name="fold_right.h">
+					<assoc id="complexity.gif"/>
+				</header>
+				<header name="for_each.h">
+					<assoc id="complexity.gif"/>
+				</header>
+				<header name="for_each_i.h">
+					<assoc id="complexity.gif"/>
+				</header>
 				<header name="for_each_product.h"/>
-				<header name="transform.h"><assoc id="complexity.gif"/></header>
+				<header name="transform.h">
+					<assoc id="complexity.gif"/>
+				</header>
 			</directory>
 		</directory>
 		<header name="arbitrary.h"/>
@@ -312,22 +329,42 @@
 			<header name="repeat_shifted.h"/>
 			<header name="x.h"/>
 			<directory name="x">
-				<header name="delineate.h"><assoc id="complexity.gif"/></header>
-				<header name="delineate_from_to.h"><assoc id="complexity.gif"/></header>
+				<header name="delineate.h">
+					<assoc id="complexity.gif"/>
+				</header>
+				<header name="delineate_from_to.h">
+					<assoc id="complexity.gif"/>
+				</header>
 				<header name="delineate_from_to_trailing.h"/>
-				<header name="delineate_shifted.h"><assoc id="complexity.gif"/></header>
+				<header name="delineate_shifted.h">
+					<assoc id="complexity.gif"/>
+				</header>
 				<header name="delineate_shifted_trailing.h"/>
 				<header name="delineate_trailing.h"/>
-				<header name="enum.h"><assoc id="complexity.gif"/></header>
-				<header name="enum_from_to.h"><assoc id="complexity.gif"/></header>
+				<header name="enum.h">
+					<assoc id="complexity.gif"/>
+				</header>
+				<header name="enum_from_to.h">
+					<assoc id="complexity.gif"/>
+				</header>
 				<header name="enum_from_to_trailing.h"/>
-				<header name="enum_shifted.h"><assoc id="complexity.gif"/></header>
+				<header name="enum_shifted.h">
+					<assoc id="complexity.gif"/>
+				</header>
 				<header name="enum_shifted_trailing.h"/>
 				<header name="enum_trailing.h"/>
-				<header name="for.h"><assoc id="complexity.gif"/></header>
-				<header name="repeat.h"><assoc id="complexity.gif"/></header>
-				<header name="repeat_from_to.h"><assoc id="complexity.gif"/></header>
-				<header name="repeat_shifted.h"><assoc id="complexity.gif"/></header>
+				<header name="for.h">
+					<assoc id="complexity.gif"/>
+				</header>
+				<header name="repeat.h">
+					<assoc id="complexity.gif"/>
+				</header>
+				<header name="repeat_from_to.h">
+					<assoc id="complexity.gif"/>
+				</header>
+				<header name="repeat_shifted.h">
+					<assoc id="complexity.gif"/>
+				</header>
 			</directory>
 		</directory>
 		<header name="seq.h"/>

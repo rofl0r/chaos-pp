@@ -46,12 +46,9 @@
 #
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_DEFAULT_AT_BYPASS(s, i, def, ...) \
-        CHAOS_PP_IF(i)( \
-            CHAOS_PP_EXPR_S(s)(CHAOS_IP_DEFAULT_AT_I( \
-                CHAOS_PP_OBSTRUCT(), CHAOS_PP_PREV(s), CHAOS_PP_DEC(i), def, __VA_ARGS__ \
-            )), \
-            CHAOS_PP_NON_OPTIONAL(__VA_ARGS__) \
-        ) \
+        CHAOS_PP_EXPR_S(s)(CHAOS_IP_DEFAULT_AT_I( \
+            CHAOS_PP_OBSTRUCT(), CHAOS_PP_PREV(s), i, def, __VA_ARGS__ \
+        ))
         /**/
 #    define CHAOS_PP_DEFAULT_AT_BYPASS_ID() CHAOS_PP_DEFAULT_AT_BYPASS
 #    define CHAOS_PP_DEFAULT_AT_BYPASS_ CHAOS_PP_LAMBDA(CHAOS_PP_DEFAULT_AT_BYPASS_ID)()

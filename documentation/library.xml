@@ -84,6 +84,8 @@
 	<item value="generic data structures"/>
 </document>
 <document id="higher-order">
+	<item value="higher-order construct"/>
+	<item value="higher-order constructs"/>
 	<item value="higher-order entry point"/>
 	<item value="higher-order entry points"/>
 	<item value="higher-order thunk"/>
@@ -461,6 +463,7 @@
 			<header name="delve.h"/>
 			<header name="equalize.h"/>
 			<header name="expr.h"/>
+			<header name="higher_order.h"/>
 			<header name="machine.h"/>
 			<header name="phase.h"/>
 			<header name="rail.h"/>
@@ -468,6 +471,15 @@
 		</directory>
 		<header name="repetition.h"/>
 		<directory name="repetition">
+			<header name="auto.h"/>
+			<directory name="auto">
+				<header name="delineate.h"/>
+				<header name="delineate_from_to.h"/>
+				<header name="delineate_from_to_trailing.h"/>
+				<header name="delineate_shifted.h"/>
+				<header name="delineate_shifted_trailing.h"/>
+				<header name="delineate_trailing.h"/>
+			</directory>
 			<header name="delineate.h"/>
 			<header name="delineate_from_to.h"/>
 			<header name="delineate_from_to_trailing.h"/>

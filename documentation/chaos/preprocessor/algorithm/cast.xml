@@ -43,8 +43,8 @@
 	</para>
 	<listing>
 		#include <chaos-preprocessor-algorithm-cast.h/>
-		#include <chaos-preprocessor-list-spec.h/>
-		#include <chaos-preprocessor-string-spec.h/>
+		#include <chaos-preprocessor-list-core.h/>
+		#include <chaos-preprocessor-string-core.h/>
 		
 		<CAST/>(<LIST/>, (<SEQ/>) (C)(H)(A)(O)(S))
 		// (<LIST/>) (C, (H, (A, (O, (S, ...)))))

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<header name="chaos/preprocessor/seq/spec.h" author="Paul Mensonides" date="2003-2004">
+<header name="chaos/preprocessor/seq/core.h" author="Paul Mensonides" date="2003-2004">
 <overview>
 	The <self/> header defines the core <link id="sequence"/> operations necessary to use a <link id="sequence"/> as a <link id="generic data structure"/>.
 </overview>
@@ -50,7 +50,7 @@
 	</para>
 	<listing>
 		#include <chaos-preprocessor-config.h/>
-		#include <chaos-preprocessor-seq-spec.h/>
+		#include <chaos-preprocessor-seq-core.h/>
 		
 		#if <VARIADICS/>
 		
@@ -102,7 +102,7 @@
 	</para>
 	<listing>
 		#include <chaos-preprocessor-config.h/>
-		#include <chaos-preprocessor-seq-spec.h/>
+		#include <chaos-preprocessor-seq-core.h/>
 		
 		<SEQ_CONS/>((y)(z), x) // (x)(y)(z)
 		
@@ -165,7 +165,7 @@
 	<x-reference id="SEQ_REST"/>
 	<listing>
 		#include <chaos-preprocessor-config.h/>
-		#include <chaos-preprocessor-seq-spec.h/>
+		#include <chaos-preprocessor-seq-core.h/>
 		
 		<SEQ_FIRST/>((1)(2)(3)) // 1
 		
@@ -195,7 +195,7 @@
 	<x-reference id="SEQ_FIRST"/>
 	<listing>
 		#include <chaos-preprocessor-config.h/>
-		#include <chaos-preprocessor-seq-spec.h/>
+		#include <chaos-preprocessor-seq-core.h/>
 		
 		<SEQ_REST/>((a)(b)(c)) // (b)(c)
 		
@@ -232,7 +232,7 @@
 	<x-reference id="SEQ_IS_NIL"/>
 	<listing>
 		#include <chaos-preprocessor-config.h/>
-		#include <chaos-preprocessor-seq-spec.h/>
+		#include <chaos-preprocessor-seq-core.h/>
 		
 		<SEQ_IS_CONS/>((1)(2)(3))          // 1
 		<SEQ_IS_CONS/>(<SEQ_NIL/>()) // 0
@@ -271,7 +271,7 @@
 	<x-reference id="SEQ_IS_CONS"/>
 	<listing>
 		#include <chaos-preprocessor-config.h/>
-		#include <chaos-preprocessor-seq-spec.h/>
+		#include <chaos-preprocessor-seq-core.h/>
 		
 		<SEQ_IS_NIL/>((a)(b)(c))          // 0
 		<SEQ_IS_NIL/>(<SEQ_NIL/>()) // 1

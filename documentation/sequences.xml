@@ -60,7 +60,7 @@
 	</section>
 	<section id="Using Sequences as Generic Data Structures">
 		<para>
-			<link id="Sequences"/> can be used as <link id="generic data structures"/> if the <chaos-preprocessor-seq-spec.h/> header is included.
+			<link id="Sequences"/> can be used as <link id="generic data structures"/> if the <chaos-preprocessor-seq-core.h/> header is included.
 			For example,
 			<snippet>
 				#define OP(s, x, _) _ ## x
@@ -70,7 +70,7 @@
 				))
 				// _xyz
 			</snippet>
-			If <link id="variadic sequences"/> are to be used as <link id="generic data structures"/>, on the other hand, the <chaos-preprocessor-seq-variadic-spec.h/> header should be included.
+			If <link id="variadic sequences"/> are to be used as <link id="generic data structures"/>, on the other hand, the <chaos-preprocessor-seq-variadic-core.h/> header should be included.
 			For example,
 			<snippet>
 				#define OP(s, x, _) <CAT/>(_, <VARIADIC_CAT/> x)
@@ -85,7 +85,7 @@
 	<section id="Nil Sequences">
 		<para>
 			In C (prior to C99) and C++, there is no such thing as a nil <link id="sequence"/>.
-			However, the special value <code><SEQ_NIL/>()</code> can be used to indicate a nil <link id="sequence"/> to the core <link id="sequence"/> operations defined in <chaos-preprocessor-seq-spec.h/>--thus allowing the generic algorithms to operate on nil <link id="sequences"/> in a temporal fashion.
+			However, the special value <code><SEQ_NIL/>()</code> can be used to indicate a nil <link id="sequence"/> to the core <link id="sequence"/> operations defined in <chaos-preprocessor-seq-core.h/>--thus allowing the generic algorithms to operate on nil <link id="sequences"/> in a temporal fashion.
 			The other <link id="sequence"/>-specific primitives, on the other hand, do not recognize <code><SEQ_NIL/>()</code>.
 			Therefore, a "would-be" nil <link id="sequence"/> result from a <link id="sequence"/>-specific primitive is undefined.
 			For example,
@@ -93,7 +93,7 @@
 				<SEQ_REST_N/>(2, (a)(b)(c)) // (c)
 				<SEQ_REST_N/>(3, (a)(b)(c)) // undefined
 			</snippet>
-			The result of generic algorithm that yields a nil <link id="sequence"/> is well-defined provided that it is used only as a <link id="generic data structure"/>--meaning that it can be passed to other generic algorithms, etc.--or used by the core operations in <chaos-preprocessor-seq-spec.h/> after the type prefix is stripped.
+			The result of generic algorithm that yields a nil <link id="sequence"/> is well-defined provided that it is used only as a <link id="generic data structure"/>--meaning that it can be passed to other generic algorithms, etc.--or used by the core operations in <chaos-preprocessor-seq-core.h/> after the type prefix is stripped.
 			For example,
 			<snippet>
 				<APPEND/>(

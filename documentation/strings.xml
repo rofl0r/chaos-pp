@@ -21,7 +21,7 @@
 			The invocation of an algorithm on an invalid <link id="string"/> is undefined and will likely cause catastrophic failure.
 		</para>
 		<para>
-			Note that it <em>is</em> safe to use the core <link id="string"/> operations defined in <chaos-preprocessor-string-spec.h/> with invalid <link id="strings"/> provided that the invalid element is never the first element of the <link id="string"/>.
+			Note that it <em>is</em> safe to use the core <link id="string"/> operations defined in <chaos-preprocessor-string-core.h/> with invalid <link id="strings"/> provided that the invalid element is never the first element of the <link id="string"/>.
 			For example,
 			<snippet>
 				<STRING_FIRST/>(a xyz b) // a
@@ -35,7 +35,7 @@
 	</section>
 	<section id="Using Strings as Generic Data Structures">
 		<para>
-			<link id="Strings"/> can be used as <link id="generic data structures"/> if the the <chaos-preprocessor-string-spec.h/> header is included.
+			<link id="Strings"/> can be used as <link id="generic data structures"/> if the the <chaos-preprocessor-string-core.h/> header is included.
 			For example,
 			<snippet>
 				<CONCAT/>((<STRING/>) C h a o s) // Chaos
@@ -45,10 +45,10 @@
 	<section id="Nil Strings">
 		<para>
 			In C (prior to C99) and C++, there is no such thing as a nil <link id="string"/>.
-			However, the special value <code><STRING_NIL/>()</code> can be used to indicate a nil <link id="string"/> to the core <link id="string"/> operations defined in <chaos-preprocessor-string-spec.h/>--thus allowing the generic algorithms to operate on nil <link id="strings"/> in a temporal fashion.
+			However, the special value <code><STRING_NIL/>()</code> can be used to indicate a nil <link id="string"/> to the core <link id="string"/> operations defined in <chaos-preprocessor-string-core.h/>--thus allowing the generic algorithms to operate on nil <link id="strings"/> in a temporal fashion.
 			The other <link id="string"/>-specific primitives, on the other hand, do not recognize <code><STRING_NIL/>()</code>.
 			Therefore, a "would-be" nil <link id="string"/> result from a <link id="string"/>-specific primitive is undefined.
-			The result of generic algorithm that yields a nil <link id="string"/> is well-defined provided that it is used only as a <link id="generic data structure"/>--meaning that it can be passed to other generic algorithms, etc.--or used by the core operations in <chaos-preprocessor-string-spec.h/> after the type prefix is stripped.
+			The result of generic algorithm that yields a nil <link id="string"/> is well-defined provided that it is used only as a <link id="generic data structure"/>--meaning that it can be passed to other generic algorithms, etc.--or used by the core operations in <chaos-preprocessor-string-core.h/> after the type prefix is stripped.
 			For example,
 			<snippet>
 				<APPEND/>(

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<header name="chaos/preprocessor/array/spec.h" author="Paul Mensonides" date="2003-2004">
+<header name="chaos/preprocessor/array/core.h" author="Paul Mensonides" date="2003-2004">
 <overview>
 	The <self/> header defines the core <link id="array"/> operations necessary to use an <link id="array"/> as a <link id="generic data structure"/>.
 </overview>
@@ -43,7 +43,7 @@
 		<syntax><ARRAY_NIL/>()</syntax>
 	</usage>
 	<listing>
-		#include <chaos-preprocessor-array-spec.h/>
+		#include <chaos-preprocessor-array-core.h/>
 		
 		<ARRAY_NIL/>() // (0, ())
 	</listing>
@@ -81,7 +81,7 @@
 		In C99, there is no such restriction.
 	</para>
 	<listing>
-		#include <chaos-preprocessor-array-spec.h/>
+		#include <chaos-preprocessor-array-core.h/>
 		
 		#define DATA() (2, (b, c))
 		
@@ -135,7 +135,7 @@
 	</para>
 	<x-reference id="ARRAY_REST"/>
 	<listing>
-		#include <chaos-preprocessor-array-spec.h/>
+		#include <chaos-preprocessor-array-core.h/>
 		
 		#define DATA() (3, (a, b, c))
 		
@@ -164,7 +164,7 @@
 	</para>
 	<x-reference id="ARRAY_FIRST"/>
 	<listing>
-		#include <chaos-preprocessor-array-spec.h/>
+		#include <chaos-preprocessor-array-core.h/>
 		
 		#define DATA() (3, (a, b, c))
 		
@@ -190,7 +190,7 @@
 	</para>
 	<x-reference id="ARRAY_IS_NIL"/>
 	<listing>
-		#include <chaos-preprocessor-array-spec.h/>
+		#include <chaos-preprocessor-array-core.h/>
 		
 		<ARRAY_IS_CONS/>((0, ()))     // 0
 		<ARRAY_IS_CONS/>((2, (x, y))) // 1
@@ -215,7 +215,7 @@
 	</para>
 	<x-reference id="ARRAY_IS_CONS"/>
 	<listing>
-		#include <chaos-preprocessor-array-spec.h/>
+		#include <chaos-preprocessor-array-core.h/>
 		
 		<ARRAY_IS_NIL/>((0, ()))     // 1
 		<ARRAY_IS_NIL/>((2, (x, y))) // 0

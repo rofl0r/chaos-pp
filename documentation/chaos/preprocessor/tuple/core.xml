@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<header name="chaos/preprocessor/tuple/spec.h" author="Paul Mensonides" date="2003-2004">
+<header name="chaos/preprocessor/tuple/core.h" author="Paul Mensonides" date="2003-2004">
 <overview>
 	The <self/> header defines the core <link id="tuple"/> operations necessary to use a <link id="tuple"/> as a <link id="generic data structure"/>.
 </overview>
@@ -52,7 +52,7 @@
 	</para>
 	<listing>
 		#include <chaos-preprocessor-config.h/>
-		#include <chaos-preprocessor-tuple-spec.h/>
+		#include <chaos-preprocessor-tuple-core.h/>
 		
 		#if <VARIADICS/>
 		
@@ -83,7 +83,7 @@
 	</para>
 	<listing>
 		#include <chaos-preprocessor-config.h/>
-		#include <chaos-preprocessor-tuple-spec.h/>
+		#include <chaos-preprocessor-tuple-core.h/>
 		
 		#if <VARIADICS/>
 		
@@ -132,7 +132,7 @@
 	<x-reference id="TUPLE_REST"/>
 	<listing>
 		#include <chaos-preprocessor-config.h/>
-		#include <chaos-preprocessor-tuple-spec.h/>
+		#include <chaos-preprocessor-tuple-core.h/>
 		
 		#if <VARIADICS/>
 		
@@ -162,7 +162,7 @@
 	<x-reference id="TUPLE_FIRST"/>
 	<listing>
 		#include <chaos-preprocessor-config.h/>
-		#include <chaos-preprocessor-tuple-spec.h/>
+		#include <chaos-preprocessor-tuple-core.h/>
 		
 		#if <VARIADICS/>
 		
@@ -193,7 +193,7 @@
 	<x-reference id="TUPLE_IS_NIL"/>
 	<listing>
 		#include <chaos-preprocessor-config.h/>
-		#include <chaos-preprocessor-tuple-spec.h/>
+		#include <chaos-preprocessor-tuple-core.h/>
 		
 		#if <VARIADICS/>
 		
@@ -224,7 +224,7 @@
 	<x-reference id="TUPLE_IS_CONS"/>
 	<listing>
 		#include <chaos-preprocessor-config.h/>
-		#include <chaos-preprocessor-tuple-spec.h/>
+		#include <chaos-preprocessor-tuple-core.h/>
 		
 		#if <VARIADICS/>
 		

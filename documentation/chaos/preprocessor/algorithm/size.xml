@@ -27,7 +27,7 @@
 	</para>
 	<listing>
 		#include <chaos-preprocessor-algorithm-size.h/>
-		#include <chaos-preprocessor-string-spec.h/>
+		#include <chaos-preprocessor-string-core.h/>
 		
 		<SIZE/>((<STRING/>) C 9 9) // 3
 	</listing>

@@ -38,7 +38,7 @@
 	</para>
 	<listing>
 		#include <chaos-preprocessor-algorithm-concat.h/>
-		#include <chaos-preprocessor-list-spec.h/>
+		#include <chaos-preprocessor-list-core.h/>
 		
 		<CONCAT/>(
 		    (<LIST/>) (C, (H, (A, (O, (S, ...)))))

@@ -27,7 +27,7 @@
 	</para>
 	<listing>
 		#include <chaos-preprocessor-algorithm-enumerate.h/>
-		#include <chaos-preprocessor-string-spec.h/>
+		#include <chaos-preprocessor-string-core.h/>
 		
 		<ENUMERATE/>((<STRING/>) 1 2 3) // 1, 2, 3
 	</listing>

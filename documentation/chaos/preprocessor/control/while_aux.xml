@@ -106,13 +106,13 @@
 	</para>
 	<listing>
 		#include <chaos-preprocessor-algorithm-reverse.h/>
-		#include <chaos-preprocessor-array-spec.h/>
+		#include <chaos-preprocessor-array-core.h/>
 		#include <chaos-preprocessor-comparison-not_equal.h/>
 		#include <chaos-preprocessor-control-iif.h/>
 		#include <chaos-preprocessor-control-while_aux.h/>
 		#include <chaos-preprocessor-facilities-as_args.h/>
 		#include <chaos-preprocessor-generics-strip.h/>
-		#include <chaos-preprocessor-list-spec.h/>
+		#include <chaos-preprocessor-list-core.h/>
 		#include <chaos-preprocessor-recursion-expr.h/>
 		
 		#define PRED(s, value, result, list) \

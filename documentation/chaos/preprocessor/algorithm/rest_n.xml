@@ -32,7 +32,7 @@
 	</para>
 	<listing>
 		#include <chaos-preprocessor-algorithm-rest_n.h/>
-		#include <chaos-preprocessor-list-spec.h/>
+		#include <chaos-preprocessor-list-core.h/>
 		
 		<REST_N/>(
 		    3,

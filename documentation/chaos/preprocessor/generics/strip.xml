@@ -19,9 +19,9 @@
 	</para>
 	<listing>
 		#include <chaos-preprocessor-config.h/>
-		#include <chaos-preprocessor-generics-spec.h/>
+		#include <chaos-preprocessor-generics-core.h/>
 		#include <chaos-preprocessor-generics-strip.h/>
-		#include <chaos-preprocessor-tuple-spec.h/>
+		#include <chaos-preprocessor-tuple-core.h/>
 		
 		#if <VARIADICS/>
 		

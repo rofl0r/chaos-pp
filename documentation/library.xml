@@ -298,10 +298,10 @@
 			</directory>
 			<header name="array.h"/>
 			<directory name="array">
+				<header name="core.h"/>
 				<header name="elem.h"/>
 				<header name="reverse.h"/>
 				<header name="size.h"/>
-				<header name="spec.h"/>
 				<header name="to_list.h"/>
 				<header name="to_seq.h"/>
 				<header name="to_string.h"/>
@@ -386,9 +386,9 @@
 			</directory>
 			<header name="generics.h"/>
 			<directory name="generics">
+				<header name="core.h"/>
 				<header name="is_elemental.h"/>
 				<header name="is_type.h"/>
-				<header name="spec.h"/>
 				<header name="strip.h"/>
 				<header name="typeof.h"/>
 			</directory>
@@ -433,7 +433,7 @@
 			<header name="limits.h"/>
 			<header name="list.h"/>
 			<directory name="list">
-				<header name="spec.h"/>
+				<header name="core.h"/>
 			</directory>
 			<header name="logical.h"/>
 			<directory name="logical">
@@ -552,6 +552,7 @@
 			<header name="seq.h"/>
 			<directory name="seq">
 				<header name="binary_transform.h"/>
+				<header name="core.h"/>
 				<header name="elem.h"/>
 				<header name="enumerate.h"/>
 				<header name="filter.h"/>
@@ -571,7 +572,6 @@
 				<header name="rest_n.h"/>
 				<header name="reverse.h"/>
 				<header name="size.h"/>
-				<header name="spec.h"/>
 				<header name="to_array.h"/>
 				<header name="to_list.h"/>
 				<header name="to_string.h"/>
@@ -579,6 +579,7 @@
 				<header name="transform.h"/>
 				<header name="variadic.h"/>
 				<directory name="variadic">
+					<header name="core.h"/>
 					<header name="filter.h"/>
 					<header name="fold_left.h"/>
 					<header name="fold_left_aux.h"/>
@@ -586,7 +587,6 @@
 					<header name="fold_right_aux.h"/>
 					<header name="for_each.h"/>
 					<header name="for_each_i.h"/>
-					<header name="spec.h"/>
 					<header name="transform.h"/>
 				</directory>
 				<header name="zip.h"/>
@@ -598,18 +598,18 @@
 			</directory>
 			<header name="string.h"/>
 			<directory name="string">
-				<header name="spec.h"/>
+				<header name="core.h"/>
 				<header name="to_lower.h"/>
 				<header name="to_upper.h"/>
 			</directory>
 			<header name="stringize.h"/>
 			<header name="tuple.h"/>
 			<directory name="tuple">
+				<header name="core.h"/>
 				<header name="eat.h"/>
 				<header name="elem.h"/>
 				<header name="rem.h"/>
 				<header name="reverse.h"/>
-				<header name="spec.h"/>
 				<header name="to_list.h"/>
 				<header name="to_seq.h"/>
 				<header name="to_string.h"/>

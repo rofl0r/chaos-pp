@@ -134,7 +134,7 @@
 		#include <chaos-preprocessor-control-branch.h/>
 		#include <chaos-preprocessor-recursion-basic.h/>
 		#include <chaos-preprocessor-recursion-expr.h/>
-		#include <chaos-preprocessor-tuple-spec.h/>
+		#include <chaos-preprocessor-tuple-core.h/>
 		
 		#if <VARIADICS/>
 		

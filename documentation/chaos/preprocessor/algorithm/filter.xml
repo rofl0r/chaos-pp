@@ -119,7 +119,7 @@
 		#include <chaos-preprocessor-lambda-ops.h/>
 		#include <chaos-preprocessor-logical-bool.h/>
 		#include <chaos-preprocessor-recursion-expr.h/>
-		#include <chaos-preprocessor-string-spec.h/>
+		#include <chaos-preprocessor-string-core.h/>
 		
 		#define P1(s, elem, _) <BOOL/>(elem)
 		
@@ -162,10 +162,10 @@
 			#include <chaos-preprocessor-config.h/>
 			#include <chaos-preprocessor-control-iif.h/>
 			#include <chaos-preprocessor-detection-is_variadic.h/>
-			#include <chaos-preprocessor-generics-spec.h/>
+			#include <chaos-preprocessor-generics-core.h/>
 			#include <chaos-preprocessor-recursion-basic.h/>
 			#include <chaos-preprocessor-recursion-expr.h/>
-			#include <chaos-preprocessor-tuple-spec.h/>
+			#include <chaos-preprocessor-tuple-core.h/>
 			
 			#if <VARIADICS/>
 			

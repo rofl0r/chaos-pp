@@ -56,7 +56,7 @@
 	</para>
 	<listing>
 		#include <chaos-preprocessor-algorithm-insert.h/>
-		#include <chaos-preprocessor-string-spec.h/>
+		#include <chaos-preprocessor-string-core.h/>
 		
 		<INSERT/>(2, (<STRING/>) a b c, _)
 		// (<STRING/>) a b _ c

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<header name="chaos/preprocessor/string/spec.h" author="Paul Mensonides" date="2003-2004">
+<header name="chaos/preprocessor/string/core.h" author="Paul Mensonides" date="2003-2004">
 <overview>
 	The <self/> header defines the core <link id="string"/> operations necessary to use a <link id="string"/> as a <link id="generic data structure"/>.
 </overview>
@@ -50,7 +50,7 @@
 	</para>
 	<listing>
 		#include <chaos-preprocessor-config.h/>
-		#include <chaos-preprocessor-string-spec.h/>
+		#include <chaos-preprocessor-string-core.h/>
 		
 		#if <VARIADICS/>
 		
@@ -101,7 +101,7 @@
 		This macro expands to a <link id="string"/> containing the elements of <var>string</var> with <var>x</var> appended to the head.
 	</para>
 	<listing>
-		#include <chaos-preprocessor-string-spec.h/>
+		#include <chaos-preprocessor-string-core.h/>
 		
 		<STRING_CONS/>(
 		    <STRING_CONS/>(
@@ -150,7 +150,7 @@
 	</para>
 	<x-reference id="STRING_REST"/>
 	<listing>
-		#include <chaos-preprocessor-string-spec.h/>
+		#include <chaos-preprocessor-string-core.h/>
 		
 		#define DATA() d a t a
 		
@@ -175,7 +175,7 @@
 	</para>
 	<x-reference id="STRING_FIRST"/>
 	<listing>
-		#include <chaos-preprocessor-string-spec.h/>
+		#include <chaos-preprocessor-string-core.h/>
 		
 		#define DATA() d a t a
 		
@@ -208,7 +208,7 @@
 	<x-reference id="STRING_IS_NIL"/>
 	<listing>
 		#include <chaos-preprocessor-config.h/>
-		#include <chaos-preprocessor-string-spec.h/>
+		#include <chaos-preprocessor-string-core.h/>
 		
 		#if <VARIADICS/>
 		
@@ -246,7 +246,7 @@
 	<x-reference id="STRING_IS_CONS"/>
 	<listing>
 		#include <chaos-preprocessor-config.h/>
-		#include <chaos-preprocessor-string-spec.h/>
+		#include <chaos-preprocessor-string-core.h/>
 		
 		#if <VARIADICS/>
 		

@@ -23,7 +23,7 @@
 	</section>
 	<section id="Using Lists as Generic Data Structures">
 		<para>
-			<link id="Lists"/> can be used as <link id="generic data structures"/> if the <chaos-preprocessor-list-spec.h/> header is included.
+			<link id="Lists"/> can be used as <link id="generic data structures"/> if the <chaos-preprocessor-list-core.h/> header is included.
 			For example,
 			<snippet>
 				#define MACRO(s, x, _) + x

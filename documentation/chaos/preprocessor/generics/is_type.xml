@@ -39,8 +39,8 @@
 	</para>
 	<listing>
 		#include <chaos-preprocessor-generics-is_type.h/>
-		#include <chaos-preprocessor-list-spec.h/>
-		#include <chaos-preprocessor-seq-spec.h/>
+		#include <chaos-preprocessor-list-core.h/>
+		#include <chaos-preprocessor-seq-core.h/>
 		
 		<IS_TYPE/>(
 		    <LIST/>, (<SEQ/>) (a)(b)(c)

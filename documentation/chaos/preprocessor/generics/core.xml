@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<header name="chaos/preprocessor/generics/spec.h" author="Paul Mensonides" date="2003-2004">
+<header name="chaos/preprocessor/generics/core.h" author="Paul Mensonides" date="2003-2004">
 <overview>
 	The <self/> header defines the operations necessary to manipulate <link id="generic data structures"/>.
 </overview>
@@ -32,9 +32,9 @@
 		</param>
 	</usage>
 	<listing>
-		#include <chaos-preprocessor-array-spec.h/>
-		#include <chaos-preprocessor-generics-spec.h/>
-		#include <chaos-preprocessor-list-spec.h/>
+		#include <chaos-preprocessor-array-core.h/>
+		#include <chaos-preprocessor-generics-core.h/>
+		#include <chaos-preprocessor-list-core.h/>
 		
 		<NIL/>(<ARRAY/>) // (0, ())
 		<NIL/>(<LIST/>)  // ...
@@ -69,8 +69,8 @@
 		This macro expands to a <link id="generic data structure"/> of the same type as <var>g</var> containing the elements of <var>g</var> with <var>x</var> (or <code>__VA_ARGS__</code>) appended to the head.
 	</para>
 	<listing>
-		#include <chaos-preprocessor-generics-spec.h/>
-		#include <chaos-preprocessor-list-spec.h/>
+		#include <chaos-preprocessor-generics-core.h/>
+		#include <chaos-preprocessor-list-core.h/>
 		
 		<CONS/>(<NIL/>(<LIST/>), a)
 		// (<LIST/>) (a, ...)
@@ -126,9 +126,9 @@
 	</para>
 	<x-reference id="REST"/>
 	<listing>
-		#include <chaos-preprocessor-generics-spec.h/>
-		#include <chaos-preprocessor-list-spec.h/>
-		#include <chaos-preprocessor-string-spec.h/>
+		#include <chaos-preprocessor-generics-core.h/>
+		#include <chaos-preprocessor-list-core.h/>
+		#include <chaos-preprocessor-string-core.h/>
 		
 		<FIRST/>((<LIST/>) (1, (2, (3, ...)))) // a
 		<FIRST/>((<STRING/>) 1 2 3 4 5)        // 1
@@ -153,9 +153,9 @@
 	<x-reference id="FIRST"/>
 	<listing>
 		#include <chaos-preprocessor-config.h/>
-		#include <chaos-preprocessor-generics-spec.h/>
-		#include <chaos-preprocessor-seq-spec.h/>
-		#include <chaos-preprocessor-tuple-spec.h/>
+		#include <chaos-preprocessor-generics-core.h/>
+		#include <chaos-preprocessor-seq-core.h/>
+		#include <chaos-preprocessor-tuple-core.h/>
 		
 		<REST/>((<SEQ/>) (X)(Y)(Z)) // (<SEQ/>) (Y)(Z)
 		
@@ -186,8 +186,8 @@
 	</para>
 	<x-reference id="IS_NIL"/>
 	<listing>
-		#include <chaos-preprocessor-generics-spec.h/>
-		#include <chaos-preprocessor-list-spec.h/>
+		#include <chaos-preprocessor-generics-core.h/>
+		#include <chaos-preprocessor-list-core.h/>
 		
 		<IS_CONS/>((<LIST/>) ...)                // 0
 		<IS_CONS/>((<LIST/>) (a, (b, (c, ...)))) // 1
@@ -212,8 +212,8 @@
 	</para>
 	<x-reference id="IS_CONS"/>
 	<listing>
-		#include <chaos-preprocessor-array-spec.h/>
-		#include <chaos-preprocessor-generics-spec.h/>
+		#include <chaos-preprocessor-array-core.h/>
+		#include <chaos-preprocessor-generics-core.h/>
 		
 		<IS_NIL/>((<ARRAY/>) (0, ()))     // 1
 		<IS_NIL/>((<ARRAY/>) (2, (x, y))) // 0

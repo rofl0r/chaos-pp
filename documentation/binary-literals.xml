@@ -205,7 +205,7 @@
 				#include <chaos-preprocessor-control-iif.h/>
 				#include <chaos-preprocessor-recursion-basic.h/>
 				#include <chaos-preprocessor-recursion-expr.h/>
-				#include <chaos-preprocessor-string-spec.h/>
+				#include <chaos-preprocessor-string-core.h/>
 				
 				#if <VARIADICS/>
 				
@@ -249,7 +249,7 @@
 				#include <chaos-preprocessor-control-while.h/>
 				#include <chaos-preprocessor-facilities-split.h/>
 				#include <chaos-preprocessor-recursion-expr.h/>
-				#include <chaos-preprocessor-string-spec.h/>
+				#include <chaos-preprocessor-string-core.h/>
 				
 				#if <VARIADICS/>
 				
@@ -295,7 +295,7 @@
 				#include <chaos-preprocessor-arbitrary-mul.h/>
 				#include <chaos-preprocessor-config.h/>
 				#include <chaos-preprocessor-recursion-expr.h/>
-				#include <chaos-preprocessor-string-spec.h/>
+				#include <chaos-preprocessor-string-core.h/>
 				
 				#if <VARIADICS/>
 				
@@ -350,7 +350,7 @@
 				#include <chaos-preprocessor-facilities-split.h/>
 				#include <chaos-preprocessor-logical-compl.h/>
 				#include <chaos-preprocessor-recursion-expr.h/>
-				#include <chaos-preprocessor-string-spec.h/>
+				#include <chaos-preprocessor-string-core.h/>
 				
 				#define BINARY(x) BINARY_S(<STATE/>(), x)
 				#define BINARY_S(s, x) \
@@ -469,7 +469,7 @@
 				#include <chaos-preprocessor-detection-is_unary.h/>
 				#include <chaos-preprocessor-logical-compl.h/>
 				#include <chaos-preprocessor-recursion-expr.h/>
-				#include <chaos-preprocessor-string-spec.h/>
+				#include <chaos-preprocessor-string-core.h/>
 				#include <chaos-preprocessor-tuple-rem.h/>
 				
 				#define XS XS
@@ -615,7 +615,7 @@
 				#include <chaos-preprocessor-cat.h/>
 				#include <chaos-preprocessor-config.h/>
 				#include <chaos-preprocessor-recursion-expr.h/>
-				#include <chaos-preprocessor-string-spec.h/>
+				#include <chaos-preprocessor-string-core.h/>
 				#include <chaos-preprocessor-string-to_upper.h/>
 				
 				#if <VARIADICS/>

@@ -121,7 +121,7 @@
 		#include <chaos-preprocessor-algorithm-for_each.h/>
 		#include <chaos-preprocessor-config.h/>
 		#include <chaos-preprocessor-lambda-ops.h/>
-		#include <chaos-preprocessor-list-spec.h/>
+		#include <chaos-preprocessor-list-core.h/>
 		#include <chaos-preprocessor-recursion-expr.h/>
 		
 		#define MACRO(s, elem, data) elem[data]

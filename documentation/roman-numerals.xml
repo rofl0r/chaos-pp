@@ -45,7 +45,7 @@
 				#include <chaos-preprocessor-config.h/>
 				#include <chaos-preprocessor-recursion-expr.h/>
 				#include <chaos-preprocessor-seq-elem.h/>
-				#include <chaos-preprocessor-string-spec.h/>
+				#include <chaos-preprocessor-string-core.h/>
 				
 				#if <VARIADICS/>
 				
@@ -139,8 +139,8 @@
 				#include <chaos-preprocessor-control-while.h/>
 				#include <chaos-preprocessor-generics-strip.h/>
 				#include <chaos-preprocessor-recursion-expr.h/>
-				#include <chaos-preprocessor-seq-spec.h/>
-				#include <chaos-preprocessor-string-spec.h/>
+				#include <chaos-preprocessor-seq-core.h/>
+				#include <chaos-preprocessor-string-core.h/>
 				#include <chaos-preprocessor-tuple-elem.h/>
 				
 				#if <VARIADICS/>

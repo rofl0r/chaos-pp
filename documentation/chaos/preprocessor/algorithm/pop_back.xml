@@ -27,7 +27,7 @@
 	</para>
 	<listing>
 		#include <chaos-preprocessor-algorithm-pop_back.h/>
-		#include <chaos-preprocessor-list-spec.h/>
+		#include <chaos-preprocessor-list-core.h/>
 		
 		<POP_BACK/>((<LIST/>) (a, (b, (c, ...))))
 		// (<LIST/>) (a, (b, ...))

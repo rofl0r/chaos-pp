@@ -37,7 +37,7 @@
 	</section>
 	<section id="Using Arrays as Generic Data Structures">
 		<para>
-			<link id="Arrays"/> can be used as <link id="generic data structures"/> if the <chaos-preprocessor-array-spec.h/> header is included.
+			<link id="Arrays"/> can be used as <link id="generic data structures"/> if the <chaos-preprocessor-array-core.h/> header is included.
 			For example,
 			<snippet>
 				#define MACRO(s, x, _) !x

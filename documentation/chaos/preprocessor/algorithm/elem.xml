@@ -32,7 +32,7 @@
 	</para>
 	<listing>
 		#include <chaos-preprocessor-algorithm-elem.h/>
-		#include <chaos-preprocessor-seq-spec.h/>
+		#include <chaos-preprocessor-seq-core.h/>
 		
 		#define DATA (<SEQ/>) (a)(b)(c)
 		

@@ -19,7 +19,7 @@
 	</para>
 	<listing>
 		#include <chaos-preprocessor-generics-typeof.h/>
-		#include <chaos-preprocessor-list-spec.h/>
+		#include <chaos-preprocessor-list-core.h/>
 		
 		<TYPEOF/>((<LIST/>) (a, (b, (c, ...)))) // <LIST/>
 	</listing>

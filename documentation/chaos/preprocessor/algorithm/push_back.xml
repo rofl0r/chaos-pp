@@ -39,7 +39,7 @@
 	</para>
 	<listing>
 		#include <chaos-preprocessor-algorithm-push_back.h/>
-		#include <chaos-preprocessor-list-spec.h/>
+		#include <chaos-preprocessor-list-core.h/>
 		
 		<PUSH_BACK/>((<LIST/>) (a, (b, ...)), c)
 		// (<LIST/>) (a, (b, (c, ...)))

@@ -27,7 +27,7 @@
 	</para>
 	<listing>
 		#include <chaos-preprocessor-algorithm-reverse.h/>
-		#include <chaos-preprocessor-seq-spec.h/>
+		#include <chaos-preprocessor-seq-core.h/>
 		
 		<REVERSE/>((<SEQ/>) (a)(b)(c))
 		// (<SEQ/>) (c)(b)(a)

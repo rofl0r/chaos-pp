@@ -32,7 +32,7 @@
 	</para>
 	<listing>
 		#include <chaos-preprocessor-algorithm-first_n.h/>
-		#include <chaos-preprocessor-array-spec.h/>
+		#include <chaos-preprocessor-array-core.h/>
 		
 		<FIRST_N/>(2, (<ARRAY/>) (5, (a, b, c, d, e)))
 		// (<ARRAY/>) (2, (a, b))

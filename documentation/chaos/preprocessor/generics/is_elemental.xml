@@ -25,8 +25,8 @@
 	<listing>
 		#include <chaos-preprocessor-config.h/>
 		#include <chaos-preprocessor-generics-is_elemental.h/>
-		#include <chaos-preprocessor-list-spec.h/>
-		#include <chaos-preprocessor-seq-variadic-spec.h/>
+		#include <chaos-preprocessor-list-core.h/>
+		#include <chaos-preprocessor-seq-variadic-core.h/>
 		
 		<IS_ELEMENTAL/>(<LIST/>) // 1
 		

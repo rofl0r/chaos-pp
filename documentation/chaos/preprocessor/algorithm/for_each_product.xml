@@ -111,10 +111,10 @@
 		#include <chaos-preprocessor-algorithm-for_each_product.h/>
 		#include <chaos-preprocessor-config.h/>
 		#include <chaos-preprocessor-lambda-ops.h/>
-		#include <chaos-preprocessor-list-spec.h/>
-		#include <chaos-preprocessor-seq-spec.h/>
+		#include <chaos-preprocessor-list-core.h/>
+		#include <chaos-preprocessor-seq-core.h/>
 		#include <chaos-preprocessor-seq-to_tuple.h/>
-		#include <chaos-preprocessor-string-spec.h/>
+		#include <chaos-preprocessor-string-core.h/>
 		
 		#define MACRO(s, product, data) \
 		    <SEQ_TO_TUPLE/>(product) \

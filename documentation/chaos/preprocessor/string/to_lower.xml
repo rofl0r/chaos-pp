@@ -62,7 +62,7 @@
 	<x-reference id="STRING_TO_UPPER"/>
 	<listing>
 		#include <chaos-preprocessor-algorithm-concat.h/>
-		#include <chaos-preprocessor-string-spec.h/>
+		#include <chaos-preprocessor-string-core.h/>
 		#include <chaos-preprocessor-string-to_lower.h/>
 		#include <chaos-preprocessor-string-to_upper.h/>
 		

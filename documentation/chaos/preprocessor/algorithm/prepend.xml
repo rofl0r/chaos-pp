@@ -30,8 +30,8 @@
 	</para>
 	<listing>
 		#include <chaos-preprocessor-algorithm-prepend.h/>
-		#include <chaos-preprocessor-list-spec.h/>
-		#include <chaos-preprocessor-seq-spec.h/>
+		#include <chaos-preprocessor-list-core.h/>
+		#include <chaos-preprocessor-seq-core.h/>
 		
 		<PREPEND/>(
 		    (<SEQ/>) (a)(b)(c),

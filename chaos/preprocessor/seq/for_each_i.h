@@ -53,6 +53,22 @@
         ) \
         /**/
 #    define CHAOS_PP_SEQ_FOR_EACH_I_S_ CHAOS_PP_LAMBDA(CHAOS_PP_SEQ_FOR_EACH_I_S_ID)()
+# else
+#    define CHAOS_PP_SEQ_FOR_EACH_I_S(s, macro, seq, data) \
+        CHAOS_PP_EXPR_S(s)(CHAOS_IP_SEQ_FOR_EACH_I_B_I \
+            CHAOS_IP_SEQ_FOR_EACH_I_A_I( \
+                s, macro, CHAOS_PP_SEQ_BINARY_TRANSFORM(CHAOS_PP_SEQ_REVERSE(seq), ~), data \
+            )(0, ~, ~, ~, ~, ~, ~) \
+        ) \
+        /**/
+# endif
+#
+# define CHAOS_PP_SEQ_FOR_EACH_I_S_ID() CHAOS_PP_SEQ_FOR_EACH_I_S
+#
+# define CHAOS_IP_SEQ_FOR_EACH_I_A_INDIRECT() CHAOS_IP_SEQ_FOR_EACH_I_A_II
+# define CHAOS_IP_SEQ_FOR_EACH_I_B_INDIRECT() CHAOS_IP_SEQ_FOR_EACH_I_B_I
+#
+# if CHAOS_PP_VARIADICS
 #    define CHAOS_IP_SEQ_FOR_EACH_I_A_I(s, macro, bin, ...) \
         CHAOS_PP_SPLIT(0, CHAOS_PP_EXPR_S(s)( \
             CHAOS_IP_SEQ_FOR_EACH_I_A_II bin, 0, CHAOS_PP_NEXT(s), macro, CHAOS_PP_CALL(macro), __VA_ARGS__ CHAOS_PP_SEQ_CLOSE(bin) \
@@ -72,13 +88,6 @@
         _m()(s, macro, n, CHAOS_PP_UNPACK px __VA_ARGS__) CHAOS_IP_SEQ_FOR_EACH_I_B_INDIRECT \
         /**/
 # else
-#    define CHAOS_PP_SEQ_FOR_EACH_I_S(s, macro, seq, data) \
-        CHAOS_PP_EXPR_S(s)(CHAOS_IP_SEQ_FOR_EACH_I_B_I \
-            CHAOS_IP_SEQ_FOR_EACH_I_A_I( \
-                s, macro, CHAOS_PP_SEQ_BINARY_TRANSFORM(CHAOS_PP_SEQ_REVERSE(seq), ~), data \
-            )(0, ~, ~, ~, ~, ~, ~) \
-        ) \
-        /**/
 #    define CHAOS_IP_SEQ_FOR_EACH_I_A_I(s, macro, bin, data) \
         CHAOS_PP_TUPLE_ELEM(6, 0, CHAOS_PP_EXPR_S(s)( \
             CHAOS_IP_SEQ_FOR_EACH_I_A_II bin (CHAOS_IP_SEQ_FOR_EACH_I_A_V, 0, CHAOS_PP_NEXT(s), macro, CHAOS_PP_CALL(macro), data) CHAOS_PP_SEQ_CLOSE(bin) \
@@ -99,10 +108,5 @@
         _m()(s, macro, n CHAOS_PP_COMMA() x CHAOS_PP_COMMA() data) CHAOS_IP_SEQ_FOR_EACH_I_B_INDIRECT \
         /**/
 # endif
-#
-# define CHAOS_PP_SEQ_FOR_EACH_I_S_ID() CHAOS_PP_SEQ_FOR_EACH_I_S
-#
-# define CHAOS_IP_SEQ_FOR_EACH_I_A_INDIRECT() CHAOS_IP_SEQ_FOR_EACH_I_A_II
-# define CHAOS_IP_SEQ_FOR_EACH_I_B_INDIRECT() CHAOS_IP_SEQ_FOR_EACH_I_B_I
 #
 # endif

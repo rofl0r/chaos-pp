@@ -96,7 +96,6 @@
         ) \
         /**/
 #    define CHAOS_PP_STRING_REST_ CHAOS_PP_LAMBDA(CHAOS_PP_STRING_REST_ID)()
-#    define CHAOS_IP_STRING_REST_I(x) x,
 # else
 #    define CHAOS_PP_STRING_REST(string) \
         CHAOS_IP_STRING_REST_II(CHAOS_PP_SPLIT( \
@@ -105,6 +104,11 @@
             ) \
         )) \
         /**/
+# endif
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_IP_STRING_REST_I(x) x,
+# else
 #    define CHAOS_IP_STRING_REST_I(x) x, ()
 #    define CHAOS_IP_STRING_REST_II(r) \
         CHAOS_PP_INLINE_UNLESS(CHAOS_PP_IS_EMPTY(CHAOS_PP_EMPTY r))( \

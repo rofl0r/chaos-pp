@@ -45,10 +45,6 @@
         ) \
         /**/
 #    define CHAOS_PP_SEQ_TRANSFORM_S_ CHAOS_PP_LAMBDA(CHAOS_PP_SEQ_TRANSFORM_S_ID)()
-#    define CHAOS_IP_SEQ_TRANSFORM_I(i, ...) \
-        CHAOS_PP_IIF(i)(CHAOS_IP_SEQ_TRANSFORM_II, CHAOS_PP_TUPLE_EAT(?))(__VA_ARGS__) \
-        /**/
-#    define CHAOS_IP_SEQ_TRANSFORM_II(s, op, _o, pd, ...) (_o()(s, op, __VA_ARGS__ CHAOS_PP_EXPOSE(pd))) CHAOS_IP_SEQ_TRANSFORM_INDIRECT
 # else
 #    define CHAOS_PP_SEQ_TRANSFORM_S(s, op, seq, data) \
         CHAOS_PP_EXPR_S(s)(CHAOS_IP_SEQ_TRANSFORM_I \
@@ -56,6 +52,18 @@
             ((0, ~, ~, ~, ~), ~) \
         ) \
         /**/
+# endif
+#
+# define CHAOS_PP_SEQ_TRANSFORM_S_ID() CHAOS_PP_SEQ_TRANSFORM
+#
+# define CHAOS_IP_SEQ_TRANSFORM_INDIRECT() CHAOS_IP_SEQ_TRANSFORM_I
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_IP_SEQ_TRANSFORM_I(i, ...) \
+        CHAOS_PP_IIF(i)(CHAOS_IP_SEQ_TRANSFORM_II, CHAOS_PP_TUPLE_EAT(?))(__VA_ARGS__) \
+        /**/
+#    define CHAOS_IP_SEQ_TRANSFORM_II(s, op, _o, pd, ...) (_o()(s, op, __VA_ARGS__ CHAOS_PP_EXPOSE(pd))) CHAOS_IP_SEQ_TRANSFORM_INDIRECT
+# else
 #    define CHAOS_IP_SEQ_TRANSFORM_I(aux, x) \
         CHAOS_PP_EXPAND(CHAOS_PP_DEFER(CHAOS_IP_SEQ_TRANSFORM_II)(CHAOS_PP_TUPLE_REM(5) aux, x)) \
         /**/
@@ -64,9 +72,5 @@
         /**/
 #    define CHAOS_IP_SEQ_TRANSFORM_III(s, op, _o, data, x) (_o()(s, op, x CHAOS_PP_COMMA() data)) CHAOS_IP_SEQ_TRANSFORM_INDIRECT
 # endif
-#
-# define CHAOS_PP_SEQ_TRANSFORM_S_ID() CHAOS_PP_SEQ_TRANSFORM
-#
-# define CHAOS_IP_SEQ_TRANSFORM_INDIRECT() CHAOS_IP_SEQ_TRANSFORM_I
 #
 # endif

@@ -33,10 +33,6 @@
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_TUPLE_ELEM(size, i, tuple) CHAOS_IP_TUPLE_ELEM_I(i, CHAOS_IP_TUPLE_ELEM_A tuple)
 #    define CHAOS_PP_TUPLE_ELEM_ CHAOS_PP_LAMBDA(CHAOS_PP_TUPLE_ELEM_ID)()
-#    define CHAOS_IP_TUPLE_ELEM_A(...) CHAOS_IP_TUPLE_ELEM_B(__VA_ARGS__,,,,,,,,,,,,,,,,,,,,,,,,,)
-#    define CHAOS_IP_TUPLE_ELEM_B(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, ...) \
-        (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y) \
-        /**/
 # else
 #    define CHAOS_PP_TUPLE_ELEM(size, i, tuple) \
         CHAOS_IP_TUPLE_ELEM_I( \
@@ -47,6 +43,16 @@
             ) \
         ) \
         /**/
+# endif
+#
+# define CHAOS_PP_TUPLE_ELEM_ID() CHAOS_PP_TUPLE_ELEM
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_IP_TUPLE_ELEM_A(...) CHAOS_IP_TUPLE_ELEM_B(__VA_ARGS__,,,,,,,,,,,,,,,,,,,,,,,,,)
+#    define CHAOS_IP_TUPLE_ELEM_B(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, ...) \
+        (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y) \
+        /**/
+# else
 #    define CHAOS_IP_TUPLE_ELEM_E_0(_) (_(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _())
 #    define CHAOS_IP_TUPLE_ELEM_E_1(_, a) (a, _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _())
 #    define CHAOS_IP_TUPLE_ELEM_E_2(_, a, b) (a, b, _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _())
@@ -74,8 +80,6 @@
 #    define CHAOS_IP_TUPLE_ELEM_E_24(_, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x) (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, _())
 #    define CHAOS_IP_TUPLE_ELEM_E_25(_, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y) (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y)
 # endif
-#
-# define CHAOS_PP_TUPLE_ELEM_ID() CHAOS_PP_TUPLE_ELEM
 #
 # define CHAOS_IP_TUPLE_ELEM_I(i, tuple) CHAOS_IP_TUPLE_ELEM_ ## i tuple
 # define CHAOS_IP_TUPLE_ELEM_0(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y) a

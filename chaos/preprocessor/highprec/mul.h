@@ -71,6 +71,7 @@
         CHAOS_IP_MUL_HP_F(5, x, y), CHAOS_IP_MUL_HP_F(6, x, y), CHAOS_IP_MUL_HP_F(7, x, y), CHAOS_IP_MUL_HP_F(8, x, y), CHAOS_IP_MUL_HP_F(9, x, y) \
     ) \
     /**/
+#
 # define CHAOS_IP_MUL_HP_I(o, _, a, b, c, d, e, f, g, h, i, j) CHAOS_IP_MUL_HP_II(o, _, a, b, c, d, e, f, g, h, i, j)
 # define CHAOS_IP_MUL_HP_II( \
         o, _, \

@@ -21,9 +21,15 @@
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_TUPLE_EAT(size) CHAOS_IP_TUPLE_EAT_I
 #    define CHAOS_PP_TUPLE_EAT_ CHAOS_PP_LAMBDA(CHAOS_PP_TUPLE_EAT)
-#    define CHAOS_IP_TUPLE_EAT_I(...)
 # else
 #    define CHAOS_PP_TUPLE_EAT(size) CHAOS_PP_PRIMITIVE_CAT(CHAOS_IP_TUPLE_EAT_, size)
+# endif
+#
+# define CHAOS_PP_TUPLE_EAT_ID() CHAOS_PP_TUPLE_EAT
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_IP_TUPLE_EAT_I(...)
+# else
 #    define CHAOS_IP_TUPLE_EAT_0()
 #    define CHAOS_IP_TUPLE_EAT_1(a)
 #    define CHAOS_IP_TUPLE_EAT_2(a, b)
@@ -51,7 +57,5 @@
 #    define CHAOS_IP_TUPLE_EAT_24(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x)
 #    define CHAOS_IP_TUPLE_EAT_25(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y)
 # endif
-#
-# define CHAOS_PP_TUPLE_EAT_ID() CHAOS_PP_TUPLE_EAT
 #
 # endif

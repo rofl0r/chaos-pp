@@ -41,6 +41,9 @@
         /**/
 #    define CHAOS_PP_MOD_MACHINE_S_ID() CHAOS_PP_MOD_MACHINE_S
 #    define CHAOS_PP_MOD_MACHINE_S_ CHAOS_PP_LAMBDA(CHAOS_PP_MOD_MACHINE_S)
+# endif
+#
+# if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_INSTRUCTION_0xCHAOS_0xMOD(s, p, x, y, k, ...) (, 0xCHAOS(0xMOD2), x, y, 0, k, __VA_ARGS__)
 #    define CHAOS_PP_INSTRUCTION_0xCHAOS_0xMOD2(s, p, x, y, r, k, ...) \
         CHAOS_PP_IIF(CHAOS_PP_LESS_EQUAL(y, x))( \

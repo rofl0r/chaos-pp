@@ -25,6 +25,9 @@
         /**/
 #    define CHAOS_PP_SEQ_ZIP_ID() CHAOS_PP_SEQ_ZIP
 #    define CHAOS_PP_SEQ_ZIP_ CHAOS_PP_LAMBDA(CHAOS_PP_SEQ_ZIP_ID)()
+# endif
+#
+# if CHAOS_PP_VARIADICS
 #    define CHAOS_IP_SEQ_ZIP_INDIRECT() CHAOS_IP_SEQ_ZIP_I
 #    define CHAOS_IP_SEQ_ZIP_I(id, ...) id(?)(((__VA_ARGS__)) CHAOS_IP_SEQ_ZIP_INDIRECT)
 # endif
@@ -37,6 +40,9 @@
         /**/
 #    define CHAOS_PP_SEQ_UNZIP_ID() CHAOS_PP_SEQ_UNZIP
 #    define CHAOS_PP_SEQ_UNZIP_ CHAOS_PP_LAMBDA(CHAOS_PP_SEQ_UNZIP_ID)()
+# endif
+#
+# if CHAOS_PP_VARIADICS
 #    define CHAOS_IP_SEQ_UNZIP_INDIRECT() CHAOS_IP_SEQ_UNZIP_I
 #    define CHAOS_IP_SEQ_UNZIP_I(id, zip) id(?)((CHAOS_PP_TUPLE_REM(?) zip) CHAOS_IP_SEQ_UNZIP_INDIRECT)
 # endif

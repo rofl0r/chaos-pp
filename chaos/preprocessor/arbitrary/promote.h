@@ -24,6 +24,9 @@
 #    define CHAOS_PP_PROMOTE_AP(x) CHAOS_PP_EXPAND(CHAOS_IP_PROMOTE_AP_I CHAOS_PP_PROMOTE_HP(x))
 #    define CHAOS_PP_PROMOTE_AP_ID() CHAOS_PP_PROMOTE_AP
 #    define CHAOS_PP_PROMOTE_AP_ CHAOS_PP_LAMBDA(CHAOS_PP_PROMOTE_AP)
+# endif
+#
+# if CHAOS_PP_VARIADICS
 #    define CHAOS_IP_PROMOTE_AP_I(r, sign) (sign, CHAOS_IP_PROMOTE_AP_II r)
 #    define CHAOS_IP_PROMOTE_AP_II(a, b, c, d, e, f, g, h, i, j) CHAOS_PP_CLEAN_AP_INTERNAL((a)(b)(c)(d)(e)(f)(g)(h)(i)(j))
 # endif

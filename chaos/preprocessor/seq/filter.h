@@ -47,6 +47,20 @@
         ) \
         /**/
 #    define CHAOS_PP_SEQ_FILTER_S_ CHAOS_PP_LAMBDA(CHAOS_PP_SEQ_FILTER_S_ID)()
+# else
+#    define CHAOS_PP_SEQ_FILTER_S(s, pred, seq, data) \
+        CHAOS_PP_EXPR_S(s)(CHAOS_IP_SEQ_FILTER_I \
+            CHAOS_PP_SEQ_INFUSE(seq, (1, CHAOS_PP_NEXT(s), pred, CHAOS_PP_CALL(pred), data)) \
+            ((0, ~, ~, ~, ~), ~) \
+        ) \
+        /**/
+# endif
+#
+# define CHAOS_PP_SEQ_FILTER_S_ID() CHAOS_PP_SEQ_FILTER_S
+#
+# define CHAOS_IP_SEQ_FILTER_INDIRECT() CHAOS_IP_SEQ_FILTER_I
+#
+# if CHAOS_PP_VARIADICS
 #    define CHAOS_IP_SEQ_FILTER_I(i, ...) \
         CHAOS_PP_IIF(i)(CHAOS_IP_SEQ_FILTER_II, CHAOS_PP_TUPLE_EAT(?))(CHAOS_PP_OBSTRUCT(), __VA_ARGS__) \
         /**/
@@ -56,12 +70,6 @@
         ) CHAOS_IP_SEQ_FILTER_INDIRECT \
         /**/
 # else
-#    define CHAOS_PP_SEQ_FILTER_S(s, pred, seq, data) \
-        CHAOS_PP_EXPR_S(s)(CHAOS_IP_SEQ_FILTER_I \
-            CHAOS_PP_SEQ_INFUSE(seq, (1, CHAOS_PP_NEXT(s), pred, CHAOS_PP_CALL(pred), data)) \
-            ((0, ~, ~, ~, ~), ~) \
-        ) \
-        /**/
 #    define CHAOS_IP_SEQ_FILTER_I(aux, x) \
         CHAOS_PP_EXPAND(CHAOS_PP_DEFER(CHAOS_IP_SEQ_FILTER_II)(CHAOS_PP_TUPLE_REM(5) aux, x)) \
         /**/
@@ -74,9 +82,5 @@
         ) CHAOS_IP_SEQ_FILTER_INDIRECT \
         /**/
 # endif
-#
-# define CHAOS_PP_SEQ_FILTER_S_ID() CHAOS_PP_SEQ_FILTER_S
-#
-# define CHAOS_IP_SEQ_FILTER_INDIRECT() CHAOS_IP_SEQ_FILTER_I
 #
 # endif

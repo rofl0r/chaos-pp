@@ -21,9 +21,15 @@
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_TUPLE_REM(size) CHAOS_IP_TUPLE_REM_I
 #    define CHAOS_PP_TUPLE_REM_ CHAOS_PP_LAMBDA(CHAOS_PP_TUPLE_REM)
-#    define CHAOS_IP_TUPLE_REM_I(...) __VA_ARGS__
 # else
 #    define CHAOS_PP_TUPLE_REM(size) CHAOS_PP_PRIMITIVE_CAT(CHAOS_IP_TUPLE_REM_, size)
+# endif
+#
+# define CHAOS_PP_TUPLE_REM_ID() CHAOS_PP_TUPLE_REM
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_IP_TUPLE_REM_I(...) __VA_ARGS__
+# else
 #    define CHAOS_IP_TUPLE_REM_0()
 #    define CHAOS_IP_TUPLE_REM_1(a) a
 #    define CHAOS_IP_TUPLE_REM_2(a, b) a, b
@@ -51,8 +57,6 @@
 #    define CHAOS_IP_TUPLE_REM_24(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x) a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x
 #    define CHAOS_IP_TUPLE_REM_25(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y) a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y
 # endif
-#
-# define CHAOS_PP_TUPLE_REM_ID() CHAOS_PP_TUPLE_REM
 #
 # /* CHAOS_PP_TUPLE_REM_CTOR */
 #

@@ -39,6 +39,19 @@
         CHAOS_PP_EXPR_S(s)(CHAOS_IP_CONCAT_I(CHAOS_PP_OBSTRUCT(), CHAOS_PP_PREV(s), g,)) \
         /**/
 #    define CHAOS_PP_CONCAT_BYPASS_ CHAOS_PP_LAMBDA(CHAOS_PP_CONCAT_BYPASS_ID)()
+# else
+#    define CHAOS_PP_CONCAT_BYPASS(s, g) \
+        CHAOS_PP_INLINE_WHEN(CHAOS_PP_IS_CONS(g))( \
+            CHAOS_PP_EXPR_S(s)(CHAOS_IP_CONCAT_I(CHAOS_PP_OBSTRUCT(), CHAOS_PP_PREV(s), CHAOS_PP_REST(g), CHAOS_PP_FIRST(g))) \
+        ) \
+        /**/
+# endif
+#
+# define CHAOS_PP_CONCAT_BYPASS_ID() CHAOS_PP_CONCAT_BYPASS
+#
+# define CHAOS_IP_CONCAT_INDIRECT() CHAOS_IP_CONCAT_I
+#
+# if CHAOS_PP_VARIADICS
 #    define CHAOS_IP_CONCAT_I(_, s, g, ...) \
         CHAOS_PP_IIF _(CHAOS_PP_IS_CONS(g))( \
             CHAOS_PP_EXPR_S(s) _(CHAOS_IP_CONCAT_INDIRECT _()( \
@@ -48,11 +61,6 @@
         ) \
         /**/
 # else
-#    define CHAOS_PP_CONCAT_BYPASS(s, g) \
-        CHAOS_PP_INLINE_WHEN(CHAOS_PP_IS_CONS(g))( \
-            CHAOS_PP_EXPR_S(s)(CHAOS_IP_CONCAT_I(CHAOS_PP_OBSTRUCT(), CHAOS_PP_PREV(s), CHAOS_PP_REST(g), CHAOS_PP_FIRST(g))) \
-        ) \
-        /**/
 #    define CHAOS_IP_CONCAT_I(_, s, g, res) \
         CHAOS_PP_IIF _(CHAOS_PP_IS_CONS(g))( \
             CHAOS_PP_EXPR_S(s) _(CHAOS_IP_CONCAT_INDIRECT _()( \
@@ -62,9 +70,5 @@
         ) \
         /**/
 # endif
-#
-# define CHAOS_PP_CONCAT_BYPASS_ID() CHAOS_PP_CONCAT_BYPASS
-#
-# define CHAOS_IP_CONCAT_INDIRECT() CHAOS_IP_CONCAT_I
 #
 # endif

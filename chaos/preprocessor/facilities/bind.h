@@ -31,6 +31,9 @@
         /**/
 #    define CHAOS_PP_BIND_ID() CHAOS_PP_BIND
 #    define CHAOS_PP_BIND_ CHAOS_PP_LAMBDA(CHAOS_PP_BIND_ID)()
+# endif
+#
+# if CHAOS_PP_VARIADICS
 #    define CHAOS_IP_BIND_P(n) CHAOS_PP_IS_NULLARY(CHAOS_IP_BIND_ ## n(, ()))
 #    define CHAOS_IP_BIND_0(p, ...) p ## __VA_ARGS__
 #    define CHAOS_IP_BIND_1(p, ...) p ## __VA_ARGS__

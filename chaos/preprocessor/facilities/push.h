@@ -23,6 +23,9 @@
 #    define CHAOS_PP_PUSH_ CHAOS_PP_LAMBDA(CHAOS_PP_PUSH_ID)()
 # else
 #    define CHAOS_PP_PUSH(a, b) CHAOS_IP_PUSH_I(a)CHAOS_IP_PUSH_I(b)
+# endif
+#
+# if !CHAOS_PP_VARIADICS
 #    define CHAOS_IP_PUSH_I(x) x
 # endif
 #

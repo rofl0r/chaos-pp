@@ -23,6 +23,9 @@
 #
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_IIF_ CHAOS_PP_LAMBDA(CHAOS_PP_IIF)
+# endif
+#
+# if CHAOS_PP_VARIADICS
 #    define CHAOS_IP_IIF_0(t, ...) __VA_ARGS__
 #    define CHAOS_IP_IIF_1(t, ...) t
 # else

@@ -21,6 +21,9 @@
 #    define CHAOS_PP_VARIADIC_CAT(...) CHAOS_IP_VARIADIC_CAT_I(__VA_ARGS__,,,,,,,,,,,,,,,,,,,,,,,,,)
 #    define CHAOS_PP_VARIADIC_CAT_ID() CHAOS_PP_VARIADIC_CAT
 #    define CHAOS_PP_VARIADIC_CAT_ CHAOS_PP_LAMBDA(CHAOS_PP_VARIADIC_CAT_ID)()
+# endif
+#
+# if CHAOS_PP_VARIADICS
 #    define CHAOS_IP_VARIADIC_CAT_I(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, ...) \
         a ## b ## c ## d ## e ## f ## g ## h ## i ## j ## k ## l ## m ## n ## o ## p ## q ## r ## s ## t ## u ## v ## w ## x ## y \
         /**/

@@ -74,13 +74,17 @@
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_SEQ_FIRST(seq) CHAOS_PP_TUPLE_REM_CTOR(?, CHAOS_PP_SPLIT(0, CHAOS_IP_SEQ_FIRST_I seq))
 #    define CHAOS_PP_SEQ_FIRST_ CHAOS_PP_LAMBDA(CHAOS_PP_SEQ_FIRST_ID)()
-#    define CHAOS_IP_SEQ_FIRST_I(...) (__VA_ARGS__),
 # else
 #    define CHAOS_PP_SEQ_FIRST(seq) CHAOS_PP_SPLIT(0, CHAOS_IP_SEQ_FIRST_I seq)
-#    define CHAOS_IP_SEQ_FIRST_I(x) x, ~
 # endif
 #
 # define CHAOS_PP_SEQ_FIRST_ID() CHAOS_PP_SEQ_FIRST
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_IP_SEQ_FIRST_I(...) (__VA_ARGS__),
+# else
+#    define CHAOS_IP_SEQ_FIRST_I(x) x, ~
+# endif
 #
 # /* CHAOS_PP_SEQ_REST */
 #

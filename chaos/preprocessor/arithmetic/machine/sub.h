@@ -33,6 +33,9 @@
 #    define CHAOS_PP_SUB_MACHINE_S(s, x, y) CHAOS_PP_EXPR_S(s)(CHAOS_PP_MACHINE_S(s, (, 0xCHAOS(0xSUB), x, y, 0xCHAOS(0xSTOP),)))
 #    define CHAOS_PP_SUB_MACHINE_S_ID() CHAOS_PP_SUB_MACHINE_S
 #    define CHAOS_PP_SUB_MACHINE_S_ CHAOS_PP_LAMBDA(CHAOS_PP_SUB_MACHINE_S)
+# endif
+#
+# if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_INSTRUCTION_0xCHAOS_0xSUB(s, p, x, y, k, ...) \
         CHAOS_PP_IF(y)( \
             (, 0xCHAOS(0xSUB), CHAOS_PP_DEC(x), CHAOS_PP_DEC(y), k, p ## __VA_ARGS__), \

@@ -48,6 +48,9 @@
         /**/
 #    define CHAOS_PP_PARSE_BYPASS_ID() CHAOS_PP_PARSE_BYPASS
 #    define CHAOS_PP_PARSE_BYPASS_ CHAOS_PP_LAMBDA(CHAOS_PP_PARSE_BYPASS_ID)()
+# endif
+#
+# if CHAOS_PP_VARIADICS
 #    define CHAOS_IP_PARSE_INDIRECT() CHAOS_IP_PARSE_I
 #    define CHAOS_IP_PARSE_I(p, s, orig, args, expr) \
         CHAOS_PP_IIF(CHAOS_PP_IS_VARIADIC(p ## expr))( \

@@ -46,10 +46,13 @@
 #    define CHAOS_PP_FOR_EACH_PRODUCT_X_S_ CHAOS_PP_LAMBDA(CHAOS_PP_FOR_EACH_PRODUCT_X_S_ID)()
 # else
 #    define CHAOS_PP_FOR_EACH_PRODUCT_X_S(s, size, macro, seq, data) CHAOS_IP_FOR_EACH_PRODUCT_X_U(s, size, macro, seq, CHAOS_IP_FOR_EACH_PRODUCT_X_N, (data))
-#    define CHAOS_IP_FOR_EACH_PRODUCT_X_N(x) (x)
 # endif
 #
 # define CHAOS_PP_FOR_EACH_PRODUCT_X_S_ID() CHAOS_PP_FOR_EACH_PRODUCT_X_S
+#
+# if !CHAOS_PP_VARIADICS
+#    define CHAOS_IP_FOR_EACH_PRODUCT_X_N(x) (x)
+# endif
 #
 # define CHAOS_IP_FOR_EACH_PRODUCT_X_U(s, size, macro, seq, bind, pd) \
     CHAOS_PP_IIF(CHAOS_PP_SEQ_IS_CONS(seq))( \

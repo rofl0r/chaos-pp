@@ -28,6 +28,7 @@
 # endif
 #
 # define CHAOS_PP_BOOL_HP_INTERNAL(x) CHAOS_IP_BOOL_HP_I x
+#
 # define CHAOS_IP_BOOL_HP_I(a, b, c, d, e, f, g, h, i, j) \
     CHAOS_PP_COMPL(CHAOS_PP_IS_NULLARY( \
         CHAOS_IP_BOOL_HP_ ## a ## b ## c ## d ## e ## f ## g ## h ## i ## j \

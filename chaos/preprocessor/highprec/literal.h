@@ -46,6 +46,24 @@
         )) \
         /**/
 #    define CHAOS_PP_LITERAL_HP_BYPASS_ CHAOS_PP_LAMBDA(CHAOS_PP_LITERAL_HP_BYPASS)
+# else
+#    define CHAOS_PP_LITERAL_HP_BYPASS(s, literal) \
+        CHAOS_PP_FIX_HP(CHAOS_PP_IIF(CHAOS_PP_IS_UNARY(literal))( \
+            (CHAOS_PP_EXPR_S(s)(CHAOS_IP_LITERAL_HP_I( \
+                CHAOS_PP_OBSTRUCT(), CHAOS_PP_PREV(s), CHAOS_PP_TUPLE_EAT(1) literal, 10, CHAOS_IP_LITERAL_HP_ID \
+            )), 1), \
+            (CHAOS_PP_EXPR_S(s)(CHAOS_IP_LITERAL_HP_I( \
+                CHAOS_PP_OBSTRUCT(), CHAOS_PP_PREV(s), literal, 10, CHAOS_IP_LITERAL_HP_ID \
+            )), 0) \
+        )) \
+        /**/
+# endif
+#
+# define CHAOS_PP_LITERAL_HP_BYPASS_ID() CHAOS_PP_LITERAL_HP_BYPASS
+#
+# define CHAOS_IP_LITERAL_HP_INDIRECT() CHAOS_IP_LITERAL_HP_I
+#
+# if CHAOS_PP_VARIADICS
 #    define CHAOS_IP_LITERAL_HP_I(_, s, string, c, ...) \
         CHAOS_PP_IIF _(CHAOS_PP_STRING_IS_CONS(string))( \
             CHAOS_PP_EXPR_S(s) _(CHAOS_IP_LITERAL_HP_INDIRECT _()( \
@@ -66,16 +84,6 @@
 #    define CHAOS_IP_LITERAL_HP_8 0, 0, 0, 0, 0, 0, 0, 0,
 #    define CHAOS_IP_LITERAL_HP_9 0, 0, 0, 0, 0, 0, 0, 0, 0,
 # else
-#    define CHAOS_PP_LITERAL_HP_BYPASS(s, literal) \
-        CHAOS_PP_FIX_HP(CHAOS_PP_IIF(CHAOS_PP_IS_UNARY(literal))( \
-            (CHAOS_PP_EXPR_S(s)(CHAOS_IP_LITERAL_HP_I( \
-                CHAOS_PP_OBSTRUCT(), CHAOS_PP_PREV(s), CHAOS_PP_TUPLE_EAT(1) literal, 10, CHAOS_IP_LITERAL_HP_ID \
-            )), 1), \
-            (CHAOS_PP_EXPR_S(s)(CHAOS_IP_LITERAL_HP_I( \
-                CHAOS_PP_OBSTRUCT(), CHAOS_PP_PREV(s), literal, 10, CHAOS_IP_LITERAL_HP_ID \
-            )), 0) \
-        )) \
-        /**/
 #    define CHAOS_IP_LITERAL_HP_ID(digit) (digit)
 #    define CHAOS_IP_LITERAL_HP_I(_, s, string, c, res) \
         CHAOS_PP_IIF _(CHAOS_PP_STRING_IS_CONS(string))( \
@@ -97,9 +105,5 @@
 #    define CHAOS_IP_LITERAL_HP_8 (0)(0)(0)(0)(0)(0)(0)(0)
 #    define CHAOS_IP_LITERAL_HP_9 (0)(0)(0)(0)(0)(0)(0)(0)(0)
 # endif
-#
-# define CHAOS_PP_LITERAL_HP_BYPASS_ID() CHAOS_PP_LITERAL_HP_BYPASS
-#
-# define CHAOS_IP_LITERAL_HP_INDIRECT() CHAOS_IP_LITERAL_HP_I
 #
 # endif

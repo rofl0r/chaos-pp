@@ -12,13 +12,13 @@
 # ifndef CHAOS_PREPROCESSOR_ARITHMETIC_INC_H
 # define CHAOS_PREPROCESSOR_ARITHMETIC_INC_H
 #
+# include <chaos/preprocessor/cat.h>
 # include <chaos/preprocessor/config.h>
-# include <chaos/preprocessor/detail/paste.h>
 # include <chaos/preprocessor/lambda/ops.h>
 #
 # /* CHAOS_PP_INC */
 #
-# define CHAOS_PP_INC(x) CHAOS_PP_PRIMITIVE_PASTE(CHAOS_IP_INC_, x)
+# define CHAOS_PP_INC(x) CHAOS_PP_PRIMITIVE_CAT(CHAOS_IP_INC_, x)
 # define CHAOS_PP_INC_ID() CHAOS_PP_INC
 #
 # if CHAOS_PP_VARIADICS

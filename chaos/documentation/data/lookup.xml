@@ -2,35 +2,39 @@
 <lookup>
 
 <header src="cat">
-	<macro id="CAT"/>
-	<macro id="CAT_"/>
-	<macro id="CAT_ID"/>
-	<macro id="PRIMITIVE_CAT"/>
-	<macro id="PRIMITIVE_CAT_"/>
-	<macro id="PRIMITIVE_CAT_ID"/>
+	<symbol id="CAT"/>
+	<symbol id="CAT_"/>
+	<symbol id="CAT_ID"/>
+	<symbol id="PRIMITIVE_CAT"/>
+	<symbol id="PRIMITIVE_CAT_"/>
+	<symbol id="PRIMITIVE_CAT_ID"/>
+</header>
+
+<header src="lambda/ops">
+	<symbol id="LAMBDA"/>
 </header>
 
 <header src="limits">
-	<macro id="LIMIT_EXPR"/>
-	<macro id="LIMIT_MAG"/>
+	<symbol id="LIMIT_EXPR"/>
+	<symbol id="LIMIT_MAG"/>
 </header>
 
 <header src="stringize">
-	<macro id="STRINGIZE"/>
-	<macro id="STRINGIZE_"/>
-	<macro id="STRINGIZE_ID"/>
-	<macro id="PRIMITIVE_STRINGIZE"/>
-	<macro id="PRIMITIVE_STRINGIZE_"/>
-	<macro id="PRIMITIVE_STRINGIZE_ID"/>
+	<symbol id="STRINGIZE"/>
+	<symbol id="STRINGIZE_"/>
+	<symbol id="STRINGIZE_ID"/>
+	<symbol id="PRIMITIVE_STRINGIZE"/>
+	<symbol id="PRIMITIVE_STRINGIZE_"/>
+	<symbol id="PRIMITIVE_STRINGIZE_ID"/>
 </header>
 
 <header src="wstringize">
-	<macro id="WSTRINGIZE"/>
-	<macro id="WSTRINGIZE_"/>
-	<macro id="WSTRINGIZE_ID"/>
-	<macro id="PRIMITIVE_WSTRINGIZE"/>
-	<macro id="PRIMITIVE_WSTRINGIZE_"/>
-	<macro id="PRIMITIVE_WSTRINGIZE_ID"/>
+	<symbol id="WSTRINGIZE"/>
+	<symbol id="WSTRINGIZE_"/>
+	<symbol id="WSTRINGIZE_ID"/>
+	<symbol id="PRIMITIVE_WSTRINGIZE"/>
+	<symbol id="PRIMITIVE_WSTRINGIZE_"/>
+	<symbol id="PRIMITIVE_WSTRINGIZE_ID"/>
 </header>
 
 </lookup>

@@ -601,6 +601,7 @@
 					<binary-file name="for_each.gif"/>
 					<binary-file name="for_each_i.gif"/>
 					<binary-file name="insert.gif"/>
+					<binary-file name="pop_back.gif"/>
 					<binary-file name="rest_n.gif"/>
 					<binary-file name="size.gif"/>
 					<binary-file name="to_list_alt.gif"/>
@@ -625,6 +626,7 @@
 				<header name="for_each.h"/>
 				<header name="for_each_i.h"/>
 				<header name="insert.h"/>
+				<header name="pop_back.h"/>
 				<header name="rest_n.h"/>
 				<header name="rem.h"/>
 				<header name="reverse.h"/>

@@ -13,7 +13,6 @@
 # define CHAOS_PREPROCESSOR_DEBUG_H
 #
 # include <chaos/preprocessor/debug/assert.h>
-# include <chaos/preprocessor/debug/division_by_zero.h>
 # include <chaos/preprocessor/debug/failure.h>
 # include <chaos/preprocessor/debug/line.h>
 #

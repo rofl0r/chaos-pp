@@ -25,7 +25,7 @@
 # include <chaos/preprocessor/arithmetic/dec.h>
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/control/iif.h>
-# include <chaos/preprocessor/debug/division_by_zero.h>
+# include <chaos/preprocessor/debug/failure.h>
 # include <chaos/preprocessor/detection/is_unary.h>
 # include <chaos/preprocessor/facilities/binary.h>
 # include <chaos/preprocessor/highprec/detail/divide.h>
@@ -72,7 +72,7 @@
                 ), \
                 0xCHAOS(0xEVAL), \
             ), \
-            CHAOS_PP_DIVISION_BY_ZERO() \
+            CHAOS_PP_FAILURE() \
         ) \
        /**/
 #    define CHAOS_PP_INSTRUCTION_0xCHAOS_0xARBITRARY_0xDIV2(s, p, x, y, rem, k, ...) \

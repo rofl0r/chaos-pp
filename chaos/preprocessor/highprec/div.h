@@ -17,7 +17,7 @@
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/control/if.h>
 # include <chaos/preprocessor/control/iif.h>
-# include <chaos/preprocessor/debug/division_by_zero.h>
+# include <chaos/preprocessor/debug/failure.h>
 # include <chaos/preprocessor/detection/is_binary.h>
 # include <chaos/preprocessor/facilities/binary.h>
 # include <chaos/preprocessor/highprec/bool.h>
@@ -99,7 +99,7 @@
             CHAOS_IP_DIV_HP_1(s, x, y), \
             (x, (0, 0, 0, 0, 0, 0, 0, 0, 0, 0)) \
         ), \
-        CHAOS_PP_DIVISION_BY_ZERO() \
+        CHAOS_PP_FAILURE() \
     ) \
     /**/
 # define CHAOS_IP_DIV_HP_1(s, x, y) \

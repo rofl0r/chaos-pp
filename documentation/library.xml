@@ -606,6 +606,7 @@
 					<binary-file name="pop_back.gif"/>
 					<binary-file name="range.gif"/>
 					<binary-file name="remove.gif"/>
+					<binary-file name="replace.gif"/>
 					<binary-file name="rest_n.gif"/>
 					<binary-file name="size.gif"/>
 					<binary-file name="to_list_alt.gif"/>
@@ -636,6 +637,7 @@
 				<header name="rest_n.h"/>
 				<header name="rem.h"/>
 				<header name="remove.h"/>
+				<header name="replace.h"/>
 				<header name="reverse.h"/>
 				<header name="size.h"/>
 				<header name="to_list.h"/>

@@ -17,7 +17,6 @@
 # include <chaos/preprocessor/control/iif.h>
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/limits.h>
-# include <chaos/preprocessor/logical/bitand.h>
 # include <chaos/preprocessor/recursion/basic.h>
 # include <chaos/preprocessor/recursion/buffer.h>
 # include <chaos/preprocessor/recursion/expr.h>
@@ -44,7 +43,7 @@
 #    define CHAOS_IP_PARAMETRIC_A(s, id, para, ...) CHAOS_IP_PARAMETRIC_B(CHAOS_PP_TUPLE_REM(?) para, s, id, __VA_ARGS__)
 #    define CHAOS_IP_PARAMETRIC_B(...) CHAOS_IP_PARAMETRIC_C(__VA_ARGS__)
 #    define CHAOS_IP_PARAMETRIC_C(buf, ...) \
-        CHAOS_PP_IIF(CHAOS_PP_BITAND(CHAOS_PP_IS_VALID(buf))(CHAOS_PP_NOT_EQUAL(buf, CHAOS_PP_LIMIT_EXPR)))( \
+        CHAOS_PP_IIF(CHAOS_PP_NOT_EQUAL(buf, CHAOS_PP_LIMIT_EXPR))( \
             CHAOS_IP_PARAMETRIC_D, CHAOS_IP_PARAMETRIC_E \
         )(CHAOS_PP_OBSTRUCT, buf, __VA_ARGS__) \
         /**/

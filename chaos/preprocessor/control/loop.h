@@ -43,9 +43,7 @@
 #    define CHAOS_PP_LOOP_S_ CHAOS_PP_LAMBDA(CHAOS_PP_LOOP_S_ID)()
 #    define CHAOS_IP_LOOP_I(_, s, buffer, pred, _p, op, _o, ...) \
         CHAOS_PP_IIF _( \
-            CHAOS_PP_BITAND _(CHAOS_PP_IS_VALID(buffer))( \
-                CHAOS_PP_BITAND _(CHAOS_PP_NOT_EQUAL(buffer, CHAOS_PP_LIMIT_EXPR))(_p()(s, pred, __VA_ARGS__)) \
-            ) \
+            CHAOS_PP_BITAND _(CHAOS_PP_NOT_EQUAL(buffer, CHAOS_PP_LIMIT_EXPR))(_p()(s, pred, __VA_ARGS__)) \
         )( \
             CHAOS_PP_EXPR_S(s) _(CHAOS_IP_LOOP_INDIRECT _()( \
                 CHAOS_PP_OBSTRUCT _(), CHAOS_PP_NEXT(s), CHAOS_PP_NEXT(buffer), pred, _p, op, _o, \
@@ -62,9 +60,7 @@
         /**/
 #    define CHAOS_IP_LOOP_I(_, s, buffer, pred, _p, op, _o, state) \
         CHAOS_PP_IIF _( \
-            CHAOS_PP_BITAND _(CHAOS_PP_IS_VALID(buffer))( \
-                CHAOS_PP_BITAND _(CHAOS_PP_NOT_EQUAL(buffer, CHAOS_PP_LIMIT_EXPR))(_p()(s, pred, state)) \
-            ) \
+            CHAOS_PP_BITAND _(CHAOS_PP_NOT_EQUAL(buffer, CHAOS_PP_LIMIT_EXPR))(_p()(s, pred, state)) \
         )( \
             CHAOS_PP_EXPR_S(s) _(CHAOS_IP_LOOP_INDIRECT _()( \
                 CHAOS_PP_OBSTRUCT _(), CHAOS_PP_NEXT(s), CHAOS_PP_NEXT(buffer), pred, _p, op, _o, \

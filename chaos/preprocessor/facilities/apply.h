@@ -38,8 +38,4 @@
 #
 # define CHAOS_PP_APPLY_ID() CHAOS_PP_APPLY
 #
-# /* CHAOS_PP_NIL */
-#
-# define CHAOS_PP_NIL CHAOS_PP_NIL
-#
 # endif

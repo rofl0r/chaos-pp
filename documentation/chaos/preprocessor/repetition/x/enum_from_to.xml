@@ -4,7 +4,7 @@
 	The <self/> header defines an <link id="exponential"/> algorithm that enumerates a user-specified target for each number in a specified range which can be <link id="parametrically resumed"/>.
 </overview>
 
-<macro id="ENUM_FROM_TO_X" type="indirect" group="delineation">
+<macro id="ENUM_FROM_TO_X" type="indirect" group="enumeration">
 	<abstract>
 		The <ENUM_FROM_TO_X/> macro enumerates its fourth argument for each number in the range specified by its second and third arguments.
 	</abstract>

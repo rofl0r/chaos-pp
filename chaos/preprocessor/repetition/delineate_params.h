@@ -38,22 +38,19 @@
 # /* CHAOS_PP_DELINEATE_PARAMS_BYPASS */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_DELINEATE_PARAMS_BYPASS(s, count, sep, ...) \
-        CHAOS_PP_EXPR_S(s)(CHAOS_IP_DELINEATE_PARAMS_I( \
-            CHAOS_PP_OBSTRUCT(), CHAOS_PP_PREV(s), CHAOS_PP_IS_VARIADIC(__VA_ARGS__), count, CHAOS_PP_EMPTY, sep, (__VA_ARGS__) \
-        )) \
-        /**/
+#    define CHAOS_PP_DELINEATE_PARAMS_BYPASS(s, count, sep, ...) CHAOS_IP_DELINEATE_PARAMS_U(s, CHAOS_PP_IS_VARIADIC(__VA_ARGS__), count, sep, (__VA_ARGS__))
 #    define CHAOS_PP_DELINEATE_PARAMS_BYPASS_ CHAOS_PP_LAMBDA(CHAOS_PP_DELINEATE_PARAMS_BYPASS_ID)()
 # else
-#    define CHAOS_PP_DELINEATE_PARAMS_BYPASS(s, count, sep, param) \
-        CHAOS_PP_EXPR_S(s)(CHAOS_IP_DELINEATE_PARAMS_I( \
-            CHAOS_PP_OBSTRUCT(), CHAOS_PP_PREV(s), CHAOS_PP_IS_BINARY(param), count, CHAOS_PP_EMPTY, sep, (param) \
-        )) \
-        /**/
+#    define CHAOS_PP_DELINEATE_PARAMS_BYPASS(s, count, sep, param) CHAOS_IP_DELINEATE_PARAMS_U(s, CHAOS_PP_IS_BINARY(param), count, sep, (param))
 # endif
 #
 # define CHAOS_PP_DELINEATE_PARAMS_BYPASS_ID() CHAOS_PP_DELINEATE_PARAMS_BYPASS
 #
+# define CHAOS_IP_DELINEATE_PARAMS_U(s, id, count, sep, pp) \
+    CHAOS_PP_EXPR_S(s)(CHAOS_IP_DELINEATE_PARAMS_I( \
+        CHAOS_PP_OBSTRUCT(), CHAOS_PP_PREV(s), id, count, CHAOS_PP_EMPTY, sep, pp \
+    )) \
+    /**/
 # define CHAOS_IP_DELINEATE_PARAMS_INDIRECT() CHAOS_IP_DELINEATE_PARAMS_I
 # define CHAOS_IP_DELINEATE_PARAMS_I(_, s, id, count, sep, ss, pp) \
     CHAOS_PP_EXPR_IF _(count)( \

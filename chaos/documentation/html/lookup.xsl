@@ -2,7 +2,7 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xso="http://chaos-pp.sourceforge.net">
 
 <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
-<xsl:namespace-alias stylesheet-prefix="xso" result-prefixe="xsl"/>
+<xsl:namespace-alias stylesheet-prefix="xso" result-prefix="xsl"/>
 
 <xsl:template match="/lookup">
 	<xsl:element name="xsl:stylesheet" namespace="http://www.w3.org/1999/XSL/Transform">

@@ -25,6 +25,7 @@
 # include <chaos/preprocessor/repetition/parametric/enum_shifted_trailing.h>
 # include <chaos/preprocessor/repetition/parametric/enum_trailing.h>
 # include <chaos/preprocessor/repetition/parametric/for.h>
+# include <chaos/preprocessor/repetition/parametric/for_aux.h>
 # include <chaos/preprocessor/repetition/parametric/repeat.h>
 # include <chaos/preprocessor/repetition/parametric/repeat_from_to.h>
 # include <chaos/preprocessor/repetition/parametric/repeat_shifted.h>

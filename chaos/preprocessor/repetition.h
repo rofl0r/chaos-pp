@@ -33,6 +33,7 @@
 # include <chaos/preprocessor/repetition/enum_trailing.h>
 # include <chaos/preprocessor/repetition/enum_trailing_params.h>
 # include <chaos/preprocessor/repetition/for.h>
+# include <chaos/preprocessor/repetition/for_aux.h>
 # include <chaos/preprocessor/repetition/parametric.h>
 # include <chaos/preprocessor/repetition/repeat.h>
 # include <chaos/preprocessor/repetition/repeat_from_to.h>

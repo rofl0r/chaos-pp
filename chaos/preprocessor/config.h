@@ -28,4 +28,12 @@
 #    define CHAOS_PP_VARIADICS 0
 # endif
 #
+# include <chaos/preprocessor/lambda/ops.h>
+#
+# define CHAOS_PP_VARIADICS_ID() CHAOS_PP_VARIADICS
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_PP_VARIADICS_ CHAOS_PP_LAMBDA(CHAOS_PP_VARIADICS_ID)()
+# endif
+#
 # endif

@@ -25,7 +25,7 @@
 # include <chaos/preprocessor/punctuation/comma.h>
 # include <chaos/preprocessor/recursion/basic.h>
 # include <chaos/preprocessor/recursion/expr.h>
-# include <chaos/preprocessor/seq/spec.h>
+# include <chaos/preprocessor/seq/core.h>
 # include <chaos/preprocessor/tuple/eat.h>
 # include <chaos/preprocessor/tuple/elem.h>
 # include <chaos/preprocessor/tuple/rem.h>

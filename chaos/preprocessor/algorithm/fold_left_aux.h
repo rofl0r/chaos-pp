@@ -17,7 +17,7 @@
 # include <chaos/preprocessor/control/inline_when.h>
 # include <chaos/preprocessor/detection/is_unary.h>
 # include <chaos/preprocessor/detection/is_variadic.h>
-# include <chaos/preprocessor/generics/spec.h>
+# include <chaos/preprocessor/generics/core.h>
 # include <chaos/preprocessor/generics/typeof.h>
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/lambda/planar.h>

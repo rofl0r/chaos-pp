@@ -26,8 +26,8 @@
 # include <chaos/preprocessor/logical/bitxor.h>
 # include <chaos/preprocessor/recursion/expr.h>
 # include <chaos/preprocessor/recursion/machine.h>
+# include <chaos/preprocessor/seq/core.h>
 # include <chaos/preprocessor/seq/reverse.h>
-# include <chaos/preprocessor/seq/spec.h>
 #
 # /* CHAOS_PP_MUL_AP */
 #

@@ -12,10 +12,10 @@
 # ifndef CHAOS_PREPROCESSOR_ARRAY_H
 # define CHAOS_PREPROCESSOR_ARRAY_H
 #
+# include <chaos/preprocessor/array/core.h>
 # include <chaos/preprocessor/array/elem.h>
 # include <chaos/preprocessor/array/reverse.h>
 # include <chaos/preprocessor/array/size.h>
-# include <chaos/preprocessor/array/spec.h>
 # include <chaos/preprocessor/array/to_list.h>
 # include <chaos/preprocessor/array/to_seq.h>
 # include <chaos/preprocessor/array/to_string.h>

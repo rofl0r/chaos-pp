@@ -12,7 +12,7 @@
 # ifndef CHAOS_PREPROCESSOR_STRING_H
 # define CHAOS_PREPROCESSOR_STRING_H
 #
-# include <chaos/preprocessor/string/spec.h>
+# include <chaos/preprocessor/string/core.h>
 # include <chaos/preprocessor/string/to_lower.h>
 # include <chaos/preprocessor/string/to_upper.h>
 #

@@ -12,9 +12,9 @@
 # ifndef CHAOS_PREPROCESSOR_GENERICS_H
 # define CHAOS_PREPROCESSOR_GENERICS_H
 #
+# include <chaos/preprocessor/generics/core.h>
 # include <chaos/preprocessor/generics/is_elemental.h>
 # include <chaos/preprocessor/generics/is_type.h>
-# include <chaos/preprocessor/generics/spec.h>
 # include <chaos/preprocessor/generics/strip.h>
 # include <chaos/preprocessor/generics/typeof.h>
 #

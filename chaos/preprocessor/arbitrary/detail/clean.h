@@ -20,7 +20,7 @@
 # include <chaos/preprocessor/facilities/binary.h>
 # include <chaos/preprocessor/facilities/split.h>
 # include <chaos/preprocessor/logical/bitand.h>
-# include <chaos/preprocessor/seq/spec.h>
+# include <chaos/preprocessor/seq/core.h>
 #
 # /* CHAOS_PP_CLEAN_AP */
 #

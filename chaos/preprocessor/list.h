@@ -12,6 +12,6 @@
 # ifndef CHAOS_PREPROCESSOR_LIST_H
 # define CHAOS_PREPROCESSOR_LIST_H
 #
-# include <chaos/preprocessor/list/spec.h>
+# include <chaos/preprocessor/list/core.h>
 #
 # endif

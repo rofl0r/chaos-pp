@@ -17,7 +17,7 @@
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/limits.h>
-# include <chaos/preprocessor/tuple/spec.h>
+# include <chaos/preprocessor/tuple/core.h>
 #
 # /* CHAOS_PP_OVERLOAD */
 #

@@ -20,7 +20,7 @@
 # include <chaos/preprocessor/logical/and.h>
 # include <chaos/preprocessor/recursion/expr.h>
 # include <chaos/preprocessor/recursion/phase.h>
-# include <chaos/preprocessor/seq/spec.h>
+# include <chaos/preprocessor/seq/core.h>
 # include <chaos/preprocessor/tuple/eat.h>
 #
 # /* CHAOS_PP_SUB */

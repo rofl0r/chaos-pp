@@ -14,7 +14,7 @@
 #
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/detection/is_variadic.h>
-# include <chaos/preprocessor/generics/spec.h>
+# include <chaos/preprocessor/generics/core.h>
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/logical/compl.h>
 #

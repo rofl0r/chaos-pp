@@ -15,7 +15,7 @@
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/control/iif.h>
 # include <chaos/preprocessor/control/inline_when.h>
-# include <chaos/preprocessor/generics/spec.h>
+# include <chaos/preprocessor/generics/core.h>
 # include <chaos/preprocessor/generics/typeof.h>
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/lambda/planar.h>

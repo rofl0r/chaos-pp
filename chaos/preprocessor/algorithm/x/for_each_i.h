@@ -17,7 +17,7 @@
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/control/iif.h>
 # include <chaos/preprocessor/facilities/optional.h>
-# include <chaos/preprocessor/generics/spec.h>
+# include <chaos/preprocessor/generics/core.h>
 # include <chaos/preprocessor/generics/typeof.h>
 # include <chaos/preprocessor/lambda/call.h>
 # include <chaos/preprocessor/lambda/ops.h>
@@ -26,7 +26,7 @@
 # include <chaos/preprocessor/recursion/buffer.h>
 # include <chaos/preprocessor/recursion/expr.h>
 # include <chaos/preprocessor/recursion/phase.h>
-# include <chaos/preprocessor/seq/spec.h>
+# include <chaos/preprocessor/seq/core.h>
 # include <chaos/preprocessor/tuple/eat.h>
 #
 # /* CHAOS_PP_FOR_EACH_I_X */

@@ -17,7 +17,7 @@
 # include <chaos/preprocessor/control/iif.h>
 # include <chaos/preprocessor/detection/is_nullary.h>
 # include <chaos/preprocessor/lambda/ops.h>
-# include <chaos/preprocessor/list/spec.h>
+# include <chaos/preprocessor/list/core.h>
 # include <chaos/preprocessor/logical/compl.h>
 # include <chaos/preprocessor/recursion/basic.h>
 #

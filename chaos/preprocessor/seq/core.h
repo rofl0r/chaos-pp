@@ -9,8 +9,8 @@
 #  *                                                                    *
 #  ******************************************************************** */
 #
-# ifndef CHAOS_PREPROCESSOR_SEQ_SPEC_H
-# define CHAOS_PREPROCESSOR_SEQ_SPEC_H
+# ifndef CHAOS_PREPROCESSOR_SEQ_CORE_H
+# define CHAOS_PREPROCESSOR_SEQ_CORE_H
 #
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/control/iif.h>

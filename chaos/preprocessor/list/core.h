@@ -9,8 +9,8 @@
 #  *                                                                    *
 #  ******************************************************************** */
 #
-# ifndef CHAOS_PREPROCESSOR_LIST_SPEC_H
-# define CHAOS_PREPROCESSOR_LIST_SPEC_H
+# ifndef CHAOS_PREPROCESSOR_LIST_CORE_H
+# define CHAOS_PREPROCESSOR_LIST_CORE_H
 #
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/detection/is_binary.h>

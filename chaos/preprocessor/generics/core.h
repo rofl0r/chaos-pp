@@ -9,8 +9,8 @@
 #  *                                                                    *
 #  ******************************************************************** */
 #
-# ifndef CHAOS_PREPROCESSOR_GENERICS_SPEC_H
-# define CHAOS_PREPROCESSOR_GENERICS_SPEC_H
+# ifndef CHAOS_PREPROCESSOR_GENERICS_CORE_H
+# define CHAOS_PREPROCESSOR_GENERICS_CORE_H
 #
 # include <chaos/preprocessor/cat.h>
 # include <chaos/preprocessor/config.h>

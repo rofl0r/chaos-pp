@@ -9,8 +9,8 @@
 #  *                                                                    *
 #  ******************************************************************** */
 #
-# ifndef CHAOS_PREPROCESSOR_TUPLE_SPEC_H
-# define CHAOS_PREPROCESSOR_TUPLE_SPEC_H
+# ifndef CHAOS_PREPROCESSOR_TUPLE_CORE_H
+# define CHAOS_PREPROCESSOR_TUPLE_CORE_H
 #
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/control/inline_when.h>

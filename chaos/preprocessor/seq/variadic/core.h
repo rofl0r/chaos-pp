@@ -9,12 +9,12 @@
 #  *                                                                    *
 #  ******************************************************************** */
 #
-# ifndef CHAOS_PREPROCESSOR_SEQ_VARIADIC_SPEC_H
-# define CHAOS_PREPROCESSOR_SEQ_VARIADIC_SPEC_H
+# ifndef CHAOS_PREPROCESSOR_SEQ_VARIADIC_CORE_H
+# define CHAOS_PREPROCESSOR_SEQ_VARIADIC_CORE_H
 #
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/lambda/ops.h>
-# include <chaos/preprocessor/seq/spec.h>
+# include <chaos/preprocessor/seq/core.h>
 #
 # /* CHAOS_PP_VARIADIC_SEQ */
 #

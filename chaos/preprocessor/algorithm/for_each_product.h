@@ -15,12 +15,12 @@
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/control/iif.h>
 # include <chaos/preprocessor/facilities/optional.h>
-# include <chaos/preprocessor/generics/spec.h>
+# include <chaos/preprocessor/generics/core.h>
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/lambda/trampoline.h>
 # include <chaos/preprocessor/recursion/basic.h>
 # include <chaos/preprocessor/recursion/expr.h>
-# include <chaos/preprocessor/seq/spec.h>
+# include <chaos/preprocessor/seq/core.h>
 # include <chaos/preprocessor/tuple/eat.h>
 #
 # /* CHAOS_PP_FOR_EACH_PRODUCT */

@@ -20,7 +20,7 @@
 # include <chaos/preprocessor/recursion/buffer.h>
 # include <chaos/preprocessor/recursion/expr.h>
 # include <chaos/preprocessor/recursion/phase.h>
-# include <chaos/preprocessor/seq/spec.h>
+# include <chaos/preprocessor/seq/core.h>
 # include <chaos/preprocessor/tuple/eat.h>
 # include <chaos/preprocessor/tuple/rem.h>
 #

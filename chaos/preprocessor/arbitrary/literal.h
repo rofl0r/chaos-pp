@@ -21,7 +21,7 @@
 # include <chaos/preprocessor/limits.h>
 # include <chaos/preprocessor/recursion/basic.h>
 # include <chaos/preprocessor/recursion/expr.h>
-# include <chaos/preprocessor/string/spec.h>
+# include <chaos/preprocessor/string/core.h>
 # include <chaos/preprocessor/tuple/eat.h>
 #
 # /* CHAOS_PP_LITERAL_AP */

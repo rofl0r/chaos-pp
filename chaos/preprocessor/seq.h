@@ -13,6 +13,7 @@
 # define CHAOS_PREPROCESSOR_SEQ_H
 #
 # include <chaos/preprocessor/seq/binary_transform.h>
+# include <chaos/preprocessor/seq/core.h>
 # include <chaos/preprocessor/seq/elem.h>
 # include <chaos/preprocessor/seq/enumerate.h>
 # include <chaos/preprocessor/seq/filter.h>
@@ -32,7 +33,6 @@
 # include <chaos/preprocessor/seq/rest_n.h>
 # include <chaos/preprocessor/seq/reverse.h>
 # include <chaos/preprocessor/seq/size.h>
-# include <chaos/preprocessor/seq/spec.h>
 # include <chaos/preprocessor/seq/to_array.h>
 # include <chaos/preprocessor/seq/to_list.h>
 # include <chaos/preprocessor/seq/to_string.h>

@@ -9,8 +9,8 @@
 #  *                                                                    *
 #  ******************************************************************** */
 #
-# ifndef CHAOS_PREPROCESSOR_ARRAY_SPEC_H
-# define CHAOS_PREPROCESSOR_ARRAY_SPEC_H
+# ifndef CHAOS_PREPROCESSOR_ARRAY_CORE_H
+# define CHAOS_PREPROCESSOR_ARRAY_CORE_H
 #
 # include <chaos/preprocessor/arithmetic/dec.h>
 # include <chaos/preprocessor/arithmetic/inc.h>
@@ -26,8 +26,8 @@
 # include <chaos/preprocessor/logical/not.h>
 # include <chaos/preprocessor/punctuation/comma_if.h>
 # include <chaos/preprocessor/recursion/basic.h>
+# include <chaos/preprocessor/tuple/core.h>
 # include <chaos/preprocessor/tuple/rem.h>
-# include <chaos/preprocessor/tuple/spec.h>
 #
 # /* CHAOS_PP_ARRAY */
 #

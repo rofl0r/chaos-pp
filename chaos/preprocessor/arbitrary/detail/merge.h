@@ -22,9 +22,9 @@
 # include <chaos/preprocessor/recursion/machine.h>
 # include <chaos/preprocessor/punctuation/paren.h>
 # include <chaos/preprocessor/seq/binary_transform.h>
+# include <chaos/preprocessor/seq/core.h>
 # include <chaos/preprocessor/seq/detail/close.h>
 # include <chaos/preprocessor/seq/reverse.h>
-# include <chaos/preprocessor/seq/spec.h>
 # include <chaos/preprocessor/tuple/eat.h>
 #
 # /* CHAOS_PP_INSTRUCTION_0xCHAOS_0xARBITRARY_0xMERGE */

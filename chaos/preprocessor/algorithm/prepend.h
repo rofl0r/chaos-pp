@@ -14,7 +14,7 @@
 #
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/control/iif.h>
-# include <chaos/preprocessor/generics/spec.h>
+# include <chaos/preprocessor/generics/core.h>
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/limits.h>
 # include <chaos/preprocessor/recursion/basic.h>

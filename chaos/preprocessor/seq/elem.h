@@ -14,8 +14,8 @@
 #
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/lambda/ops.h>
+# include <chaos/preprocessor/seq/core.h>
 # include <chaos/preprocessor/seq/rest_n.h>
-# include <chaos/preprocessor/seq/spec.h>
 #
 # /* CHAOS_PP_SEQ_ELEM */
 #

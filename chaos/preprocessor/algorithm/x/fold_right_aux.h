@@ -18,7 +18,7 @@
 # include <chaos/preprocessor/control/inline_when.h>
 # include <chaos/preprocessor/detection/is_unary.h>
 # include <chaos/preprocessor/detection/is_variadic.h>
-# include <chaos/preprocessor/generics/spec.h>
+# include <chaos/preprocessor/generics/core.h>
 # include <chaos/preprocessor/generics/typeof.h>
 # include <chaos/preprocessor/lambda/call.h>
 # include <chaos/preprocessor/lambda/ops.h>
@@ -26,7 +26,7 @@
 # include <chaos/preprocessor/recursion/buffer.h>
 # include <chaos/preprocessor/recursion/expr.h>
 # include <chaos/preprocessor/recursion/phase.h>
-# include <chaos/preprocessor/seq/spec.h>
+# include <chaos/preprocessor/seq/core.h>
 # include <chaos/preprocessor/tuple/eat.h>
 # include <chaos/preprocessor/tuple/rem.h>
 #

@@ -45,16 +45,16 @@
 #
 # define CHAOS_PP_FOLD_LEFT_S_ID() CHAOS_PP_FOLD_LEFT_S
 #
-# define CHAOS_IP_FOLD_LEFT_U(s, op, g, ps) CHAOS_IP_FOLD_LEFT_I(CHAOS_PP_NEXT(s), op, CHAOS_PP_CALL(op), CHAOS_PP_TYPEOF(g), g, ps)
-# define CHAOS_IP_FOLD_LEFT_INDIRECT() CHAOS_IP_FOLD_LEFT_I
-# define CHAOS_IP_FOLD_LEFT_I(s, op, _o, type, g, ps) \
-    CHAOS_PP_IIF(CHAOS_PP_IS_CONS(g))( \
-        CHAOS_IP_FOLD_LEFT_II, CHAOS_PP_UNPACK ps CHAOS_PP_TUPLE_EAT(7) \
-    )(CHAOS_PP_OBSTRUCT(), s, op, _o, type, g, ps) \
+# define CHAOS_IP_FOLD_LEFT_U(s, op, g, ps) \
+    CHAOS_IP_FOLD_LEFT_I(CHAOS_PP_OBSTRUCT(), CHAOS_PP_NEXT(s), op, CHAOS_PP_CALL(op), CHAOS_PP_TYPEOF(g), g, ps) \
     /**/
-# define CHAOS_IP_FOLD_LEFT_II(_, s, op, _o, type, g, ps) \
-    CHAOS_PP_EXPR_S(s) _(CHAOS_IP_FOLD_LEFT_INDIRECT _()( \
-        CHAOS_PP_NEXT(s), op, _o, type, CHAOS_PP_REST(g), \
+# define CHAOS_IP_FOLD_LEFT_INDIRECT() CHAOS_IP_FOLD_LEFT_I
+# define CHAOS_IP_FOLD_LEFT_I(_, s, op, _o, type, g, ps) \
+    CHAOS_PP_IIF(CHAOS_PP_IS_CONS(g))( \
+        CHAOS_PP_EXPR_S(s) CHAOS_PP_OBSTRUCT(), \
+        CHAOS_PP_UNPACK ps CHAOS_PP_TUPLE_EAT(1) \
+    )(CHAOS_IP_FOLD_LEFT_INDIRECT _()( \
+        CHAOS_PP_OBSTRUCT _(), CHAOS_PP_NEXT(s), op, _o, type, CHAOS_PP_REST(g), \
         (_o()(s, op, CHAOS_PP_ITEM(type, CHAOS_PP_FIRST(g)) CHAOS_PP_COMMA() CHAOS_PP_UNPACK ps)) \
     )) \
     /**/

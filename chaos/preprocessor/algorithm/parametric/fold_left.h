@@ -42,11 +42,9 @@
 #    define CHAOS_IP_FOLD_LEFT_PARAMETRIC_INDIRECT() CHAOS_IP_FOLD_LEFT_PARAMETRIC_I
 #    define CHAOS_IP_FOLD_LEFT_PARAMETRIC_I(s, id, para, op, _o, type, g, ...) \
         CHAOS_PP_IIF(CHAOS_PP_IS_CONS(g))( \
-            CHAOS_IP_FOLD_LEFT_PARAMETRIC_II, __VA_ARGS__ CHAOS_PP_TUPLE_EAT(?) \
-        )(CHAOS_PP_OBSTRUCT(), s, id, para, op, _o, type, g, __VA_ARGS__) \
-        /**/
-#    define CHAOS_IP_FOLD_LEFT_PARAMETRIC_II(_, s, id, para, op, _o, type, g, ...) \
-        CHAOS_PP_EXPR_S(s) _(id _()( \
+            CHAOS_PP_EXPR_S(s) CHAOS_PP_OBSTRUCT(), \
+            __VA_ARGS__ CHAOS_PP_TUPLE_EAT(?) \
+        )(CHAOS_PP_DEFER(id)()( \
             s, CHAOS_IP_FOLD_LEFT_PARAMETRIC_INDIRECT, para, op, _o, type, CHAOS_PP_REST(g), \
             _o()(s, op, CHAOS_PP_ITEM(type, CHAOS_PP_FIRST(g)), __VA_ARGS__) \
         )) \

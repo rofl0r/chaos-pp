@@ -37,34 +37,32 @@
 #    define CHAOS_PP_FILTER_PARAMETRIC_S(s, size, pred, g, ...) \
         CHAOS_PP_PARAMETRIC_S( \
             s, CHAOS_IP_FILTER_PARAMETRIC_A_INDIRECT, size, \
-            CHAOS_PP_DEFER, pred, CHAOS_PP_CALL(pred), CHAOS_PP_TYPEOF(g), g, CHAOS_PP_NIL(CHAOS_PP_TYPEOF(g)), __VA_ARGS__ \
+            pred, CHAOS_PP_CALL(pred), CHAOS_PP_TYPEOF(g), g, CHAOS_PP_NIL(CHAOS_PP_TYPEOF(g)), __VA_ARGS__ \
         ) \
         /**/
 #    define CHAOS_PP_FILTER_PARAMETRIC_S_ID() CHAOS_PP_FILTER_PARAMETRIC_S
 #    define CHAOS_PP_FILTER_PARAMETRIC_S_ CHAOS_PP_LAMBDA(CHAOS_PP_FILTER_PARAMETRIC_S_ID)()
 #    define CHAOS_IP_FILTER_PARAMETRIC_A_INDIRECT() CHAOS_IP_FILTER_PARAMETRIC_A
-#    define CHAOS_IP_FILTER_PARAMETRIC_A(s, id, para, _, pred, _p, type, g1, g2, ...) \
+#    define CHAOS_IP_FILTER_PARAMETRIC_A(s, id, para, pred, _p, type, g1, g2, ...) \
         CHAOS_PP_IIF(CHAOS_PP_IS_CONS(g1))( \
             CHAOS_IP_FILTER_PARAMETRIC_A_I, CHAOS_IP_FILTER_PARAMETRIC_B \
-        )(s, id, para, _, pred, _p, type, g1, g2, __VA_ARGS__) \
+        )(s, id, para, pred, _p, type, g1, g2, __VA_ARGS__) \
         /**/
-#    define CHAOS_IP_FILTER_PARAMETRIC_A_I(s, id, para, _, pred, _p, type, g1, g2, ...) \
-        _(CHAOS_PP_EXPR_S(s))(_(id)()( \
-            s, CHAOS_IP_FILTER_PARAMETRIC_A_INDIRECT, para, _, pred, _p, type, CHAOS_PP_REST(g1), \
-            _(CHAOS_PP_IIF)(_p()(s, pred, CHAOS_PP_ITEM(type, CHAOS_PP_FIRST(g1)), __VA_ARGS__))( \
-                _(CHAOS_PP_CONS)(g2, _(CHAOS_PP_FIRST)(g1)), g2 \
+#    define CHAOS_IP_FILTER_PARAMETRIC_A_I(s, id, para, pred, _p, type, g1, g2, ...) \
+        CHAOS_PP_DEFER(CHAOS_PP_EXPR_S(s))(CHAOS_PP_DEFER(id)()( \
+            s, CHAOS_IP_FILTER_PARAMETRIC_A_INDIRECT, para, pred, _p, type, CHAOS_PP_REST(g1), \
+            CHAOS_PP_DEFER(CHAOS_PP_IIF)(_p()(s, pred, CHAOS_PP_ITEM(type, CHAOS_PP_FIRST(g1)), __VA_ARGS__))( \
+                CHAOS_PP_DEFER(CHAOS_PP_CONS)(g2, CHAOS_PP_DEFER(CHAOS_PP_FIRST)(g1)), g2 \
             ), __VA_ARGS__ \
         )) \
         /**/
 #    define CHAOS_IP_FILTER_PARAMETRIC_B_INDIRECT() CHAOS_IP_FILTER_PARAMETRIC_B
-#    define CHAOS_IP_FILTER_PARAMETRIC_B(s, id, para, _, pred, _p, type, g1, g2, ...) \
+#    define CHAOS_IP_FILTER_PARAMETRIC_B(s, id, para, pred, _p, type, g1, g2, ...) \
         CHAOS_PP_IIF(CHAOS_PP_IS_CONS(g2))( \
-            CHAOS_IP_FILTER_PARAMETRIC_B_I, g1 CHAOS_PP_TUPLE_EAT(?) \
-        )(s, id, para, CHAOS_PP_OBSTRUCT(), g1, g2) \
-        /**/
-#    define CHAOS_IP_FILTER_PARAMETRIC_B_I(s, id, para, _, g1, g2) \
-        CHAOS_PP_EXPR_S(s) _(id _()( \
-            s, CHAOS_IP_FILTER_PARAMETRIC_B_INDIRECT, para,,,,, CHAOS_PP_CONS(g1, CHAOS_PP_FIRST(g2)), CHAOS_PP_REST(g2), \
+            CHAOS_PP_EXPR_S(s) CHAOS_PP_OBSTRUCT(), \
+            g1 CHAOS_PP_TUPLE_EAT(?) \
+        )(CHAOS_PP_DEFER(id)()( \
+            s, CHAOS_IP_FILTER_PARAMETRIC_B_INDIRECT, para,,,, CHAOS_PP_CONS(g1, CHAOS_PP_FIRST(g2)), CHAOS_PP_REST(g2), \
         )) \
         /**/
 # endif

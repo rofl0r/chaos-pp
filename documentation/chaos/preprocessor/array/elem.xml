@@ -12,7 +12,7 @@
 		<syntax><ARRAY_ELEM/>(i, array)</syntax>
 		<param id="i">
 			The zero-based index of the element to be extracted.
-			Valid values range from <code>0</code> to <LIMIT_TUPLE/>.
+			Valid values range from <code>0</code> to <LIMIT_TUPLE/> - 1.
 		</param>
 		<param id="array">
 			The <link id="array"/> from which an element is to be extracted.

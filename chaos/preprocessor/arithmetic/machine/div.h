@@ -13,21 +13,21 @@
 # define CHAOS_PREPROCESSOR_ARITHMETIC_MACHINE_DIV_H
 #
 # include <chaos/preprocessor/arithmetic/inc.h>
-# include <chaos/_/preprocessor/arithmetic/machine/sub.h>
+# include <chaos/preprocessor/arithmetic/machine/sub.h>
 # include <chaos/preprocessor/comparison/less.h>
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/control/iif.h>
 # include <chaos/preprocessor/control/unless.h>
 # include <chaos/preprocessor/debug/failure.h>
 # include <chaos/preprocessor/lambda/ops.h>
-# include <chaos/_/preprocessor/recursion/machine.h>
+# include <chaos/preprocessor/recursion/machine.h>
 #
 # /* CHAOS_PP_DIV_MACHINE */
 #
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_DIV_MACHINE(x, y) \
         CHAOS_PP_UNLESS(y)(CHAOS_PP_FAILURE()) \
-        CHAOS_PP_MACHINE(, x, (0xchaos)(0xdiv), y, (0xchaos)(0xstop),) \
+        CHAOS_PP_MACHINE((, x, (0xchaos)(0xdiv), y, (0xchaos)(0xstop),)) \
         /**/
 #    define CHAOS_PP_DIV_MACHINE_ID() CHAOS_PP_DIV_MACHINE
 #    define CHAOS_PP_DIV_MACHINE_ CHAOS_PP_LAMBDA(CHAOS_PP_DIV_MACHINE)

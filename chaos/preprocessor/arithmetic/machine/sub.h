@@ -16,13 +16,13 @@
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/control/if.h>
 # include <chaos/preprocessor/lambda/ops.h>
-# include <chaos/_/preprocessor/recursion/machine.h>
+# include <chaos/preprocessor/recursion/machine.h>
 #
 # /* CHAOS_PP_SUB_MACHINE */
 #
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_SUB_MACHINE(x, y) \
-        CHAOS_PP_MACHINE(, x, (0xchaos)(0xsub), y, (0xchaos)(0xstop),) \
+        CHAOS_PP_MACHINE((, x, (0xchaos)(0xsub), y, (0xchaos)(0xstop),)) \
         /**/
 #    define CHAOS_PP_SUB_MACHINE_ID() CHAOS_PP_SUB_MACHINE
 #    define CHAOS_PP_SUB_MACHINE_ CHAOS_PP_LAMBDA(CHAOS_PP_SUB_MACHINE)

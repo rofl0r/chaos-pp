@@ -26,6 +26,7 @@
 # include <chaos/preprocessor/tuple/for_each.h>
 # include <chaos/preprocessor/tuple/for_each_i.h>
 # include <chaos/preprocessor/tuple/insert.h>
+# include <chaos/preprocessor/tuple/pop_back.h>
 # include <chaos/preprocessor/tuple/rem.h>
 # include <chaos/preprocessor/tuple/rest_n.h>
 # include <chaos/preprocessor/tuple/reverse.h>

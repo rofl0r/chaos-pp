@@ -8,7 +8,7 @@
 	<abstract>
 		The <DEMOTE_AP/> macro converts its argument to an integer literal.
 	</abstract>
-	<usage lang="C99">
+	<usage>
 		<syntax><DEMOTE_AP/>(x)</syntax>
 		<param id="x">
 			The <link id="arbitrary-precision value"/> to be converted.
@@ -20,16 +20,11 @@
 	</para>
 	<listing>
 		#include <chaos-preprocessor-arbitrary-demote.h/>
-		#include <chaos-preprocessor-config.h/>
 		
-		#if <VARIADICS/>
-		
-		<DEMOTE_AP/>((1)(2)(3))   // 123
-		<DEMOTE_AP/>((1, (1)(0))) // -10
-		
-		#endif
+		<DEMOTE_AP/>( (1)(2)(3) ) // 123
+		<DEMOTE_AP/>( ((1)(0))  ) // -10
 	</listing>
-	<derivative id="DEMOTE_AP_ID" lang="C99"/>
+	<derivative id="DEMOTE_AP_ID"/>
 	<derivative id="DEMOTE_AP_" lang="C99"/>
 </macro>
 

@@ -8,12 +8,12 @@
 	<abstract>
 		The <PROMOTE_AP/> macro converts its argument to an <link id="arbitrary-precision value"/>.
 	</abstract>
-	<usage lang="C99">
+	<usage>
 		<syntax><PROMOTE_AP/>(x)</syntax>
 		<param id="x">
 			The value to be converted.
 			Valid values range from <code>0</code> to <LIMIT_MAG/>.
-			This value may also be suffixed with a negation operator.
+			This value may also be prefixed with a parenthesized negation operator.
 		</param>
 	</usage>
 	<para>
@@ -21,16 +21,11 @@
 	</para>
 	<listing>
 		#include <chaos-preprocessor-arbitrary-promote.h/>
-		#include <chaos-preprocessor-config.h/>
 		
-		#if <VARIADICS/>
-		
-		<PROMOTE_AP/>(123) // (0, (1)(2)(3))
-		<PROMOTE_AP/>(10-) // (1, (1)(0))
-		
-		#endif
+		<PROMOTE_AP/>(123)   // (1)(2)(3)
+		<PROMOTE_AP/>((-)10) // ((1)(0))
 	</listing>
-	<derivative id="PROMOTE_AP_ID" lang="C99"/>
+	<derivative id="PROMOTE_AP_ID"/>
 	<derivative id="PROMOTE_AP_" lang="C99"/>
 </macro>
 

@@ -256,11 +256,13 @@
 			<directory name="arbitrary">
 				<header name="add.h"/>
 				<header name="bool.h"/>
+				<header name="dec.h"/>
 				<header name="demote.h"/>
 				<header name="div.h"/>
 				<header name="equal.h"/>
 				<header name="greater.h"/>
 				<header name="greater_equal.h"/>
+				<header name="inc.h"/>
 				<header name="less.h"/>
 				<header name="less_equal.h"/>
 				<header name="literal.h"/>

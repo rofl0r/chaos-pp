@@ -4,7 +4,7 @@
 	The <self/> header defines a <link id="saturated"/> incrementation operator.
 </overview>
 
-<macro id="INC">
+<macro id="INC" group="incrementation">
 	<abstract>
 		The <INC/> macro increments a number.
 	</abstract>

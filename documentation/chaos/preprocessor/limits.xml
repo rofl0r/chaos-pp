@@ -102,20 +102,6 @@
 	<derivative id="LIMIT_EXPR_" lang="C99"/>
 </macro>
 
-<macro id="LIMIT_HIGHPREC" type="object">
-	<abstract>
-		The <LIMIT_HIGHPREC/> macro expands to the maximum number of digits supported by the <link id="high-precision arithmetic"/> mechanism.
-	</abstract>
-	<usage>
-		<syntax><LIMIT_HIGHPREC/></syntax>
-	</usage>
-	<para>
-		This macro currently expands to <code>10</code>.
-	</para>
-	<derivative id="LIMIT_HIGHPREC_ID"/>
-	<derivative id="LIMIT_HIGHPREC_" lang="C99"/>
-</macro>
-
 <macro id="LIMIT_ITERATION" type="object">
 	<abstract>
 		The <LIMIT_ITERATION/> macro expands to the maximum number of iterations per dimension supported by the <link id="file-iteration"/> mechanism and the maximum number of iterations supported by the <link id="local-iteration"/> mechanism.
@@ -160,7 +146,7 @@
 
 <macro id="LIMIT_MAG" type="object">
 	<abstract>
-		The <LIMIT_MAG/> macro expands to the maximum numeric magnitude supported by the library (not including the <link id="high-precision"/> and <link id="arbitrary-precision"/> arithmetic mechanisms).
+		The <LIMIT_MAG/> macro expands to the maximum numeric magnitude supported by the library (not including the <link id="arbitrary-precision"/> arithmetic mechanism).
 	</abstract>
 	<usage>
 		<syntax><LIMIT_MAG/></syntax>

@@ -8,7 +8,7 @@
 	<abstract>
 		The <SIGN_AP/> macro extracts the sign of an <link id="arbitrary-precision value"/>.
 	</abstract>
-	<usage lang="C99">
+	<usage>
 		<syntax><SIGN_AP/>(x)</syntax>
 		<param id="x">
 			The <link id="arbitrary-precision value"/> whose sign is to be extracted.
@@ -21,16 +21,11 @@
 	<listing>
 		#include <chaos-preprocessor-arbitrary-literal.h/>
 		#include <chaos-preprocessor-arbitrary-sign.h/>
-		#include <chaos-preprocessor-config.h/>
-		
-		#if <VARIADICS/>
 		
 		<SIGN_AP/>(<LITERAL_AP/>(1 2 3)) // 0
 		<SIGN_AP/>(<LITERAL_AP/>((-)1))  // 1
-		
-		#endif
 	</listing>
-	<derivative id="SIGN_AP_ID" lang="C99"/>
+	<derivative id="SIGN_AP_ID"/>
 	<derivative id="SIGN_AP_" lang="C99"/>
 </macro>
 

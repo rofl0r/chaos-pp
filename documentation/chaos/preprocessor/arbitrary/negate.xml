@@ -8,7 +8,7 @@
 	<abstract>
 		The <NEGATE_AP/> macro negates an <link id="arbitrary-precision value"/>.
 	</abstract>
-	<usage lang="C99">
+	<usage>
 		<syntax><NEGATE_AP/>(x)</syntax>
 		<param id="x">
 			The <link id="arbitrary-precision value"/> to be negated.
@@ -21,23 +21,18 @@
 	<listing>
 		#include <chaos-preprocessor-arbitrary-demote.h/>
 		#include <chaos-preprocessor-arbitrary-negate.h/>
-		#include <chaos-preprocessor-config.h/>
-		
-		#if <VARIADICS/>
 		
 		<DEMOTE_AP/>(<NEGATE_AP/>(
-		    (0, (1)(2)(3))
+		    (1)(2)(3)
 		))
 		// -123
 		
 		<DEMOTE_AP/>(<NEGATE_AP/>(
-		    (1, (1)(2)(3))
+		    ((1)(2)(3))
 		))
 		// 123
-		
-		#endif
 	</listing>
-	<derivative id="NEGATE_AP_ID" lang="C99"/>
+	<derivative id="NEGATE_AP_ID"/>
 	<derivative id="NEGATE_AP_" lang="C99"/>
 </macro>
 

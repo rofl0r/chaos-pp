@@ -8,7 +8,7 @@
 	<abstract>
 		The <BOOL_AP/> macro performs a Boolean conversion on its argument.
 	</abstract>
-	<usage lang="C99">
+	<usage>
 		<syntax><BOOL_AP/>(x)</syntax>
 		<param id="x">
 			The <link id="arbitrary-precision value"/> to be converted.
@@ -20,16 +20,11 @@
 	</para>
 	<listing>
 		#include <chaos-preprocessor-arbitrary-bool.h/>
-		#include <chaos-preprocessor-config.h/>
-		
-		#if <VARIADICS/>
 		
 		<BOOL_AP/>((0))       // 0
 		<BOOL_AP/>((1)(2)(3)) // 1
-		
-		#endif
 	</listing>
-	<derivative id="BOOL_AP_ID" lang="C99"/>
+	<derivative id="BOOL_AP_ID"/>
 	<derivative id="BOOL_AP_" lang="C99"/>
 </macro>
 

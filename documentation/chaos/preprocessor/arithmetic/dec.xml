@@ -4,7 +4,7 @@
 	The <self/> header defines a <link id="saturated"/> decrementation operator.
 </overview>
 
-<macro id="DEC">
+<macro id="DEC" group="decrementation">
 	<abstract>
 		The <DEC/> macro decrements a number.
 	</abstract>

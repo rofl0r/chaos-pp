@@ -15,7 +15,7 @@
 		</param>
 	</usage>
 	<para>
-		This macro expands to <code>__VA_ARGS__</code> when (and only when) the context introduced by <WALL/> macro is present.
+		This macro expands to a <link id="deferred expression"/> that expands to <code>__VA_ARGS__</code> when (and only when) the context introduced by the <WALL/> macro is present.
 	</para>
 	<para>
 		The common use case for this macro is currently theoretical, as C++ does not yet allow variadic arguments.
@@ -24,6 +24,7 @@
 	<listing>
 		#include <chaos-preprocessor-config.h/>
 		#include <chaos-preprocessor-facilities-type.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
 		#include <chaos-preprocessor-recursion-rail.h/>
 		
 		#if <VARIADICS/>
@@ -32,15 +33,76 @@
 		
 		MACRO(int) // int
 		
-		<WALL/>(
+		<EXPR/>(<WALL/>(
 		    MACRO(<TYPE/>(std::pair&lt;int, int&gt;))
-		)
+		))
 		// std::pair&lt;int, int&gt;
 		
 		#endif
 	</listing>
 	<derivative id="TYPE_ID" lang="C99"/>
 	<derivative id="TYPE_" lang="C99"/>
+</macro>
+
+<macro id="TYPE_II" type="object" group="encoding">
+	<abstract>
+		The <TYPE_II/> macro is a <link id="rail"/> used to encode types that contain open commas.
+	</abstract>
+	<usage>
+		<syntax><TYPE_II/>(<BEGIN/> type <END/>)</syntax>
+		<param id="type" optional="1">
+			The name of a type containing any number of open commas.
+		</param>
+	</usage>
+	<para>
+		This macro, combined with <BEGIN/> and <END/>, expands to a <link id="deferred expression"/> that expands to <var>type</var> when (and only when) the context introduced by the <WALL/> macro is present.
+	</para>
+	<para>
+		This macro is used to pass types that contain open commas--even in when variadics are not enabled--<em>without having to count commas</em>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-facilities-type.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		#include <chaos-preprocessor-recursion-rail.h/>
+		
+		#define A(x) B(x)
+		#define B(x) C(x)
+		#define C(x) D(x)
+		#define D(x) x
+		
+		<EXPR/>(<WALL/>(
+		    A(
+		        <TYPE_II/>(<BEGIN/> std::pair&lt;int, int&gt; <END/>)
+		    )
+		))
+		// std::pair&lt;int, int&gt;
+	</listing>
+	<derivative id="TYPE_II_ID"/>
+	<derivative id="TYPE_II_" lang="C99"/>
+</macro>
+
+<macro id="BEGIN" type="object">
+	<abstract>
+		The <BEGIN/> macro is used as part of the usage of <TYPE_II/>.
+	</abstract>
+	<usage>
+		<syntax><BEGIN/></syntax>
+	</usage>
+	<x-reference id="TYPE_II"/>
+	<derivative id="BEGIN_ID"/>
+	<derivative id="BEGIN_" lang="C99"/>
+</macro>
+
+<macro id="END" type="object">
+	<abstract>
+		The <END/> macro is used as part of the usage of <TYPE_II/>.
+	</abstract>
+	<usage>
+		<syntax><END/></syntax>
+	</usage>
+	<x-reference id="TYPE_II"/>
+	<derivative id="END_ID"/>
+	<derivative id="END_" lang="C99"/>
 </macro>
 
 </header>

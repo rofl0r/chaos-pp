@@ -22,6 +22,7 @@
 # include <chaos/preprocessor/facilities/identity.h>
 # include <chaos/preprocessor/facilities/indirect.h>
 # include <chaos/preprocessor/facilities/intercept.h>
+# include <chaos/preprocessor/facilities/optional.h>
 # include <chaos/preprocessor/facilities/overload.h>
 # include <chaos/preprocessor/facilities/split.h>
 # include <chaos/preprocessor/facilities/type.h>

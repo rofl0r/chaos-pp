@@ -21,7 +21,7 @@
 # /* CHAOS_PP_REPEAT */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_REPEAT(count, macro, ...) CHAOS_PP_REPEAT_S(CHAOS_PP_STATE(), count, macro, __VA_ARGS__)
+#    define CHAOS_PP_REPEAT(count, ...) CHAOS_PP_REPEAT_S(CHAOS_PP_STATE(), count, __VA_ARGS__)
 #    define CHAOS_PP_REPEAT_ CHAOS_PP_LAMBDA(CHAOS_PP_REPEAT_ID)()
 # else
 #    define CHAOS_PP_REPEAT(count, macro, data) CHAOS_PP_REPEAT_S(CHAOS_PP_STATE(), count, macro, data)
@@ -32,7 +32,7 @@
 # /* CHAOS_PP_REPEAT_S */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_REPEAT_S(s, count, macro, ...) CHAOS_PP_DELINEATE_S(s, count, CHAOS_PP_EMPTY, macro, __VA_ARGS__)
+#    define CHAOS_PP_REPEAT_S(s, count, ...) CHAOS_PP_DELINEATE_S(s, count, CHAOS_PP_EMPTY, __VA_ARGS__)
 #    define CHAOS_PP_REPEAT_S_ CHAOS_PP_LAMBDA(CHAOS_PP_REPEAT_S_ID)()
 # else
 #    define CHAOS_PP_REPEAT_S(s, count, macro, data) CHAOS_PP_DELINEATE_S(s, count, CHAOS_PP_EMPTY, macro, data)

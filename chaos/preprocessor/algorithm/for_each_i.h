@@ -15,6 +15,7 @@
 # include <chaos/preprocessor/arithmetic/inc.h>
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/control/iif.h>
+# include <chaos/preprocessor/facilities/optional.h>
 # include <chaos/preprocessor/generics/spec.h>
 # include <chaos/preprocessor/generics/typeof.h>
 # include <chaos/preprocessor/lambda/ops.h>
@@ -27,7 +28,7 @@
 # /* CHAOS_PP_FOR_EACH_I */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_FOR_EACH_I(macro, g, ...) CHAOS_PP_FOR_EACH_I_S(CHAOS_PP_STATE(), macro, g, __VA_ARGS__)
+#    define CHAOS_PP_FOR_EACH_I(macro, ...) CHAOS_PP_FOR_EACH_I_S(CHAOS_PP_STATE(), macro, __VA_ARGS__)
 #    define CHAOS_PP_FOR_EACH_I_ CHAOS_PP_LAMBDA(CHAOS_PP_FOR_EACH_I_ID)()
 # else
 #    define CHAOS_PP_FOR_EACH_I(macro, g, data) CHAOS_PP_FOR_EACH_I_S(CHAOS_PP_STATE(), macro, g, data)
@@ -38,7 +39,7 @@
 # /* CHAOS_PP_FOR_EACH_I_S */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_FOR_EACH_I_S(s, macro, g, ...) CHAOS_IP_FOR_EACH_I_U(s, macro, g, (__VA_ARGS__))
+#    define CHAOS_PP_FOR_EACH_I_S(s, macro, ...) CHAOS_IP_FOR_EACH_I_U(s, macro, CHAOS_PP_NON_OPTIONAL(__VA_ARGS__), CHAOS_PP_PACK_OPTIONAL(__VA_ARGS__))
 #    define CHAOS_PP_FOR_EACH_I_S_ CHAOS_PP_LAMBDA(CHAOS_PP_FOR_EACH_I_S_ID)()
 # else
 #    define CHAOS_PP_FOR_EACH_I_S(s, macro, g, data) CHAOS_IP_FOR_EACH_I_U(s, macro, g, (data))
@@ -58,7 +59,7 @@
     )(CHAOS_PP_OBSTRUCT(), s, o, n, macro, _m, type, g, pd) \
     /**/
 # define CHAOS_IP_FOR_EACH_I_II(_, s, o, n, macro, _m, type, g, pd) \
-    _m()(o, macro, n CHAOS_PP_COMMA() CHAOS_PP_ITEM(type, CHAOS_PP_FIRST(g)) CHAOS_PP_COMMA() CHAOS_PP_UNPACK pd) \
+    _m()(o, macro, n CHAOS_PP_COMMA() CHAOS_PP_ITEM(type, CHAOS_PP_FIRST(g)) CHAOS_PP_EXPOSE(pd)) \
     CHAOS_PP_EXPR_S(s) _(CHAOS_IP_FOR_EACH_I_INDIRECT _()( \
         CHAOS_PP_NEXT(s), o, CHAOS_PP_INC(n), macro, _m, type, CHAOS_PP_REST(g), pd \
     )) \

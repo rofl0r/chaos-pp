@@ -21,7 +21,7 @@
 # /* CHAOS_PP_ENUM_SHIFTED */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_ENUM_SHIFTED(count, macro, ...) CHAOS_PP_ENUM_SHIFTED_S(CHAOS_PP_STATE(), count, macro, __VA_ARGS__)
+#    define CHAOS_PP_ENUM_SHIFTED(count, ...) CHAOS_PP_ENUM_SHIFTED_S(CHAOS_PP_STATE(), count, __VA_ARGS__)
 #    define CHAOS_PP_ENUM_SHIFTED_ CHAOS_PP_LAMBDA(CHAOS_PP_ENUM_SHIFTED_ID)()
 # else
 #    define CHAOS_PP_ENUM_SHIFTED(count, macro, data) CHAOS_PP_ENUM_SHIFTED_S(CHAOS_PP_STATE(), count, macro, data)
@@ -32,7 +32,7 @@
 # /* CHAOS_PP_ENUM_SHIFTED_S */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_ENUM_SHIFTED_S(s, count, macro, ...) CHAOS_PP_DELINEATE_SHIFTED_S(s, count, CHAOS_PP_COMMA, macro, __VA_ARGS__)
+#    define CHAOS_PP_ENUM_SHIFTED_S(s, count, ...) CHAOS_PP_DELINEATE_SHIFTED_S(s, count, CHAOS_PP_COMMA, __VA_ARGS__)
 #    define CHAOS_PP_ENUM_SHIFTED_S_ CHAOS_PP_LAMBDA(CHAOS_PP_ENUM_SHIFTED_S_ID)()
 # else
 #    define CHAOS_PP_ENUM_SHIFTED_S(s, count, macro, data) CHAOS_PP_DELINEATE_SHIFTED_S(s, count, CHAOS_PP_COMMA, macro, data)

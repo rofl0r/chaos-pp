@@ -17,6 +17,7 @@
 # include <chaos/preprocessor/control/iif.h>
 # include <chaos/preprocessor/detection/is_empty.h>
 # include <chaos/preprocessor/detection/is_variadic.h>
+# include <chaos/preprocessor/facilities/split.h>
 # include <chaos/preprocessor/lambda/execute.h>
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/limits.h>
@@ -32,7 +33,7 @@
 # /* CHAOS_PP_PARSE */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_PARSE(expr, ...) CHAOS_PP_PARSE_BYPASS(CHAOS_PP_LIMIT_EXPR, expr, __VA_ARGS__)
+#    define CHAOS_PP_PARSE(...) CHAOS_PP_PARSE_BYPASS(CHAOS_PP_LIMIT_EXPR, __VA_ARGS__)
 #    define CHAOS_PP_PARSE_ID() CHAOS_PP_PARSE
 #    define CHAOS_PP_PARSE_ CHAOS_PP_LAMBDA(CHAOS_PP_PARSE_ID)()
 # endif
@@ -40,9 +41,9 @@
 # /* CHAOS_PP_PARSE_BYPASS */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_PARSE_BYPASS(s, expr, ...) \
+#    define CHAOS_PP_PARSE_BYPASS(s, ...) \
         CHAOS_PP_EXPR_S(s)(CHAOS_IP_PARSE_I( \
-            , CHAOS_PP_PREV(s), expr, (__VA_ARGS__), expr \
+            , CHAOS_PP_PREV(s), CHAOS_PP_SPLIT(0, __VA_ARGS__,), (CHAOS_PP_SPLIT(1, __VA_ARGS__,)), CHAOS_PP_SPLIT(0, __VA_ARGS__,) \
         )) \
         /**/
 #    define CHAOS_PP_PARSE_BYPASS_ID() CHAOS_PP_PARSE_BYPASS

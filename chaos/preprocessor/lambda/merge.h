@@ -18,6 +18,8 @@
 # include <chaos/preprocessor/detection/is_empty.h>
 # include <chaos/preprocessor/detection/is_variadic.h>
 # include <chaos/preprocessor/facilities/empty.h>
+# include <chaos/preprocessor/facilities/optional.h>
+# include <chaos/preprocessor/facilities/split.h>
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/limits.h>
 # include <chaos/preprocessor/punctuation/comma.h>
@@ -31,7 +33,7 @@
 # /* CHAOS_PP_MERGE */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_MERGE(expr, ...) CHAOS_PP_MERGE_BYPASS(CHAOS_PP_LIMIT_EXPR, expr, __VA_ARGS__)
+#    define CHAOS_PP_MERGE(...) CHAOS_PP_MERGE_BYPASS(CHAOS_PP_LIMIT_EXPR, __VA_ARGS__)
 #    define CHAOS_PP_MERGE_ID() CHAOS_PP_MERGE
 #    define CHAOS_PP_MERGE_ CHAOS_PP_LAMBDA(CHAOS_PP_MERGE_ID)()
 # endif
@@ -39,11 +41,13 @@
 # /* CHAOS_PP_MERGE_BYPASS */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_MERGE_BYPASS(s, expr, ...) \
-		CHAOS_PP_EXPR_S(s)(CHAOS_IP_MERGE_I( \
-		    , CHAOS_PP_PREV(s), expr, (__VA_ARGS__, CHAOS_IP_MERGE_SHIFT_A(0)(1)(2)(3)(4)(5)(6)(7)(8)(9)(10)(11)(12)(13)(14)(15)(16)(17)(18)(19)(20)(21)(22)(23)(24)), expr \
-		)) \
-		/**/
+#    define CHAOS_PP_MERGE_BYPASS(s, ...) \
+        CHAOS_PP_EXPR_S(s)(CHAOS_IP_MERGE_I( \
+            , CHAOS_PP_PREV(s), CHAOS_PP_NON_OPTIONAL(__VA_ARGS__), \
+            (CHAOS_PP_IIF(CHAOS_PP_IS_OPTIONAL(__VA_ARGS__))(, CHAOS_PP_SPLIT(1, __VA_ARGS__),) CHAOS_IP_MERGE_SHIFT_A(0)(1)(2)(3)(4)(5)(6)(7)(8)(9)(10)(11)(12)(13)(14)(15)(16)(17)(18)(19)(20)(21)(22)(23)(24)), \
+            CHAOS_PP_SPLIT(0, __VA_ARGS__,) \
+        )) \
+        /**/
 #    define CHAOS_PP_MERGE_BYPASS_ID() CHAOS_PP_MERGE_BYPASS
 #    define CHAOS_PP_MERGE_BYPASS_ CHAOS_PP_LAMBDA(CHAOS_PP_MERGE_BYPASS_ID)()
 #    define CHAOS_IP_MERGE_SHIFT_A(n) CHAOS_PP_PARAM(n), CHAOS_IP_MERGE_SHIFT_B

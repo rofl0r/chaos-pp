@@ -15,10 +15,10 @@
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/control/iif.h>
 # include <chaos/preprocessor/detection/is_variadic.h>
+# include <chaos/preprocessor/facilities/optional.h>
 # include <chaos/preprocessor/generics/spec.h>
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/lambda/trampoline.h>
-# include <chaos/preprocessor/punctuation/comma.h>
 # include <chaos/preprocessor/recursion/basic.h>
 # include <chaos/preprocessor/recursion/expr.h>
 # include <chaos/preprocessor/tuple/eat.h>
@@ -26,7 +26,7 @@
 # /* CHAOS_PP_TRANSFORM */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_TRANSFORM(op, g, ...) CHAOS_PP_TRANSFORM_S(CHAOS_PP_STATE(), op, g, __VA_ARGS__)
+#    define CHAOS_PP_TRANSFORM(op, ...) CHAOS_PP_TRANSFORM_S(CHAOS_PP_STATE(), op, __VA_ARGS__)
 #    define CHAOS_PP_TRANSFORM_ CHAOS_PP_LAMBDA(CHAOS_PP_TRANSFORM_ID)()
 # else
 #    define CHAOS_PP_TRANSFORM(op, g, data) CHAOS_PP_TRANSFORM_S(CHAOS_PP_STATE(), op, g, data)
@@ -37,7 +37,7 @@
 # /* CHAOS_PP_TRANSFORM_S */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_TRANSFORM_S(s, op, g, ...) CHAOS_IP_TRANSFORM_U(s, op, g, (__VA_ARGS__))
+#    define CHAOS_PP_TRANSFORM_S(s, op, ...) CHAOS_IP_TRANSFORM_U(s, op, CHAOS_PP_NON_OPTIONAL(__VA_ARGS__), CHAOS_PP_PACK_OPTIONAL(__VA_ARGS__))
 #    define CHAOS_PP_TRANSFORM_S_ CHAOS_PP_LAMBDA(CHAOS_PP_TRANSFORM_S_ID)()
 # else
 #    define CHAOS_PP_TRANSFORM_S(s, op, g, data) CHAOS_IP_TRANSFORM_U(s, op, g, (data))
@@ -60,7 +60,7 @@
         CHAOS_PP_EXPR_S(s) _(CHAOS_IP_TRANSFORM_INDIRECT _()( \
             CHAOS_PP_NEXT(s), o, op, _o, type, CHAOS_PP_REST(g), pd \
         )), \
-        _o()(o, op, CHAOS_PP_ITEM(type, CHAOS_PP_FIRST(g)) CHAOS_PP_COMMA() CHAOS_PP_UNPACK pd) \
+        _o()(o, op, CHAOS_PP_ITEM(type, CHAOS_PP_FIRST(g)) CHAOS_PP_EXPOSE(pd)) \
     ) \
     /**/
 #

@@ -16,9 +16,9 @@
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/control/if.h>
 # include <chaos/preprocessor/facilities/empty.h>
+# include <chaos/preprocessor/facilities/optional.h>
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/lambda/trampoline.h>
-# include <chaos/preprocessor/punctuation/comma.h>
 # include <chaos/preprocessor/recursion/basic.h>
 # include <chaos/preprocessor/recursion/buffer.h>
 # include <chaos/preprocessor/recursion/expr.h>
@@ -27,7 +27,7 @@
 # /* CHAOS_PP_DELINEATE_SHIFTED */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_DELINEATE_SHIFTED(count, sep, macro, ...) CHAOS_PP_DELINEATE_SHIFTED_S(CHAOS_PP_STATE(), count, sep, macro, __VA_ARGS__)
+#    define CHAOS_PP_DELINEATE_SHIFTED(count, sep, ...) CHAOS_PP_DELINEATE_SHIFTED_S(CHAOS_PP_STATE(), count, sep, __VA_ARGS__)
 #    define CHAOS_PP_DELINEATE_SHIFTED_ CHAOS_PP_LAMBDA(CHAOS_PP_DELINEATE_SHIFTED_ID)()
 # else
 #    define CHAOS_PP_DELINEATE_SHIFTED(count, sep, macro, data) CHAOS_PP_DELINEATE_SHIFTED_S(CHAOS_PP_STATE(), count, sep, macro, data)
@@ -38,7 +38,9 @@
 # /* CHAOS_PP_DELINEATE_SHIFTED_S */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_DELINEATE_SHIFTED_S(s, count, sep, macro, ...) CHAOS_IP_DELINEATE_SHIFTED_U(s, count, sep, macro, (__VA_ARGS__))
+#    define CHAOS_PP_DELINEATE_SHIFTED_S(s, count, sep, ...) \
+        CHAOS_IP_DELINEATE_SHIFTED_U(s, count, sep, CHAOS_PP_NON_OPTIONAL(__VA_ARGS__), CHAOS_PP_PACK_OPTIONAL(__VA_ARGS__)) \
+        /**/
 #    define CHAOS_PP_DELINEATE_SHIFTED_S_ CHAOS_PP_LAMBDA(CHAOS_PP_DELINEATE_SHIFTED_S_ID)()
 # else
 #    define CHAOS_PP_DELINEATE_SHIFTED_S(s, count, sep, macro, data) CHAOS_IP_DELINEATE_SHIFTED_U(s, count, sep, macro, (data))
@@ -61,7 +63,7 @@
     CHAOS_PP_EXPR_S(s) _(CHAOS_IP_DELINEATE_SHIFTED_INDIRECT _()( \
         s, o, CHAOS_PP_DEC(count), ss, ss, macro, _m, pd \
     )) \
-    _m()(o, macro, count CHAOS_PP_COMMA() CHAOS_PP_UNPACK pd) sep() \
+    _m()(o, macro, count CHAOS_PP_EXPOSE(pd)) sep() \
     /**/
 #
 # endif

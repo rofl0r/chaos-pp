@@ -16,9 +16,9 @@
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/comparison/not_equal.h>
 # include <chaos/preprocessor/control/iif.h>
+# include <chaos/preprocessor/facilities/optional.h>
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/lambda/trampoline.h>
-# include <chaos/preprocessor/punctuation/comma.h>
 # include <chaos/preprocessor/recursion/basic.h>
 # include <chaos/preprocessor/recursion/expr.h>
 # include <chaos/preprocessor/tuple/eat.h>
@@ -26,7 +26,7 @@
 # /* CHAOS_PP_REPEAT_FROM_TO */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_REPEAT_FROM_TO(from, to, macro, ...) CHAOS_PP_REPEAT_FROM_TO_S(CHAOS_PP_STATE(), from, to, macro, __VA_ARGS__)
+#    define CHAOS_PP_REPEAT_FROM_TO(from, to, ...) CHAOS_PP_REPEAT_FROM_TO_S(CHAOS_PP_STATE(), from, to, __VA_ARGS__)
 #    define CHAOS_PP_REPEAT_FROM_TO_ CHAOS_PP_LAMBDA(CHAOS_PP_REPEAT_FROM_TO_ID)()
 # else
 #    define CHAOS_PP_REPEAT_FROM_TO(from, to, macro, data) CHAOS_PP_REPEAT_FROM_TO_S(CHAOS_PP_STATE(), from, to, macro, data)
@@ -37,7 +37,9 @@
 # /* CHAOS_PP_REPEAT_FROM_TO_S */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_REPEAT_FROM_TO_S(s, from, to, macro, ...) CHAOS_IP_REPEAT_FROM_TO_U(s, from, to, macro, (__VA_ARGS__))
+#    define CHAOS_PP_REPEAT_FROM_TO_S(s, from, to, ...) \
+        CHAOS_IP_REPEAT_FROM_TO_U(s, from, to, CHAOS_PP_NON_OPTIONAL(__VA_ARGS__), CHAOS_PP_PACK_OPTIONAL(__VA_ARGS__)) \
+        /**/
 #    define CHAOS_PP_REPEAT_FROM_TO_S_ CHAOS_PP_LAMBDA(CHAOS_PP_REPEAT_FROM_TO_S_ID)()
 # else
 #    define CHAOS_PP_REPEAT_FROM_TO_S(s, from, to, macro, data) CHAOS_IP_REPEAT_FROM_TO_U(s, from, to, macro, (data))
@@ -58,7 +60,7 @@
     CHAOS_PP_DEFER(CHAOS_PP_EXPR_S(s))(CHAOS_PP_DEFER(CHAOS_IP_REPEAT_FROM_TO_INDIRECT)()( \
         CHAOS_PP_NEXT(s), o, from, to, macro, _m, pd \
     )) \
-    _m()(o, macro, to CHAOS_PP_COMMA() CHAOS_PP_UNPACK pd) \
+    _m()(o, macro, to CHAOS_PP_EXPOSE(pd)) \
     /**/
 #
 # endif

@@ -12,8 +12,8 @@
 # ifndef CHAOS_PREPROCESSOR_WSTRINGIZE_H
 # define CHAOS_PREPROCESSOR_WSTRINGIZE_H
 #
-# include <chaos/preprocessor/cat.h>
 # include <chaos/preprocessor/config.h>
+# include <chaos/preprocessor/detail/paste.h>
 # include <chaos/preprocessor/lambda/ops.h>
 #
 # /* CHAOS_PP_WSTRINGIZE */
@@ -30,10 +30,10 @@
 # /* CHAOS_PP_PRIMITIVE_WSTRINGIZE */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_PRIMITIVE_WSTRINGIZE(...) CHAOS_PP_PRIMITIVE_CAT(L, #__VA_ARGS__)
+#    define CHAOS_PP_PRIMITIVE_WSTRINGIZE(...) CHAOS_PP_PRIMITIVE_PASTE(L, #__VA_ARGS__)
 #    define CHAOS_PP_PRIMITIVE_WSTRINGIZE_ CHAOS_PP_LAMBDA(CHAOS_PP_PRIMITIVE_WSTRINGIZE)
 # else
-#    define CHAOS_PP_PRIMITIVE_WSTRINGIZE(x) CHAOS_PP_PRIMITIVE_CAT(L, #x)
+#    define CHAOS_PP_PRIMITIVE_WSTRINGIZE(x) CHAOS_PP_PRIMITIVE_PASTE(L, #x)
 # endif
 #
 # define CHAOS_PP_PRIMITIVE_WSTRINGIZE_ID() CHAOS_PP_PRIMITIVE_WSTRINGIZE

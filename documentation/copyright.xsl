@@ -23,7 +23,7 @@
 		© Copyright <xsl:copy-of select="$address"/><xsl:value-of select="' '"/><xsl:value-of select="$date"/>
 	</ADDRESS>
 	<ADDRESS>
-		Use, modification, and distribution of this document are subject to the <A href="http://www.boost.org">Boost Software License, Version 1.0</A>.
+		Distributed under the <A href="http://www.boost.org">Boost Software License, Version 1.0</A>.
 		See <A href="{$url}"><xsl:value-of select="$url"/></A> for the most recent version of this document.
 	</ADDRESS>
 </xsl:template>

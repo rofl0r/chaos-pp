@@ -1,13 +1,13 @@
-# /* *************************************************************************
-#  *                                                                         *
-#  *    (C) Copyright Paul Mensonides 2003-2004.                             *
-#  *                                                                         *
-#  *    Use, modification, and distribution are subject to Version 1.0 of    *
-#  *    the Boost Software License.  (See accompanying file LICENSE.)        *
-#  *                                                                         *
-#  *    See http://chaos-pp.sourceforge.net for most recent version.         *
-#  *                                                                         *
-#  ************************************************************************* */
+# /* ********************************************************************
+#  *                                                                    *
+#  *    (C) Copyright Paul Mensonides 2003-2004.                        *
+#  *                                                                    *
+#  *    Distributed under the Boost Software License, Version 1.0.      *
+#  *    (See accompanying file LICENSE).                                *
+#  *                                                                    *
+#  *    See http://chaos-pp.sourceforge.net for most recent version.    *
+#  *                                                                    *
+#  ******************************************************************** */
 #
 # ifndef CHAOS_PP_ITERATION_PARAMS
 #    define CHAOS_PP_ITERATION_PARAMS (0)(0)(CHAOS_PP_NULL())

@@ -30,6 +30,8 @@
 #    define CHAOS_PP_SIZE_ CHAOS_PP_LAMBDA(CHAOS_PP_SIZE)
 # endif
 #
+# define CHAOS_PP_SIZE_SHADOW(g) CHAOS_PP_SIZE_BYPASS_SHADOW(CHAOS_PP_LIMIT_EXPR, g)
+#
 # /* CHAOS_PP_SIZE_BYPASS */
 #
 # define CHAOS_PP_SIZE_BYPASS(s, g) \
@@ -46,6 +48,19 @@
     CHAOS_PP_IIF _(CHAOS_PP_IS_CONS(g))( \
         CHAOS_PP_EXPR_S(s) _(CHAOS_IP_SIZE_INDIRECT _()( \
             CHAOS_PP_OBSTRUCT _(), CHAOS_PP_PREV(s), CHAOS_PP_REST _(g), CHAOS_PP_INC(size) \
+        )), \
+        size \
+    ) \
+    /**/
+#
+# define CHAOS_PP_SIZE_BYPASS_SHADOW(s, g) \
+    CHAOS_PP_EXPR_S(s)(CHAOS_IP_SIZE_I(CHAOS_PP_OBSTRUCT(), CHAOS_PP_PREV(s), g, 0)) \
+    /**/
+# define CHAOS_IP_SIZE_SHADOW_INDIRECT() CHAOS_IP_SIZE_SHADOW_I
+# define CHAOS_IP_SIZE_SHADOW_I(_, s, g, size) \
+    CHAOS_PP_IIF_SHADOW _(CHAOS_PP_IS_CONS(g))( \
+        CHAOS_PP_EXPR_S(s) _(CHAOS_IP_SIZE_SHADOW_INDIRECT _()( \
+            CHAOS_PP_OBSTRUCT _(), CHAOS_PP_PREV(s), CHAOS_PP_REST_SHADOW _(g), CHAOS_PP_INC(size) \
         )), \
         size \
     ) \

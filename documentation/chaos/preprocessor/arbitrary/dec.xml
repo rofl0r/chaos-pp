@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/arbitrary/dec.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an <link id="arbitrary-precision"/> decrementation operator.
+</overview>
+
+<macro id="DEC_AP" group="decrementation">
+	<abstract>
+		The <DEC_AP/> macro decrements an <link id="arbitrary-precision value"/>.
+	</abstract>
+	<usage>
+		<syntax><DEC_AP/>(x)</syntax>
+		<param id="x">
+			The <link id="arbitrary-precision value"/> to be decremented.
+		</param>
+	</usage>
+	<para>
+		This macro results in an <link id="arbitrary-precision value"/> one less than <var>x</var>.
+	</para>
+	<x-reference id="INC_AP"/>
+	<listing>
+		#include <chaos-preprocessor-arbitrary-dec.h/>
+		#include <chaos-preprocessor-arbitrary-demote.h/>
+		#include <chaos-preprocessor-arbitrary-literal.h/>
+		
+		<DEMOTE_AP/>(
+		    <DEC_AP/>(<LITERAL_AP/>(1 2 3))
+		)
+		// 122
+		
+		<DEMOTE_AP/>(
+		    <DEC_AP/>(<LITERAL_AP/>((-)1 2 3))
+		)
+		// -124
+		
+		<DEMOTE_AP/>(
+		    <DEC_AP/>(<LITERAL_AP/>(0))
+		)
+		// -1
+	</listing>
+	<derivative id="DEC_AP_ID"/>
+	<derivative id="DEC_AP_" lang="C99"/>
+</macro>
+
+</header>

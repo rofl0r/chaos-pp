@@ -12,14 +12,10 @@
 # ifndef CHAOS_PREPROCESSOR_LAMBDA_OPS_H
 # define CHAOS_PREPROCESSOR_LAMBDA_OPS_H
 #
+# include <chaos/preprocessor/cat.h>
 # include <chaos/preprocessor/config.h>
-# include <chaos/preprocessor/control/expr_iif.h>
-# include <chaos/preprocessor/detection/is_variadic.h>
 # include <chaos/preprocessor/facilities/expand.h>
-# include <chaos/preprocessor/facilities/split.h>
-# include <chaos/preprocessor/logical/compl.h>
 # include <chaos/preprocessor/recursion/basic.h>
-# include <chaos/preprocessor/tuple/eat.h>
 # include <chaos/preprocessor/tuple/rem.h>
 #
 # /* CHAOS_PP_FLAG */

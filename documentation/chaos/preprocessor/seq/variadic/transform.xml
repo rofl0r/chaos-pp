@@ -73,6 +73,8 @@
 		<usage lang="C/C++">
 			<syntax><EXPR_S/>(s)(<VARIADIC_SEQ_TRANSFORM_S/>(s, op, seq, data))</syntax>
 		</usage>
+		<derivative id="VARIADIC_SEQ_TRANSFORM_S_ID" lang="C99"/>
+		<derivative id="VARIADIC_SEQ_TRANSFORM_S_" lang="C99"/>
 	</derivative>
 </macro>
 

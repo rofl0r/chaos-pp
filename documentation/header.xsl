@@ -283,7 +283,7 @@
 	<xsl:apply-templates select="derivative"/>
 </xsl:template>
 
-<!-- derivative entities -->
+<!-- Chaos-specific derivative entities -->
 
 <xsl:template match="derivative[substring-after(@id, ../@id) = '_ID']">
 	<xsl:variable name="current"><xsl:call-template name="manual"/></xsl:variable>
@@ -424,6 +424,86 @@
 	<DIV>
 		This macro may not be used if <A href="{$root}/bypass.html">bypass semantics</A> are in effect.
 	</DIV>
+	<xsl:if test="count(listing)">
+		<H4>Sample Code</H4>
+		<xsl:for-each select="listing[1]">
+			<SAMP><xsl:apply-templates/></SAMP>
+		</xsl:for-each>
+	</xsl:if>
+	<xsl:apply-templates select="derivative"/>
+</xsl:template>
+
+<!-- Boost-specific derivative entities -->
+
+<xsl:template match="derivative[substring-after(@id, ../@id) = '_D']">
+	<xsl:variable name="current"><xsl:call-template name="manual"/></xsl:variable>
+	<xsl:variable name="parent"><xsl:call-template name="manual-parent"/></xsl:variable>
+	<xsl:variable name="while"><xsl:call-template name="manual"><xsl:with-param name="id" select="'WHILE'"/></xsl:call-template></xsl:variable>
+	<HR/>
+	<A name="{@id}"/>
+	<H3 class="ALTERNATE"><xsl:value-of select="concat($prefix, @id)"/></H3>
+	<SPAN>
+		The <xsl:copy-of select="$current"/> macro behaves identically to <xsl:copy-of select="$parent"/> except that it is parametized by the <xsl:copy-of select="$while"/> depth (<VAR>d</VAR>).
+	</SPAN>
+	<xsl:for-each select="usage">
+		<xsl:variable name="position" select="position()"/>
+		<H4>Usage <xsl:if test="count(@lang)"><SMALL>- <xsl:value-of select="@lang"/> Specific</SMALL></xsl:if></H4>
+		<xsl:for-each select="syntax">
+			<SAMP><xsl:apply-templates/></SAMP>
+		</xsl:for-each>
+		<DL>
+			<DT><VAR>d</VAR></DT>
+			<DD>The current <xsl:copy-of select="$while"/> depth.</DD>
+			<xsl:for-each select="ancestor::macro/usage[position() = $position]/param">
+				<DT>
+					<xsl:choose>
+						<xsl:when test="@optional = '1'">[<VAR><xsl:value-of select="@id"/></VAR>]</xsl:when>
+						<xsl:otherwise><VAR><xsl:value-of select="@id"/></VAR></xsl:otherwise>
+					</xsl:choose>
+				</DT>
+				<DD><xsl:apply-templates/></DD>
+			</xsl:for-each>
+		</DL>
+	</xsl:for-each>
+	<xsl:if test="count(listing)">
+		<H4>Sample Code</H4>
+		<xsl:for-each select="listing[1]">
+			<SAMP><xsl:apply-templates/></SAMP>
+		</xsl:for-each>
+	</xsl:if>
+	<xsl:apply-templates select="derivative"/>
+</xsl:template>
+
+<xsl:template match="derivative[substring-after(@id, ../@id) = '_Z']">
+	<xsl:variable name="current"><xsl:call-template name="manual"/></xsl:variable>
+	<xsl:variable name="parent"><xsl:call-template name="manual-parent"/></xsl:variable>
+	<xsl:variable name="repeat"><xsl:call-template name="manual"><xsl:with-param name="id" select="'REPEAT'"/></xsl:call-template></xsl:variable>
+	<HR/>
+	<A name="{@id}"/>
+	<H3 class="ALTERNATE"><xsl:value-of select="concat($prefix, @id)"/></H3>
+	<SPAN>
+		The <xsl:copy-of select="$current"/> macro behaves identically to <xsl:copy-of select="$parent"/> except that it is parametized by the <xsl:copy-of select="$repeat"/> dimension (<VAR>z</VAR>).
+	</SPAN>
+	<xsl:for-each select="usage">
+		<xsl:variable name="position" select="position()"/>
+		<H4>Usage <xsl:if test="count(@lang)"><SMALL>- <xsl:value-of select="@lang"/> Specific</SMALL></xsl:if></H4>
+		<xsl:for-each select="syntax">
+			<SAMP><xsl:apply-templates/></SAMP>
+		</xsl:for-each>
+		<DL>
+			<DT><VAR>z</VAR></DT>
+			<DD>The current <xsl:copy-of select="$repeat"/> dimension.</DD>
+			<xsl:for-each select="ancestor::macro/usage[position() = $position]/param">
+				<DT>
+					<xsl:choose>
+						<xsl:when test="@optional = '1'">[<VAR><xsl:value-of select="@id"/></VAR>]</xsl:when>
+						<xsl:otherwise><VAR><xsl:value-of select="@id"/></VAR></xsl:otherwise>
+					</xsl:choose>
+				</DT>
+				<DD><xsl:apply-templates/></DD>
+			</xsl:for-each>
+		</DL>
+	</xsl:for-each>
 	<xsl:if test="count(listing)">
 		<H4>Sample Code</H4>
 		<xsl:for-each select="listing[1]">

@@ -16,4 +16,8 @@
 #
 # define CHAOS_PP_LIMIT_EXPR 512
 #
+# /* CHAOS_PP_LIMIT_MAG */
+#
+# define CHAOS_PP_LIMIT_MAG 512
+#
 # endif

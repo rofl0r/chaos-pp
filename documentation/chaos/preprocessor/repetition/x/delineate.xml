@@ -98,7 +98,7 @@
 	</para>
 	<para>
 		This algorithm maintains a buffer of <var>size</var> <link id="recursion steps"/> available at all times.
-		This guarantees that the target has <em>at least</em> <var>size</var> <link id="recursion steps"/> available whenver it is invoked.
+		This guarantees that the target has <em>at least</em> <var>size</var> <link id="recursion steps"/> available whenever it is invoked.
 	</para>
 	<para>
 		The <link id="exponential"/> structure of the <code>X</code>-suffixed algorithms yields a total of <library-assoc id="alpha.gif">α</library-assoc> <link id="recursion steps"/>, where <x-var>p</x-var> is the number of <link id="parametric resumptions"/> plus the initial entry, <x-var>s<sub>ω</sub></x-var> is <LIMIT_EXPR/>, <x-var>s</x-var> is the current <link id="recursion state"/> at the beginning of the algorithm (i.e. <code><STATE/>()</code>), <x-var>s<sub>δ</sub></x-var> is the buffer size, and <x-var>z</x-var> is the exponential base.

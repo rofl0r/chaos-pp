@@ -75,7 +75,7 @@
 		</param>
 	</usage>
 	<para>
-		This macro behaves identically to <REPEAT_FROM_TO/> except that the algorithm itself yields a trampolined <link id="deferred expression"/> whenver the number of <link id="recursion steps"/> is exhausted.
+		This macro behaves identically to <REPEAT_FROM_TO/> except that the algorithm itself yields a trampolined <link id="deferred expression"/> whenever the number of <link id="recursion steps"/> is exhausted.
 		This allows for <link id="parametric resumption"/>.
 	</para>
 	<para>

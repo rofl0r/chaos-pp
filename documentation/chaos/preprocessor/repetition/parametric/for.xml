@@ -9,7 +9,10 @@
 		The <FOR_PARAMETRIC/> macro is a predicated repetition construct.
 	</abstract>
 	<usage lang="C99">
-		<syntax><EXPR/>(<FOR_PARAMETRIC/>(pred, op, macro, ...))</syntax>
+		<syntax><EXPR/>(<FOR_PARAMETRIC/>(size, pred, op, macro, ...))</syntax>
+		<param id="size">
+			The size of the buffer of valid <link id="recursion steps"/> maintained by the algorithm.
+		</param>
 		<param id="pred">
 			<para>
 				The predicate that determines whether the algorithm should continue.
@@ -54,7 +57,10 @@
 		</param>
 	</usage>
 	<usage lang="C/C++">
-		<syntax><EXPR/>(<FOR_PARAMETRIC/>(pred, op, macro, state))</syntax>
+		<syntax><EXPR/>(<FOR_PARAMETRIC/>(size, pred, op, macro, state))</syntax>
+		<param id="size">
+			The size of the buffer of valid <link id="recursion steps"/> maintained by the algorithm.
+		</param>
 		<param id="pred">
 			The predicate that determines whether the algorithm should continue.
 			This predicate must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
@@ -85,6 +91,10 @@
 		This allows for <link id="parametric resumption"/>.
 	</para>
 	<para>
+		This algorithm maintains a buffer of <var>size</var> <link id="recursion steps"/> available at all times.
+		This guarantees the predicate and the operation have <em>at least</em> <var>size</var> <link id="recursion steps"/> available whenever they are invoked.
+	</para>
+	<para>
 		Ignoring the complexity of <var>pred</var>, <var>op</var>, and <var>macro</var> (each of which is invoked once for each variation of the state), each iteration of the state requires only a single <link id="recursion step"/>.
 		This implies that the algorithm is capable or repeating the target <x-var>p</x-var>∙(<x-var>s<sub>ω</sub></x-var>-<x-var>s</x-var>-1) times, where <x-var>p</x-var> is the number of <link id="parametric resumptions"/> plus the initial entry, <x-var>s<sub>ω</sub></x-var> is <LIMIT_EXPR/>, and <x-var>s</x-var> is the original <link id="recursion state"/> at the beginning of the algorithm (i.e. <code><STATE/>()</code>).
 	</para>
@@ -99,10 +109,10 @@
 	<derivative id="FOR_PARAMETRIC_" lang="C99"/>
 	<derivative id="FOR_PARAMETRIC_S">
 		<usage lang="C99">
-			<syntax><EXPR_S/>(s)(<FOR_PARAMETRIC_S/>(s, pred, op, macro, ...))</syntax>
+			<syntax><EXPR_S/>(s)(<FOR_PARAMETRIC_S/>(s, size, pred, op, macro, ...))</syntax>
 		</usage>
 		<usage lang="C/C++">
-			<syntax><EXPR_S/>(s)(<FOR_PARAMETRIC_S/>(s, pred, op, macro, state))</syntax>
+			<syntax><EXPR_S/>(s)(<FOR_PARAMETRIC_S/>(s, size, pred, op, macro, state))</syntax>
 		</usage>
 		<derivative id="FOR_PARAMETRIC_S_ID"/>
 		<derivative id="FOR_PARAMETRIC_S_" lang="C99"/>

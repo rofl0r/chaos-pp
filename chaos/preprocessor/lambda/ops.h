@@ -15,7 +15,6 @@
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/control/expr_iif.h>
 # include <chaos/preprocessor/detection/is_variadic.h>
-# include <chaos/preprocessor/facilities/bind.h>
 # include <chaos/preprocessor/facilities/expand.h>
 # include <chaos/preprocessor/facilities/split.h>
 # include <chaos/preprocessor/logical/compl.h>
@@ -97,60 +96,14 @@
 #    define CHAOS_PP_PARAM_ CHAOS_PP_LAMBDA(CHAOS_PP_PARAM)
 # endif
 #
-# if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_0 CHAOS_PP_PARAM(0)
-#    define CHAOS_PP_1 CHAOS_PP_PARAM(1)
-#    define CHAOS_PP_2 CHAOS_PP_PARAM(2)
-#    define CHAOS_PP_3 CHAOS_PP_PARAM(3)
-#    define CHAOS_PP_4 CHAOS_PP_PARAM(4)
-#    define CHAOS_PP_5 CHAOS_PP_PARAM(5)
-#    define CHAOS_PP_6 CHAOS_PP_PARAM(6)
-#    define CHAOS_PP_7 CHAOS_PP_PARAM(7)
-#    define CHAOS_PP_8 CHAOS_PP_PARAM(8)
-#    define CHAOS_PP_9 CHAOS_PP_PARAM(9)
-#    define CHAOS_PP_10 CHAOS_PP_PARAM(10)
-#    define CHAOS_PP_11 CHAOS_PP_PARAM(11)
-#    define CHAOS_PP_12 CHAOS_PP_PARAM(12)
-#    define CHAOS_PP_13 CHAOS_PP_PARAM(13)
-#    define CHAOS_PP_14 CHAOS_PP_PARAM(14)
-#    define CHAOS_PP_15 CHAOS_PP_PARAM(15)
-#    define CHAOS_PP_16 CHAOS_PP_PARAM(16)
-#    define CHAOS_PP_17 CHAOS_PP_PARAM(17)
-#    define CHAOS_PP_18 CHAOS_PP_PARAM(18)
-#    define CHAOS_PP_19 CHAOS_PP_PARAM(19)
-#    define CHAOS_PP_20 CHAOS_PP_PARAM(20)
-#    define CHAOS_PP_21 CHAOS_PP_PARAM(21)
-#    define CHAOS_PP_22 CHAOS_PP_PARAM(22)
-#    define CHAOS_PP_23 CHAOS_PP_PARAM(23)
-#    define CHAOS_PP_24 CHAOS_PP_PARAM(24)
-# endif
+# /* CHAOS_PP_PLACEHOLDERS */
 #
-# if CHAOS_PP_VARIADICS && CHAOS_PP_NO_PREFIX
-#    define _0 CHAOS_PP_ALTERNATE(_0, CHAOS_PP)
-#    define _1 CHAOS_PP_ALTERNATE(_1, CHAOS_PP)
-#    define _2 CHAOS_PP_ALTERNATE(_2, CHAOS_PP)
-#    define _3 CHAOS_PP_ALTERNATE(_3, CHAOS_PP)
-#    define _4 CHAOS_PP_ALTERNATE(_4, CHAOS_PP)
-#    define _5 CHAOS_PP_ALTERNATE(_5, CHAOS_PP)
-#    define _6 CHAOS_PP_ALTERNATE(_6, CHAOS_PP)
-#    define _7 CHAOS_PP_ALTERNATE(_7, CHAOS_PP)
-#    define _8 CHAOS_PP_ALTERNATE(_8, CHAOS_PP)
-#    define _9 CHAOS_PP_ALTERNATE(_9, CHAOS_PP)
-#    define _10 CHAOS_PP_ALTERNATE(_10, CHAOS_PP)
-#    define _11 CHAOS_PP_ALTERNATE(_11, CHAOS_PP)
-#    define _12 CHAOS_PP_ALTERNATE(_12, CHAOS_PP)
-#    define _13 CHAOS_PP_ALTERNATE(_13, CHAOS_PP)
-#    define _14 CHAOS_PP_ALTERNATE(_14, CHAOS_PP)
-#    define _15 CHAOS_PP_ALTERNATE(_15, CHAOS_PP)
-#    define _16 CHAOS_PP_ALTERNATE(_16, CHAOS_PP)
-#    define _17 CHAOS_PP_ALTERNATE(_17, CHAOS_PP)
-#    define _18 CHAOS_PP_ALTERNATE(_18, CHAOS_PP)
-#    define _19 CHAOS_PP_ALTERNATE(_19, CHAOS_PP)
-#    define _20 CHAOS_PP_ALTERNATE(_20, CHAOS_PP)
-#    define _21 CHAOS_PP_ALTERNATE(_21, CHAOS_PP)
-#    define _22 CHAOS_PP_ALTERNATE(_22, CHAOS_PP)
-#    define _23 CHAOS_PP_ALTERNATE(_23, CHAOS_PP)
-#    define _24 CHAOS_PP_ALTERNATE(_24, CHAOS_PP)
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_PP_PLACEHOLDERS(bit) CHAOS_PP_PRIMITIVE_CAT(CHAOS_IP_PLACEHOLDERS_, bit)
+#    define CHAOS_PP_PLACEHOLDERS_ID() CHAOS_PP_PLACEHOLDERS
+#    define CHAOS_PP_PLACEHOLDERS_ CHAOS_PP_LAMBDA(CHAOS_PP_PLACEHOLDERS)
+#    define CHAOS_IP_PLACEHOLDERS_0 "chaos/preprocessor/lambda/detail/placeholders_0.h"
+#    define CHAOS_IP_PLACEHOLDERS_1 "chaos/preprocessor/lambda/detail/placeholders_1.h"
 # endif
 #
 # endif

@@ -82,6 +82,8 @@
 #    define CHAOS_PP_REST_ CHAOS_PP_LAMBDA(CHAOS_PP_REST_ID)()
 # endif
 #
+# define CHAOS_IP_REST_I(type, data) (type) CHAOS_PP_PRIMITIVE_CAT(type, _REST)(data)
+#
 # /* CHAOS_PP_IS_CONS */
 #
 # define CHAOS_PP_IS_CONS(g) CHAOS_IP_IS_CONS_I(CHAOS_PP_TYPEOF(g), CHAOS_PP_STRIP(g))

@@ -26,10 +26,9 @@
 #    define CHAOS_PP_AS_ARGS_ CHAOS_PP_LAMBDA(CHAOS_PP_AS_ARGS)
 # endif
 #
-# define CHAOS_IP_AS_ARGS_1(x) (CHAOS_PP_TUPLE_REM_CTOR x)
-# define CHAOS_IP_AS_ARGS_2(a, x) (a, CHAOS_PP_TUPLE_REM_CTOR x)
-# define CHAOS_IP_AS_ARGS_3(a, b, x) (a, b, CHAOS_PP_TUPLE_REM_CTOR x)
-# define CHAOS_IP_AS_ARGS_4(a, b, c, x) (a, b, c, CHAOS_PP_TUPLE_REM_CTOR x)
-# define CHAOS_IP_AS_ARGS_5(a, b, c, d, x) (a, b, c, d, CHAOS_PP_TUPLE_REM_CTOR x)
+# define CHAOS_IP_AS_ARGS_2(s, array) (CHAOS_PP_NEXT(s), CHAOS_PP_TUPLE_REM_CTOR array)
+# define CHAOS_IP_AS_ARGS_3(s, a, array) (CHAOS_PP_NEXT(s), a, CHAOS_PP_TUPLE_REM_CTOR array)
+# define CHAOS_IP_AS_ARGS_4(s, a, b, array) (CHAOS_PP_NEXT(s), a, b, CHAOS_PP_TUPLE_REM_CTOR array)
+# define CHAOS_IP_AS_ARGS_5(s, a, b, c, array) (CHAOS_PP_NEXT(s), a, b, c, CHAOS_PP_TUPLE_REM_CTOR array)
 #
 # endif

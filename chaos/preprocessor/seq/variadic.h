@@ -12,6 +12,7 @@
 # ifndef CHAOS_PREPROCESSOR_SEQ_VARIADIC_H
 # define CHAOS_PREPROCESSOR_SEQ_VARIADIC_H
 #
+# include <chaos/preprocessor/seq/variadic/auto.h>
 # include <chaos/preprocessor/seq/variadic/core.h>
 # include <chaos/preprocessor/seq/variadic/filter.h>
 # include <chaos/preprocessor/seq/variadic/fold_left.h>

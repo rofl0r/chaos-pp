@@ -12,6 +12,7 @@
 # ifndef CHAOS_PREPROCESSOR_SEQ_H
 # define CHAOS_PREPROCESSOR_SEQ_H
 #
+# include <chaos/preprocessor/seq/auto.h>
 # include <chaos/preprocessor/seq/binary_transform.h>
 # include <chaos/preprocessor/seq/concat.h>
 # include <chaos/preprocessor/seq/core.h>

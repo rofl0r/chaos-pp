@@ -12,6 +12,7 @@
 # ifndef CHAOS_PREPROCESSOR_CONTROL_H
 # define CHAOS_PREPROCESSOR_CONTROL_H
 #
+# include <chaos/preprocessor/control/auto.h>
 # include <chaos/preprocessor/control/branch.h>
 # include <chaos/preprocessor/control/if.h>
 # include <chaos/preprocessor/control/iif.h>

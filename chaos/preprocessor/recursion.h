@@ -20,6 +20,7 @@
 # include <chaos/preprocessor/recursion/delve.h>
 # include <chaos/preprocessor/recursion/equalize.h>
 # include <chaos/preprocessor/recursion/expr.h>
+# include <chaos/preprocessor/recursion/higher_order.h>
 # include <chaos/preprocessor/recursion/machine.h>
 # include <chaos/preprocessor/recursion/phase.h>
 # include <chaos/preprocessor/recursion/rail.h>

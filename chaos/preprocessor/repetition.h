@@ -12,6 +12,7 @@
 # ifndef CHAOS_PREPROCESSOR_REPETITION_H
 # define CHAOS_PREPROCESSOR_REPETITION_H
 #
+# include <chaos/preprocessor/repetition/auto.h>
 # include <chaos/preprocessor/repetition/delineate.h>
 # include <chaos/preprocessor/repetition/delineate_from_to.h>
 # include <chaos/preprocessor/repetition/delineate_from_to_trailing.h>

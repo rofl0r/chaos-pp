@@ -13,6 +13,7 @@
 # define CHAOS_PREPROCESSOR_ALGORITHM_H
 #
 # include <chaos/preprocessor/algorithm/append.h>
+# include <chaos/preprocessor/algorithm/auto.h>
 # include <chaos/preprocessor/algorithm/cast.h>
 # include <chaos/preprocessor/algorithm/concat.h>
 # include <chaos/preprocessor/algorithm/drop.h>

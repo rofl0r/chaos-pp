@@ -90,9 +90,6 @@
         CHAOS_PP_DEFER(CHAOS_PP_LAMBDA)(CHAOS_IP_CURRY_E(, s, p ## orig, p ## args, CHAOS_PP_COMMA, CHAOS_PP_FLAG_DATA(p ## flag))) \
         /**/
 #    define CHAOS_IP_CURRY_0xLPAREN(...) CHAOS_PP_FLAG(0xLPAREN)
-#    define CHAOS_IP_CURRY_0xOVERRIDE(p, s, orig, args, flag) \
-        CHAOS_PP_DEFER(CHAOS_PP_OVERRIDE)(CHAOS_IP_CURRY_E(, s, p ## orig, p ## args, CHAOS_PP_COMMA, CHAOS_PP_FLAG_DATA(p ## flag))) \
-        /**/
 #    define CHAOS_IP_CURRY_0xPARAM(p, s, orig, args, flag) CHAOS_PP_LAMBDA(CHAOS_PP_TUPLE_ELEM(?, CHAOS_PP_FLAG_DATA(p ## flag), p ## args))
 #    define CHAOS_IP_CURRY_0xRPAREN(...) CHAOS_PP_FLAG(0xRPAREN)
 #    define CHAOS_IP_CURRY_0xSELF(p, s, orig, ...) CHAOS_PP_ESCAPE(p ## orig)

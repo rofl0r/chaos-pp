@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="cat.hpp" root="..">
+<synopsis>
+	The <self/> header defines basic concatenation macros.
+</synopsis>
+
+<symbol id="CAT">
+	<derivative id="CAT_ID"/>
+	<derivative id="CAT_"/>
+	<abstract>
+		The <CAT/> macro concatenates its arguments after they have been expanded.
+	</abstract>
+	<usage lang="C99">
+		<syntax><CAT/>(a, ...)</syntax>
+		<param id="a" optional="true">The left operand of the concatenation.</param>
+		<param id="..." optional="true">The right operand of the concatenation.</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><CAT/>(a, b)</syntax>
+		<param id="a">The left operand of the concatenation.</param>
+		<param id="b">The right operand of the concatenation.</param>
+	</usage>
+	<para>
+		This macro concatenates its arguments with the token-pasting operator.
+<snippet>
+a ## __VA_ARGS__ // C99
+a ## b           // C and C++
+</snippet>
+	</para>
+	<para>
+		This macro provides the delay necessary to allow its arguments to expand prior to concatenation.
+		This macro's sibling, <PRIMITIVE_CAT/>, does <em>not</em> provide this delay.
+	</para>
+	<para>
+		In C99, if both <var>a</var> and <code>__VA_ARGS__</code> are placemarkers, this macro expands to nothing.
+		<snippet><CAT/>(,) // nothing</snippet>
+	</para>
+	<para>
+		Similarly, if either <var>a</var> or <code>__VA_ARGS__</code> is a placemarker,
+		and the other is not, this macro expands to the non-placemarker argument(s).
+<snippet>
+<CAT/>(123,)   // 123
+<CAT/>(, a, b) // a, b
+</snippet>
+	</para>
+<listing>
+#include <cat.hpp/>
+
+#define A 1
+#define B 2
+
+<CAT/>(A, B) // 12
+</listing>
+</symbol>
+
+<symbol id="PRIMITIVE_CAT">
+	<derivative id="PRIMITIVE_CAT_ID"/>
+	<derivative id="PRIMITIVE_CAT_"/>
+	<abstract>
+		The <PRIMITIVE_CAT/> macro concatenates its arguments before they are expanded.
+	</abstract>
+	<usage lang="C99">
+		<syntax><CAT/>(a, ...)</syntax>
+		<param id="a" optional="true">The left operand of the concatenation.</param>
+		<param id="..." optional="true">The right operand of the concatenation.</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><CAT/>(a, b)</syntax>
+		<param id="a">The left operand of the concatenation.</param>
+		<param id="b">The right operand of the concatenation.</param>
+	</usage>
+	<para>
+		This macro behaves identically to <CAT/> except that it <em>does not</em> provide the delay
+		necessary to allow its arguments to expand before concatenation.
+	</para>
+</symbol>
+
+</header>

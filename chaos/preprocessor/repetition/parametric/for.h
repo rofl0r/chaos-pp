@@ -49,7 +49,7 @@
 #
 # define CHAOS_PP_FOR_PARAMETRIC_S_ID() CHAOS_PP_FOR_PARAMETRIC_S
 #
-# define CHAOS_IP_FOR_PARAMETRIC_U(s, size, pred, op, macro, ps) CHAOS_IP_FOR_PARAMETRIC_I(CHAOS_PP_NEXT(s), CHAOS_PP_BUFFER(s, size), pred, op, macro, ps)
+# define CHAOS_IP_FOR_PARAMETRIC_U(s, size, pred, op, macro, ps) CHAOS_IP_FOR_PARAMETRIC_I(CHAOS_PP_NEXT(s), CHAOS_PP_BUFFER_S(s, size), pred, op, macro, ps)
 # define CHAOS_IP_FOR_PARAMETRIC_I(s, buffer, pred, op, macro, ps) \
     CHAOS_PP_DEFER(CHAOS_PP_EXPR_S)(s)(CHAOS_IP_FOR_PARAMETRIC_II( \
         s, s, buffer, buffer, \

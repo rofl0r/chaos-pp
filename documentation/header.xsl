@@ -465,6 +465,13 @@
 			</xsl:for-each>
 		</DL>
 	</xsl:for-each>
+	<xsl:if test="@obsolete = '1'">
+		<H4>Remarks</H4>
+		<DIV>
+			This macro is obsolete and exists only for backward compatibility.
+			<xsl:copy-of select="$parent"/> should be used instead.
+		</DIV>
+	</xsl:if>
 	<xsl:if test="count(listing)">
 		<H4>Sample Code</H4>
 		<xsl:for-each select="listing[1]">
@@ -504,6 +511,13 @@
 			</xsl:for-each>
 		</DL>
 	</xsl:for-each>
+	<xsl:if test="@obsolete = '1'">
+		<H4>Remarks</H4>
+		<DIV>
+			This macro is obsolete and exists only for backward compatibility.
+			<xsl:copy-of select="$parent"/> should be used instead.
+		</DIV>
+	</xsl:if>
 	<xsl:if test="count(listing)">
 		<H4>Sample Code</H4>
 		<xsl:for-each select="listing[1]">

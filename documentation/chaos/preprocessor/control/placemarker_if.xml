@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/control/placemarker_if.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that expands to an expression if a condition is a placemarker.
+</overview>
+
+<macro id="PLACEMARKER_IF" group="if">
+	<abstract>
+		The <PLACEMARKER_IF/> macro expands to its second argument if its first argument is a placemarker.
+	</abstract>
+	<usage lang="C99">
+		<syntax><PLACEMARKER_IF/>(p)(...)</syntax>
+		<param id="p" optional="1">
+			The condition that determines whether the macro should expand to <code>__VA_ARGS__</code> or nothing.
+			Valid values are <code>0</code> and nothing (i.e. a placemarker).
+		</param>
+		<param id="..." optional="1">
+			The resulting expression if <var>p</var> is a placemarker.
+		</param>
+	</usage>
+	<para>
+		If <var>p</var> expands to <code>0</code>, this macro expands to nothing.
+		Otherwise, it expands to <code>__VA_ARGS__</code>.
+	</para>
+	<para>
+		This macro is lazy.
+		If <var>p</var> is <code>0</code>, <code>__VA_ARGS__</code> is not evaluated.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-control-placemarker_if.h/>
+		
+		#if <VARIADICS/>
+		
+		#define BRACKET(pseq) BRACKET_A pseq(0,)
+		
+		#define BRACKET_A(p, ...) <PLACEMARKER_IF/>(p)([p ## __VA_ARGS__] BRACKET_B)
+		#define BRACKET_B(p, ...) <PLACEMARKER_IF/>(p)([p ## __VA_ARGS__] BRACKET_A)
+		
+		BRACKET((,a)(,b)(,c)(,d)) // [a] [b] [c] [d]
+		
+		#endif
+	</listing>
+	<derivative id="PLACEMARKER_IF_ID" lang="C99"/>
+	<derivative id="PLACEMARKER_IF_" lang="C99"/>
+</macro>
+
+</header>

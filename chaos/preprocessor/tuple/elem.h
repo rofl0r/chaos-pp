@@ -28,6 +28,10 @@
 #    define CHAOS_PP_VARIADIC_ELEM_ CHAOS_PP_LAMBDA(CHAOS_PP_VARIADIC_ELEM_ID)()
 # endif
 #
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_PP_VARIADIC_ELEM_SHADOW(i, ...) CHAOS_PP_TUPLE_ELEM_SHADOW(?, i, (__VA_ARGS__))
+# endif
+#
 # /* CHAOS_PP_TUPLE_ELEM */
 #
 # if CHAOS_PP_VARIADICS
@@ -103,5 +107,76 @@
 # define CHAOS_IP_TUPLE_ELEM_22(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y) w
 # define CHAOS_IP_TUPLE_ELEM_23(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y) x
 # define CHAOS_IP_TUPLE_ELEM_24(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y) y
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_PP_TUPLE_ELEM_SHADOW(size, i, tuple) CHAOS_IP_TUPLE_ELEM_SHADOW_I(i, CHAOS_IP_TUPLE_ELEM_SHADOW_A tuple)
+#    define CHAOS_IP_TUPLE_ELEM_SHADOW_A(...) CHAOS_IP_TUPLE_ELEM_SHADOW_B(__VA_ARGS__,,,,,,,,,,,,,,,,,,,,,,,,,)
+#    define CHAOS_IP_TUPLE_ELEM_SHAODW_B(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, ...) \
+        (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y) \
+        /**/
+# else
+#    define CHAOS_PP_TUPLE_ELEM_SHADOW(size, i, tuple) \
+        CHAOS_IP_TUPLE_ELEM_SHADOW_I( \
+            i, \
+            CHAOS_PP_EXPAND_SHADOW( \
+                CHAOS_PP_DEFER(CHAOS_PP_PRIMITIVE_CAT_SHADOW(CHAOS_IP_TUPLE_ELEM_SHADOW_E_, size)) \
+                    (CHAOS_PP_OBSTRUCT CHAOS_PP_COMMA_IF(size) CHAOS_PP_TUPLE_REM_SHADOW(size) tuple) \
+            ) \
+        ) \
+        /**/
+#    define CHAOS_IP_TUPLE_ELEM_SHADOW_E_0(_) (_(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _())
+#    define CHAOS_IP_TUPLE_ELEM_SHADOW_E_1(_, a) (a, _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _())
+#    define CHAOS_IP_TUPLE_ELEM_SHADOW_E_2(_, a, b) (a, b, _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _())
+#    define CHAOS_IP_TUPLE_ELEM_SHADOW_E_3(_, a, b, c) (a, b, c, _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _())
+#    define CHAOS_IP_TUPLE_ELEM_SHADOW_E_4(_, a, b, c, d) (a, b, c, d, _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _())
+#    define CHAOS_IP_TUPLE_ELEM_SHADOW_E_5(_, a, b, c, d, e) (a, b, c, d, e, _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _())
+#    define CHAOS_IP_TUPLE_ELEM_SHADOW_E_6(_, a, b, c, d, e, f) (a, b, c, d, e, f, _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _())
+#    define CHAOS_IP_TUPLE_ELEM_SHADOW_E_7(_, a, b, c, d, e, f, g) (a, b, c, d, e, f, g, _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _())
+#    define CHAOS_IP_TUPLE_ELEM_SHADOW_E_8(_, a, b, c, d, e, f, g, h) (a, b, c, d, e, f, g, h, _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _())
+#    define CHAOS_IP_TUPLE_ELEM_SHADOW_E_9(_, a, b, c, d, e, f, g, h, i) (a, b, c, d, e, f, g, h, i, _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _())
+#    define CHAOS_IP_TUPLE_ELEM_SHADOW_E_10(_, a, b, c, d, e, f, g, h, i, j) (a, b, c, d, e, f, g, h, i, j, _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _())
+#    define CHAOS_IP_TUPLE_ELEM_SHADOW_E_11(_, a, b, c, d, e, f, g, h, i, j, k) (a, b, c, d, e, f, g, h, i, j, k, _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _())
+#    define CHAOS_IP_TUPLE_ELEM_SHADOW_E_12(_, a, b, c, d, e, f, g, h, i, j, k, l) (a, b, c, d, e, f, g, h, i, j, k, l, _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _())
+#    define CHAOS_IP_TUPLE_ELEM_SHADOW_E_13(_, a, b, c, d, e, f, g, h, i, j, k, l, m) (a, b, c, d, e, f, g, h, i, j, k, l, m, _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _())
+#    define CHAOS_IP_TUPLE_ELEM_SHADOW_E_14(_, a, b, c, d, e, f, g, h, i, j, k, l, m, n) (a, b, c, d, e, f, g, h, i, j, k, l, m, n, _(), _(), _(), _(), _(), _(), _(), _(), _(), _(), _())
+#    define CHAOS_IP_TUPLE_ELEM_SHADOW_E_15(_, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, _(), _(), _(), _(), _(), _(), _(), _(), _(), _())
+#    define CHAOS_IP_TUPLE_ELEM_SHADOW_E_16(_, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, _(), _(), _(), _(), _(), _(), _(), _(), _())
+#    define CHAOS_IP_TUPLE_ELEM_SHADOW_E_17(_, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q) (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, _(), _(), _(), _(), _(), _(), _(), _())
+#    define CHAOS_IP_TUPLE_ELEM_SHADOW_E_18(_, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r) (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, _(), _(), _(), _(), _(), _(), _())
+#    define CHAOS_IP_TUPLE_ELEM_SHADOW_E_19(_, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s) (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, _(), _(), _(), _(), _(), _())
+#    define CHAOS_IP_TUPLE_ELEM_SHADOW_E_20(_, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t) (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, _(), _(), _(), _(), _())
+#    define CHAOS_IP_TUPLE_ELEM_SHADOW_E_21(_, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u) (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, _(), _(), _(), _())
+#    define CHAOS_IP_TUPLE_ELEM_SHADOW_E_22(_, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v) (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, _(), _(), _())
+#    define CHAOS_IP_TUPLE_ELEM_SHADOW_E_23(_, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w) (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, _(), _())
+#    define CHAOS_IP_TUPLE_ELEM_SHADOW_E_24(_, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x) (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, _())
+#    define CHAOS_IP_TUPLE_ELEM_SHADOW_E_25(_, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y) (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y)
+# endif
+#
+# define CHAOS_IP_TUPLE_ELEM_SHADOW_I(i, tuple) CHAOS_IP_TUPLE_ELEM_SHADOW_ ## i tuple
+# define CHAOS_IP_TUPLE_ELEM_SHADOW_0(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y) a
+# define CHAOS_IP_TUPLE_ELEM_SHADOW_1(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y) b
+# define CHAOS_IP_TUPLE_ELEM_SHADOW_2(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y) c
+# define CHAOS_IP_TUPLE_ELEM_SHADOW_3(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y) d
+# define CHAOS_IP_TUPLE_ELEM_SHADOW_4(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y) e
+# define CHAOS_IP_TUPLE_ELEM_SHADOW_5(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y) f
+# define CHAOS_IP_TUPLE_ELEM_SHADOW_6(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y) g
+# define CHAOS_IP_TUPLE_ELEM_SHADOW_7(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y) h
+# define CHAOS_IP_TUPLE_ELEM_SHADOW_8(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y) i
+# define CHAOS_IP_TUPLE_ELEM_SHADOW_9(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y) j
+# define CHAOS_IP_TUPLE_ELEM_SHADOW_10(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y) k
+# define CHAOS_IP_TUPLE_ELEM_SHADOW_11(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y) l
+# define CHAOS_IP_TUPLE_ELEM_SHADOW_12(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y) m
+# define CHAOS_IP_TUPLE_ELEM_SHADOW_13(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y) n
+# define CHAOS_IP_TUPLE_ELEM_SHADOW_14(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y) o
+# define CHAOS_IP_TUPLE_ELEM_SHADOW_15(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y) p
+# define CHAOS_IP_TUPLE_ELEM_SHADOW_16(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y) q
+# define CHAOS_IP_TUPLE_ELEM_SHADOW_17(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y) r
+# define CHAOS_IP_TUPLE_ELEM_SHADOW_18(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y) s
+# define CHAOS_IP_TUPLE_ELEM_SHADOW_19(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y) t
+# define CHAOS_IP_TUPLE_ELEM_SHADOW_20(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y) u
+# define CHAOS_IP_TUPLE_ELEM_SHADOW_21(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y) v
+# define CHAOS_IP_TUPLE_ELEM_SHADOW_22(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y) w
+# define CHAOS_IP_TUPLE_ELEM_SHADOW_23(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y) x
+# define CHAOS_IP_TUPLE_ELEM_SHADOW_24(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y) y
 #
 # endif

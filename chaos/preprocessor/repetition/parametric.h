@@ -14,8 +14,12 @@
 #
 # include <chaos/preprocessor/repetition/parametric/delineate.h>
 # include <chaos/preprocessor/repetition/parametric/delineate_shifted.h>
+# include <chaos/preprocessor/repetition/parametric/delineate_shifted_trailing.h>
+# include <chaos/preprocessor/repetition/parametric/delineate_trailing.h>
 # include <chaos/preprocessor/repetition/parametric/enum.h>
 # include <chaos/preprocessor/repetition/parametric/enum_shifted.h>
+# include <chaos/preprocessor/repetition/parametric/enum_shifted_trailing.h>
+# include <chaos/preprocessor/repetition/parametric/enum_trailing.h>
 # include <chaos/preprocessor/repetition/parametric/for.h>
 # include <chaos/preprocessor/repetition/parametric/repeat.h>
 # include <chaos/preprocessor/repetition/parametric/repeat_from_to.h>

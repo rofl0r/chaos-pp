@@ -19,6 +19,7 @@
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/recursion/basic.h>
 # include <chaos/preprocessor/recursion/expr.h>
+# include <chaos/preprocessor/tuple/rem.h>
 #
 # /* CHAOS_PP_FOR */
 #

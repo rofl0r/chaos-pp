@@ -18,7 +18,7 @@
 # include <chaos/preprocessor/facilities/empty.h>
 # include <chaos/preprocessor/facilities/split.h>
 # include <chaos/preprocessor/lambda/ops.h>
-# include <chaos/preprocessor/recursion/basic.h>
+# include <chaos/preprocessor/tuple/rem.h>
 # include <chaos/preprocessor/tuple/spec.h>
 #
 # /* CHAOS_PP_IS_OPTIONAL */

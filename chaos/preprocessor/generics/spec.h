@@ -17,8 +17,8 @@
 # include <chaos/preprocessor/generics/strip.h>
 # include <chaos/preprocessor/generics/typeof.h>
 # include <chaos/preprocessor/lambda/ops.h>
-# include <chaos/preprocessor/recursion/basic.h>
 # include <chaos/preprocessor/tuple/eat.h>
+# include <chaos/preprocessor/tuple/rem.h>
 #
 # /* CHAOS_PP_TAG */
 #

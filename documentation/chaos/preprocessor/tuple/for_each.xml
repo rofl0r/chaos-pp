@@ -83,6 +83,10 @@
 		The asymptotic upper and lower bounds are <assoc id="complexity/for_each.gif">Θ</assoc>, where <x-var>n</x-var> is the number of elements in <var>tuple</var>.
 	</para>
 	<para>
+		This macro operates on the nil <link id="tuple"/> representation used by the core <link id="tuple"/> operations defined in <chaos-preprocessor-tuple-core.h/>.
+		Specifically, <code>()</code> is a one-element <link id="tuple"/>, not a zero-element <link id="tuple"/>.
+	</para>
+	<para>
 		This macro deduces the current <link id="recursion state"/> and invokes <TUPLE_FOR_EACH_S/>.
 		If the current <link id="recursion state"/> is already known, direct use of <TUPLE_FOR_EACH_S/> is more efficient.
 	</para>

@@ -12,6 +12,7 @@
 # ifndef CHAOS_PREPROCESSOR_TUPLE_H
 # define CHAOS_PREPROCESSOR_TUPLE_H
 #
+# include <chaos/preprocessor/tuple/as_args.h>
 # include <chaos/preprocessor/tuple/batch.h>
 # include <chaos/preprocessor/tuple/concat.h>
 # include <chaos/preprocessor/tuple/core.h>

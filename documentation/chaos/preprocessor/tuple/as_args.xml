@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/tuple/as_args.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro used to convert a <link id="tuple"/> to a representation suitable for use as an argument list.
+</overview>
+
+<macro id="TUPLE_AS_ARGS" type="indirect">
+	<abstract>
+		The <TUPLE_AS_ARGS/> macro converts its argument to a representation suitable for use as an argument list.
+	</abstract>
+	<usage lang="C99">
+		<syntax><TUPLE_AS_ARGS/>(tuple)</syntax>
+		<param id="tuple" optional="1">
+			The <link id="tuple"/> to be converted.
+		</param>
+	</usage>
+	<para>
+		If <var>tuple</var> is nil, this macro expands to <code>()</code>.
+		Otherwise, it expands to <var>tuple</var>.
+	</para>
+	<para>
+		This macro operates on the nil <link id="tuple"/> representation used by the core <link id="tuple"/> operations defined in <chaos-preprocessor-tuple-core.h/>.
+		Specifically, <code>()</code> is a one-element <link id="tuple"/>, not a zero-element <link id="tuple"/>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		#include <chaos-preprocessor-tuple-as_args.h/>
+		#include <chaos-preprocessor-tuple-size.h/>
+		
+		#if <VARIADICS/>
+		
+		#define APPLY(prefix, tuple) \
+		    <CAT/>(prefix, <TUPLE_QUICK_SIZE/>(tuple)) \
+		    <TUPLE_AS_ARGS/>(tuple) \
+		    /**/
+		
+		#define MACRO_0()
+		#define MACRO_1(a) a
+		#define MACRO_2(a, b) a * b
+		#define MACRO_3(a, b, c) a * b * c
+		
+		#define MACRO(args) <EXPR/>(APPLY(MACRO_, args))
+		
+		MACRO()       //
+		MACRO((1))    // 1
+		MACRO((1, 2)) // 1 * 2
+		
+		#endif
+	</listing>
+	<derivative id="TUPLE_AS_ARGS_ID" lang="C99"/>
+	<derivative id="TUPLE_AS_ARGS_" lang="C99"/>
+</macro>
+
+</header>

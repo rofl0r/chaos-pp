@@ -592,6 +592,8 @@
 			<header name="stringize.h"/>
 			<header name="tuple.h"/>
 			<directory name="tuple">
+				<header name="as_args.h"/>
+				<header name="batch.h"/>
 				<directory name="complexity">
 					<binary-file name="concat.gif"/>
 					<binary-file name="elem_alt.gif"/>
@@ -616,15 +618,14 @@
 					<binary-file name="to_string_alt.gif"/>
 					<binary-file name="transform.gif"/>
 				</directory>
+				<header name="concat.h"/>
+				<header name="core.h"/>
+				<header name="eat.h"/>
 				<directory name="efficiency">
 					<binary-file name="fold_left.gif"/>
 					<binary-file name="fold_left_aux.gif"/>
 					<binary-file name="range.gif"/>
 				</directory>
-				<header name="batch.h"/>
-				<header name="concat.h"/>
-				<header name="core.h"/>
-				<header name="eat.h"/>
 				<header name="elem.h"/>
 				<header name="filter.h"/>
 				<header name="first_n.h"/>

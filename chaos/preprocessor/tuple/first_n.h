@@ -13,7 +13,7 @@
 # define CHAOS_PREPROCESSOR_TUPLE_FIRST_N_H
 #
 # include <chaos/preprocessor/arithmetic/dec.h>
-# include <chaos/preprocessor/comparison/greater_equal.h>
+# include <chaos/preprocessor/comparison/greater.h>
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/control/if.h>
 # include <chaos/preprocessor/control/iif.h>
@@ -49,7 +49,7 @@
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_IP_TUPLE_FIRST_N_INDIRECT(n) CHAOS_IP_TUPLE_FIRST_N_ ## n
 #    define CHAOS_IP_TUPLE_FIRST_N_0(s, n, tuple) \
-        CHAOS_PP_IIF(CHAOS_PP_GREATER_EQUAL(n, 9))( \
+        CHAOS_PP_IIF(CHAOS_PP_GREATER(n, 9))( \
             CHAOS_IP_TUPLE_FIRST_N_0_I, CHAOS_IP_TUPLE_FIRST_N_1 \
         )(s, n, tuple) \
         /**/

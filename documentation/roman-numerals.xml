@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document id="Example: Roman Numerals" author="Paul Mensonides" date="2003-2004">
+	<section>
+		<para>
+			<em>NOTE: THIS DOCUMENT IS INCOMPLETE.</em>
+		</para>
+		<para>
+			This is a fun example that converts decimal values to Roman numerals (and vice versa).
+		</para>
+	</section>
+	<section id="Conversion to Roman Numerals">
+		<para>
+			This is a runtime C++ version with no error-checking or domain validation....
+			<snippet>
+				#include &lt;iostream&gt;
+				#include &lt;string&gt;
+			    
+				const std::string Roman(unsigned long x) {
+				    std::string r;
+				    const char* const table[4][10] = {
+				        { "", "M", "MM", "MMM" },
+				        { "", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM" },
+				        { "", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC" },
+				        { "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" }
+				    };
+				    for (int i = 0, j = 1000; i &lt; 4; ++i, j /= 10) {
+				        r += table[i][x / j];
+				        x %= j;
+				    }
+				    return r;
+				}
+				
+				int main(void) {
+				    std::cout
+				        &lt;&lt; "1977 == " &lt;&lt; Roman(1977) &lt;&lt; '\n'
+				        &lt;&lt; "2004 == " &lt;&lt; Roman(2004) &lt;&lt; '\n';
+				    return 0;
+				}
+			</snippet>
+		</para>
+		<para>
+			This is a preprocessor version (that assumes variadics and placemarkers)....
+			<snippet>
+				#include <chaos-preprocessor-algorithm-for_each_i.h/>
+				#include <chaos-preprocessor-config.h/>
+				#include <chaos-preprocessor-recursion-expr.h/>
+				#include <chaos-preprocessor-seq-elem.h/>
+				#include <chaos-preprocessor-string-spec.h/>
+			    
+			    #if <VARIADICS/>
+			    
+				#define ROMAN(string) ROMAN_S(<STATE/>(), string)
+				#define ROMAN_S(s, string) \
+				    <EXPR/>(<FOR_EACH_I/>( \
+				        TARGET, (<STRING/>) string \
+				    )) \
+				    /**/
+				
+				#define TARGET(s, n, x) \
+				    <SEQ_ELEM/>( \
+				        x, \
+				        <SEQ_ELEM/>( \
+				            n, \
+				            PATTERN(M, !, !) \
+				            PATTERN(C, D, M) \
+				            PATTERN(X, L, C) \
+				            PATTERN(I, V, X) \
+				        ) \
+				    ) \
+				    /**/
+				#define PATTERN(a, b, c) \
+				    ( \
+				        ()(a)(a a)(a a a)(a b)(b)(b a)(b a a)(b a a a)(a c) \
+				    ) \
+				    /**/
+				
+				ROMAN(1 9 7 7) // M C M L X X V I I
+				ROMAN(2 0 0 4) // M M I V
+				
+				#endif
+			</snippet>
+		</para>
+	</section>
+	<section id="Conversion to Arabic Numerals">
+		<para>
+			This is a runtime C++ version with no error-checking or domain validation....
+			<snippet>
+				#include &lt;iostream&gt;
+				#include &lt;string&gt;
+			    
+				unsigned long Arabic(const std::string&amp; x) {
+				    const struct {
+				        inline int operator()(char c) const {
+				            switch (c) {
+				                case 'M': return 6;
+				                case 'D': return 5;
+				                case 'C': return 4;
+				                case 'L': return 3;
+				                case 'X': return 2;
+				                case 'V': return 1;
+				                case 'I': return 0;
+				                default:
+				                    throw c;
+				            }
+				        }
+				    } rank = { };
+				    unsigned long r = 0;
+				    const unsigned long table[] = { 1, 5, 10, 50, 100, 500, 1000 };
+				    for (std::string::const_iterator i(x.begin()); i != x.end(); ++i) {
+				        if (i + 1 != x.end() &amp;&amp; rank(i[1]) &gt; rank(*i)) {
+				            r -= table[rank(*i)];
+				        }
+				        else {
+				            r += table[rank(*i)];
+				        }
+				    }
+				    return r;
+				}
+				
+				int main(void) {
+				    std::cout
+				        &lt;&lt; Arabic("MCMLXXVII") &lt;&lt; '\n'
+				        &lt;&lt; Arabic("MMIV") &lt;&lt; '\n';
+				    return 0;
+				}
+			</snippet>
+		</para>
+		<para>
+			This is a preprocessor version (that assumes variadics and placemarkers)....
+			<snippet>
+				#include <chaos-preprocessor-algorithm-cast.h/>
+				#include <chaos-preprocessor-arbitrary-add.h/>
+				#include <chaos-preprocessor-arbitrary-sub.h/>
+				#include <chaos-preprocessor-cat.h/>
+				#include <chaos-preprocessor-comparison-greater.h/>
+				#include <chaos-preprocessor-config.h/>
+				#include <chaos-preprocessor-control-iif.h/>
+				#include <chaos-preprocessor-control-while.h/>
+				#include <chaos-preprocessor-generics-strip.h/>
+				#include <chaos-preprocessor-recursion-expr.h/>
+				#include <chaos-preprocessor-seq-spec.h/>
+				#include <chaos-preprocessor-string-spec.h/>
+				#include <chaos-preprocessor-tuple-elem.h/>
+				
+				#if <VARIADICS/>
+				
+				#define ARABIC(string) ARABIC_S(<STATE/>(), string)
+				#define ARABIC_S(s, string) \
+				    <IIF/>(<STRING_IS_CONS/>(string))( \
+				        <STRIP/>(<CAST/>( \
+				            <STRING/>, \
+				            (<SEQ/>) <TUPLE_ELEM/>( \
+				                ?, 1, \
+				                <VARIADIC_ELEM/>( \
+				                    2, \
+				                    <EXPR_S/>(s)(<WHILE_S/>( \
+				                        s, PRED, OP, \
+				                        <STRING_FIRST/>(string), \
+				                        <STRING_REST/>(string 0), \
+				                        (0, (0)) \
+				                    )) \
+				                ) \
+				            ) \
+				        )), \
+				        0 \
+				    ) \
+				    /**/
+				
+				#define PRED(s, first, rest, x) <STRING_IS_CONS/>(rest)
+				#define OP(s, first, rest, x) \
+				    <STRING_FIRST/>(rest), <STRING_REST/>(rest), \
+				    <IIF/>( \
+				        <GREATER/>( \
+				            TABLE(0, <STRING_FIRST/>(rest)), \
+				            TABLE(0, first) \
+				        ) \
+				    )( \
+				        <SUB_AP_S/>, <ADD_AP_S/> \
+				    )(s, x, TABLE(1, first)) \
+				    /**/
+				#define TABLE(n, letter) \
+				    <VARIADIC_ELEM/>( \
+				        n, \
+				        <PRIMITIVE_CAT/>(TABLE_, letter) \
+				    ) \
+				    /**/
+				#define TABLE_0 0, (0) // rogue value
+				#define TABLE_I 1, (1)
+				#define TABLE_V 2, (5)
+				#define TABLE_X 3, (1)(0)
+				#define TABLE_L 4, (5)(0)
+				#define TABLE_C 5, (1)(0)(0)
+				#define TABLE_D 6, (5)(0)(0)
+				#define TABLE_M 7, (1)(0)(0)(0)
+				
+				ARABIC(M C M L X X V I I) // 1 9 7 7
+				ARABIC(M M I V)           // 2 0 0 4
+				
+				#endif
+			</snippet>
+		</para>
+	</section>
+</document>

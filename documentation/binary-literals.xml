@@ -1,0 +1,671 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document id="Example: Binary Literals" author="Paul Mensonides" date="2003-2004">
+	<section>
+		<para>
+			<em>NOTE: THIS DOCUMENT IS INCOMPLETE.</em>
+		</para>
+		<para>
+			The specification of binary integer values is a common task usually accomplished using hexidecimal literals.
+			This is an unnecessary and error-prone indirection between what is intended and what is accomplished.
+		</para>
+	</section>
+	<section id="Runtime Computation">
+		<para>
+			The simplest method of converting binary literals to values is to perform the conversion at runtime.
+			<snippet>
+				#include &lt;stdio.h&gt;
+				#include &lt;stdlib.h&gt;
+				
+				unsigned long binary(const char* x) {
+				    unsigned long r = 0;
+				    while (*x) (r *= 2) += *x++ - '0';
+				    return r;
+				}
+				
+				int main(void) {
+				    printf("%lu\n", binary("101010"));
+				    return EXIT_SUCCESS;
+				}
+			</snippet>
+			Besides the inefficiency of runtime computation, the major drawback of this approach is that the result cannot be used as a compile-time constant.
+		</para>
+		<para>
+			(On the hand, the major advantage of this approach is that it <em>can</em> do the computation at runtime--which is important in its own right.
+			<snippet>
+				int main(int argc, char* argv[]) {
+				    if (argc &lt; 2) {
+				        return EXIT_FAILURE;
+				    }
+				    printf("%lu", binary(argv[1]));
+				    return EXIT_SUCCESS;
+				}
+			</snippet>
+			Neither template metaprogramming nor preprocessor metaprogramming can achieve that.)
+		</para>
+	</section>
+	<section id="Template Metaprogramming">
+		<para>
+			In C++, template metaprogramming can be used to specify binary literals by reinterpreting the value of decimal literal (containing nothing but <code>0</code>'s and <code>1</code>'s).
+			<snippet>
+				#include &lt;iostream&gt;
+				
+				template&lt;class T, T V&gt; struct map_integral {
+				    static const T value = V;
+				};
+				
+				template&lt;class T, T V&gt; const T map_integral&lt;T, V&gt;::value;
+				
+				template&lt;unsigned long x&gt; struct binary
+				    : map_integral&lt;unsigned long, binary&lt;x / 10&gt;::value &lt;&lt; 1 | x % 10&gt; { };
+				
+				template&lt;&gt; struct binary&lt;0&gt; : map_integral&lt;unsigned long, 0&gt; { };
+				
+				int main(void) {
+				    std::cout &lt;&lt; binary&lt;11111111&gt;::value &lt;&lt; '\n'; // prints 255
+				    return 0;
+				}
+			</snippet>
+		</para>
+		<para>
+			However, there are a few of drawbacks to using the template mechanism for this purpose.
+			The most obvious of which is that this approach can only be used in C++.
+			The other drawbacks are more subtle....
+		</para>
+		<para>
+			Integer literals cannot contain enough digits to specify the full range of the greatest-width integer.
+			If, for example, an <code>unsigned long</code> is a 32-bit integer, a decimal literal would require thirty-two digits to fully specify each bit--which is well outside the range of a 32-bit integer.
+			<snippet>
+				binary&lt;10101010101010101010101010101010&gt;::value // error!
+			</snippet>
+			Thus, in order to specify such a value, the bits must be separated into groups and processed semi-independently.
+			The following implementation uses four groups of at most eight bits (note that, for simplicity, the value of a particular bit group isn't checked for overflow):
+			<snippet>
+				#include &lt;iostream&gt;
+				
+				template&lt;class T, T V&gt; struct map_integral {
+				    static const T value = V;
+				};
+				
+				template&lt;class T, T V&gt; const T map_integral&lt;T, V&gt;::value;
+			    
+				template&lt;int A, int B = -1, int C = -1, int D = -1&gt; struct binary
+				    : map_integral&lt;
+				        unsigned long,
+				        binary&lt;A, B, C&gt;::value &lt;&lt; 8 | binary&lt;D&gt;::value
+				    &gt; { };
+				
+				template&lt;int A, int B, int C&gt; struct binary&lt;A, B, C&gt;
+				    : map_integral&lt;
+				        unsigned long,
+				        binary&lt;A, B&gt;::value &lt;&lt; 8 | binary&lt;C&gt;::value
+				    &gt; { };
+				
+				template&lt;int A, int B&gt; struct binary&lt;A, B&gt;
+				    : map_integral&lt;
+				        unsigned long,
+				        binary&lt;A&gt;::value &lt;&lt; 8 | binary&lt;B&gt;::value
+				    &gt; { };
+				
+				template&lt;int A&gt; struct binary&lt;A&gt;
+				    : map_integral&lt;
+				        unsigned long,
+				        binary&lt;A / 10&gt;::value &lt;&lt; 1 | A % 10
+				    &gt; { };
+				
+				template&lt;&gt; struct binary&lt;0&gt; : map_integral&lt;unsigned long, 0&gt; { };
+				
+				int main(void) {
+				    std::cout
+				        &lt;&lt; binary&lt;11111111&gt;::value                               &lt;&lt; '\n'
+				        &lt;&lt; binary&lt;11111111, 11111111&gt;::value                     &lt;&lt; '\n'
+				        &lt;&lt; binary&lt;11111111, 11111111, 11111111, 11111111&gt;::value &lt;&lt; '\n';
+				    return 0;
+				}
+			</snippet>
+			(With a little help from preprocessor metaprogramming, the boilerplate of this metafunction implementation can be extended to handle (nearly) arbitrary numbers of bit groups.
+			However, doing so would probably be overkill, as the greatest-width integer type is unlikely to grow fast (or differ from platform to platform) enough to justify the boilerplate of the preprocessor generation itself.)
+		</para>
+		<para>
+			The reliance on the greatest-width integer type illustrates another drawback of the template-based approach.
+			The compiler cannot perform arbitrary-precision arithmetic (at least, not directly).
+			As such, there is a (relatively low) limit on the maximum integer width on which the compiler can perform arithmetic.
+			This isn't terrible--most results need to be stored in some integer variable anyway.
+			Nevertheless, the limitation exists.
+		</para>
+		<para>
+			The most subtle drawback of the template-based approach is that the value of each bit group must be either <code>0</code> or begin with <code>1</code>.
+			Otherwise, the literal is treated as octal instead of decimal--which fouls up the entire mechanism:
+			<snippet>
+				binary&lt;00000010&gt;::value // 8 (not 2)
+			</snippet>
+			Thus, binary literals cannot be specified (as they typically are) with leading <code>0</code>'s to fill up some specific width.
+			That limitation is not only annoying, but is fundamentally error-prone because there is no way to verify the original forms of the input values.
+			(One possible solution to this problem is to alter the implementation to expect hexidecimal numbers instead of decimal numbers.
+			This would allow leading <code>0</code>'s at the inconvenience of prefixing each value with <code>0x</code> or <code>0X</code>.)
+		</para>
+		<para>
+			Though the implementation can be specified in a number of different ways, these drawbacks are fundamental.
+			The second, third, and fourth drawbacks are all the result of a single root issue.
+			The above code acts on integral values instead of acting on the literals themselves.
+		</para>
+	</section>
+	<section id="Enter the Preprocessor...">
+		<para>
+			As it happens, there is a language mechanism that can operate (to a degree) on literal values--macros.
+		</para>
+		<para>
+			Given some data structure of bits (i.e. <code>0</code>'s and <code>1</code>'s), it is relatively easy to calculate a decimal value by accumulating the bits.
+			<snippet>
+				unsigned long binary(const char* x) {
+				    unsigned long r = 0;
+				    while (*x) {
+				        (r *= 2) += *x++ - '0';
+				    }
+				    return r;
+				}
+			</snippet>
+			Each time a bit is found, the algorithm doubles the running result and adds the value of the bit.
+			<!--A translation of this algorithm into preprocessor metaprogramming code is fairly straightforward.
+			The generic algorithm <FOLD_LEFT/> can be used to accumulate a <link id="string"/> of bits (in place of the recursion above).
+			This is a higher-order transformation, similar to the following C++ code:-->
+			Instead of accumulating the elements of a data structure by manually looping (or recursing), a generalized notion of "accumulation" can be used--<code>std::accumulate</code>.
+			<snippet>
+				#include &lt;cstring&gt;
+				#include &lt;numeric&gt;
+				
+				unsigned long binary(const char* x) {
+				    struct local {
+				        static unsigned long exec(unsigned long x, char bit) {
+				            return x * 2 + (bit - '0');
+				        }
+				    };
+				    return std::accumulate(x, x + std::strlen(x), 0UL, &amp;local::exec);
+				}
+			</snippet>
+			This is a higher-order transformation which yields a design that has greater similarity to a typical preprocessor-based design than the original iterative algorithm.
+			Note that the above transformation is actually two transformations.
+			The first is the abstraction of looping itself (e.g. the loop body is executed repeatedly until some supplied predicate yields <code>false</code>).
+			The second is the abstraction of the terminating condition--when the input sequence is exhausted.
+		</para>
+		<para>
+			Direct iteration, such as the <code>while</code> loop above, is impossible with the preprocessor.
+			However, the code can be rewritten recursively--which can be mirrored with the preprocessor.
+			<snippet>
+				unsigned long binary(const char* x, unsigned long r = 0) {
+				    return *x ? binary(x + 1, r * 2 + (*x - '0')) : r;
+				}
+			</snippet>
+			It is possible to implement a preprocessor-based version at any of these (not counting the iterative version) levels of abstraction.
+			(The following examples all use a <link id="string"/> data structure to specify bits.)
+		</para>
+		<para>
+			Direct translation of the recursive version requires a much more detailed understanding of how <link id="recursion"/> is generalized in Chaos.
+			For the sake of comparison, it is listed here:
+			<snippet>
+				#include <chaos-preprocessor-arbitrary-add.h/>
+				#include <chaos-preprocessor-arbitrary-demote.h/>
+				#include <chaos-preprocessor-arbitrary-mul.h/>
+				#include <chaos-preprocessor-config.h/>
+				#include <chaos-preprocessor-control-iif.h/>
+				#include <chaos-preprocessor-recursion-basic.h/>
+				#include <chaos-preprocessor-recursion-expr.h/>
+				#include <chaos-preprocessor-string-spec.h/>
+				
+				#if <VARIADICS/>
+				
+				#define BINARY(string) BINARY_S(<STATE/>(), string)
+				#define BINARY_S(s, string) \
+				    <EXPR_S/>(s)(BINARY_I( \
+				        <OBSTRUCT/>(), <NEXT/>(s), string, (0) \
+				    )) \
+				    /**/
+				#define BINARY_INDIRECT() BINARY_I
+				#define BINARY_I(_, s, string, x) \
+				    <IIF/> _(<STRING_IS_CONS/>(string))( \
+				        <EXPR_S/> _(s)(BINARY_INDIRECT _()( \
+				            <OBSTRUCT/> _(), <NEXT/>(s), \
+				            <STRING_REST/> _(string), \
+				            <ADD_AP_S/> _( \
+				                s, \
+				                <MUL_AP_S/> _(s, x, (2)), \
+				                (<STRING_FIRST/> _(string)) \
+				            ) \
+				        )), \
+				        <DEMOTE_AP/> _(x) \
+				    ) \
+				    /**/
+				
+				BINARY(1 0 1 0) // 10
+				
+				#endif
+			</snippet>
+			This version is the lowest-level, and, as such, it is likely the most efficient.
+			However, the code is dominated by code to emulate <link id="recursion"/> rather than code to calculate the value of a binary literal.
+		</para>
+		<para>
+			A cleaner implementation can be designed if the level of abstraction is increased.
+			The next step up from low-level <link id="recursion"/> is the use of a higher-order looping construct, such as <WHILE/>, which eliminates the need to deal with <link id="recursion"/>.
+			<snippet>
+				#include <chaos-preprocessor-arbitrary-add.h/>
+				#include <chaos-preprocessor-arbitrary-demote.h/>
+				#include <chaos-preprocessor-arbitrary-mul.h/>
+				#include <chaos-preprocessor-config.h/>
+				#include <chaos-preprocessor-control-while.h/>
+				#include <chaos-preprocessor-facilities-split.h/>
+				#include <chaos-preprocessor-recursion-expr.h/>
+				#include <chaos-preprocessor-string-spec.h/>
+				
+				#if <VARIADICS/>
+				
+				#define BINARY(string) BINARY_S(<STATE/>(), string)
+				#define BINARY_S(s, string) \
+				    <DEMOTE_AP/>(<SPLIT/>( \
+				        1, \
+				        <EXPR_S/>(s)(<WHILE_S/>( \
+				            s, PRED, OP, string, (0) \
+				        )) \
+				    )) \
+				    /**/
+				
+				#define PRED(s, string, x) <STRING_IS_CONS/>(string)
+				#define OP(s, string, x) \
+				    <STRING_REST/>(string), \
+				    <ADD_AP_S/>( \
+				        s, \
+				        <MUL_AP_S/>(s, x, (2)), \
+				        (<STRING_FIRST/>(string)) \
+				    ) \
+				    /**/
+				
+				BINARY(1 0 1 0) // 10
+				
+				#endif
+			</snippet>
+			This version, as far as clarity is concerned, is much better than the raw recursive version.
+			However, there are still a few annoyances.
+			The state on which the loop operates includes both the <link id="string"/> of bits and the running result.
+			This means that the operation has to operate on both in order for the predicate to eventually yield <code>0</code>.
+			Likewise, when the loop does terminate, the result is both the nil <link id="string"/> and the <link id="arbitrary-precision value"/> that holds the result.
+			Thus, the actual result must be extracted (in this case, with <SPLIT/>).
+		</para>
+		<para>
+			All of these annoyances can be eliminated if the level of abstraction is increased yet again.
+			The next step up is to use a higher-order algorithm that generalizes the notion of accumulation--which is also known as "folding."
+			In this example, the algorithm of choice is <FOLD_LEFT/>.
+			<snippet>
+				#include <chaos-preprocessor-algorithm-fold_left.h/>
+				#include <chaos-preprocessor-arbitrary-add.h/>
+				#include <chaos-preprocessor-arbitrary-demote.h/>
+				#include <chaos-preprocessor-arbitrary-mul.h/>
+				#include <chaos-preprocessor-config.h/>
+				#include <chaos-preprocessor-recursion-expr.h/>
+				#include <chaos-preprocessor-string-spec.h/>
+				
+				#if <VARIADICS/>
+				
+				#define BINARY(string) BINARY_S(<STATE/>(), string)
+				#define BINARY_S(s, string) \
+				    <DEMOTE_AP/>( \
+				        <EXPR_S/>(s)(<FOLD_LEFT_S/>( \
+				            s, OP, (<STRING/>) string, (0) \
+				        )) \
+				    ) \
+				    /**/
+				
+				#define OP(s, bit, x) \
+				    <ADD_AP_S/>( \
+				        s, <MUL_AP_S/>(s, x, (2)), (bit) \
+				    ) \
+				    /**/
+				
+				BINARY(1 0 1 0) // 10
+				
+				#endif
+			</snippet>
+		</para>
+		<para>
+			The above example eliminates the problems associated with the template-based approach.
+			It unifies the syntax by eliminating the need for groups of bits, it minimizes the "maximum value" problem, and it avoids the "octal literal" issue.
+			Though this implementation uses C99 facilities, it is possible to support C++ as well.
+			However, this implementation has its own drawback--the binary literal itself must be encoded in a <link id="string"/> data structure (e.g. <code>1 0 1 0</code> as opposed to <code>1010</code>).
+			That isn't too terrible, but it isn't ideal.
+		</para>
+	</section>
+	<section id="An Alternative Approach">
+		<para>
+			Maybe the idea of having groups of bits isn't such a bad idea after all.
+			It is possible to support groups of bits with the preprocessor as well.
+			Such a syntax would look something like
+			<snippet>
+				BINARY(10101010 10101010)
+			</snippet>
+			The major drawback of this approach is that it requires 256 macros (for eight-bit groups) to transform a group into something that can be processed.
+			Beyond that, the main problem is that <code>10101010 10101010</code> (and similar) is not a valid <link id="string"/> because each element has more than one character.
+			In fact, it isn't any library-defined data structure.
+			Thus, the special form must be manually converted (using a set of 256 macros) before the result can be accumulated.
+			This is accomplished with a <WHILE/> loop that transforms each "element" into a <link id="string"/>.
+			<snippet>
+				#include <chaos-preprocessor-algorithm-fold_left.h/>
+				#include <chaos-preprocessor-arbitrary-add.h/>
+				#include <chaos-preprocessor-arbitrary-demote.h/>
+				#include <chaos-preprocessor-arbitrary-mul.h/>
+				#include <chaos-preprocessor-control-while.h/>
+				#include <chaos-preprocessor-detection-is_nullary.h/>
+				#include <chaos-preprocessor-facilities-split.h/>
+				#include <chaos-preprocessor-logical-compl.h/>
+				#include <chaos-preprocessor-recursion-expr.h/>
+				#include <chaos-preprocessor-string-spec.h/>
+				
+				#define BINARY(x) BINARY_S(<STATE/>(), x)
+				#define BINARY_S(s, x) \
+				    <DEMOTE_AP/>( \
+				        <EXPR_S/>(s)(<FOLD_LEFT_S/>( \
+				            s, ACC, \
+				            (<STRING/>) <SPLIT/>( \
+				                0, \
+				                <EXPR_S/>(s)(<WHILE_S/>( \
+				                    s, PRED, OP,, x \
+				                )) \
+				            ), \
+				            (0) \
+				        )) \
+				    ) \
+				    /**/
+				
+				#define ACC(s, bit, x) \
+				    <ADD_AP_S/>( \
+				        s, <MUL_AP_S/>(s, x, (2)), (bit) \
+				    ) \
+				    /**/
+				
+				#define PRED(s, r, x) \
+				    <COMPL/>(<IS_NULLARY/>(x())) \
+				    /**/
+				
+				#define OP(s, r, x) \
+				    r <SPLIT/>(0, BYTE_ ## x), <SPLIT/>(1, BYTE_ ## x) \
+				    /**/
+				
+				#define BYTE_00000000 0 0 0 0 0 0 0 0,
+				#define BYTE_00000001 0 0 0 0 0 0 0 1,
+				#define BYTE_00000010 0 0 0 0 0 0 1 0,
+				// ...
+				#define BYTE_11111111 1 1 1 1 1 1 1 1,
+				
+				BINARY(00000101) // 5
+				BINARY(10001000) // 136
+				BINARY(11111111) // 255
+				BINARY(11111111 00000000) // 65280
+			</snippet>
+			(The <code>BYTE_</code> boilerplate can be pre-generated with a small program such as the following:
+			<snippet>
+				#include &lt;stdio.h&gt;
+				#include &lt;stdlib.h&gt;
+				
+				void byte(int depth) {
+				    static char s[9] = { 0 };
+				    if (depth == 8) {
+				        printf(
+				            "#define BYTE_%s %c %c %c %c %c %c %c %c,\n", s,
+				            s[0], s[1], s[2], s[3], s[4], s[5], s[6], s[7]
+				        );
+				    }
+				    else {
+				        s[depth] = '0';
+				        byte(depth + 1);
+				        s[depth] = '1';
+				        byte(depth + 1);
+				    }
+				    return;
+				}
+				
+				int main(void) {
+				    byte(0);
+				    return EXIT_SUCCESS;
+				}
+			</snippet>
+			It isn't included here because it results in 256 macro definitions--which would waste space without providing further illumination.)
+			This implementation has a couple of properties that are good and a couple that are bad--depending on perspective.
+			It forces each element to be a full eight bits--which is a primitive form of validation.
+			The main concern with the above is that it wastes time doing the conversion from the special form to a <link id="string"/>.
+			For a small number of groups, this overhead isn't too bad, but perhaps it can be eliminated altogether....
+		</para>
+		<para>
+			The central point of the following implementation is that a separate special form conversion can be avoided if a new data type is defined--in which case it is no longer a special form.
+			The following code first implements a data structure <code>XS</code> (which stands for "extensible string") and then implements <code>BINARY</code> on top of that.
+			The <code>XS</code> data structure is similar to a <link id="string"/> except that elements can be identifiers or numbers that are greater than a single character provided an appropriate "expander" is defined.
+			For example,
+			<snippet>
+				#define EXPANDER_abc (a b c)
+				#define EXPANDER_xyz (x y z)
+				
+				XS_FIRST(abc xyz) // a
+				
+				<CAST/>(
+				    <STRING/>, (XS) abc xyz \
+				)
+				// (<STRING/>) a b c x y z
+			</snippet>
+			This data structure is extensible in the sense that user-defined "expanders" can be easily written.
+			For example,
+			<snippet>
+				#define EXPANDER_Paul (P a u l)
+				#define EXPANDER_Mensonides (M e n s o n i d e s)
+				
+				#define OP(s, x) <TO_UPPER/>(x)
+				
+				<EXPR/>(<TRANSFORM/>(
+				    OP, (XS) Paul _ Mensonides
+				))
+				// (XS) P A U L _ M E N S O N I D E S
+			</snippet>
+			Give such a data structure definition (and the appropriate <code>EXPANDER_xxx</code> definitions), input such as <code>10101010 10101010</code> can be processed directly.
+			The potential downside is that the primitive validation has been lost because the <code>XS</code> data type is perhaps <em>too</em> extensible for this purpose.
+			<snippet>
+				#include <chaos-preprocessor-algorithm-fold_left.h/>
+				#include <chaos-preprocessor-arbitrary-add.h/>
+				#include <chaos-preprocessor-arbitrary-demote.h/>
+				#include <chaos-preprocessor-arbitrary-mul.h/>
+				#include <chaos-preprocessor-cat.h/>
+				#include <chaos-preprocessor-config.h/>
+				#include <chaos-preprocessor-control-iif.h/>
+				#include <chaos-preprocessor-detection-is_nullary.h/>
+				#include <chaos-preprocessor-detection-is_unary.h/>
+				#include <chaos-preprocessor-logical-compl.h/>
+				#include <chaos-preprocessor-recursion-expr.h/>
+				#include <chaos-preprocessor-string-spec.h/>
+				#include <chaos-preprocessor-tuple-rem.h/>
+				
+				#define XS XS
+				#define XS_TAG(tag) tag
+				#define XS_NIL()
+				#define XS_CONS(xs, x) x xs
+				#define XS_FIRST(xs) <STRING_FIRST/>(EXPANDER(xs))
+				#define XS_REST(xs) <STRING_REST/>(EXPANDER(xs))
+				#define XS_ITEM(x) x
+				#define XS_IS_CONS(xs) <COMPL/>(XS_IS_NIL(xs))
+				#define XS_IS_NIL(xs) <IS_NULLARY/>(xs())
+				
+				#define EXPANDER(xs) \
+				    <IIF/>( \
+				        <IS_UNARY/>(<PRIMITIVE_CAT/>(EXPANDER_, xs)) \
+				    )( \
+				        <TUPLE_REM_CTOR/>( \
+				            1, \
+				            <PRIMITIVE_CAT/>(EXPANDER_, xs) \
+				        ), \
+				        xs \
+				    ) \
+				    /**/
+				
+				#define BINARY(xs) BINARY_S(<STATE/>(), xs)
+				#define BINARY_S(s, xs) \
+				    <DEMOTE_AP/>( \
+				        <EXPR_S/>(s)(<FOLD_LEFT_S/>( \
+				            s, ACC, (XS) xs, (0) \
+				        )) \
+				    ) \
+				    /**/
+				
+				#define ACC(s, bit, x) \
+				    <ADD_AP_S/>( \
+				        s, <MUL_AP_S/>(s, x, (2)), (bit) \
+				    ) \
+				    /**/
+				
+				#define EXPANDER_00000000 (0 0 0 0 0 0 0 0)
+				#define EXPANDER_00000001 (0 0 0 0 0 0 0 1)
+				#define EXPANDER_00000010 (0 0 0 0 0 0 1 0)
+				// ...
+				#define EXPANDER_11111111 (1 1 1 1 1 1 1 1)
+				
+				BINARY(00000101) // 5
+				BINARY(10001000) // 136
+				BINARY(11111111) // 255
+				BINARY(11111111 00000000) // 65280
+			</snippet>
+			(The <code>EXPANDER_</code> boilerplate can be pre-generated with a small program such as the following:
+			<snippet>
+				#include &lt;stdio.h&gt;
+				#include &lt;stdlib.h&gt;
+				
+				void expander(int depth) {
+				    static char s[9] = { 0 };
+				    if (depth == 8) {
+				        printf(
+				            "#define EXPANDER_%s (%c %c %c %c %c %c %c %c)\n", s,
+				            s[0], s[1], s[2], s[3], s[4], s[5], s[6], s[7]
+				        );
+				    }
+				    else {
+				        s[depth] = '0';
+				        expander(depth + 1);
+				        s[depth] = '1';
+				        expander(depth + 1);
+				    }
+				    return;
+				}
+				
+				int main(void) {
+				    expander(0);
+				    return EXIT_SUCCESS;
+				}
+			</snippet>
+			It isn't included here because it results in 256 macro definitions--which would waste space without providing further illumination.)
+		</para>
+	</section>
+	<section id="Summary">
+		<para>
+			Without language support, there is no perfect solution to binary literals.
+			This article provides a few different ways that they can be specified, each with various drawbacks, but no one solution is ideal.
+			Luckily, the purpose of the article isn't to solve that problem completely.
+			Rather, the problem is merely an example that can be used to illustrate preprocessor metaprogramming methodology and to exercise Chaos.
+			Binary literals, though convenient, aren't really all that useful.
+			However, if one knows how to use the tools and techniques available, there is very little that cannot be done.
+		</para>
+	</section>
+	<section id="Postscript">
+		<para>
+			The astute reader might notice out that there is nothing particularly special about binary literals (as opposed to literals of other bases).
+			The runtime model might look something like the following:
+			<snippet>
+				#include &lt;ctype.h&gt;
+				#include &lt;stdio.h&gt;
+				#include &lt;stdlib.h&gt;
+				
+				unsigned long helper(char c) {
+				    if (isdigit(c)) {
+				        return c - '0';
+				    }
+				    else switch (tolower(c)) {
+				        case 'a': return 10;
+				        case 'b': return 11;
+				        case 'c': return 12;
+				        case 'd': return 13;
+				        case 'e': return 14;
+				        case 'f': return 15;
+				        default:
+				            return exit(EXIT_FAILURE), 0;
+				    }
+				}
+				
+				unsigned long convert(const char* x, int base) {
+				    if (base &gt; 16) exit(EXIT_FAILURE);
+				    unsigned long r = 0;
+				    while (*x) (r *= base) += helper(*x++);
+				    return r;
+				}
+				
+				int main(void) {
+				    printf(
+				        "%lu\n%lu\n%lu\n%lu\n",
+				        convert("ff", 16),
+				        convert("123", 10),
+				        convert("00000010", 2),
+				        convert("00000010", 8)
+				    );
+				    return EXIT_SUCCESS;
+				}
+			</snippet>
+		</para>
+		<para>
+			The preprocessor version can be extended accordingly.
+			<snippet>
+				#include <chaos-preprocessor-algorithm-fold_left_aux.h/>
+				#include <chaos-preprocessor-arbitrary-add.h/>
+				#include <chaos-preprocessor-arbitrary-demote.h/>
+				#include <chaos-preprocessor-arbitrary-literal.h/>
+				#include <chaos-preprocessor-arbitrary-mul.h/>
+				#include <chaos-preprocessor-cat.h/>
+				#include <chaos-preprocessor-config.h/>
+				#include <chaos-preprocessor-recursion-expr.h/>
+				#include <chaos-preprocessor-string-spec.h/>
+				#include <chaos-preprocessor-string-to_upper.h/>
+				
+				#if <VARIADICS/>
+				
+				#define CONVERT(string, base) CONVERT_S(<STATE/>(), string, base)
+				#define CONVERT_S(s, string, base) \
+				    <DEMOTE_AP/>( \
+				        <EXPR_S/>(s)(<FOLD_LEFT_AUX_S/>( \
+				            s, OP, (<STRING/>) string, (<LITERAL_AP/>(base)), (0) \
+				        )) \
+				    ) \
+				    /**/
+				
+				#define OP(s, digit, base, x) \
+				    <ADD_AP/>( \
+				        <MUL_AP/>(x, base), HELPER(digit) \
+				    ) \
+				    /**/
+				
+				#define HELPER(digit) \
+				    <CAT/>(HELPER_, <TO_UPPER/>(digit)) \
+				    /**/
+				#define HELPER_0 (0)
+				#define HELPER_1 (1)
+				#define HELPER_2 (2)
+				#define HELPER_3 (3)
+				#define HELPER_4 (4)
+				#define HELPER_5 (5)
+				#define HELPER_6 (6)
+				#define HELPER_7 (7)
+				#define HELPER_8 (8)
+				#define HELPER_9 (9)
+				#define HELPER_A (1)(0)
+				#define HELPER_B (1)(1)
+				#define HELPER_C (1)(2)
+				#define HELPER_D (1)(3)
+				#define HELPER_E (1)(4)
+				#define HELPER_F (1)(5)
+				
+				CONVERT(f f, 1 6)           // 255
+				CONVERT(1 2 3, 1 0)         // 123
+				CONVERT(0 0 0 0 0 0 1 0, 2) // 2
+				CONVERT(0 0 0 0 0 0 1 0, 8) // 8
+				
+				#endif
+			</snippet>
+		</para>
+	</section>
+</document>

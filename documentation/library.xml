@@ -27,6 +27,7 @@
 		<item value="arrays"/>
 		<item value="Arrays"/>
 	</document>
+	<document id="binary-literals"/>
 	<document id="bypass-semantics">
 		<item value="bypass semantics"/>
 		<item value="bypass recursion state"/>
@@ -141,11 +142,13 @@
 	<document id="recursion">
 		<item value="abstract recursion"/>
 		<item value="automatic recursion"/>
+		<item value="recursion"/>
 		<item value="recursion backend"/>
 		<item value="recursion state"/>
 		<item value="recursion step"/>
 		<item value="recursion steps"/>
 	</document>
+	<document id="roman-numerals"/>
 	<document id="saturation">
 		<item value="saturated"/>
 		<item value="saturates"/>

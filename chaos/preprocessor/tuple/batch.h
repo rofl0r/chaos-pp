@@ -175,6 +175,7 @@
 # endif
 #
 # if CHAOS_PP_VARIADICS
+#    define CHAOS_IP_TUPLE_BATCH_FORK_1(_, im)
 #    define CHAOS_IP_TUPLE_BATCH_FORK_2(_, im) CHAOS_IP_TUPLE_IS_BATCH_2(im, _() 1,)
 #    define CHAOS_IP_TUPLE_BATCH_FORK_3(_, im) CHAOS_IP_TUPLE_IS_BATCH_3(im, _() 2, _() 1,)
 #    define CHAOS_IP_TUPLE_BATCH_FORK_4(_, im) CHAOS_IP_TUPLE_IS_BATCH_4(im, _() 3, _() 2, _() 1,)

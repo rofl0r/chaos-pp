@@ -32,10 +32,15 @@
 	<xsl:param name="path"/>
 	<xsl:param name="type" select="'primary'"/>
 	<macro id="{@id}" header="{$path}" type="{$type}"><xsl:call-template name="make-groups"/></macro>
-	<xsl:apply-templates select="derivative">
+	<xsl:apply-templates select="derivative | alias">
 		<xsl:with-param name="path" select="$path"/>
 		<xsl:with-param name="type" select="'derivative'"/>
 	</xsl:apply-templates>
+</xsl:template>
+
+<xsl:template match="/header/macro//alias">
+	<xsl:param name="path"/>
+	<alias id="{@id}" aliased-id="{../@id}" header="{$path}" type="alias"/>
 </xsl:template>
 
 <xsl:template name="make-groups">

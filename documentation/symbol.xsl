@@ -13,6 +13,11 @@
 				<CODE><A class="{@type}" href="{{$root}}/{substring-before(@header, '.')}.html#{@id}"><xsl:value-of select="concat($prefix, @id)"/></A></CODE>
 			</o:template>
 		</xsl:for-each>
+		<xsl:for-each select="alias">
+			<o:template match="{@id}" name="{@id}">
+				<CODE><A class="{@type}" href="{{$root}}/{substring-before(@header, '.')}.html#{@aliased-id}"><xsl:value-of select="concat($prefix, @id)"/></A></CODE>
+			</o:template>
+		</xsl:for-each>
 		<xsl:for-each select="header">
 			<o:template match="{translate(@name, '/', '-')}">
 				<CODE><A class="header" href="{{$root}}/{substring-before(@name, '.')}.html">&lt;<xsl:value-of select="@name"/>&gt;</A></CODE>

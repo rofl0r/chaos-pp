@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/repetition/auto/repeat_shifted.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an algorithm that repeats a user-specified target a specified number of times.
+</overview>
+
+<macro id="AUTO_REPEAT_SHIFTED" type="object" group="repetition">
+	<abstract>
+		The <AUTO_REPEAT_SHIFTED/> macro repeats its second argument one less time than the number specified by its first argument.
+	</abstract>
+	<usage lang="C99">
+		<syntax><AUTO_REPEAT_SHIFTED/>(count, macro)</syntax>
+		<param id="count">
+			One greater than the number of times that <var>macro</var> is to be repeated.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="macro">
+			The target that is to be repeated.
+			This target must be either a <link id="λ expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			<snippet>
+				macro(s, n)
+			</snippet>
+		</param>
+	</usage>
+	<usage lang="C99">
+		<syntax><AUTO_REPEAT_SHIFTED/>(count, macro, ...)</syntax>
+		<param id="count">
+			One greater than the number of times that <var>macro</var> is to be repeated.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="macro">
+			<para>
+				The target that is to be repeated.
+				This target must be either a <link id="λ expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				<snippet>
+					macro(s, n, data<sup>†</sup>)
+				</snippet>
+			</para>
+			<para>
+				<sup>†</sup>
+				The <var>data</var> pseudo-parameter must be either <code>...</code> or the number of parameters that corresponds to the number of arguments in the auxiliary data, <code>__VA_ARGS__</code>.
+			</para>
+		</param>
+		<param id="..." optional="1">
+			Auxiliary data to be passed through the algorithm to the target.
+		</param>
+	</usage>
+	<para>
+		The <AUTO_REPEAT_SHIFTED/> macro is a <link id="higher-order thunk"/> that deduces the current <link id="higher-order entry point"/> and invokes <REPEAT_SHIFTED/>.
+	</para>
+	<para>
+		This macro may not be used if <link id="bypass semantics"/> are in effect.
+	</para>
+	<derivative id="AUTO_REPEAT_SHIFTED_ID" lang="C99"/>
+	<derivative id="AUTO_REPEAT_SHIFTED_" lang="C99"/>
+</macro>
+
+</header>

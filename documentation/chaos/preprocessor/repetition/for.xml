@@ -107,6 +107,9 @@
 		This macro deduces the current <link id="recursion state"/> and invokes <FOR_S/>.
 		If the current <link id="recursion state"/> is already known, direct use of <FOR_S/> is more efficient.
 	</para>
+	<para>
+		This macro may not be used if <link id="bypass semantics"/> are in effect.
+	</para>
 	<listing>
 		#include <chaos-preprocessor-arithmetic-dec.h/>
 		#include <chaos-preprocessor-config.h/>

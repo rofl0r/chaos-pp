@@ -119,6 +119,7 @@
 		This macro may not be used if <link id="bypass semantics"/> are in effect.
 	</para>
 	<listing>
+		#include <chaos-preprocessor-recursion-expr.h/>
 		#include <chaos-preprocessor-repetition-enum_from_to.h/>
 		
 		#define MACRO(s, n, param) param ## n

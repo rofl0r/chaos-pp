@@ -479,6 +479,17 @@
 				<header name="delineate_shifted.h"/>
 				<header name="delineate_shifted_trailing.h"/>
 				<header name="delineate_trailing.h"/>
+				<header name="enum.h"/>
+				<header name="enum_from_to.h"/>
+				<header name="enum_from_to_trailing.h"/>
+				<header name="enum_shifted.h"/>
+				<header name="enum_shifted_trailing.h"/>
+				<header name="enum_trailing.h"/>
+				<header name="for.h"/>
+				<header name="for_aux.h"/>
+				<header name="repeat.h"/>
+				<header name="repeat_from_to.h"/>
+				<header name="repeat_shifted.h"/>
 			</directory>
 			<header name="delineate.h"/>
 			<header name="delineate_from_to.h"/>

@@ -99,7 +99,7 @@
 	</para>
 	<listing>
 		#include <chaos-preprocessor-config.h/>
-		#include <chaos-preprocessor-bind.h/>
+		#include <chaos-preprocessor-facilities-bind.h/>
 		#include <chaos-preprocessor-stringize.h/>
 		
 		#if <VARIADICS/>

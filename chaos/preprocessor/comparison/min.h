@@ -19,7 +19,7 @@
 #
 # /* CHAOS_PP_MIN */
 #
-# define CHAOS_PP_MIN(x, y) CHAOS_PP_IIF(CHAOS_PP_LESS(y, x))(y, x)
+# define CHAOS_PP_MIN(x, y) CHAOS_PP_IIF_SHADOW(CHAOS_PP_LESS(y, x))(y, x)
 # define CHAOS_PP_MIN_ID() CHAOS_PP_MIN
 #
 # if CHAOS_PP_VARIADICS

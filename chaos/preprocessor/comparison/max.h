@@ -19,7 +19,7 @@
 #
 # /* CHAOS_PP_MAX */
 #
-# define CHAOS_PP_MAX(x, y) CHAOS_PP_IIF(CHAOS_PP_LESS(x, y))(y, x)
+# define CHAOS_PP_MAX(x, y) CHAOS_PP_IIF_SHADOW(CHAOS_PP_LESS(x, y))(y, x)
 # define CHAOS_PP_MAX_ID() CHAOS_PP_MAX
 #
 # if CHAOS_PP_VARIADICS

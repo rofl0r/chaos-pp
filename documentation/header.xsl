@@ -453,7 +453,12 @@
 		</xsl:for-each>
 		<DL>
 			<DT><VAR>d</VAR></DT>
-			<DD>The current <xsl:copy-of select="$while"/> depth.</DD>
+			<DD>
+				The current <xsl:copy-of select="$while"/> depth.
+				<xsl:if test="../@obsolete = '1'">
+					This argument is ignored.
+				</xsl:if>
+			</DD>
 			<xsl:for-each select="ancestor::macro/usage[position() = $position]/param">
 				<DT>
 					<xsl:choose>
@@ -499,7 +504,12 @@
 		</xsl:for-each>
 		<DL>
 			<DT><VAR>z</VAR></DT>
-			<DD>The current <xsl:copy-of select="$repeat"/> dimension.</DD>
+			<DD>
+				The current <xsl:copy-of select="$repeat"/> dimension.
+				<xsl:if test="../@obsolete = '1'">
+					This argument is ignored.
+				</xsl:if>
+			</DD>
 			<xsl:for-each select="ancestor::macro/usage[position() = $position]/param">
 				<DT>
 					<xsl:choose>

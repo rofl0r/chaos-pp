@@ -25,7 +25,7 @@
 			For example,
 			<snippet>
 				<STRING_HEAD/>(a xyz b) // a
-				<STRING_TAIL/>(a xyz b)  // xyz b
+				<STRING_TAIL/>(a xyz b) // xyz b
 				
 				<STRING_HEAD/>(xyz b)   // invalid
 			</snippet>

@@ -15,6 +15,8 @@
 		This macro expands to <VARIADIC_SEQ/>.
 		In other words, the identifier <VARIADIC_SEQ/> is defined as itself.
 	</para>
+	<derivative id="VARIADIC_SEQ_ID" lang="C99"/>
+	<derivative id="VARIADIC_SEQ_" lang="C99"/>
 </macro>
 
 <macro id="VARIADIC_SEQ_TAG" group="tag">

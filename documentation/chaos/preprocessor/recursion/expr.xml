@@ -114,7 +114,7 @@
 
 <macro id="ADJUST">
 	<abstract>
-		The <ADJUST/> macro adjusts its argument.
+		The <ADJUST/> macro adjusts a <link id="recursion state"/>.
 	</abstract>
 	<usage>
 		<syntax><ADJUST/>(s)</syntax>

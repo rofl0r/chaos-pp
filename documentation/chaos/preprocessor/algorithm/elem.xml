@@ -12,15 +12,14 @@
 		<syntax><ELEM/>(i, g)</syntax>
 		<param id="i">
 			The zero-based index of the element to be extracted.
-			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+			Valid values range from <code>0</code> to <code><SIZE/>(g)</code> - 1.
 		</param>
 		<param id="g">
-			The <link id="generic data structure"/> from which an element is to be extracted.
+			The non-nil <link id="generic data structure"/> from which an element is to be extracted.
 		</param>
 	</usage>
 	<para>
 		This macro extracts the <var>i</var>-th element of <var>g</var>.
-		Consequently, <var>g</var> must contain at least <var>i</var> + 1 elements.
 	</para>
 	<para>
 		The efficiency of the algorithm's use of the <link id="recursion backend"/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.

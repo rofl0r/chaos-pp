@@ -12,7 +12,7 @@
 		<syntax><EXPR/>(<FOR/>(pred, op, macro, ...))</syntax>
 		<param id="pred">
 			<para>
-				The predicate that determines whether the algorithm should continue.
+				The predicate to be used to determine whether the algorithm should continue.
 				This predicate must be either a <link id="λ expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
 				<snippet>
 					pred(s, state<sup>†</sup>)
@@ -25,7 +25,7 @@
 		</param>
 		<param id="op">
 			<para>
-				The operation used to iterate the state.
+				The operation to be used to iterate the state.
 				This operation must be either a <link id="λ expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
 				<snippet>
 					op(s, state<sup>†</sup>)
@@ -56,14 +56,14 @@
 	<usage lang="C/C++">
 		<syntax><EXPR/>(<FOR/>(pred, op, macro, state))</syntax>
 		<param id="pred">
-			The predicate that determines whether the algorithm should continue.
+			The predicate to be used to determine whether the algorithm should continue.
 			This predicate must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
 			<snippet>
 				pred(s, state)
 			</snippet>
 		</param>
 		<param id="op">
-			The operation used to iterate the state.
+			The operation to be used to iterate the state.
 			This operation must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
 			<snippet>
 				op(s, state)
@@ -91,7 +91,7 @@
 	<para>
 		The predicate, operation, and target are all invoked with the current <link id="recursion state"/> (<var>s</var>) and the current state (<var>state</var> or <code>__VA_ARGS__</code>).
 		The predicate must expand to <code>0</code>, <code>1</code>, or a <link id="deferred expression"/> in terms of <code><NEXT/>(s)</code> that expands to either <code>0</code> or <code>1</code>.
-		If the predicate ultimately expands to <code>0</code> the algorithm terminates.
+		If the predicate ultimately expands to <code>0</code>, the algorithm terminates.
 		Otherwise, the target is invoked with the current state, the operation is applied to the current state to yield a new state, and the algorithm continues.
 		Both the target and the operation may expand to <link id="deferred expressions"/> in terms of <code><NEXT/>(s)</code>.
 		Expansion to a <link id="deferred expression"/> allows the predicate, operation, and target to recurse on themselves if necessary.

@@ -26,6 +26,11 @@
 # /* CHAOS_PP_SEQ */
 #
 # define CHAOS_PP_SEQ CHAOS_PP_SEQ
+# define CHAOS_PP_SEQ_ID() CHAOS_PP_SEQ
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_PP_SEQ_ CHAOS_PP_LAMBDA(CHAOS_PP_SEQ)
+# endif
 #
 # /* CHAOS_PP_SEQ_TAG */
 #

@@ -6,7 +6,7 @@
 
 <macro id="ENUM_TRAILING_PARAMS" type="indirect" group="parameters">
 	<abstract>
-		The <ENUM_TRAILING_PARAMS/> macro enumerates its second argument--concatenated to the current repetition number--the number of times specified by its first argument.
+		The <ENUM_TRAILING_PARAMS/> macro enumerates its second argument the number of times specified by its first argument.
 	</abstract>
 	<usage lang="C99">
 		<syntax><ENUM_TRAILING_PARAMS/>(count, ...)</syntax>
@@ -21,7 +21,7 @@
 	<usage lang="C/C++">
 		<syntax><ENUM_TRAILING_PARAMS/>(count, param)</syntax>
 		<param id="count">
-			The number of times that <code>__VA_ARGS__</code> is to be repeated.
+			The number of times that <var>param</var> is to be repeated.
 			Valid values range from <code>0</code> to <LIMIT_MAG/>.
 		</param>
 		<param id="param">

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<header name="chaos/preprocessor/algorithm/replace.h" author="Paul Mensonides" date="2004">
+<header name="chaos/preprocessor/algorithm/replace.h" author="Paul Mensonides" date="2003-2004">
 <overview>
 	The <self/> header defines an algorithm that replaces an element in a <link id="generic data structure"/>.
 </overview>
@@ -12,10 +12,10 @@
 		<syntax><REPLACE/>(i, g, ...)</syntax>
 		<param id="i">
 			The zero-based index of the element to be replaced.
-			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+			Valid values range from <code>0</code> to <code><SIZE/>(g)</code> - 1.
 		</param>
 		<param id="g">
-			The <link id="generic data structure"/> in which an element is to be replaced.
+			The non-nil <link id="generic data structure"/> in which an element is to be replaced.
 		</param>
 		<param id="..." optional="1">
 			The element used to replace the element at index <var>i</var> in <var>g</var>.
@@ -25,10 +25,10 @@
 		<syntax><REPLACE/>(i, g, x)</syntax>
 		<param id="i">
 			The zero-based index of the element to be replaced.
-			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+			Valid values range from <code>0</code> to <code><SIZE/>(g)</code> - 1.
 		</param>
 		<param id="g">
-			The <link id="generic data structure"/> in which an element is to be replaced.
+			The non-nil <link id="generic data structure"/> in which an element is to be replaced.
 		</param>
 		<param id="x">
 			The element used to replace the element at index <var>i</var> in <var>g</var>.
@@ -36,7 +36,6 @@
 	</usage>
 	<para>
 		This macro expands to a <link id="generic data structure"/> of the same type as <var>g</var> containing the elements of <var>g</var> except with the <var>i</var>-th element replaced by <var>x</var> (or <code>__VA_ARGS__</code>).
-		Consequently, <var>g</var> must contain at least <var>i</var> + 1 elements.
 	</para>
 	<para>
 		The efficiency of the algorithm's use of the <link id="recursion backend"/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.

@@ -80,7 +80,14 @@
 			<UL>
 				<xsl:for-each select="macro[@type = 'PRIMARY']">
 					<xsl:sort select="@id"/>
-					<LI><CODE><A href="{$root}/{substring-before(@header, '.')}.html#{@id}" class="PRIMARY"><xsl:value-of select="concat(document($library)/library/@macro-prefix, @id)"/></A></CODE></LI>
+					<xsl:choose>
+						<xsl:when test="@display">
+							<LI><CODE><A href="{$root}/{substring-before(@header, '.')}.html#{@id}" class="PRIMARY"><xsl:value-of select="concat(document($library)/library/@macro-prefix, @display)"/></A></CODE></LI>
+						</xsl:when>
+						<xsl:otherwise>
+							<LI><CODE><A href="{$root}/{substring-before(@header, '.')}.html#{@id}" class="PRIMARY"><xsl:value-of select="concat(document($library)/library/@macro-prefix, @id)"/></A></CODE></LI>
+						</xsl:otherwise>
+					</xsl:choose>
 				</xsl:for-each>
 			</UL>
 			<xsl:call-template name="copyright">
@@ -109,7 +116,14 @@
 			<UL>
 				<xsl:for-each select="macro">
 					<xsl:sort select="@id"/>
-					<LI><CODE><A href="{$root}/{substring-before(@header, '.')}.html#{@id}" class="{@type}"><xsl:value-of select="concat(document($library)/library/@macro-prefix, @id)"/></A></CODE></LI>
+					<xsl:choose>
+						<xsl:when test="@display">
+							<LI><CODE><A href="{$root}/{substring-before(@header, '.')}.html#{@id}" class="PRIMARY"><xsl:value-of select="concat(document($library)/library/@macro-prefix, @display)"/></A></CODE></LI>
+						</xsl:when>
+						<xsl:otherwise>
+							<LI><CODE><A href="{$root}/{substring-before(@header, '.')}.html#{@id}" class="PRIMARY"><xsl:value-of select="concat(document($library)/library/@macro-prefix, @id)"/></A></CODE></LI>
+						</xsl:otherwise>
+					</xsl:choose>
 				</xsl:for-each>
 			</UL>
 			<xsl:call-template name="copyright">

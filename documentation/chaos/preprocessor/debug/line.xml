@@ -62,7 +62,7 @@
 		#endif // SAMPLE_HPP
 		
 		#else
-		??=include \
+		??=line \
 		    <LINE/>(__LINE__, sample.hpp - iterating type vector) \
 		    /**/
 		
@@ -75,7 +75,7 @@
 		            /**/
 		        #define <LOCAL_MACRO/>(n) \
 		            template&lt;class _&gt; struct subscript&lt;n, _&gt; { \
-		                typedef <PRIMITIVE_CAT/>(T, n) type; \
+		                typedef T ## n type; \
 		            }; \
 		            /**/
 		        ??=include <LOCAL_ITERATE/>()

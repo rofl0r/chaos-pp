@@ -6,7 +6,7 @@
 
 <macro id="DELINEATE_SHIFTED_TRAILING" type="indirect" group="delineation">
 	<abstract>
-		The <DELINEATE_SHIFTED_TRAILING/> macro repeats its third argument one less time than the number specified by its first argument with the delineator specified by its second argument between each repetition.
+		The <DELINEATE_SHIFTED_TRAILING/> macro delineates its third argument one less time than the number specified by its first argument.
 	</abstract>
 	<usage lang="C99">
 		<syntax><EXPR/>(<DELINEATE_SHIFTED_TRAILING/>(count, sep, macro))</syntax>

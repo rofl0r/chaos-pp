@@ -34,7 +34,7 @@
 	</para>
 	<para>
 		This macro performs a Boolean conversion on <var>cond</var>.
-		If this conversion is not desirable, <INLINE_WHEN/> may be used instead.
+		If this conversion is undesirable, <INLINE_WHEN/> may be used instead.
 	</para>
 	<para>
 		This macro is lazy.

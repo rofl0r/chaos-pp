@@ -6,7 +6,7 @@
 
 <macro id="DELINEATE" type="indirect" group="delineation">
 	<abstract>
-		The <DELINEATE/> macro repeats its third argument the number of times specified by its first argument with the delineator specified by its second argument between each repetition.
+		The <DELINEATE/> macro delineates its third argument the number of times specified by its first argument.
 	</abstract>
 	<usage lang="C99">
 		<syntax><EXPR/>(<DELINEATE/>(count, sep, macro))</syntax>
@@ -85,7 +85,7 @@
 	</usage>
 	<para>
 		The <DELINEATE/> macro itself expands to a <link id="deferred expression"/> in terms of <code><NEXT/>(s)</code>.
-		This <link id="deferred expression"/>, when invoked by <EXPR/>, expands to the result of repeating the target <var>count</var> times (with the delineator specified by <var>sep</var> between each repetition).
+		This <link id="deferred expression"/>, when invoked by <EXPR/>, expands to the result of delineating the target with <var>sep</var> <var>count</var> times.
 		This is illustrated by the following pseudo-code:
 		<snippet>
 			macro(s, 0, data) sep() macro(s, 1, data) sep() ... macro(s, count - 1, data)

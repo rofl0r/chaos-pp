@@ -20,16 +20,17 @@ BODY {
 	background: white;
 	background-image: url(background.gif);
 	color: black;
-	font: 12pt Georgia;
+	font-family: Georgia, Garamond, serif;
+	font-size: 12pt;
 	margin: 0px;
 	padding: 10px;
 }
 CODE {
-	font-family: "Courier New";
+	font-family: "Courier New", monospace;
 	letter-spacing: 1px;
 }
 CODE A, PRE A, SAMP A, VAR A {
-	font-family: "Courier New";
+	font-family: "Courier New", monospace;
 	letter-spacing: 1px;
 	font-style: normal;
 	font-weight: normal;
@@ -56,7 +57,7 @@ EM {
 	font-weight: normal;
 }
 H3 {
-	font-family: "Courier New";
+	font-family: "Courier New", monospace;
 	font-size: 24pt;
 	letter-spacing: 2px;
 	font-weight: bold;
@@ -69,7 +70,7 @@ H3.SECONDARY {
 	color: #888888;
 }
 H4 {
-	font-family: Georgia;
+	font-family: Georgia, Garamond, serif;
 	font-size: 12pt;
 	font-weight: bold;
 	margin: 0px 0px 10px;
@@ -93,7 +94,7 @@ LI A {
 	font-weight: normal;
 }
 PRE {
-	font-family: "Courier New";
+	font-family: "Courier New", monospace;
 	letter-spacing: 1px;
 	margin: 0px;
 	padding: 0px;
@@ -102,7 +103,7 @@ SAMP {
 	background-color: #eeeeee;
 	border: 1px solid black;
 	display: block;
-	font-family: "Courier New";
+	font-family: "Courier New", monospace;
 	letter-spacing: 1px;
 	margin: 0px 0px 10px 15px;
 	padding: 5px 14px 5px 14px;
@@ -114,7 +115,7 @@ SPAN {
 	padding: 0px;
 }
 SUB, SUP {
-	font-family: Georgia;
+	font-family: Georgia, Garamond, serif;
 }
 TABLE {
 	background-color: #eeeeee;
@@ -136,12 +137,12 @@ UL, OL {
 	padding: 0px 0px 0px 17px;
 }
 VAR {
-	font-family: "Courier New";
+	font-family: "Courier New", monospace;
 	font-style: normal;
 	letter-spacing: 1px;
 }
 VAR.EXTERNAL {
-	font-family: Georgia;
+	font-family: Georgia, Garamond, serif;
 	font-style: italic;
 	letter-spacing: 0px;
 }

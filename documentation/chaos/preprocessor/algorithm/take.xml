@@ -12,7 +12,7 @@
 		<syntax><TAKE/>(n, g)</syntax>
 		<param id="n">
 			The number of elements to be extracted.
-			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+			Valid values range from <code>0</code> to <code><SIZE/>(g)</code>.
 		</param>
 		<param id="g">
 			The <link id="generic data structure"/> from which elements are to be extracted.

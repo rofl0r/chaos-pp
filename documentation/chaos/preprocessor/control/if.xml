@@ -39,8 +39,8 @@
 		Otherwise, it expands to <var>t</var>.
 	</para>
 	<para>
-		This macro performs a Boolean conversion of <var>cond</var>.
-		If this conversion is not desirable, <IIF/> may be used instead.
+		This macro performs a Boolean conversion on <var>cond</var>.
+		If this conversion is undesirable, <IIF/> may be used instead.
 	</para>
 	<para>
 		This macro is lazy.

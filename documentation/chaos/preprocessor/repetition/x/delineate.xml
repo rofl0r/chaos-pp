@@ -6,7 +6,7 @@
 
 <macro id="DELINEATE_X" type="indirect" group="delineation">
 	<abstract>
-		The <DELINEATE_X/> macro repeats its fourth argument the number of times specified by its second argument with the delineator specified by its third argument between each repetition.
+		The <DELINEATE_X/> macro delineates its fourth argument the number of times specified by its second argument.
 	</abstract>
 	<usage lang="C99">
 		<syntax><EXPR/><DELINEATE_X/>(size, count, sep, macro))</syntax>

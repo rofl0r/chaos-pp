@@ -56,7 +56,14 @@
 		<xsl:variable name="macro-prefix" select="document($library)/library/@macro-prefix"/>
 		<xsl:for-each select="macro">
 			<meta:template match="{@id}" name="{@id}">
-				<CODE><A href="{{$root}}/{substring-before(@header, '.')}.html#{@id}" class="{@type}"><xsl:value-of select="concat($macro-prefix, @id)"/></A></CODE>
+				<xsl:choose>
+					<xsl:when test="@display">
+						<CODE><A href="{{$root}}/{substring-before(@header, '.')}.html#{@id}" class="{@type}"><xsl:value-of select="concat($macro-prefix, @display)"/></A></CODE>
+					</xsl:when>
+					<xsl:otherwise>
+						<CODE><A href="{{$root}}/{substring-before(@header, '.')}.html#{@id}" class="{@type}"><xsl:value-of select="concat($macro-prefix, @id)"/></A></CODE>
+					</xsl:otherwise>
+				</xsl:choose>
 			</meta:template>
 		</xsl:for-each>
 		<xsl:for-each select="alias">

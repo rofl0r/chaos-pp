@@ -40,7 +40,7 @@
 	</para>
 	<para>
 		This macro does <em>not</em> perform a Boolean conversion on <var>bit</var>.
-		If the conversion is desired, <IF/> should be used instead.
+		If this conversion is desirable, <IF/> may be used instead.
 	</para>
 	<para>
 		This macro is lazy.

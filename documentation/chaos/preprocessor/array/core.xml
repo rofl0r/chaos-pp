@@ -15,6 +15,8 @@
 		This macro expands to <ARRAY/>.
 		In other words, the identifier <ARRAY/> is defined as itself.
 	</para>
+	<derivative id="ARRAY_ID"/>
+	<derivative id="ARRAY_" lang="C99"/>
 </macro>
 
 <macro id="ARRAY_TAG" group="tag">

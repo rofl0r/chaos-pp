@@ -27,7 +27,7 @@
 		</param>
 	</usage>
 	<para>
-		This macro transforms <var>seq</var> into the special form illustrated by the following pseudo-code (where <var>R</var> is <TUPLE_REM/> and <var>E</var> is <TUPLE_EAT/>):
+		This macro transforms <var>seq</var> into the special form illustrated by the following pseudo-code (where <code>R</code> is <TUPLE_REM/> and <code>E</code> is <TUPLE_EAT/>):
 		<snippet>
 			(R, seq[0])() (R, seq[1])() ... (R, seq[length(seq) - 1])() (E, def)
 		</snippet>

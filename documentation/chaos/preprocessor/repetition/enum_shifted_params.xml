@@ -6,7 +6,7 @@
 
 <macro id="ENUM_SHIFTED_PARAMS" type="indirect" group="parameters">
 	<abstract>
-		The <ENUM_SHIFTED_PARAMS/> macro enumerates its second argument--concatenated to the current repetition number--one less time than the number specified by its first argument.
+		The <ENUM_SHIFTED_PARAMS/> macro enumerates its second argument one less time than the number specified by its first argument.
 	</abstract>
 	<usage lang="C99">
 		<syntax><ENUM_SHIFTED_PARAMS/>(count, ...)</syntax>
@@ -21,7 +21,7 @@
 	<usage lang="C/C++">
 		<syntax><ENUM_SHIFTED_PARAMS/>(count, param)</syntax>
 		<param id="count">
-			One greater than the number of times that <code>__VA_ARGS__</code> is to be repeated.
+			One greater than the number of times that <var>param</var> is to be repeated.
 			Valid values range from <code>0</code> to <LIMIT_MAG/>.
 		</param>
 		<param id="param">
@@ -29,8 +29,8 @@
 		</param>
 	</usage>
 	<para>
-		This macro expands to the result of repeating <var>param</var> or <code>__VA_ARGS__</code> (concatenated to the current repetition number) <var>count</var> - 1 times (with a comma between each repetition).
-		This is illustrated by the following pseudo-code (where <var>N</var> is <var>count</var> - 1):
+		This macro expands to the result of enumerating <var>param</var> or <code>__VA_ARGS__</code> with a comma <var>count</var> - 1 times such that the rightmost preprocessing token of each repetition is concatenated to the position of the current repetition.
+		This is illustrated by the following pseudo-code (where <code>N</code> is <var>count</var> - 1):
 		<snippet>
 			param ## 1, param ## 2, ... param ## N
 		</snippet>
@@ -40,8 +40,8 @@
 		<snippet>
 			(a, b)
 		</snippet>
-		If <var>param</var> or <code>__VA_ARGS__</code> is a binary parenthetic expression, this macro extracts the two elements and concatenates the current repetition number to each of them.
-		This is illustrated by the following pseudo-code (where <var>N</var> is again <var>count</var> - 1):
+		If <var>param</var> or <code>__VA_ARGS__</code> is a binary parenthetic expression, this macro extracts the two elements and concatenates the position of the current repetition to each of them.
+		This is illustrated by the following pseudo-code (where <code>N</code> is again <var>count</var> - 1):
 		<snippet>
 			a ## 1 b ## 1, a ## 2 b ## 2, ... a ## N b ## N
 		</snippet>
@@ -77,9 +77,7 @@
 		<ENUM_SHIFTED_PARAMS/>(3, (class T, = U))
 		// class T1 = U1, class T2 = U2
 		
-		<ENUM_SHIFTED_PARAMS/>(
-		    3, <COMMA/>, (class T, = void <INTERCEPT/>)
-		)
+		<ENUM_SHIFTED_PARAMS/>(3, (class T, = void <INTERCEPT/>))
 		// class T1 = void, class T2 = void
 	</listing>
 	<derivative id="ENUM_SHIFTED_PARAMS_ID"/>

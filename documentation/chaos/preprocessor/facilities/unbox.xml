@@ -11,13 +11,13 @@
 	<usage lang="C99">
 		<syntax><UNBOX/>(...)</syntax>
 		<param id="..." optional="1">
-			The argument to be applied.
+			The argument to be unboxed.
 		</param>
 	</usage>
 	<usage lang="C/C++">
 		<syntax><UNBOX/>(x)</syntax>
 		<param id="x">
-			The argument to be applied.
+			The argument to be unboxed.
 		</param>
 	</usage>
 	<para>

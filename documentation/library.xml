@@ -70,6 +70,10 @@
 		<item value="scan factor"/>
 		<item value="scan factors"/>
 	</document>
+	<document id="evaluated-parameters">
+		<item value="evaluated parameter"/>
+		<item value="evaluated parameters"/>
+	</document>
 	<document id="evaluated-slots">
 		<item value="slot index"/>
 		<item value="slot indices"/>
@@ -320,9 +324,11 @@
 				<header name="if.h"/>
 				<header name="iif.h"/>
 				<header name="include_if.h"/>
+				<header name="inline_unless.h"/>
 				<header name="inline_when.h"/>
 				<header name="null.h"/>
 				<header name="placemarker_if.h"/>
+				<header name="unless.h"/>
 				<header name="when.h"/>
 				<header name="while.h"/>
 				<header name="while_aux.h"/>

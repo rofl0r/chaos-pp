@@ -15,6 +15,8 @@
 		This macro expands to <SEQ/>.
 		In other words, the identifier <SEQ/> is defined as itself.
 	</para>
+	<derivative id="SEQ_ID"/>
+	<derivative id="SEQ_" lang="C99"/>
 </macro>
 
 <macro id="SEQ_TAG" group="tag">

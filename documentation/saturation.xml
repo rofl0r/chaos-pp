@@ -24,7 +24,7 @@
 			</snippet>
 		</para>
 		<para>
-			It should be reinforced that the <link id="saturation arithmetic"/> facilities operate on integer literals (without suffixes), not integral constant expressions such as <code>a + b</code>.
+			It should be reinforced that the <link id="saturation arithmetic"/> facilities operate on integer literals (without suffixes), not integral constant expressions such as <code>1 + 2</code>.
 		</para>
 	</section>
 	<section id="Arithmetic Operators">

@@ -6,7 +6,7 @@
 
 <macro id="DELINEATE_PARAMS" type="indirect" group="parameters">
 	<abstract>
-		The <DELINEATE_PARAMS/> macro repeats its third argument--concatenated to the current repetition number--the number of times specified by its first argument with the delineator specified by its second argument between each repetition.
+		The <DELINEATE_PARAMS/> macro delineates its third argument the number of times specified by its first argument.
 	</abstract>
 	<usage lang="C99">
 		<syntax><DELINEATE_PARAMS/>(count, sep, ...)</syntax>
@@ -28,11 +28,11 @@
 	<usage lang="C/C++">
 		<syntax><DELINEATE_PARAMS/>(count, sep, param)</syntax>
 		<param id="count">
-			The number of times that <code>__VA_ARGS__</code> is to be repeated.
+			The number of times that <var>param</var> is to be repeated.
 			Valid values range from <code>0</code> to <LIMIT_MAG/>.
 		</param>
 		<param id="sep">
-			The delineator to be situated between each repetition of <code>__VA_ARGS__</code>.
+			The delineator to be situated between each repetition of <var>param</var>.
 			This delineator must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
 			<snippet>
 				sep()
@@ -43,8 +43,8 @@
 		</param>
 	</usage>
 	<para>
-		This macro expands to the result of repeating <var>param</var> or <code>__VA_ARGS__</code> (concatenated to the current repetition number) <var>count</var> times (with the delineate specified by <var>sep</var> between each repetition).
-		This is illustrated by the following pseudo-code (where <var>N</var> is <var>count</var> - 1):
+		This macro expands to the result of delineating <var>param</var> or <code>__VA_ARGS__</code> with <var>sep</var> <var>count</var> times such that the rightmost preprocessing token of each repetition is concatenated to the position of the repetition.
+		This is illustrated by the following pseudo-code (where <code>N</code> is <var>count</var> - 1):
 		<snippet>
 			param ## 0 sep() param ## 1 sep() ... param ## N
 		</snippet>
@@ -54,8 +54,8 @@
 		<snippet>
 			(a, b)
 		</snippet>
-		If <var>param</var> or <code>__VA_ARGS__</code> is a binary parenthetic expression, this macro extracts the two elements and concatenates the current repetition number to each of them.
-		This is illustrated by the following pseudo-code (where <var>N</var> is again <var>count</var> - 1):
+		If <var>param</var> or <code>__VA_ARGS__</code> is a binary parenthetic expression, this macro extracts the two elements and concatenates the position of the current repetition to each of them.
+		This is illustrated by the following pseudo-code (where <code>N</code> is again <var>count</var> - 1):
 		<snippet>
 			a ## 0 b ## 0 sep() a ## 1 b ## 1 sep() ... a ## N b ## N
 		</snippet>

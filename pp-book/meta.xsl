@@ -25,7 +25,12 @@
 
 <xsl:template match="/derivative-spec">
 	<meta:template match="macro//derivative[substring-after(@id, ../@id) = '{@suffix}']">
-		<derivative id="{{@id}}" class="{@class}">
+		<meta:element name="derivative">
+			<meta:attribute name="id"><meta:value-of select="@id"/></meta:attribute>
+			<meta:attribute name="class"><xsl:value-of select="@class"/></meta:attribute>
+			<meta:if test="@display">
+				<meta:attribute name="display"><meta:value-of select="@display"/></meta:attribute>
+			</meta:if>
 			<xsl:apply-templates select="abstract"/>
 			<xsl:choose>
 				<xsl:when test="extended-usage">
@@ -47,7 +52,7 @@
 			<xsl:apply-templates select="post-para"/>
 			<meta:apply-templates select="listing"/>
 			<meta:apply-templates select="derivative"/>
-		</derivative>
+		</meta:element>
 	</meta:template>
 </xsl:template>
 

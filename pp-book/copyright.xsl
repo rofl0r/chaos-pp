@@ -13,7 +13,7 @@
 			<A href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</A>
 		</xsl:when>
 		<xsl:when test="$name = 'Vesa Karvonen'">
-			<A href="mailto:vesa_karvonen@user.sourceforge.net">Vesa Karvonen</A>
+			<A href="mailto:vesa_karvonen@users.sourceforge.net">Vesa Karvonen</A>
 		</xsl:when>
 		<xsl:otherwise>
 			<xsl:value-of select="$name"/>

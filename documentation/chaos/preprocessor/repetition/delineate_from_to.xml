@@ -6,7 +6,7 @@
 
 <macro id="DELINEATE_FROM_TO" type="indirect" group="delineation">
 	<abstract>
-		The <DELINEATE_FROM_TO/> macro repeats its fourth argument for each number in the range specified by its first two arguments with the delineator specified by its third argument between each repetition.
+		The <DELINEATE_FROM_TO/> macro delineates its fourth argument for each number in the range specified by its first two arguments.
 	</abstract>
 	<usage lang="C99">
 		<syntax><EXPR/>(<DELINEATE_FROM_TO/>(from, to, sep, macro))</syntax>
@@ -97,7 +97,7 @@
 	</usage>
 	<para>
 		The <DELINEATE_FROM_TO/> macro itself expands to a <link id="deferred expression"/> in terms of <code><NEXT/>(s)</code>.
-		This <link id="deferred expression"/>, when invoked by <EXPR/>, expands to the result of repeating the target for each number ranging from <var>from</var> to <var>to</var> - 1 (with the delineator specified by <var>sep</var> between each repetition).
+		This <link id="deferred expression"/>, when invoked by <EXPR/>, expands to the result of delineating the target with <var>sep</var> for each number ranging from <var>from</var> to <var>to</var> - 1.
 		This is illustrated by the following pseudo-code:
 		<snippet>
 			macro(s, from, data) sep() macro(s, from + 1, data) sep() ... macro(s, to - 1, data)

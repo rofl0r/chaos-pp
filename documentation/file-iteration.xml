@@ -1,6 +1,966 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document id="File-Iteration" author="Paul Mensonides" date="2003-2004">
 	<section>
-		<para>...</para>
+		<para>
+			<link id="File-iteration"/> is a complex, but powerful, vertical repetition construct.
+			It repeatedly includes a <em>file</em> for each number in a user-specified range.
+		</para>
+	</section>
+	<section id="Introduction">
+		<para>
+			This mechanism requires two pieces of information to operate, a range over which to iterate and a file to include on each iteration.
+			It can optionally take a third piece of information that represents flags used to discriminate between different iterations of the same file.
+			This information is obtained through a <link id="named external argument"/> called <ITERATION_PARAMS/>.
+			Prior to initiating a <link id="file-iteration"/>, this macro is defined by the user as a <link id="sequence"/> containing (in order) a lower bound, an upper bound, and a filename.
+			<snippet>
+				#define <ITERATION_PARAMS/> (lower)(upper)(file)
+			</snippet>
+			Both the lower and upper bounds specify an <em>inclusive</em> range and must be numeric values ranging from <code>0</code> to <LIMIT_ITERATION/>.
+			(Note that if the upper bound is <em>less</em> than the lower bound, the mechanism will perform the <link id="file-iteration"/> in reverse.)
+			The filename must be a <em>quoted</em> file path (e.g. <code>"file.h"</code>, as opposed to <code>&lt;file.h&gt;</code>).
+		</para>
+		<para>
+			An additional numeric argument may optionally be added.
+			This argument specifies flags primarily used to distinguish between different iterations of the same file.
+			If used, the syntax for the definition of <ITERATION_PARAMS/> becomes
+			<snippet>
+				#define <ITERATION_PARAMS/> (lower)(upper)(file)(flags)
+			</snippet>
+			If this element is <em>not</em> specified, the flags are given a default value of <code>0</code>.
+		</para>
+		<para>
+			The lower bound, upper bound, and flags are <link id="evaluated parameters"/>.
+			This implies that they can include simple integral constant expressions.
+			For example,
+			<snippet>
+				#define N() 5
+				#define <ITERATION_PARAMS/> (0)(N() + 5)("file.h")
+			</snippet>
+		</para>
+		<para>
+			Once <ITERATION_PARAMS/> has been properly defined, the mechanism must be initiated.
+			This is accomplished with <code><ITERATE/></code>.
+			<snippet>
+				??=include <ITERATE/>()
+			</snippet>
+			(The <code>??=</code> token is a trigraph for <code>#</code>.
+			It is used here to visually disambiguate this inclusion from a normal file inclusion because it is definitely <em>not</em> normal.
+			The <code>%:</code> digraph can also provide such disambiguation.
+			Neither is necessary.)
+		</para>
+		<para>
+			The following is a complete sample invocation of the <link id="file-iteration"/> mechanism:
+			<snippet>
+				#define <ITERATION_PARAMS/> (1)(10)("file.h")
+				??=include <ITERATE/>()
+			</snippet>
+			The above code causes <code>"file.h"</code> to be included ten times--once for each number ranging from <code>1</code> to <code>10</code>.
+		</para>
+		<para>
+			Under normal circumstances, there is nothing particularly useful about including a file ten times.
+			The difference with <link id="file-iteration"/> is that the current macro state changes each time.
+			For example, the <ITERATION/> macro can be used to access the current "iteration value".
+			If <code>"file.h"</code> contains the following:
+			<snippet>
+				// file.h
+				template&lt;&gt; struct sample&lt;<ITERATION/>()&gt; { };
+			</snippet>
+			and it is iterated as follows:
+			<snippet>
+				template&lt;int&gt; struct sample;
+				
+				#define <ITERATION_PARAMS/> (1)(5)("file.h")
+				??=include <ITERATE/>()
+			</snippet>
+			each inclusion yields different results...
+			<snippet>
+				template&lt;int&gt; struct sample;
+				
+				template&lt;&gt; struct sample&lt;1&gt; { };
+				template&lt;&gt; struct sample&lt;2&gt; { };
+				template&lt;&gt; struct sample&lt;3&gt; { };
+				template&lt;&gt; struct sample&lt;4&gt; { };
+				template&lt;&gt; struct sample&lt;5&gt; { };
+			</snippet>
+			(The <ITERATION_START/> and <ITERATION_FINISH/> macros can be used to retrieve the lower and upper bounds, respectively, of the current <link id="file-iteration"/>.)
+		</para>
+		<para>
+			The <ITERATION_PARAMS/> macro is automatically undefined by the library.
+		</para>
+	</section>
+	<section id="Self-Iteration">
+		<para>
+			There is no reason that a file cannot initiate an iteration of itself.
+			This has the advantage of keeping related code together.
+			The problem is that the "regular" section of the file must be discriminated from the iterated section of the file.
+			The library provides the <IS_ITERATING/> macro for this purpose.
+			If a <link id="file-iteration"/> is in progress, <IS_ITERATING/> is defined as <code>1</code>.
+			Otherwise it is not defined.
+		</para>
+		<para>
+			For example, the following merges the contents of <code>"file.h"</code> above into the file that iterates it:
+			<snippet>
+				// sample.h
+				#if !<IS_ITERATING/>
+				
+				    #ifndef SAMPLE_H
+				    #define SAMPLE_H "sample.h"
+				
+				    #include <chaos-preprocessor-iteration-file.h/>
+				
+				    template&lt;int&gt; struct sample;
+				
+				    #define <ITERATION_PARAMS/> (1)(5)(SAMPLE_H)
+				    ??=include <ITERATE/>()
+				
+				    #endif // SAMPLE_H
+				
+				#else
+				
+				    template&lt;&gt; struct sample&lt;<ITERATION/>()&gt; { };
+				
+				#endif
+			</snippet>
+		</para>
+	</section>
+	<section id="Adjacent Iterations">
+		<para>
+			The use of a single file raises another issue.
+			If the file needs to perform two (or more) separate <link id="file-iterations"/>, there must be a way to distinguish between them.
+			This is the main purpose of the optional flags element in the definition of <ITERATION_PARAMS/>.
+			<snippet>
+				// typelist.h
+				#if !<IS_ITERATING/>
+				
+				    #ifndef TYPELIST_H
+				    #define TYPELIST_H "typelist.h"
+				
+				    #include <chaos-preprocessor-iteration-file.h/>
+				    #include <chaos-preprocessor-recursion-expr.h/>
+				    #include <chaos-preprocessor-repetition-enum.h/>
+				    #include <chaos-preprocessor-repetition-enum_params.h/>
+				    #include <chaos-preprocessor-repetition-enum_shifted_params.h/>
+				    #include <chaos-preprocessor-repetition-enum_trailing_params.h/>
+				
+				    template&lt;class T&gt; struct identity {
+				        typedef T type;
+				    }
+				
+				    template&lt;class T&gt; struct wrap { };
+				    
+				    namespace detail {
+				        template&lt;class T&gt; struct unwrap : identity&lt;T&gt; { };
+				        template&lt;class T&gt; struct unwrap&lt;wrap&lt;T&gt; &gt; : identity&lt;T&gt; { };
+				    }
+				
+				    template&lt;class = void&gt; struct extract {
+				        enum { rogue = -1 };
+				    };
+				    
+				    #define <ITERATION_PARAMS/> \
+				        (0)(EXTRACT_MAX ? EXTRACT_MAX : 50)(TYPELIST_H)(0x01) \
+				        /**/
+				    ??=include <ITERATE/>()
+				
+				    namespace primitive {
+				        struct nil;
+				        template&lt;class T, class U = nil&gt; struct typelist {
+				            typedef T head;
+				            typedef U tail;
+				        };
+				    }
+				
+				    template&lt;int = extract&lt;&gt;::rogue&gt; struct typelist;
+				
+				    template&lt;&gt; struct typelist&lt;0&gt; {
+				        private:
+				            enum inaccessible { };
+				        public:
+				            template&lt;inaccessible = inaccessible()&gt; struct args {
+				                typedef primitive::nil type;
+				            };
+				    };
+				
+				    #define <ITERATION_PARAMS/> \
+				        (1)(TYPELIST_MAX ? TYPELIST_MAX : 50)(TYPELIST_H)(0x02) \
+				        /**/
+				    ??=include <ITERATE/>()
+				    
+				    #define TYPELIST(args) extract&lt;typelist&lt;&gt; args&gt;::type
+				
+				    #endif // TYPELIST_H
+				
+				#elif <ITERATION_FLAGS/>() == 0x01
+				
+				    #define n <ITERATION/>()
+				    #define unwrap(s, n, _) typename detail::unwrap&lt;T ## n&gt;::type
+				
+				    template&lt;template&lt;int&gt; class output <ENUM_TRAILING_PARAMS/>(n, class T)&gt;
+				    struct extract&lt;output&lt;extract&lt;&gt;::rogue&gt; (<ENUM_PARAMS/>(n, T))&gt; {
+				        typedef
+				            typename output&lt;n&gt;
+				                ::template args&lt;<EXPR/>(<ENUM/>(n, unwrap, ~))&gt;::type
+				                    type;
+				    };
+				    
+				    #undef n
+				    #undef unwrap
+				
+				#elif <ITERATION_FLAGS/>() == 0x02
+				
+				    #define n <ITERATION/>()
+				
+				    template&lt;&gt; struct typelist&lt;n&gt; {
+				        template&lt;<ENUM_PARAMS/>(n, class T)&gt; struct args {
+				            typedef primitive::typelist&lt;
+				                T0,
+				                typename typelist&lt;n - 1&gt;
+				                    ::args&lt;<ENUM_SHIFTED_PARAMS/>(n, T)&gt;::type
+				            &gt; type;
+				        };
+				    };
+				
+				    #undef n
+				
+				#endif
+			</snippet>
+			Note the use of the optional flags (which is accessed through the <ITERATION_FLAGS/> macro).
+			It discriminates between the <code>extract</code> and <code>typelist</code> iterations.
+			<snippet>
+				typedef TYPELIST((int, double, char, wrap&lt;void&gt;)) abc;
+			</snippet>
+			(Note that this <code>TYPELIST</code> facility maps type elements through parameter types.
+			For some types, this mapping isn't legal (such as <code>void</code>).
+			For others, this causes transformation (such as array types and function types).
+			For such types, <code>wrap</code> must be used.)
+		</para>
+		<para>
+			With variadics (which are not yet part of C++), the <code>TYPELIST</code> definition would immediately become:
+			<snippet>
+				#define TYPELIST(...) extract&lt;typelist&lt;&gt; (__VA_ARGS__)&gt;::type
+			</snippet>
+			which would remove the double parentheses clutter:
+			<snippet>
+				TYPELIST(int, double, wrap&lt;void&gt;)
+			</snippet>
+		</para>
+		<para>
+			However, with variadics, the whole mechanism can be rewritten in other ways that are superior, such as:
+			<snippet>
+				#ifndef TYPELIST_H
+				#define TYPELIST_H
+				
+				#include <chaos-preprocessor-facilities-encode.h/>
+				#include <chaos-preprocessor-recursion-expr.h/>
+				#include <chaos-preprocessor-tuple-fold_left.h/>
+				
+				struct nil;
+				
+				template&lt;class T, class U = nil&gt; struct typelist {
+				    typedef T head;
+				    typedef U tail;
+				};
+				
+				#define TYPELIST(...) \
+				    <EXPR/>(<TUPLE_FOLD_RIGHT/>( \
+				        TYPELIST_OP, (__VA_ARGS__), nil \
+				    )) \
+				    /**/
+				#define TYPELIST_OP(s, type, ...) \
+				    typelist&lt;<DECODE/>(type), __VA_ARGS__&gt; \
+				    /**/
+				
+				#endif
+			</snippet>
+			This syntactic abstraction is implemented entirely with the preprocessor.
+			For example,
+			<snippet>
+				TYPELIST(char, signed char, unsigned char)
+				// typelist&lt;char, typelist&lt;signed char, typelist&lt;unsigned char, nil&gt; &gt; &gt;
+			</snippet>
+			With this implementation, there is no need to worry about invalid parameter types or parameter transformations.
+			However, types that syntactically contain open commas must be parenthesized:
+			<snippet>
+				TYPELIST(int, (std::pair&lt;int, int&gt;))
+				// typelist&lt;int, typelist&lt;std::pair&lt;int, int&gt;, nil&gt; &gt;
+			</snippet>
+		</para>
+	</section>
+	<section id="Multiple Dimensions">
+		<para>
+			The <link id="file-iteration"/> mechanism supports up to <LIMIT_ITERATION_DEPTH/> dimensions.
+			The preceding examples have all used only the first dimension (i.e. the outermost), but the <link id="file-iteration"/> mechanism can be invoked again inside an iterated file.
+		</para>
+		<para>
+			At this point, further explanation is necessary regarding <ITERATION/>, <ITERATION_START/>, <ITERATION_FINISH/>, and <ITERATION_FLAGS/>.
+			These primitives expand to the state of the <em>current</em> dimension--regardless of what that dimension is.
+		</para>
+		<para>
+			If separate files are used for each dimension, then there are no major problems, and using multiple dimensions is straightforward.
+			However, if more than one dimension is located in the same file, they need to be distinguished from one another.
+			The <link id="file-iteration"/> mechanism provides the macro <ITERATION_DEPTH/> for this purpose:
+			<snippet>
+				// file.h
+				#if !<IS_ITERATING/>
+				
+				    #ifndef FILE_H
+				    #define FILE_H
+				
+				    #include <chaos-preprocessor-iteration-file.h/>
+				
+				    #define <ITERATION_PARAMS/> (1)(5)("file.h")
+				    ??=include <ITERATE/>()
+				
+				    #endif // FILE_H
+				
+				#elif <ITERATION_DEPTH/>() == 1
+				
+				    (<ITERATION/>())
+				
+				    #define <ITERATION_PARAMS/> (1)(<ITERATION/>())("file.h")
+				    ??=include <ITERATE/>()
+				
+				#elif <ITERATION_DEPTH/>() == 2
+				
+				    <ITERATION/>()
+				
+				#endif
+			</snippet>
+			This will result in the following:
+			<snippet>
+				(1)
+				 1
+				(2)
+				 1
+				 2
+				(3)
+				 1
+				 2
+				 3
+				(4)
+				 1
+				 2
+				 3
+				 4
+				(5)
+				 1
+				 2
+				 3
+				 4
+				 5
+			</snippet>
+		</para>
+		<para>
+			It is possible to access the state (i.e. the iteration value, etc.) of outer dimensions in two ways--absolutely and relatively.
+		</para>
+		<para>
+			The first variety accesses a value of a specific iteration frame (i.e. dimension).
+			To access the iteration value of the first dimension--from <em>any</em> dimension--<code><FRAME_ITERATION/>(1)</code> is used.
+			To access the iteration value of the second dimension, <code><FRAME_ITERATION/>(2)</code> is used, and so on.
+		</para>
+		<para>
+			There are also frame primitives to access the lower bound, the upper bound, and the flags of a specific dimension: <FRAME_START/>, <FRAME_FINISH/>, and <FRAME_FLAGS/>.
+		</para>
+		<para>
+			The second variety accesses a value of an iteration frame <em>relative</em> to the current frame (e.g. the <em>previous</em> dimension).
+			These macros take an argument that is interpreted as an offset from the current frame.
+			For example, <code><RELATIVE_ITERATION/>(1)</code> always refers to the iteration value of the next outer dimension.
+			<code><RELATIVE_ITERATION/>(2)</code> refers to the iteration value of the dimension two frames out, and so on.
+			(An argument of <code>0</code> is interpreted as an offset of <code>0</code> and, therefore, causes <code><RELATIVE_ITERATION/>(0)</code> to be equivalent to <code><ITERATION/>()</code>.)
+		</para>
+		<para>
+			The lower bound, upper bound, and flags of a dimension can be accessed in this fashion as well with <RELATIVE_START/>, <RELATIVE_FINISH/>, and <RELATIVE_FLAGS/>.
+		</para>
+		<para>
+			Using relative access to the state of outer dimensions provides the means to produce dimensional abstraction.
+			In certain situations, the dimension is unknown by the code that is being iterated--possibly because the code is reused at multiple, different dimensions.
+		</para>
+	</section>
+	<section id="Closures - A Motivating Example">
+		<para>
+			This example implements a reusable closure facility for C++ that creates function objects out of object references and pointer to member pairs.
+			It is designed such that implementing <code>operator-&gt;*</code> for a smart pointer is trivial.
+		</para>
+		<para>
+			Before the closure facility can be implemented, a few metaprogramming facilities must be defined.
+			The first of these is <code>identity</code>, a metafunction that evaluates to its argument:
+			<snippet>
+				// identity.hpp
+				#ifndef IDENTITY_HPP
+				#define IDENTITY_HPP
+				
+				template&lt;class T&gt; struct identity {
+				    typedef T type;
+				};
+				
+				#endif
+			</snippet>
+		</para>
+		<para>
+			The second metafunction, <code>map_integral</code>, is similar to <code>identity</code> except that it performs an identity on a constant value instead of a type.
+			<snippet>
+				// map_integral.hpp
+				#ifndef MAP_INTEGRAL_HPP
+				#define MAP_INTEGRAL_HPP
+				
+				template&lt;class T, T X&gt; struct map_integral {
+				    static const T value = X;
+				};
+				
+				template&lt;class T, T X&gt; const T map_integral&lt;T, X&gt;::value;
+				
+				#endif
+			</snippet>
+			The key motivation for this metafunction is that it maps all integral constants of the same type and value to the same constant variable.
+			Another common possibility is to use an enumerator.
+			However, enumerators are distinct types, which introduces several problems.
+		</para>
+		<para>
+			First, if the enumeration is unnamed, as in
+			<snippet>
+				enum { value = 123 };
+			</snippet>
+			then <code>value</code> cannot be directly used as a templatized argument to a template function because template arguments cannot refer to unnamed types.
+			<snippet>
+				export template&lt;class T&gt; void f(T x);
+				
+				void g(void) {
+				    return f(value); // error
+				}
+			</snippet>
+		</para>
+		<para>
+			Second, if the enumeration <em>is</em> named, it engenders template-produced code bloat.
+			<snippet>
+				enum value { value = 123 };
+				
+				void h(void) {
+				    f(123);   // T is "int"
+				    f(value); // T is "enum value"
+				    return;
+				}
+			</snippet>
+		</para>
+		<para>
+			Lastly, because enumerations are unique types, operators can be overloaded based on them.
+			Thus, for example, a templatized operator can cut across encapsulation boundaries by converting constant expressions to runtime expressions.
+			<snippet>
+				template&lt;class T&gt; struct some_trait {
+				    enum value { value = false };
+				};
+				
+				template&lt;bool, class T, class F&gt; struct static_if : identity&lt;F&gt; { };
+				template&lt;class T, class F&gt; struct static_if&lt;true, T, F&gt; : identity&lt;T&gt; { };
+				
+				template&lt;class T&gt; void f(T x) {
+				    typename static_if&lt;!some_trait&lt;T&gt;::value, signed, unsigned&gt;::type var = 0;
+				    // ...
+				}
+				
+				// ...
+				
+				template&lt;class T&gt; inline bool operator!(T x) {
+				    return !static_cast&lt;bool&gt;(x);
+				}
+			</snippet>
+		</para>
+		<para>
+			The third metaprogramming facility that is needed is <code>enable_if</code> and <code>disable_if</code>, which selectively disable certain overloads through type substitution failure (SFINAE).
+			<snippet>
+				// enable_if.hpp
+				#ifndef ENABLE_IF_HPP
+				#define ENABLE_IF_HPP
+				
+				#include "identity.hpp"
+				
+				namespace primitive {
+				    template&lt;bool, class R = void&gt; struct enable_if { };
+				    template&lt;class R&gt; struct enable_if&lt;true, R&gt; : identity&lt;R&gt; { };
+				    template&lt;bool X, class R = void&gt; struct disable_if : enable_if&lt;!X, R&gt; { };
+				}
+				
+				template&lt;class C, class R = void&gt; struct enable_if
+				    : primitive::enable_if&lt;C::value, R&gt; { };
+				
+				template&lt;class C, class R = void&gt; struct disable_if
+				    : primitive::disable_if&lt;C::value, R&gt; { };
+				
+				#endif
+			</snippet>
+			This implementation provides both the primitive version (which operates on a boolean condition) and a higher-level version (suitable for polymorphic metaprogramming).
+			Only the higher-level <code>disable_if</code> is actually used.
+		</para>
+		<para>
+			In order to properly handle issues related to pointers to data members, an <code>is_function</code> metafunction is required to distinguish function types from all other types.
+			The following definition works by exploiting type substitution failure (SFINAE) when attempting to form an array of function type:
+			<snippet>
+				// is_function.hpp
+				#ifndef IS_FUNCTION_HPP
+				#define IS_FUNCTION_HPP
+				
+				#include "map_integral.hpp"
+				
+				namespace detail {
+				    template&lt;class T&gt; class is_function {
+				        private:
+				            template&lt;class U&gt; static char check(U (*)[1]);
+				            template&lt;class U&gt; static char (&amp; check(...))[2];
+				        public:
+				            enum { value = sizeof(check&lt;T&gt;(0)) != 1 };
+				    };
+				}
+				
+				template&lt;class T&gt; struct is_function
+				    : map_integral&lt;bool, detail::is_function&lt;T&gt;::value&gt; { };
+				
+				template&lt;&gt; struct is_function&lt;void&gt; : map_integral&lt;bool, false&gt; { };
+				template&lt;class T&gt; struct is_function&lt;T&amp;&gt; : map_integral&lt;bool, false&gt; { };
+				
+				#endif
+			</snippet>
+		</para>
+		<para>
+			Another possible implementation is to use the "brute force" approach and define specializations up to some maximum arity of function type.
+			This can be easily accomplished with preprocessor metaprogramming.
+			The weakness of such an implementation is that there is a maximum arity--though it could be so high that the likelihood of the limit causing a practical barrier is infinitesimal.
+			Nevertheless, it is still a blemish from a purist point of view.
+		</para>
+		<para>
+			There are a few other possibilities as well.
+			The first of these is attempting to add a cv-qualification to a function type.
+			This is similar to the above, but with different (and more) specializations for special cases.
+			In particular, a cv-qualified reference or array cannot be formed, nor can a cv-qualified <code>void</code>.
+			<snippet>
+				#include "identity.hpp"
+				#include "map_integral.hpp"
+			
+				namespace detail {
+				    template&lt;class T&gt; class is_function {
+				        private:
+				            template&lt;class U&gt; static char check(identity&lt;const T&gt;*);
+				            template&lt;class U&gt; static char (&amp; check(...))[2];
+				        public:
+				            enum { value = sizeof(check&lt;T&gt;(0)) != 1 };
+				    };
+				}
+				
+				template&lt;class T&gt; struct is_function
+				    : map_integral&lt;bool, detail::is_function&lt;T&gt;::value&gt; { };
+				
+				template&lt;&gt; struct is_function&lt;void&gt; : map_integral&lt;bool, false&gt; { };
+				template&lt;class T&gt; struct is_function&lt;T&amp;&gt; : map_integral&lt;bool, false&gt; { };
+				
+				template&lt;class T&gt; struct is_function&lt;T[]&gt; : map_integral&lt;bool, false&gt; { };
+				template&lt;class T, unsigned long I&gt; struct is_function&lt;T[I]&gt;
+				    : map_integral&lt;bool, false&gt; { };
+			</snippet>
+		</para>
+		<para>
+			Another possibility is to test whether a conversion from <code>T*</code> to <code>const volatile void*</code> exists.
+			<snippet>
+				#include "map_integral.hpp"
+			    
+				namespace detail {
+				    template&lt;class T, class U&gt; class is_convertible {
+				        private:
+				            static T make(void);
+    				        static char check(U);
+				            static char (&amp; check(...))[2];
+				        public:
+    				        enum { value = sizeof(check(make())) == 1 };
+				    };
+				}
+				
+				template&lt;class T, class U&gt; struct is_convertible
+				    : map_integral&lt;bool, detail::is_convertible&lt;T, U&gt;::value&gt; { };
+				
+				template&lt;class T&gt; struct is_function : map_integral&lt;T*, const volatile void*&gt; { };
+				template&lt;class T&gt; struct is_function&lt;T&amp;&gt; : map_integral&lt;bool, false&gt; { };
+			</snippet>
+			One of the drawbacks of this implementation is that many compilers incorrectly allow a conversion from pointer to function to pointer to <code>void</code>.
+			However, this implementation, as well as the one that follows, has a more serious drawback.
+		</para>
+		<para>
+			A final possibility is to exploit a unique property of function types.
+			Specifically, when function types are used as parameter types, they undergo one of the very few forms of compile-time type transformation.
+			They become pointers to functions.
+			Arrays have a similar transformation.
+			When array types are used as parameter types, they are transformed into pointers.
+			These conversions are unlike any other conversion in C or C++.
+			They are pure type-to-type conversions, instead of value-to-value-of-another-type conversions.
+			These conversions are each unique to their respective classes of types.
+			The function type case is exploitable as follows:
+			<snippet>
+				#include "map_integral.hpp"
+				
+				template&lt;class T, class&gt; struct is_same : map_integral&lt;bool, false&gt; { };
+				template&lt;class T&gt; struct is_same&lt;T, T&gt; : map_integral&lt;bool, true&gt; { };
+				
+				template&lt;class T&gt; struct is_function : is_same&lt;void (T), void (T*)&gt; { };
+				template&lt;class T&gt; struct is_function&lt;T&amp;&gt; : map_integral&lt;bool, false&gt; { };
+			</snippet>
+			This version is the simplest, yet it cannot be used.
+			Both this implementation and the previous implementation are invalid in a particular case where it should work.
+			They cannot handle cv-qualified function types.
+			A cv-qualified function type is not a function type with a cv-qualification added--that is illegal.
+			Rather, a cv-qualified function type is, for example, the type of a cv-qualified member function.
+			More to the point, cv-qualified function types <em>can</em> exist outside of member function types and pointers to member functions.
+			For example,
+			<snippet>
+				typedef void function_type(void) const;
+			</snippet>
+			is perfectly legal.
+			However, the only thing that can be done with such a typedef is declare a member function or form a pointer to member.
+			This affects the above two implementations significantly because the formation of a pointer to a cv-qualified function type is explicitly prohibited.
+			For this esoteric reason, they are both invalid and are not true function type predicates.
+		</para>
+		<para>
+			This issue affects the "brute force" implementation as well.
+			For any given arity, eight specializations must be defined--for each cv-qualifier combination and for the presence or lack of trailing variadics (i.e. ellipsis).
+		</para>
+		<para>
+			(Note also that the "pointer to cv-qualified function" issue is avoided in the first alternative implementation by using <code>identity&lt;const T&gt;*</code> instead of just <code>const T*</code>.)
+		</para>
+		<para>
+			In summary, only the actual implementation above, the "conversion" alternative, and the "brute force" alternative are valid.
+			Of the three, only the first two are fully general.
+			Of those two, the first requires fewer specializations, which makes it the most viable alternative.
+		</para>
+		<para>
+			Given the above facilities, the closure facility can be implemented.
+			The resulting syntax for an overloaded member <code>operator-&gt;*</code> should be something like (where <code>ptr_</code> is an object pointer stored in smart pointer):
+			<snippet>
+				template&lt;class M, class C&gt;
+				typename closure&lt;M C::*&gt;::type operator-&gt;*(M C::* member) {
+				    return make_closure(ptr_, member);
+				}
+			</snippet>
+			Similarly, the resulting syntax for an overload non-member <code>operator-&gt;*</code> should be something like:
+			<snippet>
+				template&lt;class T, class M, class C&gt;
+				typename closure&lt;M C::*&gt;::type operator-&gt;*(const smart_ptr&lt;T&gt;&amp; sp, M C::* member) {
+				    return make_closure(&amp;*sp, member);
+				}
+			</snippet>
+			These functions must be able to handle pointers to data members as well as pointers to member functions.
+			(That is the reason for <code>::type</code> indirection in the return types.)
+		</para>
+		<para>
+			The <code>closure</code> template will have an optional policy parameter that specifies how an object reference is stored and how a raw pointer is retrieved.
+			<snippet>
+				template&lt;class T, template&lt;class&gt; class policy = simple&gt; class closure;
+			</snippet>
+			This policy is instantiated with a class type (possibly cv-qualified) from a pointer to member type (i.e. the <code>C</code> in <code>M C::*</code>).
+			This instantiation must have a nested type <code>type</code> that defines the type of storage.
+			Likewise, it must define a <code>static</code> member function, <code>get</code>, that returns a raw pointer.
+			The default policy, <code>simple</code>, is defined as follows:
+			<snippet>
+				template&lt;class T&gt; struct simple : identity&lt;T*&gt; {
+				    static inline T* get(T* obj) {
+				        return obj;
+				    }
+				};
+			</snippet>
+		</para>
+		<para>
+			The <code>closure</code> specialization to handle pointers to data members requires no repetition and is thus defined as follows:
+			<snippet>
+				namespace detail {
+				    template&lt;class, class = void&gt; class closure { };
+				    template&lt;class D, class C&gt; class closure&lt;
+				        D C::*, typename disable_if&lt;is_function&lt;D&gt; &gt;::type
+				    &gt; : public identity&lt;D&amp;&gt; { };
+				}
+				
+				template&lt;class T, template&lt;class&gt; class policy = simple&gt; class closure
+				    : public detail::closure&lt;T&gt; { };
+			</snippet>
+			This implementation intentionally disables the specialization (using SFINAE) if <code>T</code> is not a pointer to data member.
+			This prevents the specialization from catching pointers to member functions beyond the maximum arity of <x-var>n</x-var>--which it otherwise would.
+			(It also prevents it from catching the esoteric case of variadic member functions that use the ellipsis (<code>...</code>), which cannot be supported because the variadic arguments cannot be forwarded.)
+			Further, because of the return type indirection (<code>::type</code>), the <code>operator-&gt;*</code> will be disabled via SFINAE because the <code>::type</code> member does not exist.
+			Thus, if absolutely necessary, it is possible to manually handle border cases with additional overloads of <code>operator-&gt;*</code>.
+		</para>
+		<para>
+			The second item of note in this implementation is that it inherits <code>::type</code> as a <code>typedef</code> for <code>D&amp;</code>.
+			Corresponding overloads of <code>make_closure</code> to handle pointers to data members return <code>D&amp;</code>.
+			Thus, the implementation of <code>operator-&gt;*</code> directly returns a reference to a data member if the pointer to member it receives refers to a data member.
+			Note also that a safe <code>add_reference</code> metafunction (that avoids the reference to reference problem) is not required because it is impossible to form a pointer to reference member, such as
+			<snippet>
+				int&amp; C::* member; // illegal
+			</snippet>
+			In other words, <code>D</code> can never already be a reference.
+		</para>
+		<para>
+			To complete the handling of pointers to data members, several overloads of <code>make_closure</code> are required.
+			The only thing that changes from one overload to the next is cv-qualifications, so they will be generated with a <link id="file-iteration"/> that iterates over the cv-qualifiers.
+			The definition that handles <code>const</code> looks like this:
+			<snippet>
+				template&lt;template&lt;class&gt; class policy, class D, class C&gt;
+				inline typename disable_if&lt;is_function&lt;D&gt;, const D&amp;&gt;::type
+				make_closure(typename policy&lt;const C&gt;::type obj, D C::* data) {
+				    assert(policy&lt;const C&gt;::get(obj) &amp;&amp; data);
+				    return policy&lt;const C&gt;::get(obj)-&gt;*data;
+				}
+			</snippet>
+			These functions simply assert that <code>obj</code> and <code>data</code> are both non-null and bind the lvalue produced from applying the built-in <code>operator-&gt;*</code> to the return value reference.
+		</para>
+		<para>
+			<link id="File-iteration"/> is used to generate partial specializations of the primary template <code>closure</code> to catch various pointer to member function arities with various cv-qualifications.
+			For example, the specialization for a constant pointer to member function with an arity of two should look like the following:
+			<snippet>
+				template&lt;class R, class C, class P0, class P1, template&lt;class&gt; class policy&gt;
+				class closure&lt;R (C::*)(P0, P1) const, policy&gt; {
+				    public:
+				        typedef closure type;
+				        inline closure(
+				            typename policy&lt;const C&gt;::type obj, R (C::* func)(P0, P1) const
+				        ) : obj_((assert(policy&lt;const C&gt;::get(obj)), obj)),
+				            func_((assert(func), func)) {
+				            return;
+				        }
+				        inline R operator()(P0 p0, P1 p1) const {
+				            return (policy&lt;const C&gt;::get(obj_)-&gt;*func_)(p0, p1);
+				        }
+				    private:
+				        typename policy&lt;const C&gt;::type obj_;
+				        R (C::* func_)(P0, P1) const;
+				};
+			</snippet>
+			Each specialization defines a constructor that takes an object reference and a pointer to member function which it stores in member variables.
+			Each specialization also defines an <code>operator()</code> which is invoked with arguments that, in turn, are forwarded to the member function that is called against the stored object reference.
+		</para>
+		<para>
+			Note the <code>typedef</code> that names the closure itself.
+			In the pointer to member function case, unlike the pointer to data member case, <code>operator-&gt;*</code> must return a function object (i.e. an instance of some <code>closure</code> specialization) because it does not yet have the arguments to forward to the member function.
+		</para>
+		<para>
+			At the same time, overloads of <code>make_closure</code> are generated to catch various pointer to member function arities with various cv-qualifications.
+			For example, the overload for a constant pointer to member function with an arity of two should look like the following:
+			<snippet>
+				template&lt;template&lt;class&gt; class policy, class R, class C, class P0, class P1&gt;
+				inline closure&lt;R (C::*)(P0, P1) const, policy&gt;
+				make_closure(typename policy&lt;const C&gt;::type obj, R (C::* func)(P0, P1) const) {
+				    return closure&lt;R (C::*)(P0, P1) const, policy&gt;(obj, func);
+				}
+			</snippet>
+		</para>
+		<para>
+			The following is the complete implementation of <code>closure</code>.
+			It first defines the specialization for handling pointers to data members.
+			It then uses <link id="file-iteration"/> to iterate over the cv-qualifiers.
+			During each of these iterations, it defines a <code>make_closure</code> overload to handle pointers to data members and then performs a nested <link id="file-iteration"/> to iterate over function arities.
+			(The maximum arity defaults to fifteen, but can be increased (or decreased) by defining <code>CLOSURE_MAX_ARITY</code>.)
+			Each of these nested iterations defines a function-object specialization of <code>closure</code> and the corresponding overload of <code>make_closure</code>.
+			Finally, it defines an overload of <code>make_closure</code> for the default policy.
+			<snippet>
+				// closure.hpp
+				#if !<IS_ITERATING/>
+			    
+				    #ifndef CLOSURE_HPP
+				    #define CLOSURE_HPP "closure.hpp"
+				
+				    #include <chaos-preprocessor-facilities-unbox.h/>
+				    #include <chaos-preprocessor-iteration-file.h/>
+				    #include <chaos-preprocessor-repetition-enum_params.h/>
+				    #include <chaos-preprocessor-repetition-enum_trailing_params.h/>
+				    #include <chaos-preprocessor-seq-elem.h/>
+				
+				    #include "enable_if.hpp"
+				    #include "identity.hpp"
+				    #include "is_function.hpp"
+				
+				    #include &lt;cassert&gt;
+				    
+				    template&lt;class T&gt; struct simple : identity&lt;T*&gt; {
+				        static inline T* get(T* obj) {
+				            return obj;
+				        }
+				    };
+				
+				    namespace detail {
+				        template&lt;class, class = void&gt; class closure { };
+				        template&lt;class D, class C&gt; class closure&lt;
+				            D C::*, typename disable_if&lt;is_function&lt;D&gt; &gt;::type
+				        &gt; : public identity&lt;D&amp;&gt; { };
+				    }
+				    
+				    template&lt;class T, template&lt;class&gt; class policy = simple&gt; class closure
+				        : public detail::closure&lt;T&gt; { };
+				    
+				    #define cv(n) \
+				        <UNBOX/>(<SEQ_ELEM/>( \
+				            n, (~)((const))((volatile))((const volatile)) \
+				        )) \
+				        /**/
+				
+				    #define <ITERATION_PARAMS/> (0)(3)(CLOSURE_HPP)
+				    ??=include <ITERATE/>()
+				
+				    #undef cv
+				    
+				    template&lt;class T, class M, class C&gt;
+				    inline typename closure&lt;M C::*&gt;::type make_closure(T* obj, M C::* member) {
+				        return make_closure&lt;simple&gt;(obj, member);
+				    }
+				
+				    #endif // CLOSURE_HPP
+				
+				#elif <ITERATION_DEPTH/>() == 1
+				
+				    #define i <FRAME_ITERATION/>(1)
+				    
+				    #define get(var) policy&lt;cv(i) C&gt;::get(var)
+				    #define object typename policy&lt;cv(i) C&gt;::type
+				    
+				    template&lt;template&lt;class&gt; class policy, class D, class C&gt;
+				    inline typename disable_if&lt;is_function&lt;D&gt;, cv(i) D&amp;&gt;::type
+				    make_closure(object obj, D C::* data) {
+				        assert(get(obj) &amp;&amp; data);
+				        return get(obj)-&gt;*data;
+				    }
+				    
+				    #define <ITERATION_PARAMS/> \
+				        (0)(CLOSURE_MAX_ARITY ? CLOSURE_MAX_ARITY : 15)(CLOSURE_HPP) \
+				        /**/
+				    ??=include <ITERATE/>()
+				    
+				    #undef get
+				    #undef object
+				    
+				    #undef i
+				
+				#else
+				
+				    #define j <ITERATION/>()
+				    
+				    #define member(id) \
+				        R (C::* <UNBOX/>(id))(<ENUM_PARAMS/>(j, P)) cv(i) \
+				        /**/
+				    
+				    template&lt;
+				        class R, class C <ENUM_TRAILING_PARAMS/>(j, class P),
+				        template&lt;class&gt; class policy
+				    &gt;
+				    class closure&lt;member(~), policy&gt; {
+				        public:
+				            typedef closure type;
+				            inline closure(object obj, member((func)))
+				                : obj_((assert(get(obj)), obj)), func_((assert(func), func)) {
+				                return;
+				            }
+				            inline R operator()(<ENUM_PARAMS/>(j, (P, p))) const {
+				                return (get(obj_)-&gt;*func_)(<ENUM_PARAMS/>(j, p));
+				            }
+				        private:
+				            object obj_;
+				            member((func_));
+				    };
+				    
+				    template&lt;
+				        template&lt;class&gt; class policy,
+				        class R, class C <ENUM_TRAILING_PARAMS/>(j, class P)
+				    &gt;
+				    inline closure&lt;member(~), policy&gt; make_closure(object obj, member((func))) {
+				        return closure&lt;member(~), policy&gt;(obj, func);
+				    }
+
+				    #undef member
+				
+				    #undef j
+				
+				#endif
+			</snippet>
+			When the default maximum arity of fifteen is used, the <link id="file-iteration"/> generates sixty-four specializations of <code>closure</code> and sixty-eight overloads of <code>make_closure</code> (which represents a whole lot of avoided manual repetition).
+		</para>
+		<para>
+			Finally, the following program implements a trivial smart pointer that defines <code>operator->*</code>.
+			It also implements <code>operator->*</code> for <code>std::auto_ptr</code> and <code>boost::shared_ptr</code>.
+			<snippet>
+				// main.cpp
+				#include "closure.hpp"
+				
+				#include &lt;boost/shared_ptr.hpp&gt;
+				
+				#include &lt;iostream&gt;
+				#include &lt;memory&gt;
+				
+				template&lt;class T, class M, class C&gt; inline typename closure&lt;M C::*&gt;::type
+				operator-&gt;*(const std::auto_ptr&lt;T&gt;&amp; sp, M C::* member) {
+				    return make_closure(sp.operator-&gt;(), member);
+				}
+				
+				template&lt;class T&gt; struct shared : identity&lt;boost::shared_ptr&lt;T&gt; &gt; {
+				    static inline T* get(boost::shared_ptr&lt;T&gt; sp) {
+				        return sp.get();
+				    }
+				};
+				
+				template&lt;class T, class M, class C&gt; inline typename closure&lt;M C::*, shared&gt;::type
+				operator-&gt;*(boost::shared_ptr&lt;T&gt; sp, M C::* member) {
+				    return make_closure&lt;shared&gt;(sp, member);
+				}
+				
+				template&lt;class T&gt; class dumb_ptr {
+				    private:
+				        T* ptr_;
+				    public:
+				        inline dumb_ptr(T* ptr) : ptr_(ptr) {
+				            return;
+				        }
+				        inline ~dumb_ptr(void) {
+				            delete ptr_;
+				            return;
+				        }
+				        template&lt;class M, class C&gt;
+				        inline typename closure&lt;M C::*&gt;::type operator-&gt;*(M C::* member) {
+				            return make_closure(ptr_, member);
+				        }
+				};
+				
+				struct Q {
+				    inline Q(int x = 0) : x(x) {
+				        return;
+				    }
+				    int x;
+				    int f(void) {
+				        return x;
+				    }
+				};
+				
+				int main(void) {
+				    int Q::* px = &amp;Q::x;
+				    int (Q::* pf)(void) = &amp;Q::f;
+				
+				    Q var;
+				    Q* a = &amp;var;
+				    a-&gt;*px = 1;
+				    std::cout &lt;&lt; (a-&gt;*pf)() &lt;&lt; '\n';
+				
+				    std::auto_ptr&lt;Q&gt; b(new Q);
+				    b-&gt;*px = 2;
+				    std::cout &lt;&lt; (b-&gt;*pf)() &lt;&lt; '\n';
+				
+				    boost::shared_ptr&lt;Q&gt; c(new Q);
+				    c-&gt;*px = 3;
+				    std::cout &lt;&lt; (c-&gt;*pf)() &lt;&lt; '\n';
+				
+				    dumb_ptr&lt;Q&gt; d(new Q);
+				    d-&gt;*px = 4;
+				    std::cout &lt;&lt; (d-&gt;*pf)() &lt;&lt; '\n';
+				
+				    return 0;
+				}
+			</snippet>
+			Note that unlike the built-in closures formed by <code>operator-&gt;*</code> (and <code>.*</code>), <code>closure</code> objects can be passed around or stored, which introduces a potential loophole into a reference-counted smart pointer like <code>boost::shared_ptr</code>.
+			That is why the default policy parameter is overridden such that <code>closure</code> objects store an instance of <code>boost::shared_ptr</code> instead of a raw pointer.
+		</para>
+		<para>
+			(If a smart pointer already provides an implicit conversion to pointer type, then there should be no need for an overload of <code>operator-&gt;*</code> unless storing or otherwise manipulating the closure is desired.
+			The built-in <code>operator-&gt;*</code> should be chosen by the compiler and the implicit conversion performed on the left operand.
+			The only disadvantage that the built-in operator has is that its result has no type.
+			Otherwise, it has no arity limitations (including variadics) and it does not require forwarding.
+			Of course, there are disadvantages to providing an implicit conversion from a smart pointer to a pointer.)
+		</para>
 	</section>
 </document>

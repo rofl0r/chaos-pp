@@ -93,7 +93,14 @@
 					<xsl:for-each select="$nodeset">
 						<xsl:sort select="@id"/>
 						<xsl:if test="@id != $id">
-							<LI><CODE><A class="PRIMARY" href="{$root}/{substring-before(@header, '.')}.html#{@id}"><xsl:value-of select="concat(document($library)/library/@macro-prefix, @id)"/></A></CODE></LI>
+							<xsl:choose>
+								<xsl:when test="@display">
+									<LI><CODE><A class="PRIMARY" href="{$root}/{substring-before(@header, '.')}.html#{@id}"><xsl:value-of select="concat(document($library)/library/@macro-prefix, @display)"/></A></CODE></LI>
+								</xsl:when>
+								<xsl:otherwise>
+									<LI><CODE><A class="PRIMARY" href="{$root}/{substring-before(@header, '.')}.html#{@id}"><xsl:value-of select="concat(document($library)/library/@macro-prefix, @id)"/></A></CODE></LI>
+								</xsl:otherwise>
+							</xsl:choose>
 						</xsl:if>
 					</xsl:for-each>
 				</UL>
@@ -130,7 +137,14 @@
 		<UL>
 			<xsl:for-each select="macro">
 				<xsl:sort select="@id"/>
-				<LI><CODE><A class="PRIMARY" href="#{@id}"><xsl:value-of select="concat(document($library)/library/@macro-prefix, @id)"/></A></CODE></LI>
+				<xsl:choose>
+					<xsl:when test="@display">
+						<LI><CODE><A class="PRIMARY" href="#{@id}"><xsl:value-of select="concat(document($library)/library/@macro-prefix, @display)"/></A></CODE></LI>
+					</xsl:when>
+					<xsl:otherwise>
+						<LI><CODE><A class="PRIMARY" href="#{@id}"><xsl:value-of select="concat(document($library)/library/@macro-prefix, @id)"/></A></CODE></LI>
+					</xsl:otherwise>
+				</xsl:choose>
 			</xsl:for-each>
 		</UL>
 	</xsl:if>
@@ -150,7 +164,14 @@
 				<xsl:otherwise><xsl:value-of select="@class"/></xsl:otherwise>
 			</xsl:choose>
 		</xsl:attribute>
-		<xsl:value-of select="concat(document($library)/library/@macro-prefix, @id)"/>
+		<xsl:choose>
+			<xsl:when test="@display">
+				<xsl:value-of select="concat(document($library)/library/@macro-prefix, @display)"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="concat(document($library)/library/@macro-prefix, @id)"/>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:element>
 	<xsl:for-each select="abstract[1]">
 		<SPAN><xsl:apply-templates/></SPAN>

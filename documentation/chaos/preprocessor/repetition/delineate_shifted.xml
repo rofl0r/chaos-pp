@@ -6,7 +6,7 @@
 
 <macro id="DELINEATE_SHIFTED" type="indirect" group="delineation">
 	<abstract>
-		The <DELINEATE_SHIFTED/> macro repeats its third argument one less time than the number specified by its first argument with the delineator specified by its second argument between each repetition.
+		The <DELINEATE_SHIFTED/> macro delineates its third argument one less time than the number specified by its first argument with the delineator specified by its second argument between each repetition.
 	</abstract>
 	<usage lang="C99">
 		<syntax><EXPR/>(<DELINEATE_SHIFTED/>(count, sep, macro))</syntax>
@@ -85,7 +85,7 @@
 	</usage>
 	<para>
 		The <DELINEATE_SHIFTED/> macro itself expands to a <link id="deferred expression"/> in terms of <code><NEXT/>(s)</code>.
-		This <link id="deferred expression"/>, when invoked by <EXPR/>, expands to the result of repeating the target <var>count</var> - 1 times (with the delineator specified by <var>sep</var> between each repetition).
+		This <link id="deferred expression"/>, when invoked by <EXPR/>, expands to the result of delineating the target with <var>sep</var> <var>count</var> - 1 times.
 		This is illustrated by the following pseudo-code:
 		<snippet>
 			macro(s, 1, data) sep() macro(s, 2, data) sep() ... macro(s, count - 1, data)

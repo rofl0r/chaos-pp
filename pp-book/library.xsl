@@ -38,9 +38,18 @@
 <xsl:template match="/header/macro | /header/macro//derivative">
 	<xsl:param name="path"/>
 	<xsl:param name="type" select="'PRIMARY'"/>
-	<macro id="{@id}" header="{$path}" type="{$type}">
-		<xsl:call-template name="make-groups"/>
-	</macro>
+	<xsl:choose>
+		<xsl:when test="@display">
+			<macro id="{@id}" header="{$path}" type="{$type}" display="{@display}">
+				<xsl:call-template name="make-groups"/>
+			</macro>
+		</xsl:when>
+		<xsl:otherwise>
+			<macro id="{@id}" header="{$path}" type="{$type}">
+				<xsl:call-template name="make-groups"/>
+			</macro>
+		</xsl:otherwise>
+	</xsl:choose>
 	<xsl:apply-templates select="derivative | alias">
 		<xsl:with-param name="path" select="$path"/>
 		<xsl:with-param name="type" select="'SECONDARY'"/>

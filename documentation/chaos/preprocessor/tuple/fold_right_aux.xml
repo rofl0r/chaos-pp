@@ -38,7 +38,7 @@
 	<para>
 		The <TUPLE_FOLD_RIGHT_AUX/> macro itself expands to a <link id="deferred expression"/> in terms of <code><NEXT/>(s)</code>.
 		This <link id="deferred expression"/>, when invoked by <EXPR/>, expands to the result of accumulating the elements of <var>tuple</var>, from right to left, with the user-specified operation.
-		This is illustrated by the following pseudo-code (where <var>N</var> is the index of the last element in <var>tuple</var>):
+		This is illustrated by the following pseudo-code (where <code>N</code> is the index of the last element in <var>tuple</var>):
 		<snippet>
 			op(s, tuple[0], data, op(s, tuple[1], data, ... op(s, tuple[N], data, state) ... ))
 		</snippet>

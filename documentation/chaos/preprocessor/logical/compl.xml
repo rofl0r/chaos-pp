@@ -19,6 +19,10 @@
 		If <var>bit</var> is <code>0</code>, this macro expands to <code>1</code>.
 		Otherwise, it expands to <code>0</code>.
 	</para>
+	<para>
+		This macro does <em>not</em> perform a Boolean conversion on its operand.
+		If this conversion is desirable, <NOT/> may be used instead.
+	</para>
 	<listing>
 		#include <chaos-preprocessor-logical-compl.h/>
 		

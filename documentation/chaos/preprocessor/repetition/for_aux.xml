@@ -106,7 +106,7 @@
 	<para>
 		The <FOR_AUX/> macro itself expands to a <link id="deferred expression"/> in terms of <code><NEXT/>(s)</code>.
 		This <link id="deferred expression"/>, when invoked by <EXPR/>, expands to the result of repeating the target while iterating the state until the predicate expands to <code>0</code>.
-		This is illustrated by the following pseudo-code (where <var>D</var> is <var>data</var>, <var>M</var> is <var>macro</var>, and <var>O</var> is <var>op</var>):
+		This is illustrated by the following pseudo-code (where <code>D</code> is <var>data</var>, <code>M</code> is <var>macro</var>, and <code>O</code> is <var>op</var>):
 		<snippet>
 			M(s, D, state) M(s, D, O(s, D, state)) ... M(s, D, O(s, D, ... O(s, D, state) ...))
 		</snippet>

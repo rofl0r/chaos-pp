@@ -46,7 +46,7 @@
 	<para>
 		The <TUPLE_FOR_EACH_I/> macro itself expands to a <link id="deferred expression"/> in terms of <code><NEXT/>(s)</code>.
 		This <link id="deferred expression"/>, when invoked with <EXPR/>, expands to the result of the repeated invocation of the target for each element in <var>tuple</var>.
-		This is illustrated by the following pseudo-code (where <var>T</var> is <var>tuple</var> and <var>N</var> is the index of the last element in <var>tuple</var>):
+		This is illustrated by the following pseudo-code (where <code>T</code> is <var>tuple</var> and <code>N</code> is the index of the last element in <var>tuple</var>):
 		<snippet>
 			macro(s, 0, T[0], data) macro(s, 0, T[1], data) ... macro(s, N, T[N], data)
 		</snippet>

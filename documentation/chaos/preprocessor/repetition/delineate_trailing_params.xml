@@ -6,7 +6,7 @@
 
 <macro id="DELINEATE_TRAILING_PARAMS" type="indirect" group="parameters">
 	<abstract>
-		The <DELINEATE_TRAILING_PARAMS/> macro repeats its third argument--concatenated to the current repetition number--the number of times specified by its first argument with the delineator specified by its second argument between each repetition.
+		The <DELINEATE_TRAILING_PARAMS/> macro delineates its third argument the number of times specified by its first argument.
 	</abstract>
 	<usage lang="C99">
 		<syntax><DELINEATE_TRAILING_PARAMS/>(count, sep, ...)</syntax>
@@ -28,11 +28,11 @@
 	<usage lang="C/C++">
 		<syntax><DELINEATE_TRAILING_PARAMS/>(count, sep, param)</syntax>
 		<param id="count">
-			The number of times that <code>__VA_ARGS__</code> is to be repeated.
+			The number of times that <var>param</var> is to be repeated.
 			Valid values range from <code>0</code> to <LIMIT_MAG/>.
 		</param>
 		<param id="sep">
-			The delineator to be situated between each repetition of <code>__VA_ARGS__</code>.
+			The delineator to be situated between each repetition of <var>param</var>.
 			This delineator must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
 			<snippet>
 				sep()

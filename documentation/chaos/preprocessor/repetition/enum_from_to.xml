@@ -76,7 +76,7 @@
 	</usage>
 	<para>
 		The <ENUM_FROM_TO/> macro itself expands to a <link id="deferred expression"/> in terms of <code><NEXT/>(s)</code>.
-		This <link id="deferred expression"/>, when invoked by <EXPR/>, expands to the result of repeating the target for each number ranging from <var>from</var> to <var>to</var> - 1 (with a comma between each repetition).
+		This <link id="deferred expression"/>, when invoked by <EXPR/>, expands to the result of enumerating the target with a comma for each number ranging from <var>from</var> to <var>to</var> - 1.
 		This is illustrated by the following pseudo-code:
 		<snippet>
 			macro(s, from, data), macro(s, from + 1, data), ... macro(s, to - 1, data)

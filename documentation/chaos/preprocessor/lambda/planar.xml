@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <header name="chaos/preprocessor/lambda/planar.h" author="Paul Mensonides" date="2003-2004">
 <overview>
-	The <self/> header defines macros used to abstract the difference between the invocation of a macro and a <link id="λ-expression"/>.
+	The <self/> header defines macros used to abstract the difference between the invocation of a macro and a <link id="λ expression"/>.
 </overview>
 
 <macro id="PLANAR" group="invocation">
 	<abstract>
-		The <PLANAR/> macro abstracts the difference between a partial invocation of a macro and a partial invocation of a <link id="λ-expression"/>.
+		The <PLANAR/> macro abstracts the difference between a partial invocation of a macro and a partial invocation of a <link id="λ expression"/>.
 	</abstract>
 	<usage>
 		<syntax><PLANAR/>(x)()(s, x)</syntax>
 		<param id="x">
-			The macro name or <link id="λ-expression"/> to be invoked.
+			The macro name or <link id="λ expression"/> to be invoked.
 		</param>
 		<param id="s">
 			The <link id="recursion state"/> in terms of which the resulting <link id="deferred expression"/> is to be generated.
@@ -50,7 +50,7 @@
 	</para>
 	<para>
 		Normal usage consists of invoking <PLANAR/> without the trailing invocations, passing that result around, and finishing the invocation at another time.
-		This avoids repeatedly detecting the difference between a macro name and a <link id="λ-expression"/>.
+		This avoids repeatedly detecting the difference between a macro name and a <link id="λ expression"/>.
 		<snippet>
 			#define MACRO(s, x) MACRO_I(s, x, <PLANAR/>(x))
 			#define MACRO_I(s, x, _x) _x()(s, x) ~ <PLANAR_CLOSE/>()

@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <header name="chaos/preprocessor/lambda/invoke.h" author="Paul Mensonides" date="2003-2004">
 <overview>
-	The <self/> header defines a macro that invokes a <link id="λ-expression"/>.
+	The <self/> header defines a macro that invokes a <link id="λ expression"/>.
 </overview>
 
 <macro id="INVOKE" type="indirect">
 	<abstract>
-		The <INVOKE/> macro invokes a <link id="λ-expression"/>.
+		The <INVOKE/> macro invokes a <link id="λ expression"/>.
 	</abstract>
 	<usage lang="C99">
 		<syntax><INVOKE/>(expr)</syntax>
 		<param id="expr" optional="1">
-			The <link id="λ-expression"/> to be invoked.
+			The <link id="λ expression"/> to be invoked.
 		</param>
 	</usage>
 	<usage lang="C99">
 		<syntax><INVOKE/>(expr, ...)</syntax>
 		<param id="expr" optional="1">
-			The <link id="λ-expression"/> to be invoked.
+			The <link id="λ expression"/> to be invoked.
 		</param>
 		<param id="..." optional="1">
-			The arguments used to replace <link id="λ-placeholders"/> in <var>expr</var>.
+			The arguments used to replace <link id="λ placeholders"/> in <var>expr</var>.
 		</param>
 	</usage>
 	<para>
 		This macro produces the <link id="deferred expression"/> represented by <var>expr</var>.
 	</para>
 	<para>
-		The <code>__VA_ARGS__</code> arguments are used to replace <link id="λ-placeholders"/> in <var>expr</var>.
-		The first of these corresponds to the zero-th <link id="λ-placeholder"/>, the second to the first, and so on.
+		The <code>__VA_ARGS__</code> arguments are used to replace <link id="λ placeholders"/> in <var>expr</var>.
+		The first of these corresponds to the zero-th <link id="λ placeholder"/>, the second to the first, and so on.
 	</para>
 	<para>
 		This macro uses <link id="bypass semantics"/>.

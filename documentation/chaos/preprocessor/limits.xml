@@ -146,7 +146,7 @@
 
 <macro id="LIMIT_LAMBDA" type="object">
 	<abstract>
-		The <LIMIT_LAMBDA/> macro expands to the maximum number of <link id="tuple"/> elements supported by the <link id="λ-mechanism"/> without the use of the <OVERRIDE/> operator.
+		The <LIMIT_LAMBDA/> macro expands to the maximum number of <link id="tuple"/> elements supported by the <link id="λ mechanism"/> without the use of the <OVERRIDE/> operator.
 	</abstract>
 	<usage lang="C99">
 		<syntax><LIMIT_LAMBDA/></syntax>
@@ -188,7 +188,7 @@
 
 <macro id="LIMIT_PLACEHOLDERS" type="object">
 	<abstract>
-		The <LIMIT_PLACEHOLDERS/> macro expands to the maximum number of addressable <link id="λ-placeholders"/>.
+		The <LIMIT_PLACEHOLDERS/> macro expands to the maximum number of addressable <link id="λ placeholders"/>.
 	</abstract>
 	<usage lang="C99">
 		<syntax><LIMIT_PLACEHOLDERS/></syntax>

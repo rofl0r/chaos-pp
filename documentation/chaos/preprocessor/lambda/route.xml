@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <header name="chaos/preprocessor/lambda/route.h" author="Paul Mensonides" date="2003-2004">
 <overview>
-	The <self/> header defines a macro used to abstract the difference between the invocation of a macro and a <link id="λ-expression"/> as well as explicitly route the point of invocation.
+	The <self/> header defines a macro used to abstract the difference between the invocation of a macro and a <link id="λ expression"/> as well as explicitly route the point of invocation.
 </overview>
 
 <macro id="WAYPOINT" type="indirect" group="invocation">
@@ -26,13 +26,13 @@
 
 <macro id="ROUTE" group="invocation">
 	<abstract>
-		The <ROUTE/> macro is used to delay the invocation of a macro or <link id="λ-expression"/> until the context introduced by <WAYPOINT/> is present.
+		The <ROUTE/> macro is used to delay the invocation of a macro or <link id="λ expression"/> until the context introduced by <WAYPOINT/> is present.
 	</abstract>
 	<usage lang="C99">
 		<syntax><ROUTE/>(x)()(s, x, ...)</syntax>
 		<param id="x">
 			<para>
-				The macro or <link id="λ-expression"/> to be invoked.
+				The macro or <link id="λ expression"/> to be invoked.
 				If this argument is a macro, it must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
 				<snippet>
 					macro(s, args<sup>†</sup>)
@@ -56,7 +56,7 @@
 	</para>
 	<para>
 		Normal usage consists of invoking <ROUTE/> without the trailing invocations, passing that result around, and finishing the invocation at another time.
-		This avoids repeatedly detecting the difference between a macro name and a <link id="λ-expression"/>.
+		This avoids repeatedly detecting the difference between a macro name and a <link id="λ expression"/>.
 		<snippet>
 			#define MACRO(s, x) \
 			    <WAYPOINT/>(MACRO_I(s, x, <ROUTE/>(x))) \

@@ -1,50 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <header name="chaos/preprocessor/lambda/ops.h" author="Paul Mensonides" date="2003-2004">
 <overview>
-	The <self/> header defines basic operators used to build <link id="λ-expressions"/>.
+	The <self/> header defines basic operators used to build <link id="λ expressions"/>.
 </overview>
 
 <macro id="LAMBDA" type="indirect">
 	<abstract>
-		The <LAMBDA/> macro is used to create a <link id="λ-binding"/>.
+		The <LAMBDA/> macro is used to create a <link id="λ binding"/>.
 	</abstract>
 	<usage lang="C99">
 		<syntax><LAMBDA/>(...)</syntax>
 		<param id="..." optional="1">
-			The argument on which a <link id="λ-binding"/> is to be created.
+			The argument on which a <link id="λ binding"/> is to be created.
 		</param>
 	</usage>
 	<para>
-		This macro produces a <link id="λ-expression"/> containing <code>__VA_ARGS__</code>.
+		This macro produces a <link id="λ expression"/> containing <code>__VA_ARGS__</code>.
 	</para>
 	<para>
-		The primary purpose of this macro is to bind certain elements of a <link id="λ-expression"/> such that the parsing mechanism can parse <em>past</em> those elements.
-		Technically, just about <em>any</em> sequence of preprocessing tokens is a <link id="λ-expression"/>.
-		Because of the limitations of the preprocessor, however, the <link id="λ-mechanism"/> cannot parse past certain types of preprocessing tokens.
+		The primary purpose of this macro is to bind certain elements of a <link id="λ expression"/> such that the parsing mechanism can parse <em>past</em> those elements.
+		Technically, just about <em>any</em> sequence of preprocessing tokens is a <link id="λ expression"/>.
+		Because of the limitations of the preprocessor, however, the <link id="λ mechanism"/> cannot parse past certain types of preprocessing tokens.
 		For example, in the following code:
 		<snippet>
 			<INVOKE/>(+ _1, x)
 		</snippet>
-		The <link id="λ-mechanism"/> cannot reach the <code>_1</code>, and consequently cannot replace it.
+		The <link id="λ mechanism"/> cannot reach the <code>_1</code>, and consequently cannot replace it.
 		This macro may be used in such situations to bind preprocessing tokens.
 		<snippet>
 			<INVOKE/>(<LAMBDA/>(+) _1, x) // + x
 		</snippet>
 	</para>
 	<para>
-		Another purpose of this macro is to create <link id="λ-expressions"/> that contain open commas.
-		One of the rules of a <link id="λ-expression"/> is that it must be passable as a single argument, so an expression such as
+		Another purpose of this macro is to create <link id="λ expressions"/> that contain open commas.
+		One of the rules of a <link id="λ expression"/> is that it must be passable as a single argument, so an expression such as
 		<snippet>
 			a, b
 		</snippet>
-		cannot be a <link id="λ-expression"/>.
+		cannot be a <link id="λ expression"/>.
 		This macro allows for the creation of such expressions.
 		<snippet>
 			<LAMBDA/>(a, b)
 		</snippet>
 	</para>
 	<para>
-		Finally, the last purpose of this macro is to define <link id="λ-bindings"/> on macro names.
+		Finally, the last purpose of this macro is to define <link id="λ bindings"/> on macro names.
 		For an arbitrary macro <code>MACRO</code>, this is commonly accomplished in one of two ways.
 		The first is...
 		<snippet>
@@ -55,7 +55,7 @@
 			#define MACRO_ <LAMBDA/>(MACRO_ID)()
 		</snippet>
 		The second form requires an indirection macro, <code>MACRO_ID</code>, that expands to <code>MACRO</code> when invoked with nullary parentheses.
-		This indirection acts as a buffer that allows the resulting <link id="λ-expression"/> to pass through <code>MACRO</code> without the identifier <code>MACRO</code> becoming disabled.
+		This indirection acts as a buffer that allows the resulting <link id="λ expression"/> to pass through <code>MACRO</code> without the identifier <code>MACRO</code> becoming disabled.
 	</para>
 	<listing>
 		#include <chaos-preprocessor-arithmetic-dec.h/>
@@ -114,7 +114,7 @@
 
 <macro id="ESCAPE" type="indirect">
 	<abstract>
-		The <ESCAPE/> macro produces a <link id="λ-expression"/> whose contents are not parsed by the <link id="λ-mechanism"/>.
+		The <ESCAPE/> macro produces a <link id="λ expression"/> whose contents are not parsed by the <link id="λ mechanism"/>.
 	</abstract>
 	<usage lang="C99">
 		<syntax><ESCAPE/>(...)</syntax>
@@ -123,7 +123,7 @@
 		</param>
 	</usage>
 	<para>
-		This macro expands to a <link id="λ-expression"/> that prevents <code>__VA_ARGS__</code> from being parsed by the <link id="λ-mechanism"/>.
+		This macro expands to a <link id="λ expression"/> that prevents <code>__VA_ARGS__</code> from being parsed by the <link id="λ mechanism"/>.
 	</para>
 	<listing>
 		#include <chaos-preprocessor-cat.h/>
@@ -157,7 +157,7 @@
 
 <macro id="OVERRIDE" type="indirect">
 	<abstract>
-		The <OVERRIDE/> macro provides a means for the <link id="λ-mechanism"/> to parse <link id="tuples"/> that contain more than <LIMIT_LAMBDA/> elements.
+		The <OVERRIDE/> macro provides a means for the <link id="λ mechanism"/> to parse <link id="tuples"/> that contain more than <LIMIT_LAMBDA/> elements.
 	</abstract>
 	<usage lang="C99">
 		<syntax><OVERRIDE/>(...)</syntax>
@@ -166,12 +166,12 @@
 		</param>
 	</usage>
 	<para>
-		The <link id="λ-mechanism"/> stores internal data in <link id="tuple"/> elements beyond <LIMIT_LAMBDA/> elements.
-		This imposes a restriction on <link id="λ-expressions"/> such that they cannot contain <link id="tuples"/> containing more than <LIMIT_LAMBDA/> elements.
-		This macro overrides that restriction by explicitly telling the <link id="λ-mechanism"/> that a <link id="tuple"/> is to be parsed as a <link id="tuple"/> rather than as internal data.
+		The <link id="λ mechanism"/> stores internal data in <link id="tuple"/> elements beyond <LIMIT_LAMBDA/> elements.
+		This imposes a restriction on <link id="λ expressions"/> such that they cannot contain <link id="tuples"/> containing more than <LIMIT_LAMBDA/> elements.
+		This macro overrides that restriction by explicitly telling the <link id="λ mechanism"/> that a <link id="tuple"/> is to be parsed as a <link id="tuple"/> rather than as internal data.
 	</para>
 	<para>
-		This macro is a more explicit form of the following <link id="λ-expression"/>:
+		This macro is a more explicit form of the following <link id="λ expression"/>:
 		<snippet>
 			(<LAMBDA/>(__VA_ARGS__))
 		</snippet>
@@ -198,14 +198,14 @@
 
 <macro id="SELF">
 	<abstract>
-		The <SELF/> macro expands to the <link id="λ-expression"/> currently being parsed.
+		The <SELF/> macro expands to the <link id="λ expression"/> currently being parsed.
 	</abstract>
 	<usage lang="C99">
 		<syntax><SELF/>()</syntax>
 	</usage>
 	<para>
-		This macro expands to the <link id="λ-expression"/> currently being parsed.
-		This allows a <link id="λ-expression"/> to recurse on itself.
+		This macro expands to the <link id="λ expression"/> currently being parsed.
+		This allows a <link id="λ expression"/> to recurse on itself.
 	</para>
 	<listing>
 		#include <chaos-preprocessor-arithmetic-dec.h/>
@@ -241,20 +241,20 @@
 
 <macro id="PARAM" group="placeholders">
 	<abstract>
-		The <PARAM/> macro produces a reference to a <link id="λ-placeholder"/>.
+		The <PARAM/> macro produces a reference to a <link id="λ placeholder"/>.
 	</abstract>
 	<usage lang="C99">
 		<syntax><PARAM/>(n)</syntax>
 		<param id="n">
-			The index of the <link id="λ-placeholder"/> to be referenced.
+			The index of the <link id="λ placeholder"/> to be referenced.
 			Valid values range from <code>0</code> to <LIMIT_PLACEHOLDERS/> - 1.
 		</param>
 	</usage>
 	<para>
-		This macro expands to a reference to the <var>n</var>-th <link id="λ-placeholder"/>.
+		This macro expands to a reference to the <var>n</var>-th <link id="λ placeholder"/>.
 	</para>
 	<para>
-		This macro is an longhand form of direct use of the <link id="λ-placeholders"/> (e.g. <code>_0</code>, <code>_1</code>, etc.) which are more convenient to use, but cannot always be defined.
+		This macro is an longhand form of direct use of the <link id="λ placeholders"/> (e.g. <code>_0</code>, <code>_1</code>, etc.) which are more convenient to use, but cannot always be defined.
 	</para>
 	<listing>
 		#include <chaos-preprocessor-config.h/>
@@ -281,28 +281,28 @@
 
 <macro id="PLACEHOLDERS" group="placeholders">
 	<abstract>
-		The <PLACEHOLDERS/> macro is used to define and undefine the <link id="λ-placeholders"/>.
+		The <PLACEHOLDERS/> macro is used to define and undefine the <link id="λ placeholders"/>.
 	</abstract>
 	<usage lang="C99">
 		<syntax>??=include <PLACEHOLDERS/>(bit)</syntax>
 		<param id="bit">
-			The value that determines whether the <link id="λ-placeholders"/> should be defined or undefined.
+			The value that determines whether the <link id="λ placeholders"/> should be defined or undefined.
 			Valid values are <code>0</code> and <code>1</code>.
 		</param>
 	</usage>
 	<para>
-		If <var>bit</var> expands to <code>1</code>, the <link id="λ-placeholders"/> (e.g. <code>_0</code>, <code>_1</code>, etc.) are defined by the library.
+		If <var>bit</var> expands to <code>1</code>, the <link id="λ placeholders"/> (e.g. <code>_0</code>, <code>_1</code>, etc.) are defined by the library.
 		Otherwise, they are undefined.
 	</para>
 	<para>
-		It is important that the definitions of the <link id="λ-placeholders"/> only exist temporarily because they are unprefixed macro definitions that will interfere with any other use of those identifiers.
-		Therefore, for every use of <PLACEHOLDERS/> that enables the <link id="λ-placeholders"/>, there should be a matching use of <PLACEHOLDERS/> that disables them.
+		It is important that the definitions of the <link id="λ placeholders"/> only exist temporarily because they are unprefixed macro definitions that will interfere with any other use of those identifiers.
+		Therefore, for every use of <PLACEHOLDERS/> that enables the <link id="λ placeholders"/>, there should be a matching use of <PLACEHOLDERS/> that disables them.
 		The library cannot enforce this directly, but the <WITH_PLACEHOLDERS/> mechanism may be used to enforce it, or the longhand <PARAM/> form may be used instead.
 	</para>
 	<para>		
 		Names that begin with an underscore are reserved for the implementation in file scope (C) or the global namespace (C++).
-		Consequently, if a standard header is included while the <link id="λ-placeholders"/> are defined, the result is undefined behavior.
-		As a general rule, no "normal" headers should be included while the <link id="λ-placeholders"/> are defined.
+		Consequently, if a standard header is included while the <link id="λ placeholders"/> are defined, the result is undefined behavior.
+		As a general rule, no "normal" headers should be included while the <link id="λ placeholders"/> are defined.
 	</para>
 	<listing>
 		#include <chaos-preprocessor-config.h/>
@@ -350,8 +350,8 @@
 	</usage>
 	<para>
 		This macro is defined by the user prior to the use of <WITH_PLACEHOLDERS/>.
-		When <WITH_PLACEHOLDERS/> is used, the file specified by <var>file</var> is included with the <link id="λ-placeholders"/> defined.
-		Upon completion of the inclusion, the <link id="λ-placeholders"/> are undefined.
+		When <WITH_PLACEHOLDERS/> is used, the file specified by <var>file</var> is included with the <link id="λ placeholders"/> defined.
+		Upon completion of the inclusion, the <link id="λ placeholders"/> are undefined.
 	</para>
 	<para>
 		This macro is automatically undefined by the library.
@@ -360,27 +360,27 @@
 
 <macro id="IS_WITH_PLACEHOLDERS" group="placeholders">
 	<abstract>
-		The <IS_WITH_PLACEHOLDERS/> is defined when the <link id="λ-placeholders"/> are defined.
+		The <IS_WITH_PLACEHOLDERS/> is defined when the <link id="λ placeholders"/> are defined.
 	</abstract>
 	<usage lang="C99">
 		<syntax><IS_WITH_PLACEHOLDERS/></syntax>
 	</usage>
 	<para>
-		If the <link id="λ-placeholders"/> are defined, this macro expands to <code>1</code>.
+		If the <link id="λ placeholders"/> are defined, this macro expands to <code>1</code>.
 		Otherwise, it is not defined.
 	</para>
 </macro>
 
 <macro id="WITH_PLACEHOLDERS" group="placeholders">
 	<abstract>
-		The <WITH_PLACEHOLDERS/> macro is used to include a file with the <link id="λ-placeholders"/> defined only for that file.
+		The <WITH_PLACEHOLDERS/> macro is used to include a file with the <link id="λ placeholders"/> defined only for that file.
 	</abstract>
 	<usage lang="C99">
 		<syntax>??=include <WITH_PLACEHOLDERS/>()</syntax>
 	</usage>
 	<para>
-		This macro defines the <link id="λ-placeholders"/> (e.g. <code>_0</code>, <code>_1</code>, <code>_2</code>, etc.), includes the file specified by the <link id="named external argument"/> <INCLUDE/>, and then undefines the <link id="λ-placeholders"/>.
-		This functionality can be used to enforce the guideline that every definition of the unsafe <link id="λ-placeholders"/> is followed by a corresponding undefinition.
+		This macro defines the <link id="λ placeholders"/> (e.g. <code>_0</code>, <code>_1</code>, <code>_2</code>, etc.), includes the file specified by the <link id="named external argument"/> <INCLUDE/>, and then undefines the <link id="λ placeholders"/>.
+		This functionality can be used to enforce the guideline that every definition of the unsafe <link id="λ placeholders"/> is followed by a corresponding undefinition.
 	</para>
 	<listing>
 		// file.h

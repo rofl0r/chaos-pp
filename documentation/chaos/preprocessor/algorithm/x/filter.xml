@@ -16,7 +16,7 @@
 		<param id="pred">
 			<para>
 				The predicate that determines whether an element is to remain in the resulting <link id="generic data structure"/>.
-				This predicate must be either a <link id="λ-expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				This predicate must be either a <link id="λ expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
 				<snippet>
 					pred(s, elem<sup>†</sup>)
 				</snippet>
@@ -39,7 +39,7 @@
 		<param id="pred">
 			<para>
 				The predicate that determines whether an element is to remain in the resulting <link id="generic data structure"/>.
-				This predicate must be either a <link id="λ-expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				This predicate must be either a <link id="λ expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
 				<snippet>
 					pred(s, elem<sup>†</sup>, data<sup>‡</sup>)
 				</snippet>
@@ -89,8 +89,8 @@
 		This guarantees that the predicate has <em>at least</em> <var>size</var> <link id="recursion steps"/> available whenever it is invoked.
 	</para>
 	<para>
-		The <link id="exponential"/> structure of the <code>X</code>-suffixed algorithms yields a total of <x-alpha/> <link id="recursion steps"/>, where <x-var>p</x-var> is the number of <link id="parametric resumptions"/> plus the initial entry, <x-var>s<sub>ω</sub></x-var> is <LIMIT_EXPR/>, <x-var>s</x-var> is the current <link id="recursion state"/> at the beginning of the algorithm (i.e. <code><STATE/>()</code>), <x-var>s<sub>δ</sub></x-var> is the buffer size, and <x-var>z</x-var> is the exponential base.
-		Currently, <x-var>z</x-var> is fixed at two in the <FILTER_X/> algorithm (though it could easily be increased), which reduces the equation to <x-beta/>.
+		The <link id="exponential"/> structure of the <code>X</code>-suffixed algorithms yields a total of <library-assoc id="alpha.gif">α</library-assoc> <link id="recursion steps"/>, where <x-var>p</x-var> is the number of <link id="parametric resumptions"/> plus the initial entry, <x-var>s<sub>ω</sub></x-var> is <LIMIT_EXPR/>, <x-var>s</x-var> is the current <link id="recursion state"/> at the beginning of the algorithm (i.e. <code><STATE/>()</code>), <x-var>s<sub>δ</sub></x-var> is the buffer size, and <x-var>z</x-var> is the exponential base.
+		Currently, <x-var>z</x-var> is fixed at two in the <FILTER_X/> algorithm (though it could easily be increased), which reduces the equation to <library-assoc id="beta.gif">β</library-assoc>.
 		Ignoring the complexity of <var>pred</var> (which is invoked once for each element in <var>g</var>), the running time of the algorithm can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
 		The asymptotic upper bound of O(2<x-var>n</x-var>+1), where <x-var>n</x-var> is the number of elements in <var>g</var>, occurs when all of the elements of <var>g</var> are preserved (i.e. when <var>pred</var> always results in <code>1</code>).
 		The asymptotic lower bound of Ω(<x-var>n</x-var>+1) occurs when all of the elements in <var>g</var> are removed (i.e. when <var>pred</var> always results in <code>0</code>).

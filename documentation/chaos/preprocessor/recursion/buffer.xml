@@ -18,7 +18,7 @@
 		This macro is used to produce a <link id="recursion state"/> <var>size</var> steps ahead of <var>s</var>.
 	</para>
 	<para>
-		This <link id="recursion state"/> is used by some algorithms to guarantee that user-defined macros (or <link id="λ-expressions"/>) have at least <var>size</var> <link id="recursion steps"/> available when they are invoked.
+		This <link id="recursion state"/> is used by some algorithms to guarantee that user-defined macros (or <link id="λ expressions"/>) have at least <var>size</var> <link id="recursion steps"/> available when they are invoked.
 		Such an algorithm increases this <link id="recursion state"/> as the actual <link id="recursion state"/> increases.
 		When this auxiliary <link id="recursion state"/> reaches <LIMIT_EXPR/>, the algorithm performs a <link id="parametric"/> or <link id="exponential"/> jump.
 	</para>
@@ -124,7 +124,7 @@
 		This macro is used to produce a <link id="recursion state"/> <var>size</var> steps prior to the end of the <link id="recursion backend"/>.
 	</para>
 	<para>
-		This <link id="recursion state"/> is used by some algorithms to guarantee that user-defined macros (or <link id="λ-expressions"/>) have at least <var>size</var> <link id="recursion steps"/> available when they are invoked.
+		This <link id="recursion state"/> is used by some algorithms to guarantee that user-defined macros (or <link id="λ expressions"/>) have at least <var>size</var> <link id="recursion steps"/> available when they are invoked.
 		When the actual <link id="recursion state"/> reaches this auxiliary <link id="recursion state"/>, the algorithm performs a <link id="parametric"/> or <link id="exponential"/> jump.
 	</para>
 	<para>

@@ -17,7 +17,7 @@
 	</usage>
 	<para>
 		This macro may be used with every library algorithm that allows a user-defined macro to expand to a <link id="deferred expression"/> and contains a state or auxiliary data argument.
-		These algorithms also allow a double user-specified operation as a macro name (i.e. a non-<link id="λ-expression"/>) of the following form:
+		These algorithms also allow a double user-specified operation as a macro name (i.e. a non-<link id="λ expression"/>) of the following form:
 		<snippet>
 			B A
 		</snippet>

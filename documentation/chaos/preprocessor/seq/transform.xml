@@ -13,7 +13,7 @@
 		<param id="op">
 			<para>
 				The operation used to transform each element of <var>seq</var>.
-				This operation must be either a <link id="λ-expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				This operation must be either a <link id="λ expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
 				<snippet>
 					op(s, elem<sup>†</sup>)
 				</snippet>
@@ -33,7 +33,7 @@
 		<param id="op">
 			<para>
 				The operation used to transformed each element of <var>seq</var>.
-				This operation must be either a <link id="λ-expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				This operation must be either a <link id="λ expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
 				<snippet>
 					op(s, elem<sup>†</sup>, data<sup>‡</sup>)
 				</snippet>

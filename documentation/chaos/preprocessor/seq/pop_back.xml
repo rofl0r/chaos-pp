@@ -11,7 +11,7 @@
 	<usage>
 		<syntax><SEQ_POP_BACK/>(seq)</syntax>
 		<param id="seq">
-			The <link id="sequence"/> whose last element is to be removed.
+			The non-nil <link id="sequence"/> whose last element is to be removed.
 		</param>
 	</usage>
 	<para>

@@ -125,7 +125,7 @@
 	<usage lang="C99">
 		<syntax><TUPLE_HEAD/>(tuple)</syntax>
 		<param id="tuple">
-			The <link id="tuple"/> whose first element is to be extracted.
+			The non-nil <link id="tuple"/> whose first element is to be extracted.
 		</param>
 	</usage>
 	<para>
@@ -155,7 +155,7 @@
 	<usage lang="C99">
 		<syntax><TUPLE_TAIL/>(tuple)</syntax>
 		<param id="tuple">
-			The <link id="tuple"/> whose first element is to be removed.
+			The non-nil <link id="tuple"/> whose first element is to be removed.
 		</param>
 	</usage>
 	<para>

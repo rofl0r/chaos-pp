@@ -12,7 +12,7 @@
 		<syntax><TUPLE_REPLACE/>(i, tuple, x)</syntax>
 		<param id="i">
 			The zero-based index of the element to be replaced.
-			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+			Valid values range from <code>0</code> to <code><TUPLE_SIZE/>(tuple)</code> - 1.
 		</param>
 		<param id="tuple">
 			The <link id="tuple"/> in which an element is to be replaced.
@@ -23,7 +23,6 @@
 	</usage>
 	<para>
 		This macro expands to a <link id="tuple"/> containing the elements of <var>tuple</var> except with the <var>i</var>-th element replaced by <var>x</var>.
-		Consequently, <var>tuple</var> must contain at least <var>i</var> + 1 elements.
 	</para>
 	<para>
 		The efficiency of the algorithm's use of the <link id="recursion backend"/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.

@@ -12,7 +12,7 @@
 		<syntax><SEQ_INSERT/>(i, seq, ...)</syntax>
 		<param id="i">
 			The position at which the element is to be inserted.
-			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+			Valid values range from <code>0</code> to <code><SEQ_SIZE/>(seq)</code>.
 		</param>
 		<param id="seq" optional="1">
 			The <link id="sequence"/> into which the element is to be inserted.
@@ -25,7 +25,7 @@
 		<syntax><SEQ_INSERT/>(i, seq, x)</syntax>
 		<param id="i">
 			The position at which the element is to be inserted.
-			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+			Valid values range from <code>0</code> to <code><SEQ_SIZE/>(seq)</code>.
 		</param>
 		<param id="seq">
 			The <link id="sequence"/> into which the element is to be inserted.
@@ -36,7 +36,6 @@
 	</usage>
 	<para>
 		This macro expands to a <link id="sequence"/> with the elements of <var>seq</var> with <var>x</var> (or <code>__VA_ARGS__</code>) inserted at position <var>i</var>.
-		Consequently, <var>seq</var> must have at least <var>i</var> elements.
 	</para>
 	<listing>
 		#include <chaos-preprocessor-config.h/>

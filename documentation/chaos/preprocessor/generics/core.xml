@@ -118,7 +118,7 @@
 	<usage>
 		<syntax><HEAD/>(g)</syntax>
 		<param id="g">
-			The <link id="generic data structure"/> whose first element is to be extracted.
+			The non-nil <link id="generic data structure"/> whose first element is to be extracted.
 		</param>
 	</usage>
 	<para>
@@ -144,7 +144,7 @@
 	<usage>
 		<syntax><TAIL/>(g)</syntax>
 		<param id="g">
-			The <link id="generic data structure"/> whose first element is to be removed.
+			The non-nil <link id="generic data structure"/> whose first element is to be removed.
 		</param>
 	</usage>
 	<para>

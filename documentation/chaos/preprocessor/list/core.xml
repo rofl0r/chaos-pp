@@ -121,7 +121,7 @@
 	<usage>
 		<syntax><LIST_HEAD/>(list)</syntax>
 		<param id="list">
-			The <link id="list"/> whose first element is to be extracted.
+			The non-nil <link id="list"/> whose first element is to be extracted.
 		</param>
 	</usage>
 	<para>
@@ -146,7 +146,7 @@
 	<usage>
 		<syntax><LIST_TAIL/>(list)</syntax>
 		<param id="list">
-			The <link id="list"/> whose first element is to be removed.
+			The non-nil <link id="list"/> whose first element is to be removed.
 		</param>
 	</usage>
 	<para>

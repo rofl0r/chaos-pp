@@ -12,7 +12,7 @@
 		<syntax><SEQ_REPLACE/>(i, seq, ...)</syntax>
 		<param id="i">
 			The zero-based index of the element to be replaced.
-			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+			Valid values range from <code>0</code> to <code><SEQ_SIZE/>(seq)</code> - 1.
 		</param>
 		<param id="seq">
 			The <link id="sequence"/> in which an element is to be replaced.
@@ -25,7 +25,7 @@
 		<syntax><SEQ_REPLACE/>(i, seq, x)</syntax>
 		<param id="i">
 			The zero-based index of the element to be replaced.
-			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+			Valid values range from <code>0</code> to <code><SEQ_SIZE/>(seq)</code> - <var>i</var>.
 		</param>
 		<param id="seq">
 			The <link id="sequence"/> in which an element is to be replaced.
@@ -36,7 +36,6 @@
 	</usage>
 	<para>
 		This macro expands to a <link id="sequence"/> containing the elements of <var>seq</var> except with the <var>i</var>-th element replaced by <var>x</var> (or <code>__VA_ARGS__</code>).
-		Consequently, <var>seq</var> must contain at least <var>i</var> + 1 elements.
 	</para>
 	<listing>
 		#include <chaos-preprocessor-config.h/>

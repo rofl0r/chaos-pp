@@ -144,7 +144,7 @@
 	<usage>
 		<syntax><STRING_HEAD/>(string)</syntax>
 		<param id="string">
-			The <link id="string"/> whose first element is to be extracted.
+			The non-nil <link id="string"/> whose first element is to be extracted.
 		</param>
 	</usage>
 	<para>
@@ -169,7 +169,7 @@
 	<usage>
 		<syntax><STRING_TAIL/>(string)</syntax>
 		<param id="string">
-			The <link id="string"/> whose first element is to be removed.
+			The non-nil <link id="string"/> whose first element is to be removed.
 		</param>
 	</usage>
 	<para>

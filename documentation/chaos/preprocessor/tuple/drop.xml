@@ -12,7 +12,7 @@
 		<syntax><TUPLE_DROP/>(n, tuple)</syntax>
 		<param id="n">
 			The number of elements to be removed.
-			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+			Valid values range from <code>0</code> to <code><TUPLE_SIZE/>(tuple)</code>.
 		</param>
 		<param id="tuple" optional="1">
 			The <link id="tuple"/> from which elements are to be removed.
@@ -20,7 +20,6 @@
 	</usage>
 	<para>
 		This macro expands to a <link id="tuple"/> containing all but the first <var>n</var> elements of <var>tuple</var>.
-		Consequently, <var>tuple</var> must contain at least <var>n</var> elements.
 	</para>
 	<para>
 		The efficiency of the algorithm's use of the <link id="recursion backend"/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.

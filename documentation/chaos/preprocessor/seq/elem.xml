@@ -12,7 +12,7 @@
 		<syntax><SEQ_ELEM/>(i, seq)</syntax>
 		<param id="i">
 			The zero-based index of the element to be extracted.
-			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+			Valid values range from <code>0</code> to <code><SEQ_SIZE/>(seq)</code> - 1.
 		</param>
 		<param id="seq">
 			The <link id="sequence"/> from which an element is to be extracted.
@@ -20,7 +20,6 @@
 	</usage>
 	<para>
 		This macro extracts the <var>i</var>-th element of <var>seq</var>.
-		Consequently, <var>seq</var> must contain at least <var>i</var> + 1 elements.
 	</para>
 	<listing>
 		#include <chaos-preprocessor-config.h/>

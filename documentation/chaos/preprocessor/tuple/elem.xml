@@ -17,11 +17,11 @@
 		<param id="..." optional="1">
 			The variadic list of arguments from which an element is to be extracted.
 		</param>
-		<para>
-			This macro expands to the <var>i</var>-th argument within <code>__VA_ARGS__</code>.
-			If the <var>i</var>-th element doesn't exist, this macro expands to nothing.
-		</para>
 	</usage>
+	<para>
+		This macro expands to the <var>i</var>-th argument within <code>__VA_ARGS__</code>.
+		If the <var>i</var>-th element doesn't exist, this macro expands to nothing.
+	</para>
 	<listing>
 		#include <chaos-preprocessor-config.h/>
 		#include <chaos-preprocessor-tuple-elem.h/>

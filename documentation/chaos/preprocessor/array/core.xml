@@ -125,7 +125,7 @@
 	<usage>
 		<syntax><ARRAY_HEAD/>(array)</syntax>
 		<param id="array">
-			The <link id="array"/> whose first element is to be extracted.
+			The non-nil <link id="array"/> whose first element is to be extracted.
 		</param>
 	</usage>
 	<para>
@@ -154,7 +154,7 @@
 	<usage>
 		<syntax><ARRAY_TAIL/>(array)</syntax>
 		<param id="array">
-			The <link id="array"/> whose first element is to be removed.
+			The non-nil <link id="array"/> whose first element is to be removed.
 		</param>
 	</usage>
 	<para>

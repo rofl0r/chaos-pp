@@ -158,7 +158,7 @@
 	<usage>
 		<syntax><SEQ_HEAD/>(seq)</syntax>
 		<param id="seq">
-			The <link id="sequence"/> whose first element is to be extracted.
+			The non-nil <link id="sequence"/> whose first element is to be extracted.
 		</param>
 	</usage>
 	<para>
@@ -188,7 +188,7 @@
 	<usage>
 		<syntax><SEQ_TAIL/>(seq)</syntax>
 		<param id="seq">
-			The <link id="sequence"/> whose first element is to be removed.
+			The non-nil <link id="sequence"/> whose first element is to be removed.
 		</param>
 	</usage>
 	<para>

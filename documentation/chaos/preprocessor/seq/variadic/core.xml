@@ -115,7 +115,7 @@
 	<usage lang="C99">
 		<syntax><VARIADIC_SEQ_HEAD/>(seq)</syntax>
 		<param id="seq">
-			The <link id="variadic sequence"/> whose first element is to be extracted.
+			The non-nil <link id="variadic sequence"/> whose first element is to be extracted.
 		</param>
 	</usage>
 	<para>
@@ -143,7 +143,7 @@
 	<usage lang="C99">
 		<syntax><VARIADIC_SEQ_TAIL/>(seq)</syntax>
 		<param id="seq">
-			The <link id="variadic sequence"/> whose first element is to be removed.
+			The non-nil <link id="variadic sequence"/> whose first element is to be removed.
 		</param>
 	</usage>
 	<para>

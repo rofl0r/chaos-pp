@@ -12,11 +12,11 @@
 		<syntax><TUPLE_RANGE/>(i, len, tuple)</syntax>
 		<param id="i">
 			The zero-based index of the first element to be extracted.
-			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+			Valid values range from <code>0</code> to <code><TUPLE_SIZE/>(tuple)</code> - 1.
 		</param>
 		<param id="len">
 			The number of elements to be extracted.
-			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+			Valid values range from <code>0</code> to <code><TUPLE_SIZE/>(tuple)</code> - <var>i</var>.
 		</param>
 		<param id="tuple" optional="1">
 			The <link id="tuple"/> from which elements are to be extracted.

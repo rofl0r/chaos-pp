@@ -11,7 +11,7 @@
 	<usage lang="C99">
 		<syntax><TUPLE_POP_BACK/>(tuple)</syntax>
 		<param id="tuple">
-			The <link id="tuple"/> whose last element is to be removed.
+			The non-nil <link id="tuple"/> whose last element is to be removed.
 		</param>
 	</usage>
 	<para>

@@ -12,7 +12,7 @@
 		<syntax><SEQ_TAKE/>(n, seq)</syntax>
 		<param id="n">
 			The number of elements to be extracted.
-			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+			Valid values range from <code>0</code> to <code><SEQ_SIZE/>(seq)</code>.
 		</param>
 		<param id="seq" optional="1">
 			The <link id="sequence"/> from which elements are to be extracted.
@@ -22,7 +22,7 @@
 		<syntax><SEQ_TAKE/>(n, seq)</syntax>
 		<param id="n">
 			The number of elements to be extracted.
-			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+			Valid values range from <code>0</code> to <code><SEQ_SIZE/>(seq)</code>.
 		</param>
 		<param id="seq">
 			The <link id="sequence"/> from which elements are to be extracted.
@@ -30,7 +30,6 @@
 	</usage>
 	<para>
 		This macro expands to a <link id="sequence"/> containing the first <var>n</var> elements of <var>seq</var>.
-		Consequently, <var>seq</var> must contain at least <var>n</var> elements.
 	</para>
 	<listing>
 		#include <chaos-preprocessor-config.h/>

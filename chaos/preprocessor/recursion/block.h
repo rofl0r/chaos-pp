@@ -19,18 +19,18 @@
 #
 # /* CHAOS_PP_BLOCK */
 #
-# define CHAOS_PP_BLOCK(n, id) CHAOS_PP_PRIMITIVE_CAT(CHAOS_IP_BLOCK_, n)(id, CHAOS_PP_EMPTY)
+# define CHAOS_PP_BLOCK(n, macro) CHAOS_PP_PRIMITIVE_CAT(CHAOS_IP_BLOCK_, n)(macro, CHAOS_PP_EMPTY)
 # define CHAOS_PP_BLOCK_ID() CHAOS_PP_BLOCK
 #
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_BLOCK_ CHAOS_PP_LAMBDA(CHAOS_PP_BLOCK)
 # endif
 #
-# define CHAOS_IP_BLOCK_0(id, _) id
-# define CHAOS_IP_BLOCK_1(id, _) id _()
-# define CHAOS_IP_BLOCK_2(id, _) id _ _()()
-# define CHAOS_IP_BLOCK_3(id, _) id _ _ _()()()
-# define CHAOS_IP_BLOCK_4(id, _) id _ _ _ _()()()()
-# define CHAOS_IP_BLOCK_5(id, _) id _ _ _ _ _()()()()()
+# define CHAOS_IP_BLOCK_0(macro, _) macro
+# define CHAOS_IP_BLOCK_1(macro, _) macro _()
+# define CHAOS_IP_BLOCK_2(macro, _) macro _ _()()
+# define CHAOS_IP_BLOCK_3(macro, _) macro _ _ _()()()
+# define CHAOS_IP_BLOCK_4(macro, _) macro _ _ _ _()()()()
+# define CHAOS_IP_BLOCK_5(macro, _) macro _ _ _ _ _()()()()()
 #
 # endif

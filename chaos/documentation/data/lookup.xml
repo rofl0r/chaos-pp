@@ -26,6 +26,12 @@
 	<symbol id="VARIADICS"/>
 </header>
 
+<header src="facilities/abbr">
+	<symbol id="ABBR"/>
+	<symbol id="ABBR_"/>
+	<symbol id="ABBR_ID"/>
+</header>
+
 <header src="lambda/ops">
 	<symbol id="LAMBDA"/>
 </header>
@@ -35,9 +41,17 @@
 	<symbol id="LIMIT_MAG"/>
 </header>
 
-<header src="expr">
+<header src="punctuation/comma_if">
+	<symbol id="COMMA_IF"/>
+</header>
+
+<header src="recursion/expr">
 	<symbol id="EXPR"/>
 	<symbol id="EXPR_S"/>
+</header>
+
+<header src="repetition/repeat">
+	<symbol id="REPEAT"/>
 </header>
 
 <header src="stringize">

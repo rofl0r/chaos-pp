@@ -4,7 +4,61 @@
 	The <self/> header defines a macro used to facilitate overloading of macros.
 </overview>
 
-<macro id="OVERLOAD">
+<macro id="QUICK_OVERLOAD" group="overload">
+	<abstract>
+		The <QUICK_OVERLOAD/> macro facilitates overloading of macros on the number of arguments.
+	</abstract>
+	<usage lang="C99">
+		<syntax><QUICK_OVERLOAD/>(pre, ...)(...)</syntax>
+		<param id="pre">
+			The prefix of a set of overloaded macros.
+		</param>
+		<param id="..." optional="1">
+			The arguments to be passed to an overloaded macro.
+		</param>
+	</usage>
+	<para>
+		This macro counts the number of arguments in <code>__VA_ARGS__</code> and expands to an expression of the following form:
+		<snippet>
+			pre ## count(__VA_ARGS__)
+		</snippet>
+		If the number of arguments is greater than <LIMIT_TUPLE/>, the result is <link id="saturated"/> to <LIMIT_TUPLE/>.
+	</para>
+	<para>
+		The number of arguments is never zero--even in situations such as the following:
+		<snippet>
+			<OVERLOAD/>(XYZ_,)()
+		</snippet>
+		The above is interpreted as a single empty argument.
+	</para>
+	<para>
+		Unlike <OVERLOAD/>, <QUICK_OVERLOAD/> is a constant-time operation at the price of a much lower limit on countable elements.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-facilities-overload.h/>
+		
+		#define MACRO_1(a) -a
+		#define MACRO_2(a, b) a - b
+		#define MACRO_3(a, b, c) a - b - c
+		
+		#if <VARIADICS/>
+		
+		#define MACRO(...) \
+		    <QUICK_OVERLOAD/>(MACRO_, __VA_ARGS__)(__VA_ARGS__) \
+		    /**/
+		
+		MACRO(1)       // -1
+		MACRO(1, 2)    // 1 - 2
+		MACRO(1, 2, 3) // 1 - 2 - 3
+		
+		#endif
+	</listing>
+	<derivative id="QUICK_OVERLOAD_ID" lang="C99"/>
+	<derivative id="QUICK_OVERLOAD_" lang="C99"/>
+</macro>
+
+<macro id="OVERLOAD" group="overload">
 	<abstract>
 		The <OVERLOAD/> macro facilitates overloading of macros on the number of arguments.
 	</abstract>

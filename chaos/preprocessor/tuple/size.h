@@ -17,12 +17,31 @@
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/control/if.h>
 # include <chaos/preprocessor/control/iif.h>
+# include <chaos/preprocessor/detection/is_empty.h>
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/limits.h>
 # include <chaos/preprocessor/recursion/basic.h>
 # include <chaos/preprocessor/recursion/expr.h>
 # include <chaos/preprocessor/tuple/batch.h>
 # include <chaos/preprocessor/tuple/core.h>
+#
+# /* CHAOS_PP_TUPLE_QUICK_SIZE */
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_PP_TUPLE_QUICK_SIZE(tuple) \
+        CHAOS_IP_TUPLE_QUICK_SIZE_I(CHAOS_PP_TUPLE_BATCH_FORK(CHAOS_PP_LIMIT_TUPLE, tuple)) \
+        /**/
+#    define CHAOS_PP_TUPLE_QUICK_SIZE_ID() CHAOS_PP_TUPLE_QUICK_SIZE
+#    define CHAOS_PP_TUPLE_QUICK_SIZE_ CHAOS_PP_LAMBDA(CHAOS_PP_TUPLE_QUICK_SIZE)
+# endif
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_IP_TUPLE_QUICK_SIZE_I(fork) \
+        CHAOS_PP_IIF(CHAOS_PP_IS_EMPTY_NON_FUNCTION(fork))( \
+            CHAOS_PP_LIMIT_TUPLE, fork \
+        ) \
+        /**/
+# endif
 #
 # /* CHAOS_PP_TUPLE_SIZE */
 #

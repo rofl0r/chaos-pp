@@ -58,7 +58,7 @@
 		</param>
 		<param id="data">
 			Auxiliary data to be passed through the algorithm to the operation.
-			This argument may be either a unary parenthetic expression of any arity or a non-parenthetic expression.
+			This argument may be either a unary parenthetic expression or a non-parenthetic expression.
 		</param>
 		<param id="state">
 			The initial state of the accumulation.

@@ -170,7 +170,13 @@
 		The secondary invocation with <var>x</var> or <code>__VA_ARGS__</code> causes the argument to be scanned twice.
 		This double scan of <var>x</var> or <code>__VA_ARGS__</code> is the essence of <link id="abstract recursion"/> with the preprocessor.
 	</para>
-	<boilerplate type="s"/>
+	<para>
+		This macro deduces the current <link id="recursion state"/> and invokes <EXPR_S/>.
+		If the current <link id="recursion state"/> is already known, direct use of <EXPR_S/> is more efficient.
+	</para>
+	<para>
+		This macro may not be used if <link id="bypass semantics"/> are in effect.
+	</para>
 	<x-reference id="EXPR_S"/>
 	<listing>
 		#include <chaos-preprocessor-arithmetic-dec.h/>

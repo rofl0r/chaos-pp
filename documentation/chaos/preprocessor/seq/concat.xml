@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/seq/concat.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an algorithm that concatenates the elements of a <link id="sequence"/>.
+</overview>
+
+<macro id="SEQ_CONCAT" type="indirect" group="concatenation">
+	<abstract>
+		The <SEQ_CONCAT/> macro concatenates the elements of its argument.
+	</abstract>
+	<usage lang="C99">
+		<syntax><SEQ_CONCAT/>(seq)</syntax>
+		<param id="seq" optional="1">
+			The <link id="sequence"/> whose elements are to be concatenated.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><SEQ_CONCAT/>(seq)</syntax>
+		<param id="seq">
+			The <link id="sequence"/> whose elements are to be concatenated.
+		</param>
+	</usage>
+	<para>
+		This macro performs an ordered concatenation of the elements of <var>seq</var> beginning with the first element.
+		This is illustrated by the following pseudo-code:
+		<snippet>
+			( ... ((seq[0] ## seq[1]) ## seq[2]) ... ## seq[length(seq) - 1])
+		</snippet>
+	</para>
+	<para>
+		In C99, if <var>seq</var> contains non-unary elements, the sub-elements of each element will also be concatenated.
+		For example,
+		<snippet>
+			<SEQ_CONCAT/>((a, b)(c, d)) // abcd
+		</snippet>
+	</para>
+	<listing>
+		#include <chaos-preprocessor-seq-concat.h/>
+		
+		<SEQ_CONCAT/>((a)(b)(c)(d)(e)) // abcde
+	</listing>
+	<derivative id="SEQ_CONCAT_ID"/>
+	<derivative id="SEQ_CONCAT_" lang="C99"/>
+</macro>
+
+</header>

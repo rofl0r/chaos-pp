@@ -534,8 +534,10 @@
 				<directory name="complexity">
 					<binary-file name="duplex.gif"/>
 					<binary-file name="reverse_duplex.gif"/>
+					<binary-file name="size_alt.gif"/>
 				</directory>
 				<header name="binary_transform.h"/>
+				<header name="concat.h"/>
 				<header name="core.h"/>
 				<header name="duplex.h"/>
 				<header name="elem.h"/>

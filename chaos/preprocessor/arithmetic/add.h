@@ -17,15 +17,14 @@
 # include <chaos/preprocessor/comparison/not_equal.h>
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/control/iif.h>
-# include <chaos/preprocessor/facilities/split.h>
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/limits.h>
 # include <chaos/preprocessor/logical/bitand.h>
 # include <chaos/preprocessor/logical/bool.h>
-# include <chaos/preprocessor/punctuation/comma.h>
-# include <chaos/preprocessor/recursion/basic.h>
-# include <chaos/preprocessor/recursion/exponential.h>
 # include <chaos/preprocessor/recursion/expr.h>
+# include <chaos/preprocessor/recursion/phase.h>
+# include <chaos/preprocessor/seq/spec.h>
+# include <chaos/preprocessor/tuple/eat.h>
 #
 # /* CHAOS_PP_ADD */
 #
@@ -39,7 +38,7 @@
 # /* CHAOS_PP_ADD_BYPASS */
 #
 # define CHAOS_PP_ADD_BYPASS(s, x, y) \
-    CHAOS_PP_SPLIT(0, CHAOS_PP_EXPR_S(s)(CHAOS_IP_ADD_1(CHAOS_PP_OBSTRUCT(), CHAOS_PP_PREV(s), x, y))) \
+    CHAOS_PP_EXPR_S(s)(CHAOS_IP_ADD_I(CHAOS_PP_PREV(s), (CHAOS_PP_PREV(s)), x, y)) \
     /**/
 # define CHAOS_PP_ADD_BYPASS_ID() CHAOS_PP_ADD_BYPASS
 #
@@ -47,17 +46,36 @@
 #    define CHAOS_PP_ADD_BYPASS_ CHAOS_PP_LAMBDA(CHAOS_PP_ADD_BYPASS)
 # endif
 #
-# define CHAOS_IP_ADD_INDIRECT(n) CHAOS_IP_ADD_ ## n
-# define CHAOS_IP_ADD_0(s, im) CHAOS_IP_ADD_1(CHAOS_PP_OBSTRUCT(), s, im)
-# define CHAOS_IP_ADD_1(_, s, x, y) \
-    CHAOS_PP_IIF _( \
-        CHAOS_PP_BITAND \
-            (CHAOS_PP_IS_VALID(s)) \
-            (CHAOS_PP_BITAND(CHAOS_PP_BOOL(y))(CHAOS_PP_NOT_EQUAL(x, CHAOS_PP_LIMIT_MAG))) \
-    )( \
-        CHAOS_PP_EXPONENTIAL(s, CHAOS_PP_PREV, CHAOS_IP_ADD_INDIRECT, CHAOS_PP_INC(x) CHAOS_PP_COMMA() CHAOS_PP_DEC(y)), \
-        x CHAOS_PP_COMMA _() y \
+# define CHAOS_IP_ADD_INDIRECT() CHAOS_IP_ADD_I
+# define CHAOS_IP_ADD_I(s, jump, x, y) \
+    CHAOS_PP_IIF(CHAOS_PP_IS_VALID(CHAOS_PP_PREV(CHAOS_PP_PREV(s))))( \
+        CHAOS_PP_IIF(CHAOS_PP_IS_VALID(CHAOS_PP_PREV(s)))( \
+            CHAOS_IP_ADD_II, CHAOS_IP_ADD_III \
+        ), \
+        CHAOS_IP_ADD_IV \
+    )(CHAOS_PP_PHASE(0), s, jump, x, y) \
+    /**/
+# define CHAOS_IP_ADD_II(_, s, jump, x, y) \
+    _(1, CHAOS_PP_EXPR_S)(s)( \
+        CHAOS_IP_ADD_III(_, s, (CHAOS_PP_PREV(s)) jump, x, y) \
     ) \
+    /**/
+# define CHAOS_IP_ADD_III(_, s, jump, x, y) \
+    _(1, CHAOS_PP_IIF)( \
+        CHAOS_PP_BITAND(CHAOS_PP_NOT_EQUAL(x, CHAOS_PP_LIMIT_MAG))(CHAOS_PP_BOOL(y)) \
+    )( \
+        _(1, CHAOS_PP_EXPR_S)(s), x CHAOS_PP_TUPLE_EAT(1) \
+    )( \
+        _(1, CHAOS_IP_ADD_INDIRECT)()( \
+            CHAOS_PP_PREV(s), jump, CHAOS_PP_INC(x), CHAOS_PP_DEC(y) \
+        ) \
+    ) \
+    /**/
+# define CHAOS_IP_ADD_IV(_, s, jump, x, y) CHAOS_IP_ADD_V(CHAOS_PP_SEQ_FIRST(jump), CHAOS_PP_SEQ_REST(jump), x, y)
+# define CHAOS_IP_ADD_V(s, jump, x, y) \
+    CHAOS_PP_IIF(CHAOS_PP_IS_VALID(CHAOS_PP_PREV(s)))( \
+        CHAOS_IP_ADD_II, CHAOS_IP_ADD_III \
+    )(CHAOS_PP_PHASE(1), s, CHAOS_PP_IIF(CHAOS_PP_SEQ_IS_NIL(jump))((s), jump), x, y) \
     /**/
 #
 # endif

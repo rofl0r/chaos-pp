@@ -19,9 +19,7 @@
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/limits.h>
 # include <chaos/preprocessor/logical/not.h>
-# include <chaos/preprocessor/recursion/basic.h>
 # include <chaos/preprocessor/recursion/expr.h>
-# include <chaos/preprocessor/tuple/elem.h>
 #
 # /* CHAOS_PP_MOD */
 #
@@ -36,10 +34,7 @@
 #
 # define CHAOS_PP_MOD_BYPASS(s, x, y) \
     CHAOS_PP_EXPR_IIF(CHAOS_PP_NOT(y))(CHAOS_PP_FAILURE()) \
-    CHAOS_PP_TUPLE_ELEM( \
-        4, 1, \
-        (CHAOS_PP_EXPR_S(s)(CHAOS_IP_DIV_1(CHAOS_PP_OBSTRUCT(), CHAOS_PP_PREV(s), 0, x, y, 0))) \
-    ) \
+    CHAOS_PP_EXPR_S(s)(CHAOS_IP_DIV_I(CHAOS_PP_PREV(s), (CHAOS_PP_PREV(s)), 0, 0, x, y, 0, 1)) \
     /**/
 # define CHAOS_PP_MOD_BYPASS_ID() CHAOS_PP_MOD_BYPASS
 #

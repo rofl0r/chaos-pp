@@ -12,7 +12,7 @@
 		<syntax><EXPR/>(<SEQ_FOLD_LEFT/>(op, seq, ...))</syntax>
 		<param id="op">
 			<para>
-				The operation that is used to accumulate the elements of <var>seq</var>.
+				The operation that is to be used to accumulate the elements of <var>seq</var>.
 				This operation must be either a <link id="λ expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
 				<snippet>
 					op(s, elem<sup>†</sup>, state<sup>‡</sup>)
@@ -37,7 +37,7 @@
 	<usage lang="C/C++">
 		<syntax><EXPR/>(<SEQ_FOLD_LEFT/>(op, seq, state))</syntax>
 		<param id="op">
-			The operation that is used to accumulate the elements of <var>seq</var>.
+			The operation that is to be used to accumulate the elements of <var>seq</var>.
 			This operation must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
 			<snippet>
 				op(s, elem, state)

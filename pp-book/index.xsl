@@ -84,7 +84,7 @@
 			<LINK rel="stylesheet" type="text/css" href="{$root}/style.css"/>
 		</HEAD>
 		<BODY>
-			<H4>Macros <SMALL><A href="{$root}/master.html">(show derivatives)</A></SMALL></H4>
+			<H4>Macros <SMALL><A href="{$root}/macros.html">(hide derivatives)</A></SMALL></H4>
 			<UL>
 				<xsl:for-each select="macro">
 					<xsl:sort select="@id"/>

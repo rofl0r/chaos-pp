@@ -602,6 +602,7 @@
 					<binary-file name="for_each_i.gif"/>
 					<binary-file name="insert.gif"/>
 					<binary-file name="pop_back.gif"/>
+					<binary-file name="range.gif"/>
 					<binary-file name="rest_n.gif"/>
 					<binary-file name="size.gif"/>
 					<binary-file name="to_list_alt.gif"/>
@@ -611,6 +612,7 @@
 				<directory name="efficiency">
 					<binary-file name="fold_left.gif"/>
 					<binary-file name="fold_left_aux.gif"/>
+					<binary-file name="range.gif"/>
 				</directory>
 				<header name="batch.h"/>
 				<header name="concat.h"/>
@@ -627,6 +629,7 @@
 				<header name="for_each_i.h"/>
 				<header name="insert.h"/>
 				<header name="pop_back.h"/>
+				<header name="range.h"/>
 				<header name="rest_n.h"/>
 				<header name="rem.h"/>
 				<header name="reverse.h"/>

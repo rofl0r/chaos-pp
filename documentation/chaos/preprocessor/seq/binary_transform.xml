@@ -49,7 +49,7 @@
 	</para>
 	<para>
 		This macro uses <link id="sequential iteration"/>.
-		As a result, the algorithm is theoretically capable of processing an <em>infinite</em> number of elements.
+		As a result, the algorithm is theoretically capable of processing <link id="sequences"/> containing an <em>unrestricted</em> number of elements.
 	</para>
 	<listing>
 		#include <chaos-preprocessor-config.h/>
@@ -140,7 +140,7 @@
 	</para>
 	<para>
 		This macro uses <link id="sequential iteration"/>.
-		As a result, the algorithm is theoretically capable of processing an <em>infinite</em> number of elements.
+		As a result, the algorithm is theoretically capable of processing <link id="sequences"/> containing an <em>unrestricted</em> number of elements.
 	</para>
 	<listing>
 		#include <chaos-preprocessor-config.h/>

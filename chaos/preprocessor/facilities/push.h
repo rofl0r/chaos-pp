@@ -19,9 +19,8 @@
 # /* CHAOS_PP_PUSH */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_PUSH(a, ...) CHAOS_IP_PUSH_I(CHAOS_PP_CLEAN(a))CHAOS_IP_PUSH_I(CHAOS_PP_CLEAN(__VA_ARGS__))
+#    define CHAOS_PP_PUSH(a, ...) CHAOS_PP_CLEAN(a)CHAOS_PP_CLEAN(__VA_ARGS__)
 #    define CHAOS_PP_PUSH_ CHAOS_PP_LAMBDA(CHAOS_PP_PUSH_ID)()
-#    define CHAOS_IP_PUSH_I(...) __VA_ARGS__
 # else
 #    define CHAOS_PP_PUSH(a, b) CHAOS_IP_PUSH_I(a)CHAOS_IP_PUSH_I(b)
 #    define CHAOS_IP_PUSH_I(x) x

@@ -15,10 +15,10 @@
 			Valid values are <code>0</code> and <code>1</code>.
 		</param>
 		<param id="t" optional="1">
-			The result of the expansion if <var>bit</var> is <code>1</code>.
+			The resulting expression if <var>bit</var> is <code>1</code>.
 		</param>
 		<param id="..." optional="1">
-			The result of the expansion if <var>bit</var> is <code>0</code>.
+			The resulting expression if <var>bit</var> is <code>0</code>.
 		</param>
 	</usage>
 	<usage lang="C/C++">
@@ -28,10 +28,10 @@
 			Valid values are <code>0</code> and <code>1</code>.
 		</param>
 		<param id="t">
-			The result of the expansion if <var>bit</var> is <code>1</code>.
+			The resulting expression if <var>bit</var> is <code>1</code>.
 		</param>
 		<param id="f">
-			The result of the expansion if <var>bit</var> is <code>0</code>.
+			The resulting expression if <var>bit</var> is <code>0</code>.
 		</param>
 	</usage>
 	<para>

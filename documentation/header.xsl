@@ -435,7 +435,7 @@
 
 <!-- Boost-specific derivative entities -->
 
-<xsl:template match="derivative[substring-after(@id, ../@id) = '_D']">
+<xsl:template match="derivative[substring-after(@id, ../@id) = '_D' or substring-after(@id, ../@id) = '_d']">
 	<xsl:variable name="current"><xsl:call-template name="manual"/></xsl:variable>
 	<xsl:variable name="parent"><xsl:call-template name="manual-parent"/></xsl:variable>
 	<xsl:variable name="while"><xsl:call-template name="manual"><xsl:with-param name="id" select="'WHILE'"/></xsl:call-template></xsl:variable>
@@ -443,7 +443,7 @@
 	<A name="{@id}"/>
 	<H3 class="ALTERNATE"><xsl:value-of select="concat($prefix, @id)"/></H3>
 	<SPAN>
-		The <xsl:copy-of select="$current"/> macro behaves identically to <xsl:copy-of select="$parent"/> except that it is parametized by the <xsl:copy-of select="$while"/> depth (<VAR>d</VAR>).
+		The <xsl:copy-of select="$current"/> macro behaves identically to <xsl:copy-of select="$parent"/> except that it is parametized by the next available <xsl:copy-of select="$while"/> iteration (<VAR>d</VAR>).
 	</SPAN>
 	<xsl:for-each select="usage">
 		<xsl:variable name="position" select="position()"/>
@@ -454,7 +454,7 @@
 		<DL>
 			<DT><VAR>d</VAR></DT>
 			<DD>
-				The current <xsl:copy-of select="$while"/> depth.
+				The next available <xsl:copy-of select="$while"/> iteration.
 				<xsl:if test="../@obsolete = '1'">
 					This argument is ignored.
 				</xsl:if>
@@ -486,7 +486,7 @@
 	<xsl:apply-templates select="derivative"/>
 </xsl:template>
 
-<xsl:template match="derivative[substring-after(@id, ../@id) = '_Z']">
+<xsl:template match="derivative[substring-after(@id, ../@id) = '_Z' or substring-after(@id, ../@id) = '_z']">
 	<xsl:variable name="current"><xsl:call-template name="manual"/></xsl:variable>
 	<xsl:variable name="parent"><xsl:call-template name="manual-parent"/></xsl:variable>
 	<xsl:variable name="repeat"><xsl:call-template name="manual"><xsl:with-param name="id" select="'REPEAT'"/></xsl:call-template></xsl:variable>
@@ -494,7 +494,7 @@
 	<A name="{@id}"/>
 	<H3 class="ALTERNATE"><xsl:value-of select="concat($prefix, @id)"/></H3>
 	<SPAN>
-		The <xsl:copy-of select="$current"/> macro behaves identically to <xsl:copy-of select="$parent"/> except that it is parametized by the <xsl:copy-of select="$repeat"/> dimension (<VAR>z</VAR>).
+		The <xsl:copy-of select="$current"/> macro behaves identically to <xsl:copy-of select="$parent"/> except that it is parametized by the next available <xsl:copy-of select="$repeat"/> dimension (<VAR>z</VAR>).
 	</SPAN>
 	<xsl:for-each select="usage">
 		<xsl:variable name="position" select="position()"/>
@@ -505,7 +505,7 @@
 		<DL>
 			<DT><VAR>z</VAR></DT>
 			<DD>
-				The current <xsl:copy-of select="$repeat"/> dimension.
+				The next available <xsl:copy-of select="$repeat"/> dimension.
 				<xsl:if test="../@obsolete = '1'">
 					This argument is ignored.
 				</xsl:if>

@@ -15,10 +15,10 @@
 			Valid values range from <code>0</code> to <LIMIT_MAG/>.
 		</param>
 		<param id="t" optional="1">
-			The result of the expansion if <var>cond</var> is non-zero.
+			The resulting expression if <var>cond</var> is non-zero.
 		</param>
 		<param id="..." optional="1">
-			The result of the expansion if <var>cond</var> is <code>0</code>.
+			The resulting expression if <var>cond</var> is <code>0</code>.
 		</param>
 	</usage>
 	<usage lang="C/C++">
@@ -28,10 +28,10 @@
 			Valid values range from <code>0</code> to <LIMIT_MAG/>.
 		</param>
 		<param id="t">
-			The result of the expansion if <var>cond</var> is non-zero.
+			The resulting expression if <var>cond</var> is non-zero.
 		</param>
 		<param id="f">
-			The result of the expansion if <var>cond</var> is <code>0</code>.
+			The resulting expression if <var>cond</var> is <code>0</code>.
 		</param>
 	</usage>
 	<para>

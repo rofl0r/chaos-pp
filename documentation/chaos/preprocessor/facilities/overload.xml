@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <header name="chaos/preprocessor/facilities/overload.h" author="Paul Mensonides" date="2003-2004">
 <overview>
-	The <self/> header defines a macro used to facilitate overloading of macros.
+	The <self/> header defines macros used to facilitate overloading of macros.
 </overview>
 
 <macro id="QUICK_OVERLOAD" group="overload">

@@ -17,7 +17,7 @@
 # include <chaos/preprocessor/detection/is_variadic.h>
 # include <chaos/preprocessor/lambda/invoke.h>
 # include <chaos/preprocessor/lambda/ops.h>
-# include <chaos/preprocessor/recursion/basic.h>
+# include <chaos/preprocessor/recursion/block.h>
 # include <chaos/preprocessor/recursion/expr.h>
 #
 # /* CHAOS_PP_PLANAR */
@@ -33,21 +33,25 @@
 #
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_IP_PLANAR_1() CHAOS_IP_PLANAR_11
-#    define CHAOS_IP_PLANAR_11(s, expr) CHAOS_IP_PLANAR_111(CHAOS_PP_DEFER(CHAOS_PP_OBSTRUCT)(), s, CHAOS_PP_NEXT(s), expr)
+#    define CHAOS_IP_PLANAR_11(s, expr) CHAOS_IP_PLANAR_111(CHAOS_PP_BLOCK, s, CHAOS_PP_NEXT(s), expr)
 #    define CHAOS_IP_PLANAR_111(_, s1, s2, expr) \
-        CHAOS_PP_EXPR_S _(s2)(CHAOS_PP_EXPR_S _(s2)(CHAOS_PP_EXPR_S _(s1)(CHAOS_PP_INVOKE _(expr, s2, \
+        _(2, CHAOS_PP_EXPR_S)(s1)( \
+            _(3, CHAOS_PP_EXPR_S)(s2)(_(3, CHAOS_PP_EXPR_S)(s2)( \
+                _(2, CHAOS_PP_EXPR_S)(s1)(_(2, CHAOS_PP_INVOKE)(expr, s2, \
         /**/
 # endif
 #
 # define CHAOS_IP_PLANAR_0() CHAOS_IP_PLANAR_00
-# define CHAOS_IP_PLANAR_00(s, macro) CHAOS_IP_PLANAR_000(CHAOS_PP_DEFER(CHAOS_PP_OBSTRUCT)(), s, CHAOS_PP_NEXT(s), macro)
+# define CHAOS_IP_PLANAR_00(s, macro) CHAOS_IP_PLANAR_000(CHAOS_PP_BLOCK, s, CHAOS_PP_NEXT(s), macro)
 # define CHAOS_IP_PLANAR_000(_, s1, s2, macro) \
-    CHAOS_PP_EXPR_S _(s2)(CHAOS_PP_EXPR_S _(s2)(CHAOS_PP_EXPR_S _(s1)(macro CHAOS_PP_DEFER(CHAOS_PP_OBSTRUCT)()(s2, \
+    _(2, CHAOS_PP_EXPR_S)(s1)( \
+        _(3, CHAOS_PP_EXPR_S)(s2)(_(3, CHAOS_PP_EXPR_S)(s2)( \
+            _(2, CHAOS_PP_EXPR_S)(s1)(_(3, macro)(s2, \
     /**/
 #
 # /* CHAOS_PP_PLANAR_CLOSE */
 #
-# define CHAOS_PP_PLANAR_CLOSE() ))))
+# define CHAOS_PP_PLANAR_CLOSE() )))))
 # define CHAOS_PP_PLANAR_CLOSE_ID() CHAOS_PP_PLANAR_CLOSE
 #
 # if CHAOS_PP_VARIADICS

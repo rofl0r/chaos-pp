@@ -55,7 +55,7 @@
         )(, s, o, p ## orig, p ## args, p ## expr) \
         /**/
 #    define CHAOS_IP_PARSE_II(p, s, o, orig, args, expr) \
-        CHAOS_PP_CAT( \
+        CHAOS_PP_CAT_SHADOW( \
             CHAOS_IP_PARSE_, \
             CHAOS_PP_FLAG_NAME((CHAOS_PP_SEQ_FIRST(p ## expr))) \
         )(, s, o, p ## orig, p ## args, (CHAOS_PP_SEQ_FIRST(p ## expr))) \
@@ -70,7 +70,7 @@
         /**/
 #    define CHAOS_IP_PARSE_E_INDIRECT() CHAOS_IP_PARSE_E_I
 #    define CHAOS_IP_PARSE_E_I(p, s, o, orig, args, s1, s2, ...) \
-        CHAOS_PP_IIF(CHAOS_PP_IS_EMPTY_NON_FUNCTION(p ## __VA_ARGS__))( \
+        CHAOS_PP_IIF_SHADOW(CHAOS_PP_IS_EMPTY_NON_FUNCTION(p ## __VA_ARGS__))( \
             CHAOS_PP_TUPLE_EAT(?), \
             CHAOS_IP_PARSE_E_II \
         )(, CHAOS_PP_OBSTRUCT(), s, o, p ## orig, p ## args, p ## s1, p ## s2, __VA_ARGS__) \

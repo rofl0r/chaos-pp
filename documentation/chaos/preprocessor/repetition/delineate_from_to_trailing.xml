@@ -109,6 +109,8 @@
 	<para>
 		This macro may not be used if <link id="bypass semantics"/> are in effect.
 	</para>
+	<derivative id="DELINEATE_FROM_TO_TRAILING_ID"/>
+	<derivative id="DELINEATE_FROM_TO_TRAILING_" lang="C99"/>
 	<derivative id="DELINEATE_FROM_TO_TRAILING_S">
 		<usage lang="C99">
 			<syntax><EXPR_S/>(s)(<DELINEATE_FROM_TO_TRAILING_S/>(s, to, from, sep, macro))</syntax>

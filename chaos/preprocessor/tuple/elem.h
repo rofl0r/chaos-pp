@@ -12,12 +12,18 @@
 # ifndef CHAOS_PREPROCESSOR_TUPLE_ELEM_H
 # define CHAOS_PREPROCESSOR_TUPLE_ELEM_H
 #
+# include <chaos/preprocessor/arithmetic/dec.h>
 # include <chaos/preprocessor/cat.h>
+# include <chaos/preprocessor/comparison/greater.h>
 # include <chaos/preprocessor/config.h>
+# include <chaos/preprocessor/control/iif.h>
 # include <chaos/preprocessor/facilities/expand.h>
 # include <chaos/preprocessor/lambda/ops.h>
+# include <chaos/preprocessor/limits.h>
 # include <chaos/preprocessor/punctuation/comma_if.h>
 # include <chaos/preprocessor/recursion/basic.h>
+# include <chaos/preprocessor/recursion/expr.h>
+# include <chaos/preprocessor/tuple/batch.h>
 # include <chaos/preprocessor/tuple/rem.h>
 #
 # /* CHAOS_PP_VARIADIC_ELEM */
@@ -107,5 +113,39 @@
 # define CHAOS_IP_TUPLE_ELEM_22(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y) w
 # define CHAOS_IP_TUPLE_ELEM_23(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y) x
 # define CHAOS_IP_TUPLE_ELEM_24(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y) y
+#
+# /* CHAOS_PP_TUPLE_ELEM_ALT */
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_PP_TUPLE_ELEM_ALT(i, tuple) CHAOS_PP_TUPLE_ELEM_ALT_BYPASS(CHAOS_PP_LIMIT_EXPR, i, tuple)
+#    define CHAOS_PP_TUPLE_ELEM_ALT_ID() CHAOS_PP_TUPLE_ELEM_ALT
+#    define CHAOS_PP_TUPLE_ELEM_ALT_ CHAOS_PP_LAMBDA(CHAOS_PP_TUPLE_ELEM_ALT_ID)()
+# endif
+#
+# /* CHAOS_PP_TUPLE_ELEM_ALT */
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_PP_TUPLE_ELEM_ALT_BYPASS(s, i, tuple) \
+        CHAOS_PP_EXPR_S(s)(CHAOS_IP_TUPLE_ELEM_ALT_I( \
+            CHAOS_PP_OBSTRUCT(), CHAOS_PP_PREV(s), CHAOS_PP_DEC, i, tuple \
+        )) \
+        /**/
+#    define CHAOS_PP_TUPLE_ELEM_ALT_BYPASS_ID() CHAOS_PP_TUPLE_ELEM_ALT_BYPASS
+#    define CHAOS_PP_TUPLE_ELEM_ALT_BYPASS_ CHAOS_PP_LAMBDA(CHAOS_PP_TUPLE_ELEM_ALT_BYPASS_ID)()
+# endif
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_IP_TUPLE_ELEM_ALT_INDIRECT() CHAOS_IP_TUPLE_ELEM_ALT_I
+#    define CHAOS_IP_TUPLE_ELEM_ALT_I(_, s, d, i, tuple) \
+        CHAOS_PP_IIF _(CHAOS_PP_GREATER(i, 24))( \
+            CHAOS_PP_EXPR_S _(s)(CHAOS_IP_TUPLE_ELEM_ALT_INDIRECT _()( \
+                CHAOS_PP_OBSTRUCT _(), CHAOS_PP_PREV(s), d, \
+                d(d(d(d(d(d(d(d(d(d(d(d(d(d(d(d(d(d(d(d(d(d(d(d(d(i))))))))))))))))))))))))), \
+                CHAOS_PP_TUPLE_SANS_BATCH _(25, tuple) \
+            )), \
+            CHAOS_PP_TUPLE_ELEM _(?, i, tuple) \
+        ) \
+        /**/
+# endif
 #
 # endif

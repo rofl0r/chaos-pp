@@ -594,6 +594,7 @@
 			<directory name="tuple">
 				<directory name="complexity">
 					<binary-file name="concat.gif"/>
+					<binary-file name="elem_alt.gif"/>
 					<binary-file name="filter.gif"/>
 					<binary-file name="first_n.gif"/>
 					<binary-file name="fold_left.gif"/>

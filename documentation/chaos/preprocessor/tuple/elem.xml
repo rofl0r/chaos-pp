@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <header name="chaos/preprocessor/tuple/elem.h" author="Paul Mensonides" date="2003-2004">
 <overview>
-	The <self/> header defines a macro that extracts an element from a <link id="tuple"/>.
+	The <self/> header defines macros that extract an element from a <link id="tuple"/>.
 </overview>
 
 <macro id="VARIADIC_ELEM" type="indirect" group="element-access">
@@ -87,6 +87,47 @@
 	</listing>
 	<derivative id="TUPLE_ELEM_ID"/>
 	<derivative id="TUPLE_ELEM_" lang="C99"/>
+</macro>
+
+<macro id="TUPLE_ELEM_ALT" type="indirect" group="element-access">
+	<abstract>
+		The <TUPLE_ELEM_ALT/> macro extracts an element from a <link id="tuple"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><TUPLE_ELEM_ALT/>(i, tuple)</syntax>
+		<param id="i">
+			The zero-based index of the element to be extracted.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="tuple">
+			The <link id="tuple"/> from which an element is to be extracted.
+		</param>
+	</usage>
+	<para>
+		This macro extracts the <var>i</var>-th element of <var>tuple</var>.
+		Consequently, <var>tuple</var> must contain at least <var>i</var> + 1 elements.
+	</para>
+	<para>
+		The running time of <TUPLE_ELEM_ALT/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
+		The asymptotic upper and lower bounds are <assoc id="complexity/elem_alt.gif">Θ</assoc>, where <x-var>n</x-var> is <var>i</var> and <x-var>t<sub>ω</sub></x-var> is <LIMIT_TUPLE/>.
+	</para>
+	<para>
+		This macro operates on the nil <link id="tuple"/> representation used by the core <link id="tuple"/> operations defined in <chaos-preprocessor-tuple-core.h/>.
+		Specifically, <code>()</code> is a one-element <link id="tuple"/>, not a zero-element <link id="tuple"/>.
+	</para>
+	<para>
+		This macro uses <link id="bypass semantics"/>.
+		If <link id="bypass semantics"/> are already in effect, <TUPLE_ELEM_BYPASS/> must be used instead.
+	</para>
+	<derivative id="TUPLE_ELEM_ALT_ID" lang="C99"/>
+	<derivative id="TUPLE_ELEM_ALT_" lang="C99"/>
+	<derivative id="TUPLE_ELEM_ALT_BYPASS">
+		<usage lang="C99">
+			<syntax><TUPLE_ELEM_ALT_BYPASS/>(s, i, tuple)</syntax>
+		</usage>
+		<derivative id="TUPLE_ELEM_ALT_BYPASS_ID" lang="C99"/>
+		<derivative id="TUPLE_ELEM_ALT_BYPASS_" lang="C99"/>
+	</derivative>
 </macro>
 
 </header>

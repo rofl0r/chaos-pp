@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header includes the entire library.
+</overview>
+
+<directory-listing path="chaos/preprocessor"/>
+
+</header>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+<xsl:output method="html" doctype-public="-//W3C//DTD HTML 4.0 Strict//EN" indent="yes" encoding="UTF-8"/>
+
+<xsl:include href="copyright.xsl"/>
+
+<xsl:variable name="root" select="'.'"/>
+
+<xsl:template match="/library">
+	<HTML>
+		<HEAD>
+			<TITLE>Header Index - Chaos Preprocessor Library</TITLE>
+			<LINK rel="stylesheet" type="text/css" href="style.css"/>
+		</HEAD>
+		<BODY>
+			<H4>Headers</H4>
+			<UL>
+				<xsl:for-each select="header">
+					<xsl:sort select="@name"/>
+					<LI><CODE><A href="{$root}/{substring-before(@name, '.')}.html">&lt;<xsl:value-of select="@name"/>&gt;</A></CODE></LI>
+				</xsl:for-each>
+			</UL>
+			<xsl:call-template name="copyright">
+				<xsl:with-param name="author" select="'Paul Mensonides'"/>
+				<xsl:with-param name="date" select="'2003-2004'"/>
+			</xsl:call-template>
+		</BODY>
+	</HTML>
+</xsl:template>
+
+<xsl:template match="/library" mode="primary">
+	<HTML>
+		<HEAD>
+			<TITLE>Macro Index - Chaos Preprocessor Library</TITLE>
+			<LINK rel="stylesheet" type="text/css" href="style.css"/>
+		</HEAD>
+		<BODY>
+			<H4>Macros <SMALL><A href="master.html">(show derivatives)</A></SMALL></H4>
+			<UL>
+				<xsl:for-each select="macro[@type = 'primary']">
+					<xsl:sort select="@id"/>
+					<LI><CODE><A href="{$root}/{substring-before(@header, '.')}.html#{@id}">CHAOS_PP_<xsl:value-of select="@id"/></A></CODE></LI>
+				</xsl:for-each>
+			</UL>
+			<xsl:call-template name="copyright">
+				<xsl:with-param name="author" select="'Paul Mensonides'"/>
+				<xsl:with-param name="date" select="'2003-2004'"/>
+			</xsl:call-template>
+		</BODY>
+	</HTML>
+</xsl:template>
+
+<xsl:template match="/library" mode="secondary">
+	<HTML>
+		<HEAD>
+			<TITLE>Macro Index - Chaos Preprocessor Library</TITLE>
+			<LINK rel="stylesheet" type="text/css" href="style.css"/>
+		</HEAD>
+		<BODY>
+			<H4>Macros <SMALL><A href="macros.html">(hide derivatives)</A></SMALL></H4>
+			<UL>
+				<xsl:for-each select="macro">
+					<xsl:sort select="@id"/>
+					<LI><CODE><A href="{$root}/{substring-before(@header, '.')}.html#{@id}">CHAOS_PP_<xsl:value-of select="@id"/></A></CODE></LI>
+				</xsl:for-each>
+			</UL>
+			<xsl:call-template name="copyright">
+				<xsl:with-param name="author" select="'Paul Mensonides'"/>
+				<xsl:with-param name="date" select="'2003-2004'"/>
+			</xsl:call-template>
+		</BODY>
+	</HTML>
+</xsl:template>
+
+</xsl:stylesheet>

@@ -39,10 +39,10 @@
 # /* CHAOS_PP_PARSE_S */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_PARSE_S(s, expr, ...) CHAOS_IP_PARSE_BACKDOOR(s, CHAOS_PP_NEXT(s), expr, __VA_ARGS__)
+#    define CHAOS_PP_PARSE_S(s, expr, ...) CHAOS_PP_PARSE_BACKDOOR(s, CHAOS_PP_NEXT(s), expr, __VA_ARGS__)
 #    define CHAOS_PP_PARSE_S_ID() CHAOS_PP_PARSE_S
 #    define CHAOS_PP_PARSE_S_ CHAOS_PP_LAMBDA(CHAOS_PP_PARSE_S_ID)()
-#    define CHAOS_IP_PARSE_BACKDOOR(s, o, expr, ...) \
+#    define CHAOS_PP_PARSE_BACKDOOR(s, o, expr, ...) \
         CHAOS_PP_EXPR_S(s)( \
             CHAOS_IP_PARSE_I(, CHAOS_PP_NEXT(s), o, expr, (o, __VA_ARGS__), expr) \
         ) \

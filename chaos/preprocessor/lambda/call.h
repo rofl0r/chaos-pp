@@ -28,7 +28,7 @@
 #    define CHAOS_IP_CALL_0() CHAOS_IP_CALL_00
 #    define CHAOS_IP_CALL_1() CHAOS_IP_CALL_11
 #    define CHAOS_IP_CALL_00(s, macro, ...) CHAOS_PP_DEFER(CHAOS_PP_EXPR_S(s))(CHAOS_PP_DEFER(macro)(s, __VA_ARGS__))
-#    define CHAOS_IP_CALL_11(s, expr, ...) CHAOS_PP_DEFER(CHAOS_PP_EXPR_S(s))(CHAOS_PP_INVOKE_S(s, expr, __VA_ARGS__))
+#    define CHAOS_IP_CALL_11(s, expr, ...) CHAOS_PP_DEFER(CHAOS_PP_EXPR_S(s))(CHAOS_PP_INVOKE_S(CHAOS_PP_PREV(s), expr, __VA_ARGS__))
 # else
 #    define CHAOS_PP_CALL(x) CHAOS_IP_CALL_I
 #    define CHAOS_IP_CALL_I() CHAOS_IP_CALL_II

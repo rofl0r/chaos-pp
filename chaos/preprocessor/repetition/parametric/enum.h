@@ -9,35 +9,29 @@
 #  *                                                                         *
 #  ************************************************************************* */
 #
-# ifndef CHAOS_PREPROCESSOR_REPETITION_ENUM_SHIFTED_H
-# define CHAOS_PREPROCESSOR_REPETITION_ENUM_SHIFTED_H
+# ifndef CHAOS_PREPROCESSOR_REPETITION_PARAMETRIC_ENUM_H
+# define CHAOS_PREPROCESSOR_REPETITION_PARAMETRIC_ENUM_H
 #
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/punctuation/comma.h>
-# include <chaos/preprocessor/repetition/delineate_shifted.h>
+# include <chaos/preprocessor/repetition/parametric/delineate.h>
 # include <chaos/preprocessor/recursion/expr.h>
 #
-# /* CHAOS_PP_ENUM_SHIFTED */
+# /* CHAOS_PP_ENUM_PARAMETRIC */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_ENUM_SHIFTED(count, macro, ...) CHAOS_PP_ENUM_SHIFTED_S(CHAOS_PP_STATE(), count, macro, __VA_ARGS__)
-#    define CHAOS_PP_ENUM_SHIFTED_ CHAOS_PP_LAMBDA(CHAOS_PP_ENUM_SHIFTED_ID)()
-# else
-#    define CHAOS_PP_ENUM_SHIFTED(count, macro, data) CHAOS_PP_ENUM_SHIFTED_S(CHAOS_PP_STATE(), count, macro, data)
+#    define CHAOS_PP_ENUM_PARAMETRIC(size, count, macro, ...) CHAOS_PP_ENUM_PARAMETRIC_S(CHAOS_PP_STATE(), size, count, macro, __VA_ARGS__)
+#    define CHAOS_PP_ENUM_PARAMETRIC_ID() CHAOS_PP_ENUM_PARAMETRIC
+#    define CHAOS_PP_ENUM_PARAMETRIC_ CHAOS_PP_LAMBDA(CHAOS_PP_ENUM_PARAMETRIC_ID)()
 # endif
 #
-# define CHAOS_PP_ENUM_SHIFTED_ID() CHAOS_PP_ENUM_SHIFTED
-#
-# /* CHAOS_PP_ENUM_SHIFTED_S */
+# /* CHAOS_PP_ENUM_PARAMETRIC_S */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_ENUM_SHIFTED_S(s, count, macro, ...) CHAOS_PP_DELINEATE_SHIFTED_S(s, count, CHAOS_PP_COMMA, macro, __VA_ARGS__)
-#    define CHAOS_PP_ENUM_SHIFTED_S_ CHAOS_PP_LAMBDA(CHAOS_PP_ENUM_SHIFTED_S_ID)()
-# else
-#    define CHAOS_PP_ENUM_SHIFTED_S(s, count, macro, data) CHAOS_PP_DELINEATE_SHIFTED_S(s, count, CHAOS_PP_COMMA, macro, data)
+#    define CHAOS_PP_ENUM_PARAMETRIC_S(s, size, count, macro, ...) CHAOS_PP_DELINEATE_PARAMETRIC_S(s, size, count, CHAOS_PP_COMMA, macro, __VA_ARGS__)
+#    define CHAOS_PP_ENUM_PARAMETRIC_S_ID() CHAOS_PP_ENUM_PARAMETRIC_S
+#    define CHAOS_PP_ENUM_PARAMETRIC_S_ CHAOS_PP_LAMBDA(CHAOS_PP_ENUM_PARAMETRIC_S_ID)()
 # endif
-#
-# define CHAOS_PP_ENUM_SHIFTED_S_ID() CHAOS_PP_ENUM_SHIFTED_S
 #
 # endif

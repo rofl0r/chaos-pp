@@ -19,6 +19,7 @@
 # include <chaos/preprocessor/facilities/bind.h>
 # include <chaos/preprocessor/facilities/default.h>
 # include <chaos/preprocessor/facilities/empty.h>
+# include <chaos/preprocessor/facilities/encode.h>
 # include <chaos/preprocessor/facilities/expand.h>
 # include <chaos/preprocessor/facilities/identity.h>
 # include <chaos/preprocessor/facilities/indirect.h>

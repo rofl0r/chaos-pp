@@ -94,7 +94,7 @@
 		Ignoring the complexity of <var>pred</var> (which is invoked once for each element in <var>g</var>), the running time of the algorithm can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
 		The asymptotic upper bound of O(2<x-var>n</x-var>+1), where <x-var>n</x-var> is the number of elements in <var>g</var>, occurs when all of the elements of <var>g</var> are preserved (i.e. when <var>pred</var> always results in <code>1</code>).
 		The asymptotic lower bound of Ω(<x-var>n</x-var>+1) occurs when all of the elements in <var>g</var> are removed (i.e. when <var>pred</var> always results in <code>0</code>).
-		These bounds preserve all low-order terms, which implies that the algorithm can process at least <relative-assoc id="worst.gif">γ</relative-assoc> elements even if the worst case scenario is achieved and <relative-assoc id="best.gif">δ</relative-assoc> elements only if the best case scenario is achieved.
+		These bounds preserve all low-order terms, which implies that the algorithm can process at least <assoc id="complexity/filter-worst.gif">γ</assoc> elements even if the worst case scenario is achieved and <assoc id="complexity/filter-best.gif">δ</assoc> elements only if the best case scenario is achieved.
 	</para>
 	<para>
 		This macro deduces the current <link id="recursion state"/> and invokes <FILTER_X_S/>.

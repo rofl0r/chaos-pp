@@ -83,7 +83,7 @@
 		Currently, <x-var>z</x-var> is fixed at two in the <FOLD_RIGHT_X/> algorithm (though it could easily be increased), which reduces the equation to <library-assoc id="beta.gif">β</library-assoc>.
 		Ignoring the complexity of <var>op</var> (which is invoked once for each element in <var>g</var>), the running time of the algorithm can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
 		The aysmptotic upper and lower bounds are Θ(2<x-var>n</x-var>+1), where <x-var>n</x-var> is the number of elements in <var>g</var>.
-		These bounds preserve all low-order terms, which implies that the algorithm can process exactly <relative-assoc id="complexity.gif">γ</relative-assoc> elements.
+		These bounds preserve all low-order terms, which implies that the algorithm can process exactly <assoc id="complexity/fold_right.gif">γ</assoc> elements.
 	</para>
 	<para>
 		This macro deduces the current <link id="recursion state"/> and invokes <FOLD_RIGHT_AUX_X_S/>.

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lookup>
+
+<header src="cat">
+	<macro id="CAT"/>
+	<macro id="CAT_"/>
+	<macro id="CAT_ID"/>
+	<macro id="PRIMITIVE_CAT"/>
+	<macro id="PRIMITIVE_CAT_"/>
+	<macro id="PRIMITIVE_CAT_ID"/>
+</header>
+
+<header src="limits">
+	<macro id="LIMIT_EXPR"/>
+	<macro id="LIMIT_MAG"/>
+</header>
+
+<header src="stringize">
+	<macro id="STRINGIZE"/>
+	<macro id="STRINGIZE_"/>
+	<macro id="STRINGIZE_ID"/>
+	<macro id="PRIMITIVE_STRINGIZE"/>
+	<macro id="PRIMITIVE_STRINGIZE_"/>
+	<macro id="PRIMITIVE_STRINGIZE_ID"/>
+</header>
+
+<header src="wstringize">
+	<macro id="WSTRINGIZE"/>
+	<macro id="WSTRINGIZE_"/>
+	<macro id="WSTRINGIZE_ID"/>
+	<macro id="PRIMITIVE_WSTRINGIZE"/>
+	<macro id="PRIMITIVE_WSTRINGIZE_"/>
+	<macro id="PRIMITIVE_WSTRINGIZE_ID"/>
+</header>
+
+</lookup>

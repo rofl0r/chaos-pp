@@ -6,6 +6,9 @@ A {
 A:HOVER {
 	color: blue;
 }
+A.LISTITEM {
+	font-weight: normal;
+}
 ADDRESS {
 	font-size: 8pt;
 	font-style: normal;

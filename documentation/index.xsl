@@ -76,4 +76,27 @@
 	</HTML>
 </xsl:template>
 
+<xsl:template match="/register">
+	<HTML>
+		<HEAD>
+			<TITLE>Document Index - <xsl:value-of select="translate($library, ',', ' ')"/></TITLE>
+			<LINK rel="stylesheet" type="text/css" href="style.css"/>
+		</HEAD>
+		<BODY>
+			<H4>Documents</H4>
+			<UL>
+				<xsl:for-each select="document">
+					<xsl:sort select="@title"/>
+					<!-- document titles need to be lookup up -->
+					<LI><A href="{$root}/{@id}.html" class="LISTITEM"><xsl:value-of select="@title"/></A></LI>
+				</xsl:for-each>
+			</UL>
+			<xsl:call-template name="copyright">
+				<xsl:with-param name="author" select="'Paul Mensonides'"/>
+				<xsl:with-param name="date" select="'2003-2004'"/>
+			</xsl:call-template>
+		</BODY>
+	</HTML>
+</xsl:template>
+
 </xsl:stylesheet>

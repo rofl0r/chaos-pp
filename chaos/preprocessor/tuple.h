@@ -36,5 +36,6 @@
 # include <chaos/preprocessor/tuple/to_list.h>
 # include <chaos/preprocessor/tuple/to_seq.h>
 # include <chaos/preprocessor/tuple/to_string.h>
+# include <chaos/preprocessor/tuple/transform.h>
 #
 # endif

@@ -614,6 +614,7 @@
 					<binary-file name="to_list_alt.gif"/>
 					<binary-file name="to_seq_alt.gif"/>
 					<binary-file name="to_string_alt.gif"/>
+					<binary-file name="transform.gif"/>
 				</directory>
 				<directory name="efficiency">
 					<binary-file name="fold_left.gif"/>
@@ -645,6 +646,7 @@
 				<header name="to_list.h"/>
 				<header name="to_seq.h"/>
 				<header name="to_string.h"/>
+				<header name="transform.h"/>
 			</directory>
 			<header name="wstringize.h"/>
 		</directory>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/tuple/transform.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an algorithm that transforms the elements of a <link id="tuple"/> with a user-specified operation.
+</overview>
+
+<macro id="TUPLE_TRANSFORM" type="indirect" group="transformation">
+	<abstract>
+		The <TUPLE_TRANSFORM/> macro transforms each element of its second argument with the operation specified by its first argument.
+	</abstract>
+	<usage lang="C99">
+		<syntax><EXPR/>(<TUPLE_TRANSFORM/>(op, tuple))</syntax>
+		<param id="op">
+			The operation used to transform each element of <var>tuple</var>.
+			This operation must be either a <link id="λ expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			<snippet>
+				op(s, elem)
+			</snippet>
+		</param>
+		<param id="tuple" optional="1">
+			The <link id="tuple"/> whose elements are to be transformed.
+		</param>
+	</usage>
+	<usage lang="C99">
+		<syntax><EXPR/>(<TUPLE_TRANSFORM/>(op, tuple, ...))</syntax>
+		<param id="op">
+			<para>
+				The operation used to transform each element of <var>tuple</var>.
+				This operation must be either a <link id="λ expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				<snippet>
+					op(s, elem, data<sup>†</sup>)
+				</snippet>
+			</para>
+			<para>
+				<sup>†</sup>
+				The <var>data</var> pseudo-parameter must be either <code>...</code> or the number of parameters that corresponds to the number of arguments in the auxiliary data, <code>__VA_ARGS__</code>.
+			</para>
+		</param>
+		<param id="tuple" optional="1">
+			The <link id="tuple"/> whose elements are to be transformed.
+		</param>
+		<param id="..." optional="1">
+			Auxiliary data to be passed through the algorithm to the operation.
+		</param>
+	</usage>
+	<para>
+		The <TUPLE_TRANSFORM/> macro itself expands to a <link id="deferred expression"/> in terms of <code><NEXT/>(s)</code>.
+		This <link id="deferred expression"/>, when invoked by <EXPR/>, expands to a <link id="tuple"/> that contains the transformed elements of <var>tuple</var>.
+	</para>
+	<para>
+		The operation is invoked with the current <link id="recursion state"/> (<var>s</var>), a particular element (<var>elem</var>), and, if it exists, the auxiliary data (<code>__VA_ARGS__</code>).
+		This invocation must expand to an element that replaces the element for which it is invoked or a <link id="deferred expression"/> in terms of <code><NEXT/>(s)</code> that expands to such an element.
+		Expansion to a <link id="deferred expression"/> allows the operation to recurse on itself if necessary.
+	</para>
+	<para>
+		It is possible to omit the auxiliary data argument altogether.
+		This is different than passing "nothing" as the auxiliary data.
+		<snippet>
+			#define D (a, b, c)
+			
+			<EXPR/>(
+			    <TUPLE_TRANSFORM/>(OP, D,) // #1
+			    <TUPLE_TRANSFORM/>(OP, D)  // #2
+			)
+		</snippet>
+		The first line passes "nothing" as the auxiliary data, which causes <code>OP</code> to be invoked as (e.g.)...
+		<snippet>OP(s, a,)</snippet>
+		The second line omits the auxiliary data, which causes <code>OP</code> to be invoked as (e.g.)...
+		<snippet>OP(s, a)</snippet>
+		The fundamental difference is that, in the first line, the auxiliary data is empty (which might have a valid meaning as data), but, in the second line, <em>there is no auxiliary data</em>.
+		Hence, the algorithm is overloaded on a <link id="true-optional parameter"/>.
+	</para>
+	<para>
+		Invocations of the operation are trampolined such that each invocation is invoked with <code><NEXT/>(s)</code>, where <var>s</var> is the original <link id="recursion state"/> at the beginning of the algorithm (i.e. <code><STATE/>()</code>).
+		This maximizes the utility of the <link id="recursion backend"/>.
+	</para>
+	<para>
+		Ignoring the complexity of <var>op</var> (which is invoked once for each element in <var>tuple</var>), the running time of <TUPLE_TRANSFORM/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
+		The asymptotic upper and lower bounds are <assoc id="complexity/transform.gif">Θ</assoc>, where <x-var>n</x-var> is the number of elements in <var>tuple</var>.
+	</para>
+	<para>
+		This macro operates on the nil <link id="tuple"/> representation used by the core <link id="tuple"/> operations defined in <chaos-preprocessor-tuple-core.h/>.
+		Specifically, <code>()</code> is a one-element <link id="tuple"/>, not a zero-element <link id="tuple"/>.
+	</para>
+	<para>
+		This macro deduces the current <link id="recursion state"/> and invokes <TUPLE_TRANSFORM_S/>.
+		If the current <link id="recursion state"/> is already known, direct use of <TUPLE_TRANSFORM_S/> is more efficient.
+	</para>
+	<para>
+		This macro may not be used if <link id="bypass semantics"/> are in effect.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-lambda-ops.h/>
+		#include <chaos-preprocessor-tuple-transform.h/>
+		
+		#if <VARIADICS/>
+		
+		<EXPR/>(<TUPLE_TRANSFORM/>(
+		    <LAMBDA/>(!) <ARG/>(1),
+		    (a, b, c, d, e)
+		))
+		// (!a, !b, !c, !d, !e)
+		
+		#endif
+	</listing>
+	<derivative id="TUPLE_TRANSFORM_ID" lang="C99"/>
+	<derivative id="TUPLE_TRANSFORM_" lang="C99"/>
+	<derivative id="TUPLE_TRANSFORM_S">
+		<usage lang="C99">
+			<syntax><EXPR_S/>(s)(<TUPLE_TRANSFORM_S/>(s, op, tuple))</syntax>
+		</usage>
+		<usage lang="C99">
+			<syntax><EXPR_S/>(s)(<TUPLE_TRANSFORM_S/>(s, op, tuple, ...))</syntax>
+		</usage>
+		<derivative id="TUPLE_TRANSFORM_S_ID" lang="C99"/>
+		<derivative id="TUPLE_TRANSFORM_S_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

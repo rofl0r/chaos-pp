@@ -57,7 +57,7 @@
         CHAOS_PP_EXPR_S(s) _(CHAOS_IP_DELINEATE_SHIFTED_PARAMS_INDIRECT _()( \
             CHAOS_PP_OBSTRUCT _(), CHAOS_PP_PREV(s), id, CHAOS_PP_DEC(count), ss, ss, pp \
         )) \
-        CHAOS_PP_PRIMITIVE_CAT(CHAOS_IP_DELINEATE_SHIFTED_PARAMS_, id) _(count, CHAOS_PP_UNPACK pp) sep _() \
+        CHAOS_PP_PRIMITIVE_CAT(CHAOS_IP_DELINEATE_SHIFTED_PARAMS_, id) _(count, CHAOS_PP_REM pp) sep _() \
     ) \
     /**/
 #

@@ -49,7 +49,7 @@
 #
 # define CHAOS_PP_CONS_ID() CHAOS_PP_CONS
 #
-# define CHAOS_IP_CONS_I(type, data, px) (type) CHAOS_PP_PRIMITIVE_CAT(type, _CONS)(data, CHAOS_PP_UNPACK px)
+# define CHAOS_IP_CONS_I(type, data, px) (type) CHAOS_PP_PRIMITIVE_CAT(type, _CONS)(data, CHAOS_PP_REM px)
 #
 # /* CHAOS_PP_ITEM */
 #

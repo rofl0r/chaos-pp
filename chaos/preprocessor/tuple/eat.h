@@ -58,4 +58,15 @@
 #    define CHAOS_IP_TUPLE_EAT_25(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y)
 # endif
 #
+# /* CHAOS_PP_EAT */
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_PP_EAT(...)
+#    define CHAOS_PP_EAT_ CHAOS_PP_LAMBDA(CHAOS_PP_EAT)
+# else
+#    define CHAOS_PP_EAT(x)
+# endif
+#
+# define CHAOS_PP_EAT_ID() CHAOS_PP_EAT
+#
 # endif

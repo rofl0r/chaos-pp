@@ -64,10 +64,10 @@
 # /* CHAOS_PP_EXPOSE */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_EXPOSE(pack) CHAOS_PP_UNPACK pack
+#    define CHAOS_PP_EXPOSE(pack) CHAOS_PP_REM pack
 #    define CHAOS_PP_EXPOSE_ CHAOS_PP_LAMBDA(CHAOS_PP_EXPOSE_ID)()
 # else
-#    define CHAOS_PP_EXPOSE(pack) , CHAOS_PP_UNPACK pack
+#    define CHAOS_PP_EXPOSE(pack) , CHAOS_PP_REM pack
 # endif
 #
 # define CHAOS_PP_EXPOSE_ID() CHAOS_PP_EXPOSE

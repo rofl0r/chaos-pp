@@ -4,7 +4,7 @@
 	The <self/> header defines macros that remove the parentheses from a <link id="tuple"/>.
 </overview>
 
-<macro id="TUPLE_REM">
+<macro id="TUPLE_REM" group="rem">
 	<abstract>
 		The <TUPLE_REM/> macro removes the parentheses from a <link id="tuple"/> of the specified size.
 	</abstract>
@@ -40,7 +40,6 @@
 		The <var>size</var> parameter is ignored.
 	</para>
 	<x-reference id="TUPLE_EAT"/>
-	<x-reference id="TUPLE_REM_CTOR"/>
 	<listing>
 		#include <chaos-preprocessor-facilities-expand.h/>
 		#include <chaos-preprocessor-recursion-basic.h/>
@@ -62,7 +61,7 @@
 	<derivative id="TUPLE_REM_" lang="C99"/>
 </macro>
 
-<macro id="TUPLE_REM_CTOR" type="indirect">
+<macro id="TUPLE_REM_CTOR" type="indirect" group="rem">
 	<abstract>
 		The <TUPLE_REM_CTOR/> macro removes the parentheses from a <link id="tuple"/> of the specified size.
 	</abstract>
@@ -109,23 +108,22 @@
 			<TUPLE_REM_CTOR/>(3, A) // a, b, c
 		</snippet>
 	</para>
-	<x-reference id="TUPLE_REM"/>
 	<derivative id="TUPLE_REM_CTOR_ID"/>
 	<derivative id="TUPLE_REM_CTOR_" lang="C99"/>
 </macro>
 
-<macro id="UNPACK" type="indirect">
+<macro id="REM" type="indirect" group="rem">
 	<abstract>
-		The <UNPACK/> macro removes the parentheses from a unary <link id="tuple"/> in C++ (and C prior to C99) or from a <link id="tuple"/> of any arity in C99.
+		The <REM/> macro removes the parentheses from a unary <link id="tuple"/> in C++ (and C prior to C99) or from a <link id="tuple"/> of any arity in C99.
 	</abstract>
 	<usage lang="C99">
-		<syntax><UNPACK/> tuple</syntax>
+		<syntax><REM/> tuple</syntax>
 		<param id="tuple">
 			The <link id="tuple"/> from which parentheses are to be removed.
 		</param>
 	</usage>
 	<usage lang="C/C++">
-		<syntax><UNPACK/> tuple</syntax>
+		<syntax><REM/> tuple</syntax>
 		<param id="tuple">
 			The unary <link id="tuple"/> from which parentheses are to be removed.
 		</param>
@@ -133,6 +131,7 @@
 	<para>
 		This macro is used primarily in algorithms as a generalization between the allowance of variadic data or state in C99 and the rigidity of unary data or state in C++ (and C prior to C99) such that the implementation (other than the interface) can be shared in both C99 and C/C++ configurations.
 	</para>
+	<x-reference id="EAT"/>
 	<listing>
 		#include <chaos-preprocessor-arithmetic-dec.h/>
 		#include <chaos-preprocessor-cat.h/>
@@ -177,7 +176,7 @@
 		            <OBSTRUCT/> _(), <NEXT/>(s), \
 		            <DEC/>(count), macro, pd \
 		        )) \
-		        macro _(s, <DEC/>(count), <UNPACK/> pd) \
+		        macro _(s, <DEC/>(count), <REM/> pd) \
 		    ) \
 		    /**/
 		
@@ -205,8 +204,8 @@
 		
 		#endif
 	</listing>
-	<derivative id="UNPACK_ID"/>
-	<derivative id="UNPACK_" lang="C99"/>
+	<derivative id="REM_ID"/>
+	<derivative id="REM_" lang="C99"/>
 </macro>
 
 </header>

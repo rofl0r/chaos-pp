@@ -67,15 +67,15 @@
 #    define CHAOS_PP_TUPLE_REM_CTOR_ CHAOS_PP_LAMBDA(CHAOS_PP_TUPLE_REM_CTOR_ID)()
 # endif
 #
-# /* CHAOS_PP_UNPACK */
+# /* CHAOS_PP_REM */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_UNPACK(...) __VA_ARGS__
-#    define CHAOS_PP_UNPACK_ CHAOS_PP_LAMBDA(CHAOS_PP_UNPACK_ID)()
+#    define CHAOS_PP_REM(...) __VA_ARGS__
+#    define CHAOS_PP_REM_ CHAOS_PP_LAMBDA(CHAOS_PP_REM_ID)()
 # else
-#    define CHAOS_PP_UNPACK(x) x
+#    define CHAOS_PP_REM(x) x
 # endif
 #
-# define CHAOS_PP_UNPACK_ID() CHAOS_PP_UNPACK
+# define CHAOS_PP_REM_ID() CHAOS_PP_REM
 #
 # endif

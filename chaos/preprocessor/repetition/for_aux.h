@@ -62,12 +62,12 @@
     /**/
 # define CHAOS_IP_FOR_AUX_INDIRECT() CHAOS_IP_FOR_AUX_II
 # define CHAOS_IP_FOR_AUX_II(_, s, o, pred, _p, op, _o, macro, _m, data, ps) \
-    CHAOS_PP_IIF _(_p()(s, pred, CHAOS_PP_UNPACK data CHAOS_PP_COMMA() CHAOS_PP_UNPACK ps))( \
+    CHAOS_PP_IIF _(_p()(s, pred, CHAOS_PP_REM data CHAOS_PP_COMMA() CHAOS_PP_REM ps))( \
         CHAOS_PP_EXPR_S(s), CHAOS_PP_TUPLE_EAT(1) \
     )( \
-        _m _()(o, macro, CHAOS_PP_UNPACK data CHAOS_PP_COMMA _() CHAOS_PP_UNPACK ps) \
+        _m _()(o, macro, CHAOS_PP_REM data CHAOS_PP_COMMA _() CHAOS_PP_REM ps) \
         CHAOS_IP_FOR_AUX_INDIRECT _()( \
-            CHAOS_PP_OBSTRUCT _(), CHAOS_PP_NEXT(s), o, pred, _p, op, _o, macro, _m, data, (_o()(s, op, CHAOS_PP_UNPACK data CHAOS_PP_COMMA() CHAOS_PP_UNPACK ps)) \
+            CHAOS_PP_OBSTRUCT _(), CHAOS_PP_NEXT(s), o, pred, _p, op, _o, macro, _m, data, (_o()(s, op, CHAOS_PP_REM data CHAOS_PP_COMMA() CHAOS_PP_REM ps)) \
         ) \
     ) \
     /**/

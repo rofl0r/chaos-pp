@@ -4,7 +4,7 @@
 	The <self/> header defines a macro that eats a <link id="tuple"/>.
 </overview>
 
-<macro id="TUPLE_EAT">
+<macro id="TUPLE_EAT" group="eat">
 	<abstract>
 		The <TUPLE_EAT/> macro eats a <link id="tuple"/> of the specified size.
 	</abstract>
@@ -70,6 +70,27 @@
 	</listing>
 	<derivative id="TUPLE_EAT_ID"/>
 	<derivative id="TUPLE_EAT_" lang="C99"/>
+</macro>
+
+<macro id="EAT" group="eat">
+	<abstract>
+		The <EAT/> macro eats a unary <link id="tuple"/> in C++ (or C prior to C99) or a <link id="tuple"/> of any arity in C99.
+	</abstract>
+	<usage lang="C99">
+		<syntax><EAT/> tuple</syntax>
+		<param id="tuple">
+			The <link id="tuple"/> to be eaten.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><EAT/> tuple</syntax>
+		<param id="tuple">
+			The unary <link id="tuple"/> to be eaten.
+		</param>
+	</usage>
+	<x-reference id="REM"/>
+	<derivative id="EAT_ID"/>
+	<derivative id="EAT_" lang="C99"/>
 </macro>
 
 </header>

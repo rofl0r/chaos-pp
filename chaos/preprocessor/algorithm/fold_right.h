@@ -54,7 +54,7 @@
 # define CHAOS_IP_FOLD_RIGHT_INDIRECT() CHAOS_IP_FOLD_RIGHT_I
 # define CHAOS_IP_FOLD_RIGHT_I(s, o, op, _o, type, g, ps) \
     CHAOS_PP_IIF(CHAOS_PP_IS_CONS(g))( \
-        CHAOS_IP_FOLD_RIGHT_II, CHAOS_PP_UNPACK ps CHAOS_PP_TUPLE_EAT(8) \
+        CHAOS_IP_FOLD_RIGHT_II, CHAOS_PP_REM ps CHAOS_PP_TUPLE_EAT(8) \
     )(CHAOS_PP_OBSTRUCT(), s, o, op, _o, type, g, ps) \
     /**/
 # define CHAOS_IP_FOLD_RIGHT_II(_, s, o, op, _o, type, g, ps) \

@@ -75,12 +75,12 @@
     ) \
     /**/
 # define CHAOS_IP_WHILE_AUX_X_III(_, s, jump, fix, pred, _p, op, _o, data, ps) \
-    _(1, CHAOS_PP_IIF)(_(0, _p)()(s, pred, CHAOS_PP_UNPACK data _(0, CHAOS_PP_COMMA)() CHAOS_PP_UNPACK ps))( \
-        _(1, CHAOS_PP_EXPR_S)(s), CHAOS_PP_UNPACK ps CHAOS_PP_TUPLE_EAT(1) \
+    _(1, CHAOS_PP_IIF)(_(0, _p)()(s, pred, CHAOS_PP_REM data _(0, CHAOS_PP_COMMA)() CHAOS_PP_REM ps))( \
+        _(1, CHAOS_PP_EXPR_S)(s), CHAOS_PP_REM ps CHAOS_PP_TUPLE_EAT(1) \
     )( \
         _(1, CHAOS_IP_WHILE_AUX_X_INDIRECT)()( \
             CHAOS_PP_NEXT(s), jump, fix, pred, _p, op, _o, data, \
-            (_(0, _o)()(s, op, CHAOS_PP_UNPACK data _(0, CHAOS_PP_COMMA)() CHAOS_PP_UNPACK ps)) \
+            (_(0, _o)()(s, op, CHAOS_PP_REM data _(0, CHAOS_PP_COMMA)() CHAOS_PP_REM ps)) \
         ) \
     ) \
     /**/

@@ -61,12 +61,12 @@
 # define CHAOS_IP_FOLD_RIGHT_AUX_INDIRECT() CHAOS_IP_FOLD_RIGHT_AUX_I
 # define CHAOS_IP_FOLD_RIGHT_AUX_I(s, o, op, _o, type, g, data, ps) \
     CHAOS_PP_IIF(CHAOS_PP_IS_CONS(g))( \
-        CHAOS_IP_FOLD_RIGHT_AUX_II, CHAOS_PP_UNPACK ps CHAOS_PP_TUPLE_EAT(9) \
+        CHAOS_IP_FOLD_RIGHT_AUX_II, CHAOS_PP_REM ps CHAOS_PP_TUPLE_EAT(9) \
     )(CHAOS_PP_OBSTRUCT(), s, o, op, _o, type, g, data, ps) \
     /**/
 # define CHAOS_IP_FOLD_RIGHT_AUX_II(_, s, o, op, _o, type, g, data, ps) \
     _o()(o, op) \
-        CHAOS_PP_ITEM(type, CHAOS_PP_FIRST(g)), CHAOS_PP_UNPACK data, \
+        CHAOS_PP_ITEM(type, CHAOS_PP_FIRST(g)), CHAOS_PP_REM data, \
         CHAOS_PP_EXPR_S(s) _(CHAOS_IP_FOLD_RIGHT_AUX_INDIRECT _()( \
             CHAOS_PP_NEXT(s), o, op, _o, type, CHAOS_PP_REST(g), data, ps \
         )) \

@@ -47,11 +47,11 @@
     /**/
 # define CHAOS_IP_WHILE_INDIRECT() CHAOS_IP_WHILE_I
 # define CHAOS_IP_WHILE_I(_, s, pred, _p, op, _o, ps) \
-    CHAOS_PP_IIF _(_p()(s, pred, CHAOS_PP_UNPACK ps))( \
+    CHAOS_PP_IIF _(_p()(s, pred, CHAOS_PP_REM ps))( \
         CHAOS_PP_EXPR_S(s) _(CHAOS_IP_WHILE_INDIRECT _()( \
-            CHAOS_PP_OBSTRUCT _(), CHAOS_PP_NEXT(s), pred, _p, op, _o, (_o()(s, op, CHAOS_PP_UNPACK ps)) \
+            CHAOS_PP_OBSTRUCT _(), CHAOS_PP_NEXT(s), pred, _p, op, _o, (_o()(s, op, CHAOS_PP_REM ps)) \
         )), \
-        CHAOS_PP_UNPACK ps \
+        CHAOS_PP_REM ps \
     ) \
     /**/
 #

@@ -85,7 +85,7 @@
         CHAOS_PP_IIF(i)(CHAOS_IP_SEQ_FOR_EACH_I_B_II, CHAOS_PP_TUPLE_EAT(?))(__VA_ARGS__) \
         /**/
 #    define CHAOS_IP_SEQ_FOR_EACH_I_B_II(px, n, s, macro, _m, ...) \
-        _m()(s, macro, n, CHAOS_PP_UNPACK px __VA_ARGS__) CHAOS_IP_SEQ_FOR_EACH_I_B_INDIRECT \
+        _m()(s, macro, n, CHAOS_PP_REM px __VA_ARGS__) CHAOS_IP_SEQ_FOR_EACH_I_B_INDIRECT \
         /**/
 # else
 #    define CHAOS_IP_SEQ_FOR_EACH_I_A_I(s, macro, bin, data) \

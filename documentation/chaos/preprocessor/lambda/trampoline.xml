@@ -122,7 +122,7 @@
 		    <EXPR_S/>(s) _(REPEAT_INDIRECT _()( \
 		        <NEXT/>(s), o, count, macro, _m, pd \
 		    )) \
-		    _m()(o, macro, count <COMMA/>() <UNPACK/> pd) \
+		    _m()(o, macro, count <COMMA/>() <REM/> pd) \
 		    /**/
 		
 		#define MACRO(s, n, id) <COMMA_IF/>(n) id ## n

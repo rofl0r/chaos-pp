@@ -113,7 +113,7 @@
 		        )) \
 		        _m()( \
 		            s, macro, <DEC/>(count) \
-		            <COMMA/>() <UNPACK/> pd \
+		            <COMMA/>() <REM/> pd \
 		        ) \
 		    ) \
 		    /**/

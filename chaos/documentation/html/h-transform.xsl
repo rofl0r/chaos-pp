@@ -13,14 +13,14 @@
 <xsl:template match="var"><var><xsl:apply-templates/></var></xsl:template>
 <xsl:template match="code"><code><xsl:apply-templates/></code></xsl:template>
 
+<!-- TOPICS -->
+<xsl:template match="lambda"><a class="topic" href="{@root}/topics/lambda.html"><xsl:value-of select="@text"/></a></xsl:template>
+<xsl:template match="recursion"><a class="topic" href="{@root}/topics/recursion.html"><xsl:value-of select="@text"/></a></xsl:template>
+
 <!-- COPYRIGHT/LICENSE -->
 <xsl:template name="copyright">
 	<hr/>
 	<address>© Copyright Paul Mensonides 2003</address>
-	<address>
-		Permission to copy, use, modify, sell and distribute this document is granted provided this copyright notice appears in all copies.
-		This document is provided "as is" without express or implied warranty and with no claim as to its suitability for any purpose.
-	</address>
 </xsl:template>
 
 <!-- MANUAL SYMBOL LOOKUP -->

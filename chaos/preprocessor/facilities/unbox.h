@@ -9,8 +9,8 @@
 #  *                                                                    *
 #  ******************************************************************** */
 #
-# ifndef CHAOS_PREPROCESSOR_FACILITIES_APPLY_H
-# define CHAOS_PREPROCESSOR_FACILITIES_APPLY_H
+# ifndef CHAOS_PREPROCESSOR_FACILITIES_UNBOX_H
+# define CHAOS_PREPROCESSOR_FACILITIES_UNBOX_H
 #
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/control/inline_when.h>
@@ -19,23 +19,23 @@
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/tuple/rem.h>
 #
-# /* CHAOS_PP_APPLY */
+# /* CHAOS_PP_UNBOX */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_APPLY(...) \
+#    define CHAOS_PP_UNBOX(...) \
         CHAOS_PP_INLINE_WHEN(CHAOS_PP_IS_VARIADIC(__VA_ARGS__))( \
             CHAOS_PP_TUPLE_REM(?) __VA_ARGS__ \
         ) \
         /**/
-#    define CHAOS_PP_APPLY_ CHAOS_PP_LAMBDA(CHAOS_PP_APPLY_ID)()
+#    define CHAOS_PP_UNBOX_ CHAOS_PP_LAMBDA(CHAOS_PP_UNBOX_ID)()
 # else
-#    define CHAOS_PP_APPLY(x) \
+#    define CHAOS_PP_UNBOX(x) \
         CHAOS_PP_INLINE_WHEN(CHAOS_PP_IS_UNARY(x))( \
             CHAOS_PP_TUPLE_REM(1) x \
         ) \
         /**/
 # endif
 #
-# define CHAOS_PP_APPLY_ID() CHAOS_PP_APPLY
+# define CHAOS_PP_UNBOX_ID() CHAOS_PP_UNBOX
 #
 # endif

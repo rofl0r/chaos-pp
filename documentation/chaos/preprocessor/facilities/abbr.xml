@@ -20,7 +20,7 @@
 		For example,
 		<snippet>
 			#define INTERFACE(arg) IMPLEMENTATION(<ABBR/>, arg)
-			#define IMPLEMENTATION(_, arg) _(APPLY)(arg)
+			#define IMPLEMENTATION(_, arg) _(UNBOX)(arg)
 			
 			INTERFACE(...)    //
 			INTERFACE((const) // const

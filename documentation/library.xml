@@ -363,7 +363,6 @@
 			<header name="facilities.h"/>
 			<directory name="facilities">
 				<header name="abbr.h"/>
-				<header name="apply.h"/>
 				<header name="as_args.h"/>
 				<header name="binary.h"/>
 				<header name="bind.h"/>
@@ -379,6 +378,7 @@
 				<header name="push.h"/>
 				<header name="split.h"/>
 				<header name="type.h"/>
+				<header name="unbox.h"/>
 				<header name="whitespace.h"/>
 			</directory>
 			<header name="generics.h"/>

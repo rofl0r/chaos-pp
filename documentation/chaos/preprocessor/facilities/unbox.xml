@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<header name="chaos/preprocessor/facilities/apply.h" author="Paul Mensonides" date="2003-2004">
+<header name="chaos/preprocessor/facilities/unbox.h" author="Paul Mensonides" date="2003-2004">
 <overview>
 	The <self/> header defines a macro used to abstract empty arguments.
 </overview>
 
-<macro id="APPLY" type="indirect" group="emptiness">
+<macro id="UNBOX" type="indirect" group="emptiness">
 	<abstract>
-		The <APPLY/> macro is used to abstract empty arguments.
+		The <UNBOX/> macro is used to abstract empty arguments.
 	</abstract>
 	<usage lang="C99">
-		<syntax><APPLY/>(...)</syntax>
+		<syntax><UNBOX/>(...)</syntax>
 		<param id="..." optional="1">
 			The argument to be applied.
 		</param>
 	</usage>
 	<usage lang="C/C++">
-		<syntax><APPLY/>(x)</syntax>
+		<syntax><UNBOX/>(x)</syntax>
 		<param id="x">
 			The argument to be applied.
 		</param>
@@ -33,16 +33,16 @@
 		This macro is used to simulate empty arguments--primarily in C (prior to C99) and C++.
 	</para>
 	<listing>
-		#include <chaos-preprocessor-facilities-apply.h/>
+		#include <chaos-preprocessor-facilities-unbox.h/>
 		
-		#define MACRO(cv) <APPLY/>(cv)
+		#define MACRO(cv) <UNBOX/>(cv)
 		
 		MACRO((const))    // const
 		MACRO((volatile)) // volatile
 		MACRO(.)          //
 	</listing>
-	<derivative id="APPLY_ID"/>
-	<derivative id="APPLY_" lang="C99"/>
+	<derivative id="UNBOX_ID"/>
+	<derivative id="UNBOX_" lang="C99"/>
 </macro>
 
 </header>

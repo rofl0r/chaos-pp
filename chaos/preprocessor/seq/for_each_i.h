@@ -16,6 +16,7 @@
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/control/iif.h>
 # include <chaos/preprocessor/facilities/expand.h>
+# include <chaos/preprocessor/facilities/optional.h>
 # include <chaos/preprocessor/facilities/split.h>
 # include <chaos/preprocessor/lambda/call.h>
 # include <chaos/preprocessor/lambda/ops.h>
@@ -33,7 +34,7 @@
 # /* CHAOS_PP_SEQ_FOR_EACH_I */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_SEQ_FOR_EACH_I(macro, seq, ...) CHAOS_PP_SEQ_FOR_EACH_I_S(CHAOS_PP_STATE(), macro, seq, __VA_ARGS__)
+#    define CHAOS_PP_SEQ_FOR_EACH_I(macro, ...) CHAOS_PP_SEQ_FOR_EACH_I_S(CHAOS_PP_STATE(), macro, __VA_ARGS__)
 #    define CHAOS_PP_SEQ_FOR_EACH_I_ CHAOS_PP_LAMBDA(CHAOS_PP_SEQ_FOR_EACH_I_ID)()
 # else
 #    define CHAOS_PP_SEQ_FOR_EACH_I(macro, seq, data) CHAOS_PP_SEQ_FOR_EACH_I_S(CHAOS_PP_STATE(), macro, seq, data)
@@ -44,10 +45,10 @@
 # /* CHAOS_PP_SEQ_FOR_EACH_I_S */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_SEQ_FOR_EACH_I_S(s, macro, seq, ...) \
+#    define CHAOS_PP_SEQ_FOR_EACH_I_S(s, macro, ...) \
         CHAOS_PP_EXPR_S(s)(CHAOS_IP_SEQ_FOR_EACH_I_B_I \
             CHAOS_IP_SEQ_FOR_EACH_I_A_I( \
-                s, macro, CHAOS_PP_SEQ_BINARY_TRANSFORM(CHAOS_PP_SEQ_REVERSE(seq),), __VA_ARGS__ \
+                s, macro, CHAOS_PP_SEQ_BINARY_TRANSFORM(CHAOS_PP_SEQ_REVERSE(CHAOS_PP_NON_OPTIONAL(__VA_ARGS__)),), CHAOS_PP_EXPOSE(CHAOS_PP_PACK_OPTIONAL(__VA_ARGS__)) \
             )(0,) \
         ) \
         /**/
@@ -68,7 +69,7 @@
         CHAOS_PP_IIF(i)(CHAOS_IP_SEQ_FOR_EACH_I_B_II, CHAOS_PP_TUPLE_EAT(?))(__VA_ARGS__) \
         /**/
 #    define CHAOS_IP_SEQ_FOR_EACH_I_B_II(px, n, s, macro, _m, ...) \
-        _m()(s, macro, n, CHAOS_PP_UNPACK px, __VA_ARGS__) CHAOS_IP_SEQ_FOR_EACH_I_B_INDIRECT \
+        _m()(s, macro, n, CHAOS_PP_UNPACK px __VA_ARGS__) CHAOS_IP_SEQ_FOR_EACH_I_B_INDIRECT \
         /**/
 # else
 #    define CHAOS_PP_SEQ_FOR_EACH_I_S(s, macro, seq, data) \

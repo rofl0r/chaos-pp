@@ -14,6 +14,7 @@
 #
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/control/iif.h>
+# include <chaos/preprocessor/facilities/optional.h>
 # include <chaos/preprocessor/lambda/call.h>
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/punctuation/comma.h>
@@ -26,7 +27,7 @@
 # /* CHAOS_PP_SEQ_FOR_EACH */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_SEQ_FOR_EACH(macro, seq, ...) CHAOS_PP_SEQ_FOR_EACH_S(CHAOS_PP_STATE(), macro, seq, __VA_ARGS__)
+#    define CHAOS_PP_SEQ_FOR_EACH(macro, ...) CHAOS_PP_SEQ_FOR_EACH_S(CHAOS_PP_STATE(), macro, __VA_ARGS__)
 #    define CHAOS_PP_SEQ_FOR_EACH_ CHAOS_PP_LAMBDA(CHAOS_PP_SEQ_FOR_EACH_ID)()
 # else
 #    define CHAOS_PP_SEQ_FOR_EACH(macro, seq, data) CHAOS_PP_SEQ_FOR_EACH_S(CHAOS_PP_STATE(), macro, seq, data)
@@ -37,9 +38,9 @@
 # /* CHAOS_PP_SEQ_FOR_EACH_S */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_SEQ_FOR_EACH_S(s, macro, seq, ...) \
+#    define CHAOS_PP_SEQ_FOR_EACH_S(s, macro, ...) \
         CHAOS_PP_EXPR_S(s)(CHAOS_IP_SEQ_FOR_EACH_I \
-            CHAOS_PP_SEQ_INFUSE(seq, 1, CHAOS_PP_NEXT(s), macro, CHAOS_PP_CALL(macro), (__VA_ARGS__)) \
+            CHAOS_PP_SEQ_INFUSE(CHAOS_PP_NON_OPTIONAL(__VA_ARGS__), 1, CHAOS_PP_NEXT(s), macro, CHAOS_PP_CALL(macro), CHAOS_PP_PACK_OPTIONAL(__VA_ARGS__)) \
             (0,) \
         ) \
         /**/
@@ -47,7 +48,7 @@
 #    define CHAOS_IP_SEQ_FOR_EACH_I(i, ...) \
         CHAOS_PP_IIF(i)(CHAOS_IP_SEQ_FOR_EACH_II, CHAOS_PP_TUPLE_EAT(?))(__VA_ARGS__) \
         /**/
-#    define CHAOS_IP_SEQ_FOR_EACH_II(s, macro, _m, pd, ...) _m()(s, macro, __VA_ARGS__, CHAOS_PP_UNPACK pd) CHAOS_IP_SEQ_FOR_EACH_INDIRECT
+#    define CHAOS_IP_SEQ_FOR_EACH_II(s, macro, _m, pd, ...) _m()(s, macro, __VA_ARGS__ CHAOS_PP_EXPOSE(pd)) CHAOS_IP_SEQ_FOR_EACH_INDIRECT
 # else
 #    define CHAOS_PP_SEQ_FOR_EACH_S(s, macro, seq, data) \
         CHAOS_PP_EXPR_S(s)(CHAOS_IP_SEQ_FOR_EACH_I \

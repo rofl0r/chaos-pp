@@ -49,23 +49,23 @@
 #
 # define CHAOS_IP_FILTER_U(s, pred, v, g, pd) \
     CHAOS_PP_EXPR_S(s)(CHAOS_IP_FILTER_I( \
-        CHAOS_PP_NEXT(s), CHAOS_PP_NEXT(s), pred, \
+        CHAOS_PP_NEXT(s), CHAOS_PP_NEXT(s), \
         CHAOS_PP_IIF(v)(CHAOS_PP_INVOKE_S, pred), CHAOS_PP_IIF(v)(pred CHAOS_PP_COMMA, CHAOS_PP_EMPTY), \
         CHAOS_PP_TYPEOF(g), g, pd \
     )) \
     /**/
 # define CHAOS_IP_FILTER_INDIRECT() CHAOS_IP_FILTER_I
-# define CHAOS_IP_FILTER_I(s, o, pred, _a, _b, type, g, pd) \
+# define CHAOS_IP_FILTER_I(s, o, _a, _b, type, g, pd) \
     CHAOS_PP_IIF(CHAOS_PP_IS_CONS(g))( \
-        CHAOS_IP_FILTER_II, CHAOS_PP_NIL(type) CHAOS_PP_TUPLE_EAT(9) \
-    )(CHAOS_PP_DEFER(CHAOS_PP_OBSTRUCT)(), s, o, pred, _a, _b, type, g, pd) \
+        CHAOS_IP_FILTER_II, CHAOS_PP_NIL(type) CHAOS_PP_TUPLE_EAT(8) \
+    )(CHAOS_PP_DEFER(CHAOS_PP_OBSTRUCT)(), s, o, _a, _b, type, g, pd) \
     /**/
-# define CHAOS_IP_FILTER_II(_, s, o, pred, _a, _b, type, g, pd) \
+# define CHAOS_IP_FILTER_II(_, s, o, _a, _b, type, g, pd) \
     CHAOS_PP_IIF _(CHAOS_PP_EXPR_S _(o)(_a _(o, _b() CHAOS_PP_ITEM(type, CHAOS_PP_FIRST(g)), CHAOS_PP_UNPACK pd)))( \
         CHAOS_PP_CONS, CHAOS_IP_FILTER_III \
     )( \
         CHAOS_PP_DEFER(CHAOS_PP_EXPR_S(s))(CHAOS_PP_DEFER(CHAOS_IP_FILTER_INDIRECT)()( \
-            CHAOS_PP_NEXT(s), o, pred, _a, _b, type, CHAOS_PP_REST(g), pd \
+            CHAOS_PP_NEXT(s), o, _a, _b, type, CHAOS_PP_REST(g), pd \
         )), \
         CHAOS_PP_FIRST(g) \
     ) \

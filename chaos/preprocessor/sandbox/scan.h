@@ -9,8 +9,8 @@
 #  *                                                                         *
 #  ************************************************************************* */
 #
-# ifndef CHAOS_PREPROCESSOR_DETAIL_SANDBOX_SCAN_H
-# define CHAOS_PREPROCESSOR_DETAIL_SANDBOX_SCAN_H
+# ifndef CHAOS_PREPROCESSOR_SANDBOX_SCAN_H
+# define CHAOS_PREPROCESSOR_SANDBOX_SCAN_H
 #
 # include <chaos/preprocessor/arithmetic/dec.h>
 # include <chaos/preprocessor/config.h>

@@ -9,8 +9,8 @@
 #  *                                                                         *
 #  ************************************************************************* */
 #
-# ifndef CHAOS_PREPROCESSOR_DETAIL_SANDBOX_INHIBIT_H
-# define CHAOS_PREPROCESSOR_DETAIL_SANDBOX_INHIBIT_H
+# ifndef CHAOS_PREPROCESSOR_SANDBOX_INHIBIT_H
+# define CHAOS_PREPROCESSOR_SANDBOX_INHIBIT_H
 #
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/control/iif.h>

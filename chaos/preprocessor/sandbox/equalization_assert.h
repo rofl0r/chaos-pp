@@ -9,8 +9,8 @@
 #  *                                                                         *
 #  ************************************************************************* */
 #
-# ifndef CHAOS_PREPROCESSOR_DETAIL_SANDBOX_EQUALIZATION_ASSERT_H
-# define CHAOS_PREPROCESSOR_DETAIL_SANDBOX_EQUALIZATION_ASSERT_H
+# ifndef CHAOS_PREPROCESSOR_SANDBOX_EQUALIZATION_ASSERT_H
+# define CHAOS_PREPROCESSOR_SANDBOX_EQUALIZATION_ASSERT_H
 #
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/debug/failure.h>

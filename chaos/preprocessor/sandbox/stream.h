@@ -9,8 +9,8 @@
 #  *                                                                         *
 #  ************************************************************************* */
 #
-# ifndef CHAOS_PREPROCESSOR_DETAIL_SANDBOX_STREAM_H
-# define CHAOS_PREPROCESSOR_DETAIL_SANDBOX_STREAM_H
+# ifndef CHAOS_PREPROCESSOR_SANDBOX_STREAM_H
+# define CHAOS_PREPROCESSOR_SANDBOX_STREAM_H
 #
 # include <chaos/preprocessor/arithmetic/inc.h>
 # include <chaos/preprocessor/config.h>

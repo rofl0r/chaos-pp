@@ -36,14 +36,38 @@
 			The basic arithmetic operations are all available on <link id="arbitrary-precision values"/>.
 			The following table summarizes these operations and their equivalents in C or C++:
 			<table>
-				<row><column><code><ARBITRARY_ADD/>(x, y)</code></column><column align="center"><code>x + y</code></column></row>
-				<row><column><code><ARBITRARY_DEC/>(x)</code></column><column align="center"><code>x - 1</code></column></row>
-				<row><column><code><ARBITRARY_DIV/>(x, y)</code></column><column align="center"><code>x / y</code></column></row>
-				<row><column><code><ARBITRARY_INC/>(x)</code></column><column align="center"><code>x + 1</code></column></row>
-				<row><column><code><ARBITRARY_MUL/>(x, y)</code></column><column align="center"><code>x * y</code></column></row>
-				<row><column><code><ARBITRARY_MOD/>(x, y)</code></column><column align="center"><code>x % y</code></column></row>
-				<row><column><code><ARBITRARY_NEG/>(x)</code></column><column align="center"><code>-x</code></column></row>
-				<row><column><code><ARBITRARY_SUB/>(x, y)</code></column><column align="center"><code>x - y</code></column></row>
+				<row>
+					<column><code><ARBITRARY_ADD/>(x, y)</code></column>
+					<column type="expression"><code>x + y</code></column>
+				</row>
+				<row>
+					<column><code><ARBITRARY_DEC/>(x)</code></column>
+					<column type="expression"><code>x - 1</code></column>
+				</row>
+				<row>
+					<column><code><ARBITRARY_DIV/>(x, y)</code></column>
+					<column type="expression"><code>x / y</code></column>
+				</row>
+				<row>
+					<column><code><ARBITRARY_INC/>(x)</code></column>
+					<column type="expression"><code>x + 1</code></column>
+				</row>
+				<row>
+					<column><code><ARBITRARY_MUL/>(x, y)</code></column>
+					<column type="expression"><code>x * y</code></column>
+				</row>
+				<row>
+					<column><code><ARBITRARY_MOD/>(x, y)</code></column>
+					<column type="expression"><code>x % y</code></column>
+				</row>
+				<row>
+					<column><code><ARBITRARY_NEG/>(x)</code></column>
+					<column type="expression"><code>-x</code></column>
+				</row>
+				<row>
+					<column><code><ARBITRARY_SUB/>(x, y)</code></column>
+					<column type="expression"><code>x - y</code></column>
+				</row>
 			</table>
 		</para>
 	</section>
@@ -52,12 +76,30 @@
 			The basic equality and relation operators are provided as well.
 			The following table summarizes these operations and their equivalents in C or C++.
 			<table>
-				<row><column><code><ARBITRARY_EQUAL/>(x, y)</code></column><column align="center"><code>x == y</code></column></row>
-				<row><column><code><ARBITRARY_GREATER/>(x, y)</code></column><column align="center"><code>x &gt; y</code></column></row>
-				<row><column><code><ARBITRARY_GREATER_EQUAL/>(x, y)</code></column><column align="center"><code>x &gt;= y</code></column></row>
-				<row><column><code><ARBITRARY_LESS/>(x, y)</code></column><column align="center"><code>x &lt; y</code></column></row>
-				<row><column><code><ARBITRARY_LESS_EQUAL/>(x, y)</code></column><column align="center"><code>x &lt;= y</code></column></row>
-				<row><column><code><ARBITRARY_NOT_EQUAL/>(x, y)</code></column><column align="center"><code>x != y</code></column></row>
+				<row>
+					<column><code><ARBITRARY_EQUAL/>(x, y)</code></column>
+					<column type="expression"><code>x == y</code></column>
+				</row>
+				<row>
+					<column><code><ARBITRARY_GREATER/>(x, y)</code></column>
+					<column type="expression"><code>x &gt; y</code></column>
+				</row>
+				<row>
+					<column><code><ARBITRARY_GREATER_EQUAL/>(x, y)</code></column>
+					<column type="expression"><code>x &gt;= y</code></column>
+				</row>
+				<row>
+					<column><code><ARBITRARY_LESS/>(x, y)</code></column>
+					<column type="expression"><code>x &lt; y</code></column>
+				</row>
+				<row>
+					<column><code><ARBITRARY_LESS_EQUAL/>(x, y)</code></column>
+					<column type="expression"><code>x &lt;= y</code></column>
+				</row>
+				<row>
+					<column><code><ARBITRARY_NOT_EQUAL/>(x, y)</code></column>
+					<column type="expression"><code>x != y</code></column>
+				</row>
 			</table>
 		</para>
 	</section>

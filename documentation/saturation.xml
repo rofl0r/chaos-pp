@@ -31,27 +31,34 @@
 		<para>
 			The following table summarizes the arithmetic operations and their equivalents in C or C++:
 			<table>
-				<row><column><code><ADD/>(x, y)</code></column><column align="center">
-					<code>x + y &gt; <LIMIT_MAG/> ? <LIMIT_MAG/> : x + y</code>
-				</column></row>
-				<row><column><code><DEC/>(x)</code></column><column align="center">
-					<code>x - 1 &lt; 0 ? 0 : x - 1</code>
-				</column></row>
-				<row><column><code><DIV/>(x, y)</code></column><column align="center">
-					<code>x / y</code>
-				</column></row>
-				<row><column><code><INC/>(x)</code></column><column align="center">
-					<code>x + 1 &gt; <LIMIT_MAG/> ? <LIMIT_MAG/> : x + 1</code>
-				</column></row>
-				<row><column><code><MUL/>(x, y)</code></column><column align="center">
-					<code>x * y &gt; <LIMIT_MAG/> ? <LIMIT_MAG/> : x * y</code>
-				</column></row>
-				<row><column><code><MOD/>(x, y)</code></column><column align="center">
-					<code>x % y</code>
-				</column></row>
-				<row><column><code><SUB/>(x, y)</code></column><column align="center">
-					<code>x - y &lt; 0 ? 0 : x - y</code>
-				</column></row>
+				<row>
+					<column><code><ADD/>(x, y)</code></column>
+					<column type="expression"><code>x + y &gt; <LIMIT_MAG/> ? <LIMIT_MAG/> : x + y</code></column>
+				</row>
+				<row>
+					<column><code><DEC/>(x)</code></column>
+					<column type="expression"><code>x - 1 &lt; 0 ? 0 : x - 1</code></column>
+				</row>
+				<row>
+					<column><code><DIV/>(x, y)</code></column>
+					<column type="expression"><code>x / y</code></column>
+				</row>
+				<row>
+					<column><code><INC/>(x)</code></column>
+					<column type="expression"><code>x + 1 &gt; <LIMIT_MAG/> ? <LIMIT_MAG/> : x + 1</code></column>
+				</row>
+				<row>
+					<column><code><MUL/>(x, y)</code></column>
+					<column type="expression"><code>x * y &gt; <LIMIT_MAG/> ? <LIMIT_MAG/> : x * y</code></column>
+				</row>
+				<row>
+					<column><code><MOD/>(x, y)</code></column>
+					<column type="expression"><code>x % y</code></column>
+				</row>
+				<row>
+					<column><code><SUB/>(x, y)</code></column>
+					<column type="expression"><code>x - y &lt; 0 ? 0 : x - y</code></column>
+				</row>
 			</table>
 		</para>
 	</section>
@@ -59,12 +66,30 @@
 		<para>
 			The following table summarizes the equality and relational operations and their equivalents in C or C++.
 			<table>
-				<row><column><code><EQUAL/>(x, y)</code></column><column align="center"><code>x == y</code></column></row>
-				<row><column><code><GREATER/>(x, y)</code></column><column align="center"><code>x &gt; y</code></column></row>
-				<row><column><code><GREATER_EQUAL/>(x, y)</code></column><column align="center"><code>x &gt;= y</code></column></row>
-				<row><column><code><LESS/>(x, y)</code></column><column align="center"><code>x &lt; y</code></column></row>
-				<row><column><code><LESS_EQUAL/>(x, y)</code></column><column align="center"><code>x &lt;= y</code></column></row>
-				<row><column><code><NOT_EQUAL/>(x, y)</code></column><column align="center"><code>x != y</code></column></row>
+				<row>
+					<column><code><EQUAL/>(x, y)</code></column>
+					<column type="expression"><code>x == y</code></column>
+				</row>
+				<row>
+					<column><code><GREATER/>(x, y)</code></column>
+					<column type="expression"><code>x &gt; y</code></column>
+				</row>
+				<row>
+					<column><code><GREATER_EQUAL/>(x, y)</code></column>
+					<column type="expression"><code>x &gt;= y</code></column>
+				</row>
+				<row>
+					<column><code><LESS/>(x, y)</code></column>
+					<column type="expression"><code>x &lt; y</code></column>
+				</row>
+				<row>
+					<column><code><LESS_EQUAL/>(x, y)</code></column>
+					<column type="expression"><code>x &lt;= y</code></column>
+				</row>
+				<row>
+					<column><code><NOT_EQUAL/>(x, y)</code></column>
+					<column type="expression"><code>x != y</code></column>
+				</row>
 			</table>
 		</para>
 	</section>

@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lookup>
 
+<header src="arithmetic/dec">
+	<symbol id="DEC"/>
+	<symbol id="DEC_"/>
+	<symbol id="DEC_ID"/>
+</header>
+
+<header src="arithmetic/inc">
+	<symbol id="INC"/>
+	<symbol id="INC_"/>
+	<symbol id="INC_ID"/>
+</header>
+
 <header src="cat">
 	<symbol id="CAT"/>
 	<symbol id="CAT_"/>
@@ -10,6 +22,10 @@
 	<symbol id="PRIMITIVE_CAT_ID"/>
 </header>
 
+<header src="config">
+	<symbol id="VARIADICS"/>
+</header>
+
 <header src="lambda/ops">
 	<symbol id="LAMBDA"/>
 </header>
@@ -17,6 +33,11 @@
 <header src="limits">
 	<symbol id="LIMIT_EXPR"/>
 	<symbol id="LIMIT_MAG"/>
+</header>
+
+<header src="expr">
+	<symbol id="EXPR"/>
+	<symbol id="EXPR_S"/>
 </header>
 
 <header src="stringize">

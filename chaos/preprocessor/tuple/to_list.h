@@ -9,8 +9,8 @@
 #  *                                                                         *
 #  ************************************************************************* */
 #
-# ifndef CHAOS_PREPROCESSOR_TUPLE_TO_LIST_HP
-# define CHAOS_PREPROCESSOR_TUPLE_TO_LIST_HP
+# ifndef CHAOS_PREPROCESSOR_TUPLE_TO_LIST_H
+# define CHAOS_PREPROCESSOR_TUPLE_TO_LIST_H
 #
 # include <chaos/preprocessor/cat.h>
 # include <chaos/preprocessor/config.h>

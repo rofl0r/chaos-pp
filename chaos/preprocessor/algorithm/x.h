@@ -9,20 +9,15 @@
 #  *                                                                         *
 #  ************************************************************************* */
 #
-# ifndef CHAOS_PREPROCESSOR_RECURSION_H
-# define CHAOS_PREPROCESSOR_RECURSION_H
+# ifndef CHAOS_PREPROCESSOR_ALGORITHM_X_H
+# define CHAOS_PREPROCESSOR_ALGORITHM_X_H
 #
-# include <chaos/preprocessor/recursion/auto_rec.h>
-# include <chaos/preprocessor/recursion/basic.h>
-# include <chaos/preprocessor/recursion/buffer.h>
-# include <chaos/preprocessor/recursion/context.h>
-# include <chaos/preprocessor/recursion/delay.h>
-# include <chaos/preprocessor/recursion/delve.h>
-# include <chaos/preprocessor/recursion/equalize.h>
-# include <chaos/preprocessor/recursion/expr.h>
-# include <chaos/preprocessor/recursion/machine.h>
-# include <chaos/preprocessor/recursion/phase.h>
-# include <chaos/preprocessor/recursion/rail.h>
-# include <chaos/preprocessor/recursion/revive.h>
+# include <chaos/preprocessor/algorithm/x/filter.h>
+# include <chaos/preprocessor/algorithm/x/fold_left.h>
+# include <chaos/preprocessor/algorithm/x/fold_right.h>
+# include <chaos/preprocessor/algorithm/x/for_each.h>
+# include <chaos/preprocessor/algorithm/x/for_each_i.h>
+# include <chaos/preprocessor/algorithm/x/for_each_product.h>
+# include <chaos/preprocessor/algorithm/x/transform.h>
 #
 # endif

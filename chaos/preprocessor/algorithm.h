@@ -36,5 +36,6 @@
 # include <chaos/preprocessor/algorithm/reverse.h>
 # include <chaos/preprocessor/algorithm/size.h>
 # include <chaos/preprocessor/algorithm/transform.h>
+# include <chaos/preprocessor/algorithm/x.h>
 #
 # endif

@@ -25,5 +25,6 @@
 # include <chaos/preprocessor/repetition/repeat.h>
 # include <chaos/preprocessor/repetition/repeat_from_to.h>
 # include <chaos/preprocessor/repetition/repeat_shifted.h>
+# include <chaos/preprocessor/repetition/x.h>
 #
 # endif

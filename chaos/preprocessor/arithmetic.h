@@ -15,6 +15,7 @@
 # include <chaos/preprocessor/arithmetic/add.h>
 # include <chaos/preprocessor/arithmetic/dec.h>
 # include <chaos/preprocessor/arithmetic/div.h>
+# include <chaos/preprocessor/arithmetic/in_range.h>
 # include <chaos/preprocessor/arithmetic/inc.h>
 # include <chaos/preprocessor/arithmetic/machine.h>
 # include <chaos/preprocessor/arithmetic/mod.h>

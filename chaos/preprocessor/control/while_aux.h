@@ -13,7 +13,10 @@
 # define CHAOS_PREPROCESSOR_CONTROL_WHILE_AUX_H
 #
 # include <chaos/preprocessor/config.h>
+# include <chaos/preprocessor/control/expr_iif.h>
 # include <chaos/preprocessor/control/iif.h>
+# include <chaos/preprocessor/detection/is_unary.h>
+# include <chaos/preprocessor/detection/is_variadic.h>
 # include <chaos/preprocessor/lambda/call.h>
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/punctuation/comma.h>
@@ -35,10 +38,14 @@
 # /* CHAOS_PP_WHILE_AUX_S */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_WHILE_AUX_S(s, pred, op, data, ...) CHAOS_IP_WHILE_AUX_U(s, pred, op, data, (__VA_ARGS__))
+#    define CHAOS_PP_WHILE_AUX_S(s, pred, op, data, ...) \
+        CHAOS_IP_WHILE_AUX_U(s, pred, op, CHAOS_PP_EXPR_IIF(CHAOS_PP_IS_VARIADIC(data))(CHAOS_PP_TUPLE_REM(?))(data), (__VA_ARGS__)) \
+        /**/
 #    define CHAOS_PP_WHILE_AUX_S_ CHAOS_PP_LAMBDA(CHAOS_PP_WHILE_AUX_S_ID)()
 # else
-#    define CHAOS_PP_WHILE_AUX_S(s, pred, op, data, state) CHAOS_IP_WHILE_AUX_U(s, pred, op, data, (state))
+#    define CHAOS_PP_WHILE_AUX_S(s, pred, op, data, state) \
+        CHAOS_IP_WHILE_AUX_U(s, pred, op, CHAOS_PP_EXPR_IIF(CHAOS_PP_IS_UNARY(data))(CHAOS_PP_TUPLE_REM(1))(data), (state)) \
+        /**/
 # endif
 #
 # define CHAOS_PP_WHILE_AUX_S_ID() CHAOS_PP_WHILE_AUX_S

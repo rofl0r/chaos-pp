@@ -70,5 +70,9 @@
 				POP_REVERSE((x))       // ()
 			</snippet>
 		</para>
+		<para>
+			A few <link id="tuple"/>-specific primitives, such as <TUPLE_SIZE/>, are explicitly documented as operating on the core representation of a nil <link id="tuple"/>.
+			These primitives also treat <code>()</code> as a unary <link id="tuple"/>.
+		</para>
 	</section>
 </document>

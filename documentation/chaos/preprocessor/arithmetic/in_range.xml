@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/arithmetic/in_range.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a predicate that determines if an integer literal is in range.
+</overview>
+
+<macro id="IN_RANGE">
+	<abstract>
+		The <IN_RANGE/> macro is a predicate that tests whether its argument is greater than or equal to <code>0</code> and less than or equal to <LIMIT_MAG/>.
+	</abstract>
+	<usage>
+		<syntax><IN_RANGE/>(x)</syntax>
+		<param id="x">
+			The integer literal to be tested.
+		</param>
+	</usage>
+	<para>
+		If <var>x</var> is the greater than or equal to <code>0</code> and less than or equal to <LIMIT_MAG/>, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-arithmetic-in_range.h/>
+		
+		<IN_RANGE/>(123)     // 1
+		<IN_RANGE/>(1000000) // 0
+	</listing>
+	<derivative id="IN_RANGE_ID"/>
+	<derivative id="IN_RANGE_" lang="C99"/>
+</macro>
+
+</header>

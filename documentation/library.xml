@@ -281,6 +281,7 @@
 				<header name="add.h"/>
 				<header name="dec.h"/>
 				<header name="div.h"/>
+				<header name="in_range.h"/>
 				<header name="inc.h"/>
 				<header name="machine.h"/>
 				<directory name="machine">

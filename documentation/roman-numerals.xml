@@ -150,17 +150,14 @@
 				    <IIF/>(<STRING_IS_CONS/>(string))( \
 				        <STRIP/>(<CAST/>( \
 				            <STRING/>, \
-				            (<SEQ/>) <TUPLE_ELEM/>( \
-				                ?, 1, \
-				                <VARIADIC_ELEM/>( \
-				                    2, \
-				                    <EXPR_S/>(s)(<WHILE_S/>( \
-				                        s, PRED, OP, \
-				                        <STRING_FIRST/>(string), \
-				                        <STRING_REST/>(string 0), \
-				                        (0, (0)) \
-				                    )) \
-				                ) \
+				            (<SEQ/>) <VARIADIC_ELEM/>( \
+				                2, \
+				                <EXPR_S/>(s)(<WHILE_S/>( \
+				                    s, PRED, OP, \
+				                    <STRING_FIRST/>(string), \
+				                    <STRING_REST/>(string 0), \
+				                    (0) \
+				                )) \
 				            ) \
 				        )), \
 				        0 \
@@ -177,8 +174,8 @@
 				            TABLE(0, first) \
 				        ) \
 				    )( \
-				        <SUB_AP_S/>, <ADD_AP_S/> \
-				    )(s, x, TABLE(1, first)) \
+				        <SUB_AP/>, <ADD_AP/> \
+				    )(x, TABLE(1, first)) \
 				    /**/
 				
 				#define TABLE(n, letter) \

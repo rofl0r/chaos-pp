@@ -201,13 +201,10 @@
 				#include <chaos-preprocessor-arbitrary-add.h/>
 				#include <chaos-preprocessor-arbitrary-demote.h/>
 				#include <chaos-preprocessor-arbitrary-mul.h/>
-				#include <chaos-preprocessor-config.h/>
 				#include <chaos-preprocessor-control-iif.h/>
 				#include <chaos-preprocessor-recursion-basic.h/>
 				#include <chaos-preprocessor-recursion-expr.h/>
 				#include <chaos-preprocessor-string-core.h/>
-				
-				#if <VARIADICS/>
 				
 				#define BINARY(string) BINARY_S(<STATE/>(), string)
 				#define BINARY_S(s, string) \
@@ -221,9 +218,8 @@
 				        <EXPR_S/> _(s)(BINARY_INDIRECT _()( \
 				            <OBSTRUCT/> _(), <NEXT/>(s), \
 				            <STRING_REST/> _(string), \
-				            <ADD_AP_S/> _( \
-				                s, \
-				                <MUL_AP_S/> _(s, x, (2)), \
+				            <ADD_AP/> _( \
+				                <MUL_AP/> _(x, (2)), \
 				                (<STRING_FIRST/> _(string)) \
 				            ) \
 				        )), \
@@ -232,8 +228,6 @@
 				    /**/
 				
 				BINARY(1 0 1 0) // 10
-				
-				#endif
 			</snippet>
 			This version is the lowest-level, and, as such, it is likely the most efficient.
 			However, the code is dominated by code to emulate <link id="recursion"/> rather than code to calculate the value of a binary literal.
@@ -245,44 +239,44 @@
 				#include <chaos-preprocessor-arbitrary-add.h/>
 				#include <chaos-preprocessor-arbitrary-demote.h/>
 				#include <chaos-preprocessor-arbitrary-mul.h/>
-				#include <chaos-preprocessor-config.h/>
+				#include <chaos-preprocessor-array-elem.h/>
 				#include <chaos-preprocessor-control-while.h/>
-				#include <chaos-preprocessor-facilities-split.h/>
+				#include <chaos-preprocessor-facilities-as_args.h/>
 				#include <chaos-preprocessor-recursion-expr.h/>
 				#include <chaos-preprocessor-string-core.h/>
 				
-				#if <VARIADICS/>
-				
 				#define BINARY(string) BINARY_S(<STATE/>(), string)
 				#define BINARY_S(s, string) \
-				    <DEMOTE_AP/>(<SPLIT/>( \
+				    <DEMOTE_AP/>(<ARRAY_ELEM/>( \
 				        1, \
 				        <EXPR_S/>(s)(<WHILE_S/>( \
-				            s, PRED, OP, string, (0) \
+				            s, \
+				            PRED <AS_ARGS/>(2), \
+				            OP <AS_ARGS/>(2), \
+				            (2, (string, (0))) \
 				        )) \
 				    )) \
 				    /**/
 				
 				#define PRED(s, string, x) <STRING_IS_CONS/>(string)
 				#define OP(s, string, x) \
-				    <STRING_REST/>(string), \
-				    <ADD_AP_S/>( \
-				        s, \
-				        <MUL_AP_S/>(s, x, (2)), \
-				        (<STRING_FIRST/>(string)) \
-				    ) \
+				    (2, ( \
+				        <STRING_REST/>(string), \
+				        <ADD_AP/>( \
+				            <MUL_AP/>(x, (2)), \
+				            (<STRING_FIRST/>(string)) \
+				        ) \
+				    )) \
 				    /**/
 				
 				BINARY(1 0 1 0) // 10
-				
-				#endif
 			</snippet>
 			This version, as far as clarity is concerned, is much better than the raw recursive version.
 			However, there are still a few annoyances.
 			The state on which the loop operates includes both the <link id="string"/> of bits and the running result.
 			This means that the operation has to operate on both in order for the predicate to eventually yield <code>0</code>.
 			Likewise, when the loop does terminate, the result is both the nil <link id="string"/> and the <link id="arbitrary-precision value"/> that holds the result.
-			Thus, the actual result must be extracted (in this case, with <SPLIT/>).
+			Thus, the actual result must be extracted (in this case, with <ARRAY_ELEM/>).
 		</para>
 		<para>
 			All of these annoyances can be eliminated if the level of abstraction is increased yet again.
@@ -293,11 +287,8 @@
 				#include <chaos-preprocessor-arbitrary-add.h/>
 				#include <chaos-preprocessor-arbitrary-demote.h/>
 				#include <chaos-preprocessor-arbitrary-mul.h/>
-				#include <chaos-preprocessor-config.h/>
 				#include <chaos-preprocessor-recursion-expr.h/>
 				#include <chaos-preprocessor-string-core.h/>
-				
-				#if <VARIADICS/>
 				
 				#define BINARY(string) BINARY_S(<STATE/>(), string)
 				#define BINARY_S(s, string) \
@@ -309,20 +300,17 @@
 				    /**/
 				
 				#define OP(s, bit, x) \
-				    <ADD_AP_S/>( \
-				        s, <MUL_AP_S/>(s, x, (2)), (bit) \
+				    <ADD_AP/>( \
+				        <MUL_AP/>(x, (2)), (bit) \
 				    ) \
 				    /**/
 				
 				BINARY(1 0 1 0) // 10
-				
-				#endif
 			</snippet>
 		</para>
 		<para>
 			The above example eliminates the problems associated with the template-based approach.
 			It unifies the syntax by eliminating the need for groups of bits, it minimizes the "maximum value" problem, and it avoids the "octal literal" issue.
-			Though this implementation uses C99 facilities, it is possible to support C++ as well.
 			However, this implementation has its own drawback--the binary literal itself must be encoded in a <link id="string"/> data structure (e.g. <code>1 0 1 0</code> as opposed to <code>1010</code>).
 			That isn't too terrible, but it isn't ideal.
 		</para>
@@ -345,12 +333,15 @@
 				#include <chaos-preprocessor-arbitrary-add.h/>
 				#include <chaos-preprocessor-arbitrary-demote.h/>
 				#include <chaos-preprocessor-arbitrary-mul.h/>
+				#include <chaos-preprocessor-config.h/>
 				#include <chaos-preprocessor-control-while.h/>
 				#include <chaos-preprocessor-detection-is_nullary.h/>
 				#include <chaos-preprocessor-facilities-split.h/>
 				#include <chaos-preprocessor-logical-compl.h/>
 				#include <chaos-preprocessor-recursion-expr.h/>
 				#include <chaos-preprocessor-string-core.h/>
+				
+				#if <VARIADICS/>
 				
 				#define BINARY(x) BINARY_S(<STATE/>(), x)
 				#define BINARY_S(s, x) \
@@ -369,8 +360,8 @@
 				    /**/
 				
 				#define ACC(s, bit, x) \
-				    <ADD_AP_S/>( \
-				        s, <MUL_AP_S/>(s, x, (2)), (bit) \
+				    <ADD_AP/>( \
+				        <MUL_AP/>(x, (2)), (bit) \
 				    ) \
 				    /**/
 				
@@ -392,6 +383,8 @@
 				BINARY(10001000) // 136
 				BINARY(11111111) // 255
 				BINARY(11111111 00000000) // 65280
+				
+				#endif
 			</snippet>
 			(The <code>BYTE_</code> boilerplate can be pre-generated with a small program such as the following:
 			<snippet>
@@ -463,7 +456,6 @@
 				#include <chaos-preprocessor-arbitrary-demote.h/>
 				#include <chaos-preprocessor-arbitrary-mul.h/>
 				#include <chaos-preprocessor-cat.h/>
-				#include <chaos-preprocessor-config.h/>
 				#include <chaos-preprocessor-control-iif.h/>
 				#include <chaos-preprocessor-detection-is_nullary.h/>
 				#include <chaos-preprocessor-detection-is_unary.h/>
@@ -474,7 +466,7 @@
 				
 				#define XS XS
 				#define XS_TAG(tag) tag
-				#define XS_NIL()
+				#define XS_NIL() <STRING_NIL/>()
 				#define XS_CONS(xs, x) x xs
 				#define XS_FIRST(xs) <STRING_FIRST/>(EXPANDER(xs))
 				#define XS_REST(xs) <STRING_REST/>(EXPANDER(xs))
@@ -504,8 +496,8 @@
 				    /**/
 				
 				#define ACC(s, bit, x) \
-				    <ADD_AP_S/>( \
-				        s, <MUL_AP_S/>(s, x, (2)), (bit) \
+				    <ADD_AP/>( \
+				        <MUL_AP/>(x, (2)), (bit) \
 				    ) \
 				    /**/
 				
@@ -613,12 +605,9 @@
 				#include <chaos-preprocessor-arbitrary-literal.h/>
 				#include <chaos-preprocessor-arbitrary-mul.h/>
 				#include <chaos-preprocessor-cat.h/>
-				#include <chaos-preprocessor-config.h/>
 				#include <chaos-preprocessor-recursion-expr.h/>
 				#include <chaos-preprocessor-string-core.h/>
 				#include <chaos-preprocessor-string-to_upper.h/>
-				
-				#if <VARIADICS/>
 				
 				#define CONVERT(string, base) CONVERT_S(<STATE/>(), string, base)
 				#define CONVERT_S(s, string, base) \
@@ -659,8 +648,6 @@
 				CONVERT(1 2 3, 1 0)         // 123
 				CONVERT(0 0 0 0 0 0 1 0, 2) // 2
 				CONVERT(0 0 0 0 0 0 1 0, 8) // 8
-				
-				#endif
 			</snippet>
 		</para>
 	</section>

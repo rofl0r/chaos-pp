@@ -156,4 +156,87 @@
 	<derivative id="TUPLE_SANS_BATCH_" lang="C99"/>
 </macro>
 
+<macro id="TUPLE_BATCH_FORK" group="batch">
+	<abstract>
+		The <TUPLE_BATCH_FORK/> macro is used to branch based on whether its second argument contains <em>at least</em> the number of elements specified by its first argument or the number of elements if not.
+	</abstract>
+	<usage lang="C99">
+		<syntax><TUPLE_BATCH_FORK/>(n, tuple)</syntax>
+		<param id="n">
+			The batch size.
+			Valid values range from <code>1</code> to <LIMIT_TUPLE/>
+		</param>
+		<param id="tuple" optional="1">
+			The <link id="tuple"/> to be tested.
+		</param>
+	</usage>
+	<para>
+		If <var>tuple</var> contains <em>at least</em> <var>n</var> elements, this macro expands to nothing.
+		Otherwise, it expands to the number of elements in <var>tuple</var>.
+	</para>
+	<para>
+		The primary utility of this macro is to branch based on whether a <link id="tuple"/> can be unrolled by a factor of <var>n</var>.
+		When it cannot, this macro expands to the number of elements in the <link id="tuple"/> which facilitates unrolled processing of the those elements.
+	</para>
+	<para>
+		This macro operates on the nil <link id="tuple"/> representation used by the core <link id="tuple"/> operations defined in <chaos-preprocessor-tuple-core.h/>.
+		Specifically, <code>()</code> is a one-element <link id="tuple"/>, not a zero-element <link id="tuple"/>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-cat.h/>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-control-inline_when.h/>
+		#include <chaos-preprocessor-limits.h/>
+		#include <chaos-preprocessor-recursion-basic.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		#include <chaos-preprocessor-tuple-batch.h/>
+		#include <chaos-preprocessor-tuple-core.h/>
+		#include <chaos-preprocessor-tuple-rem.h/>
+		#include <chaos-preprocessor-tuple-reverse.h/>
+		
+		#if <VARIADICS/>
+		
+		#define REVERSE(tuple) REVERSE_BYPASS(<LIMIT_EXPR/>, tuple)
+		#define REVERSE_BYPASS(s, tuple) \
+		    <INLINE_WHEN/>(<TUPLE_IS_CONS/>(tuple))(( \
+		        <EXPR_S/>(s)(REVERSE_I( \
+		            <PREV/>(s), tuple, \
+		        )) \
+		    )) \
+		    /**/
+		
+		#define REVERSE_INDIRECT() REVERSE_I
+		#define REVERSE_I(s, tuple, ...) \
+		    <CAT/>(REVERSE_II_, <TUPLE_BATCH_FORK/>(5, tuple))( \
+		        <OBSTRUCT/>(), s, tuple, __VA_ARGS__ \
+		    ) \
+		    /**/
+		#define REVERSE_II_(_, s, tuple, ...) \
+		    <EXPR_S/> _(s)(REVERSE_INDIRECT _()( \
+		        <PREV/>(s), <TUPLE_SANS_BATCH/>(5, tuple),, \
+		    )) \
+		    <TUPLE_REM_CTOR/>( \
+		        ?, \
+		        <TUPLE_REVERSE/>(5, <TUPLE_BATCH/>(5, tuple)) \
+		    ) \
+		    __VA_ARGS__ \
+		    /**/
+		#define REVERSE_II_0(...)
+		#define REVERSE_II_1(_, s, tuple, ...) <REM/> tuple __VA_ARGS__
+		#define REVERSE_II_2(_, s, tuple, ...) REVERSE_III(2, tuple, __VA_ARGS__)
+		#define REVERSE_II_3(_, s, tuple, ...) REVERSE_III(3, tuple, __VA_ARGS__)
+		#define REVERSE_II_4(_, s, tuple, ...) REVERSE_III(4, tuple, __VA_ARGS__)
+		#define REVERSE_III(n, tuple, ...) \
+		    <TUPLE_REM_CTOR/>(?, <TUPLE_REVERSE/>(n, tuple)) __VA_ARGS__ \
+		    /**/
+		
+		REVERSE((a, b, c)) // (c, b, a)
+		REVERSE((0, 1, 2, 3, 4, 5, 6, 7, 8, 9)) // (9, 8, 7, 6, 5, 4, 3, 2, 1, 0)
+		
+		#endif
+	</listing>
+	<derivative id="TUPLE_BATCH_FORK_ID" lang="C99"/>
+	<derivative id="TUPLE_BATCH_FORK_" lang="C99"/>
+</macro>
+
 </header>

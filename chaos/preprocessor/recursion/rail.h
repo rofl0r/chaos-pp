@@ -32,6 +32,16 @@
 #    define CHAOS_PP_RAIL_ CHAOS_PP_LAMBDA(CHAOS_PP_RAIL)
 # endif
 #
+# /* CHAOS_PP_UNSAFE_RAIL */
+#
+# define CHAOS_PP_UNSAFE_RAIL(macro) \
+    CHAOS_PP_IIF_SHADOW(CHAOS_PP_IS_NULLARY(CHAOS_PP_WALL(())))( \
+        CHAOS_PP_UNSAFE_RAIL_ID CHAOS_PP_OBSTRUCT()()(macro), \
+        macro \
+    ) \
+    /**/
+# define CHAOS_PP_UNSAFE_RAIL_ID() CHAOS_PP_UNSAFE_RAIL
+#
 # /* CHAOS_PP_WALL */
 #
 # if CHAOS_PP_VARIADICS

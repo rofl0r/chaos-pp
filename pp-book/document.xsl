@@ -31,7 +31,7 @@
 		</xsl:call-template>
 	</xsl:template>
 
-	<xsl:template match="*" priority="-1">
+	<xsl:template match="*" priority="-2">
 		<xsl:call-template name="lookup:unknown-entity"/>
 	</xsl:template>
 

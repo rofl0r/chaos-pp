@@ -26,11 +26,4 @@
         /**/
 # endif
 #
-# if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_VARIADIC_CAT_SHADOW(...) CHAOS_IP_VARIADIC_CAT_SHADOW_I(__VA_ARGS__,,,,,,,,,,,,,,,,,,,,,,,,,)
-#    define CHAOS_IP_VARIADIC_CAT_SHADOW_I(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, ...) \
-        a ## b ## c ## d ## e ## f ## g ## h ## i ## j ## k ## l ## m ## n ## o ## p ## q ## r ## s ## t ## u ## v ## w ## x ## y \
-        /**/
-# endif
-#
 # endif

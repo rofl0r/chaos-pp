@@ -89,7 +89,7 @@
     /**/
 # define CHAOS_IP_WHILE_PARAMETRIC_INDIRECT() CHAOS_IP_WHILE_PARAMETRIC_II
 # define CHAOS_IP_WHILE_PARAMETRIC_II(s, o, buffer, shelf, pred, _p, op, _o, ps) \
-    CHAOS_PP_IIF_SHADOW(CHAOS_PP_BITAND(CHAOS_PP_IS_VALID(buffer))(CHAOS_PP_NOT_EQUAL(buffer, CHAOS_PP_LIMIT_EXPR)))( \
+    CHAOS_PP_IIF(CHAOS_PP_BITAND(CHAOS_PP_IS_VALID(buffer))(CHAOS_PP_NOT_EQUAL(buffer, CHAOS_PP_LIMIT_EXPR)))( \
         CHAOS_IP_WHILE_PARAMETRIC_III, CHAOS_IP_WHILE_PARAMETRIC_P \
     )(s, o, buffer, shelf, pred, _p, op, _o, ps) \
     /**/

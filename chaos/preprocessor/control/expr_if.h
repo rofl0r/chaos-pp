@@ -26,6 +26,4 @@
 #    define CHAOS_PP_EXPR_IF_ CHAOS_PP_LAMBDA(CHAOS_PP_EXPR_IF)
 # endif
 #
-# define CHAOS_PP_EXPR_IF_SHADOW(cond) CHAOS_PP_EXPR_IIF_SHADOW(CHAOS_PP_BOOL(cond))
-#
 # endif

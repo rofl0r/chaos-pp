@@ -30,14 +30,4 @@
 #    define CHAOS_IP_EXPR_IIF_1(x) x
 # endif
 #
-# define CHAOS_PP_EXPR_IIF_SHADOW(bit) CHAOS_PP_PRIMITIVE_CAT_SHADOW(CHAOS_IP_EXPR_IIF_SHADOW_, bit)
-#
-# if CHAOS_PP_VARIADICS
-#    define CHAOS_IP_EXPR_IIF_SHADOW_0(...)
-#    define CHAOS_IP_EXPR_IIF_SHADOW_1(...) __VA_ARGS__
-# else
-#    define CHAOS_IP_EXPR_IIF_SHADOW_0(x)
-#    define CHAOS_IP_EXPR_IIF_SHADOW_1(x) x
-# endif
-#
 # endif

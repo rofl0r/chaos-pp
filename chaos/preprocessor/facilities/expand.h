@@ -26,10 +26,4 @@
 #
 # define CHAOS_PP_EXPAND_ID() CHAOS_PP_EXPAND
 #
-# if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_EXPAND_SHADOW(...) __VA_ARGS__
-# else
-#    define CHAOS_PP_EXPAND_SHADOW(x) x
-# endif
-#
 # endif

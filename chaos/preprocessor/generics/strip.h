@@ -25,6 +25,4 @@
 #    define CHAOS_PP_STRIP_ CHAOS_PP_LAMBDA(CHAOS_PP_STRIP_ID)()
 # endif
 #
-# define CHAOS_PP_STRIP_SHADOW(g) CHAOS_PP_TUPLE_EAT(1) g
-#
 # endif

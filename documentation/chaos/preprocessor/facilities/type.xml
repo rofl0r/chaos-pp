@@ -15,7 +15,7 @@
 		</param>
 	</usage>
 	<para>
-		This macro expands to a <link id="deferred expression"/> that expands to <code>__VA_ARGS__</code> when (and only when) the context introduced by the <WALL/> macro is present.
+		This macro expands to <code>__VA_ARGS__</code> when (and only when) the context introduced by the <WALL/> macro is present.
 	</para>
 	<para>
 		The common use case for this macro is currently theoretical, as C++ does not yet allow variadic arguments.
@@ -24,7 +24,6 @@
 	<listing>
 		#include <chaos-preprocessor-config.h/>
 		#include <chaos-preprocessor-facilities-type.h/>
-		#include <chaos-preprocessor-recursion-expr.h/>
 		#include <chaos-preprocessor-recursion-rail.h/>
 		
 		#if <VARIADICS/>
@@ -33,9 +32,9 @@
 		
 		MACRO(int) // int
 		
-		<EXPR/>(<WALL/>(
+		<WALL/>(
 		    MACRO(<TYPE/>(std::pair&lt;int, int&gt;))
-		))
+		)
 		// std::pair&lt;int, int&gt;
 		
 		#endif

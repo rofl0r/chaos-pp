@@ -10,3 +10,5 @@ msxsl ../data/lookup.xml macros.xsl -o macros.html
 
 mkdir reference 2> nul
 call process cat
+
+del _lookup.xsl

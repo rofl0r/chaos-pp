@@ -35,6 +35,69 @@
 			The <link id="tuple"/>-specific primitives are located in the <code>chaos/preprocessor/tuple</code> subdirectory.
 		</para>
 	</section>
+	<section id="Nil Tuples">
+		<para>
+			Because <link id="tuples"/> have the syntactic form of an argument list, there is an inherent ambiguity in the representation of a nil <link id="tuple"/>.
+			Consider the macro the following macro definitions and invocations:
+			<snippet>
+				#define A()
+				#define B(x)
+				
+				A()
+				B(1)
+			</snippet>
+			The <code>A</code> macro is defined as nullary, while the <code>B</code> macro is defined as unary.
+			When <code>A</code> is invoked, it is invoked with the first of two forms of nil <link id="tuple"/> used by the library--nullary parentheses, <code>()</code>.
+			When <code>B</code> is invoked, it is invoked with a <link id="tuple"/> that is clearly unary.
+			However, with the introduction of placemarkers in C99, the distinction is no longer clear.
+			For example,
+			<snippet>
+				B()
+			</snippet>
+			Here, <code>B</code> is invoked with what appears to be, but isn't, a nil <link id="tuple"/>.
+			It is invoked with a unary <link id="tuple"/> whose only element is empty.
+			(This is why <code><IS_UNARY/>(())</code> expands to <code>1</code> in C99.)
+			Fundamentally, this is no different than a <link id="tuple"/> of greater arity with empty elements.
+			<snippet>
+				(,,)
+			</snippet>
+		</para>
+		<para>
+			Several problems arise from this situation when using <link id="tuples"/> as data structures.
+			The first is that there is no general way of detecting the difference between <code>()</code> and <code>(1)</code>.
+			It is possible to get fairly close in various ways by restricting the types of elements, but a general solution is impossible.
+		</para>
+		<para>
+			Even if such detection <em>was</em> possible, another problem surfaces.
+			Consider again the <code>(,,)</code> <link id="tuple"/>, and consider an algorithm that operates on each element of a <link id="tuple"/>.
+			If the algorithm was to attempt to individually process elements one-by-one, it might use <TUPLE_FIRST/> and <TUPLE_REST/>.
+			Everything is fine for <code><TUPLE_REST/>((,,))</code> (which yields <code>(,)</code>).
+			However, <code><TUPLE_REST/>((,))</code> yields <code>()</code> (i.e. the theoretical nil <link id="tuple"/>), and an element has been silently skipped.
+		</para>
+		<para>
+			The underlying problem is that emptiness (or "nothing") is a useful and perfectly valid form of data in its own right.
+		</para>
+		<para>
+			As a consequence, algorithms and primitives that operate on <link id="tuples"/> <em>algorithmically</em> need to use a distinct representation for nil that has no ambiguity.
+			This representation is <code><TUPLE_NIL/>()</code> which simply expands to nothing.
+			This model always treats <code>()</code> as a unary <link id="tuple"/>, and <code><TUPLE_REST/>(())</code> expands to nothing.
+		</para>
+		<para>
+			Note that this issue arises only with algorithms and primitives that operate on <link id="tuples"/> algorithmically, and <link id="tuples"/> can only be operated on algorithmically in C99.
+			Thus, all <link id="tuple"/>-specific primitives present in C (prior to C99) and C++ operate on <code>()</code> nil <link id="tuples"/>.
+			(For compatibility, these primitives are semantically identical in C99.)
+		</para>
+		<para>
+			It is sometimes necessary to convert an empty nil <link id="tuple"/> to a <code>()</code> nil <link id="tuple"/>.
+			One such case is when the <link id="tuple"/> is to be directly used as an argument list.
+			This can be accomplished with code such as the following:
+			<snippet>
+				<TUPLE_AS_ARGS/>((a, b, c)) // (a, b, c)
+				<TUPLE_AS_ARGS/>()          // ()
+			</snippet>
+			However, no conversion in the other direction is possible.
+		</para>
+	</section>
 	<section id="Using Tuples as Generic Data Structures">
 		<para>
 			In C99, <link id="tuples"/> can be used as <link id="generic data structures"/> if the <chaos-preprocessor-tuple-core.h/> header is included.
@@ -47,32 +110,9 @@
 				))
 				// &lt; x &gt; &lt; y &gt; &lt; z &gt;
 			</snippet>
-			Note, however, that a nil <link id="tuple"/> is represented differently by <link id="tuple"/>-specific primitives and by the core <link id="tuple"/> operations defined in <chaos-preprocessor-tuple-core.h/> (and, by extension, the generic algorithms).
-			For example, to a core <link id="tuple"/> primitive, <code>()</code> is a one-element <link id="tuple"/> whose single element is empty--just as <code>(,)</code> is a two-element <link id="tuple"/> whose elements are both empty.
-			A nil <link id="tuple"/> is represented by <code><TUPLE_NIL/>()</code>.
-			However, to <link id="tuple"/>-specific primitives--such as <TUPLE_TO_LIST/>--<code>()</code> is a nil (i.e. zero-element) <link id="tuple"/> and <code><TUPLE_NIL/>()</code> is invalid input.
-			Thus, if a core <link id="tuple"/> primitive or generic algorithm operates on a <link id="tuple"/> in a fashion that might result in a nil <link id="tuple"/> that is to be further used by <link id="tuple"/>-specific primitives, the user must check for the nil case with <TUPLE_IS_CONS/> or <TUPLE_IS_NIL/> or the generic equivalents.
-			For example,
-			<snippet>
-				#define POP_REVERSE(tuple) \
-				    POP_REVERSE_I(<POP_BACK/>((<TUPLE/>) tuple)) \
-				    /**/
-				#define POP_REVERSE_I(g) \
-				    <TUPLE_REVERSE/>( \
-				        <SIZE/>(g), \
-				        <IIF/>(<IS_CONS/>(g))( \
-				            <STRIP/>(g), () \
-				        ) \
-				    ) \
-				    /**/
-				
-				POP_REVERSE((a, b, c)) // (b, a)
-				POP_REVERSE((x))       // ()
-			</snippet>
 		</para>
 		<para>
-			A few <link id="tuple"/>-specific primitives, such as <TUPLE_SIZE/>, are explicitly documented as operating on the core representation of a nil <link id="tuple"/>.
-			These primitives also treat <code>()</code> as a unary <link id="tuple"/>.
+			(Note that <link id="tuples"/> used as generic data structures use the empty nil <link id="tuple"/> representation.)
 		</para>
 	</section>
 </document>

@@ -12,7 +12,7 @@
 		<syntax><ARRAY_REVERSE/>(array)</syntax>
 		<param id="array">
 			The <link id="array"/> whose elements are to be reversed.
-			This <link id="array"/> must contain less than <LIMIT_TUPLE/> elements.
+			This <link id="array"/> must contain <LIMIT_TUPLE/> or less elements.
 		</param>
 	</usage>
 	<para>

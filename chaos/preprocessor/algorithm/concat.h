@@ -17,7 +17,7 @@
 # include <chaos/preprocessor/control/expr_iif.h>
 # include <chaos/preprocessor/control/iif.h>
 # include <chaos/preprocessor/extended/variadic_cat.h>
-# include <chaos/preprocessor/generics/type.h>
+# include <chaos/preprocessor/generics/spec.h>
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/limits.h>
 # include <chaos/preprocessor/recursion/basic.h>

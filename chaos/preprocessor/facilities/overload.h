@@ -19,7 +19,7 @@
 # include <chaos/preprocessor/limits.h>
 # include <chaos/preprocessor/recursion/basic.h>
 # include <chaos/preprocessor/recursion/expr.h>
-# include <chaos/preprocessor/tuple/type.h>
+# include <chaos/preprocessor/tuple/spec.h>
 #
 # /* CHAOS_PP_OVERLOAD */
 #

@@ -14,7 +14,7 @@
 #
 # include <chaos/preprocessor/comparison/not_equal.h>
 # include <chaos/preprocessor/config.h>
-# include <chaos/preprocessor/generics/type.h>
+# include <chaos/preprocessor/generics/spec.h>
 # include <chaos/preprocessor/generics/typeof.h>
 # include <chaos/preprocessor/lambda/call.h>
 # include <chaos/preprocessor/lambda/ops.h>

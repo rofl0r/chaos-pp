@@ -14,6 +14,7 @@
 #
 # include <chaos/preprocessor/extended/auto_cat.h>
 # include <chaos/preprocessor/extended/partial_cat.h>
+# include <chaos/preprocessor/extended/reverse_cat.h>
 # include <chaos/preprocessor/extended/variadic_cat.h>
 #
 # endif

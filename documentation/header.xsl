@@ -60,6 +60,7 @@
 
 <xsl:template name="unknown-entity">
 	<xsl:param name="text"/>
+	<!--<xsl:message terminate="yes">unknown symbol: <xsl:value-of select="$text"/></xsl:message>-->
 	<CODE><A class="unknown" href="{$root}/unknown.html"><xsl:value-of select="$text"/></A></CODE>
 </xsl:template>
 

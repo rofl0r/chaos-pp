@@ -56,4 +56,10 @@
 #
 # define CHAOS_PP_UNPACK_ID() CHAOS_PP_UNPACK
 #
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_PP_UNPACK_SHADOW(...) __VA_ARGS__
+# else
+#    define CHAOS_PP_UNPACK_SHADOW(x) x
+# endif
+#
 # endif

@@ -71,7 +71,7 @@
 #
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_ALTERNATE(id, pre) \
-        CHAOS_PP_IIF( \
+        CHAOS_PP_IIF_SHADOW( \
             CHAOS_PP_BITOR \
                 (CHAOS_PP_IS_NULLARY(CHAOS_IP_BIND_0(, ()))) \
                 (CHAOS_PP_COMPL(CHAOS_PP_IS_NULLARY(CHAOS_PP_EXTERN(, ())))) \

@@ -27,4 +27,10 @@
 #
 # define CHAOS_PP_IDENTITY_ID() CHAOS_PP_IDENTITY
 #
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_PP_IDENTITY_SHADOW(...) __VA_ARGS__ CHAOS_PP_EMPTY
+# else
+#    define CHAOS_PP_IDENTITY_SHADOW(x) x CHAOS_PP_EMPTY
+# endif
+#
 # endif

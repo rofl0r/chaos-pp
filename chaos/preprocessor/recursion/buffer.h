@@ -30,7 +30,7 @@
 #
 # define CHAOS_IP_BUFFER_INDIRECT() CHAOS_IP_BUFFER_I
 # define CHAOS_IP_BUFFER_I(_, s, size) \
-    CHAOS_PP_IF _(size)( \
+    CHAOS_PP_IF_SHADOW _(size)( \
         CHAOS_PP_EXPR_S(s) _(CHAOS_IP_BUFFER_INDIRECT _()(CHAOS_PP_OBSTRUCT _(), CHAOS_PP_NEXT(s), CHAOS_PP_DEC(size))), \
         CHAOS_PP_PREV(s) \
     ) \

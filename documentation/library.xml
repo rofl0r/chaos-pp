@@ -327,6 +327,7 @@
 				<header name="include_if.h"/>
 				<header name="inline_when.h"/>
 				<header name="null.h"/>
+				<header name="placemarker_if.h"/>
 				<header name="when.h"/>
 				<header name="while.h"/>
 				<header name="while_aux.h"/>
@@ -530,8 +531,13 @@
 			</directory>
 			<header name="seq.h"/>
 			<directory name="seq">
+				<directory name="complexity">
+					<binary-file name="duplex.gif"/>
+					<binary-file name="reverse_duplex.gif"/>
+				</directory>
 				<header name="binary_transform.h"/>
 				<header name="core.h"/>
+				<header name="duplex.h"/>
 				<header name="elem.h"/>
 				<header name="enumerate.h"/>
 				<header name="filter.h"/>

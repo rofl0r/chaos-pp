@@ -15,7 +15,7 @@
 # include <chaos/preprocessor/arithmetic/dec.h>
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/control/if.h>
-# include <chaos/preprocessor/control/inline_when.h>
+# include <chaos/preprocessor/control/placemarker_if.h>
 # include <chaos/preprocessor/facilities/expand.h>
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/limits.h>
@@ -78,8 +78,8 @@
             seq \
         ) \
         /**/
-#    define CHAOS_IP_SEQ_REVERSE_DUPLEX_A(bit, a, b) CHAOS_PP_INLINE_WHEN(bit)(b a CHAOS_IP_SEQ_REVERSE_DUPLEX_B)
-#    define CHAOS_IP_SEQ_REVERSE_DUPLEX_B(bit, a, b) CHAOS_PP_INLINE_WHEN(bit)(b a CHAOS_IP_SEQ_REVERSE_DUPLEX_A)
+#    define CHAOS_IP_SEQ_REVERSE_DUPLEX_A(p, a, b) CHAOS_PP_PLACEMARKER_IF(p)(b a CHAOS_IP_SEQ_REVERSE_DUPLEX_B)
+#    define CHAOS_IP_SEQ_REVERSE_DUPLEX_B(p, a, b) CHAOS_PP_PLACEMARKER_IF(p)(b a CHAOS_IP_SEQ_REVERSE_DUPLEX_A)
 # endif
 #
 # endif

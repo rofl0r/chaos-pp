@@ -54,7 +54,7 @@
             (n, seq) \
         ) \
         /**/
-#    define CHAOS_IP_SEQ_DUPLEX_A(...) CHAOS_PP_DEFER(CHAOS_PP_LPAREN)() 1, (__VA_ARGS__) CHAOS_IP_SEQ_DUPLEX_B
+#    define CHAOS_IP_SEQ_DUPLEX_A(...) CHAOS_PP_DEFER(CHAOS_PP_LPAREN)(), (__VA_ARGS__) CHAOS_IP_SEQ_DUPLEX_B
 #    define CHAOS_IP_SEQ_DUPLEX_B(...) , (__VA_ARGS__) CHAOS_PP_DEFER(CHAOS_PP_RPAREN)() CHAOS_IP_SEQ_DUPLEX_A
 #    define CHAOS_IP_SEQ_DUPLEX_A0
 #    define CHAOS_IP_SEQ_DUPLEX_B0 ,)

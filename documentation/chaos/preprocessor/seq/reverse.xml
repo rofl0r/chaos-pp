@@ -27,6 +27,15 @@
 		This macro uses <link id="sequential iteration"/>.
 		As a result, the algorithm is theoretically capable of processing <link id="sequences"/> containing an <em>unrestricted</em> number of elements.
 	</para>
+	<para>
+		The structure of this algorithm causes approximately Θ(<x-var>n</x-var><sup>2</sup>) element scans (where <x-var>n</x-var> is the number of elements in <var>seq</var>).
+		This scanning may be inefficient when <var>seq</var> contains a large number of elements.
+		In such a situation in C99, it may be more efficient to use <SEQ_REVERSE_DUPLEX/> instead.
+		The structure of the <SEQ_REVERSE_DUPLEX/> algorithm causes approximately Θ(<x-var>n</x-var>∙log<sub>2</sub><x-var>n</x-var>) element scans.
+		On the other hand, though both <SEQ_REVERSE/> and <SEQ_REVERSE_DUPLEX/> invoke approximately Θ(<x-var>n</x-var>) macros, the discarded constant multiple is significantly larger for <SEQ_REVERSE_DUPLEX/>.
+		This causes <SEQ_REVERSE/> to be more efficient when <x-var>n</x-var> is smaller.
+		Thus, as <x-var>n</x-var> increases, at some point (depending on the preprocessor) <SEQ_REVERSE_DUPLEX/> is likely to become more efficient.
+	</para>
 	<listing>
 		#include <chaos-preprocessor-config.h/>
 		#include <chaos-preprocessor-seq-reverse.h/>
@@ -42,6 +51,47 @@
 	</listing>
 	<derivative id="SEQ_REVERSE_ID"/>
 	<derivative id="SEQ_REVERSE_" lang="C99"/>
+</macro>
+
+<macro id="SEQ_REVERSE_DUPLEX" type="indirect" group="reversal">
+	<abstract>
+		The <SEQ_REVERSE_DUPLEX/> macro reverses the elements in its argument.
+	</abstract>
+	<usage lang="C99">
+		<syntax><SEQ_REVERSE_DUPLEX/>(seq)</syntax>
+		<param id="seq" optional="1">
+			The <link id="sequence"/> whose elements are to be reversed.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="sequence"/> containing the elements of <var>seq</var> in reverse order.
+	</para>
+	<para>
+		The running time of <SEQ_REVERSE_DUPLEX/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
+		The asymptotic upper and lower bounds are <assoc id="complexity/reverse_duplex.gif">Θ</assoc>, where <x-var>n</x-var> is the number of elements in <var>seq</var>.
+	</para>
+	<para>
+		As with <SEQ_REVERSE/>, the structure of this algorithm causes the invocation of approximately Θ(<x-var>n</x-var>) macros (where <x-var>n</x-var> is the number of elements in <var>seq</var>).
+		However, the discarded constant multiple is significantly larger.
+		This macro expansion may be inefficient when <var>seq</var> contains a small number of elements.
+		In such a situation, it is more efficient to use <SEQ_REVERSE/> instead.
+		On the other hand, the structure of the <SEQ_REVERSE/> algorithm causes approximately Θ(<x-var>n</x-var><sup>2</sup>) element scans.
+		The structure of the <SEQ_REVERSE_DUPLEX/> algorithm causes approximately Θ(<x-var>n</x-var>∙log<sub>2</sub><x-var>n</x-var>) element scans.
+		Thus, as <x-var>n</x-var> increases, at some point (depending on the preprocessor) <SEQ_REVERSE_DUPLEX/> is likely to become more efficient.
+	</para>
+	<para>
+		This macro uses <link id="bypass semantics"/>.
+		If <link id="bypass semantics"/> are already in effect, <SEQ_REVERSE_DUPLEX_BYPASS/> must be used instead.
+	</para>
+	<derivative id="SEQ_REVERSE_DUPLEX_ID" lang="C99"/>
+	<derivative id="SEQ_REVERSE_DUPLEX_" lang="C99"/>
+	<derivative id="SEQ_REVERSE_DUPLEX_BYPASS">
+		<usage lang="C99">
+			<syntax><SEQ_REVERSE_DUPLEX_BYPASS/>(s, seq)</syntax>
+		</usage>
+		<derivative id="SEQ_REVERSE_DUPLEX_BYPASS_ID" lang="C99"/>
+		<derivative id="SEQ_REVERSE_DUPLEX_BYPASS_" lang="C99"/>
+	</derivative>
 </macro>
 
 </header>

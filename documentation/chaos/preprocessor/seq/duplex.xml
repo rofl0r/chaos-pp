@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/seq/duplex.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that converts a <link id="sequence"/> to a binary tree.
+</overview>
+
+<macro id="SEQ_DUPLEX" type="indirect">
+	<abstract>
+		The <SEQ_DUPLEX/> macro converts its argument to a binary tree.
+	</abstract>
+	<usage lang="C99">
+		<syntax><SEQ_DUPLEX/>(seq)</syntax>
+		<param id="seq" optional="1">
+			The <link id="sequence"/> to be converted to binary tree.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a binary <link id="tuple"/> containing a binary tree which contains the elements of <var>seq</var> as the second element and the depth of that tree as the first element.
+		This is accomplished by pairing elements in <var>seq</var> according to the following pattern: pairing two adjacent elements, <code>a</code> and <code>b</code>, results in <code>(, (a), (b))</code>.
+		This pairing is applied to the entire <link id="sequence"/> to produce a new <link id="sequence"/> of pairs.
+		This is illustrated by the following pseudo-code:
+		<snippet>
+			(a)(b)(c)(d) => (, (a), (b))(, (c), (d))
+		</snippet>
+		If the number of elements in the <link id="sequence"/> is odd, the last element will be paired with nothing.
+		For example,
+		<snippet>
+			(a)(b)(c) => (, (a), (b))(, (c),)
+		</snippet>
+		The pairing process of the <link id="sequence"/> is repeatedly applied to the resulting <link id="sequence"/> until a one-element <link id="sequence"/> is produced.
+		The number of times that the pairing process is repeated is the depth of the resulting binary tree.
+		<snippet>
+			(a)(b) => (, (a), (b))
+			
+			(a)(b)(c)(d)
+			    => (, (a), (b))(, (c), (d))
+			    => (, (1, (a), (b)), (, (c), (d)))
+			
+			(a)(b)(c)(d)(e)(f)(g)(h)
+			    => (, (a), (b))(, (c), (d))(, (e), (f))(, (g), (h))
+			    => (, (, (a), (b)), (, (c), (d)))(1, (, (e), (f)), (, (g), (h)))
+			    => (, (, (, (a), (b)), (, (c), (d))), (, (, (e), (f)), (, (g), (h))))
+		</snippet>
+		In the first pseudo-code transformation above, the depth is <code>1</code>, in the second, the depth is <code>2</code>, and in the third, the depth is is <code>3</code>.
+		The algorithm yields both the depth and resulting binary tree:
+		<snippet>
+			<SEQ_DUPLEX/>((a)(b))
+			    // (1, (, (a), (b)))
+			
+			<SEQ_DUPLEX/>((a)(b)(c)(d))
+			    // (2, (, (, (a), (b)), (, (c), (d))))
+			
+			<SEQ_DUPLEX/>((a)(b)(c)(d)(e)(f)(g)(h))
+			    // (3, (, (, (, (a), (b)), (, (c), (d))), (, (, (e), (f)), (, (g), (h)))))
+		</snippet>
+	</para>
+	<para>
+		The purpose of the placemarker element in each pair is to facilitate <link id="sequential iteration"/> on the resulting <link id="sequence"/>.
+		For example, the initial <link id="sequence"/> can be reconstituted as follows:
+		<snippet>
+			#define RC(duplex) \
+			    RC_BYPASS(<LIMIT_EXPR/>, duplex) \
+			    /**/
+			#define RC_BYPASS(s, duplex) \
+			    <EXPR_S/>(s)(RC_I( \
+			        <OBSTRUCT/>(), <PREV/>(s), \
+			        <BINARY/>(0) duplex, <BINARY/>(1) duplex \
+			    )) \
+			    /**/
+			
+			#define RC_INDIRECT() RC_I
+			#define RC_I(_, s, depth, seq) \
+			    <IF/> _(depth)( \
+			        <EXPR_S/> _(s)(RC_INDIRECT _()( \
+			            <OBSTRUCT/> _(), <PREV/>(s), \
+			            <DEC/>(depth), RC_A _ seq(0,,) \
+			        )), \
+			        seq \
+			    ) \
+			    /**/
+			#define RC_A(p, a, b) <PLACEMARKER_IF/>(p)(a b RC_B)
+			#define RC_B(p, a, b) <PLACEMARKER_IF/>(p)(a b RC_A)
+			
+			RC(<SEQ_DUPLEX/>((a)(b)(c)(d))) // (a)(b)(c)(d)
+		</snippet>
+	</para>
+	<para>
+		The running time of <SEQ_DUPLEX/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
+		The asymptotic upper and lower bounds are <assoc id="complexity/duplex.gif">Θ</assoc>, where <x-var>n</x-var> is the number of elements in <var>seq</var>.
+	</para>
+	<para>	
+		This macro uses <link id="bypass semantics"/>.
+		If <link id="bypass semantics"/> are already in effect, <SEQ_DUPLEX_BYPASS/> must be used instead.
+	</para>
+	<derivative id="SEQ_DUPLEX_ID" lang="C99"/>
+	<derivative id="SEQ_DUPLEX_" lang="C99"/>
+	<derivative id="SEQ_DUPLEX_BYPASS">
+		<usage lang="C99">
+			<syntax><SEQ_DUPLEX_BYPASS/>(s, seq)</syntax>
+		</usage>
+		<derivative id="SEQ_DUPLEX_BYPASS_ID" lang="C99"/>
+		<derivative id="SEQ_DUPLEX_BYPASS_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

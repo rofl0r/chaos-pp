@@ -21,6 +21,8 @@
 # include <chaos/preprocessor/tuple/first_n.h>
 # include <chaos/preprocessor/tuple/fold_left.h>
 # include <chaos/preprocessor/tuple/fold_left_aux.h>
+# include <chaos/preprocessor/tuple/fold_right.h>
+# include <chaos/preprocessor/tuple/fold_right_aux.h>
 # include <chaos/preprocessor/tuple/rem.h>
 # include <chaos/preprocessor/tuple/rest_n.h>
 # include <chaos/preprocessor/tuple/reverse.h>

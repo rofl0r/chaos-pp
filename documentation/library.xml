@@ -1,254 +1,228 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!-- **************************************************************************
+     *                                                                        *
+     *    (C) Copyright Paul Mensonides 2003-2004.                            *
+     *                                                                        *
+     *    Distributed under the Boost Software License, Version 1.0.          *
+     *    (See accompanying file LICENSE).                                    *
+     *                                                                        *
+     *    See http://chaos-pp.sourceforge.net for the most recent version.    *
+     *                                                                        *
+     ************************************************************************** -->
+
 <library name="Chaos Preprocessor Library" url="http://chaos-pp.sourceforge.net" header-name-format="h-char-sequence" macro-prefix="CHAOS_PP_">
 
-<!-- note: #line, etc. -->
+	<document id="active-arguments">
+		<item value="active"/>
+		<item value="active argument"/>
+		<item value="active arguments"/>
+	</document>
+	<document id="arbitrary-precision">
+		<item value="arbitrary-precision"/>
+		<item value="arbitrary-precision arithmetic"/>
+		<item value="arbitrary-precision value"/>
+		<item value="arbitrary-precision values"/>
+	</document>
+	<document id="arrays">
+		<item value="array"/>
+		<item value="arrays"/>
+	</document>
+	<document id="binary-literals"/>
+	<document id="bypass-semantics">
+		<item value="bypass semantics"/>
+		<item value="bypass recursion state"/>
+	</document>
+	<document id="closures">
+		<item value="closure"/>
+		<item value="closures"/>
+	</document>
+	<document id="continuation-machine">
+		<item value="continuation"/>
+		<item value="continuations"/>
+		<item value="continuation machine"/>
+		<item value="continuation machine instruction"/>
+		<item value="continuation machine instructions"/>
+	</document>
+	<document id="conventions"/>
+	<document id="cpp-intro"/>
+	<document id="deferral">
+		<item value="defer"/>
+		<item value="defers"/>
+		<item value="deferral"/>
+		<item value="deferral phase"/>
+		<item value="deferral phasing"/>
+		<item value="deferred"/>
+		<item value="deferred context"/>
+		<item value="deferred contexts"/>
+		<item value="deferred expression"/>
+		<item value="deferred expressions"/>
+		<item value="obstruct"/>
+		<item value="obstructed"/>
+		<item value="obstructed expression"/>
+		<item value="obstructed expressions"/>
+	</document>
+	<document id="doc-conventions"/>
+	<document id="equalization">
+		<item value="equalization"/>
+		<item value="equalize"/>
+		<item value="equalized"/>
+		<item value="equalizing scan"/>
+		<item value="equalizing scans"/>
+		<item value="scan factor"/>
+		<item value="scan factors"/>
+	</document>
+	<document id="evaluated-parameters">
+		<item value="evaluated parameter"/>
+		<item value="evaluated parameters"/>
+	</document>
+	<document id="evaluated-slots">
+		<item value="slot index"/>
+		<item value="slot indices"/>
+		<item value="evaluated slot"/>
+		<item value="evaluated slots"/>
+	</document>
+	<document id="exponentials">
+		<item value="exponential"/>
+	</document>
+	<document id="file-iteration">
+		<item value="file-iteration"/>
+		<item value="file-iterations"/>
+	</document>
+	<document id="generics">
+		<item value="generic data structure"/>
+		<item value="generic data structures"/>
+	</document>
+	<document id="higher-order">
+		<item value="higher-order construct"/>
+		<item value="higher-order constructs"/>
+		<item value="higher-order entry point"/>
+		<item value="higher-order entry points"/>
+		<item value="higher-order thunk"/>
+	</document>
+	<document id="il">
+		<item value="IL expression"/>
+		<item value="IL expressions"/>
+		<item value="IL operator"/>
+		<item value="IL operators"/>
+		<item value="IL statement"/>
+		<item value="IL statements"/>
+	</document>
+	<document id="intermediates">
+		<item value="intermediate"/>
+		<item value="intermediates"/>
+	</document>
+	<document id="introduction"/>
+	<document id="lambda">
+		<item value="λ binding"/>
+		<item value="λ bindings"/>
+		<item value="λ expression"/>
+		<item value="λ expressions"/>
+		<item value="λ mechanism"/>
+		<item value="λ placeholder"/>
+		<item value="λ placeholders"/>
+	</document>
+	<document id="lists">
+		<item value="list"/>
+		<item value="lists"/>
+	</document>
+	<document id="local-iteration">
+		<item value="local-iteration"/>
+		<item value="local-iterations"/>
+	</document>
+	<document id="macro-expansion"/>
+	<document id="named-externals">
+		<item value="named external argument"/>
+		<item value="named external arguments"/>
+	</document>
+	<document id="overview"/>
+	<document id="parametrics">
+		<item value="parametric"/>
+		<item value="parametric resumption"/>
+		<item value="parametric resumptions"/>
+		<item value="parametrically resumed"/>
+	</document>
+	<document id="rails">
+		<item value="rail"/>
+		<item value="rails"/>
+	</document>
+	<document id="recursion">
+		<item value="abstract recursion"/>
+		<item value="automatic recursion"/>
+		<item value="recursion"/>
+		<item value="recursion backend"/>
+		<item value="recursion state"/>
+		<item value="recursion step"/>
+		<item value="recursion steps"/>
+	</document>
+	<document id="roman-numerals"/>
+	<document id="saturation">
+		<item value="saturated"/>
+		<item value="saturates"/>
+		<item value="saturation"/>
+		<item value="saturation arithmetic"/>
+	</document>
+	<document id="second-tier">
+		<item value="second-tier"/>
+	</document>
+	<document id="sequences">
+		<item value="sequence"/>
+		<item value="sequences"/>
+		<item value="variadic sequence"/>
+		<item value="variadic sequences"/>
+	</document>
+	<document id="sequential-iteration">
+		<item value="sequential iteration"/>
+	</document>
+	<document id="strings">
+		<item value="string"/>
+		<item value="strings"/>
+	</document>
+	<document id="true-optionals">
+		<item value="true-optional argument"/>
+		<item value="true-optional arguments"/>
+		<item value="true-optional parameter"/>
+		<item value="true-optional parameters"/>
+	</document>
+	<document id="tuples">
+		<item value="tuple"/>
+		<item value="tuples"/>
+	</document>
+	<document id="tutorial"/>
 
-<document id="active-arguments">
-	<item value="active"/>
-	<item value="active argument"/>
-	<item value="active arguments"/>
-</document>
-<document id="arbitrary-precision">
-	<item value="arbitrary-precision"/>
-	<item value="arbitrary-precision arithmetic"/>
-	<item value="arbitrary-precision value"/>
-	<item value="arbitrary-precision values"/>
-</document>
-<document id="arrays">
-	<item value="array"/>
-	<item value="arrays"/>
-</document>
-<document id="binary-literals"/>
-<document id="bypass-semantics">
-	<item value="bypass semantics"/>
-	<item value="bypass recursion state"/>
-</document>
-<document id="closures">
-	<item value="closure"/>
-	<item value="closures"/>
-</document>
-<document id="continuation-machine">
-	<item value="continuation"/>
-	<item value="continuations"/>
-	<item value="continuation machine"/>
-	<item value="continuation machine instruction"/>
-	<item value="continuation machine instructions"/>
-</document>
-<document id="conventions"/>
-<document id="cpp-intro"/>
-<document id="deferral">
-	<item value="defer"/>
-	<item value="defers"/>
-	<item value="deferral"/>
-	<item value="deferral phase"/>
-	<item value="deferral phasing"/>
-	<item value="deferred"/>
-	<item value="deferred context"/>
-	<item value="deferred contexts"/>
-	<item value="deferred expression"/>
-	<item value="deferred expressions"/>
-	<item value="obstruct"/>
-	<item value="obstructed"/>
-	<item value="obstructed expression"/>
-	<item value="obstructed expressions"/>
-</document>
-<document id="doc-conventions"/>
-<document id="equalization">
-	<item value="equalization"/>
-	<item value="equalize"/>
-	<item value="equalized"/>
-	<item value="equalizing scan"/>
-	<item value="equalizing scans"/>
-	<item value="scan factor"/>
-	<item value="scan factors"/>
-</document>
-<document id="evaluated-parameters">
-	<item value="evaluated parameter"/>
-	<item value="evaluated parameters"/>
-</document>
-<document id="evaluated-slots">
-	<item value="slot index"/>
-	<item value="slot indices"/>
-	<item value="evaluated slot"/>
-	<item value="evaluated slots"/>
-</document>
-<document id="exponentials">
-	<item value="exponential"/>
-</document>
-<document id="file-iteration">
-	<item value="file-iteration"/>
-	<item value="file-iterations"/>
-</document>
-<document id="generics">
-	<item value="generic data structure"/>
-	<item value="generic data structures"/>
-</document>
-<document id="higher-order">
-	<item value="higher-order construct"/>
-	<item value="higher-order constructs"/>
-	<item value="higher-order entry point"/>
-	<item value="higher-order entry points"/>
-	<item value="higher-order thunk"/>
-</document>
-<document id="il">
-	<item value="IL expression"/>
-	<item value="IL expressions"/>
-	<item value="IL operator"/>
-	<item value="IL operators"/>
-	<item value="IL statement"/>
-	<item value="IL statements"/>
-</document>
-<document id="intermediates">
-	<item value="intermediate"/>
-	<item value="intermediates"/>
-</document>
-<document id="introduction"/>
-<document id="lambda">
-	<item value="λ binding"/>
-	<item value="λ bindings"/>
-	<item value="λ expression"/>
-	<item value="λ expressions"/>
-	<item value="λ mechanism"/>
-	<item value="λ placeholder"/>
-	<item value="λ placeholders"/>
-</document>
-<document id="lists">
-	<item value="list"/>
-	<item value="lists"/>
-</document>
-<document id="local-iteration">
-	<item value="local-iteration"/>
-	<item value="local-iterations"/>
-</document>
-<document id="macro-expansion"/>
-<document id="named-externals">
-	<item value="named external argument"/>
-	<item value="named external arguments"/>
-</document>
-<document id="overview"/>
-<document id="parametrics">
-	<item value="parametric"/>
-	<item value="parametric resumption"/>
-	<item value="parametric resumptions"/>
-	<item value="parametrically resumed"/>
-</document>
-<document id="rails">
-	<item value="rail"/>
-	<item value="rails"/>
-</document>
-<document id="recursion">
-	<item value="abstract recursion"/>
-	<item value="automatic recursion"/>
-	<item value="recursion"/>
-	<item value="recursion backend"/>
-	<item value="recursion state"/>
-	<item value="recursion step"/>
-	<item value="recursion steps"/>
-</document>
-<document id="roman-numerals"/>
-<document id="saturation">
-	<item value="saturated"/>
-	<item value="saturates"/>
-	<item value="saturation"/>
-	<item value="saturation arithmetic"/>
-</document>
-<document id="second-tier">
-	<item value="second-tier"/>
-</document>
-<document id="sequences">
-	<item value="sequence"/>
-	<item value="sequences"/>
-	<item value="variadic sequence"/>
-	<item value="variadic sequences"/>
-</document>
-<document id="sequential-iteration">
-	<item value="sequential iteration"/>
-</document>
-<document id="strings">
-	<item value="string"/>
-	<item value="strings"/>
-</document>
-<document id="true-optionals">
-	<item value="true-optional argument"/>
-	<item value="true-optional arguments"/>
-	<item value="true-optional parameter"/>
-	<item value="true-optional parameters"/>
-</document>
-<document id="tuples">
-	<item value="tuple"/>
-	<item value="tuples"/>
-</document>
-<document id="tutorial"/>
+	<binary-file name="alpha.gif"/>
+	<binary-file name="beta.gif"/>
 
-<binary-file name="alpha.gif"/>
-<binary-file name="beta.gif"/>
-
-<directory name="chaos">
-	<header name="preprocessor.h"/>
-	<directory name="preprocessor">
-		<header name="algorithm.h"/>
-		<directory name="algorithm">
-			<header name="append.h"/>
-			<header name="auto.h"/>
-			<directory name="auto">
-				<header name="filter.h"/>
-				<header name="fold_left.h"/>
-				<header name="fold_left_aux.h"/>
-				<header name="fold_right.h"/>
-				<header name="fold_right_aux.h"/>
-				<header name="for_each.h"/>
-				<header name="for_each_i.h"/>
-				<header name="for_each_product.h"/>
-				<header name="transform.h"/>
-			</directory>
-			<header name="cast.h"/>
-			<directory name="complexity">
-				<binary-file name="for_each_product.gif"/>
-				<binary-file name="for_each_product-functional.gif"/>
-			</directory>
-			<header name="concat.h"/>
-			<header name="drop.h"/>
-			<directory name="efficiency">
-				<binary-file name="for_each_product.gif"/>
-			</directory>
-			<header name="elem.h"/>
-			<header name="enumerate.h"/>
-			<header name="filter.h"/>
-			<header name="fold_left.h"/>
-			<header name="fold_left_aux.h"/>
-			<header name="fold_right.h"/>
-			<header name="fold_right_aux.h"/>
-			<header name="for_each.h"/>
-			<header name="for_each_i.h"/>
-			<header name="for_each_product.h"/>
-			<header name="insert.h"/>
-			<header name="parametric.h"/>
-			<directory name="parametric">
-				<header name="for_each.h"/>
-				<header name="for_each_i.h"/>
-				<header name="for_each_product.h"/>
-			</directory>
-			<header name="pop_back.h"/>
-			<header name="prepend.h"/>
-			<header name="push_back.h"/>
-			<header name="range.h"/>
-			<header name="remove.h"/>
-			<header name="replace.h"/>
-			<header name="reverse.h"/>
-			<header name="size.h"/>
-			<header name="take.h"/>
-			<header name="transform.h"/>
-			<header name="x.h"/>
-			<directory name="x">
-				<directory name="complexity">
-					<binary-file name="filter-best.gif"/>
-					<binary-file name="filter-worst.gif"/>
-					<binary-file name="fold_left.gif"/>
-					<binary-file name="fold_right.gif"/>
-					<binary-file name="for_each.gif"/>
-					<binary-file name="for_each_i.gif"/>
-					<binary-file name="transform.gif"/>
+	<directory name="chaos">
+		<header name="preprocessor.h"/>
+		<directory name="preprocessor">
+			<header name="algorithm.h"/>
+			<directory name="algorithm">
+				<header name="append.h"/>
+				<header name="auto.h"/>
+				<directory name="auto">
+					<header name="filter.h"/>
+					<header name="fold_left.h"/>
+					<header name="fold_left_aux.h"/>
+					<header name="fold_right.h"/>
+					<header name="fold_right_aux.h"/>
+					<header name="for_each.h"/>
+					<header name="for_each_i.h"/>
+					<header name="for_each_product.h"/>
+					<header name="transform.h"/>
 				</directory>
+				<header name="cast.h"/>
+				<directory name="complexity">
+					<binary-file name="for_each_product.gif"/>
+					<binary-file name="for_each_product-functional.gif"/>
+				</directory>
+				<header name="concat.h"/>
+				<header name="drop.h"/>
+				<directory name="efficiency">
+					<binary-file name="for_each_product.gif"/>
+				</directory>
+				<header name="elem.h"/>
+				<header name="enumerate.h"/>
 				<header name="filter.h"/>
 				<header name="fold_left.h"/>
 				<header name="fold_left_aux.h"/>
@@ -257,360 +231,350 @@
 				<header name="for_each.h"/>
 				<header name="for_each_i.h"/>
 				<header name="for_each_product.h"/>
+				<header name="insert.h"/>
+				<header name="parametric.h"/>
+				<directory name="parametric">
+					<header name="for_each.h"/>
+					<header name="for_each_i.h"/>
+					<header name="for_each_product.h"/>
+				</directory>
+				<header name="pop_back.h"/>
+				<header name="prepend.h"/>
+				<header name="push_back.h"/>
+				<header name="range.h"/>
+				<header name="remove.h"/>
+				<header name="replace.h"/>
+				<header name="reverse.h"/>
+				<header name="size.h"/>
+				<header name="take.h"/>
 				<header name="transform.h"/>
+				<header name="x.h"/>
+				<directory name="x">
+					<directory name="complexity">
+						<binary-file name="filter-best.gif"/>
+						<binary-file name="filter-worst.gif"/>
+						<binary-file name="fold_left.gif"/>
+						<binary-file name="fold_right.gif"/>
+						<binary-file name="for_each.gif"/>
+						<binary-file name="for_each_i.gif"/>
+						<binary-file name="transform.gif"/>
+					</directory>
+					<header name="filter.h"/>
+					<header name="fold_left.h"/>
+					<header name="fold_left_aux.h"/>
+					<header name="fold_right.h"/>
+					<header name="fold_right_aux.h"/>
+					<header name="for_each.h"/>
+					<header name="for_each_i.h"/>
+					<header name="for_each_product.h"/>
+					<header name="transform.h"/>
+				</directory>
 			</directory>
-		</directory>
-		<header name="arbitrary.h"/>
-		<directory name="arbitrary">
-			<header name="add.h"/>
-			<header name="bool.h"/>
-			<header name="dec.h"/>
-			<header name="demote.h"/>
-			<header name="div.h"/>
-			<header name="equal.h"/>
-			<header name="greater.h"/>
-			<header name="greater_equal.h"/>
-			<header name="inc.h"/>
-			<header name="less.h"/>
-			<header name="less_equal.h"/>
-			<header name="literal.h"/>
-			<header name="mod.h"/>
-			<header name="mul.h"/>
-			<header name="neg.h"/>
-			<header name="not_equal.h"/>
-			<header name="promote.h"/>
-			<header name="sign.h"/>
-			<header name="sub.h"/>
-		</directory>
-		<header name="arithmetic.h"/>
-		<directory name="arithmetic">
-			<header name="add.h"/>
-			<header name="dec.h"/>
-			<header name="div.h"/>
-			<header name="in_range.h"/>
-			<header name="inc.h"/>
-			<header name="machine.h"/>
-			<directory name="machine">
+			<header name="arbitrary.h"/>
+			<directory name="arbitrary">
 				<header name="add.h"/>
+				<header name="bool.h"/>
+				<header name="dec.h"/>
+				<header name="demote.h"/>
 				<header name="div.h"/>
+				<header name="equal.h"/>
+				<header name="greater.h"/>
+				<header name="greater_equal.h"/>
+				<header name="inc.h"/>
+				<header name="less.h"/>
+				<header name="less_equal.h"/>
+				<header name="literal.h"/>
+				<header name="mod.h"/>
+				<header name="mul.h"/>
+				<header name="neg.h"/>
+				<header name="not_equal.h"/>
+				<header name="promote.h"/>
+				<header name="sign.h"/>
+				<header name="sub.h"/>
+			</directory>
+			<header name="arithmetic.h"/>
+			<directory name="arithmetic">
+				<header name="add.h"/>
+				<header name="dec.h"/>
+				<header name="div.h"/>
+				<header name="in_range.h"/>
+				<header name="inc.h"/>
+				<header name="machine.h"/>
+				<directory name="machine">
+					<header name="add.h"/>
+					<header name="div.h"/>
+					<header name="mod.h"/>
+					<header name="mul.h"/>
+					<header name="sub.h"/>
+				</directory>
 				<header name="mod.h"/>
 				<header name="mul.h"/>
 				<header name="sub.h"/>
 			</directory>
-			<header name="mod.h"/>
-			<header name="mul.h"/>
-			<header name="sub.h"/>
-		</directory>
-		<header name="array.h"/>
-		<directory name="array">
-			<header name="core.h"/>
-			<header name="elem.h"/>
-			<header name="reverse.h"/>
-			<header name="size.h"/>
-			<header name="to_list.h"/>
-			<header name="to_seq.h"/>
-			<header name="to_string.h"/>
-			<header name="to_tuple.h"/>
-		</directory>
-		<header name="cat.h"/>
-		<header name="comparison.h"/>
-		<directory name="comparison">
-			<header name="equal.h"/>
-			<header name="greater.h"/>
-			<header name="greater_equal.h"/>
-			<header name="less.h"/>
-			<header name="less_equal.h"/>
-			<header name="max.h"/>
-			<header name="min.h"/>
-			<header name="not_equal.h"/>
-		</directory>
-		<header name="config.h"/>
-		<header name="control.h"/>
-		<directory name="control">
-			<header name="auto.h"/>
-			<directory name="auto">
+			<header name="array.h"/>
+			<directory name="array">
+				<header name="core.h"/>
+				<header name="elem.h"/>
+				<header name="reverse.h"/>
+				<header name="size.h"/>
+				<header name="to_list.h"/>
+				<header name="to_seq.h"/>
+				<header name="to_string.h"/>
+				<header name="to_tuple.h"/>
+			</directory>
+			<header name="cat.h"/>
+			<header name="comparison.h"/>
+			<directory name="comparison">
+				<header name="equal.h"/>
+				<header name="greater.h"/>
+				<header name="greater_equal.h"/>
+				<header name="less.h"/>
+				<header name="less_equal.h"/>
+				<header name="max.h"/>
+				<header name="min.h"/>
+				<header name="not_equal.h"/>
+			</directory>
+			<header name="config.h"/>
+			<header name="control.h"/>
+			<directory name="control">
+				<header name="auto.h"/>
+				<directory name="auto">
+					<header name="while.h"/>
+					<header name="while_aux.h"/>
+				</directory>
+				<header name="branch.h"/>
+				<header name="if.h"/>
+				<header name="iif.h"/>
+				<header name="include_if.h"/>
+				<header name="inline_unless.h"/>
+				<header name="inline_when.h"/>
+				<header name="null.h"/>
+				<header name="placemarker_if.h"/>
+				<header name="unless.h"/>
+				<header name="when.h"/>
 				<header name="while.h"/>
 				<header name="while_aux.h"/>
+				<header name="x.h"/>
+				<directory name="x">
+					<header name="while.h"/>
+					<header name="while_aux.h"/>
+				</directory>
 			</directory>
-			<header name="branch.h"/>
-			<header name="if.h"/>
-			<header name="iif.h"/>
-			<header name="include_if.h"/>
-			<header name="inline_unless.h"/>
-			<header name="inline_when.h"/>
-			<header name="null.h"/>
-			<header name="placemarker_if.h"/>
-			<header name="unless.h"/>
-			<header name="when.h"/>
-			<header name="while.h"/>
-			<header name="while_aux.h"/>
-			<header name="x.h"/>
-			<directory name="x">
-				<header name="while.h"/>
-				<header name="while_aux.h"/>
+			<header name="debug.h"/>
+			<directory name="debug">
+				<header name="assert.h"/>
+				<header name="failure.h"/>
+				<header name="line.h"/>
 			</directory>
-		</directory>
-		<header name="debug.h"/>
-		<directory name="debug">
-			<header name="assert.h"/>
-			<header name="failure.h"/>
-			<header name="line.h"/>
-		</directory>
-		<header name="detection.h"/>
-		<directory name="detection">
-			<header name="compare.h"/>
-			<header name="is_binary.h"/>
-			<header name="is_empty.h"/>
-			<header name="is_flag.h"/>
-			<header name="is_nullary.h"/>
-			<header name="is_numeric.h"/>
-			<header name="is_one.h"/>
-			<header name="is_ternary.h"/>
-			<header name="is_unary.h"/>
-			<header name="is_variadic.h"/>
-		</directory>
-		<header name="extended.h"/>
-		<directory name="extended">
-			<header name="auto_cat.h"/>
-			<header name="partial_cat.h"/>
-			<header name="reverse_cat.h"/>
-			<header name="variadic_cat.h"/>
-		</directory>
-		<header name="facilities.h"/>
-		<directory name="facilities">
-			<header name="abbr.h"/>
-			<header name="as_args.h"/>
-			<header name="binary.h"/>
-			<header name="bind.h"/>
-			<header name="default.h"/>
-			<header name="empty.h"/>
-			<header name="encode.h"/>
-			<header name="expand.h"/>
-			<header name="identity.h"/>
-			<header name="indirect.h"/>
-			<header name="intercept.h"/>
-			<header name="optional.h"/>
-			<header name="overload.h"/>
-			<header name="push.h"/>
-			<header name="split.h"/>
-			<header name="type.h"/>
-			<header name="unbox.h"/>
-			<header name="whitespace.h"/>
-		</directory>
-		<header name="generics.h"/>
-		<directory name="generics">
-			<header name="core.h"/>
-			<header name="is_elemental.h"/>
-			<header name="is_type.h"/>
-			<header name="strip.h"/>
-			<header name="typeof.h"/>
-		</directory>
-		<header name="iteration.h"/>
-		<directory name="iteration">
-			<header name="file.h"/>
-			<header name="local.h"/>
-		</directory>
-		<header name="lambda.h"/>
-		<directory name="lambda">
-			<header name="call.h"/>
-			<header name="closure.h"/>
-			<header name="curry.h"/>
-			<header name="execute.h"/>
-			<header name="invoke.h"/>
-			<header name="ops.h"/>
-			<header name="parse.h"/>
-			<header name="planar.h"/>
-			<header name="route.h"/>
-			<header name="trampoline.h"/>
-		</directory>
-		<header name="limits.h"/>
-		<header name="list.h"/>
-		<directory name="list">
-			<header name="core.h"/>
-		</directory>
-		<header name="logical.h"/>
-		<directory name="logical">
-			<header name="and.h"/>
-			<header name="bitand.h"/>
-			<header name="bitnand.h"/>
-			<header name="bitnor.h"/>
-			<header name="bitor.h"/>
-			<header name="bitxnor.h"/>
-			<header name="bitxor.h"/>
-			<header name="bool.h"/>
-			<header name="compl.h"/>
-			<header name="nand.h"/>
-			<header name="nor.h"/>
-			<header name="not.h"/>
-			<header name="or.h"/>
-			<header name="xnor.h"/>
-			<header name="xor.h"/>
-		</directory>
-		<header name="punctuation.h"/>
-		<directory name="punctuation">
-			<header name="comma.h"/>
-			<header name="comma_if.h"/>
-			<header name="hash.h"/>
-			<header name="paren.h"/>
-		</directory>
-		<header name="recursion.h"/>
-		<directory name="recursion">
-			<header name="auto_rec.h"/>
-			<header name="basic.h"/>
-			<header name="buffer.h"/>
-			<header name="context.h"/>
-			<header name="delay.h"/>
-			<header name="delve.h"/>
-			<header name="equalize.h"/>
-			<header name="expr.h"/>
-			<header name="higher_order.h"/>
-			<header name="machine.h"/>
-			<header name="phase.h"/>
-			<header name="rail.h"/>
-			<header name="revive.h"/>
-		</directory>
-		<header name="repetition.h"/>
-		<directory name="repetition">
-			<header name="auto.h"/>
-			<directory name="auto">
-				<header name="delineate.h"/>
-				<header name="delineate_from_to.h"/>
-				<header name="delineate_from_to_trailing.h"/>
-				<header name="delineate_shifted.h"/>
-				<header name="delineate_shifted_trailing.h"/>
-				<header name="delineate_trailing.h"/>
-				<header name="enum.h"/>
-				<header name="enum_from_to.h"/>
-				<header name="enum_from_to_trailing.h"/>
-				<header name="enum_shifted.h"/>
-				<header name="enum_shifted_trailing.h"/>
-				<header name="enum_trailing.h"/>
-				<header name="for.h"/>
-				<header name="for_aux.h"/>
-				<header name="repeat.h"/>
-				<header name="repeat_from_to.h"/>
-				<header name="repeat_shifted.h"/>
+			<header name="detection.h"/>
+			<directory name="detection">
+				<header name="compare.h"/>
+				<header name="is_binary.h"/>
+				<header name="is_empty.h"/>
+				<header name="is_flag.h"/>
+				<header name="is_nullary.h"/>
+				<header name="is_numeric.h"/>
+				<header name="is_one.h"/>
+				<header name="is_ternary.h"/>
+				<header name="is_unary.h"/>
+				<header name="is_variadic.h"/>
 			</directory>
-			<header name="delineate.h"/>
-			<header name="delineate_from_to.h"/>
-			<header name="delineate_from_to_trailing.h"/>
-			<header name="delineate_params.h"/>
-			<header name="delineate_shifted.h"/>
-			<header name="delineate_shifted_params.h"/>
-			<header name="delineate_shifted_trailing.h"/>
-			<header name="delineate_shifted_trailing_params.h"/>
-			<header name="delineate_trailing.h"/>
-			<header name="delineate_trailing_params.h"/>
-			<header name="enum.h"/>
-			<header name="enum_from_to.h"/>
-			<header name="enum_from_to_trailing.h"/>
-			<header name="enum_params.h"/>
-			<header name="enum_shifted.h"/>
-			<header name="enum_shifted_params.h"/>
-			<header name="enum_shifted_trailing.h"/>
-			<header name="enum_shifted_trailing_params.h"/>
-			<header name="enum_trailing.h"/>
-			<header name="enum_trailing_params.h"/>
-			<header name="for.h"/>
-			<header name="for_aux.h"/>
-			<header name="parametric.h"/>
-			<directory name="parametric">
-				<header name="delineate.h"/>
-				<header name="delineate_from_to.h"/>
-				<header name="delineate_from_to_trailing.h"/>
-				<header name="delineate_shifted.h"/>
-				<header name="delineate_shifted_trailing.h"/>
-				<header name="delineate_trailing.h"/>
-				<header name="enum.h"/>
-				<header name="enum_from_to.h"/>
-				<header name="enum_from_to_trailing.h"/>
-				<header name="enum_shifted.h"/>
-				<header name="enum_shifted_trailing.h"/>
-				<header name="enum_trailing.h"/>
-				<header name="for.h"/>
-				<header name="for_aux.h"/>
-				<header name="repeat.h"/>
-				<header name="repeat_from_to.h"/>
-				<header name="repeat_shifted.h"/>
+			<header name="extended.h"/>
+			<directory name="extended">
+				<header name="auto_cat.h"/>
+				<header name="partial_cat.h"/>
+				<header name="reverse_cat.h"/>
+				<header name="variadic_cat.h"/>
 			</directory>
-			<header name="repeat.h"/>
-			<header name="repeat_from_to.h"/>
-			<header name="repeat_shifted.h"/>
-			<header name="x.h"/>
-			<directory name="x">
-				<directory name="complexity">
-					<binary-file name="delineate.gif"/>
-					<binary-file name="delineate_from_to.gif"/>
-					<binary-file name="delineate_shifted.gif"/>
-					<binary-file name="for.gif"/>
+			<header name="facilities.h"/>
+			<directory name="facilities">
+				<header name="abbr.h"/>
+				<header name="as_args.h"/>
+				<header name="binary.h"/>
+				<header name="bind.h"/>
+				<header name="default.h"/>
+				<header name="empty.h"/>
+				<header name="encode.h"/>
+				<header name="expand.h"/>
+				<header name="identity.h"/>
+				<header name="indirect.h"/>
+				<header name="intercept.h"/>
+				<header name="optional.h"/>
+				<header name="overload.h"/>
+				<header name="push.h"/>
+				<header name="split.h"/>
+				<header name="type.h"/>
+				<header name="unbox.h"/>
+				<header name="whitespace.h"/>
+			</directory>
+			<header name="generics.h"/>
+			<directory name="generics">
+				<header name="core.h"/>
+				<header name="is_elemental.h"/>
+				<header name="is_type.h"/>
+				<header name="strip.h"/>
+				<header name="typeof.h"/>
+			</directory>
+			<header name="iteration.h"/>
+			<directory name="iteration">
+				<header name="file.h"/>
+				<header name="local.h"/>
+			</directory>
+			<header name="lambda.h"/>
+			<directory name="lambda">
+				<header name="call.h"/>
+				<header name="closure.h"/>
+				<header name="curry.h"/>
+				<header name="execute.h"/>
+				<header name="invoke.h"/>
+				<header name="ops.h"/>
+				<header name="parse.h"/>
+				<header name="planar.h"/>
+				<header name="route.h"/>
+				<header name="trampoline.h"/>
+			</directory>
+			<header name="limits.h"/>
+			<header name="list.h"/>
+			<directory name="list">
+				<header name="core.h"/>
+			</directory>
+			<header name="logical.h"/>
+			<directory name="logical">
+				<header name="and.h"/>
+				<header name="bitand.h"/>
+				<header name="bitnand.h"/>
+				<header name="bitnor.h"/>
+				<header name="bitor.h"/>
+				<header name="bitxnor.h"/>
+				<header name="bitxor.h"/>
+				<header name="bool.h"/>
+				<header name="compl.h"/>
+				<header name="nand.h"/>
+				<header name="nor.h"/>
+				<header name="not.h"/>
+				<header name="or.h"/>
+				<header name="xnor.h"/>
+				<header name="xor.h"/>
+			</directory>
+			<header name="punctuation.h"/>
+			<directory name="punctuation">
+				<header name="comma.h"/>
+				<header name="comma_if.h"/>
+				<header name="hash.h"/>
+				<header name="paren.h"/>
+			</directory>
+			<header name="recursion.h"/>
+			<directory name="recursion">
+				<header name="auto_rec.h"/>
+				<header name="basic.h"/>
+				<header name="buffer.h"/>
+				<header name="context.h"/>
+				<header name="delay.h"/>
+				<header name="delve.h"/>
+				<header name="equalize.h"/>
+				<header name="expr.h"/>
+				<header name="higher_order.h"/>
+				<header name="machine.h"/>
+				<header name="phase.h"/>
+				<header name="rail.h"/>
+				<header name="revive.h"/>
+			</directory>
+			<header name="repetition.h"/>
+			<directory name="repetition">
+				<header name="auto.h"/>
+				<directory name="auto">
+					<header name="delineate.h"/>
+					<header name="delineate_from_to.h"/>
+					<header name="delineate_from_to_trailing.h"/>
+					<header name="delineate_shifted.h"/>
+					<header name="delineate_shifted_trailing.h"/>
+					<header name="delineate_trailing.h"/>
+					<header name="enum.h"/>
+					<header name="enum_from_to.h"/>
+					<header name="enum_from_to_trailing.h"/>
+					<header name="enum_shifted.h"/>
+					<header name="enum_shifted_trailing.h"/>
+					<header name="enum_trailing.h"/>
+					<header name="for.h"/>
+					<header name="for_aux.h"/>
+					<header name="repeat.h"/>
+					<header name="repeat_from_to.h"/>
+					<header name="repeat_shifted.h"/>
 				</directory>
 				<header name="delineate.h"/>
 				<header name="delineate_from_to.h"/>
 				<header name="delineate_from_to_trailing.h"/>
+				<header name="delineate_params.h"/>
 				<header name="delineate_shifted.h"/>
+				<header name="delineate_shifted_params.h"/>
 				<header name="delineate_shifted_trailing.h"/>
+				<header name="delineate_shifted_trailing_params.h"/>
 				<header name="delineate_trailing.h"/>
+				<header name="delineate_trailing_params.h"/>
 				<header name="enum.h"/>
 				<header name="enum_from_to.h"/>
 				<header name="enum_from_to_trailing.h"/>
+				<header name="enum_params.h"/>
 				<header name="enum_shifted.h"/>
+				<header name="enum_shifted_params.h"/>
 				<header name="enum_shifted_trailing.h"/>
+				<header name="enum_shifted_trailing_params.h"/>
 				<header name="enum_trailing.h"/>
+				<header name="enum_trailing_params.h"/>
 				<header name="for.h"/>
 				<header name="for_aux.h"/>
+				<header name="parametric.h"/>
+				<directory name="parametric">
+					<header name="delineate.h"/>
+					<header name="delineate_from_to.h"/>
+					<header name="delineate_from_to_trailing.h"/>
+					<header name="delineate_shifted.h"/>
+					<header name="delineate_shifted_trailing.h"/>
+					<header name="delineate_trailing.h"/>
+					<header name="enum.h"/>
+					<header name="enum_from_to.h"/>
+					<header name="enum_from_to_trailing.h"/>
+					<header name="enum_shifted.h"/>
+					<header name="enum_shifted_trailing.h"/>
+					<header name="enum_trailing.h"/>
+					<header name="for.h"/>
+					<header name="for_aux.h"/>
+					<header name="repeat.h"/>
+					<header name="repeat_from_to.h"/>
+					<header name="repeat_shifted.h"/>
+				</directory>
 				<header name="repeat.h"/>
 				<header name="repeat_from_to.h"/>
 				<header name="repeat_shifted.h"/>
+				<header name="x.h"/>
+				<directory name="x">
+					<directory name="complexity">
+						<binary-file name="delineate.gif"/>
+						<binary-file name="delineate_from_to.gif"/>
+						<binary-file name="delineate_shifted.gif"/>
+						<binary-file name="for.gif"/>
+					</directory>
+					<header name="delineate.h"/>
+					<header name="delineate_from_to.h"/>
+					<header name="delineate_from_to_trailing.h"/>
+					<header name="delineate_shifted.h"/>
+					<header name="delineate_shifted_trailing.h"/>
+					<header name="delineate_trailing.h"/>
+					<header name="enum.h"/>
+					<header name="enum_from_to.h"/>
+					<header name="enum_from_to_trailing.h"/>
+					<header name="enum_shifted.h"/>
+					<header name="enum_shifted_trailing.h"/>
+					<header name="enum_trailing.h"/>
+					<header name="for.h"/>
+					<header name="for_aux.h"/>
+					<header name="repeat.h"/>
+					<header name="repeat_from_to.h"/>
+					<header name="repeat_shifted.h"/>
+				</directory>
 			</directory>
-		</directory>
-		<header name="seq.h"/>
-		<directory name="seq">
-			<header name="auto.h"/>
-			<directory name="auto">
-				<header name="filter.h"/>
-				<header name="fold_left.h"/>
-				<header name="fold_left_aux.h"/>
-				<header name="fold_right.h"/>
-				<header name="fold_right_aux.h"/>
-				<header name="for_each.h"/>
-				<header name="for_each_i.h"/>
-				<header name="transform.h"/>
-			</directory>
-			<directory name="complexity">
-				<binary-file name="duplex.gif"/>
-				<binary-file name="reverse_duplex.gif"/>
-				<binary-file name="size_alt.gif"/>
-			</directory>
-			<header name="binary_transform.h"/>
-			<header name="concat.h"/>
-			<header name="core.h"/>
-			<header name="drop.h"/>
-			<header name="duplex.h"/>
-			<header name="elem.h"/>
-			<header name="enumerate.h"/>
-			<header name="filter.h"/>
-			<header name="fold_left.h"/>
-			<header name="fold_left_aux.h"/>
-			<header name="fold_right.h"/>
-			<header name="fold_right_aux.h"/>
-			<header name="for_each.h"/>
-			<header name="for_each_i.h"/>
-			<header name="infuse.h"/>
-			<header name="insert.h"/>
-			<header name="pop_back.h"/>
-			<header name="range.h"/>
-			<header name="remove.h"/>
-			<header name="replace.h"/>
-			<header name="reverse.h"/>
-			<header name="size.h"/>
-			<header name="take.h"/>
-			<header name="to_array.h"/>
-			<header name="to_list.h"/>
-			<header name="to_string.h"/>
-			<header name="to_tuple.h"/>
-			<header name="transform.h"/>
-			<header name="variadic.h"/>
-			<directory name="variadic">
+			<header name="seq.h"/>
+			<directory name="seq">
 				<header name="auto.h"/>
 				<directory name="auto">
 					<header name="filter.h"/>
@@ -622,7 +586,18 @@
 					<header name="for_each_i.h"/>
 					<header name="transform.h"/>
 				</directory>
+				<directory name="complexity">
+					<binary-file name="duplex.gif"/>
+					<binary-file name="reverse_duplex.gif"/>
+					<binary-file name="size_alt.gif"/>
+				</directory>
+				<header name="binary_transform.h"/>
+				<header name="concat.h"/>
 				<header name="core.h"/>
+				<header name="drop.h"/>
+				<header name="duplex.h"/>
+				<header name="elem.h"/>
+				<header name="enumerate.h"/>
 				<header name="filter.h"/>
 				<header name="fold_left.h"/>
 				<header name="fold_left_aux.h"/>
@@ -630,27 +605,106 @@
 				<header name="fold_right_aux.h"/>
 				<header name="for_each.h"/>
 				<header name="for_each_i.h"/>
+				<header name="infuse.h"/>
+				<header name="insert.h"/>
+				<header name="pop_back.h"/>
+				<header name="range.h"/>
+				<header name="remove.h"/>
+				<header name="replace.h"/>
+				<header name="reverse.h"/>
+				<header name="size.h"/>
+				<header name="take.h"/>
+				<header name="to_array.h"/>
+				<header name="to_list.h"/>
+				<header name="to_string.h"/>
+				<header name="to_tuple.h"/>
 				<header name="transform.h"/>
+				<header name="variadic.h"/>
+				<directory name="variadic">
+					<header name="auto.h"/>
+					<directory name="auto">
+						<header name="filter.h"/>
+						<header name="fold_left.h"/>
+						<header name="fold_left_aux.h"/>
+						<header name="fold_right.h"/>
+						<header name="fold_right_aux.h"/>
+						<header name="for_each.h"/>
+						<header name="for_each_i.h"/>
+						<header name="transform.h"/>
+					</directory>
+					<header name="core.h"/>
+					<header name="filter.h"/>
+					<header name="fold_left.h"/>
+					<header name="fold_left_aux.h"/>
+					<header name="fold_right.h"/>
+					<header name="fold_right_aux.h"/>
+					<header name="for_each.h"/>
+					<header name="for_each_i.h"/>
+					<header name="transform.h"/>
+				</directory>
+				<header name="zip.h"/>
 			</directory>
-			<header name="zip.h"/>
-		</directory>
-		<header name="slot.h"/>
-		<directory name="slot">
-			<header name="counter.h"/>
 			<header name="slot.h"/>
-		</directory>
-		<header name="string.h"/>
-		<directory name="string">
-			<header name="core.h"/>
-			<header name="to_lower.h"/>
-			<header name="to_upper.h"/>
-		</directory>
-		<header name="stringize.h"/>
-		<header name="tuple.h"/>
-		<directory name="tuple">
-			<header name="as_args.h"/>
-			<header name="auto.h"/>
-			<directory name="auto">
+			<directory name="slot">
+				<header name="counter.h"/>
+				<header name="slot.h"/>
+			</directory>
+			<header name="string.h"/>
+			<directory name="string">
+				<header name="core.h"/>
+				<header name="to_lower.h"/>
+				<header name="to_upper.h"/>
+			</directory>
+			<header name="stringize.h"/>
+			<header name="tuple.h"/>
+			<directory name="tuple">
+				<header name="as_args.h"/>
+				<header name="auto.h"/>
+				<directory name="auto">
+					<header name="filter.h"/>
+					<header name="fold_left.h"/>
+					<header name="fold_left_aux.h"/>
+					<header name="fold_right.h"/>
+					<header name="fold_right_aux.h"/>
+					<header name="for_each.h"/>
+					<header name="for_each_i.h"/>
+					<header name="transform.h"/>
+				</directory>
+				<header name="batch.h"/>
+				<directory name="complexity">
+					<binary-file name="concat.gif"/>
+					<binary-file name="drop.gif"/>
+					<binary-file name="elem_alt.gif"/>
+					<binary-file name="filter.gif"/>
+					<binary-file name="fold_left.gif"/>
+					<binary-file name="fold_left_aux.gif"/>
+					<binary-file name="fold_right.gif"/>
+					<binary-file name="fold_right_aux.gif"/>
+					<binary-file name="for_each.gif"/>
+					<binary-file name="for_each_i.gif"/>
+					<binary-file name="insert.gif"/>
+					<binary-file name="pop_back.gif"/>
+					<binary-file name="range.gif"/>
+					<binary-file name="remove.gif"/>
+					<binary-file name="replace.gif"/>
+					<binary-file name="reverse_alt.gif"/>
+					<binary-file name="size.gif"/>
+					<binary-file name="take.gif"/>
+					<binary-file name="to_list_alt.gif"/>
+					<binary-file name="to_seq_alt.gif"/>
+					<binary-file name="to_string_alt.gif"/>
+					<binary-file name="transform.gif"/>
+				</directory>
+				<header name="concat.h"/>
+				<header name="core.h"/>
+				<header name="drop.h"/>
+				<header name="eat.h"/>
+				<directory name="efficiency">
+					<binary-file name="fold_left.gif"/>
+					<binary-file name="fold_left_aux.gif"/>
+					<binary-file name="range.gif"/>
+				</directory>
+				<header name="elem.h"/>
 				<header name="filter.h"/>
 				<header name="fold_left.h"/>
 				<header name="fold_left_aux.h"/>
@@ -658,140 +712,96 @@
 				<header name="fold_right_aux.h"/>
 				<header name="for_each.h"/>
 				<header name="for_each_i.h"/>
+				<header name="insert.h"/>
+				<header name="pop_back.h"/>
+				<header name="range.h"/>
+				<header name="rem.h"/>
+				<header name="remove.h"/>
+				<header name="replace.h"/>
+				<header name="reverse.h"/>
+				<header name="size.h"/>
+				<header name="take.h"/>
+				<header name="to_list.h"/>
+				<header name="to_seq.h"/>
+				<header name="to_string.h"/>
 				<header name="transform.h"/>
 			</directory>
-			<header name="batch.h"/>
-			<directory name="complexity">
-				<binary-file name="concat.gif"/>
-				<binary-file name="drop.gif"/>
-				<binary-file name="elem_alt.gif"/>
-				<binary-file name="filter.gif"/>
-				<binary-file name="fold_left.gif"/>
-				<binary-file name="fold_left_aux.gif"/>
-				<binary-file name="fold_right.gif"/>
-				<binary-file name="fold_right_aux.gif"/>
-				<binary-file name="for_each.gif"/>
-				<binary-file name="for_each_i.gif"/>
-				<binary-file name="insert.gif"/>
-				<binary-file name="pop_back.gif"/>
-				<binary-file name="range.gif"/>
-				<binary-file name="remove.gif"/>
-				<binary-file name="replace.gif"/>
-				<binary-file name="reverse_alt.gif"/>
-				<binary-file name="size.gif"/>
-				<binary-file name="take.gif"/>
-				<binary-file name="to_list_alt.gif"/>
-				<binary-file name="to_seq_alt.gif"/>
-				<binary-file name="to_string_alt.gif"/>
-				<binary-file name="transform.gif"/>
-			</directory>
-			<header name="concat.h"/>
-			<header name="core.h"/>
-			<header name="drop.h"/>
-			<header name="eat.h"/>
-			<directory name="efficiency">
-				<binary-file name="fold_left.gif"/>
-				<binary-file name="fold_left_aux.gif"/>
-				<binary-file name="range.gif"/>
-			</directory>
-			<header name="elem.h"/>
-			<header name="filter.h"/>
-			<header name="fold_left.h"/>
-			<header name="fold_left_aux.h"/>
-			<header name="fold_right.h"/>
-			<header name="fold_right_aux.h"/>
-			<header name="for_each.h"/>
-			<header name="for_each_i.h"/>
-			<header name="insert.h"/>
-			<header name="pop_back.h"/>
-			<header name="range.h"/>
-			<header name="rem.h"/>
-			<header name="remove.h"/>
-			<header name="replace.h"/>
-			<header name="reverse.h"/>
-			<header name="size.h"/>
-			<header name="take.h"/>
-			<header name="to_list.h"/>
-			<header name="to_seq.h"/>
-			<header name="to_string.h"/>
-			<header name="transform.h"/>
+			<header name="wstringize.h"/>
 		</directory>
-		<header name="wstringize.h"/>
 	</directory>
-</directory>
 
-<derivative-spec suffix="_" class="secondary" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-	<abstract>
-		The <current/> macro expands to a <link id="λ expression"/> representing <parent/>.
-	</abstract>
-	<usage>
-		<syntax><current/></syntax>
-	</usage>
-	<pre-para>
-		This macro is a shorthand form of the following <link id="λ binding"/>:
-		<xsl:choose>
-			<xsl:when test="ancestor::macro/@type = 'indirect' or ancestor::macro/@type = 'object'">
-				<snippet>
-					<LAMBDA/>(<sibling suffix="_ID"/>)()
-				</snippet>
-			</xsl:when>
-			<xsl:otherwise>
-				<snippet>
-					<LAMBDA/>(<parent/>)
-				</snippet>
-			</xsl:otherwise>
-		</xsl:choose>
-	</pre-para>
-</derivative-spec>
+	<derivative-spec suffix="_" class="secondary" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+		<abstract>
+			The <current/> macro expands to a <link id="λ expression"/> representing <parent/>.
+		</abstract>
+		<usage>
+			<syntax><current/></syntax>
+		</usage>
+		<pre-para>
+			This macro is a shorthand form of the following <link id="λ binding"/>:
+			<xsl:choose>
+				<xsl:when test="ancestor::macro/@type = 'indirect' or ancestor::macro/@type = 'object'">
+					<snippet>
+						<LAMBDA/>(<sibling suffix="_ID"/>)()
+					</snippet>
+				</xsl:when>
+				<xsl:otherwise>
+					<snippet>
+						<LAMBDA/>(<parent/>)
+					</snippet>
+				</xsl:otherwise>
+			</xsl:choose>
+		</pre-para>
+	</derivative-spec>
 
-<derivative-spec suffix="_BYPASS" class="alternate">
-	<abstract>
-		The <current/> macro behaves identically to <parent/> except that it is parametized by the <link id="bypass recursion state"/>.
-	</abstract>
-	<extended-usage>
-		<pre-param id="s">
-			The current <link id="bypass recursion state"/>.
-		</pre-param>
-	</extended-usage>
-	<post-para>
-		If <link id="bypass semantics"/> are already in effect, this macro must be used instead of <parent/>.
-	</post-para>
-</derivative-spec>
+	<derivative-spec suffix="_BYPASS" class="alternate">
+		<abstract>
+			The <current/> macro behaves identically to <parent/> except that it is parametized by the <link id="bypass recursion state"/>.
+		</abstract>
+		<extended-usage>
+			<pre-param id="s">
+				The current <link id="bypass recursion state"/>.
+			</pre-param>
+		</extended-usage>
+		<post-para>
+			If <link id="bypass semantics"/> are already in effect, this macro must be used instead of <parent/>.
+		</post-para>
+	</derivative-spec>
 
-<derivative-spec suffix="_ID" class="secondary" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-	<abstract>
-		The <current/> macro indirectly expands to <parent/>.
-	</abstract>
-	<usage>
-		<syntax><current/>()</syntax>
-	</usage>
-	<pre-para>
-		<xsl:choose>
-			<xsl:when test="ancestor::macro/@type = 'indirect'">
-				This macro effectively allows <parent/> to pass through itself without becoming disabled.
-			</xsl:when>
-			<xsl:when test="ancestor::macro/@type = 'object'">
-				This macro effectively allows <parent/> to be passed around without expansion.
-			</xsl:when>
-			<xsl:otherwise>
-				This macro exists only for uniformity with other macros that require indirect invocation.
-			</xsl:otherwise>
-		</xsl:choose>
-	</pre-para>
-</derivative-spec>
+	<derivative-spec suffix="_ID" class="secondary" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+		<abstract>
+			The <current/> macro indirectly expands to <parent/>.
+		</abstract>
+		<usage>
+			<syntax><current/>()</syntax>
+		</usage>
+		<pre-para>
+			<xsl:choose>
+				<xsl:when test="ancestor::macro/@type = 'indirect'">
+					This macro effectively allows <parent/> to pass through itself without becoming disabled.
+				</xsl:when>
+				<xsl:when test="ancestor::macro/@type = 'object'">
+					This macro effectively allows <parent/> to be passed around without expansion.
+				</xsl:when>
+				<xsl:otherwise>
+					This macro exists only for uniformity with other macros that require indirect invocation.
+				</xsl:otherwise>
+			</xsl:choose>
+		</pre-para>
+	</derivative-spec>
 
-<derivative-spec suffix="_S" class="alternate">
-	<abstract>
-		The <current/> macro behaves identically to <parent/> except that it is parametized by the <link id="recursion state"/>.
-	</abstract>
-	<extended-usage>
-		<pre-param id="s">
-			The current <link id="recursion state"/>.
-		</pre-param>
-	</extended-usage>
-	<post-para>
-		This macro may not be used if <link id="bypass semantics"/> are in effect.
-	</post-para>
-</derivative-spec>
+	<derivative-spec suffix="_S" class="alternate">
+		<abstract>
+			The <current/> macro behaves identically to <parent/> except that it is parametized by the <link id="recursion state"/>.
+		</abstract>
+		<extended-usage>
+			<pre-param id="s">
+				The current <link id="recursion state"/>.
+			</pre-param>
+		</extended-usage>
+		<post-para>
+			This macro may not be used if <link id="bypass semantics"/> are in effect.
+		</post-para>
+	</derivative-spec>
 
 </library>

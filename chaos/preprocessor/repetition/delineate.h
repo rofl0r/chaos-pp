@@ -99,7 +99,6 @@
     CHAOS_IP_DELINEATE_PARAMETRIC_C(s, s, buffer, buffer, count, CHAOS_PP_EMPTY, sep, macro, CHAOS_PP_TRAMPOLINE(macro), pd) \
     /**/
 # define CHAOS_IP_DELINEATE_PARAMETRIC_INDIRECT() CHAOS_IP_DELINEATE_PARAMETRIC_C
-
 # define CHAOS_IP_DELINEATE_PARAMETRIC_C(s, o, buffer, shelf, count, sep, ss, macro, _m, pd) \
     CHAOS_PP_IIF(CHAOS_PP_BITAND(CHAOS_PP_IS_VALID(buffer))(CHAOS_PP_NOT_EQUAL(buffer, CHAOS_PP_LIMIT_EXPR)))( \
         CHAOS_PP_IF(count)( \

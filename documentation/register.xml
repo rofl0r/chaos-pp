@@ -14,6 +14,7 @@
 	<document id="array">
 		<item value="array"/>
 		<item value="arrays"/>
+		<item value="Arrays"/>
 	</document>
 	<document id="bypass">
 		<item value="bypass semantics"/>
@@ -25,6 +26,7 @@
 	</document>
 	<document id="continuation">
 		<item value="continuation"/>
+		<item value="continuations"/>
 		<item value="continuation machine"/>
 	</document>
 	<document id="deferral">
@@ -38,6 +40,7 @@
 		<item value="deferred contexts"/>
 		<item value="deferred expression"/>
 		<item value="deferred expressions"/>
+		<item value="Deferral"/>
 		<item value="obstruct"/>
 		<item value="obstructed"/>
 		<item value="obstructed expression"/>
@@ -46,8 +49,11 @@
 	<document id="equalization">
 		<item value="equalization"/>
 		<item value="equalize"/>
+		<item value="equalized"/>
 		<item value="equalizing scan"/>
 		<item value="equalizing scans"/>
+		<item value="scan factor"/>
+		<item value="scan factors"/>
 	</document>
 	<document id="evaluated-slot">
 		<item value="slot index"/>
@@ -80,18 +86,19 @@
 		<item value="IL statement"/>
 		<item value="IL statements"/>
 	</document>
+	<document id="index"/>
 	<document id="intermediate">
 		<item value="intermediate"/>
 		<item value="intermediates"/>
 	</document>
 	<document id="lambda">
-		<item value="λ-binding"/>
-		<item value="λ-bindings"/>
-		<item value="λ-expression"/>
-		<item value="λ-expressions"/>
-		<item value="λ-mechanism"/>
-		<item value="λ-placeholder"/>
-		<item value="λ-placeholders"/>
+		<item value="λ binding"/>
+		<item value="λ bindings"/>
+		<item value="λ expression"/>
+		<item value="λ expressions"/>
+		<item value="λ mechanism"/>
+		<item value="λ placeholder"/>
+		<item value="λ placeholders"/>
 	</document>
 	<document id="list">
 		<item value="list"/>
@@ -125,6 +132,7 @@
 	</document>
 	<document id="saturation">
 		<item value="saturated"/>
+		<item value="saturates"/>
 	</document>
 	<document id="second-tier">
 		<item value="second-tier"/>

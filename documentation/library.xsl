@@ -3,6 +3,8 @@
 
 <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
 
+<xsl:param name="source"/>
+
 <xsl:template match="/library">
 	<library name="@name">
 		<xsl:apply-templates>
@@ -21,7 +23,7 @@
 <xsl:template match="/library//header">
 	<xsl:param name="path"/>
 	<header name="{$path}/{@name}"/>
-	<xsl:apply-templates select="document(concat($path, '/', substring-before(@name, '.'), '.xml'))/header/macro">
+	<xsl:apply-templates select="document(concat($source, '/', $path, '/', substring-before(@name, '.'), '.xml'))/header/macro">
 		<xsl:with-param name="path" select="concat($path, '/', @name)"/>
 	</xsl:apply-templates>
 </xsl:template>

@@ -5,12 +5,15 @@
 
 <xsl:include href="copyright.xsl"/>
 
+<xsl:param name="library"/>
+<xsl:param name="prefix"/>
+
 <xsl:variable name="root" select="'.'"/>
 
 <xsl:template match="/library">
 	<HTML>
 		<HEAD>
-			<TITLE>Header Index - Chaos Preprocessor Library</TITLE>
+			<TITLE>Header Index - <xsl:value-of select="translate($library, ',', ' ')"/></TITLE>
 			<LINK rel="stylesheet" type="text/css" href="style.css"/>
 		</HEAD>
 		<BODY>
@@ -32,7 +35,7 @@
 <xsl:template match="/library" mode="primary">
 	<HTML>
 		<HEAD>
-			<TITLE>Macro Index - Chaos Preprocessor Library</TITLE>
+			<TITLE>Macro Index - <xsl:value-of select="translate($library, ',', ' ')"/></TITLE>
 			<LINK rel="stylesheet" type="text/css" href="style.css"/>
 		</HEAD>
 		<BODY>
@@ -40,7 +43,7 @@
 			<UL>
 				<xsl:for-each select="macro[@type = 'primary']">
 					<xsl:sort select="@id"/>
-					<LI><CODE><A href="{$root}/{substring-before(@header, '.')}.html#{@id}">CHAOS_PP_<xsl:value-of select="@id"/></A></CODE></LI>
+					<LI><CODE><A href="{$root}/{substring-before(@header, '.')}.html#{@id}"><xsl:value-of select="concat($prefix, @id)"/></A></CODE></LI>
 				</xsl:for-each>
 			</UL>
 			<xsl:call-template name="copyright">
@@ -54,7 +57,7 @@
 <xsl:template match="/library" mode="secondary">
 	<HTML>
 		<HEAD>
-			<TITLE>Macro Index - Chaos Preprocessor Library</TITLE>
+			<TITLE>Macro Index - <xsl:value-of select="translate($library, ',', ' ')"/></TITLE>
 			<LINK rel="stylesheet" type="text/css" href="style.css"/>
 		</HEAD>
 		<BODY>
@@ -62,7 +65,7 @@
 			<UL>
 				<xsl:for-each select="macro">
 					<xsl:sort select="@id"/>
-					<LI><CODE><A href="{$root}/{substring-before(@header, '.')}.html#{@id}">CHAOS_PP_<xsl:value-of select="@id"/></A></CODE></LI>
+					<LI><CODE><A href="{$root}/{substring-before(@header, '.')}.html#{@id}"><xsl:value-of select="concat($prefix, @id)"/></A></CODE></LI>
 				</xsl:for-each>
 			</UL>
 			<xsl:call-template name="copyright">

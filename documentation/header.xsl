@@ -3,11 +3,17 @@
 
 <xsl:output method="html" doctype-public="-//W3C//DTD HTML 4.0 Strict//EN" indent="yes" encoding="UTF-8"/>
 
-<xsl:include href="_register.xsl"/>
-<xsl:include href="_symbol.xsl"/>
+<xsl:include href=".register.xsl"/>
+<xsl:include href=".symbol.xsl"/>
 
 <xsl:include href="copyright.xsl"/>
+<xsl:include href="identities.xsl"/>
+<xsl:include href="paragraph.xsl"/>
 <xsl:include href="whitespace.xsl"/>
+
+<xsl:param name="library"/>
+<xsl:param name="prefix"/>
+<xsl:param name="source"/>
 
 <!-- globals -->
 
@@ -45,8 +51,8 @@
 
 <xsl:variable name="make-self">
 	<xsl:choose>
-		<xsl:when test="contains(/header/@name, 'chaos/preprocessor/')">
-			<xsl:value-of select="substring-after(/header/@name, 'chaos/preprocessor/')"/>
+		<xsl:when test="contains(substring-after(/header/@name, '/'), '/')">
+			<xsl:value-of select="substring-after(substring-after(/header/@name, '/'), '/')"/>
 		</xsl:when>
 		<xsl:otherwise>
 			<xsl:value-of select="substring-after(/header/@name, '/')"/>
@@ -60,7 +66,6 @@
 
 <xsl:template name="unknown-entity">
 	<xsl:param name="text"/>
-	<!--<xsl:message terminate="yes">unknown symbol: <xsl:value-of select="$text"/></xsl:message>-->
 	<CODE><A class="unknown" href="{$root}/unknown.html"><xsl:value-of select="$text"/></A></CODE>
 </xsl:template>
 
@@ -73,10 +78,14 @@
 		</xsl:when>
 		<xsl:otherwise>
 			<xsl:call-template name="unknown-entity">
-				<xsl:with-param name="text">CHAOS_PP_<xsl:value-of select="name()"/></xsl:with-param>
+				<xsl:with-param name="text"><xsl:value-of select="concat($prefix, name())"/></xsl:with-param>
 			</xsl:call-template>
 		</xsl:otherwise>
 	</xsl:choose>
+</xsl:template>
+
+<xsl:template match="x-var">
+	<VAR class="EXTERNAL"><xsl:apply-templates/></VAR>
 </xsl:template>
 
 <!-- association links -->
@@ -89,24 +98,8 @@
 	<A href="{$base-filename}/{@id}"><xsl:apply-templates/></A>
 </xsl:template>
 
-<xsl:template match="x-alpha">
-	<A href="{$root}/x-alpha.gif">α</A>
-</xsl:template>
-
-<xsl:template match="x-beta">
-	<A href="{$root}/x-beta.gif">β</A>
-</xsl:template>
-
-<!-- identities -->
-
-<xsl:template match="code | em | sub | sup | var">
-	<xsl:element name="{name()}">
-		<xsl:apply-templates/>
-	</xsl:element>
-</xsl:template>
-
-<xsl:template match="x-var">
-	<VAR class="EXTERNAL"><xsl:apply-templates/></VAR>
+<xsl:template match="library-assoc">
+	<A href="{$root}/{@id}"><xsl:apply-templates/></A>
 </xsl:template>
 
 <!-- manual symbol lookup -->
@@ -115,7 +108,7 @@
 	<xsl:param name="id" select="@id"/>
 	<xsl:choose>
 		<xsl:when test="contains($id, '.')">
-			<xsl:variable name="nodeset" select="document('_library.xml')/library/header[@name = $id]"/>
+			<xsl:variable name="nodeset" select="document('.library.xml')/library/header[@name = $id]"/>
 			<xsl:choose>
 				<xsl:when test="count($nodeset)">
 					<CODE><A class="header" href="{$root}/{substring-before($nodeset[1]/@name, '.')}.html">&lt;<xsl:value-of select="$id"/>&gt;</A></CODE>
@@ -128,14 +121,14 @@
 			</xsl:choose>
 		</xsl:when>
 		<xsl:otherwise>
-			<xsl:variable name="nodeset" select="document('_library.xml')/library/macro[@id = $id]"/>
+			<xsl:variable name="nodeset" select="document('.library.xml')/library/macro[@id = $id]"/>
 			<xsl:choose>
 				<xsl:when test="count($nodeset)">
-					<CODE><A class="{$nodeset[1]/@type}" href="{$root}/{substring-before($nodeset[1]/@header, '.')}.html#{$id}">CHAOS_PP_<xsl:value-of select="$id"/></A></CODE>
+					<CODE><A class="{$nodeset[1]/@type}" href="{$root}/{substring-before($nodeset[1]/@header, '.')}.html#{$id}"><xsl:value-of select="concat($prefix, $id)"/></A></CODE>
 				</xsl:when>
 				<xsl:otherwise>
 					<xsl:call-template name="unknown-entity">
-						<xsl:with-param name="text">CHAOS_PP_<xsl:value-of select="$id"/></xsl:with-param>
+						<xsl:with-param name="text"><xsl:value-of select="concat($prefix, $id)"/></xsl:with-param>
 					</xsl:call-template>
 				</xsl:otherwise>
 			</xsl:choose>
@@ -153,9 +146,9 @@
 <!-- directory listing -->
 
 <xsl:template name="directory-listing" match="directory-listing">
-	<xsl:param name="path" select="substring-after(@path, 'chaos/')"/>
+	<xsl:param name="path" select="substring-after(@path, '/')"/>
 	<xsl:param name="original" select="@path"/>
-	<xsl:param name="nodeset" select="document('library.xml')/library"/>
+	<xsl:param name="nodeset" select="document(concat($source, '/library.xml'))/library"/>
 	<xsl:choose>
 		<xsl:when test="contains($path, '/')">
 			<xsl:call-template name="directory-listing">
@@ -164,10 +157,6 @@
 			</xsl:call-template>
 		</xsl:when>
 		<xsl:otherwise>
-			<xsl:variable name="sans-prefix" select="substring-after($original, 'chaos/preprocessor/')"/>
-			<xsl:variable name="separator">
-				<xsl:if test="string-length($sans-prefix)">/</xsl:if>
-			</xsl:variable>
 			<xsl:if test="$nodeset/directory[@name = $path]/header">
 				<H4>Headers</H4>
 				<UL>
@@ -186,12 +175,12 @@
 <xsl:template name="group-lookup">
 	<xsl:param name="id" select="@id"/>
 	<xsl:param name="nodeset" select="node()[false()]"/>
-	<xsl:param name="groups" select="document('_library.xml')/library/macro[@id = $id]/group"/>
+	<xsl:param name="groups" select="document('.library.xml')/library/macro[@id = $id]/group"/>
 	<xsl:choose>
 		<xsl:when test="count($groups)">
 			<xsl:call-template name="group-lookup">
 				<xsl:with-param name="id" select="$id"/>
-				<xsl:with-param name="nodeset" select="$nodeset | document('_library.xml')/library/macro[group[@id = $groups[1]/@id]]"/>
+				<xsl:with-param name="nodeset" select="$nodeset | document('.library.xml')/library/macro[group[@id = $groups[1]/@id]]"/>
 				<xsl:with-param name="groups" select="$groups/following-sibling::group"/>
 			</xsl:call-template>
 		</xsl:when>
@@ -202,7 +191,7 @@
 					<xsl:for-each select="$nodeset">
 						<xsl:sort select="@id"/>
 						<xsl:if test="@id != $id">
-							<LI><CODE><A class="primary" href="{$root}/{substring-before(@header, '.')}.html#{@id}">CHAOS_PP_<xsl:value-of select="@id"/></A></CODE></LI>
+							<LI><CODE><A class="primary" href="{$root}/{substring-before(@header, '.')}.html#{@id}"><xsl:value-of select="concat($prefix, @id)"/></A></CODE></LI>
 						</xsl:if>
 					</xsl:for-each>
 				</UL>
@@ -216,7 +205,7 @@
 <xsl:template match="/">
 	<HTML>
 		<HEAD>
-			<TITLE><xsl:value-of select="$make-self"/> - Chaos Preprocessor Library</TITLE>
+			<TITLE><xsl:value-of select="$make-self"/> - <xsl:value-of select="translate($library, ',', ' ')"/></TITLE>
 			<LINK rel="stylesheet" type="text/css" href="{$root}/style.css"/>
 		</HEAD>
 		<BODY>
@@ -241,9 +230,8 @@
 		<H4>Contents</H4>
 		<UL>
 			<xsl:for-each select="macro">
-			<!--<xsl:for-each select="macro | macro//derivative">-->
 				<xsl:sort select="@id"/>
-				<LI><CODE><A class="primary" href="#{@id}">CHAOS_PP_<xsl:value-of select="@id"/></A></CODE></LI>
+				<LI><CODE><A class="primary" href="#{@id}"><xsl:value-of select="concat($prefix, @id)"/></A></CODE></LI>
 			</xsl:for-each>
 		</UL>
 	</xsl:if>
@@ -256,7 +244,7 @@
 <xsl:template match="/header/macro">
 	<HR/>
 	<A name="{@id}"/>
-	<H3 class="PRIMARY">CHAOS_PP_<xsl:value-of select="@id"/></H3>
+	<H3 class="PRIMARY"><xsl:value-of select="concat($prefix, @id)"/></H3>
 	<xsl:for-each select="abstract">
 		<SPAN><xsl:apply-templates/></SPAN>
 	</xsl:for-each>
@@ -284,7 +272,7 @@
 		<xsl:apply-templates select="para"/>
 	</xsl:if>
 	<xsl:call-template name="group-lookup">
-		<xsl:with-param name="nodeset" select="document('_library.xml')/library/macro[@id = current()/x-reference/@id]"/>
+		<xsl:with-param name="nodeset" select="document('.library.xml')/library/macro[@id = current()/x-reference/@id]"/>
 	</xsl:call-template>
 	<xsl:if test="count(listing)">
 		<H4>Sample Code</H4>
@@ -295,98 +283,6 @@
 	<xsl:apply-templates select="derivative"/>
 </xsl:template>
 
-<xsl:template match="para" priority="-1">
-	<DIV><xsl:apply-templates/></DIV>
-</xsl:template>
-
-<xsl:template match="*" mode="typeof">element</xsl:template>
-<xsl:template match="text()" mode="typeof">text</xsl:template>
-
-<xsl:template name="push">
-	<xsl:param name="nodeset" select="preceding-sibling::node()"/>
-	<xsl:choose>
-		<xsl:when test="count($nodeset) != 0">
-			<xsl:variable name="type">
-				<xsl:apply-templates select="$nodeset[last()]" mode="typeof"/>
-			</xsl:variable>
-			<xsl:choose>
-				<xsl:when test="$type = 'text'">
-					<xsl:choose>
-						<xsl:when test="normalize-space($nodeset[last()]) = ''">
-							<xsl:call-template name="push">
-								<xsl:with-param name="nodeset" select="$nodeset[last()]/preceding-sibling::node()"/>
-							</xsl:call-template>
-						</xsl:when>
-						<xsl:otherwise>PUSH</xsl:otherwise>
-					</xsl:choose>
-				</xsl:when>
-			</xsl:choose>
-		</xsl:when>
-	</xsl:choose>
-</xsl:template>
-
-<xsl:template name="pull">
-	<xsl:param name="nodeset" select="following-sibling::node()"/>
-	<xsl:choose>
-		<xsl:when test="count($nodeset) != 0">
-			<xsl:variable name="type">
-				<xsl:apply-templates select="$nodeset[1]" mode="typeof"/>
-			</xsl:variable>
-			<xsl:choose>
-				<xsl:when test="$type = 'text'">
-					<xsl:choose>
-						<xsl:when test="normalize-space($nodeset[1]) = ''">
-							<xsl:call-template name="pull">
-								<xsl:with-param name="nodeset" select="$nodeset[1]/following-sibling::node()"/>
-							</xsl:call-template>
-						</xsl:when>
-					</xsl:choose>
-				</xsl:when>
-			</xsl:choose>
-		</xsl:when>
-		<xsl:otherwise>PULL</xsl:otherwise>
-	</xsl:choose>
-</xsl:template>
-
-<xsl:template match="param/para">
-	<xsl:variable name="push"><xsl:call-template name="push"/></xsl:variable>
-	<xsl:variable name="pull"><xsl:call-template name="pull"/></xsl:variable>
-	<xsl:choose>
-		<xsl:when test="concat($push, $pull) = ''">
-			<SPAN><xsl:apply-templates/></SPAN>
-		</xsl:when>
-		<xsl:otherwise>
-			<SPAN class="{concat($push, $pull)}"><xsl:apply-templates/></SPAN>
-		</xsl:otherwise>
-	</xsl:choose>
-</xsl:template>
-
-<xsl:template match="para/para">
-	<xsl:variable name="push"><xsl:call-template name="push"/></xsl:variable>
-	<xsl:variable name="pull"><xsl:call-template name="pull"/></xsl:variable>
-	<xsl:choose>
-		<xsl:when test="concat($push, $pull) = ''">
-			<DIV><xsl:apply-templates/></DIV>
-		</xsl:when>
-		<xsl:otherwise>
-			<DIV class="{concat($push, $pull)}"><xsl:apply-templates/></DIV>
-		</xsl:otherwise>
-	</xsl:choose>
-</xsl:template>
-
-<xsl:template match="snippet">
-	<xsl:variable name="push"><xsl:call-template name="push"/></xsl:variable>
-	<xsl:variable name="pull"><xsl:call-template name="pull"/></xsl:variable>
-	<xsl:choose>
-		<xsl:when test="concat($push, $pull) = ''">
-			<DIV><PRE><xsl:apply-templates/></PRE></DIV>
-		</xsl:when>
-		<xsl:otherwise>
-			<DIV class="{concat($push, $pull)}"><PRE><xsl:apply-templates/></PRE></DIV>
-		</xsl:otherwise>
-	</xsl:choose>
-</xsl:template>
-
 <!-- derivative entities -->
 
 <xsl:template match="derivative[substring-after(@id, ../@id) = '_ID']">
@@ -394,7 +290,7 @@
 	<xsl:variable name="parent"><xsl:call-template name="manual-parent"/></xsl:variable>
 	<HR/>
 	<A name="{@id}"/>
-	<H3 class="SECONDARY">CHAOS_PP_<xsl:value-of select="@id"/></H3>
+	<H3 class="SECONDARY"><xsl:value-of select="concat($prefix, @id)"/></H3>
 	<SPAN>
 		The <xsl:copy-of select="$current"/> macro indirectly expands to <xsl:copy-of select="$parent"/>.
 	</SPAN>
@@ -427,15 +323,15 @@
 	<xsl:variable name="parent"><xsl:call-template name="manual-parent"/></xsl:variable>
 	<HR/>
 	<A name="{@id}"/>
-	<H3 class="SECONDARY">CHAOS_PP_<xsl:value-of select="@id"/></H3>
+	<H3 class="SECONDARY"><xsl:value-of select="concat($prefix, @id)"/></H3>
 	<SPAN>
-		The <xsl:copy-of select="$current"/> macro expands to a <A href="{$root}/lambda.html">λ-expression</A> representing <xsl:copy-of select="$parent"/>.
+		The <xsl:copy-of select="$current"/> macro expands to a <A href="{$root}/lambda.html">λ expression</A> representing <xsl:copy-of select="$parent"/>.
 	</SPAN>
 	<H4>Usage <xsl:if test="count(@lang)"><SMALL>- <xsl:value-of select="@lang"/> Specific</SMALL></xsl:if></H4>
 	<SAMP><xsl:copy-of select="$current"/></SAMP>
 	<H4>Remarks</H4>
 	<DIV>
-		This macro is a shorthand form of the following <A href="{$root}/lambda.html">λ-binding</A>:
+		This macro is a shorthand form of the following <A href="{$root}/lambda.html">λ binding</A>:
 		<xsl:choose>
 			<xsl:when test="ancestor::macro/@type = 'indirect' or ancestor::macro/@type = 'object'">
 				<DIV class="PUSHPULL"><PRE><xsl:call-template name="manual"><xsl:with-param name="id" select="'LAMBDA'"/></xsl:call-template>(<xsl:call-template name="manual"><xsl:with-param name="id" select="concat(../@id, '_ID')"/></xsl:call-template>)()</PRE></DIV>
@@ -458,7 +354,7 @@
 	<xsl:variable name="parent"><xsl:call-template name="manual-parent"/></xsl:variable>
 	<HR/>
 	<A name="{@id}"/>
-	<H3 class="ALTERNATE">CHAOS_PP_<xsl:value-of select="@id"/></H3>
+	<H3 class="ALTERNATE"><xsl:value-of select="concat($prefix, @id)"/></H3>
 	<SPAN>
 		The <xsl:copy-of select="$current"/> macro behaves identically to <xsl:copy-of select="$parent"/> except that it is parametized by the current <A href="{$root}/bypass.html">bypass recursion state</A>.
 	</SPAN>
@@ -500,7 +396,7 @@
 	<xsl:variable name="parent"><xsl:call-template name="manual-parent"/></xsl:variable>
 	<HR/>
 	<A name="{@id}"/>
-	<H3 class="ALTERNATE">CHAOS_PP_<xsl:value-of select="@id"/></H3>
+	<H3 class="ALTERNATE"><xsl:value-of select="concat($prefix, @id)"/></H3>
 	<SPAN>
 		The <xsl:copy-of select="$current"/> macro behaves identically to <xsl:copy-of select="$parent"/> except that it is parametized by the <A href="{$root}/recursion.html">recursion state</A>.
 	</SPAN>

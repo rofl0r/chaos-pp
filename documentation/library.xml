@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <library name="chaos">
+	<assoc id="alpha.gif"/>
+	<assoc id="beta.gif"/>
 	<header name="preprocessor.h"/>
 	<directory name="preprocessor">
 		<header name="algorithm.h"/>

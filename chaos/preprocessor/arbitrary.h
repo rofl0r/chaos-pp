@@ -26,7 +26,7 @@
 # include <chaos/preprocessor/arbitrary/literal.h>
 # include <chaos/preprocessor/arbitrary/mod.h>
 # include <chaos/preprocessor/arbitrary/mul.h>
-# include <chaos/preprocessor/arbitrary/negate.h>
+# include <chaos/preprocessor/arbitrary/neg.h>
 # include <chaos/preprocessor/arbitrary/not_equal.h>
 # include <chaos/preprocessor/arbitrary/promote.h>
 # include <chaos/preprocessor/arbitrary/sign.h>

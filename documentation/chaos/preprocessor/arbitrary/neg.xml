@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<header name="chaos/preprocessor/arbitrary/negate.h" author="Paul Mensonides" date="2003-2004">
+<header name="chaos/preprocessor/arbitrary/neg.h" author="Paul Mensonides" date="2003-2004">
 <overview>
 	The <self/> header defines a macro that negates an <link id="arbitrary-precision value"/>.
 </overview>
 
-<macro id="ARBITRARY_NEGATE" group="negation">
+<macro id="ARBITRARY_NEG" group="negation">
 	<abstract>
-		The <ARBITRARY_NEGATE/> macro negates an <link id="arbitrary-precision value"/>.
+		The <ARBITRARY_NEG/> macro negates an <link id="arbitrary-precision value"/>.
 	</abstract>
 	<usage>
-		<syntax><ARBITRARY_NEGATE/>(x)</syntax>
+		<syntax><ARBITRARY_NEG/>(x)</syntax>
 		<param id="x">
 			The <link id="arbitrary-precision value"/> to be negated.
 		</param>
@@ -22,18 +22,18 @@
 		#include <chaos-preprocessor-arbitrary-demote.h/>
 		#include <chaos-preprocessor-arbitrary-negate.h/>
 		
-		<ARBITRARY_DEMOTE/>(<ARBITRARY_NEGATE/>(
+		<ARBITRARY_DEMOTE/>(<ARBITRARY_NEG/>(
 		    (1)(2)(3)
 		))
 		// -123
 		
-		<ARBITRARY_DEMOTE/>(<ARBITRARY_NEGATE/>(
+		<ARBITRARY_DEMOTE/>(<ARBITRARY_NEG/>(
 		    ((1)(2)(3))
 		))
 		// 123
 	</listing>
-	<derivative id="ARBITRARY_NEGATE_ID"/>
-	<derivative id="ARBITRARY_NEGATE_" lang="C99"/>
+	<derivative id="ARBITRARY_NEG_ID"/>
+	<derivative id="ARBITRARY_NEG_" lang="C99"/>
 </macro>
 
 </header>

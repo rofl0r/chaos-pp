@@ -270,7 +270,7 @@
 				<header name="literal.h"/>
 				<header name="mod.h"/>
 				<header name="mul.h"/>
-				<header name="negate.h"/>
+				<header name="neg.h"/>
 				<header name="not_equal.h"/>
 				<header name="promote.h"/>
 				<header name="sign.h"/>

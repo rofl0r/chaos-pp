@@ -13,26 +13,23 @@
 # define CHAOS_PREPROCESSOR_LAMBDA_EXECUTE_H
 #
 # include <chaos/preprocessor/config.h>
-# include <chaos/preprocessor/control/expr_iif.h>
-# include <chaos/preprocessor/facilities/expand.h>
+# include <chaos/preprocessor/control/iif.h>
+# include <chaos/preprocessor/facilities/empty.h>
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/tuple/eat.h>
-# include <chaos/preprocessor/tuple/rem.h>
 #
 # /* CHAOS_PP_ELEMENT */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_ELEMENT(...) (1, __VA_ARGS__)
+#    define CHAOS_PP_ELEMENT(...) (1, __VA_ARGS__ CHAOS_PP_EMPTY)()
 #    define CHAOS_PP_ELEMENT_ CHAOS_PP_LAMBDA(CHAOS_PP_ELEMENT_ID)()
 # else
-#    define CHAOS_PP_ELEMENT(x) (1, x)
+#    define CHAOS_PP_ELEMENT(x) (1, x CHAOS_PP_EMPTY)()
 # endif
-#
-# define CHAOS_PP_ELEMENT_ID() CHAOS_PP_ELEMENT
 #
 # /* CHAOS_PP_OPERATOR */
 #
-# define CHAOS_PP_OPERATOR(op) (0, op)
+# define CHAOS_PP_OPERATOR(op) (1, op)()
 # define CHAOS_PP_OPERATOR_ID() CHAOS_PP_OPERATOR
 #
 # if CHAOS_PP_VARIADICS
@@ -41,31 +38,21 @@
 #
 # /* CHAOS_PP_EXECUTE */
 #
-# define CHAOS_PP_EXECUTE(il) \
-    CHAOS_PP_EXPAND( \
-        CHAOS_IP_EXECUTE_X \
-            CHAOS_PP_CAT(CHAOS_IP_EXECUTE_A il, 0)(CHAOS_PP_TUPLE_EAT, ...) \
-    ) \
-    /**/
+# define CHAOS_PP_EXECUTE(il) CHAOS_IP_EXECUTE_I il(0, ~)
 # define CHAOS_PP_EXECUTE_ID() CHAOS_PP_EXECUTE
 #
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_EXECUTE_ CHAOS_PP_LAMBDA(CHAOS_PP_EXECUTE_ID)()
 # endif
 #
-# define CHAOS_IP_EXECUTE_A0
-# define CHAOS_IP_EXECUTE_B0
+# define CHAOS_IP_EXECUTE_INDIRECT() CHAOS_IP_EXECUTE_I
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_IP_EXECUTE_A(b, ...) (CHAOS_PP_TUPLE_REM, __VA_ARGS__ CHAOS_PP_EXPR_IIF(b)(CHAOS_PP_EMPTY)) CHAOS_IP_EXECUTE_B
-#    define CHAOS_IP_EXECUTE_B(b, ...) (CHAOS_PP_TUPLE_REM, __VA_ARGS__ CHAOS_PP_EXPR_IIF(b)(CHAOS_PP_EMPTY)) CHAOS_IP_EXECUTE_A
-#    define CHAOS_IP_EXECUTE_X(m, ...) m(?)(__VA_ARGS__() CHAOS_IP_EXECUTE_Y)
-#    define CHAOS_IP_EXECUTE_Y(m, ...) m(?)(__VA_ARGS__() CHAOS_IP_EXECUTE_X)
+#    define CHAOS_IP_EXECUTE_I(bit, ...) CHAOS_PP_IIF(bit)(CHAOS_IP_EXECUTE_II, CHAOS_PP_TUPLE_EAT(?))(__VA_ARGS__)
+#    define CHAOS_IP_EXECUTE_II(...) __VA_ARGS__() CHAOS_IP_EXECUTE_INDIRECT
 # else
-#    define CHAOS_IP_EXECUTE_A(b, x) (CHAOS_PP_TUPLE_REM, x CHAOS_PP_EXPR_IIF(b)(CHAOS_PP_EMPTY)) CHAOS_IP_EXECUTE_B
-#    define CHAOS_IP_EXECUTE_B(b, x) (CHAOS_PP_TUPLE_REM, x CHAOS_PP_EXPR_IIF(b)(CHAOS_PP_EMPTY)) CHAOS_IP_EXECUTE_A
-#    define CHAOS_IP_EXECUTE_X(m, x) m(1)(x() CHAOS_IP_EXECUTE_Y)
-#    define CHAOS_IP_EXECUTE_Y(m, x) m(1)(x() CHAOS_IP_EXECUTE_X)
+#    define CHAOS_IP_EXECUTE_I(bit, x) CHAOS_PP_IIF(bit)(CHAOS_IP_EXECUTE_II, CHAOS_PP_TUPLE_EAT(1))(x)
+#    define CHAOS_IP_EXECUTE_II(x) x() CHAOS_IP_EXECUTE_INDIRECT
 # endif
 #
 # endif

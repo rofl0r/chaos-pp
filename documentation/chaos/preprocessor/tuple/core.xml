@@ -116,12 +116,12 @@
 	<derivative id="TUPLE_ITEM_" lang="C99"/>
 </macro>
 
-<macro id="TUPLE_FIRST" type="indirect" group="first">
+<macro id="TUPLE_HEAD" type="indirect" group="head">
 	<abstract>
-		The <TUPLE_FIRST/> macro extracts the first element from a <link id="tuple"/>.
+		The <TUPLE_HEAD/> macro extracts the first element from a <link id="tuple"/>.
 	</abstract>
 	<usage lang="C99">
-		<syntax><TUPLE_FIRST/>(tuple)</syntax>
+		<syntax><TUPLE_HEAD/>(tuple)</syntax>
 		<param id="tuple">
 			The <link id="tuple"/> whose first element is to be extracted.
 		</param>
@@ -129,7 +129,7 @@
 	<para>
 		This macro expands to the first element contained in <var>tuple</var>.
 	</para>
-	<x-reference id="TUPLE_REST"/>
+	<x-reference id="TUPLE_TAIL"/>
 	<listing>
 		#include <chaos-preprocessor-config.h/>
 		#include <chaos-preprocessor-tuple-core.h/>
@@ -138,20 +138,20 @@
 		
 		#define DATA() (a, b, c)
 		
-		<TUPLE_FIRST/>(DATA()) // a
+		<TUPLE_HEAD/>(DATA()) // a
 		
 		#endif
 	</listing>
-	<derivative id="TUPLE_FIRST_ID" lang="C99"/>
-	<derivative id="TUPLE_FIRST_" lang="C99"/>
+	<derivative id="TUPLE_HEAD_ID" lang="C99"/>
+	<derivative id="TUPLE_HEAD_" lang="C99"/>
 </macro>
 
-<macro id="TUPLE_REST" type="indirect" group="rest">
+<macro id="TUPLE_TAIL" type="indirect" group="tail">
 	<abstract>
-		The <TUPLE_REST/> macro removes the first element from a <link id="tuple"/>.
+		The <TUPLE_TAIL/> macro removes the first element from a <link id="tuple"/>.
 	</abstract>
 	<usage lang="C99">
-		<syntax><TUPLE_REST/>(tuple)</syntax>
+		<syntax><TUPLE_TAIL/>(tuple)</syntax>
 		<param id="tuple">
 			The <link id="tuple"/> whose first element is to be removed.
 		</param>
@@ -159,7 +159,7 @@
 	<para>
 		This macro expands to a <link id="tuple"/> containing all of the elements of <var>tuple</var> except the first.
 	</para>
-	<x-reference id="TUPLE_FIRST"/>
+	<x-reference id="TUPLE_HEAD"/>
 	<listing>
 		#include <chaos-preprocessor-config.h/>
 		#include <chaos-preprocessor-tuple-core.h/>
@@ -168,12 +168,12 @@
 		
 		#define DATA() (a, b, c)
 		
-		<TUPLE_REST/>(DATA()) // (b, c)
+		<TUPLE_TAIL/>(DATA()) // (b, c)
 		
 		#endif
 	</listing>
-	<derivative id="TUPLE_REST_ID" lang="C99"/>
-	<derivative id="TUPLE_REST_" lang="C99"/>
+	<derivative id="TUPLE_TAIL_ID" lang="C99"/>
+	<derivative id="TUPLE_TAIL_" lang="C99"/>
 </macro>
 
 <macro id="TUPLE_IS_CONS" group="is-cons">

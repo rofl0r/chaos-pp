@@ -112,9 +112,9 @@
 		    /**/
 		#define CURLY_BRACES_3(_, s, tuple) \
 		    <INLINE_WHEN/> _(<TUPLE_IS_CONS/>(tuple))( \
-		        { <TUPLE_FIRST/> _(tuple) } \
+		        { <TUPLE_HEAD/> _(tuple) } \
 		        <EXPR_S/> _(s)(CURLY_BRACES_INDIRECT _(3)( \
-		            <OBSTRUCT/> _(), <PREV/>(s), <TUPLE_REST/> _(tuple) \
+		            <OBSTRUCT/> _(), <PREV/>(s), <TUPLE_TAIL/> _(tuple) \
 		        )) \
 		    ) \
 		    /**/

@@ -111,12 +111,12 @@
 	<derivative id="ITEM_" lang="C99"/>
 </macro>
 
-<macro id="FIRST" type="indirect" group="first">
+<macro id="HEAD" type="indirect" group="head">
 	<abstract>
-		The <FIRST/> macro extracts the first element from a <link id="generic data structure"/>.
+		The <HEAD/> macro extracts the first element from a <link id="generic data structure"/>.
 	</abstract>
 	<usage>
-		<syntax><FIRST/>(g)</syntax>
+		<syntax><HEAD/>(g)</syntax>
 		<param id="g">
 			The <link id="generic data structure"/> whose first element is to be extracted.
 		</param>
@@ -124,25 +124,25 @@
 	<para>
 		This macro expands to the first element contained in <var>g</var>.
 	</para>
-	<x-reference id="REST"/>
+	<x-reference id="TAIL"/>
 	<listing>
 		#include <chaos-preprocessor-generics-core.h/>
 		#include <chaos-preprocessor-list-core.h/>
 		#include <chaos-preprocessor-string-core.h/>
 		
-		<FIRST/>((<LIST/>) (1, (2, (3, ...)))) // a
-		<FIRST/>((<STRING/>) 1 2 3 4 5)        // 1
+		<HEAD/>((<LIST/>) (1, (2, (3, ...)))) // 1
+		<HEAD/>((<STRING/>) 1 2 3 4 5)        // 1
 	</listing>
-	<derivative id="FIRST_ID"/>
-	<derivative id="FIRST_" lang="C99"/>
+	<derivative id="HEAD_ID"/>
+	<derivative id="HEAD_" lang="C99"/>
 </macro>
 
-<macro id="REST" type="indirect" group="rest">
+<macro id="TAIL" type="indirect" group="tail">
 	<abstract>
-		The <REST/> macro removes the first element from a <link id="generic data structure"/>.
+		The <TAIL/> macro removes the first element from a <link id="generic data structure"/>.
 	</abstract>
 	<usage>
-		<syntax><REST/>(g)</syntax>
+		<syntax><TAIL/>(g)</syntax>
 		<param id="g">
 			The <link id="generic data structure"/> whose first element is to be removed.
 		</param>
@@ -150,24 +150,24 @@
 	<para>
 		This macro expands to a <link id="generic data structure"/> of the same type as <var>g</var> containing all the elements of <var>g</var> except the first.
 	</para>
-	<x-reference id="FIRST"/>
+	<x-reference id="HEAD"/>
 	<listing>
 		#include <chaos-preprocessor-config.h/>
 		#include <chaos-preprocessor-generics-core.h/>
 		#include <chaos-preprocessor-seq-core.h/>
 		#include <chaos-preprocessor-tuple-core.h/>
 		
-		<REST/>((<SEQ/>) (X)(Y)(Z)) // (<SEQ/>) (Y)(Z)
+		<TAIL/>((<SEQ/>) (X)(Y)(Z)) // (<SEQ/>) (Y)(Z)
 		
 		#if <VARIADICS/>
 		
-		<REST/>((<TUPLE/>) (a, b, c, d, e))
+		<TAIL/>((<TUPLE/>) (a, b, c, d, e))
 		// (<TUPLE/>) (b, c, d, e)
 		
 		#endif
 	</listing>
-	<derivative id="REST_ID"/>
-	<derivative id="REST_" lang="C99"/>
+	<derivative id="TAIL_ID"/>
+	<derivative id="TAIL_" lang="C99"/>
 </macro>
 
 <macro id="IS_CONS" group="is-cons">

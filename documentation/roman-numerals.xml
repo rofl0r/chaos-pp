@@ -154,8 +154,8 @@
 				                2, \
 				                <EXPR_S/>(s)(<WHILE_S/>( \
 				                    s, PRED, OP, \
-				                    <STRING_FIRST/>(string), \
-				                    <STRING_REST/>(string 0), \
+				                    <STRING_HEAD/>(string), \
+				                    <STRING_TAIL/>(string 0), \
 				                    (0) \
 				                )) \
 				            ) \
@@ -167,10 +167,10 @@
 				#define PRED(s, first, rest, x) <STRING_IS_CONS/>(rest)
 				
 				#define OP(s, first, rest, x) \
-				    <STRING_FIRST/>(rest), <STRING_REST/>(rest), \
+				    <STRING_HEAD/>(rest), <STRING_TAIL/>(rest), \
 				    <IIF/>( \
 				        <GREATER/>( \
-				            TABLE(0, <STRING_FIRST/>(rest)), \
+				            TABLE(0, <STRING_HEAD/>(rest)), \
 				            TABLE(0, first) \
 				        ) \
 				    )( \

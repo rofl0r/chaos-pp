@@ -106,12 +106,12 @@
 	<derivative id="VARIADIC_SEQ_ITEM_" lang="C99"/>
 </macro>
 
-<macro id="VARIADIC_SEQ_FIRST" type="indirect" group="first">
+<macro id="VARIADIC_SEQ_HEAD" type="indirect" group="head">
 	<abstract>
-		The <VARIADIC_SEQ_FIRST/> macro extracts the first element from a <link id="variadic sequence"/>.
+		The <VARIADIC_SEQ_HEAD/> macro extracts the first element from a <link id="variadic sequence"/>.
 	</abstract>
 	<usage lang="C99">
-		<syntax><VARIADIC_SEQ_FIRST/>(seq)</syntax>
+		<syntax><VARIADIC_SEQ_HEAD/>(seq)</syntax>
 		<param id="seq">
 			The <link id="variadic sequence"/> whose first element is to be extracted.
 		</param>
@@ -119,27 +119,27 @@
 	<para>
 		This macro expands to the first element contained in <var>seq</var>.
 	</para>
-	<x-reference id="VARIADIC_SEQ_REST"/>
+	<x-reference id="VARIADIC_SEQ_TAIL"/>
 	<listing>
 		#include <chaos-preprocessor-config.h/>
 		#include <chaos-preprocessor-seq-variadic-core.h/>
 		
 		#if <VARIADICS/>
 		
-		<VARIADIC_SEQ_FIRST/>((a, b)()(e, f, g)) // a, b
+		<VARIADIC_SEQ_HEAD/>((a, b)()(e, f, g)) // a, b
 		
 		#endif
 	</listing>
-	<derivative id="VARIADIC_SEQ_FIRST_ID" lang="C99"/>
-	<derivative id="VARIADIC_SEQ_FIRST_" lang="C99"/>
+	<derivative id="VARIADIC_SEQ_HEAD_ID" lang="C99"/>
+	<derivative id="VARIADIC_SEQ_HEAD_" lang="C99"/>
 </macro>
 
-<macro id="VARIADIC_SEQ_REST" type="indirect" group="rest">
+<macro id="VARIADIC_SEQ_TAIL" type="indirect" group="tail">
 	<abstract>
-		The <VARIADIC_SEQ_REST/> macro removes the first element from a <link id="variadic sequence"/>.
+		The <VARIADIC_SEQ_TAIL/> macro removes the first element from a <link id="variadic sequence"/>.
 	</abstract>
 	<usage lang="C99">
-		<syntax><VARIADIC_SEQ_REST/>(seq)</syntax>
+		<syntax><VARIADIC_SEQ_TAIL/>(seq)</syntax>
 		<param id="seq">
 			The <link id="variadic sequence"/> whose first element is to be removed.
 		</param>
@@ -147,19 +147,19 @@
 	<para>
 		This macro expands to a <link id="variadic sequence"/> containing all of the elements of <var>seq</var> except the first.
 	</para>
-	<x-reference id="VARIADIC_SEQ_FIRST"/>
+	<x-reference id="VARIADIC_SEQ_HEAD"/>
 	<listing>
 		#include <chaos-preprocessor-config.h/>
 		#include <chaos-preprocessor-seq-variadic-core.h/>
 		
 		#if <VARIADICS/>
 		
-		<VARIADIC_SEQ_REST/>((a, b)(c)(d, e, f)) // (c)(d, e, f)
+		<VARIADIC_SEQ_TAIL/>((a, b)(c)(d, e, f)) // (c)(d, e, f)
 		
 		#endif
 	</listing>
-	<derivative id="VARIADIC_SEQ_REST_ID" lang="C99"/>
-	<derivative id="VARIADIC_SEQ_REST_" lang="C99"/>
+	<derivative id="VARIADIC_SEQ_TAIL_ID" lang="C99"/>
+	<derivative id="VARIADIC_SEQ_TAIL_" lang="C99"/>
 </macro>
 
 <macro id="VARIADIC_SEQ_IS_CONS" group="is-cons">

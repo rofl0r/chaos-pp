@@ -149,10 +149,10 @@
 		    <BRANCH/> _ \
 		        (0xIIF)(<TUPLE_IS_CONS/>(tuple))( \
 		            <ADD_MACHINE_S/> _( \
-		                s, <TUPLE_FIRST/> _(tuple), \
+		                s, <TUPLE_HEAD/> _(tuple), \
 		                <EXPR_S/>(s) _(ADD_INDIRECT _()( \
 		                    <OBSTRUCT/> _(), <NEXT/>(s), \
-		                    <TUPLE_REST/> _(tuple) \
+		                    <TUPLE_TAIL/> _(tuple) \
 		                )) \
 		            ) \
 		        ) \

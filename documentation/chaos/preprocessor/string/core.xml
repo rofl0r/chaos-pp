@@ -135,12 +135,12 @@
 	<derivative id="STRING_ITEM_" lang="C99"/>
 </macro>
 
-<macro id="STRING_FIRST" type="indirect" group="first">
+<macro id="STRING_HEAD" type="indirect" group="head">
 	<abstract>
-		The <STRING_FIRST/> macro extracts the first element from a <link id="string"/>.
+		The <STRING_HEAD/> macro extracts the first element from a <link id="string"/>.
 	</abstract>
 	<usage>
-		<syntax><STRING_FIRST/>(string)</syntax>
+		<syntax><STRING_HEAD/>(string)</syntax>
 		<param id="string">
 			The <link id="string"/> whose first element is to be extracted.
 		</param>
@@ -148,24 +148,24 @@
 	<para>
 		This macro expands to the first element contained in <var>string</var>.
 	</para>
-	<x-reference id="STRING_REST"/>
+	<x-reference id="STRING_TAIL"/>
 	<listing>
 		#include <chaos-preprocessor-string-core.h/>
 		
 		#define DATA() d a t a
 		
-		<STRING_FIRST/>(DATA()) // d
+		<STRING_HEAD/>(DATA()) // d
 	</listing>
-	<derivative id="STRING_FIRST_ID"/>
-	<derivative id="STRING_FIRST_" lang="C99"/>
+	<derivative id="STRING_HEAD_ID"/>
+	<derivative id="STRING_HEAD_" lang="C99"/>
 </macro>
 
-<macro id="STRING_REST" type="indirect" group="rest">
+<macro id="STRING_TAIL" type="indirect" group="tail">
 	<abstract>
-		The <STRING_REST/> macro removes the first element from a <link id="string"/>.
+		The <STRING_TAIL/> macro removes the first element from a <link id="string"/>.
 	</abstract>
 	<usage>
-		<syntax><STRING_REST/>(string)</syntax>
+		<syntax><STRING_TAIL/>(string)</syntax>
 		<param id="string">
 			The <link id="string"/> whose first element is to be removed.
 		</param>
@@ -173,16 +173,16 @@
 	<para>
 		This macro expands to a <link id="string"/> containing all of the elements of <var>string</var> except the first.
 	</para>
-	<x-reference id="STRING_FIRST"/>
+	<x-reference id="STRING_HEAD"/>
 	<listing>
 		#include <chaos-preprocessor-string-core.h/>
 		
 		#define DATA() d a t a
 		
-		<STRING_REST/>(DATA()) // a t a
+		<STRING_TAIL/>(DATA()) // a t a
 	</listing>
-	<derivative id="STRING_REST_ID"/>
-	<derivative id="STRING_REST_" lang="C99"/>
+	<derivative id="STRING_TAIL_ID"/>
+	<derivative id="STRING_TAIL_" lang="C99"/>
 </macro>
 
 <macro id="STRING_IS_CONS" group="is-cons">

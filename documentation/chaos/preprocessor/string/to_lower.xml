@@ -77,8 +77,8 @@
 		    PROPER_I(<STRING_TO_LOWER/>(string)) \
 		    /**/
 		#define PROPER_I(string) \
-		    <TO_UPPER/>(<STRING_FIRST/>(string)) \
-		    <STRING_REST/>(string) \
+		    <TO_UPPER/>(<STRING_HEAD/>(string)) \
+		    <STRING_TAIL/>(string) \
 		    /**/
 		
 		PROPER(C H A O S) // C h a o s

@@ -70,9 +70,9 @@
 		<para>
 			Even if such detection <em>was</em> possible, another problem surfaces.
 			Consider again the <code>(,,)</code> <link id="tuple"/>, and consider an algorithm that operates on each element of a <link id="tuple"/>.
-			If the algorithm was to attempt to individually process elements one-by-one, it might use <TUPLE_FIRST/> and <TUPLE_REST/>.
-			Everything is fine for <code><TUPLE_REST/>((,,))</code> (which yields <code>(,)</code>).
-			However, <code><TUPLE_REST/>((,))</code> yields <code>()</code> (i.e. the theoretical nil <link id="tuple"/>), and an element has been silently skipped.
+			If the algorithm was to attempt to individually process elements one-by-one, it might use <TUPLE_HEAD/> and <TUPLE_TAIL/>.
+			Everything is fine for <code><TUPLE_TAIL/>((,,))</code> (which yields <code>(,)</code>).
+			However, <code><TUPLE_TAIL/>((,))</code> yields <code>()</code> (i.e. the theoretical nil <link id="tuple"/>), and an element has been silently skipped.
 		</para>
 		<para>
 			The underlying problem is that emptiness (or "nothing") is a useful and perfectly valid form of data in its own right.
@@ -80,7 +80,7 @@
 		<para>
 			As a consequence, algorithms and primitives that operate on <link id="tuples"/> <em>algorithmically</em> need to use a distinct representation for nil that has no ambiguity.
 			This representation is <code><TUPLE_NIL/>()</code> which simply expands to nothing.
-			This model always treats <code>()</code> as a unary <link id="tuple"/>, and <code><TUPLE_REST/>(())</code> expands to nothing.
+			This model always treats <code>()</code> as a unary <link id="tuple"/>, and <code><TUPLE_TAIL/>(())</code> expands to nothing.
 		</para>
 		<para>
 			Note that this issue arises only with algorithms and primitives that operate on <link id="tuples"/> algorithmically, and <link id="tuples"/> can only be operated on algorithmically in C99.

@@ -112,12 +112,12 @@
 	<derivative id="LIST_ITEM_" lang="C99"/>
 </macro>
 
-<macro id="LIST_FIRST" type="indirect" group="first">
+<macro id="LIST_HEAD" type="indirect" group="head">
 	<abstract>
-		The <LIST_FIRST/> macro extracts the first element from a <link id="list"/>.
+		The <LIST_HEAD/> macro extracts the first element from a <link id="list"/>.
 	</abstract>
 	<usage>
-		<syntax><LIST_FIRST/>(list)</syntax>
+		<syntax><LIST_HEAD/>(list)</syntax>
 		<param id="list">
 			The <link id="list"/> whose first element is to be extracted.
 		</param>
@@ -125,24 +125,24 @@
 	<para>
 		This macro expands to the first element contained in <var>list</var>.
 	</para>
-	<x-reference id="LIST_REST"/>
+	<x-reference id="LIST_TAIL"/>
 	<listing>
 		#include <chaos-preprocessor-list-core.h/>
 		
 		#define DATA() (a, (b, (c, ...)))
 		
-		<LIST_FIRST/>(DATA()) // a
+		<LIST_HEAD/>(DATA()) // a
 	</listing>
-	<derivative id="LIST_FIRST_ID"/>
-	<derivative id="LIST_FIRST_" lang="C99"/>
+	<derivative id="LIST_HEAD_ID"/>
+	<derivative id="LIST_HEAD_" lang="C99"/>
 </macro>
 
-<macro id="LIST_REST" type="indirect" group="rest">
+<macro id="LIST_TAIL" type="indirect" group="tail">
 	<abstract>
-		The <LIST_REST/> macro removes the first element from a <link id="list"/>.
+		The <LIST_TAIL/> macro removes the first element from a <link id="list"/>.
 	</abstract>
 	<usage>
-		<syntax><LIST_REST/>(list)</syntax>
+		<syntax><LIST_TAIL/>(list)</syntax>
 		<param id="list">
 			The <link id="list"/> whose first element is to be removed.
 		</param>
@@ -150,16 +150,16 @@
 	<para>
 		This macro expands to a <link id="list"/> containing all of the elements of <var>list</var> except the first.
 	</para>
-	<x-reference id="LIST_FIRST"/>
+	<x-reference id="LIST_HEAD"/>
 	<listing>
 		#include <chaos-preprocessor-list-core.h/>
 		
 		#define DATA() (a, (b, (c, ...)))
 		
-		<LIST_REST/>(DATA()) // (b, (c, ...))
+		<LIST_TAIL/>(DATA()) // (b, (c, ...))
 	</listing>
-	<derivative id="LIST_REST_ID"/>
-	<derivative id="LIST_REST_" lang="C99"/>
+	<derivative id="LIST_TAIL_ID"/>
+	<derivative id="LIST_TAIL_" lang="C99"/>
 </macro>
 
 <macro id="LIST_IS_CONS" group="is-cons">

@@ -122,21 +122,21 @@
 		    (2, ( \
 		        <IIF/>( \
 		            <NOT_EQUAL/>( \
-		                value, <LIST_FIRST/>(list) \
+		                value, <LIST_HEAD/>(list) \
 		            ) \
 		        )( \
 		            <LIST_CONS/>( \
-		                result, <LIST_FIRST/>(list) \
+		                result, <LIST_HEAD/>(list) \
 		            ), \
 		            result \
 		        ), \
-		        <LIST_REST/>(list) \
+		        <LIST_TAIL/>(list) \
 		    )) \
 		    /**/
 		
 		#define REMOVE_ALL(value, list) \
 		    <STRIP/>(<REVERSE/>( \
-		        (<LIST/>) <ARRAY_FIRST/>( \
+		        (<LIST/>) <ARRAY_HEAD/>( \
 		            <EXPR/>(<WHILE_AUX/>( \
 		                PRED <AS_ARGS/>(3), \
 		                OP <AS_ARGS/>(3), \

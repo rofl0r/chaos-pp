@@ -149,12 +149,12 @@
 	<derivative id="SEQ_ITEM_" lang="C99"/>
 </macro>
 
-<macro id="SEQ_FIRST" type="indirect" group="first">
+<macro id="SEQ_HEAD" type="indirect" group="head">
 	<abstract>
-		The <SEQ_FIRST/> macro extracts the first element from a <link id="sequence"/>.
+		The <SEQ_HEAD/> macro extracts the first element from a <link id="sequence"/>.
 	</abstract>
 	<usage>
-		<syntax><SEQ_FIRST/>(seq)</syntax>
+		<syntax><SEQ_HEAD/>(seq)</syntax>
 		<param id="seq">
 			The <link id="sequence"/> whose first element is to be extracted.
 		</param>
@@ -162,29 +162,29 @@
 	<para>
 		This macro expands to the first element contained in <var>seq</var>.
 	</para>
-	<x-reference id="SEQ_REST"/>
+	<x-reference id="SEQ_TAIL"/>
 	<listing>
 		#include <chaos-preprocessor-config.h/>
 		#include <chaos-preprocessor-seq-core.h/>
 		
-		<SEQ_FIRST/>((1)(2)(3)) // 1
+		<SEQ_HEAD/>((1)(2)(3)) // 1
 		
 		#if <VARIADICS/>
 		
-		<SEQ_FIRST/>((a, b)(c, d)(e, f)) // a, b
+		<SEQ_HEAD/>((a, b)(c, d)(e, f)) // a, b
 		
 		#endif
 	</listing>
-	<derivative id="SEQ_FIRST_ID"/>
-	<derivative id="SEQ_FIRST_" lang="C99"/>
+	<derivative id="SEQ_HEAD_ID"/>
+	<derivative id="SEQ_HEAD_" lang="C99"/>
 </macro>
 
-<macro id="SEQ_REST" type="indirect" group="rest">
+<macro id="SEQ_TAIL" type="indirect" group="tail">
 	<abstract>
-		The <SEQ_REST/> macro removes the first element from a <link id="sequence"/>.
+		The <SEQ_TAIL/> macro removes the first element from a <link id="sequence"/>.
 	</abstract>
 	<usage>
-		<syntax><SEQ_REST/>(seq)</syntax>
+		<syntax><SEQ_TAIL/>(seq)</syntax>
 		<param id="seq">
 			The <link id="sequence"/> whose first element is to be removed.
 		</param>
@@ -192,21 +192,21 @@
 	<para>
 		This macro expands to a <link id="sequence"/> containing all of the elements of <var>seq</var> except the first.
 	</para>
-	<x-reference id="SEQ_FIRST"/>
+	<x-reference id="SEQ_HEAD"/>
 	<listing>
 		#include <chaos-preprocessor-config.h/>
 		#include <chaos-preprocessor-seq-core.h/>
 		
-		<SEQ_REST/>((a)(b)(c)) // (b)(c)
+		<SEQ_TAIL/>((a)(b)(c)) // (b)(c)
 		
 		#if <VARIADICS/>
 		
-		<SEQ_REST/>((a, b)(c)(d, e, f)) // (c)(d, e, f)
+		<SEQ_TAIL/>((a, b)(c)(d, e, f)) // (c)(d, e, f)
 		
 		#endif
 	</listing>
-	<derivative id="SEQ_REST_ID"/>
-	<derivative id="SEQ_REST_" lang="C99"/>
+	<derivative id="SEQ_TAIL_ID"/>
+	<derivative id="SEQ_TAIL_" lang="C99"/>
 </macro>
 
 <macro id="SEQ_IS_CONS" group="is-cons">

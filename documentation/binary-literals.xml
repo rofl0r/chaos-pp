@@ -217,10 +217,10 @@
 				    <IIF/> _(<STRING_IS_CONS/>(string))( \
 				        <EXPR_S/> _(s)(BINARY_INDIRECT _()( \
 				            <OBSTRUCT/> _(), <NEXT/>(s), \
-				            <STRING_REST/> _(string), \
+				            <STRING_TAIL/> _(string), \
 				            <ARBITRARY_ADD/> _( \
 				                <ARBITRARY_MUL/> _(x, (2)), \
-				                (<STRING_FIRST/> _(string)) \
+				                (<STRING_HEAD/> _(string)) \
 				            ) \
 				        )), \
 				        <ARBITRARY_DEMOTE/> _(x) \
@@ -261,10 +261,10 @@
 				#define PRED(s, string, x) <STRING_IS_CONS/>(string)
 				#define OP(s, string, x) \
 				    (2, ( \
-				        <STRING_REST/>(string), \
+				        <STRING_TAIL/>(string), \
 				        <ARBITRARY_ADD/>( \
 				            <ARBITRARY_MUL/>(x, (2)), \
-				            (<STRING_FIRST/>(string)) \
+				            (<STRING_HEAD/>(string)) \
 				        ) \
 				    )) \
 				    /**/
@@ -428,7 +428,7 @@
 				#define EXPANDER_abc (a b c)
 				#define EXPANDER_xyz (x y z)
 				
-				XS_FIRST(abc xyz) // a
+				XS_HEAD(abc xyz) // a
 				
 				<CAST/>(
 				    <STRING/>, (XS) abc xyz \
@@ -468,8 +468,8 @@
 				#define XS_TAG(tag) tag
 				#define XS_NIL() <STRING_NIL/>()
 				#define XS_CONS(xs, x) x xs
-				#define XS_FIRST(xs) <STRING_FIRST/>(EXPANDER(xs))
-				#define XS_REST(xs) <STRING_REST/>(EXPANDER(xs))
+				#define XS_HEAD(xs) <STRING_HEAD/>(EXPANDER(xs))
+				#define XS_TAIL(xs) <STRING_TAIL/>(EXPANDER(xs))
 				#define XS_ITEM(x) x
 				#define XS_IS_CONS(xs) <COMPL/>(XS_IS_NIL(xs))
 				#define XS_IS_NIL(xs) <IS_NULLARY/>(xs())

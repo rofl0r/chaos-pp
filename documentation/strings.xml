@@ -24,10 +24,10 @@
 			Note that it <em>is</em> safe to use the core <link id="string"/> operations defined in <chaos-preprocessor-string-core.h/> with invalid <link id="strings"/> provided that the invalid element is never the first element of the <link id="string"/>.
 			For example,
 			<snippet>
-				<STRING_FIRST/>(a xyz b) // a
-				<STRING_REST/>(a xyz b)  // xyz b
+				<STRING_HEAD/>(a xyz b) // a
+				<STRING_TAIL/>(a xyz b)  // xyz b
 				
-				<STRING_FIRST/>(xyz b)   // invalid
+				<STRING_HEAD/>(xyz b)   // invalid
 			</snippet>
 			This allowance makes it possible to reuse the <link id="string"/> data type in the creation of, for example, and extensible string data type.
 			However, such use requires extreme care.

@@ -151,7 +151,7 @@
 	</section>
 	<section id="Library Support">
 		<para>
-			In the infinite <link id="list"/> example, notice the use of the custom <code>HEAD</code> and <code>TAIL</code> macros instead of the <LIST_FIRST/> and <LIST_REST/> library primitives.
+			In the infinite <link id="list"/> example, notice the use of the custom <code>HEAD</code> and <code>TAIL</code> macros instead of the <LIST_HEAD/> and <LIST_TAIL/> library primitives.
 			This replication is purposeful.
 			Except in a very few situations, the library currently is not designed to handle user input that contains <link id="active arguments"/> that invoke library primitives.
 			Therefore, <link id="active arguments"/>, unless directly constructed by library primitives, should never be passed to library primitives.

@@ -116,12 +116,12 @@
 	<derivative id="ARRAY_ITEM_" lang="C99"/>
 </macro>
 
-<macro id="ARRAY_FIRST" type="indirect" group="first">
+<macro id="ARRAY_HEAD" type="indirect" group="head">
 	<abstract>
-		The <ARRAY_FIRST/> macro extracts the first element from an <link id="array"/>.
+		The <ARRAY_HEAD/> macro extracts the first element from an <link id="array"/>.
 	</abstract>
 	<usage>
-		<syntax><ARRAY_FIRST/>(array)</syntax>
+		<syntax><ARRAY_HEAD/>(array)</syntax>
 		<param id="array">
 			The <link id="array"/> whose first element is to be extracted.
 		</param>
@@ -133,24 +133,24 @@
 		In C and C++, <var>array</var> must contain less than <LIMIT_TUPLE/> elements.
 		In C99, there is no such restriction.
 	</para>
-	<x-reference id="ARRAY_REST"/>
+	<x-reference id="ARRAY_TAIL"/>
 	<listing>
 		#include <chaos-preprocessor-array-core.h/>
 		
 		#define DATA() (3, (a, b, c))
 		
-		<ARRAY_FIRST/>(DATA()) // a
+		<ARRAY_HEAD/>(DATA()) // a
 	</listing>
-	<derivative id="ARRAY_FIRST_ID"/>
-	<derivative id="ARRAY_FIRST_" lang="C99"/>
+	<derivative id="ARRAY_HEAD_ID"/>
+	<derivative id="ARRAY_HEAD_" lang="C99"/>
 </macro>
 
-<macro id="ARRAY_REST" type="indirect" group="rest">
+<macro id="ARRAY_TAIL" type="indirect" group="tail">
 	<abstract>
-		The <ARRAY_REST/> macro removes the first element from an <link id="array"/>.
+		The <ARRAY_TAIL/> macro removes the first element from an <link id="array"/>.
 	</abstract>
 	<usage>
-		<syntax><ARRAY_REST/>(array)</syntax>
+		<syntax><ARRAY_TAIL/>(array)</syntax>
 		<param id="array">
 			The <link id="array"/> whose first element is to be removed.
 		</param>
@@ -162,16 +162,16 @@
 		In C and C++, <var>array</var> must contain less than <LIMIT_TUPLE/> elements.
 		In C99, there is no such restriction.
 	</para>
-	<x-reference id="ARRAY_FIRST"/>
+	<x-reference id="ARRAY_HEAD"/>
 	<listing>
 		#include <chaos-preprocessor-array-core.h/>
 		
 		#define DATA() (3, (a, b, c))
 		
-		<ARRAY_REST/>(DATA()) // (2, (b, c))
+		<ARRAY_TAIL/>(DATA()) // (2, (b, c))
 	</listing>
-	<derivative id="ARRAY_REST_ID"/>
-	<derivative id="ARRAY_REST_" lang="C99"/>
+	<derivative id="ARRAY_TAIL_ID"/>
+	<derivative id="ARRAY_TAIL_" lang="C99"/>
 </macro>
 
 <macro id="ARRAY_IS_CONS" group="is-cons">

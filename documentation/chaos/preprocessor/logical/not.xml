@@ -21,7 +21,7 @@
 	</para>
 	<para>
 		This macro performs a Boolean conversion on its operand.
-		If this conversion is undesireable, <COMPL/> may be used instead.
+		If this conversion is undesirable, <COMPL/> may be used instead.
 	</para>
 	<listing>
 		#include <chaos-preprocessor-logical-not.h/>

@@ -24,8 +24,8 @@
 		Otherwise, it expands to <code>0</code>.
 	</para>
 	<para>
-		This macro does <em>not</em> perform a Boolean conversion on its operands.
-		If this conversion is desireable, <NOR/> may be used instead.
+		This macro does <em>not</em> perform Boolean conversions on its operands.
+		If this conversion is desirable, <NOR/> may be used instead.
 	</para>
 	<para>
 		This macro is lazy.

@@ -25,7 +25,7 @@
 	</para>
 	<para>
 		This macro performs a Boolean conversion on each operand.
-		If this conversion is undesireable, <BITNOR/> may be used instead.
+		If this conversion is undesirable, <BITNOR/> may be used instead.
 	</para>
 	<para>
 		This macro is lazy.

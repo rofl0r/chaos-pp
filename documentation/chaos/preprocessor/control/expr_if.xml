@@ -34,7 +34,7 @@
 	</para>
 	<para>
 		This macro performs a Boolean conversion of <var>cond</var>.
-		If this conversion is not desireable, <EXPR_IIF/> may be used instead.
+		If this conversion is not desirable, <EXPR_IIF/> may be used instead.
 	</para>
 	<para>
 		This macro is lazy.

@@ -596,11 +596,17 @@
 					<binary-file name="first_n.gif"/>
 					<binary-file name="fold_left.gif"/>
 					<binary-file name="fold_left_aux.gif"/>
+					<binary-file name="fold_right.gif"/>
+					<binary-file name="fold_right_aux.gif"/>
 					<binary-file name="rest_n.gif"/>
 					<binary-file name="size.gif"/>
 					<binary-file name="to_list_alt.gif"/>
 					<binary-file name="to_seq_alt.gif"/>
 					<binary-file name="to_string_alt.gif"/>
+				</directory>
+				<directory name="efficiency">
+					<binary-file name="fold_left.gif"/>
+					<binary-file name="fold_left_aux.gif"/>
 				</directory>
 				<header name="batch.h"/>
 				<header name="concat.h"/>
@@ -611,6 +617,8 @@
 				<header name="first_n.h"/>
 				<header name="fold_left.h"/>
 				<header name="fold_left_aux.h"/>
+				<header name="fold_right.h"/>
+				<header name="fold_right_aux.h"/>
 				<header name="rest_n.h"/>
 				<header name="rem.h"/>
 				<header name="reverse.h"/>

@@ -102,6 +102,20 @@
 	<derivative id="LIMIT_EXPR_" lang="C99"/>
 </macro>
 
+<macro id="LIMIT_HIGHER_ORDER" type="object">
+	<abstract>
+		The <LIMIT_HIGHER_ORDER/> macro expands to the maximum number of <link id="higher-order entry points"/> supported by the library.
+	</abstract>
+	<usage lang="C99">
+		<syntax><LIMIT_HIGHER_ORDER/></syntax>
+	</usage>
+	<para>
+		This macro currently expands to <code>8</code>.
+	</para>
+	<derivative id="LIMIT_HIGHER_ORDER_ID" lang="C99"/>
+	<derivative id="LIMIT_HIGHER_ORDER_" lang="C99"/>
+</macro>
+
 <macro id="LIMIT_ITERATION" type="object">
 	<abstract>
 		The <LIMIT_ITERATION/> macro expands to the maximum number of iterations per dimension supported by the <link id="file-iteration"/> mechanism and the maximum number of iterations supported by the <link id="local-iteration"/> mechanism.

@@ -79,8 +79,8 @@ a ## b           // C and C++
 		<param id="b">The right operand of the concatenation.</param>
 	</usage>
 	<para>
-		This macro is identical to <CAT/> except that it does not allow
-		its arguments to expand prior to concatenation.
+		This macro identically to <CAT/> except that it <em>does not</em>
+		allow its arguments to expand prior to concatenation.
 	</para>
 <listing>
 #include <cat.h/>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lookup>
+
+<header src="cat">
+	<macro id="CAT"/>
+	<macro id="CAT_"/>
+	<macro id="CAT_ID"/>
+	<macro id="CAT_SHADOW"/>
+	<macro id="PRIMITIVE_CAT"/>
+	<macro id="PRIMITIVE_CAT_"/>
+	<macro id="PRIMITIVE_CAT_ID"/>
+	<macro id="PRIMITIVE_CAT_SHADOW"/>
+</header>
+
+<header src="lambda/ops">
+	<macro id="LAMBDA"/>
+</header>
+
+<header src="stringize">
+	<macro id="STRINGIZE"/>
+	<macro id="STRINGIZE_"/>
+	<macro id="STRINGIZE_ID"/>
+	<macro id="STRINGIZE_SHADOW"/>
+	<macro id="PRIMITIVE_STRINGIZE"/>
+	<macro id="PRIMITIVE_STRINGIZE_"/>
+	<macro id="PRIMITIVE_STRINGIZE_ID"/>
+	<macro id="PRIMITIVE_STRINGIZE_SHADOW"/>
+</header>
+
+</lookup>

@@ -104,7 +104,7 @@
 
 <macro id="LIMIT_HIGHER_ORDER" type="object">
 	<abstract>
-		The <LIMIT_HIGHER_ORDER/> macro expands to the maximum number of <link id="higher-order entry points"/> supported by the library.
+		The <LIMIT_HIGHER_ORDER/> macro expands to the maximum number of <link id="higher-order entry points"/> supported by the <HIGHER_ORDER/>.
 	</abstract>
 	<usage lang="C99">
 		<syntax><LIMIT_HIGHER_ORDER/></syntax>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/recursion/higher_order.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro used to simplify the invocations of <link id="higher-order constructs"/>.
+</overview>
+
+<macro id="HIGHER_ORDER">
+	<abstract>
+		The <HIGHER_ORDER/> macro is used to simplify the invocations of <link id="higher-order constructs"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><HIGHER_ORDER/>()</syntax>
+	</usage>
+	<usage lang="C99">
+		<syntax><HIGHER_ORDER/>(e)(p, ...)</syntax>
+		<param id="e">
+			The current <link id="higher-order entry point"/>.
+		</param>
+		<param id="p">
+			This argument must be empty (i.e. a placemarker).
+		</param>
+		<param id="..." optional="1">
+			The expression to be evaluated in the context of <var>e</var>.
+		</param>
+	</usage>
+	<para>
+		This macro is overloaded.
+		The first form of this macro, <code><HIGHER_ORDER/>()</code>, expands to the current <link id="higher-order entry point"/>.
+		The second form expands to <code>__VA_ARGS__</code>.
+	</para>
+	<para>
+		Neither <var>e</var> or <code>__VA_ARGS__</code> is allowed to expand on input.
+		In the case of <code>__VA_ARGS__</code>, this pulls the expansion into the context of the macro name resulting from <code><HIGHER_ORDER/>(e)</code>.
+		Each <var>e</var>, which are integers ranging from <code>1</code> to <LIMIT_HIGHER_ORDER/>, yields a unique macro name and, therefore, a unique context.
+	</para>
+	<para>
+		The purpose of this macro is define a small set of entry points that clean up the invocation syntax of <link id="higher-order constructs"/>.
+		These invocations usually follow one of the following patterns:
+		<snippet>
+			<EXPR/>(MACRO(...))
+		</snippet>
+		<snippet>
+			<EXPR_S/>(s)(MACRO_S(s, ...))
+		</snippet>
+		Given a theoretical <link id="higher-order construct"/> <code>MACRO</code>, the <HIGHER_ORDER/> macro can be used to easily map the complex (and more open-ended) invocation syntax to a much simpler one.
+		For example,
+		<snippet>
+			#define AUTO_MACRO <CAT/>(AUTO_MACRO_, <HIGHER_ORDER/>())
+			
+			#define AUTO_MACRO_1(...) \
+			    <HIGHER_ORDER/>(1)(, <EXPR/>(MACRO(__VA_ARGS__))) \
+			    /**/
+			#define AUTO_MACRO_2(...) \
+			    <HIGHER_ORDER/>(2)(, <EXPR/>(MACRO(__VA_ARGS__))) \
+			    /**/
+			
+			/* ... */
+			
+			#define AUTO_MACRO_8(...) \
+			    <HIGHER_ORDER/>(8)(, <EXPR/>(MACRO(__VA_ARGS__))) \
+			    /**/
+		</snippet>
+		This code maps the invocation syntax from <code><EXPR/>(MACRO(...))</code> to <code>AUTO_MACRO(...)</code>.
+	</para>
+	<para>
+		The library defines only <LIMIT_HIGHER_ORDER/> <link id="higher-order entry points"/>--currently <code>8</code>.
+		The <link id="recursion backend"/> theoretically allows <LIMIT_EXPR/> entry points.
+		However, while many <link id="recursion steps"/> may be used, it is unusual to use more the a very small number of entry points.
+	</para>
+	<para>
+		In order to make a standalone expression such as <code>MACRO(...)</code> operate recursively, <code>MACRO</code> must be an object-like macro that expands to some other macro name that is not currently disabled.
+		That implies, that for eight entry points, eight unique macros are required (such as the <code>AUTO_MACRO_1</code> through <code>AUTO_MACRO_8</code> macros above).
+		This is why the library only supports <LIMIT_HIGHER_ORDER/> <link id="higher-order entry points"/>--more are rarely needed and increasing their number increases macro replication across all constructs that use it.
+	</para>
+	<para>
+		If such a mapping is used, a <link id="higher-order construct"/> should provide <LIMIT_HIGHER_ORDER/> <link id="higher-order entry points"/> because the entry points may be shared across many constructs.
+		Thus, for example, <code>AUTO_MACRO</code> may be invoked only for the first time and still expand to something other than <code>AUTO_MACRO_1</code> because an invoking macro may have already used the first <link id="higher-order entry point"/>.
+		Because of this, a mapping implementation might want to trigger a compile-time assertion if <LIMIT_HIGHER_ORDER/> happens to increase to a number greater than the number of entry-point macros.
+		For example,
+		<snippet>
+			#if <LIMIT_HIGHER_ORDER/> &gt; 8
+			    #error The AUTO_MACRO implementation needs to be extended.
+			#endif
+		</snippet>
+	</para>
+	<x-reference id="LIMIT_HIGHER_ORDER"/>
+	<listing>
+		#include <chaos-preprocessor-arithmetic-dec.h/>
+		#include <chaos-preprocessor-arithmetic-inc.h/>
+		#include <chaos-preprocessor-cat.h/>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-control-when.h/>
+		#include <chaos-preprocessor-punctuation-comma_if.h/>
+		#include <chaos-preprocessor-recursion-basic.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		#include <chaos-preprocessor-recursion-higher_order.h/>
+		
+		#define REP(count, macro, data) \
+		    REP_S(<STATE/>(), count, macro, data) \
+		    /**/
+		#define REP_S(s, count, macro, data) \
+		    REP_I(<OBSTRUCT/>(), <NEXT/>(s), count, macro, data) \
+		    /**/
+		#define REP_INDIRECT() REP_I
+		#define REP_I(_, s, count, macro, data) \
+		    <WHEN/> _(count)( \
+		        <EXPR_S/> _(s)(REP_INDIRECT _()( \
+		            <OBSTRUCT/> _(), <NEXT/>(s), \
+		            <DEC/>(count), macro, data \
+		        )) \
+		        macro _(s, <DEC/>(count), data) \
+		    ) \
+		    /**/
+		
+		#if <VARIADICS/>
+		
+		#if <LIMIT_HIGHER_ORDER/> &gt; 8
+		    #error The AUTO_REP implementation needs to be extended.
+		#endif
+		
+		#define AUTO_REP <CAT/>(AUTO_REP_, <HIGHER_ORDER/>())
+		
+		#define AUTO_REP_1(...) <HIGHER_ORDER/>(1)(, <EXPR/>(REP(__VA_ARGS__)))
+		#define AUTO_REP_2(...) <HIGHER_ORDER/>(2)(, <EXPR/>(REP(__VA_ARGS__)))
+		#define AUTO_REP_3(...) <HIGHER_ORDER/>(3)(, <EXPR/>(REP(__VA_ARGS__)))
+		#define AUTO_REP_4(...) <HIGHER_ORDER/>(4)(, <EXPR/>(REP(__VA_ARGS__)))
+		#define AUTO_REP_5(...) <HIGHER_ORDER/>(5)(, <EXPR/>(REP(__VA_ARGS__)))
+		#define AUTO_REP_6(...) <HIGHER_ORDER/>(6)(, <EXPR/>(REP(__VA_ARGS__)))
+		#define AUTO_REP_7(...) <HIGHER_ORDER/>(7)(, <EXPR/>(REP(__VA_ARGS__)))
+		#define AUTO_REP_8(...) <HIGHER_ORDER/>(8)(, <EXPR/>(REP(__VA_ARGS__)))
+		
+		#define TEXT(s, n, text) <COMMA_IF/>(n) text
+		#define TTP(s, n, id) \
+		    <COMMA_IF/>(n) \
+		    template&lt;AUTO_REP(<INC/>(n), TEXT, class)&gt; class id ## n \
+		    /**/
+		
+		AUTO_REP(3, TTP, T)
+		// template&lt;class&gt; class T0,
+		// template&lt;class, class&gt; class T1,
+		// template&lt;class, class, class&gt; class T2
+		
+		#endif
+	</listing>
+	<derivative id="HIGHER_ORDER_ID" lang="C99"/>
+	<derivative id="HIGHER_ORDER_" lang="C99"/>
+</macro>
+
+</header>

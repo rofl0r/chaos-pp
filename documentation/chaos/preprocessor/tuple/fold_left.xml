@@ -4,7 +4,7 @@
 	The <self/> header defines an algorithm that accumulates the elements of a <link id="tuple"/> from the first element to the last element.
 </overview>
 
-<macro id="TUPLE_FOLD_LEFT" type="indirect" group="accumulation">
+<macro id="TUPLE_FOLD_LEFT" type="indirect" group="left-accumulation">
 	<abstract>
 		The <TUPLE_FOLD_LEFT/> macro accumulates the elements of its second argument with the operation specified by its first argument.
 	</abstract>
@@ -66,6 +66,7 @@
 	<para>
 		This macro may not be used if <link id="bypass semantics"/> are in effect.
 	</para>
+	<x-reference id="TUPLE_FOLD_RIGHT"/>
 	<listing>
 		#include <chaos-preprocessor-config.h/>
 		#include <chaos-preprocessor-recursion-expr.h/>

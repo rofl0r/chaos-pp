@@ -4,7 +4,7 @@
 	The <self/> header defines an algorithm that accumulates the elements of a <link id="sequence"/> from the last element to the first element.
 </overview>
 
-<macro id="SEQ_FOLD_RIGHT_AUX" type="indirect" group="accumulation">
+<macro id="SEQ_FOLD_RIGHT_AUX" type="indirect" group="right-accumulation">
 	<abstract>
 		The <SEQ_FOLD_RIGHT_AUX/> macro accumulates the elements of its second argument with the operation specified by its first argument.
 	</abstract>
@@ -92,6 +92,7 @@
 	<para>
 		This macro may not be used if <link id="bypass semantics"/> are in effect.
 	</para>
+	<x-reference id="SEQ_FOLD_LEFT_AUX"/>
 	<derivative id="SEQ_FOLD_RIGHT_AUX_ID"/>
 	<derivative id="SEQ_FOLD_RIGHT_AUX_" lang="C99"/>
 	<derivative id="SEQ_FOLD_RIGHT_AUX_S">

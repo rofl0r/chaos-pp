@@ -4,7 +4,7 @@
 	The <self/> header defines an <link id="exponential"/> algorithm that accumulates the elements of a <link id="generic data structure"/> from the first element to the last element which can be <link id="parametrically resumed"/>.
 </overview>
 
-<macro id="FOLD_LEFT_AUX_X" type="indirect" group="accumulation">
+<macro id="FOLD_LEFT_AUX_X" type="indirect" group="left-accumulation">
 	<abstract>
 		The <FOLD_LEFT_AUX_X/> macro accumulates the elements of its third argument with the operation specified by its second argument.
 	</abstract>
@@ -92,6 +92,7 @@
 	<para>
 		This macro may not be used if <link id="bypass semantics"/> are in effect.
 	</para>
+	<x-reference id="FOLD_RIGHT_AUX_X"/>
 	<derivative id="FOLD_LEFT_AUX_X_ID"/>
 	<derivative id="FOLD_LEFT_AUX_X_" lang="C99"/>
 	<derivative id="FOLD_LEFT_AUX_X_S">

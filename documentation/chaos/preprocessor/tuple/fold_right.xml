@@ -4,7 +4,7 @@
 	The <self/> header defines an algorithm that accumulates the elements of a <link id="tuple"/> from the last element to the first element.
 </overview>
 
-<macro id="TUPLE_FOLD_RIGHT" type="indirect" group="accumulation">
+<macro id="TUPLE_FOLD_RIGHT" type="indirect" group="right-accumulation">
 	<abstract>
 		The <TUPLE_FOLD_RIGHT/> macro accumulates the elements of its second argument with the operation specified by its first argument.
 	</abstract>
@@ -62,6 +62,7 @@
 	<para>
 		This macro may not be used if <link id="bypass semantics"/> are in effect.
 	</para>
+	<x-reference id="TUPLE_FOLD_LEFT"/>
 	<derivative id="TUPLE_FOLD_RIGHT_ID" lang="C99"/>
 	<derivative id="TUPLE_FOLD_RIGHT_" lang="C99"/>
 	<derivative id="TUPLE_FOLD_RIGHT_S">

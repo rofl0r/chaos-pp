@@ -14,11 +14,13 @@
 #
 # include <chaos/preprocessor/arbitrary/add.h>
 # include <chaos/preprocessor/arbitrary/bool.h>
+# include <chaos/preprocessor/arbitrary/dec.h>
 # include <chaos/preprocessor/arbitrary/demote.h>
 # include <chaos/preprocessor/arbitrary/div.h>
 # include <chaos/preprocessor/arbitrary/equal.h>
 # include <chaos/preprocessor/arbitrary/greater.h>
 # include <chaos/preprocessor/arbitrary/greater_equal.h>
+# include <chaos/preprocessor/arbitrary/inc.h>
 # include <chaos/preprocessor/arbitrary/less.h>
 # include <chaos/preprocessor/arbitrary/less_equal.h>
 # include <chaos/preprocessor/arbitrary/literal.h>

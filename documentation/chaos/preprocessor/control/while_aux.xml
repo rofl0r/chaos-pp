@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/control/while_aux.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a looping construct.
+</overview>
+
+<macro id="WHILE_AUX" type="indirect" group="looping">
+	<abstract>
+		The <WHILE_AUX/> macro iterates a state with a user-specified operation while a user-specified predicate expands to <code>1</code>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><EXPR/>(<WHILE_AUX/>(pred, op, data, ...))</syntax>
+		<param id="pred">
+			<para>
+				The predicate that determines whether the loop should continue.
+				This predicate must be either a <link id="λ expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				<snippet>
+					pred(s, data<sup>†</sup>, state<sup>‡</sup>)
+				</snippet>
+			</para>
+			<para>
+				<sup>†</sup>
+				If the auxiliary data is parenthetic, the <var>data</var> pseudo-parameter must be the number of parameters that corresponds to the number of sub-elements in the auxiliary data.
+				Otherwise, it must be a single parameter.
+			</para>
+			<para>
+				<sup>‡</sup>
+				The <var>state</var> pseudo-parameter must be either <code>...</code> or the number of parameters that corresponds to the number of arguments in the initial state, <code>__VA_ARGS__</code>.
+			</para>
+		</param>
+		<param id="op">
+			<para>
+				The operation used to iterate the state.
+				This operation must be either a <link id="λ expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				<snippet>
+					op(s, data<sup>†</sup>, state<sup>‡</sup>)
+				</snippet>
+			</para>
+			<para>
+				<sup>†</sup>
+				If the auxiliary data is parenthetic, the <var>data</var> pseudo-parameter must be the number of parameters that corresponds to the number of sub-elements in the auxiliary data.
+				Otherwise, it must be a single parameter.
+			</para>
+			<para>
+				<sup>‡</sup>
+				The <var>state</var> pseudo-parameter must be either <code>...</code> or the number of parameters that corresponds to the number of arguments in the initial state, <code>__VA_ARGS__</code>.
+			</para>
+		</param>
+		<param id="data" optional="1">
+			Auxiliary data to be passed through the algorithm to the predicate and the operation.
+			This argument may be either a parenthetic expression of any arity or a non-parenthetic expression.
+		</param>
+		<param id="..." optional="1">
+			The initial state of the loop.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><EXPR/>(<WHILE_AUX/>(pred, op, data, state))</syntax>
+		<param id="pred">
+			The predicate that determines whether the loop should continue.
+			This predicate must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			<snippet>
+				pred(s, data, state)
+			</snippet>
+		</param>
+		<param id="op">
+			The operation used to iterate the state.
+			This operation must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			<snippet>
+				op(s, data, state)
+			</snippet>
+		</param>
+		<param id="data">
+			Auxiliary data to be passed through the algorithm to the predicate and the operation.
+			This argument may be either a unary parenthetic expression or a non-parenthetic expression.
+		</param>
+		<param id="state">
+			The initial state of the loop.
+		</param>
+	</usage>
+	<para>
+		The <WHILE_AUX/> macro itself expands to a <link id="deferred expression"/> in terms of <code><NEXT/>(s)</code>.
+		This <link id="deferred expression"/>, when invoked by <EXPR/>, expands to the result of repeatedly applying the operation to the state until the predicate expands to <code>0</code>.
+	</para>
+	<para>
+		Both the predicate and the operation are invoked with the current <link id="recursion state"/> (<var>s</var>), the auxiliary data (<var>data</var>), and the current state (<var>state</var> or <code>__VA_ARGS__</code>).
+		The predicate must expand to either <code>0</code>, <code>1</code>, or a <link id="deferred expression"/> in terms of <code><NEXT/>(s)</code> that expands to either <code>0</code> or <code>1</code>.
+		If it expands to <code>0</code>, the loop terminates, and the algorithm expands to the current state.
+		Otherwise, the operation is applied to the current state to yield a new state or a <link id="deferred expression"/> in terms of <code><NEXT/>(s)</code> that yields a new state, and the loop continues.
+	</para>
+	<para>
+		The auxiliary data, <var>data</var>, is treated differently depending on whether it is parenthetic.
+		If <var>data</var> is non-parenthetic, it is passed directly to the predicate and the operation as a single argument.
+		In C99, if <var>data</var> is a parenthetic expression of any arity, its sub-elements are passed to the predicate and the operation as individual arguments.
+		In C (prior to C99) and C++, if <var>data</var> is a unary parenthetic expression, its sub-element is passed to the predicate and the operation as a single argument (a parenthetic expression of any other arity is prohibited).
+	</para>
+	<para>
+		Ignoring the complexity of <var>pred</var> and the <var>op</var> (which are invoked, at most, once per loop iteration), each loop iteration requires only a single <link id="recursion step"/>.
+	</para>
+	<para>
+		This macro deduces the current <link id="recursion state"/> and invokes <WHILE_AUX_S/>.
+		If the current <link id="recursion state"/> is already known, direct use of <WHILE_AUX_S/> is more efficient.
+	</para>
+	<para>
+		This macro may not be used if <link id="bypass semantics"/> are in effect.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-algorithm-reverse.h/>
+		#include <chaos-preprocessor-array-spec.h/>
+		#include <chaos-preprocessor-comparison-not_equal.h/>
+		#include <chaos-preprocessor-control-iif.h/>
+		#include <chaos-preprocessor-control-while_aux.h/>
+		#include <chaos-preprocessor-facilities-as_args.h/>
+		#include <chaos-preprocessor-generics-strip.h/>
+		#include <chaos-preprocessor-list-spec.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		
+		#define PRED(s, value, result, list) \
+		    <LIST_IS_CONS/>(list) \
+		    /**/
+		#define OP(s, value, result, list) \
+		    (2, ( \
+		        <IIF/>( \
+		            <NOT_EQUAL/>( \
+		                value, <LIST_FIRST/>(list) \
+		            ) \
+		        )( \
+		            <LIST_CONS/>( \
+		                result, <LIST_FIRST/>(list) \
+		            ), \
+		            result \
+		        ), \
+		        <LIST_REST/>(list) \
+		    )) \
+		    /**/
+		
+		#define REMOVE_ALL(value, list) \
+		    <STRIP/>(<REVERSE/>( \
+		        (<LIST/>) <ARRAY_FIRST/>( \
+		            <EXPR/>(<WHILE_AUX/>( \
+		                PRED <AS_ARGS/>(3), \
+		                OP <AS_ARGS/>(3), \
+		                value, (2, (<LIST_NIL/>(), list)) \
+		            )) \
+		        ) \
+		    )) \
+		    /**/
+		
+		REMOVE_ALL(3, (3, (1, (2, (3, (1, (3, ...)))))))
+		// (1, (2, (1, ...)))
+	</listing>
+	<derivative id="WHILE_AUX_ID"/>
+	<derivative id="WHILE_AUX_" lang="C99"/>
+	<derivative id="WHILE_AUX_S">
+		<usage lang="C99">
+			<syntax><EXPR_S/>(s)(<WHILE_AUX_S/>(s, pred, op, data, ...))</syntax>
+		</usage>
+		<usage lang="C/C++">
+			<syntax><EXPR_S/>(s)(<WHILE_AUX_S/>(s, pred, op, data, state))</syntax>
+		</usage>
+		<derivative id="WHILE_AUX_S_ID"/>
+		<derivative id="WHILE_AUX_S_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

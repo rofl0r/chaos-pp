@@ -54,19 +54,19 @@
     /**/
 # define CHAOS_IP_FOLD_LEFT_PLANAR_I(s, v, op, g, ps) \
     CHAOS_IP_FOLD_LEFT_PLANAR_1( \
-        s, s, op, CHAOS_PP_IIF(v)(CHAOS_PP_INVOKE_S, op), CHAOS_PP_IIF(v)(pred CHAOS_PP_COMMA, CHAOS_PP_EMPTY), CHAOS_PP_TYPEOF(g), g \
+        s, s, CHAOS_PP_IIF(v)(CHAOS_PP_INVOKE_S, op), CHAOS_PP_IIF(v)(op CHAOS_PP_COMMA, CHAOS_PP_EMPTY), CHAOS_PP_TYPEOF(g), g \
     ) \
     CHAOS_PP_UNPACK CHAOS_PP_OBSTRUCT() ps CHAOS_IP_FOLD_LEFT_PLANAR_2(CHAOS_PP_OBSTRUCT(), s, g) \
     /**/
 # define CHAOS_IP_FOLD_LEFT_PLANAR_INDIRECT(n) CHAOS_IP_FOLD_LEFT_PLANAR_ ## n
-# define CHAOS_IP_FOLD_LEFT_PLANAR_1(s, o, op, _a, _b, type, g) \
+# define CHAOS_IP_FOLD_LEFT_PLANAR_1(s, o, _a, _b, type, g) \
     CHAOS_PP_IIF(CHAOS_PP_IS_CONS(g))( \
-        CHAOS_IP_FOLD_LEFT_PLANAR_1_I, CHAOS_PP_TUPLE_EAT(8) \
-    )(CHAOS_PP_OBSTRUCT(), s, o, op, _a, _b, type, g) \
+        CHAOS_IP_FOLD_LEFT_PLANAR_1_I, CHAOS_PP_TUPLE_EAT(7) \
+    )(CHAOS_PP_OBSTRUCT(), s, o, _a, _b, type, g) \
     /**/
-# define CHAOS_IP_FOLD_LEFT_PLANAR_1_I(_, s, o, op, _a, _b, type, g) \
+# define CHAOS_IP_FOLD_LEFT_PLANAR_1_I(_, s, o, _a, _b, type, g) \
     CHAOS_PP_EXPR_S(s) _(CHAOS_IP_FOLD_LEFT_PLANAR_INDIRECT _(1)( \
-        CHAOS_PP_NEXT(s), o, op, _a, _b, type, CHAOS_PP_REST(g) \
+        CHAOS_PP_NEXT(s), o, _a, _b, type, CHAOS_PP_REST(g) \
     )) \
     CHAOS_PP_EXPR_S CHAOS_PP_OBSTRUCT()(o)(_a CHAOS_PP_OBSTRUCT()(o, _b() CHAOS_PP_ITEM(type, CHAOS_PP_FIRST(g)), \
     /**/

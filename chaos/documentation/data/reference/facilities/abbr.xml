@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="facilities/abbr.hpp" root="../..">
+<synopsis>
+	The <self/> header defines a macro used to abbreviate the names of library primitives.
+</synopsis>
+
+<symbol id="ABBR">
+	<derivative id="ABBR_ID" buffer="false"/>
+	<derivative id="ABBR_" buffer="false"/>
+	<abstract>
+		The <ABBR/> macro prefixes an identifier with <code>CHAOS_PP_</code>.
+	</abstract>
+	<usage>
+		<syntax><ABBR/>(id)</syntax>
+		<param id="id">The identifier to be prefixed.</param>
+	</usage>
+	<para>
+		This macro is normally passed as an argument to another macro.
+		Within the replacement list of that other macro, the name of the formal parameter
+		to the macro becomes a local alias for <ABBR/> which can further be used to prefix identifiers.
+		<snippet><ABBR/>(CAT)(1, 2) // 12</snippet>
+	</para>
+<listing>
+#include <facilities-abbr.hpp/>
+#include <punctuation-comma_if.hpp/>
+#include <recursion-expr.hpp/>
+#include <repetition-repeat.hpp/>
+
+#define A(count) <EXPR/>(<REPEAT/>(count, B, ...))
+#define B(s, n, _) <COMMA_IF/>(n) class T ## n
+
+A(3) // class T0, class T1, class T2
+
+// -vs.-
+
+#define X(count) Y(count, <ABBR/>)
+#define Y(count, _) _(EXPR)(_(REPEAT)(count, Z, _))
+#define Z(s, n, _) _(COMMA_IF)(n) class T ## n
+
+X(3) // class T0, class T1, class T2
+</listing>
+</symbol>
+
+</header>

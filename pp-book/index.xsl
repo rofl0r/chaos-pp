@@ -11,6 +11,8 @@
 
 <xsl:variable name="root" select="'.'"/>
 
+<xsl:variable name="count-entries" select="true()"/>
+
 <xsl:template match="/library">
 	<HTML>
 		<HEAD>
@@ -41,8 +43,8 @@
 		</HEAD>
 		<BODY>
 			<xsl:choose>
-				<xsl:when test="false()">
-					<H4>Headers <SMALL>(<xsl:value-of select="count(header)"/>)</SMALL></H4>
+				<xsl:when test="$count-entries">
+					<H4>Headers <SMALL>(<xsl:value-of select="count(header)"/> entries)</SMALL></H4>
 				</xsl:when>
 				<xsl:otherwise>
 					<H4>Headers</H4>
@@ -70,8 +72,8 @@
 		</HEAD>
 		<BODY>
 			<xsl:choose>
-				<xsl:when test="false()">
-					<H4>Macros <SMALL>(<xsl:value-of select="count(macro[@type = 'PRIMARY'])"/>)</SMALL></H4>
+				<xsl:when test="$count-entries">
+					<H4>Macros <SMALL><A href="{$root}/master.html">(show derivatives)</A> (<xsl:value-of select="count(macro[@type = 'PRIMARY'])"/> entries)</SMALL></H4>
 				</xsl:when>
 				<xsl:otherwise>
 					<H4>Macros <SMALL><A href="{$root}/master.html">(show derivatives)</A></SMALL></H4>
@@ -106,8 +108,8 @@
 		</HEAD>
 		<BODY>
 			<xsl:choose>
-				<xsl:when test="false()">
-					<H4>Macros <SMALL>(<xsl:value-of select="count(macro)"/>)</SMALL></H4>
+				<xsl:when test="$count-entries">
+					<H4>Macros <SMALL><A href="{$root}/macros.html">(hide derivatives)</A> (<xsl:value-of select="count(macro)"/> entries)</SMALL></H4>
 				</xsl:when>
 				<xsl:otherwise>
 					<H4>Macros <SMALL><A href="{$root}/macros.html">(hide derivatives)</A></SMALL></H4>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/algorithm/auto/transform.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an algorithm that transforms the elements of a <link id="generic data structure"/> with a user-specified operation.
+</overview>
+
+<macro id="AUTO_TRANSFORM" type="object" group="transformation">
+	<abstract>
+		The <AUTO_TRANSFORM/> macro transforms each element of its second argument with the operation specified by its first argument.
+	</abstract>
+	<usage lang="C99">
+		<syntax><AUTO_TRANSFORM/>(op, g)</syntax>
+		<param id="op">
+			<para>
+				The operation to be used to transform each element of <var>g</var>.
+				This operation must be either a <link id="λ expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				<snippet>
+					op(s, elem<sup>†</sup>)
+				</snippet>
+			</para>
+			<para>
+				<sup>†</sup>
+				If the type of <var>g</var> is non-variadic, <var>elem</var> must be <code>...</code> or the number of parameters that corresponds to the number of sub-elements in each element of <var>g</var>.
+				Otherwise, <var>elem</var> must be <code>...</code> or a single parameter.
+			</para>
+		</param>
+		<param id="g">
+			The <link id="generic data structure"/> whose elements are to be transformed.
+		</param>
+	</usage>
+	<usage lang="C99">
+		<syntax><AUTO_TRANSFORM/>(op, g, ...)</syntax>
+		<param id="op">
+			<para>
+				The operation to be used to transform each element of <var>g</var>.
+				This operation must be either a <link id="λ expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				<snippet>
+					op(s, elem<sup>†</sup>, data<sup>‡</sup>)
+				</snippet>
+			</para>
+			<para>
+				<sup>†</sup>
+				If the type of <var>g</var> is non-variadic, <var>elem</var> must be the number of parameters that corresponds to the number of sub-elements in each element of <var>g</var>.
+				Otherwise, <var>elem</var> must be a single parameter.
+			</para>
+			<para>
+				<sup>‡</sup>
+				The <var>data</var> pseudo-parameter must be either <code>...</code> or the number of parameters that corresponds to the number of arguments in the auxiliary data, <code>__VA_ARGS__</code>.
+			</para>
+		</param>
+		<param id="g">
+			The <link id="generic data structure"/> whose elements are to be transformed.
+		</param>
+		<param id="..." optional="1">
+			Auxiliary data to be passed through the algorithm to the operation.
+		</param>
+	</usage>
+	<para>
+		The <AUTO_TRANSFORM/> macro is a <link id="higher-order thunk"/> that deduces the current <link id="higher-order entry point"/> and invokes <TRANSFORM/>.
+	</para>
+	<para>
+		This macro may not be used if <link id="bypass semantics"/> are in effect.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-algorithm-auto-transform.h/>
+		#include <chaos-preprocessor-arithmetic-dec.h/>
+		#include <chaos-preprocessor-array-core.h/>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-lambda-ops.h/>
+		
+		#if <VARIADICS/>
+		
+		<AUTO_TRANSFORM/>(
+		    <DEC_/>(<ARG/>(1)),
+		    (<ARRAY/>) (5, (1, 2, 3, 4, 5))
+		)
+		// (5, (0, 1, 2, 3, 4))
+		
+		#endif
+	</listing>
+	<derivative id="AUTO_TRANSFORM_ID" lang="C99"/>
+	<derivative id="AUTO_TRANSFORM_" lang="C99"/>
+</macro>
+
+</header>

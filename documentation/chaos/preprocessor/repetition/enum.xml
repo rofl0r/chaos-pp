@@ -164,6 +164,8 @@
 		<usage lang="C/C++">
 			<syntax><EXPR_S/>(s)(<ENUM_S/>(s, count, macro, data))</syntax>
 		</usage>
+		<derivative id="ENUM_S_ID"/>
+		<derivative id="ENUM_S_" lang="C99"/>
 	</derivative>
 </macro>
 

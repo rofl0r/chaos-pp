@@ -12,7 +12,7 @@
 		<syntax><SPLIT/>(i, ...)</syntax>
 		<param id="i">
 			The index of the element to be extracted.
-			Valid values are <codee>0</codee> and <code>1</code>.
+			Valid values are <code>0</code> and <code>1</code>.
 		</param>
 		<param id="..." optional="1">
 			The <link id="intermediate"/> from which an element is to be extracted.
@@ -23,7 +23,7 @@
 		<syntax><SPLIT/>(i, im)</syntax>
 		<param id="i">
 			The index of the element to be extracted.
-			Valid values are <codee>0</codee> and <code>1</code>.
+			Valid values are <code>0</code> and <code>1</code>.
 		</param>
 		<param id="im">
 			The <link id="intermediate"/> from which an element is to be extracted.

@@ -79,8 +79,8 @@
 		#include <chaos-preprocessor-highprec-mod.h/>
 		
 		<DEMOTE_HP/>(<MOD_HP/>(
-		    <LITERAL/>(1 2 3 4 5),
-		    <LITERAL/>(2)
+		    <LITERAL_HP/>(1 2 3 4 5),
+		    <LITERAL_HP/>(2)
 		))
 		// 1
 	</listing>

@@ -79,8 +79,8 @@
 		#include <chaos-preprocessor-highprec-literal.h/>
 		
 		<DEMOTE_HP/>(<DIV_HP/>(
-		    <LITERAL/>(1 2 3 4 5),
-		    <LITERAL/>(2)
+		    <LITERAL_HP/>(1 2 3 4 5),
+		    <LITERAL_HP/>(2)
 		))
 		// 6172
 	</listing>

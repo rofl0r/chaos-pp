@@ -15,11 +15,11 @@
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/seq/core.h>
-# include <chaos/preprocessor/seq/rest_n.h>
+# include <chaos/preprocessor/seq/drop.h>
 #
 # /* CHAOS_PP_SEQ_ELEM */
 #
-# define CHAOS_PP_SEQ_ELEM(i, seq) CHAOS_PP_SEQ_FIRST(CHAOS_PP_SEQ_REST_N(i, seq))
+# define CHAOS_PP_SEQ_ELEM(i, seq) CHAOS_PP_SEQ_FIRST(CHAOS_PP_SEQ_DROP(i, seq))
 # define CHAOS_PP_SEQ_ELEM_ID() CHAOS_PP_SEQ_ELEM
 #
 # if CHAOS_PP_VARIADICS

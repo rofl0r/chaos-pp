@@ -15,8 +15,8 @@
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/limits.h>
-# include <chaos/preprocessor/tuple/first_n.h>
-# include <chaos/preprocessor/tuple/rest_n.h>
+# include <chaos/preprocessor/tuple/drop.h>
+# include <chaos/preprocessor/tuple/take.h>
 #
 # /* CHAOS_PP_TUPLE_RANGE */
 #
@@ -30,7 +30,7 @@
 #
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_TUPLE_RANGE_BYPASS(s, i, len, tuple) \
-        CHAOS_PP_TUPLE_FIRST_N_BYPASS(s, len, CHAOS_PP_TUPLE_REST_N_BYPASS(s, i, tuple)) \
+        CHAOS_PP_TUPLE_TAKE_BYPASS(s, len, CHAOS_PP_TUPLE_DROP_BYPASS(s, i, tuple)) \
         /**/
 #    define CHAOS_PP_TUPLE_RANGE_BYPASS_ID() CHAOS_PP_TUPLE_RANGE_BYPASS
 #    define CHAOS_PP_TUPLE_RANGE_BYPASS_ CHAOS_PP_LAMBDA(CHAOS_PP_TUPLE_RANGE_BYPASS_ID)()

@@ -15,13 +15,13 @@
 # include <chaos/preprocessor/arithmetic/inc.h>
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/lambda/ops.h>
-# include <chaos/preprocessor/seq/first_n.h>
-# include <chaos/preprocessor/seq/rest_n.h>
+# include <chaos/preprocessor/seq/drop.h>
+# include <chaos/preprocessor/seq/take.h>
 #
 # /* CHAOS_PP_SEQ_REMOVE */
 #
 # define CHAOS_PP_SEQ_REMOVE(i, seq) \
-    CHAOS_PP_SEQ_FIRST_N(i, seq) CHAOS_PP_SEQ_REST_N(CHAOS_PP_INC(i), seq) \
+    CHAOS_PP_SEQ_TAKE(i, seq) CHAOS_PP_SEQ_DROP(CHAOS_PP_INC(i), seq) \
     /**/
 # define CHAOS_PP_SEQ_REMOVE_ID() CHAOS_PP_SEQ_REMOVE
 #

@@ -16,10 +16,10 @@
 # include <chaos/preprocessor/tuple/batch.h>
 # include <chaos/preprocessor/tuple/concat.h>
 # include <chaos/preprocessor/tuple/core.h>
+# include <chaos/preprocessor/tuple/drop.h>
 # include <chaos/preprocessor/tuple/eat.h>
 # include <chaos/preprocessor/tuple/elem.h>
 # include <chaos/preprocessor/tuple/filter.h>
-# include <chaos/preprocessor/tuple/first_n.h>
 # include <chaos/preprocessor/tuple/fold_left.h>
 # include <chaos/preprocessor/tuple/fold_left_aux.h>
 # include <chaos/preprocessor/tuple/fold_right.h>
@@ -31,9 +31,9 @@
 # include <chaos/preprocessor/tuple/rem.h>
 # include <chaos/preprocessor/tuple/remove.h>
 # include <chaos/preprocessor/tuple/replace.h>
-# include <chaos/preprocessor/tuple/rest_n.h>
 # include <chaos/preprocessor/tuple/reverse.h>
 # include <chaos/preprocessor/tuple/size.h>
+# include <chaos/preprocessor/tuple/take.h>
 # include <chaos/preprocessor/tuple/to_list.h>
 # include <chaos/preprocessor/tuple/to_seq.h>
 # include <chaos/preprocessor/tuple/to_string.h>

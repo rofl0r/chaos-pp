@@ -92,6 +92,7 @@
 	<listing>
 		#include <chaos-preprocessor-config.h/>
 		#include <chaos-preprocessor-lambda-ops.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
 		#include <chaos-preprocessor-tuple-transform.h/>
 		
 		#if <VARIADICS/>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/tuple/auto/for_each_i.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an algorithm that repeats a user-specified target for each element in a <link id="tuple"/>.
+</overview>
+
+<macro id="TUPLE_AUTO_FOR_EACH_I" type="object" group="for-each">
+	<abstract>
+		The <TUPLE_AUTO_FOR_EACH_I/> macro repeats the target specified by its first argument for each element in its second argument.
+	</abstract>
+	<usage lang="C99">
+		<syntax><TUPLE_AUTO_FOR_EACH_I/>(macro, tuple)</syntax>
+		<param id="macro">
+			The target that is repeated for each element in <var>tuple</var>.
+			This target must be either a <link id="λ expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			<snippet>
+				macro(s, i, elem)
+			</snippet>
+		</param>
+		<param id="tuple" optional="1">
+			The <link id="tuple"/> for which <var>macro</var> is to be repeated for each element.
+		</param>
+	</usage>
+	<usage lang="C99">
+		<syntax><TUPLE_AUTO_FOR_EACH_I/>(macro, tuple, ...)</syntax>
+		<param id="macro">
+			<para>
+				The target that is repeated for each element in <var>tuple</var>.
+				This target must be either a <link id="λ expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				<snippet>
+					macro(s, i, elem, data<sup>†</sup>)
+				</snippet>
+			</para>
+			<para>
+				<sup>†</sup>
+				The <var>data</var> pseudo-parameter must be either <code>...</code> or the number of parameters that corresponds to the number of arguments in the auxiliary data, <code>__VA_ARGS__</code>.
+			</para>
+		</param>
+		<param id="tuple" optional="1">
+			The <link id="tuple"/> for which <var>macro</var> is to be repeated for each element.
+		</param>
+		<param id="..." optional="1">
+			Auxiliary data to be passed through the algorithm to the target.
+		</param>
+	</usage>
+	<para>
+		The <TUPLE_AUTO_FOR_EACH_I/> macro is a <link id="higher-order thunk"/> that deduces the current <link id="higher-order entry point"/> and invokes <TUPLE_FOR_EACH_I/>.
+	</para>
+	<para>
+		This macro may not be used if <link id="bypass semantics"/> are in effect.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-punctuation-comma_if.h/>
+		#include <chaos-preprocessor-tuple-for_each_i.h/>
+		
+		#if <VARIADICS/>
+		
+		#define MACRO(s, i, elem) <COMMA_IF/>(i) elem[i]
+		
+		<TUPLE_AUTO_FOR_EACH_I/>(
+		    MACRO, (a, b, c, d, e, f, g, h, i, j, k, l)
+		)
+		// a[0], b[1], c[2], d[3], e[4], f[5], g[6], h[7], i[8], j[9], k[10], l[11]
+		
+		#endif
+	</listing>
+	<derivative id="TUPLE_AUTO_FOR_EACH_I_ID" lang="C99"/>
+	<derivative id="TUPLE_AUTO_FOR_EACH_I_" lang="C99"/>
+</macro>
+
+</header>

@@ -9,7 +9,7 @@
 		The <VARIADIC_SEQ_FOR_EACH_I/> macro repeats the target specified by its first argument for each element in its second argument.
 	</abstract>
 	<usage lang="C99">
-		<syntax><EXPR/><VARIADIC_SEQ_FOR_EACH_I/>(macro, seq))</syntax>
+		<syntax><EXPR/>(<VARIADIC_SEQ_FOR_EACH_I/>(macro, seq))</syntax>
 		<param id="macro">
 			The target that is to be repeated for each element in <var>seq</var>.
 			This target must be either a <link id="λ expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
@@ -61,7 +61,7 @@
 	<para>
 		This macro may not be used if <link id="bypass semantics"/> are in effect.
 	</para>
-	<derivative id="VARIADIC_SEQ_FOR_EACH_I_ID"/>
+	<derivative id="VARIADIC_SEQ_FOR_EACH_I_ID" lang="C99"/>
 	<derivative id="VARIADIC_SEQ_FOR_EACH_I_" lang="C99"/>
 	<derivative id="VARIADIC_SEQ_FOR_EACH_I_S">
 		<usage lang="C99">
@@ -69,9 +69,6 @@
 		</usage>
 		<usage lang="C99">
 			<syntax><EXPR_S/>(s)(<VARIADIC_SEQ_FOR_EACH_I_S/>(s, macro, seq, ...))</syntax>
-		</usage>
-		<usage lang="C/C++">
-			<syntax><EXPR_S/>(s)(<VARIADIC_SEQ_FOR_EACH_I_S/>(s, macro, seq, data))</syntax>
 		</usage>
 		<derivative id="VARIADIC_SEQ_FOR_EACH_I_S_ID"/>
 		<derivative id="VARIADIC_SEQ_FOR_EACH_I_S_" lang="C99"/>

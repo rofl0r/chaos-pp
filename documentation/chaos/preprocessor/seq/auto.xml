@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/seq/auto.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header includes all of the headers in the <code>chaos/preprocessor/seq/auto</code> subdirectory.
+</overview>
+
+<directory-listing path="chaos/preprocessor/seq/auto"/>
+
+</header>

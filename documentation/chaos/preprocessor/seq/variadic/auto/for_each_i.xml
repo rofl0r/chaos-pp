@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<header name="chaos/preprocessor/seq/variadic/for_each.h" author="Paul Mensonides" date="2003-2004">
+<header name="chaos/preprocessor/seq/variadic/auto/for_each_i.h" author="Paul Mensonides" date="2003-2004">
 <overview>
 	The <self/> header defines an algorithm that repeats a user-specified target for each element in a <link id="variadic sequence"/>.
 </overview>
 
-<macro id="VARIADIC_SEQ_FOR_EACH" type="indirect" group="for-each">
+<macro id="VARIADIC_SEQ_AUTO_FOR_EACH_I" type="object" group="for-each">
 	<abstract>
-		The <VARIADIC_SEQ_FOR_EACH/> macro repeats the target specified by its first argument for each element in its second argument.
+		The <VARIADIC_SEQ_AUTO_FOR_EACH_I/> macro repeats the target specified by its first argument for each element in its second argument.
 	</abstract>
 	<usage lang="C99">
-		<syntax><EXPR/>(<VARIADIC_SEQ_FOR_EACH/>(macro, seq))</syntax>
+		<syntax><VARIADIC_SEQ_AUTO_FOR_EACH_I/>(macro, seq)</syntax>
 		<param id="macro">
 			The target that is to be repeated for each element in <var>seq</var>.
 			This target must be either a <link id="λ expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
 			<snippet>
-				macro(s, tuple)
+				macro(s, i, tuple)
 			</snippet>
 		</param>
 		<param id="seq" optional="1">
@@ -22,13 +22,13 @@
 		</param>
 	</usage>
 	<usage lang="C99">
-		<syntax><EXPR/>(<VARIADIC_SEQ_FOR_EACH/>(macro, seq, ...))</syntax>
+		<syntax><VARIADIC_SEQ_AUTO_FOR_EACH_I/>(macro, seq, ...)</syntax>
 		<param id="macro">
 			<para>
 				The target that is to be repeated for each element in <var>seq</var>.
 				This target must be either a <link id="λ expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
 				<snippet>
-					macro(s, tuple, data<sup>†</sup>)
+					macro(s, i, tuple, data<sup>†</sup>)
 				</snippet>
 			</para>
 			<para>
@@ -44,35 +44,13 @@
 		</param>
 	</usage>
 	<para>
-		This macro behaves identically to <SEQ_FOR_EACH_I/> except that each element is wrapped in parentheses prior to being passed to the target.
-		For example, instead of the the target being invoked as...
-		<snippet>
-			macro(s, elem, state)
-		</snippet>
-		it is invoked as...
-		<snippet>
-			macro(s, (elem), state)
-		</snippet>
-	</para>
-	<para>
-		This macro deduces the current <link id="recursion state"/> and invokes <VARIADIC_SEQ_FOR_EACH_S/>.
-		If the current <link id="recursion state"/> is already known, direct use of <VARIADIC_SEQ_FOR_EACH_S/> is more efficient.
+		The <VARIADIC_SEQ_AUTO_FOR_EACH_I/> macro is a <link id="higher-order thunk"/> that deduces the current <link id="higher-order entry point"/> and invokes <VARIADIC_SEQ_FOR_EACH_I/>.
 	</para>
 	<para>
 		This macro may not be used if <link id="bypass semantics"/> are in effect.
 	</para>
-	<derivative id="VARIADIC_SEQ_FOR_EACH_ID" lang="C99"/>
-	<derivative id="VARIADIC_SEQ_FOR_EACH_" lang="C99"/>
-	<derivative id="VARIADIC_SEQ_FOR_EACH_S">
-		<usage lang="C99">
-			<syntax><EXPR_S/>(s)(<VARIADIC_SEQ_FOR_EACH_S/>(s, macro, seq))</syntax>
-		</usage>
-		<usage lang="C99">
-			<syntax><EXPR_S/>(s)(<VARIADIC_SEQ_FOR_EACH_S/>(s, macro, seq, ...))</syntax>
-		</usage>
-		<derivative id="VARIADIC_SEQ_FOR_EACH_S_ID"/>
-		<derivative id="VARIADIC_SEQ_FOR_EACH_S_" lang="C99"/>
-	</derivative>
+	<derivative id="VARIADIC_SEQ_AUTO_FOR_EACH_I_ID" lang="C99"/>
+	<derivative id="VARIADIC_SEQ_AUTO_FOR_EACH_I_" lang="C99"/>
 </macro>
 
 </header>

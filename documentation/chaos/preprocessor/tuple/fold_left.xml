@@ -74,6 +74,8 @@
 		
 		#if <VARIADICS/>
 		
+		#define OP(s, elem, r) r ## elem
+		
 		<EXPR/>(<TUPLE_FOLD_LEFT/>(
 		    OP,
 		    (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z),

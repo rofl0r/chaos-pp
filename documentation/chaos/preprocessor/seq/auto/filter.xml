@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/seq/auto/filter.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an algorithm that filters elements from a <link id="sequence"/> according to a user-specified criteria.
+</overview>
+
+<macro id="SEQ_AUTO_FILTER" type="object" group="filtration">
+	<abstract>
+		The <SEQ_AUTO_FILTER/> macro filters elements from its second argument according to the criteria specified by its first argument.
+	</abstract>
+	<usage lang="C99">
+		<syntax><SEQ_AUTO_FILTER/>(pred, seq)</syntax>
+		<param id="pred">
+			<para>
+				The predicate that determines whether an element is to remain in the resulting <link id="sequence"/>.
+				This predicate must be either a <link id="λ expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				<snippet>
+					pred(s, elem<sup>†</sup>)
+				</snippet>
+			</para>
+			<para>
+				<sup>†</sup>
+				If <var>seq</var> contains elements that have varying arities, <var>elem</var> must be <code>...</code>.
+				Otherwise, <var>elem</var> must be the number of parameters that corresponds to the arity of each element in <var>seq</var>.
+			</para>
+		</param>
+		<param id="seq" optional="1">
+			The <link id="sequence"/> to be filtered.
+		</param>
+	</usage>
+	<usage lang="C99">
+		<syntax><SEQ_AUTO_FILTER/>(pred, seq, ...)</syntax>
+		<param id="pred">
+			<para>
+				The predicate that determines whether an element is to remain in the resulting <link id="sequence"/>.
+				This predicate must be either a <link id="λ expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				<snippet>
+					pred(s, elem<sup>†</sup>, data<sup>‡</sup>)
+				</snippet>
+			</para>
+			<para>
+				<sup>†</sup>
+				The <var>elem</var> pseudo-parameter must be the number of parameters that corresponds to the arity of each element in <var>seq</var>.
+			</para>
+			<para>
+				<sup>‡</sup>
+				The <var>data</var> pseudo-parameter must be either <code>...</code> or the number of parameters that corresponds to the number of arguments in the auxiliary data, <code>__VA_ARGS__</code>.
+			</para>
+		</param>
+		<param id="seq" optional="1">
+			The <link id="sequence"/> to be filtered.
+		</param>
+		<param id="..." optional="1">
+			Auxiliary data to be passed through the algorithm to the predicate.
+		</param>
+	</usage>
+	<para>
+		The <SEQ_AUTO_FILTER/> macro is a <link id="higher-order thunk"/> that deduces the current <link id="higher-order entry point"/> and invokes <SEQ_FILTER/>.
+	</para>
+	<para>
+		This macro may not be used if <link id="bypass semantics"/> are in effect.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-lambda-ops.h/>
+		#include <chaos-preprocessor-logical-bool.h/>
+		#include <chaos-preprocessor-seq-auto-filter.h/>
+		
+		#if <VARIADICS/>
+		
+		<SEQ_AUTO_FILTER/>(
+		    <BOOL_/>(<ARG/>(1)), (1)(0)(2)(0)(3)(0)(4)(0)(5)
+		)
+		// (1)(2)(3)(4)(5)
+		
+		#endif
+	</listing>
+	<derivative id="SEQ_AUTO_FILTER_ID" lang="C99"/>
+	<derivative id="SEQ_AUTO_FILTER_" lang="C99"/>
+</macro>
+
+</header>

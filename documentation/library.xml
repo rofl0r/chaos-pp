@@ -565,6 +565,17 @@
 		</directory>
 		<header name="seq.h"/>
 		<directory name="seq">
+			<header name="auto.h"/>
+			<directory name="auto">
+				<header name="filter.h"/>
+				<header name="fold_left.h"/>
+				<header name="fold_left_aux.h"/>
+				<header name="fold_right.h"/>
+				<header name="fold_right_aux.h"/>
+				<header name="for_each.h"/>
+				<header name="for_each_i.h"/>
+				<header name="transform.h"/>
+			</directory>
 			<directory name="complexity">
 				<binary-file name="duplex.gif"/>
 				<binary-file name="reverse_duplex.gif"/>
@@ -600,6 +611,17 @@
 			<header name="transform.h"/>
 			<header name="variadic.h"/>
 			<directory name="variadic">
+				<header name="auto.h"/>
+				<directory name="auto">
+					<header name="filter.h"/>
+					<header name="fold_left.h"/>
+					<header name="fold_left_aux.h"/>
+					<header name="fold_right.h"/>
+					<header name="fold_right_aux.h"/>
+					<header name="for_each.h"/>
+					<header name="for_each_i.h"/>
+					<header name="transform.h"/>
+				</directory>
 				<header name="core.h"/>
 				<header name="filter.h"/>
 				<header name="fold_left.h"/>
@@ -627,6 +649,17 @@
 		<header name="tuple.h"/>
 		<directory name="tuple">
 			<header name="as_args.h"/>
+			<header name="auto.h"/>
+			<directory name="auto">
+				<header name="filter.h"/>
+				<header name="fold_left.h"/>
+				<header name="fold_left_aux.h"/>
+				<header name="fold_right.h"/>
+				<header name="fold_right_aux.h"/>
+				<header name="for_each.h"/>
+				<header name="for_each_i.h"/>
+				<header name="transform.h"/>
+			</directory>
 			<header name="batch.h"/>
 			<directory name="complexity">
 				<binary-file name="concat.gif"/>

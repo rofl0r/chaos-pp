@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<header name="chaos/preprocessor/seq/variadic/fold_left_aux.h" author="Paul Mensonides" date="2003-2004">
+<header name="chaos/preprocessor/seq/variadic/auto/fold_left_aux.h" author="Paul Mensonides" date="2003-2004">
 <overview>
 	The <self/> header defines an algorithm that accumulates the elements of a <link id="variadic sequence"/> from the first element to the last element.
 </overview>
 
-<macro id="VARIADIC_SEQ_FOLD_LEFT_AUX" type="indirect" group="left-accumulation">
+<macro id="VARIADIC_SEQ_AUTO_FOLD_LEFT_AUX" type="object" group="left-accumulation">
 	<abstract>
-		The <VARIADIC_SEQ_FOLD_LEFT_AUX/> macro accumulates the elements of its second argument with the operation specified by its first argument.
+		The <VARIADIC_SEQ_AUTO_FOLD_LEFT_AUX/> macro accumulates the elements of its second argument with the operation specified by its first argument.
 	</abstract>
 	<usage lang="C99">
-		<syntax><EXPR/>(<VARIADIC_SEQ_FOLD_LEFT_AUX/>(op, seq, data, ...))</syntax>
+		<syntax><VARIADIC_SEQ_AUTO_FOLD_LEFT_AUX/>(op, seq, data, ...)</syntax>
 		<param id="op">
 			<para>
 				The operation that is to be used to accumulate the elements of <var>seq</var>.
@@ -40,33 +40,14 @@
 		</param>
 	</usage>
 	<para>
-		This macro behaves identically to <SEQ_FOLD_LEFT_AUX/> except that each element is wrapped in parentheses prior to being passed to the operation.
-		For example, instead of the operation being invoked as...
-		<snippet>
-			op(s, elem, data, state)
-		</snippet>
-		it is invoked as...
-		<snippet>
-			op(s, (elem), data, state)
-		</snippet>
-	</para>
-	<para>
-		This macro deduces the current <link id="recursion state"/> and invokes <VARIADIC_SEQ_FOLD_LEFT_AUX_S/>.
-		If the current <link id="recursion state"/> is already known, direct use of <VARIADIC_SEQ_FOLD_LEFT_AUX_S/> is more efficient.
+		The <VARIADIC_SEQ_AUTO_FOLD_LEFT_AUX/> macro is a <link id="higher-order thunk"/> that deduces the current <link id="higher-order entry point"/> and invokes <VARIADIC_SEQ_FOLD_LEFT_AUX/>.
 	</para>
 	<para>
 		This macro may not be used if <link id="bypass semantics"/> are in effect.
 	</para>
-	<x-reference id="VARIADIC_SEQ_FOLD_RIGHT_AUX"/>
-	<derivative id="VARIADIC_SEQ_FOLD_LEFT_AUX_ID" lang="C99"/>
-	<derivative id="VARIADIC_SEQ_FOLD_LEFT_AUX_" lang="C99"/>
-	<derivative id="VARIADIC_SEQ_FOLD_LEFT_AUX_S">
-		<usage lang="C99">
-			<syntax><EXPR_S/>(s)(<VARIADIC_SEQ_FOLD_LEFT_AUX_S/>(s, op, seq, data, ...))</syntax>
-		</usage>
-		<derivative id="VARIADIC_SEQ_FOLD_LEFT_AUX_S_ID"/>
-		<derivative id="VARIADIC_SEQ_FOLD_LEFT_AUX_S_" lang="C99"/>
-	</derivative>
+	<x-reference id="VARIADIC_SEQ_AUTO_FOLD_RIGHT_AUX"/>
+	<derivative id="VARIADIC_SEQ_AUTO_FOLD_LEFT_AUX_ID" lang="C99"/>
+	<derivative id="VARIADIC_SEQ_AUTO_FOLD_LEFT_AUX_" lang="C99"/>
 </macro>
 
 </header>

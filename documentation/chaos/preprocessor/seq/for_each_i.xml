@@ -9,7 +9,7 @@
 		The <SEQ_FOR_EACH_I/> macro repeats the target specified by its first argument for each element in its second argument.
 	</abstract>
 	<usage lang="C99">
-		<syntax><EXPR/><SEQ_FOR_EACH_I/>(macro, seq))</syntax>
+		<syntax><EXPR/>(<SEQ_FOR_EACH_I/>(macro, seq))</syntax>
 		<param id="macro">
 			<para>
 				The target that is to be repeated for each element in <var>seq</var>.

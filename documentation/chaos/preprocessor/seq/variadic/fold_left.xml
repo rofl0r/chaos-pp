@@ -49,14 +49,11 @@
 		This macro may not be used if <link id="bypass semantics"/> are in effect.
 	</para>
 	<x-reference id="VARIADIC_SEQ_FOLD_RIGHT"/>
-	<derivative id="VARIADIC_SEQ_FOLD_LEFT_ID"/>
+	<derivative id="VARIADIC_SEQ_FOLD_LEFT_ID" lang="C99"/>
 	<derivative id="VARIADIC_SEQ_FOLD_LEFT_" lang="C99"/>
 	<derivative id="VARIADIC_SEQ_FOLD_LEFT_S">
 		<usage lang="C99">
 			<syntax><EXPR_S/>(s)(<VARIADIC_SEQ_FOLD_LEFT_S/>(s, op, seq, ...))</syntax>
-		</usage>
-		<usage lang="C/C++">
-			<syntax><EXPR_S/>(s)(<VARIADIC_SEQ_FOLD_LEFT_S/>(s, op, seq, state))</syntax>
 		</usage>
 		<derivative id="VARIADIC_SEQ_FOLD_LEFT_S_ID"/>
 		<derivative id="VARIADIC_SEQ_FOLD_LEFT_S_" lang="C99"/>

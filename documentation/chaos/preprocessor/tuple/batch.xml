@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/tuple/batch.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines primitives used to unroll <link id="tuples"/> by processing batches of elements.
+</overview>
+
+<macro id="TUPLE_IS_BATCH" group="batch">
+	<abstract>
+		The <TUPLE_IS_BATCH/> macro is a predicate that determines whether its second argument contains <em>at least</em> the number of elements specified by its first argument.
+	</abstract>
+	<usage lang="C99">
+		<syntax><TUPLE_IS_BATCH/>(n, tuple)</syntax>
+		<param id="n">
+			The batch size.
+			Valid values range from <code>1</code> to <LIMIT_TUPLE/>.
+		</param>
+		<param id="tuple">
+			The <link id="tuple"/> to be tested.
+		</param>
+	</usage>
+	<para>
+		If <var>tuple</var> contains <em>at least</em> <var>n</var> elements, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<para>
+		The primary utility of this macro is to determine if <var>tuple</var> can be unrolled by a factor of <var>n</var>.
+	</para>
+	<para>
+		This macro operates on the nil-<link id="tuple"/> representation used by the core <link id="tuple"/> operations defined in <chaos-preprocessor-tuple-core.h/>.
+		Specifically, <code>()</code> is a one-element <link id="tuple"/>, not a zero-element <link id="tuple"/>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-tuple-batch.h/>
+		
+		#if <VARIADICS/>
+		
+		<IS_BATCH/>(1, ()) // 1
+		
+		<IS_BATCH/>(8, (a, b, c, d, e, f, g))       // 0
+		<IS_BATCH/>(8, (a, b, c, d, e, f, g, h))    // 1
+		<IS_BATCH/>(8, (a, b, c, d, e, f, g, h, i)) // 1
+		
+		#endif
+	</listing>
+	<derivative id="TUPLE_IS_BATCH_ID" lang="C99"/>
+	<derivative id="TUPLE_IS_BATCH_" lang="C99"/>
+</macro>
+
+<macro id="TUPLE_BATCH" type="indirect" group="batch">
+	<abstract>
+		The <TUPLE_BATCH/> macro extracts a batch of elements from a <link id="tuple"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><TUPLE_BATCH/>(n, tuple)</syntax>
+		<param id="n">
+			The batch size.
+			Valid values range from <code>1</code> to <LIMIT_TUPLE/>.
+		</param>
+		<param id="tuple">
+			The <link id="tuple"/> from which a batch of elements is to be extracted.
+			This <link id="tuple"/> must contain <em>at least</em> <var>n</var> elements.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="tuple"/> containing the first <var>n</var> elements of <var>tuple</var>.
+	</para>
+	<para>
+		The primary utility of this macro is to unroll <link id="tuple"/> operations by processing <var>n</var> elements at a time.
+	</para>
+	<para>
+		This macro operates on the nil-<link id="tuple"/> representation used by the core <link id="tuple"/> operations defined in <chaos-preprocessor-tuple-core.h/>.
+		Specifically, <code>()</code> is a one-element <link id="tuple"/>, not a zero-element <link id="tuple"/>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-control-iif.h/>
+		#include <chaos-preprocessor-control-inline_when.h/>
+		#include <chaos-preprocessor-limits.h/>
+		#include <chaos-preprocessor-recursion-basic.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		#include <chaos-preprocessor-tuple-batch.h/>
+		#include <chaos-preprocessor-tuple-core.h/>
+		
+		#if <VARIADICS/>
+		
+		#define CURLY_BRACES(tuple) \
+		    CURLY_BRACES_BYPASS(<LIMIT_EXPR/>, tuple) \
+		    /**/
+		#define CURLY_BRACES_BYPASS(s, tuple) \
+		    <EXPR_S/>(s)(CURLY_BRACES_1( \
+		        <OBSTRUCT/>(), <PREV/>(s), tuple \
+		    )) \
+		    /**/
+		#define CURLY_BRACES_INDIRECT(n) CURLY_BRACES_ ## n
+		#define CURLY_BRACES_1(_, s, tuple) \
+		    <IIF/> _(<TUPLE_IS_BATCH/>(8, tuple))( \
+		        <EXPR_S/> _(s)( \
+		            CURLY_BRACES_2 <TUPLE_BATCH/> _(8, tuple) \
+		            CURLY_BRACES_INDIRECT _(1)( \
+		                <OBSTRUCT/> _(), <PREV/>(s), \
+		                <TUPLE_SANS_BATCH/> _(8, tuple) \
+		            ) \
+		        ), \
+		        <EXPR_S/> _(s)(CURLY_BRACES_INDIRECT _(3)( \
+		            <OBSTRUCT/> _(), <PREV/>(s), tuple \
+		        )) \
+		    ) \
+		    /**/
+		#define CURLY_BRACES_2(a, b, c, d, e, f, g, h) \
+		    { a } { b } { c } { d } { e } { f } { g } { h } \
+		    /**/
+		#define CURLY_BRACES_3(_, s, tuple) \
+		    <INLINE_WHEN/> _(<TUPLE_IS_CONS/>(tuple))( \
+		        { <TUPLE_FIRST/> _(tuple) } \
+		        <EXPR_S/> _(s)(CURLY_BRACES_INDIRECT _(3)( \
+		            <OBSTRUCT/> _(), <PREV/>(s), <TUPLE_REST/> _(tuple) \
+		        )) \
+		    ) \
+		    /**/
+		
+		CURLY_BRACES((1, 2, 3)) // { 1 } { 2 } { 3 }
+		
+		CURLY_BRACES((1, 2, 3, 4, 5, 6, 7, 8, 9, 0))
+		    // { 1 } { 2 } { 3 } { 4 } { 5 } { 6 } { 7 } { 8 } { 9 } { 0 }
+		
+		#endif
+	</listing>
+	<derivative id="TUPLE_BATCH_ID" lang="C99"/>
+	<derivative id="TUPLE_BATCH_" lang="C99"/>
+</macro>
+
+<macro id="TUPLE_SANS_BATCH" type="indirect" group="batch">
+	<abstract>
+		The <TUPLE_SANS_BATCH/> macro removes a batch of elements from a <link id="tuple"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><TUPLE_SANS_BATCH/>(n, tuple)</syntax>
+		<param id="n">
+			The batch size.
+			Valid values range from <code>1</code> to <LIMIT_TUPLE/>.
+		</param>
+		<param id="tuple">
+			The <link id="tuple"/> from which a batch of elements is to be removed.
+			This <link id="tuple"/> must contain <em>at least</em> <var>n</var> elements.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="tuple"/> containing all but the first <var>n</var> elements of <var>tuple</var>.
+	</para>
+	<para>
+		This macro operates on the nil-<link id="tuple"/> representation used by the core <link id="tuple"/> operations defined in <chaos-preprocessor-tuple-core.h/>.
+		Specifically, <code>()</code> is a one-element <link id="tuple"/>, not a zero-element <link id="tuple"/>.
+	</para>
+	<derivative id="TUPLE_SANS_BATCH_ID" lang="C99"/>
+	<derivative id="TUPLE_SANS_BATCH_" lang="C99"/>
+</macro>
+
+</header>

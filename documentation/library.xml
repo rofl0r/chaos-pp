@@ -584,6 +584,7 @@
 			<header name="stringize.h"/>
 			<header name="tuple.h"/>
 			<directory name="tuple">
+				<header name="batch.h"/>
 				<header name="core.h"/>
 				<header name="eat.h"/>
 				<header name="elem.h"/>

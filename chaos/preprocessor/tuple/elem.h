@@ -111,7 +111,7 @@
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_TUPLE_ELEM_SHADOW(size, i, tuple) CHAOS_IP_TUPLE_ELEM_SHADOW_I(i, CHAOS_IP_TUPLE_ELEM_SHADOW_A tuple)
 #    define CHAOS_IP_TUPLE_ELEM_SHADOW_A(...) CHAOS_IP_TUPLE_ELEM_SHADOW_B(__VA_ARGS__,,,,,,,,,,,,,,,,,,,,,,,,,)
-#    define CHAOS_IP_TUPLE_ELEM_SHAODW_B(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, ...) \
+#    define CHAOS_IP_TUPLE_ELEM_SHADOW_B(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, ...) \
         (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y) \
         /**/
 # else

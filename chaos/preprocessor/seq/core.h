@@ -69,37 +69,37 @@
 #
 # define CHAOS_PP_SEQ_ITEM_ID() CHAOS_PP_SEQ_ITEM
 #
-# /* CHAOS_PP_SEQ_FIRST */
+# /* CHAOS_PP_SEQ_HEAD */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_SEQ_FIRST(seq) CHAOS_PP_TUPLE_REM_CTOR(?, CHAOS_PP_SPLIT(0, CHAOS_IP_SEQ_FIRST_I seq))
-#    define CHAOS_PP_SEQ_FIRST_ CHAOS_PP_LAMBDA(CHAOS_PP_SEQ_FIRST_ID)()
+#    define CHAOS_PP_SEQ_HEAD(seq) CHAOS_PP_TUPLE_REM_CTOR(?, CHAOS_PP_SPLIT(0, CHAOS_IP_SEQ_HEAD_I seq))
+#    define CHAOS_PP_SEQ_HEAD_ CHAOS_PP_LAMBDA(CHAOS_PP_SEQ_HEAD_ID)()
 # else
-#    define CHAOS_PP_SEQ_FIRST(seq) CHAOS_PP_SPLIT(0, CHAOS_IP_SEQ_FIRST_I seq)
+#    define CHAOS_PP_SEQ_HEAD(seq) CHAOS_PP_SPLIT(0, CHAOS_IP_SEQ_HEAD_I seq)
 # endif
 #
-# define CHAOS_PP_SEQ_FIRST_ID() CHAOS_PP_SEQ_FIRST
+# define CHAOS_PP_SEQ_HEAD_ID() CHAOS_PP_SEQ_HEAD
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_IP_SEQ_FIRST_I(...) (__VA_ARGS__),
+#    define CHAOS_IP_SEQ_HEAD_I(...) (__VA_ARGS__),
 # else
-#    define CHAOS_IP_SEQ_FIRST_I(x) x, ~
+#    define CHAOS_IP_SEQ_HEAD_I(x) x, ~
 # endif
 #
-# /* CHAOS_PP_SEQ_REST */
+# /* CHAOS_PP_SEQ_TAIL */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_SEQ_REST(seq) CHAOS_PP_EAT seq
-#    define CHAOS_PP_SEQ_REST_ CHAOS_PP_LAMBDA(CHAOS_PP_SEQ_REST_ID)()
+#    define CHAOS_PP_SEQ_TAIL(seq) CHAOS_PP_EAT seq
+#    define CHAOS_PP_SEQ_TAIL_ CHAOS_PP_LAMBDA(CHAOS_PP_SEQ_TAIL_ID)()
 # else
-#    define CHAOS_PP_SEQ_REST(seq) \
+#    define CHAOS_PP_SEQ_TAIL(seq) \
         CHAOS_PP_IIF(CHAOS_PP_IS_UNARY(CHAOS_PP_EAT seq ~))( \
             CHAOS_PP_EAT seq, CHAOS_PP_SEQ_NIL() \
         ) \
         /**/
 # endif
 #
-# define CHAOS_PP_SEQ_REST_ID() CHAOS_PP_SEQ_REST
+# define CHAOS_PP_SEQ_TAIL_ID() CHAOS_PP_SEQ_TAIL
 #
 # /* CHAOS_PP_SEQ_IS_CONS */
 #

@@ -45,7 +45,7 @@
 # define CHAOS_IP_SIZE_I(_, s, g, size) \
     CHAOS_PP_IIF _(CHAOS_PP_IS_CONS(g))( \
         CHAOS_PP_EXPR_S(s) _(CHAOS_IP_SIZE_INDIRECT _()( \
-            CHAOS_PP_OBSTRUCT _(), CHAOS_PP_PREV(s), CHAOS_PP_REST _(g), CHAOS_PP_INC(size) \
+            CHAOS_PP_OBSTRUCT _(), CHAOS_PP_PREV(s), CHAOS_PP_TAIL _(g), CHAOS_PP_INC(size) \
         )), \
         size \
     ) \

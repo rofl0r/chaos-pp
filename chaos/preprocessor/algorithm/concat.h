@@ -42,7 +42,7 @@
 # else
 #    define CHAOS_PP_CONCAT_BYPASS(s, g) \
         CHAOS_PP_INLINE_WHEN(CHAOS_PP_IS_CONS(g))( \
-            CHAOS_PP_EXPR_S(s)(CHAOS_IP_CONCAT_I(CHAOS_PP_OBSTRUCT(), CHAOS_PP_PREV(s), CHAOS_PP_REST(g), CHAOS_PP_FIRST(g))) \
+            CHAOS_PP_EXPR_S(s)(CHAOS_IP_CONCAT_I(CHAOS_PP_OBSTRUCT(), CHAOS_PP_PREV(s), CHAOS_PP_TAIL(g), CHAOS_PP_HEAD(g))) \
         ) \
         /**/
 # endif
@@ -55,7 +55,7 @@
 #    define CHAOS_IP_CONCAT_I(_, s, g, ...) \
         CHAOS_PP_IIF _(CHAOS_PP_IS_CONS(g))( \
             CHAOS_PP_EXPR_S(s) _(CHAOS_IP_CONCAT_INDIRECT _()( \
-                CHAOS_PP_OBSTRUCT _(), CHAOS_PP_PREV(s), CHAOS_PP_REST _(g), CHAOS_PP_VARIADIC_CAT _(__VA_ARGS__, CHAOS_PP_FIRST _(g)) \
+                CHAOS_PP_OBSTRUCT _(), CHAOS_PP_PREV(s), CHAOS_PP_TAIL _(g), CHAOS_PP_VARIADIC_CAT _(__VA_ARGS__, CHAOS_PP_HEAD _(g)) \
             )), \
             __VA_ARGS__ \
         ) \
@@ -64,7 +64,7 @@
 #    define CHAOS_IP_CONCAT_I(_, s, g, res) \
         CHAOS_PP_IIF _(CHAOS_PP_IS_CONS(g))( \
             CHAOS_PP_EXPR_S(s) _(CHAOS_IP_CONCAT_INDIRECT _()( \
-                CHAOS_PP_OBSTRUCT _(), CHAOS_PP_PREV(s), CHAOS_PP_REST _(g), CHAOS_PP_CAT _(res, CHAOS_PP_FIRST _(g)) \
+                CHAOS_PP_OBSTRUCT _(), CHAOS_PP_PREV(s), CHAOS_PP_TAIL _(g), CHAOS_PP_CAT _(res, CHAOS_PP_HEAD _(g)) \
             )), \
             res \
         ) \

@@ -85,7 +85,7 @@
     ) \
     /**/
 # define CHAOS_IP_WHILE_AUX_X_IV(_, s, jump, fix, pred, _p, op, _o, data, ps) \
-    CHAOS_IP_WHILE_AUX_X_V(CHAOS_PP_SEQ_FIRST(jump), CHAOS_PP_SEQ_REST(jump), fix, pred, _p, op, _o, data, ps) \
+    CHAOS_IP_WHILE_AUX_X_V(CHAOS_PP_SEQ_HEAD(jump), CHAOS_PP_SEQ_TAIL(jump), fix, pred, _p, op, _o, data, ps) \
     /**/
 # define CHAOS_IP_WHILE_AUX_X_V(s, jump, fix, pred, _p, op, _o, data, ps) \
     CHAOS_PP_IIF(CHAOS_PP_NOT_EQUAL(s, CHAOS_PP_PREV(fix)))( \

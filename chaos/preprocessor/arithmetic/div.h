@@ -66,7 +66,7 @@
     ) \
     /**/
 # define CHAOS_IP_DIV_III(_, s, jump, mode, r, x, y, z, ex) \
-    CHAOS_IP_DIV_IV(CHAOS_PP_SEQ_FIRST(jump), CHAOS_PP_SEQ_REST(jump), mode, r, x, y, z, ex) \
+    CHAOS_IP_DIV_IV(CHAOS_PP_SEQ_HEAD(jump), CHAOS_PP_SEQ_TAIL(jump), mode, r, x, y, z, ex) \
     /**/
 # define CHAOS_IP_DIV_IV(s, jump, mode, r, x, y, z, ex) \
     CHAOS_PP_IIF(CHAOS_PP_IS_VALID(CHAOS_PP_PREV(s)))( \

@@ -72,9 +72,9 @@
 #    define CHAOS_IP_TUPLE_TRANSFORM_2_I(_, s, o, op, _o, tuple, pd) \
         CHAOS_PP_OBSTRUCT(CHAOS_PP_TUPLE_CONS)( \
             CHAOS_PP_EXPR_S _(s)(CHAOS_IP_TUPLE_TRANSFORM_INDIRECT _(1)( \
-                CHAOS_PP_NEXT(s), o, op, _o, CHAOS_PP_TUPLE_REST(tuple), pd \
+                CHAOS_PP_NEXT(s), o, op, _o, CHAOS_PP_TUPLE_TAIL(tuple), pd \
             )), \
-            _o()(o, op, CHAOS_PP_TUPLE_FIRST(tuple) CHAOS_PP_EXPOSE(pd)) \
+            _o()(o, op, CHAOS_PP_TUPLE_HEAD(tuple) CHAOS_PP_EXPOSE(pd)) \
         ) \
         /**/
 # endif

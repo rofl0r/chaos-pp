@@ -119,7 +119,7 @@
 #
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_TUPLE_SANS_BATCH(n, tuple) \
-        CHAOS_PP_TUPLE_REST(CHAOS_PP_EXPAND( \
+        CHAOS_PP_TUPLE_TAIL(CHAOS_PP_EXPAND( \
             CHAOS_PP_DEFER(CHAOS_PP_PRIMITIVE_CAT(CHAOS_IP_TUPLE_SANS_BATCH_, n))( \
                 CHAOS_PP_REM tuple \
             ) \

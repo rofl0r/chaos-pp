@@ -32,11 +32,11 @@
 #    define CHAOS_PP_SEQ_CONCAT_ CHAOS_PP_LAMBDA(CHAOS_PP_SEQ_CONCAT_ID)()
 # else
 #    define CHAOS_PP_SEQ_CONCAT(seq) \
-        CHAOS_PP_IIF(CHAOS_PP_SEQ_IS_CONS(CHAOS_PP_SEQ_REST(seq)))( \
+        CHAOS_PP_IIF(CHAOS_PP_SEQ_IS_CONS(CHAOS_PP_SEQ_TAIL(seq)))( \
             CHAOS_PP_EXPAND(CHAOS_IP_SEQ_CONCAT_I( \
-                CHAOS_PP_SEQ_BINARY_TRANSFORM(CHAOS_PP_SEQ_REST(seq), ~), CHAOS_PP_SEQ_FIRST(seq) \
+                CHAOS_PP_SEQ_BINARY_TRANSFORM(CHAOS_PP_SEQ_TAIL(seq), ~), CHAOS_PP_SEQ_HEAD(seq) \
             )), \
-            CHAOS_PP_SEQ_FIRST(seq) \
+            CHAOS_PP_SEQ_HEAD(seq) \
         ) \
         /**/
 # endif

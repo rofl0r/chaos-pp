@@ -70,9 +70,9 @@
         /**/
 #    define CHAOS_IP_TUPLE_FOLD_LEFT_AUX_2_I(_, s, o, op, _o, tuple, ...) \
         CHAOS_PP_EXPR_S _(s)(CHAOS_IP_TUPLE_FOLD_LEFT_AUX_INDIRECT _(2)( \
-            CHAOS_PP_NEXT(s), o, op, _o, CHAOS_PP_TUPLE_REST(tuple), __VA_ARGS__ \
+            CHAOS_PP_NEXT(s), o, op, _o, CHAOS_PP_TUPLE_TAIL(tuple), __VA_ARGS__ \
         )) \
-        _o()(o, op) CHAOS_PP_TUPLE_FIRST(tuple), __VA_ARGS__, \
+        _o()(o, op) CHAOS_PP_TUPLE_HEAD(tuple), __VA_ARGS__, \
         /**/
 #    define CHAOS_IP_TUPLE_FOLD_LEFT_AUX_3(_, s, tuple) \
         CHAOS_PP_IIF _(CHAOS_PP_TUPLE_IS_BATCH(10, tuple))( \
@@ -90,7 +90,7 @@
         CHAOS_PP_INLINE_WHEN _(CHAOS_PP_TUPLE_IS_CONS(tuple))( \
             CHAOS_PP_PLANAR_CLOSE _() \
             CHAOS_PP_EXPR_S _(s)(CHAOS_IP_TUPLE_FOLD_LEFT_AUX_INDIRECT _(4)( \
-                CHAOS_PP_OBSTRUCT _(), CHAOS_PP_NEXT(s), CHAOS_PP_TUPLE_REST _(tuple) \
+                CHAOS_PP_OBSTRUCT _(), CHAOS_PP_NEXT(s), CHAOS_PP_TUPLE_TAIL _(tuple) \
             )) \
         ) \
         /**/

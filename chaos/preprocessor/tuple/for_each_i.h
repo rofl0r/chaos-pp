@@ -77,9 +77,9 @@
         )(CHAOS_PP_OBSTRUCT(), s, o, macro, _m, tuple, n, pd) \
         /**/
 #    define CHAOS_IP_TUPLE_FOR_EACH_I_2_I(_, s, o, macro, _m, tuple, n, pd) \
-        _m()(o, macro, n, CHAOS_PP_TUPLE_FIRST(tuple) CHAOS_PP_EXPOSE(pd)) \
+        _m()(o, macro, n, CHAOS_PP_TUPLE_HEAD(tuple) CHAOS_PP_EXPOSE(pd)) \
         CHAOS_PP_EXPR_S _(s)(CHAOS_IP_TUPLE_FOR_EACH_I_INDIRECT _(2)( \
-            CHAOS_PP_NEXT(s), o, macro, _m, CHAOS_PP_TUPLE_REST(tuple), CHAOS_PP_INC(n), pd \
+            CHAOS_PP_NEXT(s), o, macro, _m, CHAOS_PP_TUPLE_TAIL(tuple), CHAOS_PP_INC(n), pd \
         )) \
         /**/
 # endif

@@ -65,9 +65,9 @@
     )(_, s, o, macro, _m, type, g, pd) \
     /**/
 # define CHAOS_IP_FOR_EACH_PARAMETRIC_III(_, s, o, macro, _m, type, g, pd) \
-    _(0, _m)()(o, macro, CHAOS_PP_ITEM(type, CHAOS_PP_FIRST(g)) _(0, CHAOS_PP_EXPOSE)(pd)) \
+    _(0, _m)()(o, macro, CHAOS_PP_ITEM(type, CHAOS_PP_HEAD(g)) _(0, CHAOS_PP_EXPOSE)(pd)) \
     _(1, CHAOS_PP_EXPR_S)(s)(_(1, CHAOS_IP_FOR_EACH_PARAMETRIC_INDIRECT)()( \
-        CHAOS_PP_NEXT(s), o, macro, _m, type, CHAOS_PP_REST(g), pd \
+        CHAOS_PP_NEXT(s), o, macro, _m, type, CHAOS_PP_TAIL(g), pd \
     )) \
     /**/
 # define CHAOS_IP_FOR_EACH_PARAMETRIC_IV(_, s, o, macro, _m, type, g, pd) \

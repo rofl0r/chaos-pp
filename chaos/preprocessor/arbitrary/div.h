@@ -84,13 +84,13 @@
 #    define CHAOS_IP_ARBITRARY_DIV_2(_, x, y, rem) \
         CHAOS_PP_IIF(CHAOS_PP_IS_UNARY(y))( \
             CHAOS_IP_ARBITRARY_DIV_INDIRECT _(2)( \
-                CHAOS_PP_DEFER _(CHAOS_PP_OBSTRUCT)(), CHAOS_PP_EAT x, CHAOS_PP_EAT y, rem _(CHAOS_PP_SEQ_FIRST _(x)) \
+                CHAOS_PP_DEFER _(CHAOS_PP_OBSTRUCT)(), CHAOS_PP_EAT x, CHAOS_PP_EAT y, rem _(CHAOS_PP_SEQ_HEAD _(x)) \
             ), \
             CHAOS_PP_INLINE_UNLESS _(CHAOS_PP_IS_UNARY _(CHAOS_PP_EAT _ rem))((0)) rem, x \
         ) \
         /**/
 #    define CHAOS_IP_ARBITRARY_DIV_3(y, rem, pool) \
-        CHAOS_PP_SCAN(3)(CHAOS_IP_ARBITRARY_DIV_X (0)pool(00)(CHAOS_IP_ARBITRARY_DIV_4(y, CHAOS_PP_SEQ_FIRST(y), rem, pool)) CHAOS_PP_SPECIAL_CLOSE((0)pool)) \
+        CHAOS_PP_SCAN(3)(CHAOS_IP_ARBITRARY_DIV_X (0)pool(00)(CHAOS_IP_ARBITRARY_DIV_4(y, CHAOS_PP_SEQ_HEAD(y), rem, pool)) CHAOS_PP_SPECIAL_CLOSE((0)pool)) \
         /**/
 #    define CHAOS_IP_ARBITRARY_DIV_5(y, digit, est, rem, pool) \
         CHAOS_IP_ARBITRARY_DIV_6( \
@@ -104,7 +104,7 @@
 #    define CHAOS_IP_ARBITRARY_DIV_7(y, digit, diff, pool) \
         CHAOS_PP_IIF(CHAOS_PP_IS_UNARY(pool))( \
             CHAOS_IP_ARBITRARY_DIV_INDIRECT CHAOS_PP_OBSTRUCT()(4)( \
-                y, digit, diff(CHAOS_PP_SEQ_FIRST(pool)), CHAOS_PP_EAT pool \
+                y, digit, diff(CHAOS_PP_SEQ_HEAD(pool)), CHAOS_PP_EAT pool \
             ), \
             , diff \
         ) \
@@ -128,13 +128,13 @@
 #    define CHAOS_IP_ARBITRARY_DIV_2(_, x, y, rem) \
         CHAOS_PP_IIF(CHAOS_PP_IS_UNARY(y))( \
             CHAOS_IP_ARBITRARY_DIV_INDIRECT _(2)( \
-                CHAOS_PP_DEFER _(CHAOS_PP_OBSTRUCT)(), CHAOS_PP_EAT x, CHAOS_PP_EAT y, rem _(CHAOS_PP_SEQ_FIRST _(x)) \
+                CHAOS_PP_DEFER _(CHAOS_PP_OBSTRUCT)(), CHAOS_PP_EAT x, CHAOS_PP_EAT y, rem _(CHAOS_PP_SEQ_HEAD _(x)) \
             ), \
             CHAOS_PP_INLINE_UNLESS _(CHAOS_PP_IS_UNARY _(CHAOS_PP_EAT _ rem ~))((0)) rem CHAOS_PP_COMMA _() x \
         ) \
         /**/
 #    define CHAOS_IP_ARBITRARY_DIV_3(y, rem, pool) \
-        CHAOS_PP_SCAN(3)(CHAOS_IP_ARBITRARY_DIV_X (0)pool()(00) (CHAOS_IP_ARBITRARY_DIV_4(y, CHAOS_PP_SEQ_FIRST(y), rem, pool() ~)) CHAOS_PP_SPECIAL_CLOSE((0)pool())) \
+        CHAOS_PP_SCAN(3)(CHAOS_IP_ARBITRARY_DIV_X (0)pool()(00) (CHAOS_IP_ARBITRARY_DIV_4(y, CHAOS_PP_SEQ_HEAD(y), rem, pool() ~)) CHAOS_PP_SPECIAL_CLOSE((0)pool())) \
         /**/
 #    define CHAOS_IP_ARBITRARY_DIV_5(y, digit, est, rem, pool) \
         CHAOS_IP_ARBITRARY_DIV_6( \
@@ -148,7 +148,7 @@
 #    define CHAOS_IP_ARBITRARY_DIV_7(y, digit, diff, pool) \
         CHAOS_PP_IIF(CHAOS_PP_IS_UNARY(pool))( \
             CHAOS_IP_ARBITRARY_DIV_INDIRECT CHAOS_PP_OBSTRUCT()(4)( \
-                y, digit, diff(CHAOS_PP_SEQ_FIRST(pool)), CHAOS_PP_EAT pool \
+                y, digit, diff(CHAOS_PP_SEQ_HEAD(pool)), CHAOS_PP_EAT pool \
             ), \
             CHAOS_PP_COMMA() diff \
         ) \
@@ -169,7 +169,7 @@
 # define CHAOS_IP_ARBITRARY_DIV_INDIRECT(n) CHAOS_IP_ARBITRARY_DIV_ ## n
 #
 # define CHAOS_IP_ARBITRARY_DIV_4(y, digit, rem, pool) \
-    CHAOS_IP_ARBITRARY_DIV_5(y, digit, CHAOS_PP_DIVIDE(CHAOS_PP_SEQ_FIRST(rem), CHAOS_PP_SEQ_FIRST(CHAOS_PP_EAT rem), digit), rem, pool) \
+    CHAOS_IP_ARBITRARY_DIV_5(y, digit, CHAOS_PP_DIVIDE(CHAOS_PP_SEQ_HEAD(rem), CHAOS_PP_SEQ_HEAD(CHAOS_PP_EAT rem), digit), rem, pool) \
     /**/
 # define CHAOS_IP_ARBITRARY_DIV_6(y, digit, est, trial, rem, pool) \
     CHAOS_PP_IIF(CHAOS_PP_ARBITRARY_LESS_EQUAL_INTERNAL(trial, rem))( \

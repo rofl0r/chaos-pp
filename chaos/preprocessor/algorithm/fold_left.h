@@ -60,15 +60,15 @@
     /**/
 # define CHAOS_IP_FOLD_LEFT_1_I(_, s, o, op, _o, type, g) \
     CHAOS_PP_EXPR_S(s) _(CHAOS_IP_FOLD_LEFT_INDIRECT _(1)( \
-        CHAOS_PP_NEXT(s), o, op, _o, type, CHAOS_PP_REST(g) \
+        CHAOS_PP_NEXT(s), o, op, _o, type, CHAOS_PP_TAIL(g) \
     )) \
-    _o()(o, op) CHAOS_PP_ITEM(type, CHAOS_PP_FIRST(g)), \
+    _o()(o, op) CHAOS_PP_ITEM(type, CHAOS_PP_HEAD(g)), \
     /**/
 # define CHAOS_IP_FOLD_LEFT_2(_, s, g) \
     CHAOS_PP_INLINE_WHEN _(CHAOS_PP_IS_CONS(g))( \
         CHAOS_PP_PLANAR_CLOSE _() \
         CHAOS_PP_EXPR_S(s) _(CHAOS_IP_FOLD_LEFT_INDIRECT _(2)( \
-            CHAOS_PP_OBSTRUCT _(), CHAOS_PP_NEXT(s), CHAOS_PP_REST _(g) \
+            CHAOS_PP_OBSTRUCT _(), CHAOS_PP_NEXT(s), CHAOS_PP_TAIL _(g) \
         )) \
     ) \
     /**/

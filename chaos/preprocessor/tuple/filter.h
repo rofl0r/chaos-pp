@@ -88,13 +88,13 @@
         )(CHAOS_PP_OBSTRUCT(), s, o, pred, _p, tuple, pd) \
         /**/
 #    define CHAOS_IP_TUPLE_FILTER_2_I(_, s, o, pred, _p, tuple, pd) \
-        CHAOS_PP_OBSTRUCT(CHAOS_PP_IIF)(_p()(o, pred, CHAOS_PP_TUPLE_FIRST(tuple) CHAOS_PP_EXPOSE(pd)))( \
+        CHAOS_PP_OBSTRUCT(CHAOS_PP_IIF)(_p()(o, pred, CHAOS_PP_TUPLE_HEAD(tuple) CHAOS_PP_EXPOSE(pd)))( \
             CHAOS_PP_TUPLE_CONS, CHAOS_PP_BINARY(0) \
         )( \
             CHAOS_PP_EXPR_S _(s)(CHAOS_IP_TUPLE_FILTER_INDIRECT _(2)( \
-                CHAOS_PP_NEXT(s), o, pred, _p, CHAOS_PP_TUPLE_REST(tuple), pd \
+                CHAOS_PP_NEXT(s), o, pred, _p, CHAOS_PP_TUPLE_TAIL(tuple), pd \
             )), \
-            CHAOS_PP_TUPLE_FIRST(tuple) \
+            CHAOS_PP_TUPLE_HEAD(tuple) \
         ) \
         /**/
 # endif

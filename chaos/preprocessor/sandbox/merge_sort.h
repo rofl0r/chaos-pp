@@ -59,7 +59,7 @@
 # define CHAOS_IP_MERGE_SORT_1(s, o, pred, _p, type, g, pd) \
     CHAOS_PP_IIF( \
         CHAOS_PP_BITAND \
-            (CHAOS_PP_IS_CONS(g))(CHAOS_PP_IS_CONS(CHAOS_PP_REST(g))) \
+            (CHAOS_PP_IS_CONS(g))(CHAOS_PP_IS_CONS(CHAOS_PP_TAIL(g))) \
     )( \
         CHAOS_IP_MERGE_SORT_3, g CHAOS_PP_TUPLE_EAT(8) \
     )( \
@@ -73,7 +73,7 @@
 # define CHAOS_IP_MERGE_SORT_2(_, s, g, r1, r2) \
     CHAOS_PP_IIF _(CHAOS_PP_IS_CONS(g))( \
         CHAOS_PP_EXPR_S _(s)(CHAOS_IP_MERGE_SORT_INDIRECT _(2)( \
-            CHAOS_PP_OBSTRUCT _(), CHAOS_PP_NEXT(s), CHAOS_PP_REST _(g), r2, CHAOS_PP_CONS _(r1, CHAOS_PP_FIRST _(g)) \
+            CHAOS_PP_OBSTRUCT _(), CHAOS_PP_NEXT(s), CHAOS_PP_TAIL _(g), r2, CHAOS_PP_CONS _(r1, CHAOS_PP_HEAD _(g)) \
         )), \
         (r1, r2) \
     ) \
@@ -99,18 +99,18 @@
     )(CHAOS_PP_OBSTRUCT(), s, pred, _p, type, r1, r2, pd) \
     /**/
 # define CHAOS_IP_MERGE_SORT_5(_, s, pred, _p, type, r1, r2, pd) \
-    CHAOS_PP_IIF _(_p()(s, pred, CHAOS_PP_ITEM(type, CHAOS_PP_FIRST(r1)) CHAOS_PP_COMMA() CHAOS_PP_ITEM(type, CHAOS_PP_FIRST(r2)) CHAOS_PP_EXPOSE(pd)))( \
+    CHAOS_PP_IIF _(_p()(s, pred, CHAOS_PP_ITEM(type, CHAOS_PP_HEAD(r1)) CHAOS_PP_COMMA() CHAOS_PP_ITEM(type, CHAOS_PP_HEAD(r2)) CHAOS_PP_EXPOSE(pd)))( \
         CHAOS_PP_CONS _( \
             CHAOS_PP_EXPR_S _(s)(CHAOS_IP_MERGE_SORT_INDIRECT _(4)( \
-                CHAOS_PP_NEXT(s), pred, _p, type, CHAOS_PP_REST _(r1), r2, pd \
+                CHAOS_PP_NEXT(s), pred, _p, type, CHAOS_PP_TAIL _(r1), r2, pd \
             )), \
-            CHAOS_PP_FIRST _(r1) \
+            CHAOS_PP_HEAD _(r1) \
         ), \
         CHAOS_PP_CONS _( \
             CHAOS_PP_EXPR_S _(s)(CHAOS_IP_MERGE_SORT_INDIRECT _(4)( \
-                CHAOS_PP_NEXT(s), pred, _p, type, r1, CHAOS_PP_REST _(r2), pd \
+                CHAOS_PP_NEXT(s), pred, _p, type, r1, CHAOS_PP_TAIL _(r2), pd \
             )), \
-            CHAOS_PP_FIRST _(r2) \
+            CHAOS_PP_HEAD _(r2) \
         ) \
     ) \
     /**/

@@ -45,9 +45,9 @@
 # define CHAOS_IP_ENUMERATE_INDIRECT() CHAOS_IP_ENUMERATE_I
 # define CHAOS_IP_ENUMERATE_I(_, s, sep, ss, g) \
     CHAOS_PP_INLINE_WHEN _(CHAOS_PP_IS_CONS(g))( \
-        sep _() CHAOS_PP_FIRST _(g) \
+        sep _() CHAOS_PP_HEAD _(g) \
         CHAOS_PP_EXPR_S(s) _(CHAOS_IP_ENUMERATE_INDIRECT _()( \
-            CHAOS_PP_OBSTRUCT _(), CHAOS_PP_PREV(s), ss, ss, CHAOS_PP_REST _(g) \
+            CHAOS_PP_OBSTRUCT _(), CHAOS_PP_PREV(s), ss, ss, CHAOS_PP_TAIL _(g) \
         )) \
     ) \
     /**/

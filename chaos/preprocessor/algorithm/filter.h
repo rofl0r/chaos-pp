@@ -59,13 +59,13 @@
     )(CHAOS_PP_DEFER(CHAOS_PP_OBSTRUCT)(), s, o, pred, _p, type, g, pd) \
     /**/
 # define CHAOS_IP_FILTER_II(_, s, o, pred, _p, type, g, pd) \
-    CHAOS_PP_IIF _(_p()(o, pred, CHAOS_PP_ITEM(type, CHAOS_PP_FIRST(g)) CHAOS_PP_EXPOSE(pd)))( \
+    CHAOS_PP_IIF _(_p()(o, pred, CHAOS_PP_ITEM(type, CHAOS_PP_HEAD(g)) CHAOS_PP_EXPOSE(pd)))( \
         CHAOS_PP_CONS, CHAOS_PP_BINARY(0) \
     )( \
         CHAOS_PP_DEFER(CHAOS_PP_EXPR_S(s))(CHAOS_PP_DEFER(CHAOS_IP_FILTER_INDIRECT)()( \
-            CHAOS_PP_NEXT(s), o, pred, _p, type, CHAOS_PP_REST(g), pd \
+            CHAOS_PP_NEXT(s), o, pred, _p, type, CHAOS_PP_TAIL(g), pd \
         )), \
-        CHAOS_PP_FIRST(g) \
+        CHAOS_PP_HEAD(g) \
     ) \
     /**/
 #

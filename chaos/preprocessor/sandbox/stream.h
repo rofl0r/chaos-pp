@@ -21,13 +21,19 @@
 # include <chaos/preprocessor/logical/compl.h>
 # include <chaos/preprocessor/recursion/basic.h>
 #
+# if !!!!!0 // WARNING: REDEFINITION!
+#    undef CHAOS_PP_LIST_TAIL
+#    define CHAOS_PP_LIST_TAIL(list) CHAOS_IP_LIST_TAIL_SID(CHAOS_PP_SPLIT(1, CHAOS_PP_TUPLE_REM(2) list))
+#    define CHAOS_IP_LIST_TAIL_SID(x) x
+# endif
+#
 # /* CHAOS_PP_LIST_STREAM */
 #
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_LIST_STREAM(macro, ...) (macro(0, __VA_ARGS__), CHAOS_IP_LIST_STREAM_I(1, macro, __VA_ARGS__))
 #    define CHAOS_PP_LIST_STREAM_ CHAOS_PP_LAMBDA(CHAOS_PP_LIST_STREAM_ID)()
 #    define CHAOS_IP_LIST_STREAM_I(n, macro, ...) \
-        CHAOS_PP_IIF_SHADOW(CHAOS_PP_COMPL(CHAOS_PP_IS_NULLARY(CHAOS_IP_LIST_REST_SID(()))))( \
+        CHAOS_PP_IIF_SHADOW(CHAOS_PP_COMPL(CHAOS_PP_IS_NULLARY(CHAOS_IP_LIST_TAIL_SID(()))))( \
             (macro(n, __VA_ARGS__), CHAOS_IP_LIST_STREAM_INDIRECT CHAOS_PP_OBSTRUCT()()(CHAOS_PP_INC(n), macro, __VA_ARGS__)), \
             CHAOS_IP_LIST_STREAM_INDIRECT CHAOS_PP_OBSTRUCT()()(n, macro, __VA_ARGS__) \
         ) \
@@ -35,7 +41,7 @@
 # else
 #    define CHAOS_PP_LIST_STREAM(macro, data) (macro(0, data), CHAOS_IP_LIST_STREAM_I(1, macro, data))
 #    define CHAOS_IP_LIST_STREAM_I(n, macro, data) \
-        CHAOS_PP_IIF_SHADOW(CHAOS_PP_COMPL(CHAOS_PP_IS_NULLARY(CHAOS_IP_LIST_REST_SID(()))))( \
+        CHAOS_PP_IIF_SHADOW(CHAOS_PP_COMPL(CHAOS_PP_IS_NULLARY(CHAOS_IP_LIST_TAIL_SID(()))))( \
             (macro(n, data), CHAOS_IP_LIST_STREAM_INDIRECT CHAOS_PP_OBSTRUCT()()(CHAOS_PP_INC(n), macro, data)), \
             CHAOS_IP_LIST_STREAM_INDIRECT CHAOS_PP_OBSTRUCT()()(n, macro, data) \
         ) \

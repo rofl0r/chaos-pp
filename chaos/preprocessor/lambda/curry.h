@@ -59,7 +59,7 @@
 #    define CHAOS_IP_CURRY_I(p, s, orig, args, expr) \
         CHAOS_PP_IIF(CHAOS_PP_IS_VARIADIC(p ## expr))( \
             CHAOS_IP_CURRY_II, expr CHAOS_PP_EAT \
-        )(, CHAOS_PP_OBSTRUCT(), s, p ## orig, p ## args, (CHAOS_PP_SEQ_FIRST(p ## expr)), CHAOS_PP_SEQ_REST(p ## expr)) \
+        )(, CHAOS_PP_OBSTRUCT(), s, p ## orig, p ## args, (CHAOS_PP_SEQ_HEAD(p ## expr)), CHAOS_PP_SEQ_TAIL(p ## expr)) \
         /**/
 #    define CHAOS_IP_CURRY_II(p, _, s, orig, args, first, rest) \
         CHAOS_PP_CAT( \

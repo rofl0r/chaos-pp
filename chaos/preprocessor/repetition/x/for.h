@@ -82,7 +82,7 @@
     )) \
     /**/
 # define CHAOS_IP_FOR_X_III(_, s, jump, fix, mode, pred, _p, op, _o, macro, _m, ps) \
-    CHAOS_IP_FOR_X_IV(CHAOS_PP_SEQ_FIRST(jump), CHAOS_PP_SEQ_REST(jump), fix, mode, pred, _p, op, _o, macro, _m, ps) \
+    CHAOS_IP_FOR_X_IV(CHAOS_PP_SEQ_HEAD(jump), CHAOS_PP_SEQ_TAIL(jump), fix, mode, pred, _p, op, _o, macro, _m, ps) \
     /**/
 # define CHAOS_IP_FOR_X_IV(s, jump, fix, mode, pred, _p, op, _o, macro, _m, ps) \
     CHAOS_PP_IIF(CHAOS_PP_NOT_EQUAL(s, CHAOS_PP_PREV(fix)))( \

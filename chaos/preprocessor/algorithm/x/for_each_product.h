@@ -57,7 +57,7 @@
 # define CHAOS_IP_FOR_EACH_PRODUCT_X_U(s, size, macro, seq, bind, pd) \
     CHAOS_PP_IIF(CHAOS_PP_SEQ_IS_CONS(seq))( \
         CHAOS_IP_FOR_EACH_PRODUCT_X_I, CHAOS_PP_TUPLE_EAT(8) \
-    )(CHAOS_PP_NEXT(s), (CHAOS_PP_NEXT(s)), CHAOS_PP_FIXED_S(s, size), macro, CHAOS_PP_CALL(macro), CHAOS_PP_SEQ_FIRST(seq), CHAOS_PP_SEQ_REST(seq), bind, pd) \
+    )(CHAOS_PP_NEXT(s), (CHAOS_PP_NEXT(s)), CHAOS_PP_FIXED_S(s, size), macro, CHAOS_PP_CALL(macro), CHAOS_PP_SEQ_HEAD(seq), CHAOS_PP_SEQ_TAIL(seq), bind, pd) \
     /**/
 # define CHAOS_IP_FOR_EACH_PRODUCT_X_INDIRECT() CHAOS_IP_FOR_EACH_PRODUCT_X_I
 # define CHAOS_IP_FOR_EACH_PRODUCT_X_I(s, jump, fix, macro, _m, g, seq, bind, pd) \
@@ -83,19 +83,19 @@
         CHAOS_IP_FOR_EACH_PRODUCT_X_V, CHAOS_IP_FOR_EACH_PRODUCT_X_VI \
     )(_, s, jump, fix, macro, _m, g, seq, bind, pd) \
     _(1, CHAOS_PP_EXPR_S)(s)(_(1, CHAOS_IP_FOR_EACH_PRODUCT_X_INDIRECT)()( \
-        CHAOS_PP_NEXT(s), jump, fix, macro, _m, CHAOS_PP_REST(g), seq, bind, pd \
+        CHAOS_PP_NEXT(s), jump, fix, macro, _m, CHAOS_PP_TAIL(g), seq, bind, pd \
     )) \
     /**/
 # define CHAOS_IP_FOR_EACH_PRODUCT_X_V(_, s, jump, fix, macro, _m, g, seq, bind, pd) \
     _(1, CHAOS_PP_EXPR_S)(s)(_(1, CHAOS_IP_FOR_EACH_PRODUCT_X_INDIRECT)()( \
-        CHAOS_PP_NEXT(s), jump, fix, macro, _m, CHAOS_PP_SEQ_FIRST(seq), CHAOS_PP_SEQ_REST(seq), bind (CHAOS_PP_FIRST(g)), pd \
+        CHAOS_PP_NEXT(s), jump, fix, macro, _m, CHAOS_PP_SEQ_HEAD(seq), CHAOS_PP_SEQ_TAIL(seq), bind (CHAOS_PP_HEAD(g)), pd \
     )) \
     /**/
 # define CHAOS_IP_FOR_EACH_PRODUCT_X_VI(_, s, jump, fix, macro, _m, g, seq, bind, pd) \
-    _(0, _m)()(s, macro, bind (CHAOS_PP_FIRST(g)) _(0, CHAOS_PP_EXPOSE)(pd)) \
+    _(0, _m)()(s, macro, bind (CHAOS_PP_HEAD(g)) _(0, CHAOS_PP_EXPOSE)(pd)) \
     /**/
 # define CHAOS_IP_FOR_EACH_PRODUCT_X_VII(_, s, jump, fix, macro, _m, g, seq, bind, pd) \
-    CHAOS_IP_FOR_EACH_PRODUCT_X_VIII(CHAOS_PP_SEQ_FIRST(jump), CHAOS_PP_SEQ_REST(jump), fix, macro, _m, g, seq, bind, pd) \
+    CHAOS_IP_FOR_EACH_PRODUCT_X_VIII(CHAOS_PP_SEQ_HEAD(jump), CHAOS_PP_SEQ_TAIL(jump), fix, macro, _m, g, seq, bind, pd) \
     /**/
 # define CHAOS_IP_FOR_EACH_PRODUCT_X_VIII(s, jump, fix, macro, _m, g, seq, bind, pd) \
     CHAOS_PP_IIF(CHAOS_PP_NOT_EQUAL(s, CHAOS_PP_PREV(fix)))( \

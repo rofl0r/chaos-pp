@@ -73,10 +73,10 @@
 # define CHAOS_IP_BUBBLESORT_2(s, pred, _p, type, g, size, pd) \
     CHAOS_PP_IF(size)( \
         CHAOS_IP_BUBBLESORT_3, g CHAOS_PP_TUPLE_EAT(9) \
-    )(CHAOS_PP_OBSTRUCT(), s, pred, _p, type, (CHAOS_PP_FIRST(g)), CHAOS_PP_REST(g), CHAOS_PP_DEC(size), pd) \
+    )(CHAOS_PP_OBSTRUCT(), s, pred, _p, type, (CHAOS_PP_HEAD(g)), CHAOS_PP_TAIL(g), CHAOS_PP_DEC(size), pd) \
     /**/
 # define CHAOS_IP_BUBBLESORT_3(_, s, pred, _p, type, first, rest, size, pd) \
-    CHAOS_PP_IIF _(_p()(s, pred, CHAOS_PP_ITEM(type, CHAOS_PP_REM first) CHAOS_PP_COMMA() CHAOS_PP_ITEM(type, CHAOS_PP_FIRST(rest)) CHAOS_PP_EXPOSE(pd)))( \
+    CHAOS_PP_IIF _(_p()(s, pred, CHAOS_PP_ITEM(type, CHAOS_PP_REM first) CHAOS_PP_COMMA() CHAOS_PP_ITEM(type, CHAOS_PP_HEAD(rest)) CHAOS_PP_EXPOSE(pd)))( \
         CHAOS_PP_CONS _( \
             CHAOS_PP_EXPR_S _(s)(CHAOS_IP_BUBBLESORT_INDIRECT _(2)( \
                 CHAOS_PP_NEXT(s), pred, _p, type, rest, size, pd \
@@ -85,9 +85,9 @@
         ), \
         CHAOS_PP_CONS _( \
             CHAOS_PP_EXPR_S _(s)(CHAOS_IP_BUBBLESORT_INDIRECT _(2)( \
-                CHAOS_PP_NEXT(s), pred, _p, type, CHAOS_PP_CONS _(CHAOS_PP_REST _(rest), CHAOS_PP_REM first), size, pd \
+                CHAOS_PP_NEXT(s), pred, _p, type, CHAOS_PP_CONS _(CHAOS_PP_TAIL _(rest), CHAOS_PP_REM first), size, pd \
             )), \
-            CHAOS_PP_FIRST _(rest) \
+            CHAOS_PP_HEAD _(rest) \
         ) \
     ) \
     /**/

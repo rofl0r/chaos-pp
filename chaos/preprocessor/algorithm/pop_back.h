@@ -43,12 +43,12 @@
 #
 # define CHAOS_IP_POP_BACK_INDIRECT() CHAOS_IP_POP_BACK_I
 # define CHAOS_IP_POP_BACK_I(_, s, g) \
-    CHAOS_PP_IIF _(CHAOS_PP_IS_CONS(CHAOS_PP_REST(g)))( \
+    CHAOS_PP_IIF _(CHAOS_PP_IS_CONS(CHAOS_PP_TAIL(g)))( \
         CHAOS_PP_CONS _( \
             CHAOS_PP_EXPR_S(s) _(CHAOS_IP_POP_BACK_INDIRECT _()( \
-                CHAOS_PP_OBSTRUCT _(), CHAOS_PP_PREV(s), CHAOS_PP_REST(g) \
+                CHAOS_PP_OBSTRUCT _(), CHAOS_PP_PREV(s), CHAOS_PP_TAIL(g) \
             )), \
-            CHAOS_PP_FIRST(g) \
+            CHAOS_PP_HEAD(g) \
         ), \
         CHAOS_PP_NIL(CHAOS_PP_TYPEOF(g)) \
     ) \

@@ -52,9 +52,9 @@
     CHAOS_PP_IIF _(CHAOS_PP_IS_CONS(g))( \
         CHAOS_PP_CONS _( \
             CHAOS_PP_EXPR_S(s) _(CHAOS_IP_PUSH_BACK_INDIRECT _()( \
-                CHAOS_PP_OBSTRUCT _(), CHAOS_PP_PREV(s), CHAOS_PP_REST _(g), px \
+                CHAOS_PP_OBSTRUCT _(), CHAOS_PP_PREV(s), CHAOS_PP_TAIL _(g), px \
             )), \
-            CHAOS_PP_FIRST _(g) \
+            CHAOS_PP_HEAD _(g) \
         ), \
         CHAOS_PP_CONS _(g, CHAOS_PP_REM px) \
     ) \

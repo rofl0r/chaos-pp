@@ -47,9 +47,9 @@
     CHAOS_PP_IF _(n)( \
         CHAOS_PP_CONS _( \
             CHAOS_PP_EXPR_S(s) _(CHAOS_IP_TAKE_INDIRECT _()( \
-                CHAOS_PP_OBSTRUCT _(), CHAOS_PP_PREV(s), CHAOS_PP_DEC(n), CHAOS_PP_REST _(g) \
+                CHAOS_PP_OBSTRUCT _(), CHAOS_PP_PREV(s), CHAOS_PP_DEC(n), CHAOS_PP_TAIL _(g) \
             )), \
-            CHAOS_PP_FIRST _(g) \
+            CHAOS_PP_HEAD _(g) \
         ), \
         CHAOS_PP_NIL _(CHAOS_PP_TYPEOF _(g)) \
     ) \

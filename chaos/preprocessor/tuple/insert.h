@@ -81,9 +81,9 @@
 #    define CHAOS_IP_TUPLE_INSERT_2_I(_, s, n, tuple, x) \
         CHAOS_PP_TUPLE_CONS _( \
             CHAOS_PP_EXPR_S _(s)(CHAOS_IP_TUPLE_INSERT_INDIRECT _(2)( \
-                CHAOS_PP_PREV(s), CHAOS_PP_DEC(n), CHAOS_PP_TUPLE_REST(tuple), x \
+                CHAOS_PP_PREV(s), CHAOS_PP_DEC(n), CHAOS_PP_TUPLE_TAIL(tuple), x \
             )), \
-            CHAOS_PP_TUPLE_FIRST(tuple) \
+            CHAOS_PP_TUPLE_HEAD(tuple) \
         ) \
         /**/
 # endif

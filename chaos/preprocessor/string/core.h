@@ -68,49 +68,49 @@
 #    define CHAOS_PP_STRING_ITEM_ CHAOS_PP_LAMBDA(CHAOS_PP_STRING_ITEM_ID)()
 # endif
 #
-# /* CHAOS_PP_STRING_FIRST */
+# /* CHAOS_PP_STRING_HEAD */
 #
-# define CHAOS_PP_STRING_FIRST(string) \
+# define CHAOS_PP_STRING_HEAD(string) \
     CHAOS_PP_SPLIT( \
         0, CHAOS_PP_EXPAND( \
-            CHAOS_IP_STRING_FIRST_I CHAOS_PP_PRIMITIVE_CAT(CHAOS_IP_STRING_, string) \
+            CHAOS_IP_STRING_HEAD_I CHAOS_PP_PRIMITIVE_CAT(CHAOS_IP_STRING_, string) \
         ) \
     ) \
     /**/
-# define CHAOS_PP_STRING_FIRST_ID() CHAOS_PP_STRING_FIRST
+# define CHAOS_PP_STRING_HEAD_ID() CHAOS_PP_STRING_HEAD
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_STRING_FIRST_ CHAOS_PP_LAMBDA(CHAOS_PP_STRING_FIRST_ID)()
+#    define CHAOS_PP_STRING_HEAD_ CHAOS_PP_LAMBDA(CHAOS_PP_STRING_HEAD_ID)()
 # endif
 #
-# define CHAOS_IP_STRING_FIRST_I(x) x, ~
+# define CHAOS_IP_STRING_HEAD_I(x) x, ~
 #
-# /* CHAOS_PP_STRING_REST */
+# /* CHAOS_PP_STRING_TAIL */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_STRING_REST(string) \
+#    define CHAOS_PP_STRING_TAIL(string) \
         CHAOS_PP_SPLIT( \
             1, CHAOS_PP_EXPAND( \
-                CHAOS_IP_STRING_REST_I CHAOS_PP_PRIMITIVE_CAT(CHAOS_IP_STRING_, string) \
+                CHAOS_IP_STRING_TAIL_I CHAOS_PP_PRIMITIVE_CAT(CHAOS_IP_STRING_, string) \
             ) \
         ) \
         /**/
-#    define CHAOS_PP_STRING_REST_ CHAOS_PP_LAMBDA(CHAOS_PP_STRING_REST_ID)()
+#    define CHAOS_PP_STRING_TAIL_ CHAOS_PP_LAMBDA(CHAOS_PP_STRING_TAIL_ID)()
 # else
-#    define CHAOS_PP_STRING_REST(string) \
-        CHAOS_IP_STRING_REST_II(CHAOS_PP_SPLIT( \
+#    define CHAOS_PP_STRING_TAIL(string) \
+        CHAOS_IP_STRING_TAIL_II(CHAOS_PP_SPLIT( \
             1, CHAOS_PP_EXPAND( \
-                CHAOS_IP_STRING_REST_I CHAOS_PP_PRIMITIVE_CAT(CHAOS_IP_STRING_, string) \
+                CHAOS_IP_STRING_TAIL_I CHAOS_PP_PRIMITIVE_CAT(CHAOS_IP_STRING_, string) \
             ) \
         )) \
         /**/
 # endif
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_IP_STRING_REST_I(x) x,
+#    define CHAOS_IP_STRING_TAIL_I(x) x,
 # else
-#    define CHAOS_IP_STRING_REST_I(x) x, ()
-#    define CHAOS_IP_STRING_REST_II(r) \
+#    define CHAOS_IP_STRING_TAIL_I(x) x, ()
+#    define CHAOS_IP_STRING_TAIL_II(r) \
         CHAOS_PP_INLINE_UNLESS(CHAOS_PP_IS_EMPTY(CHAOS_PP_EMPTY r))( \
             CHAOS_PP_EMPTY \
         ) r \

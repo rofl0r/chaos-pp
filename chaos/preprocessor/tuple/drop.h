@@ -65,7 +65,7 @@
 #    define CHAOS_IP_TUPLE_DROP_1(_, s, n, tuple) \
         CHAOS_PP_IF _(n)( \
             CHAOS_PP_EXPR_S _(s)(CHAOS_IP_TUPLE_DROP_INDIRECT _(1)( \
-                CHAOS_PP_OBSTRUCT _(), CHAOS_PP_PREV(s), CHAOS_PP_DEC(n), CHAOS_PP_TUPLE_REST _(tuple) \
+                CHAOS_PP_OBSTRUCT _(), CHAOS_PP_PREV(s), CHAOS_PP_DEC(n), CHAOS_PP_TUPLE_TAIL _(tuple) \
             )), \
             tuple \
         ) \

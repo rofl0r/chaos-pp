@@ -83,7 +83,7 @@
     )) \
     /**/
 # define CHAOS_IP_DELINEATE_FROM_TO_X_V(_, s, jump, fix, from, to, s1, s2, macro, _m, pd) \
-    CHAOS_IP_DELINEATE_FROM_TO_X_VI(CHAOS_PP_SEQ_FIRST(jump), CHAOS_PP_SEQ_REST(jump), fix, from, to, s1, s2, macro, _m, pd) \
+    CHAOS_IP_DELINEATE_FROM_TO_X_VI(CHAOS_PP_SEQ_HEAD(jump), CHAOS_PP_SEQ_TAIL(jump), fix, from, to, s1, s2, macro, _m, pd) \
     /**/
 # define CHAOS_IP_DELINEATE_FROM_TO_X_VI(s, jump, fix, from, to, s1, s2, macro, _m, pd) \
     CHAOS_PP_IIF(CHAOS_PP_NOT_EQUAL(s, CHAOS_PP_PREV(fix)))( \

@@ -120,9 +120,9 @@
 # define CHAOS_IP_STRING_TO_LOWER_INDIRECT() CHAOS_IP_STRING_TO_LOWER_I
 # define CHAOS_IP_STRING_TO_LOWER_I(_, s, string) \
     CHAOS_PP_INLINE_WHEN _(CHAOS_PP_STRING_IS_CONS(string))( \
-        CHAOS_PP_TO_LOWER _(CHAOS_PP_STRING_FIRST _(string)) \
+        CHAOS_PP_TO_LOWER _(CHAOS_PP_STRING_HEAD _(string)) \
         CHAOS_PP_EXPR_S(s) _(CHAOS_IP_STRING_TO_LOWER_INDIRECT _()( \
-            CHAOS_PP_OBSTRUCT _(), CHAOS_PP_PREV(s), CHAOS_PP_STRING_REST _(string) \
+            CHAOS_PP_OBSTRUCT _(), CHAOS_PP_PREV(s), CHAOS_PP_STRING_TAIL _(string) \
         )) \
     ) \
     /**/

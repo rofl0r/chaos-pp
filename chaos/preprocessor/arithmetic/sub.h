@@ -66,7 +66,7 @@
         ) \
     ) \
     /**/
-# define CHAOS_IP_SUB_IV(_, s, jump, x, y) CHAOS_IP_SUB_V(CHAOS_PP_SEQ_FIRST(jump), CHAOS_PP_SEQ_REST(jump), x, y)
+# define CHAOS_IP_SUB_IV(_, s, jump, x, y) CHAOS_IP_SUB_V(CHAOS_PP_SEQ_HEAD(jump), CHAOS_PP_SEQ_TAIL(jump), x, y)
 # define CHAOS_IP_SUB_V(s, jump, x, y) \
     CHAOS_PP_IIF(CHAOS_PP_IS_VALID(CHAOS_PP_PREV(s)))( \
         CHAOS_IP_SUB_II, CHAOS_IP_SUB_III \

@@ -61,9 +61,9 @@
         CHAOS_PP_EXPR_S _(s)(CHAOS_IP_INSERTION_SORT_INDIRECT _(1)( \
             CHAOS_PP_OBSTRUCT _(), CHAOS_PP_NEXT(s), pred, _p, \
             CHAOS_PP_EXPR_S _(s)(CHAOS_IP_INSERTION_SORT_2 _( \
-                CHAOS_PP_NEXT(s), pred, _p, sorted, type, (CHAOS_PP_FIRST _(g)), pd \
+                CHAOS_PP_NEXT(s), pred, _p, sorted, type, (CHAOS_PP_HEAD _(g)), pd \
             )), \
-            type, CHAOS_PP_REST _(g), pd \
+            type, CHAOS_PP_TAIL _(g), pd \
         )), \
         sorted \
     ) \
@@ -75,14 +75,14 @@
     /**/
 # define CHAOS_IP_INSERTION_SORT_3(_, s, pred, _p, sorted, type, key, pd) \
     CHAOS_PP_IIF _( \
-        _p()(s, pred, CHAOS_PP_ITEM(type, CHAOS_PP_REM key) CHAOS_PP_COMMA() CHAOS_PP_ITEM(type, CHAOS_PP_FIRST(sorted)) CHAOS_PP_EXPOSE(pd)) \
+        _p()(s, pred, CHAOS_PP_ITEM(type, CHAOS_PP_REM key) CHAOS_PP_COMMA() CHAOS_PP_ITEM(type, CHAOS_PP_HEAD(sorted)) CHAOS_PP_EXPOSE(pd)) \
     )( \
         CHAOS_PP_CONS _(sorted, CHAOS_PP_REM _ key), \
         CHAOS_PP_CONS _( \
             CHAOS_PP_EXPR_S _(s)(CHAOS_IP_INSERTION_SORT_INDIRECT _(2)( \
-                CHAOS_PP_NEXT(s), pred, _p, CHAOS_PP_REST _(sorted), type, key, pd \
+                CHAOS_PP_NEXT(s), pred, _p, CHAOS_PP_TAIL _(sorted), type, key, pd \
             )), \
-            CHAOS_PP_FIRST _(sorted) \
+            CHAOS_PP_HEAD _(sorted) \
         ) \
     ) \
     /**/

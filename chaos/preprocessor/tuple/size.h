@@ -83,7 +83,7 @@
 #    define CHAOS_IP_TUPLE_SIZE_1(_, s, tuple, x) \
         CHAOS_PP_IIF _(CHAOS_PP_TUPLE_IS_CONS(tuple))( \
             CHAOS_PP_EXPR_S _(s)(CHAOS_IP_TUPLE_SIZE_INDIRECT _(1)( \
-                CHAOS_PP_OBSTRUCT _(), CHAOS_PP_PREV(s), CHAOS_PP_TUPLE_REST _(tuple), CHAOS_PP_INC(x) \
+                CHAOS_PP_OBSTRUCT _(), CHAOS_PP_PREV(s), CHAOS_PP_TUPLE_TAIL _(tuple), CHAOS_PP_INC(x) \
             )), \
             x \
         ) \

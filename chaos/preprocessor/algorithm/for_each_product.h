@@ -52,7 +52,7 @@
 # define CHAOS_IP_FOR_EACH_PRODUCT_U(s, macro, seq, bind, pd) \
     CHAOS_PP_EXPR_S(s)(CHAOS_PP_IIF(CHAOS_PP_SEQ_IS_CONS(seq))( \
         CHAOS_IP_FOR_EACH_PRODUCT_I, CHAOS_PP_TUPLE_EAT(8) \
-    )(CHAOS_PP_NEXT(s), CHAOS_PP_NEXT(s), macro, CHAOS_PP_TRAMPOLINE(macro), CHAOS_PP_SEQ_FIRST(seq), CHAOS_PP_SEQ_REST(seq), bind, pd)) \
+    )(CHAOS_PP_NEXT(s), CHAOS_PP_NEXT(s), macro, CHAOS_PP_TRAMPOLINE(macro), CHAOS_PP_SEQ_HEAD(seq), CHAOS_PP_SEQ_TAIL(seq), bind, pd)) \
     /**/
 # define CHAOS_IP_FOR_EACH_PRODUCT_INDIRECT() CHAOS_IP_FOR_EACH_PRODUCT_I
 # define CHAOS_IP_FOR_EACH_PRODUCT_I(s, o, macro, _m, g, seq, bind, pd) \
@@ -65,16 +65,16 @@
         CHAOS_IP_FOR_EACH_PRODUCT_III, CHAOS_IP_FOR_EACH_PRODUCT_IV \
     )(CHAOS_PP_OBSTRUCT(), s, o, macro, _m, g, seq, bind, pd) \
     CHAOS_PP_EXPR_S(s) _(CHAOS_IP_FOR_EACH_PRODUCT_INDIRECT _()( \
-        CHAOS_PP_NEXT(s), o, macro, _m, CHAOS_PP_REST(g), seq, bind, pd \
+        CHAOS_PP_NEXT(s), o, macro, _m, CHAOS_PP_TAIL(g), seq, bind, pd \
     )) \
     /**/
 # define CHAOS_IP_FOR_EACH_PRODUCT_III(_, s, o, macro, _m, g, seq, bind, pd) \
     CHAOS_PP_EXPR_S(s) _(CHAOS_IP_FOR_EACH_PRODUCT_INDIRECT _()( \
-        CHAOS_PP_NEXT(s), o, macro, _m, CHAOS_PP_SEQ_FIRST(seq), CHAOS_PP_SEQ_REST(seq), bind(CHAOS_PP_FIRST(g)), pd \
+        CHAOS_PP_NEXT(s), o, macro, _m, CHAOS_PP_SEQ_HEAD(seq), CHAOS_PP_SEQ_TAIL(seq), bind(CHAOS_PP_HEAD(g)), pd \
     )) \
     /**/
 # define CHAOS_IP_FOR_EACH_PRODUCT_IV(_, s, o, macro, _m, g, seq, bind, pd) \
-    _m()(o, macro, bind(CHAOS_PP_FIRST(g)) CHAOS_PP_EXPOSE(pd)) \
+    _m()(o, macro, bind(CHAOS_PP_HEAD(g)) CHAOS_PP_EXPOSE(pd)) \
     /**/
 #
 # endif

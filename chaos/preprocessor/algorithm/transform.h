@@ -58,9 +58,9 @@
 # define CHAOS_IP_TRANSFORM_II(_, s, o, op, _o, type, g, pd) \
     CHAOS_PP_CONS CHAOS_PP_OBSTRUCT()( \
         CHAOS_PP_EXPR_S(s) _(CHAOS_IP_TRANSFORM_INDIRECT _()( \
-            CHAOS_PP_NEXT(s), o, op, _o, type, CHAOS_PP_REST(g), pd \
+            CHAOS_PP_NEXT(s), o, op, _o, type, CHAOS_PP_TAIL(g), pd \
         )), \
-        _o()(o, op, CHAOS_PP_ITEM(type, CHAOS_PP_FIRST(g)) CHAOS_PP_EXPOSE(pd)) \
+        _o()(o, op, CHAOS_PP_ITEM(type, CHAOS_PP_HEAD(g)) CHAOS_PP_EXPOSE(pd)) \
     ) \
     /**/
 #

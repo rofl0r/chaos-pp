@@ -73,15 +73,15 @@
         /**/
 #    define CHAOS_IP_TUPLE_REPLACE_2(s, n, tuple, x) \
         CHAOS_PP_IF(n)( \
-            CHAOS_IP_TUPLE_REPLACE_2_I, CHAOS_PP_TUPLE_CONS(CHAOS_PP_TUPLE_REST(tuple), x) CHAOS_PP_EAT \
+            CHAOS_IP_TUPLE_REPLACE_2_I, CHAOS_PP_TUPLE_CONS(CHAOS_PP_TUPLE_TAIL(tuple), x) CHAOS_PP_EAT \
         )(CHAOS_PP_OBSTRUCT(), s, n, tuple, x) \
         /**/
 #    define CHAOS_IP_TUPLE_REPLACE_2_I(_, s, n, tuple, x) \
         CHAOS_PP_TUPLE_CONS _( \
             CHAOS_PP_EXPR_S _(s)(CHAOS_IP_TUPLE_REPLACE_INDIRECT _(2)( \
-                CHAOS_PP_PREV(s), CHAOS_PP_DEC(n), CHAOS_PP_TUPLE_REST(tuple), x \
+                CHAOS_PP_PREV(s), CHAOS_PP_DEC(n), CHAOS_PP_TUPLE_TAIL(tuple), x \
             )), \
-            CHAOS_PP_TUPLE_FIRST(tuple) \
+            CHAOS_PP_TUPLE_HEAD(tuple) \
         ) \
         /**/
 # endif

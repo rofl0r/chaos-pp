@@ -70,9 +70,9 @@
 #    define CHAOS_IP_TUPLE_POP_BACK_2_I(_, s, tuple) \
         CHAOS_PP_TUPLE_CONS _( \
             CHAOS_PP_EXPR_S _(s)(CHAOS_IP_TUPLE_POP_BACK_INDIRECT _(2)( \
-                CHAOS_PP_PREV(s), CHAOS_PP_TUPLE_REST(tuple) \
+                CHAOS_PP_PREV(s), CHAOS_PP_TUPLE_TAIL(tuple) \
             )), \
-            CHAOS_PP_TUPLE_FIRST(tuple) \
+            CHAOS_PP_TUPLE_HEAD(tuple) \
         ) \
         /**/
 # endif

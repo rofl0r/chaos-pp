@@ -59,9 +59,9 @@
     /**/
 # define CHAOS_IP_FOLD_RIGHT_II(_, s, o, op, _o, type, g, ps) \
     _o()(o, op) \
-        CHAOS_PP_ITEM(type, CHAOS_PP_FIRST(g)), \
+        CHAOS_PP_ITEM(type, CHAOS_PP_HEAD(g)), \
         CHAOS_PP_EXPR_S(s) _(CHAOS_IP_FOLD_RIGHT_INDIRECT _()( \
-            CHAOS_PP_NEXT(s), o, op, _o, type, CHAOS_PP_REST(g), ps \
+            CHAOS_PP_NEXT(s), o, op, _o, type, CHAOS_PP_TAIL(g), ps \
         )) \
     CHAOS_PP_PLANAR_CLOSE() \
     /**/

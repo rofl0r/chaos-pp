@@ -60,7 +60,7 @@
     ) \
     /**/
 # define CHAOS_IP_MUL_III(_, s, jump, mode, r, x, y, z) \
-    CHAOS_IP_MUL_IV(CHAOS_PP_SEQ_FIRST(jump), CHAOS_PP_SEQ_REST(jump), mode, r, x, y, z) \
+    CHAOS_IP_MUL_IV(CHAOS_PP_SEQ_HEAD(jump), CHAOS_PP_SEQ_TAIL(jump), mode, r, x, y, z) \
     /**/
 # define CHAOS_IP_MUL_IV(s, jump, mode, r, x, y, z) \
     CHAOS_PP_IIF(CHAOS_PP_IS_VALID(CHAOS_PP_PREV(s)))( \

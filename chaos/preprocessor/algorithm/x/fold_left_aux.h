@@ -83,11 +83,11 @@
     /**/
 # define CHAOS_IP_FOLD_LEFT_AUX_X_IV(_, s, jump, fix, op, _o, type, g, data, ps) \
     _(1, CHAOS_PP_EXPR_S)(s)(_(1, CHAOS_IP_FOLD_LEFT_AUX_X_INDIRECT)()( \
-        CHAOS_PP_NEXT(s), jump, fix, op, _o, type, CHAOS_PP_REST(g), data, (_(0, _o)()(s, op, CHAOS_PP_ITEM(type, CHAOS_PP_FIRST(g)) _(0, CHAOS_PP_COMMA)() CHAOS_PP_REM data _(0, CHAOS_PP_COMMA)() CHAOS_PP_REM ps)) \
+        CHAOS_PP_NEXT(s), jump, fix, op, _o, type, CHAOS_PP_TAIL(g), data, (_(0, _o)()(s, op, CHAOS_PP_ITEM(type, CHAOS_PP_HEAD(g)) _(0, CHAOS_PP_COMMA)() CHAOS_PP_REM data _(0, CHAOS_PP_COMMA)() CHAOS_PP_REM ps)) \
     )) \
     /**/
 # define CHAOS_IP_FOLD_LEFT_AUX_X_V(_, s, jump, fix, op, _o, type, g, data, ps) \
-    CHAOS_IP_FOLD_LEFT_AUX_X_VI(CHAOS_PP_SEQ_FIRST(jump), CHAOS_PP_SEQ_REST(jump), fix, op, _o, type, g, data, ps) \
+    CHAOS_IP_FOLD_LEFT_AUX_X_VI(CHAOS_PP_SEQ_HEAD(jump), CHAOS_PP_SEQ_TAIL(jump), fix, op, _o, type, g, data, ps) \
     /**/
 # define CHAOS_IP_FOLD_LEFT_AUX_X_VI(s, jump, fix, op, _o, type, g, data, ps) \
     CHAOS_PP_IIF(CHAOS_PP_NOT_EQUAL(s, CHAOS_PP_PREV(fix)))( \

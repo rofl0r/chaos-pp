@@ -77,13 +77,13 @@
     )(_, s, jump, fix, macro, _m, type, g, pd) \
     /**/
 # define CHAOS_IP_FOR_EACH_X_IV(_, s, jump, fix, macro, _m, type, g, pd) \
-    _(0, _m)()(s, macro, CHAOS_PP_ITEM(type, CHAOS_PP_FIRST(g)) _(0, CHAOS_PP_EXPOSE)(pd)) \
+    _(0, _m)()(s, macro, CHAOS_PP_ITEM(type, CHAOS_PP_HEAD(g)) _(0, CHAOS_PP_EXPOSE)(pd)) \
     _(1, CHAOS_PP_EXPR_S)(s)(_(1, CHAOS_IP_FOR_EACH_X_INDIRECT)()( \
-        CHAOS_PP_NEXT(s), jump, fix, macro, _m, type, CHAOS_PP_REST(g), pd \
+        CHAOS_PP_NEXT(s), jump, fix, macro, _m, type, CHAOS_PP_TAIL(g), pd \
     )) \
     /**/
 # define CHAOS_IP_FOR_EACH_X_V(_, s, jump, fix, macro, _m, type, g, pd) \
-    CHAOS_IP_FOR_EACH_X_VI(CHAOS_PP_SEQ_FIRST(jump), CHAOS_PP_SEQ_REST(jump), fix, macro, _m, type, g, pd) \
+    CHAOS_IP_FOR_EACH_X_VI(CHAOS_PP_SEQ_HEAD(jump), CHAOS_PP_SEQ_TAIL(jump), fix, macro, _m, type, g, pd) \
     /**/
 # define CHAOS_IP_FOR_EACH_X_VI(s, jump, fix, macro, _m, type, g, pd) \
     CHAOS_PP_IIF(CHAOS_PP_NOT_EQUAL(s, CHAOS_PP_PREV(fix)))( \

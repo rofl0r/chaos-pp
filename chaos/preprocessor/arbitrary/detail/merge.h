@@ -58,14 +58,14 @@
 #    define CHAOS_IP_ARBITRARY_FMERGE_B(digit) CHAOS_PP_SPECIAL(digit)(CHAOS_IP_ARBITRARY_FMERGE_I CHAOS_PP_DEFER(CHAOS_PP_LPAREN)() digit, CHAOS_IP_ARBITRARY_FMERGE_A)
 #    define CHAOS_IP_ARBITRARY_FMERGE_I(...) CHAOS_IP_ARBITRARY_FMERGE_II(__VA_ARGS__)
 #    define CHAOS_IP_ARBITRARY_FMERGE_II(digit, res, y, op, def, swap) \
-        (op) swap(digit, CHAOS_PP_SEQ_FIRST(y)) res, CHAOS_PP_SEQ_REST(y(def)), op, def, swap \
+        (op) swap(digit, CHAOS_PP_SEQ_HEAD(y)) res, CHAOS_PP_SEQ_TAIL(y(def)), op, def, swap \
         /**/
 # else
 #    define CHAOS_IP_ARBITRARY_FMERGE_A(digit) CHAOS_PP_SPECIAL(digit)(CHAOS_IP_ARBITRARY_FMERGE_I CHAOS_PP_DEFER(CHAOS_PP_LPAREN)() digit CHAOS_PP_COMMA() CHAOS_IP_ARBITRARY_FMERGE_B)
 #    define CHAOS_IP_ARBITRARY_FMERGE_B(digit) CHAOS_PP_SPECIAL(digit)(CHAOS_IP_ARBITRARY_FMERGE_I CHAOS_PP_DEFER(CHAOS_PP_LPAREN)() digit CHAOS_PP_COMMA() CHAOS_IP_ARBITRARY_FMERGE_A)
 #    define CHAOS_IP_ARBITRARY_FMERGE_I(digit, im) CHAOS_IP_ARBITRARY_FMERGE_II(digit, im)
 #    define CHAOS_IP_ARBITRARY_FMERGE_II(digit, res, y, op, def, swap) \
-        (op) swap(digit, CHAOS_PP_SEQ_FIRST(y)) res, CHAOS_PP_SEQ_REST(y(def)), op, def, swap \
+        (op) swap(digit, CHAOS_PP_SEQ_HEAD(y)) res, CHAOS_PP_SEQ_TAIL(y(def)), op, def, swap \
         /**/
 # endif
 #
@@ -98,14 +98,14 @@
 #    define CHAOS_IP_ARBITRARY_RMERGE_B(digit) CHAOS_PP_SPECIAL(digit)(CHAOS_IP_ARBITRARY_RMERGE_I CHAOS_PP_DEFER(CHAOS_PP_LPAREN)() digit, CHAOS_IP_ARBITRARY_RMERGE_A)
 #    define CHAOS_IP_ARBITRARY_RMERGE_I(...) CHAOS_IP_ARBITRARY_RMERGE_II(__VA_ARGS__)
 #    define CHAOS_IP_ARBITRARY_RMERGE_II(digit, res, y, op, def, swap) \
-        res(op) swap(digit, CHAOS_PP_SEQ_FIRST(y)), CHAOS_PP_SEQ_REST(y(def)), op, def, swap \
+        res(op) swap(digit, CHAOS_PP_SEQ_HEAD(y)), CHAOS_PP_SEQ_TAIL(y(def)), op, def, swap \
         /**/
 # else
 #    define CHAOS_IP_ARBITRARY_RMERGE_A(digit) CHAOS_PP_SPECIAL(digit)(CHAOS_IP_ARBITRARY_RMERGE_I CHAOS_PP_DEFER(CHAOS_PP_LPAREN)() digit CHAOS_PP_COMMA() CHAOS_IP_ARBITRARY_RMERGE_B)
 #    define CHAOS_IP_ARBITRARY_RMERGE_B(digit) CHAOS_PP_SPECIAL(digit)(CHAOS_IP_ARBITRARY_RMERGE_I CHAOS_PP_DEFER(CHAOS_PP_LPAREN)() digit CHAOS_PP_COMMA() CHAOS_IP_ARBITRARY_RMERGE_A)
 #    define CHAOS_IP_ARBITRARY_RMERGE_I(digit, im) CHAOS_IP_ARBITRARY_RMERGE_II(digit, im)
 #    define CHAOS_IP_ARBITRARY_RMERGE_II(digit, res, y, op, def, swap) \
-        res(op) swap(digit, CHAOS_PP_SEQ_FIRST(y)), CHAOS_PP_SEQ_REST(y(def)), op, def, swap \
+        res(op) swap(digit, CHAOS_PP_SEQ_HEAD(y)), CHAOS_PP_SEQ_TAIL(y(def)), op, def, swap \
         /**/
 # endif
 #

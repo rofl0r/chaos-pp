@@ -54,9 +54,9 @@
 # define CHAOS_IP_ARBITRARY_LITERAL_INDIRECT() CHAOS_IP_ARBITRARY_LITERAL_I
 # define CHAOS_IP_ARBITRARY_LITERAL_I(_, s, literal) \
     CHAOS_PP_INLINE_WHEN _(CHAOS_PP_STRING_IS_CONS(literal))( \
-        (CHAOS_PP_STRING_FIRST _(literal)) \
+        (CHAOS_PP_STRING_HEAD _(literal)) \
         CHAOS_PP_EXPR_S _(s)(CHAOS_IP_ARBITRARY_LITERAL_INDIRECT _()( \
-            CHAOS_PP_OBSTRUCT _(), CHAOS_PP_PREV(s), CHAOS_PP_STRING_REST _(literal) \
+            CHAOS_PP_OBSTRUCT _(), CHAOS_PP_PREV(s), CHAOS_PP_STRING_TAIL _(literal) \
         )) \
     ) \
     /**/

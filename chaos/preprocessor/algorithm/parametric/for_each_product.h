@@ -55,7 +55,7 @@
 #
 # define CHAOS_IP_FOR_EACH_PRODUCT_PARAMETRIC_U(s, macro, seq, bind, pd) \
     CHAOS_PP_EXPR_S(s)(CHAOS_IP_FOR_EACH_PRODUCT_PARAMETRIC_I( \
-        CHAOS_PP_NEXT(s), CHAOS_PP_NEXT(s), macro, CHAOS_PP_TRAMPOLINE(macro), CHAOS_PP_SEQ_FIRST(seq), CHAOS_PP_SEQ_REST(seq), bind, pd \
+        CHAOS_PP_NEXT(s), CHAOS_PP_NEXT(s), macro, CHAOS_PP_TRAMPOLINE(macro), CHAOS_PP_SEQ_HEAD(seq), CHAOS_PP_SEQ_TAIL(seq), bind, pd \
     )) \
     /**/
 # define CHAOS_IP_FOR_EACH_PRODUCT_PARAMETRIC_INDIRECT() CHAOS_IP_FOR_EACH_PRODUCT_PARAMETRIC_I
@@ -74,16 +74,16 @@
         CHAOS_IP_FOR_EACH_PRODUCT_PARAMETRIC_IV, CHAOS_IP_FOR_EACH_PRODUCT_PARAMETRIC_V \
     )(_, s, o, macro, _m, g, seq, bind, pd) \
     _(1, CHAOS_PP_EXPR_S)(s)(_(1, CHAOS_IP_FOR_EACH_PRODUCT_PARAMETRIC_INDIRECT)()( \
-        CHAOS_PP_NEXT(s), o, macro, _m, CHAOS_PP_REST(g), seq, bind, pd \
+        CHAOS_PP_NEXT(s), o, macro, _m, CHAOS_PP_TAIL(g), seq, bind, pd \
     )) \
     /**/
 # define CHAOS_IP_FOR_EACH_PRODUCT_PARAMETRIC_IV(_, s, o, macro, _m, g, seq, bind, pd) \
     _(1, CHAOS_PP_EXPR_S)(s)(_(1, CHAOS_IP_FOR_EACH_PRODUCT_PARAMETRIC_INDIRECT)()( \
-        CHAOS_PP_NEXT(s), o, macro, _m, CHAOS_PP_SEQ_FIRST(seq), CHAOS_PP_SEQ_REST(seq), bind (CHAOS_PP_FIRST(g)), pd \
+        CHAOS_PP_NEXT(s), o, macro, _m, CHAOS_PP_SEQ_HEAD(seq), CHAOS_PP_SEQ_TAIL(seq), bind (CHAOS_PP_HEAD(g)), pd \
     )) \
     /**/
 # define CHAOS_IP_FOR_EACH_PRODUCT_PARAMETRIC_V(_, s, o, macro, _m, g, seq, bind, pd) \
-    _(0, _m)()(o, macro, bind (CHAOS_PP_FIRST(g)) _(0, CHAOS_PP_EXPOSE)(pd)) \
+    _(0, _m)()(o, macro, bind (CHAOS_PP_HEAD(g)) _(0, CHAOS_PP_EXPOSE)(pd)) \
     /**/
 # define CHAOS_IP_FOR_EACH_PRODUCT_PARAMETRIC_VI(_, s, o, macro, _m, g, seq, bind, pd) \
     CHAOS_IP_FOR_EACH_PRODUCT_PARAMETRIC_II(CHAOS_PP_PHASE(1), o, o, macro, _m, g, seq, bind, pd) \

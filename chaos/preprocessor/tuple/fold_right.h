@@ -68,9 +68,9 @@
         )(CHAOS_PP_OBSTRUCT(), s, o, op, _o, tuple, __VA_ARGS__) \
         /**/
 #    define CHAOS_IP_TUPLE_FOLD_RIGHT_2_I(_, s, o, op, _o, tuple, ...) \
-        _o()(o, op) CHAOS_PP_TUPLE_FIRST(tuple), \
+        _o()(o, op) CHAOS_PP_TUPLE_HEAD(tuple), \
         CHAOS_PP_EXPR_S _(s)(CHAOS_IP_TUPLE_FOLD_RIGHT_INDIRECT _(2)( \
-            CHAOS_PP_NEXT(s), o, op, _o, CHAOS_PP_TUPLE_REST(tuple), __VA_ARGS__ \
+            CHAOS_PP_NEXT(s), o, op, _o, CHAOS_PP_TUPLE_TAIL(tuple), __VA_ARGS__ \
         )) \
         CHAOS_PP_PLANAR_CLOSE() \
         /**/

@@ -34,4 +34,3 @@ echo.
 echo cleaning temporary files...
 del _library.xml _symbol.xsl _register.xsl _script.bat
 echo done.
-call beep

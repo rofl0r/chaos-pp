@@ -15,7 +15,7 @@
 # include <chaos/preprocessor/arithmetic/dec.h>
 # include <chaos/preprocessor/cat.h>
 # include <chaos/preprocessor/config.h>
-# include <chaos/preprocessor/control/expr_if.h>
+# include <chaos/preprocessor/control/when.h>
 # include <chaos/preprocessor/detection/is_binary.h>
 # include <chaos/preprocessor/detection/is_variadic.h>
 # include <chaos/preprocessor/lambda/ops.h>
@@ -53,7 +53,7 @@
     /**/
 # define CHAOS_IP_DELINEATE_PARAMS_INDIRECT() CHAOS_IP_DELINEATE_PARAMS_I
 # define CHAOS_IP_DELINEATE_PARAMS_I(_, s, id, count, sep, ss, pp) \
-    CHAOS_PP_EXPR_IF _(count)( \
+    CHAOS_PP_WHEN _(count)( \
         CHAOS_PP_EXPR_S(s) _(CHAOS_IP_DELINEATE_PARAMS_INDIRECT _()( \
             CHAOS_PP_OBSTRUCT _(), CHAOS_PP_PREV(s), id, CHAOS_PP_DEC(count), ss, ss, pp \
         )) \

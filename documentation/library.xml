@@ -320,12 +320,12 @@
 			<header name="control.h"/>
 			<directory name="control">
 				<header name="branch.h"/>
-				<header name="expr_if.h"/>
-				<header name="expr_iif.h"/>
 				<header name="if.h"/>
 				<header name="iif.h"/>
 				<header name="include_if.h"/>
+				<header name="inline_when.h"/>
 				<header name="null.h"/>
+				<header name="when.h"/>
 				<header name="while.h"/>
 				<header name="while_aux.h"/>
 				<header name="x.h"/>

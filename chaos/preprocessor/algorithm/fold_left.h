@@ -13,8 +13,8 @@
 # define CHAOS_PREPROCESSOR_ALGORITHM_FOLD_LEFT_H
 #
 # include <chaos/preprocessor/config.h>
-# include <chaos/preprocessor/control/expr_iif.h>
 # include <chaos/preprocessor/control/iif.h>
+# include <chaos/preprocessor/control/inline_when.h>
 # include <chaos/preprocessor/generics/spec.h>
 # include <chaos/preprocessor/generics/typeof.h>
 # include <chaos/preprocessor/lambda/ops.h>
@@ -65,7 +65,7 @@
     _o()(o, op) CHAOS_PP_ITEM(type, CHAOS_PP_FIRST(g)), \
     /**/
 # define CHAOS_IP_FOLD_LEFT_2(_, s, g) \
-    CHAOS_PP_EXPR_IIF _(CHAOS_PP_IS_CONS(g))( \
+    CHAOS_PP_INLINE_WHEN _(CHAOS_PP_IS_CONS(g))( \
         CHAOS_PP_PLANAR_CLOSE _() \
         CHAOS_PP_EXPR_S(s) _(CHAOS_IP_FOLD_LEFT_INDIRECT _(2)( \
             CHAOS_PP_OBSTRUCT _(), CHAOS_PP_NEXT(s), CHAOS_PP_REST _(g) \

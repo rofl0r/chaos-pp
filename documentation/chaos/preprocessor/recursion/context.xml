@@ -140,15 +140,15 @@
 		Otherwise, it expands to <code>0</code>.
 	</para>
 	<listing>
-		#include <chaos-preprocessor-control-expr_iif.h/>
+		#include <chaos-preprocessor-control-inline_when.h/>
 		#include <chaos-preprocessor-recursion-basic.h/>
 		#include <chaos-preprocessor-recursion-context.h/>
 		
 		#define A(x) \
-		    <EXPR_IIF/>(<RETRIEVE/>())(x B) \
+		    <INLINE_WHEN/>(<RETRIEVE/>())(x B) \
 		    /**/
 		#define B(x) \
-		    <EXPR_IIF/>(<RETRIEVE/>())(x A) \
+		    <INLINE_WHEN/>(<RETRIEVE/>())(x A) \
 		    /**/
 		
 		<CONTEXT/>(1)(

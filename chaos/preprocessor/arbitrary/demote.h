@@ -15,7 +15,7 @@
 # include <chaos/preprocessor/arbitrary/detail/clean.h>
 # include <chaos/preprocessor/cat.h>
 # include <chaos/preprocessor/config.h>
-# include <chaos/preprocessor/control/expr_iif.h>
+# include <chaos/preprocessor/control/inline_when.h>
 # include <chaos/preprocessor/facilities/binary.h>
 # include <chaos/preprocessor/facilities/expand.h>
 # include <chaos/preprocessor/lambda/ops.h>
@@ -30,7 +30,7 @@
 #    define CHAOS_PP_DEMOTE_AP_ID() CHAOS_PP_DEMOTE_AP
 #    define CHAOS_PP_DEMOTE_AP_ CHAOS_PP_LAMBDA(CHAOS_PP_DEMOTE_AP)
 #    define CHAOS_IP_DEMOTE_AP_I(x) \
-        CHAOS_PP_EXPR_IIF(CHAOS_PP_BINARY(0) x)(-) \
+        CHAOS_PP_INLINE_WHEN(CHAOS_PP_BINARY(0) x)(-) \
         CHAOS_IP_DEMOTE_AP_II(CHAOS_PP_SEQ_BINARY_TRANSFORM(CHAOS_PP_BINARY(1) x,)) \
         /**/
 #    define CHAOS_IP_DEMOTE_AP_II(seq) CHAOS_PP_EXPAND(CHAOS_IP_DEMOTE_AP_III seq CHAOS_PP_SEQ_CLOSE(seq))

@@ -16,9 +16,9 @@
 # include <chaos/preprocessor/comparison/less.h>
 # include <chaos/preprocessor/comparison/not_equal.h>
 # include <chaos/preprocessor/config.h>
-# include <chaos/preprocessor/control/expr_iif.h>
 # include <chaos/preprocessor/control/if.h>
 # include <chaos/preprocessor/control/iif.h>
+# include <chaos/preprocessor/control/inline_when.h>
 # include <chaos/preprocessor/debug/failure.h>
 # include <chaos/preprocessor/facilities/binary.h>
 # include <chaos/preprocessor/lambda/ops.h>
@@ -42,7 +42,7 @@
 # /* CHAOS_PP_DIV_BYPASS */
 #
 # define CHAOS_PP_DIV_BYPASS(s, x, y) \
-    CHAOS_PP_EXPR_IIF(CHAOS_PP_NOT(y))(CHAOS_PP_FAILURE()) \
+    CHAOS_PP_INLINE_WHEN(CHAOS_PP_NOT(y))(CHAOS_PP_FAILURE()) \
     CHAOS_PP_EXPR_S(s)(CHAOS_IP_DIV_I(CHAOS_PP_PREV(s), (CHAOS_PP_PREV(s)), 0, 0, x, y, 0, 0)) \
     /**/
 # define CHAOS_PP_DIV_BYPASS_ID() CHAOS_PP_DIV_BYPASS

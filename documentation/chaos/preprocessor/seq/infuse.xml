@@ -42,7 +42,7 @@
 			#define A(macro, seq) B(<SEQ_INFUSE/>(seq, (1, macro)))
 			#define B(bin) C bin ((0, ~), ~)
 			#define C(pair, x) \
-			    <EXPR_IIF/>(<BINARY/>(0) pair)( \
+			    <INLINE_WHEN/>(<BINARY/>(0) pair)( \
 			        <BINARY/>(1) pair(x) C_INDIRECT \
 			    ) \
 			    /**/
@@ -62,7 +62,7 @@
 	</para>
 	<listing>
 		#include <chaos-preprocessor-config.h/>
-		#include <chaos-preprocessor-control-expr_iif.h/>
+		#include <chaos-preprocessor-control-inline_when.h/>
 		#include <chaos-preprocessor-facilities-expand.h/>
 		#include <chaos-preprocessor-recursion-basic.h/>
 		#include <chaos-preprocessor-recursion-expr.h/>
@@ -75,7 +75,7 @@
 		    /**/
 		#define FOR_EACH_I(bin) FOR_EACH_II bin (0, ~, ~, ~)
 		#define FOR_EACH_II(bit, macro, data, ...) \
-		    <EXPR_IIF/>(bit)( \
+		    <INLINE_WHEN/>(bit)( \
 		        <OBSTRUCT/>(macro)(data, __VA_ARGS__) \
 		        FOR_EACH_INDIRECT \
 		    ) \
@@ -95,7 +95,7 @@
 		    ) \
 		    /**/
 		#define FOR_EACH_III(bit, macro, data, x) \
-		    <EXPR_IIF/>(bit)( \
+		    <INLINE_WHEN/>(bit)( \
 		        macro <OBSTRUCT/>()(data, x) \
 		        FOR_EACH_INDIRECT \
 		    ) \

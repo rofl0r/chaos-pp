@@ -14,8 +14,8 @@
 #
 # include <chaos/preprocessor/cat.h>
 # include <chaos/preprocessor/config.h>
-# include <chaos/preprocessor/control/expr_iif.h>
 # include <chaos/preprocessor/control/iif.h>
+# include <chaos/preprocessor/control/inline_when.h>
 # include <chaos/preprocessor/debug/failure.h>
 # include <chaos/preprocessor/detection/is_binary.h>
 # include <chaos/preprocessor/facilities/binary.h>
@@ -90,7 +90,7 @@
     ) \
     /**/
 # define CHAOS_IP_ADD_HP_II(j, i, h, g, f, e, d, c, b, a, overflow) \
-    CHAOS_PP_EXPR_IIF(overflow)(CHAOS_PP_FAILURE())(a, b, c, d, e, f, g, h, i, j) \
+    CHAOS_PP_INLINE_WHEN(overflow)(CHAOS_PP_FAILURE())(a, b, c, d, e, f, g, h, i, j) \
     /**/
 # define CHAOS_IP_ADD_HP_M(x) CHAOS_IP_ADD_HP_ ## x
 # define CHAOS_IP_ADD_HP_0(x, y) CHAOS_PP_PLUS_3RD(0)(CHAOS_PP_PLUS(x, y))

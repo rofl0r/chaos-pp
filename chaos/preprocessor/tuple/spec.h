@@ -13,7 +13,7 @@
 # define CHAOS_PREPROCESSOR_TUPLE_SPEC_H
 #
 # include <chaos/preprocessor/config.h>
-# include <chaos/preprocessor/control/expr_iif.h>
+# include <chaos/preprocessor/control/inline_when.h>
 # include <chaos/preprocessor/detection/is_empty.h>
 # include <chaos/preprocessor/detection/is_variadic.h>
 # include <chaos/preprocessor/facilities/split.h>
@@ -47,7 +47,7 @@
 #
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_TUPLE_CONS(tuple, x) \
-        (x CHAOS_PP_EXPR_IIF(CHAOS_PP_TUPLE_IS_CONS(tuple))(, CHAOS_PP_TUPLE_REM(?) tuple)) \
+        (x CHAOS_PP_INLINE_WHEN(CHAOS_PP_TUPLE_IS_CONS(tuple))(, CHAOS_PP_TUPLE_REM(?) tuple)) \
         /**/
 #    define CHAOS_PP_TUPLE_CONS_ID() CHAOS_PP_TUPLE_CONS
 #    define CHAOS_PP_TUPLE_CONS_ CHAOS_PP_LAMBDA(CHAOS_PP_TUPLE_CONS_ID)()
@@ -73,7 +73,7 @@
 #
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_TUPLE_REST(tuple) \
-        CHAOS_PP_EXPR_IIF( \
+        CHAOS_PP_INLINE_WHEN( \
             CHAOS_PP_COMPL(CHAOS_PP_IS_EMPTY_NON_FUNCTION(CHAOS_PP_SPLIT(1, CHAOS_PP_TUPLE_REM(?) tuple,))) \
         )((CHAOS_PP_SPLIT(1, CHAOS_PP_TUPLE_REM(?) tuple))) \
         /**/

@@ -13,7 +13,7 @@
 # define CHAOS_PREPROCESSOR_SEQ_POP_BACK_H
 #
 # include <chaos/preprocessor/config.h>
-# include <chaos/preprocessor/control/expr_iif.h>
+# include <chaos/preprocessor/control/inline_when.h>
 # include <chaos/preprocessor/facilities/expand.h>
 # include <chaos/preprocessor/punctuation/paren.h>
 # include <chaos/preprocessor/lambda/ops.h>

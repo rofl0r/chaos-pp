@@ -13,8 +13,8 @@
 # define CHAOS_PREPROCESSOR_SEQ_SPEC_H
 #
 # include <chaos/preprocessor/config.h>
-# include <chaos/preprocessor/control/expr_iif.h>
 # include <chaos/preprocessor/control/iif.h>
+# include <chaos/preprocessor/control/inline_when.h>
 # include <chaos/preprocessor/detection/is_unary.h>
 # include <chaos/preprocessor/detection/is_variadic.h>
 # include <chaos/preprocessor/facilities/split.h>
@@ -53,7 +53,7 @@
 #    define CHAOS_PP_SEQ_CONS(seq, ...) (__VA_ARGS__) seq
 #    define CHAOS_PP_SEQ_CONS_ CHAOS_PP_LAMBDA(CHAOS_PP_SEQ_CONS_ID)()
 # else
-#    define CHAOS_PP_SEQ_CONS(seq, x) (x) CHAOS_PP_EXPR_IIF(CHAOS_PP_IS_UNARY(seq))(seq)
+#    define CHAOS_PP_SEQ_CONS(seq, x) (x) CHAOS_PP_INLINE_WHEN(CHAOS_PP_IS_UNARY(seq))(seq)
 # endif
 #
 # define CHAOS_PP_SEQ_CONS_ID() CHAOS_PP_SEQ_CONS

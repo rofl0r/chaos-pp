@@ -13,8 +13,8 @@
 # define CHAOS_PREPROCESSOR_HIGHPREC_MUL_H
 #
 # include <chaos/preprocessor/config.h>
-# include <chaos/preprocessor/control/expr_iif.h>
 # include <chaos/preprocessor/control/iif.h>
+# include <chaos/preprocessor/control/inline_when.h>
 # include <chaos/preprocessor/detection/is_binary.h>
 # include <chaos/preprocessor/facilities/binary.h>
 # include <chaos/preprocessor/facilities/expand.h>
@@ -122,7 +122,7 @@
     ) \
     /**/
 # define CHAOS_IP_MUL_HP_F_II(j, i, h, g, f, e, d, c, b, a, overflow) \
-    CHAOS_PP_EXPR_IIF(overflow)(CHAOS_IP_MUL_HP_OVERFLOW(!)) \
+    CHAOS_PP_INLINE_WHEN(overflow)(CHAOS_IP_MUL_HP_OVERFLOW(!)) \
     a, b, c, d, e, f, g, h, i, j \
     /**/
 #
@@ -149,7 +149,7 @@
 # define CHAOS_IP_MUL_HP_COL_8(x) CHAOS_IP_MUL_HP_COL_I(CHAOS_PP_PLUS(x, 8))
 # define CHAOS_IP_MUL_HP_COL_9(x) CHAOS_IP_MUL_HP_COL_I(CHAOS_PP_PLUS(x, 9))
 #
-# define CHAOS_IP_MUL_HP_COL_I(bin) CHAOS_PP_EXPR_IIF(CHAOS_PP_BINARY(0) bin)((+)) CHAOS_PP_INDIRECT(CHAOS_PP_BINARY(1) bin)
+# define CHAOS_IP_MUL_HP_COL_I(bin) CHAOS_PP_INLINE_WHEN(CHAOS_PP_BINARY(0) bin)((+)) CHAOS_PP_INDIRECT(CHAOS_PP_BINARY(1) bin)
 #
 # define CHAOS_IP_MUL_HP_OPT_M(x) CHAOS_IP_MUL_HP_OPT_ ## x
 # define CHAOS_IP_MUL_HP_OPT_0(col) CHAOS_IP_MUL_HP_OPT_I(0, col)

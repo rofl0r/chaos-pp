@@ -13,7 +13,7 @@
 # define CHAOS_PREPROCESSOR_ALGORITHM_ENUMERATE_H
 #
 # include <chaos/preprocessor/config.h>
-# include <chaos/preprocessor/control/expr_iif.h>
+# include <chaos/preprocessor/control/inline_when.h>
 # include <chaos/preprocessor/facilities/empty.h>
 # include <chaos/preprocessor/generics/spec.h>
 # include <chaos/preprocessor/lambda/ops.h>
@@ -44,7 +44,7 @@
 #
 # define CHAOS_IP_ENUMERATE_INDIRECT() CHAOS_IP_ENUMERATE_I
 # define CHAOS_IP_ENUMERATE_I(_, s, sep, ss, g) \
-    CHAOS_PP_EXPR_IIF _(CHAOS_PP_IS_CONS(g))( \
+    CHAOS_PP_INLINE_WHEN _(CHAOS_PP_IS_CONS(g))( \
         sep _() CHAOS_PP_FIRST _(g) \
         CHAOS_PP_EXPR_S(s) _(CHAOS_IP_ENUMERATE_INDIRECT _()( \
             CHAOS_PP_OBSTRUCT _(), CHAOS_PP_PREV(s), ss, ss, CHAOS_PP_REST _(g) \

@@ -15,8 +15,8 @@
 # include <chaos/preprocessor/arithmetic/dec.h>
 # include <chaos/preprocessor/cat.h>
 # include <chaos/preprocessor/config.h>
-# include <chaos/preprocessor/control/expr_iif.h>
 # include <chaos/preprocessor/control/iif.h>
+# include <chaos/preprocessor/control/inline_when.h>
 # include <chaos/preprocessor/detection/is_nullary.h>
 # include <chaos/preprocessor/detection/is_unary.h>
 # include <chaos/preprocessor/facilities/split.h>
@@ -120,7 +120,7 @@
 # endif
 #
 # define CHAOS_IP_ABSOLUTE_I(res) \
-    CHAOS_PP_EXPR_IIF(CHAOS_PP_IS_UNARY(res))(CHAOS_PP_SPLIT(0, CHAOS_IP_ABSOLUTE_II res)) \
+    CHAOS_PP_INLINE_WHEN(CHAOS_PP_IS_UNARY(res))(CHAOS_PP_SPLIT(0, CHAOS_IP_ABSOLUTE_II res)) \
     /**/
 # define CHAOS_IP_ABSOLUTE_II(x) x, ...
 #

@@ -20,7 +20,7 @@
 	</para>
 	<listing>
 		#include <chaos-preprocessor-arithmetic-dec.h/>
-		#include <chaos-preprocessor-control-expr_iif.h/>
+		#include <chaos-preprocessor-control-inline_when.h/>
 		#include <chaos-preprocessor-logical-bool.h/>
 		#include <chaos-preprocessor-recursion-basic.h/>
 		#include <chaos-preprocessor-recursion-expr.h/>
@@ -36,7 +36,7 @@
 		    /**/
 		#define FOR_INDIRECT() FOR_I
 		#define FOR_I(_, s, pred, op, macro, state) \
-		    <EXPR_IIF/> _(pred _(s, state))( \
+		    <INLINE_WHEN/> _(pred _(s, state))( \
 		        macro _(s, state) \
 		        <EXPR_S/>(s) _(FOR_INDIRECT _()( \
 		            <OBSTRUCT/> _(), <NEXT/>(s), \
@@ -162,7 +162,7 @@
 	<x-reference id="EXPR_S"/>
 	<listing>
 		#include <chaos-preprocessor-arithmetic-dec.h/>
-		#include <chaos-preprocessor-control-expr_if.h/>
+		#include <chaos-preprocessor-control-when.h/>
 		#include <chaos-preprocessor-recursion-basic.h/>
 		#include <chaos-preprocessor-recursion-expr.h/>
 		
@@ -173,7 +173,7 @@
 		    /**/
 		#define COUNT_INDIRECT() COUNT_I
 		#define COUNT_I(_, n) \
-		    <EXPR_IF/> _(n)( \
+		    <WHEN/> _(n)( \
 		        <EXPR_ID/> _()(COUNT_INDIRECT _()( \
 		            <OBSTRUCT/> _(), <DEC/>(n) \
 		        )) \
@@ -220,7 +220,7 @@
 	<x-reference id="EXPR"/>
 	<listing>
 		#include <chaos-preprocessor-arithmetic-dec.h/>
-		#include <chaos-preprocessor-control-expr_if.h/>
+		#include <chaos-preprocessor-control-when.h/>
 		#include <chaos-preprocessor-recursion-basic.h/>
 		#include <chaos-preprocessor-recursion-expr.h/>
 		
@@ -232,7 +232,7 @@
 		    /**/
 		#define COUNT_INDIRECT() COUNT_I
 		#define COUNT_I(_, s, n) \
-		    <EXPR_IF/> _(n)( \
+		    <WHEN/> _(n)( \
 		        <EXPR_S/>(s) _(COUNT_INDIRECT _()( \
 		            <OBSTRUCT/> _(), <NEXT/>(s), \
 		            <DEC/>(n) \

@@ -13,7 +13,7 @@
 # define CHAOS_PREPROCESSOR_FACILITIES_ENCODE_H
 #
 # include <chaos/preprocessor/config.h>
-# include <chaos/preprocessor/control/expr_iif.h>
+# include <chaos/preprocessor/control/inline_when.h>
 # include <chaos/preprocessor/detection/is_variadic.h>
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/tuple/rem.h>
@@ -30,7 +30,7 @@
 #
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_DECODE(...) \
-        CHAOS_PP_EXPR_IIF(CHAOS_PP_IS_VARIADIC(__VA_ARGS__))( \
+        CHAOS_PP_INLINE_WHEN(CHAOS_PP_IS_VARIADIC(__VA_ARGS__))( \
             CHAOS_PP_TUPLE_REM(?) \
         ) __VA_ARGS__ \
         /**/

@@ -28,7 +28,7 @@
 			For example,
 			<snippet>
 				#define B(n) \
-				    n <EXPR_IF/>(n)( \
+				    n <WHEN/>(n)( \
 				        B_INDIRECT <OBSTRUCT/>()()(<DEC/>(n)) \
 				    ) \
 				    /**/
@@ -111,7 +111,7 @@
 			The following example uses multi-level <link id="active arguments"/> more explicitly:
 			<snippet>
 				#define A(n) \
-				    <EXPR_IF/>(n)( \
+				    <WHEN/>(n)( \
 				        A_INDIRECT <OBSTRUCT/>()()(<DEC/>(n)) \
 				        n \
 				    ) \
@@ -123,7 +123,7 @@
 				( I(I(I(I(I( A(3) ))))) ) // ( 1 2 3 )
 				
 				#define B(n) \
-				    <EXPR_IF/>(n)( \
+				    <WHEN/>(n)( \
 				        B_INDIRECT <OBSTRUCT/>()()(<DEC/>(n)) \
 				        ( I(I(I(I(I( A(n) ))))) ) \
 				    ) \
@@ -135,7 +135,7 @@
 				( J(J(J(J(J( B(3) ))))) ) // ( ( 1 ) ( 1 2 ) ( 1 2 3 ) )
 				
 				#define C(n) \
-				    <EXPR_IF/>(n)( \
+				    <WHEN/>(n)( \
 				        C_INDIRECT <OBSTRUCT/>()()(<DEC/>(n)) \
 				        ( J(J(J(J(J( B(n) ))))) ) \
 				    ) \
@@ -213,7 +213,7 @@
 				#define E(...) __VA_ARGS__
 				
 				#define REPEAT(count, macro, ...) \
-				    <EXPR_IF/>(count)( \
+				    <WHEN/>(count)( \
 				        REPEAT_INDIRECT <OBSTRUCT/>()()( \
 				            <DEC/>(count), macro, __VA_ARGS__ \
 				        ) \

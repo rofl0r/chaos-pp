@@ -13,7 +13,7 @@
 # define CHAOS_PREPROCESSOR_REPETITION_DELINEATE_TRAILING_H
 #
 # include <chaos/preprocessor/config.h>
-# include <chaos/preprocessor/control/expr_if.h>
+# include <chaos/preprocessor/control/when.h>
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/recursion/expr.h>
 # include <chaos/preprocessor/repetition/delineate.h>
@@ -32,10 +32,10 @@
 # /* CHAOS_PP_DELINEATE_TRAILING_S */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_DELINEATE_TRAILING_S(s, count, sep, ...) CHAOS_PP_EXPR_IF(count)(sep()) CHAOS_PP_DELINEATE_S(s, count, sep, __VA_ARGS__)
+#    define CHAOS_PP_DELINEATE_TRAILING_S(s, count, sep, ...) CHAOS_PP_WHEN(count)(sep()) CHAOS_PP_DELINEATE_S(s, count, sep, __VA_ARGS__)
 #    define CHAOS_PP_DELINEATE_TRAILING_S_ CHAOS_PP_LAMBDA(CHAOS_PP_DELINEATE_TRAILING_S_ID)()
 # else
-#    define CHAOS_PP_DELINEATE_TRAILING_S(s, count, sep, macro, data) CHAOS_PP_EXPR_IF(count)(sep()) CHAOS_PP_DELINEATE_S(s, count, sep, macro, data)
+#    define CHAOS_PP_DELINEATE_TRAILING_S(s, count, sep, macro, data) CHAOS_PP_WHEN(count)(sep()) CHAOS_PP_DELINEATE_S(s, count, sep, macro, data)
 # endif
 #
 # define CHAOS_PP_DELINEATE_TRAILING_S_ID() CHAOS_PP_DELINEATE_TRAILING_S

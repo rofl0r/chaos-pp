@@ -122,7 +122,7 @@
 	<listing>
 		#include <chaos-preprocessor-arithmetic-dec.h/>
 		#include <chaos-preprocessor-config.h/>
-		#include <chaos-preprocessor-control-expr_if.h/>
+		#include <chaos-preprocessor-control-when.h/>
 		#include <chaos-preprocessor-facilities-optional.h/>
 		#include <chaos-preprocessor-recursion-basic.h/>
 		#include <chaos-preprocessor-recursion-expr.h/>
@@ -141,7 +141,7 @@
 		    /**/
 		#define REPEAT_INDIRECT() REPEAT_I
 		#define REPEAT_I(_, s, count, macro, data) \
-		    <EXPR_IF/> _(count)( \
+		    <WHEN/> _(count)( \
 		        <EXPR_S/>(s) _(REPEAT_INDIRECT _()( \
 		            <OBSTRUCT/> _(), <NEXT/>(s), \
 		            <DEC/>(count), macro, data \

@@ -13,7 +13,7 @@
 # define CHAOS_PREPROCESSOR_REPETITION_DELINEATE_TRAILING_PARAMS_H
 #
 # include <chaos/preprocessor/config.h>
-# include <chaos/preprocessor/control/expr_if.h>
+# include <chaos/preprocessor/control/when.h>
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/limits.h>
 # include <chaos/preprocessor/repetition/delineate_params.h>
@@ -32,10 +32,10 @@
 # /* CHAOS_PP_DELINEATE_TRAILING_PARAMS_BYPASS */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_DELINEATE_TRAILING_PARAMS_BYPASS(s, count, sep, ...) CHAOS_PP_EXPR_IF(count)(sep()) CHAOS_PP_DELINEATE_PARAMS_BYPASS(s, count, sep, __VA_ARGS__)
+#    define CHAOS_PP_DELINEATE_TRAILING_PARAMS_BYPASS(s, count, sep, ...) CHAOS_PP_WHEN(count)(sep()) CHAOS_PP_DELINEATE_PARAMS_BYPASS(s, count, sep, __VA_ARGS__)
 #    define CHAOS_PP_DELINEATE_TRAILING_PARAMS_BYPASS_ CHAOS_PP_LAMBDA(CHAOS_PP_DELINEATE_TRAILING_PARAMS_BYPASS_ID)()
 # else
-#    define CHAOS_PP_DELINEATE_TRAILING_PARAMS_BYPASS(s, count, sep, param) CHAOS_PP_EXPR_IF(count)(sep()) CHAOS_PP_DELINEATE_PARAMS_BYPASS(s, count, sep, param)
+#    define CHAOS_PP_DELINEATE_TRAILING_PARAMS_BYPASS(s, count, sep, param) CHAOS_PP_WHEN(count)(sep()) CHAOS_PP_DELINEATE_PARAMS_BYPASS(s, count, sep, param)
 # endif
 #
 # define CHAOS_PP_DELINEATE_TRAILING_PARAMS_BYPASS_ID() CHAOS_PP_DELINEATE_TRAILING_PARAMS_BYPASS

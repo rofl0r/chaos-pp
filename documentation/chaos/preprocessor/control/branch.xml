@@ -90,7 +90,7 @@
 	<para>
 		Note that any number of "else-if" branches may exist, though no "else-if" branches are required.
 		Also note that the "else" branch need not exist.
-		For example, the following lines are roughly equivalent to <code><EXPR_IIF/>(bit)(expr)</code> and <code><IIF/>(bit)(T, F)</code> respectively:
+		For example, the following lines are roughly equivalent to <code><INLINE_WHEN/>(bit)(expr)</code> and <code><IIF/>(bit)(T, F)</code> respectively:
 		<snippet>
 		    <BRANCH/>(0xIIF)(bit)(expr)(0xENDIF)
 		    <BRANCH/>(0xIIF)(bit)(T)(0xELSEIF)(F)(0xENDIF)
@@ -100,7 +100,7 @@
 			#define A() !
 			
 			<BRANCH/>(0xIIF)(1)(A)(0xENDIF)() // A ()
-			<EXPR_IIF/>(1)(A)()               // !
+			<INLINE_WHEN/>(1)(A)()            // !
 		</snippet>
 		In order to make the above expand as desired, the result of <BRANCH/> needs to be "cleaned" with an identity macro such as <EXPAND/>.
 		<snippet>

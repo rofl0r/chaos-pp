@@ -60,8 +60,8 @@
 	<listing>
 		#include <chaos-preprocessor-cat.h/>
 		#include <chaos-preprocessor-config.h/>
-		#include <chaos-preprocessor-control-expr_iif.h/>
 		#include <chaos-preprocessor-control-iif.h/>
+		#include <chaos-preprocessor-control-inline_when.h/>
 		#include <chaos-preprocessor-lambda-planar.h/>
 		#include <chaos-preprocessor-recursion-expr.h/>
 		#include <chaos-preprocessor-seq-infuse.h/>
@@ -95,7 +95,7 @@
 		    /**/
 		#define FOLD_RIGHT_C_INDIRECT() FOLD_RIGHT_C
 		#define FOLD_RIGHT_C(bit, ...) \
-		    <EXPR_IIF/>(bit)( \
+		    <INLINE_WHEN/>(bit)( \
 		        <PLANAR_CLOSE/>() FOLD_RIGHT_C_INDIRECT \
 		    ) \
 		    /**/

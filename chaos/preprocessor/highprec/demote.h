@@ -14,7 +14,7 @@
 #
 # include <chaos/preprocessor/cat.h>
 # include <chaos/preprocessor/config.h>
-# include <chaos/preprocessor/control/expr_iif.h>
+# include <chaos/preprocessor/control/inline_when.h>
 # include <chaos/preprocessor/facilities/binary.h>
 # include <chaos/preprocessor/highprec/detail/length.h>
 # include <chaos/preprocessor/highprec/sign.h>
@@ -23,7 +23,7 @@
 # /* CHAOS_PP_DEMOTE_HP */
 #
 # define CHAOS_PP_DEMOTE_HP(x) \
-    CHAOS_PP_EXPR_IIF(CHAOS_PP_SIGN_HP(x))(-) CHAOS_IP_DEMOTE_HP_I(CHAOS_PP_BINARY(0) x) \
+    CHAOS_PP_INLINE_WHEN(CHAOS_PP_SIGN_HP(x))(-) CHAOS_IP_DEMOTE_HP_I(CHAOS_PP_BINARY(0) x) \
     /**/
 # define CHAOS_PP_DEMOTE_HP_ID() CHAOS_PP_DEMOTE_HP
 #

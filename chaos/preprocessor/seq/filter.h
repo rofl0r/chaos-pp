@@ -13,8 +13,8 @@
 # define CHAOS_PREPROCESSOR_SEQ_FILTER_H
 #
 # include <chaos/preprocessor/config.h>
-# include <chaos/preprocessor/control/expr_iif.h>
 # include <chaos/preprocessor/control/iif.h>
+# include <chaos/preprocessor/control/inline_when.h>
 # include <chaos/preprocessor/facilities/expand.h>
 # include <chaos/preprocessor/facilities/optional.h>
 # include <chaos/preprocessor/lambda/call.h>
@@ -51,7 +51,7 @@
         CHAOS_PP_IIF(i)(CHAOS_IP_SEQ_FILTER_II, CHAOS_PP_TUPLE_EAT(?))(CHAOS_PP_OBSTRUCT(), __VA_ARGS__) \
         /**/
 #    define CHAOS_IP_SEQ_FILTER_II(_, s, pred, _p, pd, ...) \
-        CHAOS_PP_EXPR_IIF _(_p()(s, pred, __VA_ARGS__ CHAOS_PP_EXPOSE(pd)))( \
+        CHAOS_PP_INLINE_WHEN _(_p()(s, pred, __VA_ARGS__ CHAOS_PP_EXPOSE(pd)))( \
             (__VA_ARGS__) \
         ) CHAOS_IP_SEQ_FILTER_INDIRECT \
         /**/
@@ -69,7 +69,7 @@
         CHAOS_PP_IIF(i)(CHAOS_IP_SEQ_FILTER_III, CHAOS_PP_TUPLE_EAT(6))(CHAOS_PP_OBSTRUCT(), s, pred, _p, data, x) \
         /**/
 #    define CHAOS_IP_SEQ_FILTER_III(_, s, pred, _p, data, x) \
-        CHAOS_PP_EXPR_IIF _(_p()(s, pred, x CHAOS_PP_COMMA() data))( \
+        CHAOS_PP_INLINE_WHEN _(_p()(s, pred, x CHAOS_PP_COMMA() data))( \
             (x) \
         ) CHAOS_IP_SEQ_FILTER_INDIRECT \
         /**/

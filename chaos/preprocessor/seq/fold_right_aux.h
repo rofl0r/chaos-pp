@@ -13,8 +13,8 @@
 # define CHAOS_PREPROCESSOR_SEQ_FOLD_RIGHT_AUX_H
 #
 # include <chaos/preprocessor/config.h>
-# include <chaos/preprocessor/control/expr_iif.h>
 # include <chaos/preprocessor/control/iif.h>
+# include <chaos/preprocessor/control/inline_when.h>
 # include <chaos/preprocessor/detection/is_unary.h>
 # include <chaos/preprocessor/detection/is_variadic.h>
 # include <chaos/preprocessor/facilities/expand.h>
@@ -43,25 +43,25 @@
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_SEQ_FOLD_RIGHT_AUX_S(s, op, seq, data, ...) \
         CHAOS_PP_EXPAND(CHAOS_IP_SEQ_FOLD_RIGHT_AUX_I( \
-            CHAOS_PP_SEQ_INFUSE(seq, 1, CHAOS_PP_NEXT(s), op, CHAOS_PP_PLANAR(op), CHAOS_PP_EXPR_IIF(CHAOS_PP_IS_VARIADIC(data))(CHAOS_PP_TUPLE_REM(?))(data))(0,), \
+            CHAOS_PP_SEQ_INFUSE(seq, 1, CHAOS_PP_NEXT(s), op, CHAOS_PP_PLANAR(op), CHAOS_PP_INLINE_WHEN(CHAOS_PP_IS_VARIADIC(data))(CHAOS_PP_TUPLE_REM(?))(data))(0,), \
             (__VA_ARGS__) \
         )) \
         /**/
 #    define CHAOS_PP_SEQ_FOLD_RIGHT_AUX_S_ CHAOS_PP_LAMBDA(CHAOS_PP_SEQ_FOLD_RIGHT_AUX_S_ID)()
 #    define CHAOS_IP_SEQ_FOLD_RIGHT_AUX_A(i, ...) CHAOS_PP_IIF(i)(CHAOS_IP_SEQ_FOLD_RIGHT_AUX_A_I, CHAOS_PP_TUPLE_EAT(?))(__VA_ARGS__)
 #    define CHAOS_IP_SEQ_FOLD_RIGHT_AUX_A_I(s, op, _o, data, ...) _o()(s, op) CHAOS_PP_UNPACK data, __VA_ARGS__, CHAOS_IP_SEQ_FOLD_RIGHT_AUX_A_INDIRECT
-#    define CHAOS_IP_SEQ_FOLD_RIGHT_AUX_B(i, ...) CHAOS_PP_EXPR_IIF(i)(CHAOS_PP_PLANAR_CLOSE() CHAOS_IP_SEQ_FOLD_RIGHT_AUX_B_INDIRECT)
+#    define CHAOS_IP_SEQ_FOLD_RIGHT_AUX_B(i, ...) CHAOS_PP_INLINE_WHEN(i)(CHAOS_PP_PLANAR_CLOSE() CHAOS_IP_SEQ_FOLD_RIGHT_AUX_B_INDIRECT)
 # else
 #    define CHAOS_PP_SEQ_FOLD_RIGHT_AUX_S(s, op, seq, data, state) \
         CHAOS_PP_EXPAND(CHAOS_IP_SEQ_FOLD_RIGHT_AUX_I( \
-            CHAOS_PP_SEQ_INFUSE(seq, (1, CHAOS_PP_NEXT(s), op, CHAOS_PP_PLANAR(op), CHAOS_PP_EXPR_IIF(CHAOS_PP_IS_UNARY(data))(CHAOS_PP_TUPLE_REM(1))(data)))((0, ~, ~, ~, ~), ~), \
+            CHAOS_PP_SEQ_INFUSE(seq, (1, CHAOS_PP_NEXT(s), op, CHAOS_PP_PLANAR(op), CHAOS_PP_INLINE_WHEN(CHAOS_PP_IS_UNARY(data))(CHAOS_PP_TUPLE_REM(1))(data)))((0, ~, ~, ~, ~), ~), \
             (state) \
         )) \
         /**/
 #    define CHAOS_IP_SEQ_FOLD_RIGHT_AUX_A(aux, x) CHAOS_PP_EXPAND(CHAOS_PP_DEFER(CHAOS_IP_SEQ_FOLD_RIGHT_AUX_A_I)(CHAOS_PP_TUPLE_REM(5) aux, x))
 #    define CHAOS_IP_SEQ_FOLD_RIGHT_AUX_A_I(i, s, op, _o, data, x) CHAOS_PP_IIF(i)(CHAOS_IP_SEQ_FOLD_RIGHT_AUX_A_II, CHAOS_PP_TUPLE_EAT(5))(s, op, _o, data, x)
 #    define CHAOS_IP_SEQ_FOLD_RIGHT_AUX_A_II(s, op, _o, data, x) _o()(s, op) x, CHAOS_PP_UNPACK data, CHAOS_IP_SEQ_FOLD_RIGHT_AUX_A_INDIRECT
-#    define CHAOS_IP_SEQ_FOLD_RIGHT_AUX_B(aux, x) CHAOS_PP_EXPR_IIF(CHAOS_PP_TUPLE_ELEM(5, 0, aux))(CHAOS_PP_PLANAR_CLOSE() CHAOS_IP_SEQ_FOLD_RIGHT_AUX_B_INDIRECT)
+#    define CHAOS_IP_SEQ_FOLD_RIGHT_AUX_B(aux, x) CHAOS_PP_INLINE_WHEN(CHAOS_PP_TUPLE_ELEM(5, 0, aux))(CHAOS_PP_PLANAR_CLOSE() CHAOS_IP_SEQ_FOLD_RIGHT_AUX_B_INDIRECT)
 # endif
 #
 # define CHAOS_PP_SEQ_FOLD_RIGHT_AUX_S_ID() CHAOS_PP_SEQ_FOLD_RIGHT_AUX_S

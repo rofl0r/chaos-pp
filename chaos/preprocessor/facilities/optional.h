@@ -13,8 +13,8 @@
 # define CHAOS_PREPROCESSOR_FACILITIES_OPTIONAL_H
 #
 # include <chaos/preprocessor/config.h>
-# include <chaos/preprocessor/control/expr_iif.h>
 # include <chaos/preprocessor/control/iif.h>
+# include <chaos/preprocessor/control/inline_when.h>
 # include <chaos/preprocessor/facilities/empty.h>
 # include <chaos/preprocessor/facilities/split.h>
 # include <chaos/preprocessor/lambda/ops.h>
@@ -33,7 +33,7 @@
 #
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_OPTIONAL(...) \
-        CHAOS_PP_SPLIT(1, __VA_ARGS__ CHAOS_PP_EXPR_IIF(CHAOS_PP_IS_OPTIONAL(__VA_ARGS__))(,)) \
+        CHAOS_PP_SPLIT(1, __VA_ARGS__ CHAOS_PP_INLINE_WHEN(CHAOS_PP_IS_OPTIONAL(__VA_ARGS__))(,)) \
         /**/
 #    define CHAOS_PP_OPTIONAL_ID() CHAOS_PP_OPTIONAL
 #    define CHAOS_PP_OPTIONAL_ CHAOS_PP_LAMBDA(CHAOS_PP_OPTIONAL_ID)()
@@ -54,7 +54,7 @@
 #    define CHAOS_PP_PACK_OPTIONAL_ID() CHAOS_PP_PACK_OPTIONAL
 #    define CHAOS_PP_PACK_OPTIONAL_ CHAOS_PP_LAMBDA(CHAOS_PP_PACK_OPTIONAL_ID)()
 #    define CHAOS_IP_PACK_OPTIONAL_I(opt, ...) \
-        (CHAOS_PP_IIF(opt)(,,) CHAOS_PP_SPLIT(1, __VA_ARGS__ CHAOS_PP_EXPR_IIF(opt)(,))) \
+        (CHAOS_PP_IIF(opt)(,,) CHAOS_PP_SPLIT(1, __VA_ARGS__ CHAOS_PP_INLINE_WHEN(opt)(,))) \
         /**/
 # endif
 #

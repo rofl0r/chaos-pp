@@ -14,8 +14,8 @@
 #
 # include <chaos/preprocessor/arbitrary/detail/clean.h>
 # include <chaos/preprocessor/config.h>
-# include <chaos/preprocessor/control/expr_iif.h>
 # include <chaos/preprocessor/control/iif.h>
+# include <chaos/preprocessor/control/inline_when.h>
 # include <chaos/preprocessor/detection/is_unary.h>
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/limits.h>
@@ -49,7 +49,7 @@
 #    define CHAOS_PP_LITERAL_AP_BYPASS_ CHAOS_PP_LAMBDA(CHAOS_PP_LITERAL_AP_BYPASS)
 #    define CHAOS_IP_LITERAL_AP_INDIRECT() CHAOS_IP_LITERAL_AP_I
 #    define CHAOS_IP_LITERAL_AP_I(_, s, string) \
-        CHAOS_PP_EXPR_IIF _(CHAOS_PP_STRING_IS_CONS(string))( \
+        CHAOS_PP_INLINE_WHEN _(CHAOS_PP_STRING_IS_CONS(string))( \
             (CHAOS_PP_STRING_FIRST _(string)) \
             CHAOS_PP_EXPR_S(s) _(CHAOS_IP_LITERAL_AP_INDIRECT _()( \
                 CHAOS_PP_OBSTRUCT _(), CHAOS_PP_PREV(s), CHAOS_PP_STRING_REST _(string) \

@@ -14,7 +14,8 @@
 #
 # include <chaos/preprocessor/cat.h>
 # include <chaos/preprocessor/config.h>
-# include <chaos/preprocessor/control/expr_iif.h>
+# include <chaos/preprocessor/control/inline_unless.h>
+# include <chaos/preprocessor/control/inline_when.h>
 # include <chaos/preprocessor/detection/is_empty.h>
 # include <chaos/preprocessor/detection/is_nullary.h>
 # include <chaos/preprocessor/facilities/empty.h>
@@ -53,7 +54,7 @@
 #    define CHAOS_PP_STRING_CONS(string, x) x string
 #    define CHAOS_PP_STRING_CONS_ CHAOS_PP_LAMBDA(CHAOS_PP_STRING_CONS_ID)()
 # else
-#    define CHAOS_PP_STRING_CONS(string, x) x CHAOS_PP_EXPR_IIF(CHAOS_PP_STRING_IS_NIL(string))(CHAOS_PP_EMPTY) string
+#    define CHAOS_PP_STRING_CONS(string, x) x CHAOS_PP_INLINE_WHEN(CHAOS_PP_STRING_IS_NIL(string))(CHAOS_PP_EMPTY) string
 # endif
 #
 # define CHAOS_PP_STRING_CONS_ID() CHAOS_PP_STRING_CONS
@@ -106,7 +107,7 @@
         /**/
 #    define CHAOS_IP_STRING_REST_I(x) x, ()
 #    define CHAOS_IP_STRING_REST_II(r) \
-        CHAOS_PP_EXPR_IIF(CHAOS_PP_COMPL(CHAOS_PP_IS_EMPTY(CHAOS_PP_EMPTY r)))( \
+        CHAOS_PP_INLINE_UNLESS(CHAOS_PP_IS_EMPTY(CHAOS_PP_EMPTY r))( \
             CHAOS_PP_EMPTY \
         ) r \
         /**/

@@ -14,8 +14,8 @@
 #
 # include <chaos/preprocessor/cat.h>
 # include <chaos/preprocessor/config.h>
-# include <chaos/preprocessor/control/expr_iif.h>
 # include <chaos/preprocessor/control/iif.h>
+# include <chaos/preprocessor/control/inline_when.h>
 # include <chaos/preprocessor/extended/variadic_cat.h>
 # include <chaos/preprocessor/generics/spec.h>
 # include <chaos/preprocessor/lambda/ops.h>
@@ -49,7 +49,7 @@
         /**/
 # else
 #    define CHAOS_PP_CONCAT_BYPASS(s, g) \
-        CHAOS_PP_EXPR_IIF(CHAOS_PP_IS_CONS(g))( \
+        CHAOS_PP_INLINE_WHEN(CHAOS_PP_IS_CONS(g))( \
             CHAOS_PP_EXPR_S(s)(CHAOS_IP_CONCAT_I(CHAOS_PP_OBSTRUCT(), CHAOS_PP_PREV(s), CHAOS_PP_REST(g), CHAOS_PP_FIRST(g))) \
         ) \
         /**/

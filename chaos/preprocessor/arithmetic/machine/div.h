@@ -16,8 +16,8 @@
 # include <chaos/preprocessor/arithmetic/machine/sub.h>
 # include <chaos/preprocessor/comparison/less_equal.h>
 # include <chaos/preprocessor/config.h>
-# include <chaos/preprocessor/control/expr_iif.h>
 # include <chaos/preprocessor/control/iif.h>
+# include <chaos/preprocessor/control/inline_when.h>
 # include <chaos/preprocessor/debug/failure.h>
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/logical/not.h>
@@ -36,7 +36,7 @@
 #
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_DIV_MACHINE_S(s, x, y) \
-        CHAOS_PP_EXPR_IIF(CHAOS_PP_NOT(y))(CHAOS_PP_FAILURE()) \
+        CHAOS_PP_INLINE_WHEN(CHAOS_PP_NOT(y))(CHAOS_PP_FAILURE()) \
         CHAOS_PP_EXPR_S(s)(CHAOS_PP_MACHINE_S(s, (, 0xCHAOS(0xDIV), x, y, 0xCHAOS(0xSTOP),))) \
         /**/
 #    define CHAOS_PP_DIV_MACHINE_S_ID() CHAOS_PP_DIV_MACHINE_S

@@ -14,7 +14,7 @@
 #
 # include <chaos/preprocessor/comparison/not_equal.h>
 # include <chaos/preprocessor/config.h>
-# include <chaos/preprocessor/control/expr_iif.h>
+# include <chaos/preprocessor/control/inline_when.h>
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/recursion/expr.h>
 # include <chaos/preprocessor/repetition/delineate_from_to.h>
@@ -33,10 +33,10 @@
 # /* CHAOS_PP_DELINEATE_FROM_TO_TRAILING_S */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_DELINEATE_FROM_TO_TRAILING_S(s, from, to, sep, ...) CHAOS_PP_EXPR_IIF(CHAOS_PP_NOT_EQUAL(from, to))(sep()) CHAOS_PP_DELINEATE_FROM_TO_S(s, from, to, sep, __VA_ARGS__)
+#    define CHAOS_PP_DELINEATE_FROM_TO_TRAILING_S(s, from, to, sep, ...) CHAOS_PP_INLINE_WHEN(CHAOS_PP_NOT_EQUAL(from, to))(sep()) CHAOS_PP_DELINEATE_FROM_TO_S(s, from, to, sep, __VA_ARGS__)
 #    define CHAOS_PP_DELINEATE_FROM_TO_TRAILING_S_ CHAOS_PP_LAMBDA(CHAOS_PP_DELINEATE_FROM_TO_TRAILING_S_ID)()
 # else
-#    define CHAOS_PP_DELINEATE_FROM_TO_TRAILING_S(s, from, to, sep, macro, data) CHAOS_PP_EXPR_IIF(CHAOS_PP_NOT_EQUAL(from, to))(sep()) CHAOS_PP_DELINEATE_FROM_TO_S(s, from, to, sep, macro, data)
+#    define CHAOS_PP_DELINEATE_FROM_TO_TRAILING_S(s, from, to, sep, macro, data) CHAOS_PP_INLINE_WHEN(CHAOS_PP_NOT_EQUAL(from, to))(sep()) CHAOS_PP_DELINEATE_FROM_TO_S(s, from, to, sep, macro, data)
 # endif
 #
 # define CHAOS_PP_DELINEATE_FROM_TO_TRAILING_S_ID() CHAOS_PP_DELINEATE_FROM_TO_TRAILING_S

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<header name="chaos/preprocessor/control/expr_iif.h" author="Paul Mensonides" date="2003-2004">
+<header name="chaos/preprocessor/control/inline_when.h" author="Paul Mensonides" date="2003-2004">
 <overview>
 	The <self/> header defines a macro that expands to an expression if a condition is <code>1</code>.
 </overview>
 
-<macro id="EXPR_IIF" group="if">
+<macro id="INLINE_WHEN" group="if">
 	<abstract>
-		The <EXPR_IIF/> macro expands to its second argument if its first argument is <code>1</code>.
+		The <INLINE_WHEN/> macro expands to its second argument if its first argument is <code>1</code>.
 	</abstract>
 	<usage lang="C99">
-		<syntax><EXPR_IIF/>(bit)(...)</syntax>
+		<syntax><INLINE_WHEN/>(bit)(...)</syntax>
 		<param id="bit">
 			The condition that determines whether the macro should expand to <code>__VA_ARGS__</code> or nothing.
 			Valid values are <code>0</code> and <code>1</code>.
@@ -19,7 +19,7 @@
 		</param>
 	</usage>
 	<usage lang="C/C++">
-		<syntax><EXPR_IIF/>(bit)(x)</syntax>
+		<syntax><INLINE_WHEN/>(bit)(x)</syntax>
 		<param id="bit">
 			The condition that determines whether the macro should expand to <var>x</var> or nothing.
 			Valid values are <code>0</code> and <code>1</code>.
@@ -34,23 +34,23 @@
 	</para>
 	<para>
 		This macro does <em>not</em> perform a Boolean conversion on <var>bit</var>.
-		If the conversion is desired, <EXPR_IF/> should be used instead.
+		If the conversion is desired, <WHEN/> should be used instead.
 	</para>
 	<para>
 		This macro is lazy.
 		If <var>bit</var> is <code>0</code>, <var>x</var> (or <code>__VA_ARGS__</code>) is not evaluated.
 	</para>
 	<listing>
-		#include <chaos-preprocessor-control-expr_iif.h/>
+		#include <chaos-preprocessor-control-inline_when.h/>
 		
 		#define VALID() 1
 		#define INVALID() VALID(!) // too many arguments
 		
-		<EXPR_IIF/>(1)(VALID())   // 1
-		<EXPR_IIF/>(0)(INVALID()) //
+		<INLINE_WHEN/>(1)(VALID())   // 1
+		<INLINE_WHEN/>(0)(INVALID()) //
 	</listing>
-	<derivative id="EXPR_IIF_ID"/>
-	<derivative id="EXPR_IIF_" lang="C99"/>
+	<derivative id="INLINE_WHEN_ID"/>
+	<derivative id="INLINE_WHEN_" lang="C99"/>
 </macro>
 
 </header>

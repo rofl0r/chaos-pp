@@ -144,7 +144,7 @@
 	</para>
 	<listing>
 		#include <chaos-preprocessor-config.h/>
-		#include <chaos-preprocessor-control-expr_iif.h/>
+		#include <chaos-preprocessor-control-inline_when.h/>
 		#include <chaos-preprocessor-facilities-expand.h/>
 		#include <chaos-preprocessor-punctuation-comma_if.h/>
 		#include <chaos-preprocessor-seq-binary_transform.h/>
@@ -158,7 +158,7 @@
 		#if <VARIADICS/>
 		
 		#define ENUM_A(bit, ...) \
-		    <EXPR_IIF/>(bit)(__VA_ARGS__ ENUM_INDIRECT) \
+		    <INLINE_WHEN/>(bit)(__VA_ARGS__ ENUM_INDIRECT) \
 		    /**/
 		#define ENUM_B(bit, ...) \
 		    <COMMA_IF/>(bit) ENUM_A(bit, __VA_ARGS__) \
@@ -166,7 +166,7 @@
 		
 		#else
 		
-		#define ENUM_A(bit, x) <EXPR_IIF/>(bit)(x ENUM_INDIRECT)
+		#define ENUM_A(bit, x) <INLINE_WHEN/>(bit)(x ENUM_INDIRECT)
 		#define ENUM_B(bit, x) <COMMA_IF/>(bit) ENUM_A(bit, x)
 		
 		#endif

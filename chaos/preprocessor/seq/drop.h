@@ -23,12 +23,12 @@
 #
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_SEQ_DROP(n, seq) \
-        CHAOS_PP_SPLIT(1, CHAOS_PP_PRIMITIVE_CAT(CHAOS_IP_SEQ_DROP_, n) seq) \
+        CHAOS_PP_SPLIT(1, CHAOS_PP_PRIMITIVE_CAT(CHAOS_IP_SEQ_TAKE_, n) seq) \
         /**/
 #    define CHAOS_PP_SEQ_DROP_ CHAOS_PP_LAMBDA(CHAOS_PP_SEQ_DROP_ID)()
 # else
 #    define CHAOS_PP_SEQ_DROP(n, seq) \
-        CHAOS_PP_SPLIT(1, ~ CHAOS_PP_PRIMITIVE_CAT(CHAOS_IP_SEQ_DROP_, n) seq CHAOS_PP_EMPTY)() \
+        CHAOS_PP_SPLIT(1, ~ CHAOS_PP_PRIMITIVE_CAT(CHAOS_IP_SEQ_TAKE_, n) seq CHAOS_PP_EMPTY)() \
         /**/
 # endif
 #

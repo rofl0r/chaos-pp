@@ -584,12 +584,16 @@
 			<header name="stringize.h"/>
 			<header name="tuple.h"/>
 			<directory name="tuple">
+				<directory name="complexity">
+					<binary-file name="size.gif"/>
+				</directory>
 				<header name="batch.h"/>
 				<header name="core.h"/>
 				<header name="eat.h"/>
 				<header name="elem.h"/>
 				<header name="rem.h"/>
 				<header name="reverse.h"/>
+				<header name="size.h"/>
 				<header name="to_list.h"/>
 				<header name="to_seq.h"/>
 				<header name="to_string.h"/>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/tuple/size.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that calculates the size of a <link id="tuple"/>.
+</overview>
+
+<macro id="TUPLE_SIZE" group="size">
+	<abstract>
+		The <TUPLE_SIZE/> macro calculates the number of elements in its argument.
+	</abstract>
+	<usage lang="C99">
+		<syntax><TUPLE_SIZE/>(tuple)</syntax>
+		<param id="tuple" optional="1">
+			The <link id="tuple"/> whose size is to be calculated.
+		</param>
+	</usage>
+	<para>
+		This macro expands to the number of elements in <var>tuple</var>.
+		If <var>tuple</var> contains more than <LIMIT_MAG/> elements, the result is <link id="saturated"/> to <LIMIT_MAG/>.
+	</para>
+	<para>
+		The running time of <TUPLE_SIZE/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
+		The asymptotic upper and lower bounds are <assoc id="complexity/size.gif">Θ</assoc>, where <x-var>n</x-var> is the number of elements in <var>tuple</var>.
+	</para>
+	<para>
+		This macro operates on the nil-<link id="tuple"/> representation used by the core <link id="tuple"/> operations defined in <chaos-preprocessor-tuple-core.h/>.
+		Specifically, <code>()</code> is a one-element <link id="tuple"/>, not a zero-element <link id="tuple"/>.
+	</para>
+	<para>
+		This macro uses <link id="bypass semantics"/>.
+		If <link id="bypass semantics"/> are already in effect, <TUPLE_SIZE_BYPASS/> must be used instead.
+	</para>
+	<derivative id="TUPLE_SIZE_ID" lang="C99"/>
+	<derivative id="TUPLE_SIZE_" lang="C99"/>
+	<derivative id="TUPLE_SIZE_BYPASS">
+		<usage lang="C99">
+			<syntax><TUPLE_SIZE_BYPASS/>(s, tuple)</syntax>
+		</usage>
+	</derivative>
+</macro>
+
+</header>

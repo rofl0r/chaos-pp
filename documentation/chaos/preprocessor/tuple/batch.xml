@@ -14,7 +14,7 @@
 			The batch size.
 			Valid values range from <code>1</code> to <LIMIT_TUPLE/>.
 		</param>
-		<param id="tuple">
+		<param id="tuple" optional="1">
 			The <link id="tuple"/> to be tested.
 		</param>
 	</usage>

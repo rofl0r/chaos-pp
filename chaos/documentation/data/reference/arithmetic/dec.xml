@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="arithmetic/dec.hpp" root="../..">
+<synopsis>
+	The <self/> header defines a saturated decrement operator.
+</synopsis>
+
+<symbol id="DEC">
+	<derivative id="DEC_ID" buffer="false"/>
+	<derivative id="DEC_" buffer="false"/>
+	<abstract>
+		The <DEC/> macro decrements a number.
+	</abstract>
+	<usage>
+		<syntax><DEC/>(x)</syntax>
+		<param id="x">
+			The number to be decremented.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+	</usage>
+	<para>
+		If <var>x</var> is <code>0</code>, this macro expands to <code>0</code>.
+		Otherwise, it expands to one less than <var>x</var>.
+	</para>
+<listing>
+#include <arithmetic-dec.hpp/>
+
+<DEC/>(0) // 0
+<DEC/>(5) // 4
+</listing>
+</symbol>
+
+</header>

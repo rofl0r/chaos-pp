@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="arithmetic/inc.hpp" root="../..">
+<synopsis>
+	The <self/> header defines a saturated increment operator.
+</synopsis>
+
+<symbol id="INC">
+	<derivative id="INC_ID" buffer="false"/>
+	<derivative id="INC_" buffer="false"/>
+	<abstract>
+		The <INC/> macro increments a number.
+	</abstract>
+	<usage>
+		<syntax><INC/>(x)</syntax>
+		<param id="x">
+			The number to be incremented.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+	</usage>
+	<para>
+		If <var>x</var> is <LIMIT_MAG/>, this macro expands to <LIMIT_MAG/>.
+		Otherwise, it expands to one greater than <var>x</var>.
+	</para>
+<listing>
+#include <arithmetic-inc.hpp/>
+
+<INC/>(0) // 1
+<INC/>(5) // 6
+</listing>
+</symbol>
+
+</header>

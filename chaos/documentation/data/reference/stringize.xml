@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="stringize.hpp" root="..">
+<synopsis>
+	The <self/> header defines stringizing macros.
+</synopsis>
+
+<symbol id="STRINGIZE">
+	<derivative id="STRINGIZE_ID" buffer="false"/>
+	<derivative id="STRINGIZE_" buffer="false"/>
+	<abstract>
+		The <STRINGIZE/> macro stringizes its argument after it has been expanded.
+	</abstract>
+	<usage lang="C99">
+		<syntax><STRINGIZE/>(...)</syntax>
+		<param id="..." optional="true">The argument(s) to be stringized.</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><STRINGIZE/>(x)</syntax>
+		<param id="x">The argument to be stringized.</param>
+	</usage>
+	<para>
+		This macro stringizes its argument with the stringizing operator.
+<snippet>
+#__VA_ARGS__ // C99
+#x           // C and C++
+</snippet>
+	</para>
+	<para>
+		This macro provides the delay necessary to allow its argument(s) to expand prior to stringizing.
+		This macro's sibling, <PRIMITIVE_STRINGIZE/>, does <em>not</em> provide this delay.
+	</para>
+<listing>
+#include <stringize.hpp/>
+
+#define A text
+
+<STRINGIZE/>(A) // "text"
+</listing>
+</symbol>
+
+<symbol id="PRIMITIVE_STRINGIZE">
+	<derivative id="PRIMITIVE_STRINGIZE_ID" buffer="false"/>
+	<derivative id="PRIMITIVE_STRINGIZE_" buffer="false"/>
+	<abstract>
+		The <PRIMITIVE_STRINGIZE/> macro stringizes its argument before it is expanded.
+	</abstract>
+	<usage lang="C99">
+		<syntax><PRIMITIVE_STRINGIZE/>(...)</syntax>
+		<param id="..." optional="true">The argument(s) to be stringized.</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><PRIMITIVE_STRINGIZE/>(x)</syntax>
+		<param id="x">The argument to be stringized.</param>
+	</usage>
+	<para>
+		This macro behaves identically to <STRINGIZE/> except that it <em>does not</em> provide the delay
+		necessary to allow its argument(s) to expand before stringizing.
+	</para>
+<listing>
+#include <stringize.hpp/>
+
+#define A text
+
+<PRIMITIVE_STRINGIZE/>(A) // "A"
+</listing>
+</symbol>
+
+</header>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="limits.hpp" root="..">
+<synopsis>
+	The <self/> header defines physical limits on various library facilities.
+</synopsis>
+
+<symbol id="LIMIT_EXPR">
+	<abstract>
+		The <LIMIT_EXPR/> macro expands to the maximum number of abstract steps supported by the <recursion text="recursion backend"/> (<EXPR/> and <EXPR_S/>).
+	</abstract>
+	<usage><syntax><LIMIT_EXPR/></syntax></usage>
+	<para>This macro currently expands to <code>512</code>.</para>
+</symbol>
+
+<symbol id="LIMIT_MAG">
+	<abstract>
+		The <LIMIT_MAG/> macro expands to the maximum magnitude numeric literal that the library can directly process as a number.
+	</abstract>
+	<usage><syntax><LIMIT_MAG/></syntax></usage>
+	<para>This macro currently expands to <code>512</code>.</para>
+</symbol>
+
+</header>

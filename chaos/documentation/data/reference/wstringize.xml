@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="wstringize.hpp" root="..">
+<synopsis>
+	The <self/> header defines wide-stringizing macros.
+</synopsis>
+
+<symbol id="WSTRINGIZE">
+	<derivative id="WSTRINGIZE_ID" buffer="false"/>
+	<derivative id="WSTRINGIZE_" buffer="false"/>
+	<abstract>
+		The <WSTRINGIZE/> macro wide-stringizes its argument after it has been expanded.
+	</abstract>
+	<usage lang="C99">
+		<syntax><WSTRINGIZE/>(...)</syntax>
+		<param id="..." optional="true">The argument(s) to be wide-stringized.</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><WSTRINGIZE/>(x)</syntax>
+		<param id="x">The argument to be wide-stringized.</param>
+	</usage>
+	<para>
+		This macro provides the delay necessary to allow its arguments(s) to expand prior to stringizing.
+		This macro's sibling, <PRIMITIVE_WSTRINGIZE/>, does <em>not</em> provide this delay.
+	</para>
+<listing>
+#include <wstringize.hpp/>
+
+#define A text
+
+<WSTRINGIZE/>(A) // L"text"
+</listing>
+</symbol>
+
+<symbol id="PRIMITIVE_WSTRINGIZE">
+	<derivative id="PRIMITIVE_WSTRINGIZE_ID" buffer="false"/>
+	<derivative id="PRIMITIVE_WSTRINGIZE_" buffer="false"/>
+	<abstract>
+		The <PRIMITIVE_WSTRINGIZE/> macro wide-stringizes its argument before it is expanded.
+	</abstract>
+	<usage lang="C99">
+		<syntax><PRIMITIVE_WSTRINGIZE/>(...)</syntax>
+		<param id="..." optional="true">The argument(s) to be wide-stringized.</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><PRIMITIVE_WSTRINGIZE/>(x)</syntax>
+		<param id="x">The argument to be wide-stringized.</param>
+	</usage>
+	<para>
+		This macro behaves identically to <WSTRINGIZE/> except that it <em>does not</em> provide the delay
+		necessary to allow its argument to expand before stringizing.
+	</para>
+<listing>
+#include <wstringize.hpp/>
+
+#define A text
+
+<PRIMITIVE_WSTRINGIZE/>(A) // L"A"
+</listing>
+
+</symbol>
+
+</header>

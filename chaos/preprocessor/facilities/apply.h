@@ -38,4 +38,18 @@
 #
 # define CHAOS_PP_APPLY_ID() CHAOS_PP_APPLY
 #
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_PP_APPLY_SHADOW(...) \
+        CHAOS_PP_EXPR_IIF_SHADOW(CHAOS_PP_IS_VARIADIC(__VA_ARGS__))( \
+            CHAOS_PP_TUPLE_REM_SHADOW(?) __VA_ARGS__ \
+        ) \
+        /**/
+# else
+#    define CHAOS_PP_APPLY_SHADOW(x) \
+        CHAOS_PP_EXPR_IIF_SHADOW(CHAOS_PP_IS_UNARY(x))( \
+            CHAOS_PP_TUPLE_REM_SHADOW(1) x \
+        ) \
+        /**/
+# endif
+#
 # endif

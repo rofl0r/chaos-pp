@@ -37,6 +37,7 @@
 #
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_GREATER_EQUAL_AP_INTERNAL(s, x, y) CHAOS_PP_LESS_EQUAL_AP_INTERNAL(s, y, x)
+# endif
 #
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_INSTRUCTION_0xCHAOS_0xARBITRARY_0xGREATER_EQUAL(s, p, x, y, k, ...) (, 0xCHAOS(0xARBITRARY(0xLESS_EQUAL)), p ## y, p ## x, k, p ## __VA_ARGS__)

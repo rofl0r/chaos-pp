@@ -39,6 +39,7 @@
 #
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_NOT_EQUAL_AP_INTERNAL(s, x, y) CHAOS_PP_COMPL(CHAOS_PP_EQUAL_AP_INTERNAL(s, x, y))
+# endif
 #
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_INSTRUCTION_0xCHAOS_0xARBITRARY_0xNOT_EQUAL(s, p, x, y, k, ...) (, 0xCHAOS(0xARBITRARY(0xEQUAL)), p ## x, p ## y, 0xCHAOS(0xCOMPL), k, p ## __VA_ARGS__)

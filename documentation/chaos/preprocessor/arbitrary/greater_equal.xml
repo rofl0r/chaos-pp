@@ -2,7 +2,7 @@
 
 <!-- **************************************************************************
      *                                                                        *
-     *    (C) Copyright Paul Mensonides 2003-2004.                            *
+     *    (C) Copyright Paul Mensonides 2003-2005.                            *
      *                                                                        *
      *    Distributed under the Boost Software License, Version 1.0.          *
      *    (See accompanying file LICENSE).                                    *
@@ -11,7 +11,7 @@
      *                                                                        *
      ************************************************************************** -->
 
-<header name="chaos/preprocessor/arbitrary/greater_equal.h" author="Paul Mensonides" date="2003-2004">
+<header name="chaos/preprocessor/arbitrary/greater_equal.h" author="Paul Mensonides" date="2003-2005">
 <overview>
 	The <self/> header defines an <link id="arbitrary-precision"/> "greater-than-or-equal" operator.
 </overview>

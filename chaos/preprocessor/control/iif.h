@@ -26,6 +26,9 @@
 #    define CHAOS_PP_IIF_ CHAOS_PP_LAMBDA(CHAOS_PP_IIF)
 #    define CHAOS_IP_IIF_0(t, ...) __VA_ARGS__
 #    define CHAOS_IP_IIF_1(t, ...) t
+# else
+#    define CHAOS_IP_IIF_0(t, f) f
+#    define CHAOS_IP_IIF_1(t, f) t
 # endif
 #
 # if CHAOS_PP_NO_PREFIX

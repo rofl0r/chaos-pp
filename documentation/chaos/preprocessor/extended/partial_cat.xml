@@ -74,8 +74,6 @@
 		)
 		// __LINE__4
 	</listing>
-	<derivative id="PARTIAL_CAT_ID"/>
-	<derivative id="PARTIAL_CAT_" lang="C99"/>
 </macro>
 
 </header>

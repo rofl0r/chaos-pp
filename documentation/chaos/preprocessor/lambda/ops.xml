@@ -254,7 +254,7 @@
 		This macro expands to a reference to the <var>n</var>-th <link id="λ placeholder"/>.
 	</para>
 	<para>
-		This macro is an longhand form of direct use of the <link id="λ placeholders"/> (e.g. <code>_0</code>, <code>_1</code>, etc.) which are more convenient to use, but cannot always be defined.
+		This macro is an longhand form of the direct use of the <link id="λ placeholders"/> (e.g. <code>_0</code>, <code>_1</code>, etc.) which are more convenient to use, but cannot always be defined.
 	</para>
 	<listing>
 		#include <chaos-preprocessor-config.h/>

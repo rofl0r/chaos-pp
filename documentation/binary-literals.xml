@@ -30,7 +30,7 @@
 			Besides the inefficiency of runtime computation, the major drawback of this approach is that the result cannot be used as a compile-time constant.
 		</para>
 		<para>
-			(On the hand, the major advantage of this approach is that it <em>can</em> do the computation at runtime--which is important in its own right.
+			(On the other hand, the major advantage of this approach is that it <em>can</em> do the computation at runtime--which is important in its own right.
 			<snippet>
 				int main(int argc, char* argv[]) {
 				    if (argc &lt; 2) {
@@ -67,8 +67,7 @@
 			</snippet>
 		</para>
 		<para>
-			However, there are a few of drawbacks to using the template mechanism for this purpose.
-			The most obvious of which is that this approach can only be used in C++.
+			However, there are a few drawbacks to using the template mechanism for this purpose, the most obvious of which is that this approach can only be used in C++.
 			The other drawbacks are more subtle....
 		</para>
 		<para>
@@ -165,9 +164,6 @@
 				}
 			</snippet>
 			Each time a bit is found, the algorithm doubles the running result and adds the value of the bit.
-			<!--A translation of this algorithm into preprocessor metaprogramming code is fairly straightforward.
-			The generic algorithm <FOLD_LEFT/> can be used to accumulate a <link id="string"/> of bits (in place of the recursion above).
-			This is a higher-order transformation, similar to the following C++ code:-->
 			Instead of accumulating the elements of a data structure by manually looping (or recursing), a generalized notion of "accumulation" can be used--<code>std::accumulate</code>.
 			<snippet>
 				#include &lt;cstring&gt;
@@ -459,7 +455,7 @@
 				))
 				// (XS) P A U L _ M E N S O N I D E S
 			</snippet>
-			Give such a data structure definition (and the appropriate <code>EXPANDER_xxx</code> definitions), input such as <code>10101010 10101010</code> can be processed directly.
+			Given such a data structure definition (and the appropriate <code>EXPANDER_xxx</code> definitions), input such as <code>10101010 10101010</code> can be processed directly.
 			The potential downside is that the primitive validation has been lost because the <code>XS</code> data type is perhaps <em>too</em> extensible for this purpose.
 			<snippet>
 				#include <chaos-preprocessor-algorithm-fold_left.h/>
@@ -566,7 +562,7 @@
 	</section>
 	<section id="Postscript">
 		<para>
-			The astute reader might notice out that there is nothing particularly special about binary literals (as opposed to literals of other bases).
+			The astute reader might notice that there is nothing particularly special about binary literals (as opposed to literals of other bases).
 			The runtime model might look something like the following:
 			<snippet>
 				#include &lt;ctype.h&gt;

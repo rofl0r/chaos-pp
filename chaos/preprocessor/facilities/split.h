@@ -15,7 +15,6 @@
 # include <chaos/preprocessor/cat.h>
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/lambda/ops.h>
-# include <chaos/preprocessor/names.h>
 #
 # /* CHAOS_PP_SPLIT */
 #
@@ -31,11 +30,5 @@
 # endif
 #
 # define CHAOS_PP_SPLIT_ID() CHAOS_PP_SPLIT
-#
-# if CHAOS_PP_NO_PREFIX
-#    define SPLIT    CHAOS_PP_PREFIX(SPLIT)
-#    define SPLIT_   CHAOS_PP_PREFIX(SPLIT_)
-#    define SPLIT_ID CHAOS_PP_PREFIX(SPLIT_ID)
-# endif
 #
 # endif

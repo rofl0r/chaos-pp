@@ -16,7 +16,6 @@
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/detection/is_nullary.h>
 # include <chaos/preprocessor/lambda/ops.h>
-# include <chaos/preprocessor/names.h>
 #
 # /* CHAOS_PP_NOT */
 #
@@ -28,11 +27,5 @@
 # endif
 #
 # define CHAOS_IP_NOT_0 ()
-#
-# if CHAOS_PP_NO_PREFIX
-#    define NOT    CHAOS_PP_PREFIX(NOT)
-#    define NOT_   CHAOS_PP_PREFIX(NOT_)
-#    define NOT_ID CHAOS_PP_PREFIX(NOT_ID)
-# endif
 #
 # endif

@@ -14,7 +14,6 @@
 #
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/lambda/ops.h>
-# include <chaos/preprocessor/names.h>
 #
 # /* CHAOS_PP_CAT */
 #
@@ -27,12 +26,6 @@
 #
 # define CHAOS_PP_CAT_ID() CHAOS_PP_CAT
 #
-# if CHAOS_PP_NO_PREFIX
-#    define CAT    CHAOS_PP_PREFIX(CAT)
-#    define CAT_   CHAOS_PP_PREFIX(CAT_)
-#    define CAT_ID CHAOS_PP_PREFIX(CAT_ID)
-# endif
-#
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_PRIMITIVE_CAT(a, ...) a ## __VA_ARGS__
 #    define CHAOS_PP_PRIMITIVE_CAT_ CHAOS_PP_LAMBDA(CHAOS_PP_PRIMITIVE_CAT_ID)()
@@ -41,11 +34,5 @@
 # endif
 #
 # define CHAOS_PP_PRIMITIVE_CAT_ID() CHAOS_PP_PRIMITIVE_CAT
-#
-# if CHAOS_PP_NO_PREFIX
-#    define PRIMITIVE_CAT    CHAOS_PP_PREFIX(PRIMITIVE_CAT)
-#    define PRIMITIVE_CAT_   CHAOS_PP_PREFIX(PRIMITIVE_CAT_)
-#    define PRIMITIVE_CAT_ID CHAOS_PP_PREFIX(PRIMITIVE_CAT_ID)
-# endif
 #
 # endif

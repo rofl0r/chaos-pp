@@ -18,7 +18,6 @@
 # include <chaos/preprocessor/detection/is_nullary.h>
 # include <chaos/preprocessor/facilities/expand.h>
 # include <chaos/preprocessor/lambda/ops.h>
-# include <chaos/preprocessor/names.h>
 # include <chaos/preprocessor/tuple/eat.h>
 #
 # /* CHAOS_PP_NOT_EQUAL */
@@ -35,12 +34,6 @@
 #
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_NOT_EQUAL_ CHAOS_PP_LAMBDA(CHAOS_PP_NOT_EQUAL)
-# endif
-#
-# if CHAOS_PP_NO_PREFIX
-#    define NOT_EQUAL    CHAOS_PP_PREFIX(NOT_EQUAL)
-#    define NOT_EQUAL_   CHAOS_PP_PREFIX(NOT_EQUAL_)
-#    define NOT_EQUAL_ID CHAOS_PP_PREFIX(NOT_EQUAL_ID)
 # endif
 #
 # endif

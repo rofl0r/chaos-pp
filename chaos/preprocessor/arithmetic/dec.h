@@ -15,7 +15,6 @@
 # include <chaos/preprocessor/cat.h>
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/lambda/ops.h>
-# include <chaos/preprocessor/names.h>
 #
 # /* CHAOS_PP_DEC */
 #
@@ -539,11 +538,5 @@
 # define CHAOS_IP_DEC_510 509
 # define CHAOS_IP_DEC_511 510
 # define CHAOS_IP_DEC_512 511
-#
-# if CHAOS_PP_NO_PREFIX
-#    define DEC    CHAOS_PP_PREFIX(DEC)
-#    define DEC_   CHAOS_PP_PREFIX(DEC_)
-#    define DEC_ID CHAOS_PP_PREFIX(DEC_ID)
-# endif
 #
 # endif

@@ -17,7 +17,6 @@
 # include <chaos/preprocessor/detection/is_nullary.h>
 # include <chaos/preprocessor/facilities/empty.h>
 # include <chaos/preprocessor/lambda/ops.h>
-# include <chaos/preprocessor/names.h>
 # include <chaos/preprocessor/tuple/eat.h>
 # include <chaos/preprocessor/tuple/rem.h>
 #
@@ -550,11 +549,5 @@
 # define CHAOS_IP_LESS_510(a, b) a(CHAOS_IP_LESS_509) b(CHAOS_PP_TUPLE_REM(1), CHAOS_PP_EMPTY())
 # define CHAOS_IP_LESS_511(a, b) a(CHAOS_IP_LESS_510) b(CHAOS_PP_TUPLE_REM(1), CHAOS_PP_EMPTY())
 # define CHAOS_IP_LESS_512(a, b) a(CHAOS_IP_LESS_511) b(CHAOS_PP_TUPLE_REM(1), CHAOS_PP_EMPTY())
-#
-# if CHAOS_PP_NO_PREFIX
-#    define LESS    CHAOS_PP_PREFIX(LESS)
-#    define LESS_   CHAOS_PP_PREFIX(LESS_)
-#    define LESS_ID CHAOS_PP_PREFIX(LESS_ID)
-# endif
 #
 # endif

@@ -17,7 +17,6 @@
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/logical/bool.h>
 # include <chaos/preprocessor/logical/not.h>
-# include <chaos/preprocessor/names.h>
 #
 # /* CHAOS_PP_NOR */
 #
@@ -30,11 +29,5 @@
 #
 # define CHAOS_IP_NOR_0(q) CHAOS_PP_NOT(q)
 # define CHAOS_IP_NOR_1(q) 0
-#
-# if CHAOS_PP_NO_PREFIX
-#    define NOR    CHAOS_PP_PREFIX(NOR)
-#    define NOR_   CHAOS_PP_PREFIX(NOR_)
-#    define NOR_ID CHAOS_PP_PREFIX(NOR_ID)
-# endif
 #
 # endif

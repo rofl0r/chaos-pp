@@ -14,7 +14,6 @@
 #
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/lambda/ops.h>
-# include <chaos/preprocessor/names.h>
 #
 # /* CHAOS_PP_EXPAND */
 #
@@ -26,11 +25,5 @@
 # endif
 #
 # define CHAOS_PP_EXPAND_ID() CHAOS_PP_EXPAND
-#
-# if CHAOS_PP_NO_PREFIX
-#    define EXPAND    CHAOS_PP_PREFIX(EXPAND)
-#    define EXPAND_   CHAOS_PP_PREFIX(EXPAND_)
-#    define EXPAND_ID CHAOS_PP_PREFIX(EXPAND_ID)
-# endif
 #
 # endif

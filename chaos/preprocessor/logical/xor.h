@@ -17,7 +17,6 @@
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/logical/bool.h>
 # include <chaos/preprocessor/logical/not.h>
-# include <chaos/preprocessor/names.h>
 #
 # /* CHAOS_PP_XOR */
 #
@@ -30,11 +29,5 @@
 #
 # define CHAOS_IP_XOR_0(q) CHAOS_PP_BOOL(q)
 # define CHAOS_IP_XOR_1(q) CHAOS_PP_NOT(q)
-#
-# if CHAOS_PP_NO_PREFIX
-#    define XOR    CHAOS_PP_PREFIX(XOR)
-#    define XOR_   CHAOS_PP_PREFIX(XOR_)
-#    define XOR_ID CHAOS_PP_PREFIX(XOR_ID)
-# endif
 #
 # endif

@@ -16,7 +16,6 @@
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/logical/bool.h>
-# include <chaos/preprocessor/names.h>
 #
 # /* CHAOS_PP_OR */
 #
@@ -29,11 +28,5 @@
 #
 # define CHAOS_IP_OR_0(q) CHAOS_PP_BOOL(q)
 # define CHAOS_IP_OR_1(q) 1
-#
-# if CHAOS_PP_NO_PREFIX
-#    define OR    CHAOS_PP_PREFIX(OR)
-#    define OR_   CHAOS_PP_PREFIX(OR_)
-#    define OR_ID CHAOS_PP_PREFIX(OR_ID)
-# endif
 #
 # endif

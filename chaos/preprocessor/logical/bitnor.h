@@ -16,7 +16,6 @@
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/logical/compl.h>
-# include <chaos/preprocessor/names.h>
 #
 # /* CHAOS_PP_BITNOR */
 #
@@ -29,11 +28,5 @@
 #
 # define CHAOS_IP_BITNOR_0(y) CHAOS_PP_COMPL(y)
 # define CHAOS_IP_BITNOR_1(y) 0
-#
-# if CHAOS_PP_NO_PREFIX
-#    define BITNOR    CHAOS_PP_PREFIX(BITNOR)
-#    define BITNOR_   CHAOS_PP_PREFIX(BITNOR_)
-#    define BITNOR_ID CHAOS_PP_PREFIX(BITNOR_ID)
-# endif
 #
 # endif

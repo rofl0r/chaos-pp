@@ -15,7 +15,6 @@
 # include <chaos/preprocessor/cat.h>
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/lambda/ops.h>
-# include <chaos/preprocessor/names.h>
 #
 # /* CHAOS_PP_WSTRINGIZE */
 #
@@ -28,12 +27,6 @@
 #
 # define CHAOS_PP_WSTRINGIZE_ID() CHAOS_PP_WSTRINGIZE
 #
-# if CHAOS_PP_NO_PREFIX
-#    define WSTRINGIZE    CHAOS_PP_PREFIX(WSTRINGIZE)
-#    define WSTRINGIZE_   CHAOS_PP_PREFIX(WSTRINGIZE_)
-#    define WSTRINGIZE_ID CHAOS_PP_PREFIX(WSTRINGIZE_ID)
-# endif
-#
 # /* CHAOS_PP_PRIMITIVE_WSTRINGIZE */
 #
 # if CHAOS_PP_VARIADICS
@@ -44,11 +37,5 @@
 # endif
 #
 # define CHAOS_PP_PRIMITIVE_WSTRINGIZE_ID() CHAOS_PP_PRIMITIVE_WSTRINGIZE
-#
-# if CHAOS_PP_NO_PREFIX
-#    define PRIMITIVE_WSTRINGIZE    CHAOS_PP_PREFIX(PRIMITIVE_WSTRINGIZE)
-#    define PRIMITIVE_WSTRINGIZE_   CHAOS_PP_PREFIX(PRIMITIVE_WSTRINGIZE_)
-#    define PRIMITIVE_WSTRINGIZE_ID CHAOS_PP_PREFIX(PRIMITIVE_WSTRINGIZE_ID)
-# endif
 #
 # endif

@@ -16,7 +16,6 @@
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/logical/compl.h>
 # include <chaos/preprocessor/logical/not.h>
-# include <chaos/preprocessor/names.h>
 #
 # /* CHAOS_PP_BOOL */
 #
@@ -25,12 +24,6 @@
 #
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_BOOL_ CHAOS_PP_LAMBDA(CHAOS_PP_BOOL)
-# endif
-#
-# if CHAOS_PP_NO_PREFIX
-#    define BOOL    CHAOS_PP_PREFIX(BOOL)
-#    define BOOL_   CHAOS_PP_PREFIX(BOOL_)
-#    define BOOL_ID CHAOS_PP_PREFIX(BOOL_ID)
 # endif
 #
 # endif

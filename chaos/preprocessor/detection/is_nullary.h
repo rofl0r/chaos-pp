@@ -16,7 +16,6 @@
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/facilities/split.h>
 # include <chaos/preprocessor/lambda/ops.h>
-# include <chaos/preprocessor/names.h>
 #
 # /* CHAOS_PP_IS_NULLARY */
 #
@@ -32,11 +31,5 @@
 # define CHAOS_IP_IS_NULLARY_C() 1
 # define CHAOS_IP_IS_NULLARY_R_1 1, ~
 # define CHAOS_IP_IS_NULLARY_R_CHAOS_IP_IS_NULLARY_C 0, ~
-#
-# if CHAOS_PP_NO_PREFIX
-#    define IS_NULLARY    CHAOS_PP_PREFIX(IS_NULLARY)
-#    define IS_NULLARY_   CHAOS_PP_PREFIX(IS_NULLARY_)
-#    define IS_NULLARY_ID CHAOS_PP_PREFIX(IS_NULLARY_ID)
-# endif
 #
 # endif

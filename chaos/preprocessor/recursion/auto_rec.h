@@ -16,7 +16,6 @@
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/control/iif.h>
 # include <chaos/preprocessor/lambda/ops.h>
-# include <chaos/preprocessor/names.h>
 #
 # /* CHAOS_PP_AUTO_REC */
 #
@@ -550,11 +549,5 @@
 #                            define CHAOS_IP_NODE_510(p) CHAOS_PP_IIF(p(510))(CHAOS_IP_NODE_509, CHAOS_IP_NODE_511)
 #                                define CHAOS_IP_NODE_509(p) CHAOS_PP_IIF(p(509))(509, 510)
 #                                define CHAOS_IP_NODE_511(p) CHAOS_PP_IIF(p(511))(511, 512)
-#
-# if CHAOS_PP_NO_PREFIX
-#    define AUTO_REC    CHAOS_PP_PREFIX(AUTO_REC)
-#    define AUTO_REC_   CHAOS_PP_PREFIX(AUTO_REC_)
-#    define AUTO_REC_ID CHAOS_PP_PREFIX(AUTO_REC_ID)
-# endif
 #
 # endif

@@ -15,7 +15,6 @@
 # include <chaos/preprocessor/cat.h>
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/lambda/ops.h>
-# include <chaos/preprocessor/names.h>
 #
 # /* CHAOS_PP_TUPLE_EAT */
 #
@@ -54,11 +53,5 @@
 # endif
 #
 # define CHAOS_PP_TUPLE_EAT_ID() CHAOS_PP_TUPLE_EAT
-#
-# if CHAOS_PP_NO_PREFIX
-#    define TUPLE_EAT    CHAOS_PP_PREFIX(TUPLE_EAT)
-#    define TUPLE_EAT_   CHAOS_PP_PREFIX(TUPLE_EAT_)
-#    define TUPLE_EAT_ID CHAOS_PP_PREFIX(TUPLE_EAT_ID)
-# endif
 #
 # endif

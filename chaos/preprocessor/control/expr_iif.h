@@ -15,7 +15,6 @@
 # include <chaos/preprocessor/cat.h>
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/lambda/ops.h>
-# include <chaos/preprocessor/names.h>
 #
 # /* CHAOS_PP_EXPR_IIF */
 #
@@ -29,12 +28,6 @@
 # else
 #    define CHAOS_IP_EXPR_IIF_0(x)
 #    define CHAOS_IP_EXPR_IIF_1(x) x
-# endif
-#
-# if CHAOS_PP_NO_PREFIX
-#    define EXPR_IIF    CHAOS_PP_PREFIX(EXPR_IIF)
-#    define EXPR_IIF_   CHAOS_PP_PREFIX(EXPR_IIF_)
-#    define EXPR_IIF_ID CHAOS_PP_PREFIX(EXPR_IIF_ID)
 # endif
 #
 # endif

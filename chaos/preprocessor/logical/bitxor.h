@@ -29,10 +29,4 @@
 # define CHAOS_IP_BITXOR_0(y) y
 # define CHAOS_IP_BITXOR_1(y) CHAOS_PP_COMPL(y)
 #
-# if CHAOS_PP_NO_PREFIX
-#    define BITXOR    CHAOS_PP_PREFIX(BITXOR)
-#    define BITXOR_   CHAOS_PP_PREFIX(BITXOR_)
-#    define BITXOR_ID CHAOS_PP_PREFIX(BITXOR_ID)
-# endif
-#
 # endif

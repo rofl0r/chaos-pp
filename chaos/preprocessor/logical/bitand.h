@@ -15,7 +15,6 @@
 # include <chaos/preprocessor/cat.h>
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/lambda/ops.h>
-# include <chaos/preprocessor/names.h>
 #
 # /* CHAOS_PP_BITAND */
 #
@@ -28,11 +27,5 @@
 #
 # define CHAOS_IP_BITAND_0(y) 0
 # define CHAOS_IP_BITAND_1(y) y
-#
-# if CHAOS_PP_NO_PREFIX
-#    define BITAND    CHAOS_PP_PREFIX(BITAND)
-#    define BITAND_   CHAOS_PP_PREFIX(BITAND_)
-#    define BITAND_ID CHAOS_PP_PREFIX(BITAND_ID)
-# endif
 #
 # endif

@@ -15,7 +15,6 @@
 # include <chaos/preprocessor/cat.h>
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/lambda/ops.h>
-# include <chaos/preprocessor/names.h>
 #
 # /* CHAOS_PP_COMPL */
 #
@@ -28,11 +27,5 @@
 #
 # define CHAOS_IP_COMPL_0 1
 # define CHAOS_IP_COMPL_1 0
-#
-# if CHAOS_PP_NO_PREFIX
-#    define COMPL    CHAOS_PP_PREFIX(COMPL)
-#    define COMPL_   CHAOS_PP_PREFIX(COMPL_)
-#    define COMPL_ID CHAOS_PP_PREFIX(COMPL_ID)
-# endif
 #
 # endif

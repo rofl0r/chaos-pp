@@ -16,7 +16,6 @@
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/control/iif.h>
 # include <chaos/preprocessor/lambda/ops.h>
-# include <chaos/preprocessor/names.h>
 #
 # /* CHAOS_PP_MAX */
 #
@@ -25,12 +24,6 @@
 #
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_MAX_ CHAOS_PP_LAMBDA(CHAOS_PP_MAX)
-# endif
-#
-# if CHAOS_PP_NO_PREFIX
-#    define MAX    CHAOS_PP_PREFIX(MAX)
-#    define MAX_   CHAOS_PP_PREFIX(MAX_)
-#    define MAX_ID CHAOS_PP_PREFIX(MAX_ID)
 # endif
 #
 # endif

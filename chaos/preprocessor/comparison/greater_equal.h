@@ -16,7 +16,6 @@
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/logical/compl.h>
-# include <chaos/preprocessor/names.h>
 #
 # /* CHAOS_PP_GREATER_EQUAL */
 #
@@ -25,12 +24,6 @@
 #
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_GREATER_EQUAL_ CHAOS_PP_LAMBDA(CHAOS_PP_GREATER_EQUAL)
-# endif
-#
-# if CHAOS_PP_NO_PREFIX
-#    define GREATER_EQUAL    CHAOS_PP_NO_PREFIX(GREATER_EQUAL)
-#    define GREATER_EQUAL_   CHAOS_PP_NO_PREFIX(GREATER_EQUAL_)
-#    define GREATER_EQUAL_ID CHAOS_PP_NO_PREFIX(GREATER_EQUAL_ID)
 # endif
 #
 # endif

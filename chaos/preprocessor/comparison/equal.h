@@ -16,7 +16,6 @@
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/logical/compl.h>
-# include <chaos/preprocessor/names.h>
 #
 # /* CHAOS_PP_EQUAL */
 #
@@ -25,12 +24,6 @@
 #
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_EQUAL_ CHAOS_PP_LAMBDA(CHAOS_PP_EQUAL)
-# endif
-#
-# if CHAOS_PP_NO_PREFIX
-#    define EQUAL    CHAOS_PP_PREFIX(EQUAL)
-#    define EQUAL_   CHAOS_PP_PREFIX(EQUAL_)
-#    define EQUAL_ID CHAOS_PP_PREFIX(EQUAL_ID)
 # endif
 #
 # endif

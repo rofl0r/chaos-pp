@@ -16,7 +16,6 @@
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/logical/bool.h>
-# include <chaos/preprocessor/names.h>
 #
 # /* CHAOS_PP_AND */
 #
@@ -29,11 +28,5 @@
 #
 # define CHAOS_IP_AND_0(q) 0
 # define CHAOS_IP_AND_1(q) CHAOS_PP_BOOL(q)
-#
-# if CHAOS_PP_NO_PREFIX
-#    define AND    CHAOS_PP_PREFIX(AND)
-#    define AND_   CHAOS_PP_PREFIX(AND_)
-#    define AND_ID CHAOS_PP_PREFIX(AND_ID)
-# endif
 #
 # endif

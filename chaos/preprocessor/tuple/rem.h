@@ -15,7 +15,6 @@
 # include <chaos/preprocessor/cat.h>
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/lambda/ops.h>
-# include <chaos/preprocessor/names.h>
 #
 # /* CHAOS_PP_TUPLE_REM */
 #
@@ -55,12 +54,6 @@
 #
 # define CHAOS_PP_TUPLE_REM_ID() CHAOS_PP_TUPLE_REM
 #
-# if CHAOS_PP_NO_PREFIX
-#    define TUPLE_REM    CHAOS_PP_PREFIX(TUPLE_REM)
-#    define TUPLE_REM_   CHAOS_PP_PREFIX(TUPLE_REM_)
-#    define TUPLE_REM_ID CHAOS_PP_PREFIX(TUPLE_REM_ID)
-# endif
-#
 # /* CHAOS_PP_TUPLE_REM_CTOR */
 #
 # define CHAOS_PP_TUPLE_REM_CTOR(size, tuple) CHAOS_PP_TUPLE_REM(size) tuple
@@ -68,12 +61,6 @@
 #
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_TUPLE_REM_CTOR_ CHAOS_PP_LAMBDA(CHAOS_PP_TUPLE_REM_CTOR_ID)()
-# endif
-#
-# if CHAOS_PP_NO_PREFIX
-#    define TUPLE_REM_CTOR    CHAOS_PP_PREFIX(TUPLE_REM_CTOR)
-#    define TUPLE_REM_CTOR_   CHAOS_PP_PREFIX(TUPLE_REM_CTOR_)
-#    define TUPLE_REM_CTOR_ID CHAOS_PP_PREFIX(TUPLE_REM_CTOR_ID)
 # endif
 #
 # endif

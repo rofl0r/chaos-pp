@@ -15,7 +15,6 @@
 # include <chaos/preprocessor/cat.h>
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/lambda/ops.h>
-# include <chaos/preprocessor/names.h>
 #
 # /* CHAOS_PP_BITOR */
 #
@@ -28,11 +27,5 @@
 #
 # define CHAOS_IP_BITOR_0(y) y
 # define CHAOS_IP_BITOR_1(y) 1
-#
-# if CHAOS_PP_NO_PREFIX
-#    define BITOR    CHAOS_PP_PREFIX(BITOR)
-#    define BITOR_   CHAOS_PP_PREFIX(BITOR_)
-#    define BITOR_ID CHAOS_PP_PREFIX(BITOR_ID)
-# endif
 #
 # endif

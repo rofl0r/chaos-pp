@@ -17,6 +17,7 @@
 # include <chaos/preprocessor/facilities/as_args.h>
 # include <chaos/preprocessor/facilities/binary.h>
 # include <chaos/preprocessor/facilities/bind.h>
+# include <chaos/preprocessor/facilities/default.h>
 # include <chaos/preprocessor/facilities/empty.h>
 # include <chaos/preprocessor/facilities/expand.h>
 # include <chaos/preprocessor/facilities/identity.h>

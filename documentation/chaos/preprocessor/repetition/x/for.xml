@@ -98,7 +98,7 @@
 		The <link id="exponential"/> structure of the <code>X</code>-suffixed algorithms yields a total of <library-assoc id="alpha.gif">α</library-assoc> <link id="recursion steps"/>, where <x-var>p</x-var> is the number of <link id="parametric resumptions"/> plus the initial entry, <x-var>s<sub>ω</sub></x-var> is <LIMIT_EXPR/>, <x-var>s</x-var> is the current <link id="recursion state"/> at the beginning of the algorithm (i.e. <code><STATE/>()</code>), <x-var>s<sub>δ</sub></x-var> is the buffer size, and <x-var>z</x-var> is the exponential base.
 		Currently, <x-var>z</x-var> is fixed at two in the <FOR_X/> algorithm (though it could easily be increased), which reduces the equation to <library-assoc id="beta.gif">β</library-assoc>.
 		Ignoring the complexity of <var>pred</var>, <var>op</var>, and <var>macro</var> (each of which are invoked once for each variation of the state), each iteration of the state requires only a single <link id="recursion step"/>.
-		This implies that the algorithm is capable of repeating the target <relative-assoc id="complexity.gif">γ</relative-assoc> times.
+		This implies that the algorithm is capable of repeating the target <assoc id="complexity/for.gif">γ</assoc> times.
 	</para>
 	<para>
 		This macro deduces the current <link id="recursion state"/> and invokes <FOR_X_S/>.

@@ -6,7 +6,7 @@
 
 <macro id="NOT" group="not">
 	<abstract>
-		The <NOT/> macro expands to the logical "not" of its operand.
+		The <NOT/> macro expands to the logical NOT of its operand.
 	</abstract>
 	<usage>
 		<syntax><NOT/>(x)</syntax>

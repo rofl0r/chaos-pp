@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <header name="chaos/preprocessor/highprec/bool.h" author="Paul Mensonides" date="2003-2004">
 <overview>
-	The <self/> header defines a macro that performs a boolean conversion on a <link id="high-precision value"/>.
+	The <self/> header defines a macro that performs a Boolean conversion on a <link id="high-precision value"/>.
 </overview>
 
 <macro id="BOOL_HP" group="boolean">
 	<abstract>
-		The <BOOL_HP/> macro performs a boolean conversion on its argument.
+		The <BOOL_HP/> macro performs a Boolean conversion on its argument.
 	</abstract>
 	<usage>
 		<syntax><BOOL_HP/>(x)</syntax>

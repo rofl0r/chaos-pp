@@ -24,7 +24,7 @@
 		Otherwise, it expands to <code>1</code>.
 	</para>
 	<para>
-		This macro performs a boolean conversion on each operand.
+		This macro performs a Boolean conversion on each operand.
 		If this conversion is undesireable, <BITXNOR/> may be used instead.
 	</para>
 	<listing>

@@ -24,7 +24,7 @@
 		Otherwise, it expands to <code>1</code>.
 	</para>
 	<para>
-		This macro does <em>not</em> perform a boolean conversion on its operands.
+		This macro does <em>not</em> perform a Boolean conversion on its operands.
 		If this conversion is desireable, <NAND/> may be used instead.
 	</para>
 	<para>

@@ -33,7 +33,7 @@
 		Otherwise, it expands to <var>x</var> or <code>__VA_ARGS__</code>.
 	</para>
 	<para>
-		This macro does <em>not</em> perform a boolean conversion on <var>bit</var>.
+		This macro does <em>not</em> perform a Boolean conversion on <var>bit</var>.
 		If the conversion is desired, <EXPR_IF/> should be used instead.
 	</para>
 	<para>

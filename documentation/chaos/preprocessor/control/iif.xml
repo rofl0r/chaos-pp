@@ -39,7 +39,7 @@
 		Otherwise, it expands to <var>t</var>.
 	</para>
 	<para>
-		This macro does <em>not</em> perform a boolean conversion on <var>bit</var>.
+		This macro does <em>not</em> perform a Boolean conversion on <var>bit</var>.
 		If the conversion is desired, <IF/> should be used instead.
 	</para>
 	<para>

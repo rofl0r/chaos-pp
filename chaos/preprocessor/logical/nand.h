@@ -9,23 +9,25 @@
 #  *                                                                         *
 #  ************************************************************************* */
 #
-# ifndef CHAOS_PREPROCESSOR_LOGICAL_H
-# define CHAOS_PREPROCESSOR_LOGICAL_H
+# ifndef CHAOS_PREPROCESSOR_LOGICAL_NAND_H
+# define CHAOS_PREPROCESSOR_LOGICAL_NAND_H
 #
-# include <chaos/preprocessor/logical/and.h>
-# include <chaos/preprocessor/logical/bitand.h>
-# include <chaos/preprocessor/logical/bitnand.h>
-# include <chaos/preprocessor/logical/bitnor.h>
-# include <chaos/preprocessor/logical/bitor.h>
-# include <chaos/preprocessor/logical/bitxnor.h>
-# include <chaos/preprocessor/logical/bitxor.h>
+# include <chaos/preprocessor/cat.h>
+# include <chaos/preprocessor/config.h>
+# include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/logical/bool.h>
-# include <chaos/preprocessor/logical/compl.h>
-# include <chaos/preprocessor/logical/nand.h>
-# include <chaos/preprocessor/logical/nor.h>
 # include <chaos/preprocessor/logical/not.h>
-# include <chaos/preprocessor/logical/or.h>
-# include <chaos/preprocessor/logical/xnor.h>
-# include <chaos/preprocessor/logical/xor.h>
+#
+# /* CHAOS_PP_NAND */
+#
+# define CHAOS_PP_NAND(p) CHAOS_PP_CAT(CHAOS_IP_NAND_, CHAOS_PP_BOOL(p))
+# define CHAOS_PP_NAND_ID() CHAOS_PP_NAND
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_PP_NAND_ CHAOS_PP_LAMBDA(CHAOS_PP_NAND)
+# endif
+#
+# define CHAOS_IP_NAND_0(q) 1
+# define CHAOS_IP_NAND_1(q) CHAOS_PP_NOT(q)
 #
 # endif

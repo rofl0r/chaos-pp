@@ -9,23 +9,24 @@
 #  *                                                                         *
 #  ************************************************************************* */
 #
-# ifndef CHAOS_PREPROCESSOR_LOGICAL_H
-# define CHAOS_PREPROCESSOR_LOGICAL_H
+# ifndef CHAOS_PREPROCESSOR_LOGICAL_BITXNOR_H
+# define CHAOS_PREPROCESSOR_LOGICAL_BITXNOR_H
 #
-# include <chaos/preprocessor/logical/and.h>
-# include <chaos/preprocessor/logical/bitand.h>
-# include <chaos/preprocessor/logical/bitnand.h>
-# include <chaos/preprocessor/logical/bitnor.h>
-# include <chaos/preprocessor/logical/bitor.h>
-# include <chaos/preprocessor/logical/bitxnor.h>
-# include <chaos/preprocessor/logical/bitxor.h>
-# include <chaos/preprocessor/logical/bool.h>
+# include <chaos/preprocessor/cat.h>
+# include <chaos/preprocessor/config.h>
+# include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/logical/compl.h>
-# include <chaos/preprocessor/logical/nand.h>
-# include <chaos/preprocessor/logical/nor.h>
-# include <chaos/preprocessor/logical/not.h>
-# include <chaos/preprocessor/logical/or.h>
-# include <chaos/preprocessor/logical/xnor.h>
-# include <chaos/preprocessor/logical/xor.h>
+#
+# /* CHAOS_PP_BITXNOR */
+#
+# define CHAOS_PP_BITXNOR(x) CHAOS_PP_PRIMITIVE_CAT(CHAOS_IP_BITXNOR_, x)
+# define CHAOS_PP_BITXNOR_ID() CHAOS_PP_BITXOR
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_PP_BITXNOR_ CHAOS_PP_LAMBDA(CHAOS_PP_BITXNOR)
+# endif
+#
+# define CHAOS_IP_BITXNOR_0(y) CHAOS_PP_COMPL(y)
+# define CHAOS_IP_BITXNOR_1(y) y
 #
 # endif

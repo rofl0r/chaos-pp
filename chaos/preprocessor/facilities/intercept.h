@@ -9,8 +9,8 @@
 #  *                                                                         *
 #  ************************************************************************* */
 #
-# ifndef CHAOS_PREPROCESSOR_FACILITIES_INTERCEPT_HPP
-# define CHAOS_PREPROCESSOR_FACILITIES_INTERCEPT_HPP
+# ifndef CHAOS_PREPROCESSOR_FACILITIES_INTERCEPT_H
+# define CHAOS_PREPROCESSOR_FACILITIES_INTERCEPT_H
 #
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/lambda/ops.h>

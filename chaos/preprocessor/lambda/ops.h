@@ -102,4 +102,12 @@
 #    define CHAOS_IP_PLACEHOLDERS_1 "chaos/preprocessor/lambda/detail/placeholders_1.h"
 # endif
 #
+# /* CHAOS_PP_WITH_PLACEHOLDERS */
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_PP_WITH_PLACEHOLDERS() "chaos/preprocessor/lambda/detail/with_placeholders.h"
+#    define CHAOS_PP_WITH_PLACEHOLDERS_ID() CHAOS_PP_WITH_PLACEHOLDERS
+#    define CHAOS_PP_WITH_PLACEHOLDERS_ CHAOS_PP_LAMBDA(CHAOS_PP_WITH_PLACEHOLDERS)
+# endif
+#
 # endif

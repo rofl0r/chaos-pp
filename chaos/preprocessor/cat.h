@@ -12,9 +12,9 @@
 # ifndef CHAOS_PREPROCESSOR_CAT_H
 # define CHAOS_PREPROCESSOR_CAT_H
 #
-# include "chaos/preprocessor/config.h"
-# include "chaos/preprocessor/lambda/core.h"
-# include "chaos/preprocessor/scope.h"
+# include <chaos/preprocessor/config.h>
+# include <chaos/preprocessor/lambda/ops.h>
+# include <chaos/preprocessor/names.h>
 #
 # /* CHAOS_PP_CAT */
 #

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document id="Sequences" author="Paul Mensonides" date="2003-2004">
+	<section>
+		<para>
+			A <link id="sequence"/> is a data structure consisting of a series of adjacent parenthesized elements.
+			For example,
+			<snippet>
+				(a)(b)(c)
+			</snippet>
+			is a <link id="sequence"/> containing three elements, <code>a</code>, <code>b</code>, and <code>c</code>.
+		</para>
+		<para>
+			The <link id="sequence"/>-specific primitives are located in the <code>chaos/preprocessor/seq</code> subdirectory.
+		</para>
+	</section>
+	<section id="Sequences vs. Variadic Sequences">
+		<para>
+			In C (prior to C99) and C++, <link id="sequences"/> cannot contain elements with any arity other than unary.
+			However, they can contain nested <link id="sequences"/> or other data structures that contain multiple elements.
+			For example, the following is a <link id="sequence"/> of <link id="tuples"/>:
+			<snippet>
+				((a, b))((c, d))((e, f))
+			</snippet>
+		</para>
+		<para>
+			In C99, <link id="sequences"/> can contain elements of any arity.
+			A <link id="sequence"/> whose elements all have the same arity can be treated as a normal <link id="sequence"/>.
+			An example of such a <link id="sequence"/> is
+			<snippet>
+				(a, b)(c, d)(e, f)
+			</snippet>
+			When algorithms that operate on <link id="generic data structures"/> (or <link id="sequences"/> specifically) invoke user-defined operations, those user-defined operations may be designed to handle the <em>constant</em> arity of the elements of the particular data structure being processed.
+			For example,
+			<snippet>
+				#define MACRO(s, x, y, _) [x + y]
+			    
+				<EXPR/>(<SEQ_FOR_EACH/>(
+				    MACRO, (a, b)(p, q)(x, y), ~
+				))
+				// [a + b][p + q][x + y]
+			</snippet>
+			However, a <link id="sequence"/> whose elements have varying arities is called a <link id="variadic sequence"/>.
+			For example,
+			<snippet>
+				( int )( std::pair&lt;int, int&gt; )( double )
+			</snippet>
+			<link id="Sequences"/> of this form must be handled specially in algorithms that invoke user-defined operations.
+			For each <link id="sequence"/>-specific algorithm that invokes user-defined operations, there is an equivalent algorithm in the <code>chaos/preprocessor/seq/variadic</code> subdirectory that is designed to operate on <link id="variadic sequences"/>.
+			These algorithms all invoke user-defined operations with the entire <link id="sequence"/> element wrapped in parentheses.
+			For example,
+			<snippet>
+				#define MACRO(s, type, _) <TUPLE_REM/>(?) type
+				
+				<EXPR/>(<VARIADIC_SEQ_FOR_EACH/>(
+				    MACRO, (int)(std::pair&lt;int, int&gt;)(double), ~
+				))
+				// int std::pair&lt;int, int&gt; double
+			</snippet>
+		</para>
+	</section>
+	<section id="Using Sequences as Generic Data Structures">
+		<para>
+			<link id="Sequences"/> can be used as <link id="generic data structures"/> if the <chaos-preprocessor-seq-spec.h/> header is included.
+			For example,
+			<snippet>
+				#define OP(s, x, _) _ ## x
+				
+				<EXPR/>(<FOLD_LEFT/>(
+				    OP, (<SEQ/>) (x)(y)(z), _
+				))
+				// _xyz
+			</snippet>
+			If <link id="variadic sequences"/> are to be used as <link id="generic data structures"/>, on the other hand, the <chaos-preprocessor-seq-variadic-spec.h/> header should be included.
+			For example,
+			<snippet>
+				#define OP(s, x, _) <CAT/>(_, <VARIADIC_CAT/> x)
+				
+				<EXPR/>(<FOLD_LEFT/>(
+				    OP, (<VARIADIC_SEQ/>) (a)(b, c)(d, e, f), _
+				))
+				// _abcdef
+			</snippet>
+		</para>
+	</section>
+	<section id="Nil Sequences">
+		<para>
+			In C (prior to C99) and C++, there is no such thing as a nil <link id="sequence"/>.
+			However, the special value <code><SEQ_NIL/>()</code> can be used to indicate a nil <link id="sequence"/> to the core <link id="sequence"/> operations defined in <chaos-preprocessor-seq-spec.h/>--thus allowing the generic algorithms to operate on nil <link id="sequences"/> in a temporal fashion.
+			The other <link id="sequence"/>-specific primitives, on the other hand, do not recognize <code><SEQ_NIL/>()</code>.
+			Therefore, a "would-be" nil <link id="sequence"/> result from a <link id="sequence"/>-specific primitive is undefined.
+			For example,
+			<snippet>
+				<SEQ_REST_N/>(2, (a)(b)(c)) // (c)
+				<SEQ_REST_N/>(3, (a)(b)(c)) // undefined
+			</snippet>
+			The result of generic algorithm that yields a nil <link id="sequence"/> is well-defined provided that it is used only as a <link id="generic data structure"/>--meaning that it can be passed to other generic algorithms, etc.--or used by the core operations in <chaos-preprocessor-seq-spec.h/> after the type prefix is stripped.
+			For example,
+			<snippet>
+				<APPEND/>(
+				    <REST_N/>(3, (<SEQ/>) (a)(b)(c)),
+				    (<SEQ/>) (x)(y)
+				)
+				// (<SEQ/>) (x)(y)
+			</snippet>
+		</para>
+		<para>
+			In C99, nil <link id="sequences"/> are well-defined as "nothing", which is accepted as the representation of nil by all <link id="sequence"/> primitives.
+		</para>
+	</section>
+</document>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document id="Lists" author="Paul Mensonides" date="2003-2004">
+	<section>
+		<para>
+			A <link id="list"/> is a data structure resembling a cons-style singly linked list.
+			A <link id="list"/> is either an ellipsis (<code>...</code>), which represents a nil <link id="list"/>, or a binary <link id="tuple"/> whose first element is an element in the <link id="list"/> and whose second element is another <link id="list"/>.
+			For example,
+			<snippet>
+				(a, (b, (c, ...)))
+			</snippet>
+			is a <link id="list"/> containing three elements, <code>a</code>, <code>b</code>, and <code>c</code>.		
+		</para>
+		<para>
+			<link id="Lists"/> cannot contain elements with any arity other than unary even in C99.  However, they can contain nested <link id="lists"/> or other data structures that contain multiple elements.
+			For example, the following is a <link id="list"/> of <link id="tuples"/>:
+			<snippet>
+				((a, b), ((p, q), ((x, y), ...)))
+			</snippet>
+		</para>
+		<para>
+			The <link id="list"/>-specific primitives are located in the <code>chaos/preprocessor/list</code> subdirectory.
+		</para>
+	</section>
+	<section id="Using Lists as Generic Data Structures">
+		<para>
+			<link id="Lists"/> can be used as <link id="generic data structures"/> if the <chaos-preprocessor-list-spec.h/> header is included.
+			For example,
+			<snippet>
+				#define MACRO(s, x, _) + x
+				
+				<EXPR/>(<FOR_EACH/>(
+				    MACRO, (<LIST/>) (x, (y, (z, ...))), ~
+				))
+				// + x + y + z
+			</snippet>
+		</para>
+	</section>
+</document>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<derivative-spec suffix="_" class="SECONDARY" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+	<abstract>
+		The <current/> macro expands to a <link id="λ expression"/> representing <parent/>.
+	</abstract>
+	<usage>
+		<syntax><current/></syntax>
+	</usage>
+	<pre-para>
+		This macro is a shorthand form of the following <link id="λ binding"/>:
+		<xsl:choose>
+			<xsl:when test="ancestor::macro/@type = 'indirect' or ancestor::macro/@type = 'object'">
+				<snippet>
+					<LAMBDA/>(<sibling suffix="_ID"/>)()
+				</snippet>
+			</xsl:when>
+			<xsl:otherwise>
+				<snippet>
+					<LAMBDA/>(<parent/>)
+				</snippet>
+			</xsl:otherwise>
+		</xsl:choose>
+	</pre-para>
+</derivative-spec>

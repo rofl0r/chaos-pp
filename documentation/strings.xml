@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document id="Strings" author="Paul Mensonides" date="2003-2004">
+	<section>
+		<para>
+			A <link id="string"/> is a data structure consisting of a series of space-separated letters, numerals, or underscores.
+			For example,
+			<snippet>
+				a b c
+			</snippet>
+			is a <link id="string"/> containing three elements, <code>a</code>, <code>b</code>, and <code>c</code>.
+		</para>
+		<para>
+			The <link id="string"/>-specific primitives are located in the <code>chaos/preprocessor/string</code> subdirectory.
+		</para>
+	</section>
+	<section id="Restricted Domain">
+		<para>
+			<link id="Strings"/>, unlike other data structures, have a restricted domain of possible element values.
+			Each element <em>must</em> be a single letter (from <code>a</code> to <code>z</code> or from <code>A</code> to <code>Z</code>), a numeral (from <code>0</code> to <code>9</code>), or an underscore (<code>_</code>).
+			Any other character is invalid, and any operation that inserts an invalid character invalidates the <link id="string"/>.
+			The invocation of an algorithm on an invalid <link id="string"/> is undefined and will likely cause catastrophic failure.
+		</para>
+	</section>
+	<section id="Using Strings as Generic Data Structures">
+		<para>
+			<link id="Strings"/> can be used as <link id="generic data structures"/> if the the <chaos-preprocessor-string-spec.h/> header is included.
+			For example,
+			<snippet>
+				<CONCAT/>((<STRING/>) C h a o s) // Chaos
+			</snippet>
+		</para>
+	</section>
+	<section id="Nil Strings">
+		<para>
+			In C (prior to C99) and C++, there is no such thing as a nil <link id="string"/>.
+			However, the special value <code><STRING_NIL/>()</code> can be used to indicate a nil <link id="string"/> to the core <link id="string"/> operations defined in <chaos-preprocessor-string-spec.h/>--thus allowing the generic algorithms to operate on nil <link id="strings"/> in a temporal fashion.
+			The other <link id="string"/>-specific primitives, on the other hand, do not recognize <code><STRING_NIL/>()</code>.
+			Therefore, a "would-be" nil <link id="string"/> result from a <link id="string"/>-specific primitive is undefined.
+			The result of generic algorithm that yields a nil <link id="string"/> is well-defined provided that it is used only as a <link id="generic data structure"/>--meaning that it can be passed to other generic algorithms, etc.--or used by the core operations in <chaos-preprocessor-string-spec.h/> after the type prefix is stripped.
+			For example,
+			<snippet>
+				<APPEND/>(
+				    <REST_N/>(3, (<STRING/>) a b c),
+				    (<STRING/>) x y
+				)
+				// (<STRING/>) x y
+			</snippet>
+		</para>
+		<para>
+			In C99, nil <link id="strings"/> are well-defined as "nothing", which is accepted as the representation of nil by all <link id="string"/> primitives.
+		</para>
+	</section>
+</document>

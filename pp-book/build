@@ -1,0 +1,34 @@
+# $1 = library specification file
+# $2 = source path
+# $3 = destination path
+
+echo expanding library...
+msxsl $1 library.xsl -o .library.xml source=$2
+
+echo copying support files...
+mkdir -p $3
+cp style.css $3/style.css
+cp alternate.css $3/alternate.css
+cp background.gif $3/background.gif
+
+echo creating indices...
+msxsl .library.xml index.xsl -m headers -o $3/headers.html library=$1 source=$2
+msxsl .library.xml index.xsl -m primary -o $3/macros.html library=$1 source=$2
+msxsl .library.xml index.xsl -m secondary -o $3/master.html library=$1 source=$2
+msxsl .library.xml index.xsl -o $3/documents.html library=$1 source=$2
+
+echo generating symbol table...
+msxsl .library.xml symbol.xsl -o .symbol.xsl library=$1
+
+echo generating meta-transformations...
+msxsl $1 meta.xsl -o .meta.xsl source=$2
+
+echo generating build script...
+msxsl $1 script.xsl -o .script
+chmod +rx .script
+
+echo executing build script...
+./.script $@
+
+echo deleting temporary files...
+rm .library.xml .meta.xsl .script .symbol.xsl .temp.xml

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<derivative-spec suffix="_ID" class="SECONDARY" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+	<abstract>
+		The <current/> macro indirectly expands to <parent/>.
+	</abstract>
+	<usage>
+		<syntax><current/>()</syntax>
+	</usage>
+	<pre-para>
+		<xsl:choose>
+			<xsl:when test="ancestor::macro/@type = 'indirect'">
+				This macro effectively allows <parent/> to pass through itself without becoming disabled.
+			</xsl:when>
+			<xsl:when test="ancestor::macro/@type = 'object'">
+				This macro effectively allows <parent/> to be passed around without expansion.
+			</xsl:when>
+			<xsl:otherwise>
+				This macro exists only for uniformity with other macros that require indirect invocation.
+			</xsl:otherwise>
+		</xsl:choose>
+	</pre-para>
+</derivative-spec>

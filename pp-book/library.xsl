@@ -6,9 +6,9 @@
 <xsl:param name="source"/>
 
 <xsl:template match="/library">
-	<library name="@name">
+	<library>
 		<xsl:apply-templates>
-			<xsl:with-param name="path" select="@name"/>
+			<xsl:with-param name="path" select="''"/>
 		</xsl:apply-templates>
 	</library>
 </xsl:template>
@@ -16,31 +16,40 @@
 <xsl:template match="/library//directory">
 	<xsl:param name="path"/>
 	<xsl:apply-templates>
-		<xsl:with-param name="path" select="concat($path, '/', @name)"/>
+		<xsl:with-param name="path" select="concat($path, @name, '/')"/>
 	</xsl:apply-templates>
+</xsl:template>
+
+<xsl:template match="/library//document">
+	<xsl:param name="path"/>
+	<document path="{$path}{@id}">
+		<xsl:copy-of select="item"/>
+	</document>
 </xsl:template>
 
 <xsl:template match="/library//header">
 	<xsl:param name="path"/>
-	<header name="{$path}/{@name}"/>
-	<xsl:apply-templates select="document(concat($source, '/', $path, '/', substring-before(@name, '.'), '.xml'))/header/macro">
-		<xsl:with-param name="path" select="concat($path, '/', @name)"/>
+	<header name="{$path}{@name}"/>
+	<xsl:apply-templates select="document(concat($source, '/', $path, substring-before(@name, '.'), '.xml'))/header/macro">
+		<xsl:with-param name="path" select="concat($path, @name)"/>
 	</xsl:apply-templates>
 </xsl:template>
 
 <xsl:template match="/header/macro | /header/macro//derivative">
 	<xsl:param name="path"/>
-	<xsl:param name="type" select="'primary'"/>
-	<macro id="{@id}" header="{$path}" type="{$type}"><xsl:call-template name="make-groups"/></macro>
+	<xsl:param name="type" select="'PRIMARY'"/>
+	<macro id="{@id}" header="{$path}" type="{$type}">
+		<xsl:call-template name="make-groups"/>
+	</macro>
 	<xsl:apply-templates select="derivative | alias">
 		<xsl:with-param name="path" select="$path"/>
-		<xsl:with-param name="type" select="'derivative'"/>
+		<xsl:with-param name="type" select="'SECONDARY'"/>
 	</xsl:apply-templates>
 </xsl:template>
 
 <xsl:template match="/header/macro//alias">
 	<xsl:param name="path"/>
-	<alias id="{@id}" aliased-id="{../@id}" header="{$path}" type="alias"/>
+	<alias id="{@id}" aliased-id="{../@id}" header="{$path}" type="'ALIAS'"/>
 </xsl:template>
 
 <xsl:template name="make-groups">

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<derivative-spec suffix="_BYPASS" class="ALTERNATE">
+	<abstract>
+		The <current/> macro behaves identically to <parent/> except that it is parametized by the <link id="bypass recursion state"/>.
+	</abstract>
+	<extended-usage>
+		<pre-param id="s">
+			The current <link id="bypass recursion state"/>.
+		</pre-param>
+	</extended-usage>
+	<post-para>
+		If <link id="bypass semantics"/> are already in effect, this macro must be used instead of <parent/>.
+	</post-para>
+</derivative-spec>

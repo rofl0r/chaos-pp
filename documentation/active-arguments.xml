@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document id="Active Arguments" author="Paul Mensonides" date="2003-2004">
+	<section>
+		<para>
+			An <link id="active argument"/> is an argument that expands each time that it is scanned by the preprocessor.
+			For example,
+			<snippet>
+				#define A(n) \
+				    <DEFER/>(A_INDIRECT)()(<INC/>(n)) \
+				    /**/
+				#define A_INDIRECT() A
+				
+				#define X(arg) arg
+				#define Y(arg) X(arg)
+				#define Z(arg) Y(arg)
+				
+				   A(0)   // A_INDIRECT()(1)
+				X( A(0) ) // A_INDIRECT()(2)
+				Y( A(0) ) // A_INDIRECT()(3)
+				Z( A(0) ) // A_INDIRECT()(4)
+			</snippet>
+			In the above, each invocation of <code>A</code> is subjected to a different number of scans, which causes the results to be different each time.
+		</para>
+	</section>
+	<section id="Terminal State">
+		<para>
+			Normally, unlike the example in the previous section, an <link id="active argument"/> eventually reaches a terminal, or inactive, state.
+			For example,
+			<snippet>
+				#define B(n) \
+				    n <EXPR_IF/>(n)( \
+				        B_INDIRECT <OBSTRUCT/>()()(<DEC/>(n)) \
+				    ) \
+				    /**/
+				#define B_INDIRECT() B
+				
+				#define ID(x) x
+				
+				#define SCAN(x) ID(ID(ID(ID(ID(x)))))
+				
+				SCAN( B(0) ) // 0
+				SCAN( B(1) ) // 1 0
+				SCAN( B(2) ) // 2 1 0
+				SCAN( B(3) ) // 3 2 1 0
+			</snippet>
+			Here, each invocation of <code>B</code> creates an <link id="active argument"/> that eventually reaches a terminal state.
+			However, each invocation reaches that terminal state at a different time (i.e. after a different number of scans).
+		</para>
+		<para>
+			Not all useful <link id="active arguments"/> reach a terminal state.
+			The following code produces an infinite <link id="list"/>:
+			<snippet>
+				#define HEAD(list) HEAD_I list
+				#define HEAD_I(head, tail) head
+				
+				#define TAIL(list) TAIL_I list
+				#define TAIL_I(head, tail) tail
+				
+				#define STREAM(x, op, data) (x, STREAM_I(x, op, data))
+				#define STREAM_INDIRECT() STREAM_I
+				#define STREAM_I(x, op, data) \
+				    <IIF/>(<IS_NULLARY/>(TAIL_I(~, ())))( \
+				        STREAM_INDIRECT <OBSTRUCT/>()()(x, op, data) \
+				            <TUPLE_EAT/>(3), \
+				        STREAM_II \
+				    )(op(x, data), op, data) \
+				    /**/
+				#define STREAM_II(x, op, data) \
+				    (x, <DEFER/>(STREAM_INDIRECT)()(x, op, data)) \
+				    /**/
+				
+				#define NATURALS STREAM(0, NATURALS_OP, ~)
+				#define NATURALS_OP(x, _) <INC/>(x)
+				
+				HEAD(NATURALS)             // 0
+				HEAD(TAIL(NATURALS))       // 1
+				HEAD(TAIL(TAIL(NATURALS))) // 2
+			</snippet>
+			The <code>NATURALS</code> macro conceptually expands to a <link id="list"/> of all natural numbers.
+			(Because this code is using <link id="saturation arithmetic"/>, the value eventually will reach <LIMIT_MAG/>, causing an infinite <link id="list"/> of values <link id="saturated"/> to <LIMIT_MAG/> from that point on.)
+		</para>
+	</section>
+	<section id="Multiple Dimensions">
+		<para>
+			The preprocessor's "normal" scanning can be considered the first dimension of activity.
+			An argument passed in a macro invocation is scanned in what can be considered the second dimension of activity.
+			Typically, this initial argument scan simply expands to a terminal result.
+			This behavior is so typical, in fact, and has no effect on encapsulation (unless the argument is used as an operand of <code>#</code> or <code>##</code>), that it is not enough to be considered an <link id="active argument"/>.
+			When an initial argument scan <em>does not</em> expand to a terminal result, that argument can properly be called an <link id="active argument"/>.
+		</para>
+		<para>
+			All of the uses of <link id="active arguments"/> that have been considered so far have been <link id="active"/> in the second dimension.
+			These can be called first-level <link id="active arguments"/>.
+			However, <link id="active arguments"/> themselves invoke other macros, possibly passing arguments.
+			Those arguments are scanned in a higher dimension yet--yielding third, fourth, and fifth (and so on) dimensions of scanning and, therefore, second-, third-, and fourth-level (etc.) <link id="active arguments"/>.
+			A second-level <link id="active argument"/> occurs, for example, when a first-level <link id="active argument"/> invokes a macro with an <link id="active argument"/>.
+			The <code>STREAM</code> macro defined in the previous section has a parameter intended to be used as auxiliary data.
+			If an <link id="active argument"/> is passed as the auxiliary data, it effectively becomes a second-level <link id="active argument"/>.
+			The following code demonstrates this:
+			<snippet>
+				#define SCANS STREAM(0, SCANS_OP, <DELVE/>())
+				#define SCANS_OP(x, d) <HALT/>(d)
+				
+				HEAD(TAIL(TAIL(TAIL(SCANS))))
+			</snippet>
+			(The result isn't shown here because the generated elements are the number of scans endured by the auxiliary data argument at the point when the element is created.
+			That number of scans is not guaranteed to be a specific value by the library.
+			However, each element <em>will</em> have a value that is some magnitude <em>higher</em> than the previous element.)
+			In this example, the <link id="active argument"/> constructed by <code>SCANS</code> is scanned repeatedly as it passes through <code>HEAD</code> and <code>TAIL</code>.
+			Each of those scans causes invocations that pass the auxiliary data--which is itself <link id="active"/>.
+			The following example uses multi-level <link id="active arguments"/> more explicitly:
+			<snippet>
+				#define A(n) \
+				    <EXPR_IF/>(n)( \
+				        A_INDIRECT <OBSTRUCT/>()()(<DEC/>(n)) \
+				        n \
+				    ) \
+				    /**/
+				#define A_INDIRECT() A
+				
+				#define I(x) x
+				
+				( I(I(I(I(I( A(3) ))))) ) // ( 1 2 3 )
+				
+				#define B(n) \
+				    <EXPR_IF/>(n)( \
+				        B_INDIRECT <OBSTRUCT/>()()(<DEC/>(n)) \
+				        ( I(I(I(I(I( A(n) ))))) ) \
+				    ) \
+				    /**/
+				#define B_INDIRECT() B
+				
+				#define J(x) x
+				
+				( J(J(J(J(J( B(3) ))))) ) // ( ( 1 ) ( 1 2 ) ( 1 2 3 ) )
+				
+				#define C(n) \
+				    <EXPR_IF/>(n)( \
+				        C_INDIRECT <OBSTRUCT/>()()(<DEC/>(n)) \
+				        ( J(J(J(J(J( B(n) ))))) ) \
+				    ) \
+				    /**/
+				#define C_INDIRECT() C
+				
+				#define K(x) x
+				
+				( K(K(K(K(K( C(3) ))))) )
+				// ( ( ( 1 ) ) ( ( 1 ) ( 1 2 ) ) ( ( 1 ) ( 1 2 ) ( 1 2 3 ) ) )
+			</snippet>
+		</para>
+	</section>
+	<section id="Library Support">
+		<para>
+			In the infinite <link id="list"/> example, notice the use of the custom <code>HEAD</code> and <code>TAIL</code> macros instead of the <LIST_FIRST/> and <LIST_REST/> library primitives.
+			This replication is purposeful.
+			Except in a very few situations, the library currently is not designed to handle user input that contains <link id="active arguments"/> that invoke library primitives.
+			Therefore, <link id="active arguments"/>, unless directly constructed by library primitives, should never be passed to library primitives.
+			The reason for this restriction is that library primitives often internally use other library primitives.
+			If an <link id="active argument"/>, using a specific library primitive, passes through that same primitive, the usage of that primitive inside the <link id="active argument"/> will fail to expand.
+			This failure can cause unexpected results or even compilation errors.
+			The library primitives that any given library primitive uses internally are implementation details that are not documented and should not be considered stable.
+			Therefore, there is no guarantee that a library primitive that is used by an <link id="active argument"/> is not also used by a library primitive to which the <link id="active argument"/> is passed.
+			The following illustrates such behavior:
+			<snippet>
+				#define BUILD(n) BUILD_I(<INC/>(n), n)
+				#define BUILD_I(n, r) \
+				    <DEFER/>(BUILD_INDIRECT)()( \
+				        <INC/>(n), <PRIMITIVE_CAT/>(r, n) \
+				    ) \
+				    /**/
+				#define BUILD_INDIRECT() BUILD_I
+				
+				#define ID(x) x
+				
+				ID(ID(ID( BUILD(1) ))) // BUILD_INDIRECT()( 6, 12345 )
+				
+				<CAT/>(BUILD(1) x, y) // failure!
+			</snippet>
+			Here, the <link id="active argument"/> constructed by <code>BUILD(1)</code> passes through <CAT/>.
+			The <CAT/> macro happens to pass its arguments on to <PRIMITIVE_CAT/> internally which causes the <link id="active argument"/> to pass through <PRIMITIVE_CAT/>.
+			This, in turn, causes the use of <PRIMITIVE_CAT/> in the <link id="active argument"/> to fail to expand--causing an unexpected garbage result.
+			This is a simplistic example where it is relatively easy to figure out what went wrong, but that is not always the case.
+		</para>
+		<para>
+			There are a few library primitives that intentionally construct <link id="active arguments"/>.
+			The most common of these are <DEFER/>, <OBSTRUCT/>, and other macros that simply delay invocation of a macro through some number of scans.
+			Other examples include <DELVE/> and <RAIL/>.
+			In general, the library is designed to handle these <link id="active arguments"/> provided that the specific library primitive used does not require the argument to be in a specific form.
+			For example, passing an <link id="active argument"/> to <INC/> is invalid because <INC/> requires a number between <code>0</code> and <LIMIT_MAG/>, and an <link id="active argument"/> is not a number.
+			On the other hand, <TUPLE_ELEM/> does not require that the elements of the <link id="tuple"/> it is accessing be in any particular form:
+			<snippet>
+				<HALT/>(
+				    <TUPLE_ELEM/>(3, 0, (<DELVE/>(), x, y))
+				)
+			</snippet>
+		</para>
+		<para>
+			Future versions of the library may support <link id="active arguments"/> more generally.
+		</para>
+	</section>
+	<section id="Postscript">
+		<para>
+			It is worth noting that an entire recursion engine can be built by the manipulation of <link id="active arguments"/>.
+			A simplistic example is demonstrated here (this one uses variadics as a change of pace).
+			<snippet>
+				#define EVAL(...) \
+				    A(A(A(__VA_ARGS__))) \
+				    /**/
+				#define A(...) B(B(B(__VA_ARGS__)))
+				#define B(...) C(C(C(__VA_ARGS__)))
+				#define C(...) D(D(D(__VA_ARGS__)))
+				#define D(...) E(E(E(__VA_ARGS__)))
+				#define E(...) __VA_ARGS__
+				
+				#define REPEAT(count, macro, ...) \
+				    <EXPR_IF/>(count)( \
+				        REPEAT_INDIRECT <OBSTRUCT/>()()( \
+				            <DEC/>(count), macro, __VA_ARGS__ \
+				        ) \
+				        macro <OBSTRUCT/>()( \
+				            <DEC/>(count), __VA_ARGS__ \
+				        ) \
+				    ) \
+				    /**/
+				#define REPEAT_INDIRECT() REPEAT
+				
+				#define PARAM(n, ...) <COMMA_IF/>(n) __VA_ARGS__ ## n
+				
+				EVAL( REPEAT(100, PARAM, class T) ) // class T0, class T1, ... class T99
+				
+				#define FIXED(n, ...) <COMMA_IF/>(n) __VA_ARGS__
+				#define TTP(n, ...) \
+				    <COMMA_IF/>(n) \
+				        template&lt;REPEAT(<INC/>(n), FIXED, class)&gt; class __VA_ARGS__ ## n \
+				    /**/
+				
+				EVAL( REPEAT(3, TTP, T) )
+				// template&lt;class&gt; class T0,
+				// template&lt;class, class&gt; class T1,
+				// template&lt;class, class, class&gt; class T2
+			</snippet>
+			This form of recursion engine, while interesting, has several major drawbacks.
+			Most of them can be minimized, in one way or another, but a fundamental problem is efficiency.
+			Eventually, the <link id="active argument"/> reaches a terminal state--at which point it no longer changes--and no further scans are required to produce the final result.
+			However, further scans are applied anyway--exponentially.
+			Another drawback is that this approach effectively enforces a continuation style because it destroys call-and-return semantics.
+			In the above example, the result of the "nested" use of <code>REPEAT</code> is not needed for further calculation, so it isn't an issue.
+			That is not always the case.
+		</para>
+		<para>
+			(The library uses a form of recursion very similar to this.
+			The major difference is that there is no outer controller that applies a massive number of scans to its argument.
+			Instead, there is only an identity macro that causes its argument to be scanned twice--where the first scan yields a <link id="deferred"/> use of another identity macro (and so on).
+			This creates a cascading effect that terminates when another identity macro is not generated.
+			Thus, all activity stops when a particular algorithm completes.)
+		</para>
+	</section>
+</document>

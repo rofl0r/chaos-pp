@@ -6,9 +6,6 @@ A {
 A:HOVER {
 	color: blue;
 }
-A.LISTITEM {
-	font-weight: normal;
-}
 ADDRESS {
 	font-size: 8pt;
 	font-style: normal;
@@ -23,7 +20,7 @@ BODY {
 	background: white;
 	background-image: url(background.gif);
 	color: black;
-	font: 10pt Verdana;
+	font: 12pt Georgia;
 	margin: 0px;
 	padding: 10px;
 }
@@ -60,7 +57,7 @@ EM {
 }
 H3 {
 	font-family: "Courier New";
-	font-size: 18pt;
+	font-size: 24pt;
 	letter-spacing: 2px;
 	font-weight: bold;
 	margin: 0px 0px 10px;
@@ -72,8 +69,8 @@ H3.SECONDARY {
 	color: #888888;
 }
 H4 {
-	font-family: Verdana;
-	font-size: 10pt;
+	font-family: Georgia;
+	font-size: 12pt;
 	font-weight: bold;
 	margin: 0px 0px 10px;
 }
@@ -91,6 +88,9 @@ HR {
 LI {
 	margin: 0px;
 	padding: 0px;
+}
+LI A {
+	font-weight: normal;
 }
 PRE {
 	font-family: "Courier New";
@@ -114,7 +114,7 @@ SPAN {
 	padding: 0px;
 }
 SUB, SUP {
-	font-family: Verdana;
+	font-family: Georgia;
 }
 UL, OL {
 	margin: 0px 0px 10px 30px;
@@ -126,7 +126,7 @@ VAR {
 	letter-spacing: 1px;
 }
 VAR.EXTERNAL {
-	font-family: Verdana;
+	font-family: Georgia;
 	font-style: italic;
 	letter-spacing: 0px;
 }

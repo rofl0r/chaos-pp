@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
-<xsl:template match="listing/text() | snippet/text()">
+<xsl:template match="code/text() | listing/text() | snippet/text() | syntax/text()">
 	<xsl:variable name="sans-tabs" select="translate(., '&#x9;', '')"/>
 	<xsl:variable name="sans-leading-newlines">
 		<xsl:choose>
-			<xsl:when test="count(preceding-sibling::node())">
+			<xsl:when test="preceding-sibling::node()">
 				<xsl:value-of select="$sans-tabs"/>
 			</xsl:when>
 			<xsl:otherwise>
@@ -16,7 +16,7 @@
 		</xsl:choose>
 	</xsl:variable>
 	<xsl:choose>
-		<xsl:when test="count(following-sibling::node())">
+		<xsl:when test="following-sibling::node()">
 			<xsl:value-of select="$sans-leading-newlines"/>
 		</xsl:when>
 		<xsl:otherwise>

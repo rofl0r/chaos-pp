@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document id="Arrays" author="Paul Mensonides" date="2003-2004">
+	<section>
+		<para>
+			An <link id="array"/> is a data structure consisting of two fields: a <link id="tuple"/> of elements and the size of that <link id="tuple"/>.
+			These fields are structured as a binary <link id="tuple"/> whose first element is the size and whose second element is the <link id="tuple"/> of elements contained in the <link id="array"/>.
+			For example,
+			<snippet>
+				(3, (a, b, c))
+			</snippet>
+			is an <link id="array"/> containing three elements, <code>a</code>, <code>b</code>, and <code>c</code>.
+		</para>
+		<para>
+			The primary strength of <link id="arrays"/> is that they store their own size.
+			Because of this, access to elements does not require the size as it does for <link id="tuples"/> in C (prior to C99) and C++.
+			This allows macro arguments to be variable in size and allows those sizes to change without the user explicitly having to keep track of the size independently.
+		</para>
+		<para>
+			Like <link id="tuples"/>, <link id="arrays"/> provide random access to their contained elements.
+		</para>
+		<para>
+			In C (prior to C99) and C++, <link id="arrays"/> can contain only up to <LIMIT_TUPLE/> elements.
+			In C99, <link id="arrays"/> can contain up to <LIMIT_MAG/> elements, but random access to the contained elements is still provided only for elements with indices ranging from <code>0</code> to <LIMIT_TUPLE/> - 1.
+			(Several other <link id="array"/>-specific primitives--such as <ARRAY_REVERSE/>--are also limited in this way.)
+		</para>
+		<para>
+			<link id="Arrays"/> cannot contain elements with any arity other than unary even in C99.
+			However, they can contain nested <link id="arrays"/> or other data structures that contain multiple elements.
+			For example, the following is an <link id="array"/> of <link id="tuples"/>:
+			<snippet>
+				(2, ((a, b, c), (x, y, z)))
+			</snippet>
+		</para>
+		<para>
+			The <link id="array"/>-specific primitives are located in the <code>chaos/preprocessor/array</code> subdirectory.
+		</para>
+	</section>
+	<section id="Using Arrays as Generic Data Structures">
+		<para>
+			<link id="Arrays"/> can be used as <link id="generic data structures"/> if the <chaos-preprocessor-array-spec.h/> header is included.
+			For example,
+			<snippet>
+				#define MACRO(s, x, _) !x
+				
+				<EXPR/>(<FOR_EACH/>(
+				    MACRO, (<ARRAY/>) (3, (x, y, z)), ~
+				))
+				// !x !y !z
+			</snippet>
+			However, in C (prior to C99) and C++, an <link id="array"/> must never grow larger than <LIMIT_TUPLE/> elements.
+			Likewise, in C99, an <link id="array"/> must never grow beyond <LIMIT_MAG/> elements.
+			If this happens, the result is undefined and will likely cause catastrophic failure.
+		</para>
+	</section>
+</document>

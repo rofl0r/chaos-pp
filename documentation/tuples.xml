@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document id="Tuples" author="Paul Mensonides" date="2003-2004">
+	<section>
+		<para>
+			A <link id="tuple"/> is a parenthesized series of comma-separated elements.
+			For example,
+			<snippet>
+				(a, b, c)
+			</snippet>
+			is a <link id="tuple"/> containing three elements, <code>a</code>, <code>b</code>, and <code>c</code>.
+		</para>
+		<para>
+			<link id="Tuples"/> are fast and, for the most part, easy to use.
+			However, in C (prior to C99) and C++, access to a <link id="tuple"/> requires knowledge of its size.
+			Even in C99, several <link id="tuple"/>-specific primitives--such as <TUPLE_REVERSE/>--require the size of the <link id="tuple"/> as an argument.
+			(Note that it is possible to deduce the size of a <link id="tuple"/> in C99.)
+		</para>
+		<para>
+			<link id="Tuples"/> provide random access to their contained elements.
+		</para>
+		<para>
+			In C (prior to C99) and C++, <link id="tuples"/> can contain only up to <LIMIT_TUPLE/> elements.
+			In C99, <link id="tuples"/> can contain any number of elements, but random access to the contained elements is still provided only for elements with indices ranging from <code>0</code> to <LIMIT_TUPLE/> - 1.
+			(Several other <link id="tuple"/>-specific primitives--such as <TUPLE_REVERSE/>--are also limited in this way.)
+		</para>
+		<para>
+			<link id="Tuples"/> cannot contain elements with any arity other than unary even in C99.
+			However, they can contain nested <link id="tuples"/> or other data structures that contain multiple elements.
+			For example, the following is a <link id="tuple"/> of <link id="lists"/>:
+			<snippet>
+				( (a, (b, (c, ...))), (x, (y, (z, ...))) )
+			</snippet>
+		</para>
+		<para>
+			The <link id="tuple"/>-specific primitives are located in the <code>chaos/preprocessor/tuple</code> subdirectory.
+		</para>
+	</section>
+	<section id="Using Tuples as Generic Data Structures">
+		<para>
+			In C99, <link id="tuples"/> can be used as <link id="generic data structures"/> if the <chaos-preprocessor-tuple-spec.h/> header is included.
+			For example,
+			<snippet>
+				#define MACRO(s, x, _) &lt; x &gt;
+				
+				<EXPR/>(<FOR_EACH/>(
+				    MACRO, (<TUPLE/>) (x, y, z), ~
+				))
+				// &lt; x &gt; &lt; y &gt; &lt; z &gt;
+			</snippet>
+			Note, however, that a nil <link id="tuple"/> is represented differently by <link id="tuple"/>-specific primitives and by the core <link id="tuple"/> operations defined in <chaos-preprocessor-tuple-spec.h/> (and, by extension, the generic algorithms).
+			For example, to a core <link id="tuple"/> primitive, <code>()</code> is a one-element <link id="tuple"/> whose single element is empty--just as <code>(,)</code> is a two-element <link id="tuple"/> whose elements are both empty.
+			A nil <link id="tuple"/> is represented by <code><TUPLE_NIL/>()</code>.
+			However, to <link id="tuple"/>-specific primitives--such as <TUPLE_TO_LIST/>--<code>()</code> is a nil (i.e. zero-element) <link id="tuple"/> and <code><TUPLE_NIL/>()</code> is invalid input.
+			Thus, if a core <link id="tuple"/> primitive or generic algorithm operates on a <link id="tuple"/> in a fashion that might result in a nil <link id="tuple"/> that is to be further used by <link id="tuple"/>-specific primitives, the user must check for the nil case with <TUPLE_IS_CONS/> or <TUPLE_IS_NIL/> or the generic equivalents.
+			For example,
+			<snippet>
+				#define POP_REVERSE(tuple) \
+				    POP_REVERSE_I(<POP_BACK/>((<TUPLE/>) tuple)) \
+				    /**/
+				#define POP_REVERSE_I(g) \
+				    <TUPLE_REVERSE/>( \
+				        <SIZE/>(g), \
+				        <IIF/>(<IS_CONS/>(g))( \
+				            <STRIP/>(g), () \
+				        ) \
+				    ) \
+				    /**/
+				
+				POP_REVERSE((a, b, c)) // (b, a)
+				POP_REVERSE((x))       // ()
+			</snippet>
+		</para>
+	</section>
+</document>

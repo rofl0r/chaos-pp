@@ -309,6 +309,7 @@
 				This macro exists only for uniformity with other macros that require indirect invocation.
 			</xsl:otherwise>
 		</xsl:choose>
+		<xsl:apply-templates select="para"/>
 	</DIV>
 	<xsl:if test="count(listing)">
 		<H4>Sample Code</H4>
@@ -340,6 +341,7 @@
 				<DIV class="PUSHPULL"><PRE><xsl:call-template name="manual"><xsl:with-param name="id" select="'LAMBDA'"/></xsl:call-template>(<xsl:copy-of select="$parent"/>)</PRE></DIV>
 			</xsl:otherwise>
 		</xsl:choose>
+		<xsl:apply-templates select="para"/>
 	</DIV>
 	<xsl:if test="count(listing)">
 		<H4>Sample Code</H4>
@@ -382,6 +384,7 @@
 	<DIV>
 		If <A href="{$root}/bypass.html">bypass semantics</A> are already in effect, this macro must be used instead of <xsl:copy-of select="$parent"/>.
 	</DIV>
+	<xsl:apply-templates select="para"/>
 	<xsl:if test="count(listing)">
 		<H4>Sample Code</H4>
 		<xsl:for-each select="listing[1]">
@@ -424,6 +427,7 @@
 	<DIV>
 		This macro may not be used if <A href="{$root}/bypass.html">bypass semantics</A> are in effect.
 	</DIV>
+	<xsl:apply-templates select="para"/>
 	<xsl:if test="count(listing)">
 		<H4>Sample Code</H4>
 		<xsl:for-each select="listing[1]">
@@ -455,9 +459,6 @@
 			<DT><VAR>d</VAR></DT>
 			<DD>
 				The next available <xsl:copy-of select="$while"/> iteration.
-				<xsl:if test="../@obsolete = '1'">
-					This argument is ignored.
-				</xsl:if>
 			</DD>
 			<xsl:for-each select="ancestor::macro/usage[position() = $position]/param">
 				<DT>
@@ -470,12 +471,54 @@
 			</xsl:for-each>
 		</DL>
 	</xsl:for-each>
-	<xsl:if test="@obsolete = '1'">
+	<xsl:if test="count(para)">
 		<H4>Remarks</H4>
-		<DIV>
-			This macro is obsolete and exists only for backward compatibility.
-			<xsl:copy-of select="$parent"/> should be used instead.
-		</DIV>
+		<xsl:apply-templates select="para"/>
+	</xsl:if>
+	<xsl:if test="count(listing)">
+		<H4>Sample Code</H4>
+		<xsl:for-each select="listing[1]">
+			<SAMP><xsl:apply-templates/></SAMP>
+		</xsl:for-each>
+	</xsl:if>
+	<xsl:apply-templates select="derivative"/>
+</xsl:template>
+
+<xsl:template match="derivative[substring-after(@id, ../@id) = '_R' or substring-after(@id, ../@id) = '_r']">
+	<xsl:variable name="current"><xsl:call-template name="manual"/></xsl:variable>
+	<xsl:variable name="parent"><xsl:call-template name="manual-parent"/></xsl:variable>
+	<xsl:variable name="for"><xsl:call-template name="manual"><xsl:with-param name="id" select="'FOR'"/></xsl:call-template></xsl:variable>
+	<HR/>
+	<A name="{@id}"/>
+	<H3 class="ALTERNATE"><xsl:value-of select="concat($prefix, @id)"/></H3>
+	<SPAN>
+		The <xsl:copy-of select="$current"/> macro behaves identically to <xsl:copy-of select="$parent"/> except that it is parametized by the next available <xsl:copy-of select="$for"/> repetition (<VAR>r</VAR>).
+	</SPAN>
+	<xsl:for-each select="usage">
+		<xsl:variable name="position" select="position()"/>
+		<H4>Usage <xsl:if test="count(@lang)"><SMALL>- <xsl:value-of select="@lang"/> Specific</SMALL></xsl:if></H4>
+		<xsl:for-each select="syntax">
+			<SAMP><xsl:apply-templates/></SAMP>
+		</xsl:for-each>
+		<DL>
+			<DT><VAR>z</VAR></DT>
+			<DD>
+				The next available <xsl:copy-of select="$for"/> repetition.
+			</DD>
+			<xsl:for-each select="ancestor::macro/usage[position() = $position]/param">
+				<DT>
+					<xsl:choose>
+						<xsl:when test="@optional = '1'">[<VAR><xsl:value-of select="@id"/></VAR>]</xsl:when>
+						<xsl:otherwise><VAR><xsl:value-of select="@id"/></VAR></xsl:otherwise>
+					</xsl:choose>
+				</DT>
+				<DD><xsl:apply-templates/></DD>
+			</xsl:for-each>
+		</DL>
+	</xsl:for-each>
+	<xsl:if test="count(para)">
+		<H4>Remarks</H4>
+		<xsl:apply-templates select="para"/>
 	</xsl:if>
 	<xsl:if test="count(listing)">
 		<H4>Sample Code</H4>
@@ -506,9 +549,6 @@
 			<DT><VAR>z</VAR></DT>
 			<DD>
 				The next available <xsl:copy-of select="$repeat"/> dimension.
-				<xsl:if test="../@obsolete = '1'">
-					This argument is ignored.
-				</xsl:if>
 			</DD>
 			<xsl:for-each select="ancestor::macro/usage[position() = $position]/param">
 				<DT>
@@ -521,12 +561,8 @@
 			</xsl:for-each>
 		</DL>
 	</xsl:for-each>
-	<xsl:if test="@obsolete = '1'">
-		<H4>Remarks</H4>
-		<DIV>
-			This macro is obsolete and exists only for backward compatibility.
-			<xsl:copy-of select="$parent"/> should be used instead.
-		</DIV>
+	<xsl:if test="count(para)">
+		<xsl:apply-templates select="para"/>
 	</xsl:if>
 	<xsl:if test="count(listing)">
 		<H4>Sample Code</H4>

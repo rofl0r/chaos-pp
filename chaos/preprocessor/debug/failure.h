@@ -24,6 +24,6 @@
 #    define CHAOS_PP_FAILURE_ CHAOS_PP_LAMBDA(CHAOS_PP_FAILURE)
 # endif
 #
-# define CHAOS_IP_FAILURE_I()
+# define CHAOS_IP_FAILURE_I() CHAOS_IP_FAILURE_I
 #
 # endif

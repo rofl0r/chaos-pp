@@ -1,0 +1,163 @@
+# /* *************************************************************************
+#  *                                                                         *
+#  *    (C) Copyright Paul Mensonides 2003.                                  *
+#  *                                                                         *
+#  *    Use, modification, and distribution are subject to Version 1.0 of    *
+#  *    the Boost Software License.  (See accompanying file LICENSE.)        *
+#  *                                                                         *
+#  *    See http://chaos-pp.sourceforge.net for most recent version.         *
+#  *                                                                         *
+#  ************************************************************************* */
+#
+# ifndef CHAOS_PREPROCESSOR_ITERATION_FILE_H
+# define CHAOS_PREPROCESSOR_ITERATION_FILE_H
+#
+# include <chaos/preprocessor/arithmetic/inc.h>
+# include <chaos/preprocessor/cat.h>
+# include <chaos/preprocessor/config.h>
+# include <chaos/preprocessor/control/null.h>
+# include <chaos/preprocessor/facilities/expand.h>
+# include <chaos/preprocessor/lambda/ops.h>
+# include <chaos/preprocessor/recursion/basic.h>
+# include <chaos/preprocessor/seq/elem.h>
+# include <chaos/preprocessor/slot/slot.h>
+# include <chaos/preprocessor/stringize.h>
+#
+# /* CHAOS_PP_ITERATE */
+#
+# define CHAOS_PP_ITERATE() CHAOS_PP_EXPAND(CHAOS_PP_DEFER(CHAOS_IP_ITERATE_I)(CHAOS_PP_INC(CHAOS_PP_ITERATION_DEPTH())))
+# define CHAOS_PP_ITERATE_ID() CHAOS_PP_ITERATE
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_PP_ITERATE_ CHAOS_PP_LAMBDA(CHAOS_PP_ITERATE)
+# endif
+#
+# define CHAOS_IP_ITERATE_I(n) CHAOS_PP_PRIMITIVE_STRINGIZE(chaos/preprocessor/iteration/detail/i ## n.h)
+#
+# /* CHAOS_PP_ITERATION_DEPTH */
+#
+# define CHAOS_PP_ITERATION_DEPTH() 0
+# define CHAOS_PP_ITERATION_DEPTH_ID() CHAOS_PP_ITERATION_DEPTH
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_PP_ITERATION_DEPTH_ CHAOS_PP_LAMBDA(CHAOS_PP_ITERATION_DEPTH)
+# endif
+#
+# /* CHAOS_PP_FRAME_ITERATION */
+#
+# define CHAOS_PP_FRAME_ITERATION(i) CHAOS_PP_PRIMITIVE_CAT(CHAOS_IP_ITERATION_, i)()
+# define CHAOS_PP_FRAME_ITERATION_ID() CHAOS_PP_FRAME_ITERATION
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_PP_FRAME_ITERATION_ CHAOS_PP_LAMBDA(CHAOS_PP_FRAME_ITERATION)
+# endif
+#
+# /* CHAOS_PP_FRAME_START */
+#
+# define CHAOS_PP_FRAME_START(i) CHAOS_PP_PRIMITIVE_CAT(CHAOS_IP_ITERATION_START_, i)()
+# define CHAOS_PP_FRAME_START_ID() CHAOS_PP_FRAME_START
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_PP_FRAME_START_ CHAOS_PP_LAMBDA(CHAOS_PP_FRAME_START)
+# endif
+#
+# /* CHAOS_PP_FRAME_FINISH */
+#
+# define CHAOS_PP_FRAME_FINISH(i) CHAOS_PP_PRIMITIVE_CAT(CHAOS_IP_ITERATION_FINISH_, i)()
+# define CHAOS_PP_FRAME_FINISH_ID() CHAOS_PP_FRAME_FINISH
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_PP_FRAME_FINISH_ CHAOS_PP_LAMBDA(CHAOS_PP_FRAME_FINISH)
+# endif
+#
+# /* CHAOS_PP_FRAME_FLAGS */
+#
+# define CHAOS_PP_FRAME_FLAGS(i) CHAOS_PP_PRIMITIVE_CAT(CHAOS_IP_ITERATION_FLAGS_, i)()
+# define CHAOS_PP_FRAME_FLAGS_ID() CHAOS_PP_FRAME_FLAGS
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_PP_FRAME_FLAGS_ CHAOS_PP_LAMBDA(CHAOS_PP_FRAME_FLAGS)
+# endif
+#
+# /* CHAOS_PP_RELATIVE_ITERATION */
+#
+# define CHAOS_PP_RELATIVE_ITERATION(i) CHAOS_PP_FRAME_ITERATION(CHAOS_PP_PRIMITIVE_CAT(CHAOS_IP_RELATIVE_ITERATION_, i)())
+# define CHAOS_PP_RELATIVE_ITERATION_ID() CHAOS_PP_RELATIVE_ITERATION
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_PP_RELATIVE_ITERATION_ CHAOS_PP_LAMBDA(CHAOS_PP_RELATIVE_ITERATION)
+# endif
+#
+# /* CHAOS_PP_RELATIVE_START */
+#
+# define CHAOS_PP_RELATIVE_START(i) CHAOS_PP_FRAME_START(CHAOS_PP_PRIMITIVE_CAT(CHAOS_IP_RELATIVE_ITERATION_, i)())
+# define CHAOS_PP_RELATIVE_START_ID() CHAOS_PP_RELATIVE_START
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_PP_RELATIVE_START_ CHAOS_PP_LAMBDA(CHAOS_PP_RELATIVE_START)
+# endif
+#
+# /* CHAOS_PP_RELATIVE_FINISH */
+#
+# define CHAOS_PP_RELATIVE_FINISH(i) CHAOS_PP_FRAME_FINISH(CHAOS_PP_PRIMITIVE_CAT(CHAOS_IP_RELATIVE_ITERATION_, i)())
+# define CHAOS_PP_RELATIVE_FINISH_ID() CHAOS_PP_RELATIVE_FINISH
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_PP_RELATIVE_FINISH_ CHAOS_PP_LAMBDA(CHAOS_PP_RELATIVE_FINISH)
+# endif
+#
+# /* CHAOS_PP_RELATIVE_FLAGS */
+#
+# define CHAOS_PP_RELATIVE_FLAGS(i) CHAOS_PP_FRAME_FLAGS(CHAOS_PP_PRIMITIVE_CAT(CHAOS_IP_RELATIVE_ITERATION_, i)())
+# define CHAOS_PP_RELATIVE_FLAGS_ID() CHAOS_PP_RELATIVE_FLAGS
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_PP_RELATIVE_FLAGS_ CHAOS_PP_LAMBDA(CHAOS_PP_RELATIVE_FLAGS)
+# endif
+#
+# define CHAOS_IP_RELATIVE_ITERATION_0() CHAOS_PP_ITERATION_DEPTH()
+# define CHAOS_IP_RELATIVE_ITERATION_1() CHAOS_PP_DEC(CHAOS_PP_ITERATION_DEPTH())
+# define CHAOS_IP_RELATIVE_ITERATION_2() CHAOS_PP_DEC(CHAOS_IP_RELATIVE_ITERATION_1())
+# define CHAOS_IP_RELATIVE_ITERATION_3() CHAOS_PP_DEC(CHAOS_IP_RELATIVE_ITERATION_2())
+# define CHAOS_IP_RELATIVE_ITERATION_4() CHAOS_PP_DEC(CHAOS_IP_RELATIVE_ITERATION_3())
+#
+# /* CHAOS_PP_ITERATION */
+#
+# define CHAOS_PP_ITERATION() CHAOS_PP_RELATIVE_ITERATION(0)
+# define CHAOS_PP_ITERATION_ID() CHAOS_PP_ITERATION
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_PP_ITERATION_ CHAOS_PP_LAMBDA(CHAOS_PP_ITERATION)
+# endif
+#
+# /* CHAOS_PP_ITERATION_START */
+#
+# define CHAOS_PP_ITERATION_START() CHAOS_PP_RELATIVE_START(0)
+# define CHAOS_PP_ITERATION_START_ID() CHAOS_PP_ITERATION_START
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_PP_ITERATION_START_ CHAOS_PP_LAMBDA(CHAOS_PP_ITERATION_START)
+# endif
+#
+# /* CHAOS_PP_ITERATION_FINISH */
+#
+# define CHAOS_PP_ITERATION_FINISH() CHAOS_PP_RELATIVE_FINISH(0)
+# define CHAOS_PP_ITERATION_FINISH_ID() CHAOS_PP_ITERATION_FINISH
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_PP_ITERATION_FINISH_ CHAOS_PP_LAMBDA(CHAOS_PP_ITERATION_FINISH)
+# endif
+#
+# /* CHAOS_PP_ITERATION_FLAGS */
+#
+# define CHAOS_PP_ITERATION_FLAGS() CHAOS_PP_RELATIVE_FLAGS(0)
+# define CHAOS_PP_ITERATION_FLAGS_ID() CHAOS_PP_ITERATION_FLAGS
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_PP_ITERATION_FLAGS_ CHAOS_PP_LAMBDA(CHAOS_PP_ITERATION_FLAGS)
+# endif
+#
+# define CHAOS_IP_ITERATE_F(d, x) CHAOS_IP_ITERATION_START_ ## d() <= x && x <= CHAOS_IP_ITERATION_FINISH_ ## d()
+# define CHAOS_IP_ITERATE_R(d, x) CHAOS_IP_ITERATION_START_ ## d() >= x && x >= CHAOS_IP_ITERATION_FINISH_ ## d()
+#
+# endif

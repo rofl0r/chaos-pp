@@ -22,7 +22,7 @@
 		Otherwise, it expands to <code>0</code>.
 	</para>
 	<para>
-		All of the C and C++ keywords are pre-registered by the library.
+		The lowercase and uppercase letters, the underscore, and all of the C and C++ keywords are pre-registered by the library.
 		Further identifiers can be registered with a macro definition as follows (where <code>xyz</code> is a placeholder for some identifier):
 		<snippet>
 			#define CHAOS_PP_COMPARE_xyz(x) x

@@ -3,7 +3,7 @@ clear
 destination=chaos-pp
 library=Chaos,Preprocessor,Library
 prefix=CHAOS_PP_
-source=../chaos-pp/documentation
+source=.
 url=http://chaos-pp.sourceforge.net
 
 paramset="destination=$destination library=$library prefix=$prefix source=$source url=$url"

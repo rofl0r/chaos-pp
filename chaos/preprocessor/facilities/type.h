@@ -1,6 +1,6 @@
 # /* *************************************************************************
 #  *                                                                         *
-#  *    (C) Copyright Paul Mensonides 2004.                                  *
+#  *    (C) Copyright Paul Mensonides 2003-2004.                             *
 #  *                                                                         *
 #  *    Use, modification, and distribution are subject to Version 1.0 of    *
 #  *    the Boost Software License.  (See accompanying file LICENSE.)        *

@@ -4,7 +4,7 @@
 	The <self/> header defines an algorithm that delineates a sequence of preprocessing tokens a specified number of times.
 </overview>
 
-<macro id="DELINEATE_PARAMS" group="parameters">
+<macro id="DELINEATE_PARAMS" type="indirect" group="parameters">
 	<abstract>
 		The <DELINEATE_PARAMS/> macro repeats its third argument--concatenated to the current repetition number--the number of times specified by its first argument with the delineator specified by its second argument between each repetition.
 	</abstract>
@@ -16,7 +16,7 @@
 		</param>
 		<param id="sep">
 			The delineator to be situated between each repetition of <code>__VA_ARGS__</code>.
-			This delineator must be a macro name compatible with the following pseudo-signature:
+			This delineator must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
 			<snippet>
 				sep()
 			</snippet>
@@ -33,7 +33,7 @@
 		</param>
 		<param id="sep">
 			The delineator to be situated between each repetition of <code>__VA_ARGS__</code>.
-			This delineator must be a macro name compatible with the following pseudo-signature:
+			This delineator must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
 			<snippet>
 				sep()
 			</snippet>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/repetition/delineate_shifted_trailing_params.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an algorithm that delineates a sequence of preprocessing tokens a specified number of times.
+</overview>
+
+<macro id="DELINEATE_SHIFTED_TRAILING_PARAMS" type="indirect" group="parameters">
+	<abstract>
+		The <DELINEATE_SHIFTED_TRAILING_PARAMS/> macro repeats its third argument--concatenated to the current repetition number--one less time than the number specified by its first argument with the delineator specified by its second argument between each repetition.
+	</abstract>
+	<usage lang="C99">
+		<syntax><DELINEATE_SHIFTED_TRAILING_PARAMS/>(count, sep, ...)</syntax>
+		<param id="count">
+			One greater than the number of times that <code>__VA_ARGS__</code> is to be repeated.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="sep">
+			The delineator to be situated between each repetition of <code>__VA_ARGS__</code>.
+			This delineator must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			<snippet>
+				sep()
+			</snippet>
+		</param>
+		<param id="..." optional="1">
+			The sequence of preprocessing tokens to be repeated.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><DELINEATE_SHIFTED_TRAILING_PARAMS/>(count, sep, param)</syntax>
+		<param id="count">
+			One greater than the number of times that <code>__VA_ARGS__</code> is to be repeated.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="sep">
+			The delineator to be situated between each repetition of <code>__VA_ARGS__</code>.
+			This delineator must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			<snippet>
+				sep()
+			</snippet>
+		</param>
+		<param id="param">
+			The sequence of preprocessing tokens to be repeated.
+		</param>
+	</usage>
+	<para>
+		This macro behaves identically to <DELINEATE_SHIFTED_PARAMS/> except that it inserts a leading delineator if any repetitions exist.
+	</para>
+	<para>
+		This macro uses <link id="bypass semantics"/>.
+		If <link id="bypass semantics"/> are already in effect, <DELINEATE_SHIFTED_TRAILING_PARAMS_BYPASS/> must be used instead.
+	</para>
+	<derivative id="DELINEATE_SHIFTED_TRAILING_PARAMS_ID"/>
+	<derivative id="DELINEATE_SHIFTED_TRAILING_PARAMS_" lang="C99"/>
+	<derivative id="DELINEATE_SHIFTED_TRAILING_PARAMS_BYPASS">
+		<usage lang="C99">
+			<syntax><DELINEATE_SHIFTED_TRAILING_PARAMS_BYPASS/>(s, count, sep, ...)</syntax>
+		</usage>
+		<usage lang="C/C++">
+			<syntax><DELINEATE_SHIFTED_TRAILING_PARAMS_BYPASS/>(s, count, sep, param)</syntax>
+		</usage>
+		<derivative id="DELINEATE_SHIFTED_TRAILING_PARAMS_BYPASS_ID"/>
+		<derivative id="DELINEATE_SHIFTED_TRAILING_PARAMS_BYPASS_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

@@ -4,7 +4,7 @@
 	The <self/> header defines an <link id="exponential"/> algorithm that repeats a user-specified target a specified number of times which can be <link id="parametrically resumed"/>.
 </overview>
 
-<macro id="REPEAT_X" type="indirect" group="delineation">
+<macro id="REPEAT_X" type="indirect" group="repetition">
 	<abstract>
 		The <REPEAT_X/> macro repeats its third argument the number of times specified by its second argument.
 	</abstract>

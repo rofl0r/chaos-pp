@@ -4,7 +4,7 @@
 	The <self/> header defines an <link id="exponential"/> algorithm that enumerates a user-specified target a specified number of times which can be <link id="parametrically resumed"/>.
 </overview>
 
-<macro id="ENUM_SHIFTED_X" type="indirect" group="delineation">
+<macro id="ENUM_SHIFTED_X" type="indirect" group="enumeration">
 	<abstract>
 		The <ENUM_SHIFTED_X/> macro enumerates its third argument the number of times specified by its second argument.
 	</abstract>

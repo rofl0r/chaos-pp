@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/repetition/enum_shifted_trailing_params.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an algorithm that enumerates a sequence of preprocessing tokens a specified number of times.
+</overview>
+
+<macro id="ENUM_SHIFTED_TRAILING_PARAMS" type="indirect" group="parameters">
+	<abstract>
+		The <ENUM_SHIFTED_TRAILING_PARAMS/> macro enumerates its second argument--concatenated to the current repetition number--one less time than the number specified by its first argument.
+	</abstract>
+	<usage lang="C99">
+		<syntax><ENUM_SHIFTED_TRAILING_PARAMS/>(count, ...)</syntax>
+		<param id="count">
+			One greater than the number of times that <code>__VA_ARGS__</code> is to be repeated.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="..." optional="1">
+			The sequence of preprocessing tokens to be repeated.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><ENUM_SHIFTED_TRAILING_PARAMS/>(count, param)</syntax>
+		<param id="count">
+			One greater than the number of times that <code>__VA_ARGS__</code> is to be repeated.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="param">
+			The sequence of preprocessing tokens to be repeated.
+		</param>
+	</usage>
+	<para>
+		This macro behaves identically to <ENUM_SHIFTED_PARAMS/> except that it inserts a leading comma if any repetitions exist.
+	</para>
+	<para>
+		This macro uses <link id="bypass semantics"/>.
+		If <link id="bypass semantics"/> are already in effect, <ENUM_SHIFTED_TRAILING_PARAMS_BYPASS/> must be used instead.
+	</para>
+	<derivative id="ENUM_SHIFTED_TRAILING_PARAMS_ID"/>
+	<derivative id="ENUM_SHIFTED_TRAILING_PARAMS_" lang="C99"/>
+	<derivative id="ENUM_SHIFTED_TRAILING_PARAMS_BYPASS">
+		<usage lang="C99">
+			<syntax><ENUM_SHIFTED_TRAILING_PARAMS_BYPASS/>(s, count, ...)</syntax>
+		</usage>
+		<usage lang="C/C++">
+			<syntax><ENUM_SHIFTED_TRAILING_PARAMS_BYPASS/>(s, count, param)</syntax>
+		</usage>
+		<derivative id="ENUM_SHIFTED_TRAILING_PARAMS_BYPASS_ID"/>
+		<derivative id="ENUM_SHIFTED_TRAILING_PARAMS_BYPASS_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

@@ -4,7 +4,7 @@
 	The <self/> header defines an algorithm that enumerates a sequence of preprocessing tokens a specified number of times.
 </overview>
 
-<macro id="ENUM_SHIFTED_PARAMS" group="parameters">
+<macro id="ENUM_SHIFTED_PARAMS" type="indirect" group="parameters">
 	<abstract>
 		The <ENUM_SHIFTED_PARAMS/> macro enumerates its second argument--concatenated to the current repetition number--one less time than the number specified by its first argument.
 	</abstract>

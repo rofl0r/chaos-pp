@@ -14,7 +14,9 @@
 			<header name="filter.h"/>
 			<header name="first_n.h"/>
 			<header name="fold_left.h"/>
+			<header name="fold_left_aux.h"/>
 			<header name="fold_right.h"/>
+			<header name="fold_right_aux.h"/>
 			<header name="for_each.h"/>
 			<header name="for_each_i.h"/>
 			<header name="for_each_product.h"><assoc id="complexity.gif"/><assoc id="efficiency.gif"/><assoc id="functional.gif"/></header>

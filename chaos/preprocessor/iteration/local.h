@@ -13,10 +13,9 @@
 # define CHAOS_PREPROCESSOR_ITERATION_LOCAL_H
 #
 # include <chaos/preprocessor/config.h>
-# include <chaos/preprocessor/facilities/split.h>
+# include <chaos/preprocessor/facilities/binary.h>
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/tuple/eat.h>
-# include <chaos/preprocessor/tuple/rem.h>
 #
 # /* CHAOS_PP_LOCAL_ITERATE */
 #
@@ -28,10 +27,10 @@
 # endif
 #
 # define CHAOS_IP_LOCAL_ITERATE_F(x, y) \
-    (CHAOS_PP_SPLIT(0, CHAOS_PP_TUPLE_REM_CTOR(2, CHAOS_PP_LOCAL_LIMITS))) <= x && x <= (CHAOS_PP_SPLIT(1, CHAOS_PP_TUPLE_REM_CTOR(2, CHAOS_PP_LOCAL_LIMITS))) \
+    (CHAOS_PP_BINARY_CTOR(0, CHAOS_PP_LOCAL_LIMITS)) <= x && x <= (CHAOS_PP_BINARY_CTOR(1, CHAOS_PP_LOCAL_LIMITS)) \
     /**/
 # define CHAOS_IP_LOCAL_ITERATE_R(x, y) \
-    (CHAOS_PP_SPLIT(0, CHAOS_PP_TUPLE_REM_CTOR(2, CHAOS_PP_LOCAL_LIMITS))) >= y && y >= (CHAOS_PP_SPLIT(1, CHAOS_PP_TUPLE_REM_CTOR(2, CHAOS_PP_LOCAL_LIMITS))) \
+    (CHAOS_PP_BINARY_CTOR(0, CHAOS_PP_LOCAL_LIMITS)) >= y && y >= (CHAOS_PP_BINARY_CTOR(1, CHAOS_PP_LOCAL_LIMITS)) \
     /**/
 #
 # endif

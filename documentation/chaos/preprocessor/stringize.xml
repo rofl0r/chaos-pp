@@ -32,7 +32,7 @@
 		This macro's sibling, <PRIMITIVE_STRINGIZE/>, does <em>not</em> provide this delay.
 	</para>
 	<para>
-		Both leading and trailing whitespace is removed from the argument when it is stringized, and internal whitespace separations are each condensed to a single space character.
+		Both leading and trailing whitespace are removed from the argument when it is stringized, and internal whitespace separations are each condensed to a single space character.
 		<snippet>
 			<STRINGIZE/>( abc ) // "abc"
 			<STRINGIZE/>(1   2) // "1 2"

@@ -594,6 +594,8 @@
 					<binary-file name="concat.gif"/>
 					<binary-file name="filter.gif"/>
 					<binary-file name="first_n.gif"/>
+					<binary-file name="fold_left.gif"/>
+					<binary-file name="fold_left_aux.gif"/>
 					<binary-file name="rest_n.gif"/>
 					<binary-file name="size.gif"/>
 					<binary-file name="to_list_alt.gif"/>
@@ -607,6 +609,8 @@
 				<header name="elem.h"/>
 				<header name="filter.h"/>
 				<header name="first_n.h"/>
+				<header name="fold_left.h"/>
+				<header name="fold_left_aux.h"/>
 				<header name="rest_n.h"/>
 				<header name="rem.h"/>
 				<header name="reverse.h"/>

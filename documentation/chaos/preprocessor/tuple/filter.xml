@@ -93,6 +93,21 @@
 	<para>
 		This macro may not be used if <link id="bypass semantics"/> are in effect.
 	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-lambda-ops.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		#include <chaos-preprocessor-tuple-filter.h/>
+		
+		#if <VARIADICS/>
+		
+		<EXPR/>(<TUPLE_FILTER/>(
+		    <ARG/>(1), (1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1)
+		))
+		// (1, 1, 1, 1, 1, 1, 1)
+		
+		#endif
+	</listing>
 	<derivative id="TUPLE_FILTER_ID" lang="C99"/>
 	<derivative id="TUPLE_FILTER_" lang="C99"/>
 	<derivative id="TUPLE_FILTER_S">

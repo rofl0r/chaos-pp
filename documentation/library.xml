@@ -467,6 +467,7 @@
 			<directory name="recursion">
 				<header name="auto_rec.h"/>
 				<header name="basic.h"/>
+				<header name="block.h"/>
 				<header name="buffer.h"/>
 				<header name="context.h"/>
 				<header name="delay.h"/>

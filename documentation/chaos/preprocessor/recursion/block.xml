@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- **************************************************************************
+     *                                                                        *
+     *    (C) Copyright Paul Mensonides 2003-2005.                            *
+     *                                                                        *
+     *    Distributed under the Boost Software License, Version 1.0.          *
+     *    (See accompanying file LICENSE).                                    *
+     *                                                                        *
+     *    See http://chaos-pp.sourceforge.net for the most recent version.    *
+     *                                                                        *
+     ************************************************************************** -->
+
+<header name="chaos/preprocessor/recursion/block.h" author="Paul Mensonides" date="2003-2005">
+<overview>
+	The <self/> header defines a variable <link id="deferral"/> macro.
+</overview>
+
+<macro id="BLOCK" group="deferral">
+	<abstract>
+		The <BLOCK/> macro facilitates the <link id="deferral"/> of a macro invocation through a variable number of scans.
+	</abstract>
+	<usage>
+		<syntax><BLOCK/>(n, macro)</syntax>
+		<param id="n">
+			The number of scans through which the invocation of <var>macro</var> is to be <link id="deferred"/>.
+			Valid values range from <code>0</code> to <LIMIT_BLOCK/>.
+		</param>
+		<param id="macro">
+			The macro name of a macro invocation to be <link id="deferred"/>.
+		</param>
+	</usage>
+	<para>
+		This macro prevents <var>macro</var> from expanding during the first <var>n</var> scans against arguments that exist following the invocation of <BLOCK/>.
+		For example,
+		<snippet>
+			<BLOCK/>(2, MACRO)(...)
+		</snippet>
+		causes the invocation of <code>MACRO</code> to be delayed through two scans.
+	</para>
+	<derivative id="BLOCK_ID"/>
+	<derivative id="BLOCK_" lang="C99"/>
+</macro>
+
+</header>

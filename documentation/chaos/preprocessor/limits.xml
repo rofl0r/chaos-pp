@@ -58,6 +58,20 @@
 	<derivative id="LIMIT_BIND_" lang="C99"/>
 </macro>
 
+<macro id="LIMIT_BLOCK" type="object">
+	<abstract>
+		The <LIMIT_BLOCK/> macro expands to the maximum amount of <link id="deferral"/> supported by <BLOCK/>.
+	</abstract>
+	<usage>
+		<syntax><LIMIT_BLOCK/></syntax>
+	</usage>
+	<para>
+		This macro currently expands to <code>5</code>.
+	</para>
+	<derivative id="LIMIT_BLOCK_ID"/>
+	<derivative id="LIMIT_BLOCK_" lang="C99"/>
+</macro>
+
 <macro id="LIMIT_CLOSURE" type="object">
 	<abstract>
 		The <LIMIT_CLOSURE/> macro expands to the maximum number of arguments supported by the <link id="closure"/> mechanism.

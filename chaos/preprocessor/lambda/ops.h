@@ -14,6 +14,7 @@
 #
 # include <chaos/preprocessor/cat.h>
 # include <chaos/preprocessor/config.h>
+# include <chaos/preprocessor/control/null.h>
 # include <chaos/preprocessor/facilities/expand.h>
 # include <chaos/preprocessor/recursion/basic.h>
 # include <chaos/preprocessor/tuple/rem.h>

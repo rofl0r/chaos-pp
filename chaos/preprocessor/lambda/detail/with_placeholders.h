@@ -9,7 +9,10 @@
 #  *                                                                         *
 #  ************************************************************************* */
 #
-# ifdef CHAOS_PP_INCLUDE
+# ifndef CHAOS_PP_INCLUDE
+#    line 1 CHAOS_PP_NULL()
+# endif
+#
 # line 1 CHAOS_PP_INCLUDE
 # undef CHAOS_PP_INCLUDE
 #

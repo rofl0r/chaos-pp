@@ -32,7 +32,7 @@
 		<syntax><EXPR/>(<TRANSFORM/>(op, g, ...))</syntax>
 		<param id="op">
 			<para>
-				The operation used to transformed each element of <var>g</var>.
+				The operation used to transform each element of <var>g</var>.
 				This operation must be either a <link id="λ expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
 				<snippet>
 					op(s, elem<sup>†</sup>, data<sup>‡</sup>)
@@ -58,7 +58,7 @@
 	<usage lang="C/C++">
 		<syntax><EXPR/>(<TRANSFORM/>(op, g, data))</syntax>
 		<param id="op">
-			The operation used to transformed each element of <var>g</var>.
+			The operation used to transform each element of <var>g</var>.
 			This operation must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
 			<snippet>
 				op(s, elem, data)

@@ -58,7 +58,7 @@
     )(CHAOS_PP_OBSTRUCT(), s, o, n, macro, _m, type, g, pd) \
     /**/
 # define CHAOS_IP_FOR_EACH_I_II(_, s, o, n, macro, _m, type, g, pd) \
-    _m()(s, o, macro, n CHAOS_PP_COMMA() CHAOS_PP_ITEM(type, CHAOS_PP_FIRST(g)) CHAOS_PP_COMMA() CHAOS_PP_UNPACK pd) \
+    _m()(o, macro, n CHAOS_PP_COMMA() CHAOS_PP_ITEM(type, CHAOS_PP_FIRST(g)) CHAOS_PP_COMMA() CHAOS_PP_UNPACK pd) \
     CHAOS_PP_EXPR_S(s) _(CHAOS_IP_FOR_EACH_I_INDIRECT _()( \
         CHAOS_PP_NEXT(s), o, CHAOS_PP_INC(n), macro, _m, type, CHAOS_PP_REST(g), pd \
     )) \

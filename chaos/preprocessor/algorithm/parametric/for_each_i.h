@@ -48,7 +48,7 @@
         )(CHAOS_PP_OBSTRUCT(), s, id, para, o, n, macro, _m, type, g, __VA_ARGS__) \
         /**/
 #    define CHAOS_IP_FOR_EACH_I_PARAMETRIC_II(_, s, id, para, o, n, macro, _m, type, g, ...) \
-        _m()(s, o, macro, n, CHAOS_PP_ITEM(type, CHAOS_PP_FIRST(g)), __VA_ARGS__) \
+        _m()(o, macro, n, CHAOS_PP_ITEM(type, CHAOS_PP_FIRST(g)), __VA_ARGS__) \
         CHAOS_PP_EXPR_S(s) _(id _()( \
             s, CHAOS_IP_FOR_EACH_I_PARAMETRIC_INDIRECT, para, o, CHAOS_PP_INC(n), macro, _m, type, CHAOS_PP_REST(g), __VA_ARGS__ \
         )) \

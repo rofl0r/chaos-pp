@@ -71,7 +71,7 @@
     )) \
     /**/
 # define CHAOS_IP_FOR_EACH_PRODUCT_IV(_, s, o, macro, _m, g, seq, bind, pd) \
-    _m()(s, o, macro, bind(CHAOS_PP_FIRST(g)) CHAOS_PP_COMMA() CHAOS_PP_UNPACK pd) \
+    _m()(o, macro, bind(CHAOS_PP_FIRST(g)) CHAOS_PP_COMMA() CHAOS_PP_UNPACK pd) \
     /**/
 #
 # endif

@@ -48,7 +48,7 @@
 # define CHAOS_IP_FOLD_LEFT_U(s, op, g, ps) \
     CHAOS_PP_EXPR_S(s)(CHAOS_IP_FOLD_LEFT_1( \
         CHAOS_PP_NEXT(s), CHAOS_PP_NEXT(s), \
-        op, CHAOS_PP_PLANAR(op), CHAOS_PP_TYPEOF(g),g \
+        op, CHAOS_PP_PLANAR(op), CHAOS_PP_TYPEOF(g), g \
     ) CHAOS_PP_UNPACK ps CHAOS_IP_FOLD_LEFT_2(CHAOS_PP_OBSTRUCT(), CHAOS_PP_NEXT(s), g)) \
     /**/
 # define CHAOS_IP_FOLD_LEFT_INDIRECT(n) CHAOS_IP_FOLD_LEFT_ ## n

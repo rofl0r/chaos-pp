@@ -60,7 +60,7 @@
         CHAOS_PP_EXPR_S(s) _(CHAOS_IP_TRANSFORM_INDIRECT _()( \
             CHAOS_PP_NEXT(s), o, op, _o, type, CHAOS_PP_REST(g), pd \
         )), \
-        _o()(s, o, op, CHAOS_PP_ITEM(type, CHAOS_PP_FIRST(g)) CHAOS_PP_COMMA() CHAOS_PP_UNPACK pd) \
+        _o()(o, op, CHAOS_PP_ITEM(type, CHAOS_PP_FIRST(g)) CHAOS_PP_COMMA() CHAOS_PP_UNPACK pd) \
     ) \
     /**/
 #

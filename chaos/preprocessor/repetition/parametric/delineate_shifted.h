@@ -52,7 +52,7 @@
         CHAOS_PP_EXPR_S(s) _(id _()( \
             s, CHAOS_IP_DELINEATE_SHIFTED_PARAMETRIC_INDIRECT, para, o, CHAOS_PP_DEC(count), s2, s2, macro, _m, __VA_ARGS__ \
         )) \
-        _m()(s, o, macro, count, __VA_ARGS__) s1() \
+        _m()(o, macro, count, __VA_ARGS__) s1() \
         /**/
 # endif
 #

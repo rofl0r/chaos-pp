@@ -58,7 +58,7 @@
     CHAOS_PP_DEFER(CHAOS_PP_EXPR_S(s))(CHAOS_PP_DEFER(CHAOS_IP_REPEAT_FROM_TO_INDIRECT)()( \
         CHAOS_PP_NEXT(s), o, from, to, macro, _m, pd \
     )) \
-    _m()(s, o, macro, to CHAOS_PP_COMMA() CHAOS_PP_UNPACK pd) \
+    _m()(o, macro, to CHAOS_PP_COMMA() CHAOS_PP_UNPACK pd) \
     /**/
 #
 # endif

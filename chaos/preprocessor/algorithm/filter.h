@@ -59,7 +59,7 @@
     )(CHAOS_PP_DEFER(CHAOS_PP_OBSTRUCT)(), s, o, pred, _p, type, g, pd) \
     /**/
 # define CHAOS_IP_FILTER_II(_, s, o, pred, _p, type, g, pd) \
-    CHAOS_PP_IIF _(_p()(s, o, pred, CHAOS_PP_ITEM(type, CHAOS_PP_FIRST(g)) CHAOS_PP_COMMA() CHAOS_PP_UNPACK pd))( \
+    CHAOS_PP_IIF _(_p()(o, pred, CHAOS_PP_ITEM(type, CHAOS_PP_FIRST(g)) CHAOS_PP_COMMA() CHAOS_PP_UNPACK pd))( \
         CHAOS_PP_CONS, CHAOS_IP_FILTER_III \
     )( \
         CHAOS_PP_DEFER(CHAOS_PP_EXPR_S(s))(CHAOS_PP_DEFER(CHAOS_IP_FILTER_INDIRECT)()( \

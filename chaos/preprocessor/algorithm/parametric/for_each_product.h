@@ -61,7 +61,7 @@
         )) \
         /**/
 #    define CHAOS_IP_FOR_EACH_PRODUCT_PARAMETRIC_IV(_, s, id, para, o, macro, _m, g, seq, bind, ...) \
-        _m()(s, o, macro, bind(CHAOS_PP_FIRST(g)), __VA_ARGS__) \
+        _m()(o, macro, bind(CHAOS_PP_FIRST(g)), __VA_ARGS__) \
         /**/
 # endif
 #

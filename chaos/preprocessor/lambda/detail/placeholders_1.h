@@ -9,7 +9,7 @@
 #  *                                                                         *
 #  ************************************************************************* */
 #
-# define _0 CHAOS_PP_FLAG(0xSTATE)
+# define _0 CHAOS_PP_PARAM(0)
 # define _1 CHAOS_PP_PARAM(1)
 # define _2 CHAOS_PP_PARAM(2)
 # define _3 CHAOS_PP_PARAM(3)

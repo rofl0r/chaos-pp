@@ -48,7 +48,7 @@
         CHAOS_PP_EXPR_S(s) _(id _()( \
             s, CHAOS_IP_REPEAT_FROM_TO_PARAMETRIC_INDIRECT, para, o, from, to, macro, _m, __VA_ARGS__ \
         )) \
-        _m()(s, o, macro, to, __VA_ARGS__) \
+        _m()(o, macro, to, __VA_ARGS__) \
         /**/
 # endif
 #

@@ -60,7 +60,7 @@
     CHAOS_PP_EXPR_S(s) _(CHAOS_IP_DELINEATE_INDIRECT _()( \
         s, o, count, ss, ss, macro, _m, pd \
     )) \
-    _m()(s, o, macro, count CHAOS_PP_COMMA() CHAOS_PP_UNPACK pd) sep() \
+    _m()(o, macro, count CHAOS_PP_COMMA() CHAOS_PP_UNPACK pd) sep() \
     /**/
 #
 # endif

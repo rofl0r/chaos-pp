@@ -22,6 +22,7 @@
 	</usage>
 	<para>
 		This macro expands to the number of elements in <var>seq</var>.
+		If <var>seq</var> contains more than <LIMIT_MAG/> elements, the result is <link id="saturated"/> to <LIMIT_MAG/>.
 	</para>
 	<listing>
 		#include <chaos-preprocessor-config.h/>

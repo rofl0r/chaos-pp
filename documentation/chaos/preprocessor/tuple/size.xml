@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <header name="chaos/preprocessor/tuple/size.h" author="Paul Mensonides" date="2003-2004">
 <overview>
-	The <self/> header defines a macro that calculates the size of a <link id="tuple"/>.
+	The <self/> header defines a macro that counts the elements in a <link id="tuple"/>.
 </overview>
 
 <macro id="TUPLE_SIZE" group="size">
 	<abstract>
-		The <TUPLE_SIZE/> macro calculates the number of elements in its argument.
+		The <TUPLE_SIZE/> macro counts the elements in its argument.
 	</abstract>
 	<usage lang="C99">
 		<syntax><TUPLE_SIZE/>(tuple)</syntax>
 		<param id="tuple" optional="1">
-			The <link id="tuple"/> whose size is to be calculated.
+			The <link id="tuple"/> whose elements are to be counted.
 		</param>
 	</usage>
 	<para>

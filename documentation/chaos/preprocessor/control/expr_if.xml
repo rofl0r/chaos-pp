@@ -33,7 +33,7 @@
 		Otherwise, it expands to <var>x</var> or <code>__VA_ARGS__</code>.
 	</para>
 	<para>
-		This macro performs a Boolean conversion of <var>cond</var>.
+		This macro performs a Boolean conversion on <var>cond</var>.
 		If this conversion is not desirable, <EXPR_IIF/> may be used instead.
 	</para>
 	<para>

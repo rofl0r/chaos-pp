@@ -61,7 +61,7 @@
 		#include <chaos-preprocessor-config.h/>
 		#include <chaos-preprocessor-debug-assert.h/>
 		
-		<ASSERT_MSG/>(<VARIADICS/>, "Variadics macros are required";)
+		<ASSERT_MSG/>(<VARIADICS/>, "Variadic macros are required";)
 	</listing>
 	<derivative id="ASSERT_MSG_ID"/>
 	<derivative id="ASSERT_MSG_" lang="C99"/>

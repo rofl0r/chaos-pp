@@ -92,12 +92,12 @@
 		This maximizes the utility of the <link id="recursion backend"/>.
 	</para>
 	<para>
-		Ignoring the complexity of <var>macro</var> (which is invoked once for each Cartesian product), the running time of <FOR_EACH_PRODUCT/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
+		Ignoring the complexity of <var>macro</var> (which is invoked once for each Cartesian product), the efficiency of the algorithm's use of the <link id="recursion backend"/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
 		The asymptotic upper and lower bounds are <assoc id="complexity/for_each_product.gif">Θ<sub>α</sub></assoc>, where <x-var>n</x-var> is the number of elements in <var>seq</var> and <x-var>n<sub>k</sub></x-var> is the number of elements in the <x-var>k</x-var>-th element of <var>seq</var>.
 		(This formula can also be expressed functionally as Θ(<x-var>f</x-var>(<x-var>n</x-var>)+1), where <x-var>f</x-var> is <assoc id="complexity/for_each_product-functional.gif">F</assoc>, which might be easier to conceptualize.)
 	</para>
 	<para>
-		Ignoring <var>macro</var> once again, the efficiency of the algorithm's use of the <link id="recursion backend"/> can be described in terms of the total depth of <link id="recursion steps"/> required to complete the algorithm.
+		Ignoring <var>macro</var> once again, the efficiency of the algorithm's use of the <link id="recursion backend"/> can also be described in terms of the total depth of <link id="recursion steps"/> required to complete the algorithm.
 		The asymptotic upper and lower bounds are <assoc id="efficiency/for_each_product.gif">Θ<sub>β</sub></assoc>, where <x-var>n</x-var> is the number of elements in <var>seq</var> and <x-var>n<sub>k</sub></x-var> is the number of elements in the <x-var>k</x-var>-th element of <var>seq</var>.
 	</para>
 	<para>

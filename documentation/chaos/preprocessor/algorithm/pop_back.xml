@@ -18,7 +18,7 @@
 		This macro expands to a <link id="generic data structure"/> of the same type as <var>g</var> that contains all of the elements of <var>g</var> except the last.
 	</para>
 	<para>
-		The running time of <POP_BACK/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
+		The efficiency of the algorithm's use of the <link id="recursion backend"/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
 		The asymptotic upper and lower bounds are Θ(<x-var>n</x-var>), where <x-var>n</x-var> is the number of elements in <var>g</var>.
 	</para>
 	<para>

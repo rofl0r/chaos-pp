@@ -33,8 +33,8 @@
 		</snippet>
 	</para>
 	<para>
-		The running time of <CAST/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
-		The asymptotic upper bound of O(<x-var>n</x-var>+1), where <x-var>n</x-var> is the number of elements in <var>g</var>, occurs when the <var>g</var> is not of type <var>type</var>.
+		The efficiency of the algorithm's use of the <link id="recursion backend"/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
+		The asymptotic upper bound of O(<x-var>n</x-var>+1), where <x-var>n</x-var> is the number of elements in <var>g</var>, occurs when <var>g</var> is not of type <var>type</var>.
 		The asymptotic lower bound of Ω(0) occurs when <var>g</var> is already of type <var>type</var>.
 	</para>
 	<para>

@@ -47,7 +47,7 @@
 		This macro expands to a <link id="list"/> containing the elements of <var>tuple</var>.
 	</para>
 	<para>
-		The running time of <TUPLE_TO_LIST_ALT/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
+		The efficiency of the algorithm's use of the <link id="recursion backend"/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
 		The asymptotic upper and lower bounds are <assoc id="complexity/to_list_alt.gif">Θ</assoc>, where <x-var>n</x-var> is the number of elements in <var>tuple</var> and <x-var>t<sub>ω</sub></x-var> is <LIMIT_TUPLE/>.
 	</para>
 	<para>

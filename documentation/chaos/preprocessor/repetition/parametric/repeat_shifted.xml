@@ -67,7 +67,7 @@
 		This allows for <link id="parametric resumption"/>.
 	</para>
 	<para>
-		Ignoring the complexity of <var>macro</var> (which is invoked exactly <var>count</var> times), the running time of <REPEAT_SHIFTED_PARAMETRIC/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
+		Ignoring the complexity of <var>macro</var> (which is invoked exactly <var>count</var> times), the efficiency of the algorithm's use of the <link id="recursion backend"/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
 		The asymptotic upper and lower bounds are Θ(<x-var>n</x-var>), where <x-var>n</x-var> is <var>count</var>.
 		These bounds preserve all low-order terms, which implies that the algorithm can repeat the target min(<x-var>p</x-var>∙(<x-var>s<sub>ω</sub></x-var>-<x-var>s</x-var>-1), <x-var>m</x-var>) times, where <x-var>p</x-var> is the number of <link id="parametric resumptions"/> plus the initial entry, <x-var>s<sub>ω</sub></x-var> is <LIMIT_EXPR/>, <x-var>s</x-var> is the original <link id="recursion state"/> at the beginning of the algorithm (i.e. <code><STATE/>()</code>), and <x-var>m</x-var> is <LIMIT_MAG/>.
 	</para>

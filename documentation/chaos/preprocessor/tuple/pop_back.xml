@@ -18,7 +18,7 @@
 		This macro expands to a <link id="tuple"/> that contains all of the elements of <var>tuple</var> except the last.
 	</para>
 	<para>
-		The running time of <TUPLE_POP_BACK/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
+		The efficiency of the algorithm's use of the <link id="recursion backend"/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
 		The asymptotic upper and lower bounds are <assoc id="complexity/pop_back.gif">Θ</assoc>, where <x-var>n</x-var> is the number of elements in <var>tuple</var>.
 	</para>
 	<para>

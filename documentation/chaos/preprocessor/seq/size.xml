@@ -61,7 +61,7 @@
 		If <var>seq</var> contains more than <LIMIT_MAG/> elements, the result is <link id="saturated"/> to <LIMIT_MAG/>.
 	</para>
 	<para>
-		The running time of <SEQ_SIZE_ALT/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
+		The efficiency of the algorithm's use of the <link id="recursion backend"/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
 		The asymptotic upper and lower bounds are <assoc id="complexity/size_alt.gif">Θ</assoc>, where <x-var>n</x-var> is the number of elements in <var>seq</var>.
 	</para>
 	<para>

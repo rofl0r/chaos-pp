@@ -88,7 +88,7 @@
 		In C (prior to C99) and C++, if <var>data</var> is a unary parenthetic expression, its sub-element is passed to the operation as a single argument (a parenthetic expression of any other arity is prohibited).
 	</para>
 	<para>
-		Ignoring the complexity of <var>op</var> (which is invoked once for each element in <var>g</var>), the running time of <FOLD_LEFT_AUX/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
+		Ignoring the complexity of <var>op</var> (which is invoked once for each element in <var>g</var>), the efficiency of the algorithm's use of the <link id="recursion backend"/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
 		The asymptotic upper and lower bounds are Θ(<x-var>2n</x-var>+2), where <x-var>n</x-var> is the number of elements in <var>g</var>.
 	</para>
 	<para>

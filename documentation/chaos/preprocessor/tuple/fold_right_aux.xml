@@ -58,7 +58,7 @@
 		If <var>data</var> is a parenthetic expression of any arity, its sub-elements are passed to the operation as individual arguments.
 	</para>
 	<para>
-		Ignoring the complexity of <var>op</var> (which is invoked once for each element in <var>tuple</var>), the running time of <TUPLE_FOLD_RIGHT_AUX/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
+		Ignoring the complexity of <var>op</var> (which is invoked once for each element in <var>tuple</var>), the efficiency of the algorithm's use of the <link id="recursion backend"/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
 		The asymptotic upper and lower bounds are <assoc id="complexity/fold_right_aux.gif">Θ</assoc>, where <x-var>n</x-var> is the number of elements in <var>tuple</var>.
 	</para>
 	<para>

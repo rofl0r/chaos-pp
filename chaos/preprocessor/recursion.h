@@ -14,6 +14,7 @@
 #
 # include <chaos/preprocessor/recursion/auto_rec.h>
 # include <chaos/preprocessor/recursion/basic.h>
+# include <chaos/preprocessor/recursion/block.h>
 # include <chaos/preprocessor/recursion/buffer.h>
 # include <chaos/preprocessor/recursion/context.h>
 # include <chaos/preprocessor/recursion/delay.h>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/array/size.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that extracts the size of an <link id="array"/>.
+</overview>
+
+<macro id="ARRAY_SIZE" group="size">
+	<abstract>
+		The <ARRAY_SIZE/> macro extracts the size of an <link id="array"/>.
+	</abstract>
+	<usage>
+		<syntax><ARRAY_SIZE/>(array)</syntax>
+		<param id="array">
+			The <link id="array"/> whose size is to be extracted.
+		</param>
+	</usage>
+	<para>
+		This macro expands to the number of elements in <var>array</var>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-array-size.h/>
+		
+		#define DATA() (3, (a, b, c))
+		
+		<ARRAY_SIZE/>(DATA()) // 3
+	</listing>
+	<derivative id="ARRAY_SIZE_ID"/>
+	<derivative id="ARRAY_SIZE_" lang="C99"/>
+</macro>
+
+</header>

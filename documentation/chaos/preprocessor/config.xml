@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/config.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines library configuration macros.
+</overview>
+
+<macro id="VARIADICS" type="object">
+	<abstract>
+		The <VARIADICS/> macro determines whether the library supports C99 facilities such as variadic macros and placemarkers.
+	</abstract>
+	<usage>
+		<syntax>#define <VARIADICS/> x</syntax>
+		<param id="x" optional="1">
+			The value that determines whether variadics and placemarkers are supported.
+		</param>
+	</usage>
+	<usage>
+		<syntax><VARIADICS/></syntax>
+	</usage>
+	<para>
+		This macro defaults to <code>1</code> if the preprocessor is a C99 preprocessor.
+		Otherwise, it defaults to <code>0</code>.
+	</para>
+	<para>
+		This macro may be defined by the user prior to the inclusion of any library headers to explicitly enable or disable the use of variadics and placemarkers in the library.
+		If this macro <em>is</em> defined by the user, the library redefines it such that it expands to either <code>0</code> or <code>1</code>.
+		If it is defined by the user with an empty replacement list or is defined as non-zero, the library redefines it as <code>1</code>.
+		Otherwise, the library redefines it as <code>0</code>.
+	</para>
+	<para>
+		If the user defines this macro as an expression (as opposed to a number), the expression should be enclosed in parentheses to avoid interference with the redefinition process.
+		<snippet>#define <VARIADICS/> (A + B)</snippet>
+	</para>
+	<para>
+		This macro may further be used in user code to distinguish between variadic macro and placemarker support and the lack thereof.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		
+		#if <VARIADICS/>
+		    // ...
+		#else
+		    // ...
+		#endif
+	</listing>
+	<derivative id="VARIADICS_ID"/>
+	<derivative id="VARIADICS_" lang="C99"/>
+</macro>
+
+</header>

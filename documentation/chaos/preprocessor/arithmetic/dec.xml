@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/arithmetic/dec.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a <link id="saturated"/> decrementation operator.
+</overview>
+
+<macro id="DEC">
+	<abstract>
+		The <DEC/> macro decrements a number.
+	</abstract>
+	<usage>
+		<syntax><DEC/>(x)</syntax>
+		<param id="x">
+			The value to be decremented.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+	</usage>
+	<para>
+		If <var>x</var> is <code>0</code>, this macro expands to <code>0</code>.
+		Otherwise, it expands to one less than <var>x</var>.
+	</para>
+	<x-reference id="INC"/>
+	<listing>
+		#include <chaos-preprocessor-arithmetic-dec.h/>
+		
+		<DEC/>(0) // 0
+		<DEC/>(5) // 4
+	</listing>
+	<derivative id="DEC_ID"/>
+	<derivative id="DEC_" lang="C99"/>
+</macro>
+
+</header>

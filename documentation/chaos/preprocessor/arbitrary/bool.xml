@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/arbitrary/bool.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that performs a boolean conversion on an <link id="arbitrary-precision value"/>.
+</overview>
+
+<macro id="BOOL_AP" group="boolean">
+	<abstract>
+		The <BOOL_AP/> macro performs a boolean conversion on its argument.
+	</abstract>
+	<usage lang="C99">
+		<syntax><BOOL_AP/>(x)</syntax>
+		<param id="x">
+			The <link id="arbitrary-precision value"/> to be converted.
+		</param>
+	</usage>
+	<para>
+		If <var>x</var> is an <link id="arbitrary-precision value"/> representing <code>0</code>, this macro expands to <code>0</code>.
+		Otherwise, it expands to <code>1</code>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-arbitrary-bool.h/>
+		#include <chaos-preprocessor-config.h/>
+		
+		#if <VARIADICS/>
+		
+		<BOOL_AP/>((0))       // 0
+		<BOOL_AP/>((1)(2)(3)) // 1
+		
+		#endif
+	</listing>
+	<derivative id="BOOL_AP_ID" lang="C99"/>
+	<derivative id="BOOL_AP_" lang="C99"/>
+</macro>
+
+</header>

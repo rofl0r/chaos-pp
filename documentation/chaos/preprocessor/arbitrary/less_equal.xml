@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/arbitrary/less_equal.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an <link id="arbitrary-precision"/> "less-than-or-equal-to" operator.
+</overview>
+
+<macro id="LESS_EQUAL_AP" group="less-equal">
+	<abstract>
+		The <LESS_EQUAL_AP/> macro tests whether its first operand is less than or equal to its second operand.
+	</abstract>
+	<usage lang="C99">
+		<syntax><LESS_EQUAL_AP/>(x, y)</syntax>
+		<param id="x">
+			The first operand.
+		</param>
+		<param id="y">
+			The second operand.
+		</param>
+	</usage>
+	<para>
+		If <var>x</var> is less than or equal to <var>y</var>, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<para>
+		This macro is a <link id="second-tier"/> algorithm that deduces the current <link id="recursion state"/> and invokes <LESS_EQUAL_AP_S/>.
+		If the current <link id="recursion state"/> is already known, direct use of <LESS_EQUAL_AP_S/> is more efficient.
+	</para>
+	<para>
+		This macro may not be used if <link id="bypass semantics"/> are in effect.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-arbitrary-less_equal.h/>
+		#include <chaos-preprocessor-arbitrary-literal.h/>
+		#include <chaos-preprocessor-config.h/>
+		
+		#if <VARIADICS/>
+		
+		<LESS_EQUAL_AP/>((1)(2)(3), (4)(5)) // 0
+		<LESS_EQUAL_AP/>((1)(2), (3)(4)(5)) // 1
+		
+		<LESS_EQUAL_AP/>(
+		    <LITERAL_AP/>((-)1), <LITERAL_AP/>((-)1)
+		)
+		// 1
+		
+		#endif
+	</listing>
+	<derivative id="LESS_EQUAL_AP_ID" lang="C99"/>
+	<derivative id="LESS_EQUAL_AP_" lang="C99"/>
+	<derivative id="LESS_EQUAL_AP_S">
+		<usage lang="C99">
+			<syntax><LESS_EQUAL_AP_S/>(s, x, y)</syntax>
+		</usage>
+		<derivative id="LESS_EQUAL_AP_S_ID" lang="C99"/>
+		<derivative id="LESS_EQUAL_AP_S_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

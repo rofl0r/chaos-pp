@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/arbitrary/greater.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an <link id="arbitrary-precision"/> "greater-than" operator.
+</overview>
+
+<macro id="GREATER_AP" group="greater">
+	<abstract>
+		The <GREATER_AP/> macro tests whether its first operand is greater than its second operand.
+	</abstract>
+	<usage lang="C99">
+		<syntax><GREATER_AP/>(x, y)</syntax>
+		<param id="x">
+			The first operand.
+		</param>
+		<param id="y">
+			The second operand.
+		</param>
+	</usage>
+	<para>
+		If <var>x</var> is greater than <var>y</var>, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<para>
+		This macro is a <link id="second-tier"/> algorithm that deduces the current <link id="recursion state"/> and invokes <GREATER_AP_S/>.
+		If the current <link id="recursion state"/> is already known, direct use of <GREATER_AP_S/> is more efficient.
+	</para>
+	<para>
+		This macro may not be used if <link id="bypass semantics"/> are in effect.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-arbitrary-greater.h/>
+		#include <chaos-preprocessor-config.h/>
+		
+		#if <VARIADICS/>
+		
+		<GREATER_AP/>((1)(2)(3), (4)(5)) // 1
+		<GREATER_AP/>((1)(2), (3)(4)(5)) // 0
+		
+		#endif
+	</listing>
+	<derivative id="GREATER_AP_ID" lang="C99"/>
+	<derivative id="GREATER_AP_" lang="C99"/>
+	<derivative id="GREATER_AP_S">
+		<usage lang="C99">
+			<syntax><GREATER_AP_S/>(s, x, y)</syntax>
+		</usage>
+		<derivative id="GREATER_AP_S_ID" lang="C99"/>
+		<derivative id="GREATER_AP_S_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

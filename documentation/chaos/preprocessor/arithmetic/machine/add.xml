@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/arithmetic/machine/add.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an addition operator.
+</overview>
+
+<macro id="ADD_MACHINE" group="addition">
+	<abstract>
+		The <ADD_MACHINE/> macro computes the sum of two values.
+	</abstract>
+	<usage lang="C99">
+		<syntax><ADD_MACHINE/>(x, y)</syntax>
+		<param id="x">
+			The first addend.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="y">
+			The second addend.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+	</usage>
+	<para>
+		This macro expands to the sum of <var>x</var> and <var>y</var>.
+		If the result is greater than <LIMIT_MAG/>, it is <link id="saturated"/> to <LIMIT_MAG/>.
+	</para>
+	<para>
+		This macro behaves identically to <ADD/> except that it is implemented with the <link id="continuation machine"/>, which can yield significant performance improvements.
+	</para>
+	<para>
+		This macro is a <link id="second-tier"/> algorithm that deduces the current <link id="recursion state"/> and invokes <ADD_MACHINE_S/>.
+		If the current <link id="recursion state"/> is already known, direct use of <ADD_MACHINE_S/> is more efficient.
+	</para>
+	<para>
+		This macro may not be used if <link id="bypass semantics"/> are in effect.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-arithmetic-machine-add.h/>
+		#include <chaos-preprocessor-config.h/>
+		
+		#if <VARIADICS/>
+		
+		<ADD_MACHINE/>(11, 12) // 23
+		
+		#endif
+	</listing>
+	<derivative id="ADD_MACHINE_ID" lang="C99"/>
+	<derivative id="ADD_MACHINE_" lang="C99"/>
+	<derivative id="ADD_MACHINE_S">
+		<usage lang="C99">
+			<syntax><ADD_MACHINE_S/>(s, x, y)</syntax>
+		</usage>
+		<derivative id="ADD_MACHINE_S_ID" lang="C99"/>
+		<derivative id="ADD_MACHINE_S_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

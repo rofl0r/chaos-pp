@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/comparison/greater_equal.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a "greater-than-or-equal" operator.
+</overview>
+
+<macro id="GREATER_EQUAL" group="greater-equal">
+	<abstract>
+		The <GREATER_EQUAL/> macro tests whether its first operand is greater than or equal to its second operand.
+	</abstract>
+	<usage>
+		<syntax><GREATER_EQUAL/>(x, y)</syntax>
+		<param id="x">
+			The first operand.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="y">
+			The second operand.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+	</usage>
+	<para>
+		If <var>x</var> is greater than or equal to <var>y</var>, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-comparison-greater_equal.h/>
+		
+		<GREATER_EQUAL/>(123, 45) // 1
+		<GREATER_EQUAL/>(12, 345) // 0
+
+		<GREATER_EQUAL/>(10, 10) // 1
+	</listing>
+	<derivative id="GREATER_EQUAL_ID"/>
+	<derivative id="GREATER_EQUAL_" lang="C99"/>
+</macro>
+
+</header>

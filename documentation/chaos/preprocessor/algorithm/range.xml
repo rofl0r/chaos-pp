@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/algorithm/range.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an algorithm that extracts a range of elements from a <link id="generic data structure"/>.
+</overview>
+
+<macro id="RANGE" type="indirect" group="range">
+	<abstract>
+		The <RANGE/> macro extracts the range of elements specified by its first two arguments from its third argument.
+	</abstract>
+	<usage>
+		<syntax><RANGE/>(i, len, g)</syntax>
+		<param id="i">
+			The zero-based index of the first element to be extracted.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="len">
+			The number of elements to be extracted.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="g">
+			The <link id="generic data structure"/> from which elements are to be extracted.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="generic data structure"/> of the same type as <var>g</var> containing <var>len</var> elements from <var>g</var> starting at the <var>i</var>-th element of <var>g</var>.
+		Consequently, <var>g</var> must contain the entire range specified by <var>i</var> and <var>len</var>.
+	</para>
+	<para>
+		The running time of <RANGE/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
+		The asymptotic upper and lower bounds are Θ(<x-var>i</x-var>+<x-var>n</x-var>+1), where <x-var>i</x-var> is <var>i</var> and <x-var>n</x-var> is <var>len</var>.
+	</para>
+	<para>
+		This macro uses <link id="bypass semantics"/>.
+		If <link id="bypass semantics"/> are already in effect, <RANGE_BYPASS/> must be used instead.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-algorithm-range.h/>
+		#include <chaos-preprocessor-string-spec.h/>
+		
+		<RANGE/>(2, 4, (<STRING/>) 0 1 2 3 4 5 6 7 8 9)
+		// (<STRING/>) 2 3 4 5
+	</listing>
+	<derivative id="RANGE_ID"/>
+	<derivative id="RANGE_" lang="C99"/>
+	<derivative id="RANGE_BYPASS">
+		<usage>
+			<syntax><RANGE_BYPASS/>(s, i, len, g)</syntax>
+		</usage>
+		<derivative id="RANGE_BYPASS_ID"/>
+		<derivative id="RANGE_BYPASS_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

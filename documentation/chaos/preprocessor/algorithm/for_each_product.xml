@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/algorithm/for_each_product.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an algorithm that repeats a user-specified target for each Cartesian product of elements in a <link id="sequence"/> of <link id="generic data structures"/>.
+</overview>
+
+<macro id="FOR_EACH_PRODUCT" type="indirect" group="cartesian">
+	<abstract>
+		The <FOR_EACH_PRODUCT/> macro repeats the target specified by its first argument for each Cartesian product of elements in its second argument.
+	</abstract>
+	<usage lang="C99">
+		<syntax><EXPR/>(<FOR_EACH_PRODUCT/>(macro, seq))</syntax>
+		<param id="macro">
+			The target that is to be repeated for each Cartesian product in <var>seq</var>.
+			This target must be either a <link id="λ-expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			<snippet>
+				macro(s, product)
+			</snippet>
+		</param>
+		<param id="seq" optional="1">
+			The <link id="sequence"/> of <link id="generic data structures"/> from which Cartesian products are to be generated.
+		</param>
+	</usage>
+	<usage lang="C99">
+		<syntax><EXPR/>(<FOR_EACH_PRODUCT/>(macro, seq, ...))</syntax>
+		<param id="macro">
+			<para>
+				The target that is to be repeated for each Cartesian product in <var>seq</var>.
+				This target must be either a <link id="λ-expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				<snippet>
+					macro(s, product, data<sup>†</sup>)
+				</snippet>
+			</para>
+			<para>
+				<sup>†</sup>
+				The <var>data</var> pseudo-parameter must be either <code>...</code> or the number of parameters that corresponds to the number of arguments in the auxiliary data, <code>__VA_ARGS__</code>.
+			</para>
+		</param>
+		<param id="seq" optional="1">
+			The <link id="sequence"/> of <link id="generic data structures"/> from which Cartesian products are to be generated.
+		</param>
+		<param id="..." optional="1">
+			Auxiliary data to be passed through the algorithm to the target.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><EXPR/>(<FOR_EACH_PRODUCT/>(macro, seq, data))</syntax>
+		<param id="macro">
+			The target that is to be repeated for each Cartesian product in <var>seq</var>.
+			This target must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			<snippet>
+				macro(s, product, data)
+			</snippet>
+		</param>
+		<param id="seq">
+			The <link id="sequence"/> of <link id="generic data structures"/> from which Cartesian products are to be generated.
+		</param>
+		<param id="data">
+			Auxiliary data to be passed through the algorithm to the target.
+		</param>
+	</usage>
+	<para>
+		The <FOR_EACH_PRODUCT/> macro itself expands to a <link id="deferred expression"/> in terms of <code><NEXT/>(s)</code>.
+		This <link id="deferred expression"/>, when invoked by <EXPR/>, expands to the result of the repeated invocation of the target for each Cartesian product in <var>seq</var>.
+	</para>
+	<para>
+		The target is invoked with the current <link id="recursion state"/> (<var>s</var>), a <link id="sequence"/> of elements representing a Cartesian product (<var>product</var>), and, if it exists, the auxiliary data (<var>data</var> or <code>__VA_ARGS__</code>).
+		This target may expand to a <link id="deferred expression"/> in terms of <code><NEXT/>(s)</code>.
+		This allows the target to recurse on itself if necessary.
+	</para>
+	<para>
+		In C99, it is possible to omit the auxiliary data argument altogether.
+		This is different than passing "nothing" as the auxiliary data.
+		<snippet>
+			#define A (<TUPLE/>) (a, b, c)
+			#define B (<TUPLE/>) (x, y, z)
+			
+			<EXPR/>(
+			    <FOR_EACH_PRODUCT/>(MACRO, (A)(B),) // #1
+			    <FOR_EACH_PRODUCT/>(MACRO, (A)(B))  // #2
+			)
+		</snippet>
+		The first line passes "nothing" as the auxiliary data, which causes <code>MACRO</code> to be invoked as (e.g.)...
+		<snippet>MACRO(s, (a)(x),)</snippet>
+		The second line omits the auxiliary data, which causes <code>MACRO</code> to be invoked as (e.g.)...
+		<snippet>MACRO(s, (a)(x))</snippet>
+		The fundamental difference is that, in the first line, the auxiliary data is empty (which might have a valid meaning as data), but, in the second line, <em>there is no auxiliary data</em>.
+		Hence, the algorithm is overloaded on a <link id="true-optional parameter"/>.
+	</para>
+	<para>
+		Invocations of the target are trampolined such that each invocation is invoked with <code><NEXT/>(s)</code>, where <var>s</var> is the original <link id="recursion state"/> at the beginning of the algorithm (i.e. <code><STATE/>()</code>).
+		This maximizes the utility of the <link id="recursion backend"/>.
+	</para>
+	<para>
+		Ignoring the complexity of <var>macro</var> (which is invoked once for each Cartesian product), the running time of <FOR_EACH_PRODUCT/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
+		The asymptotic upper and lower bounds are <relative-assoc id="complexity.gif">Θ<sub>α</sub></relative-assoc>, where <x-var>n</x-var> is the number of elements in <var>seq</var> and <x-var>n<sub>k</sub></x-var> is the number of elements in the <x-var>k</x-var>-th element of <var>seq</var>.
+		(This formula can also be expressed functionally as Θ(<x-var>f</x-var>(<x-var>n</x-var>)+1), where <x-var>f</x-var> is <relative-assoc id="functional.gif">F</relative-assoc>, which might be easier to conceptualize.)
+	</para>
+	<para>
+		Ignoring <var>macro</var> once again, the efficiency of the algorithm's use of the <link id="recursion backend"/> can be described in terms of the total depth of <link id="recursion steps"/> required to complete the algorithm.
+		The asymptotic upper and lower bounds are <relative-assoc id="efficiency.gif">Θ<sub>β</sub></relative-assoc>, where <x-var>n</x-var> is the number of elements in <var>seq</var> and <x-var>n<sub>k</sub></x-var> is the number of elements in the <x-var>k</x-var>-th element of <var>seq</var>.
+	</para>
+	<para>
+		This macro deduces the current <link id="recursion state"/> and invokes <FOR_EACH_PRODUCT_S/>.
+		If the current <link id="recursion state"/> is already known, direct use of <FOR_EACH_PRODUCT_S/> is more efficient.
+	</para>
+	<para>
+		This macro may not be used if <link id="bypass semantics"/> are in effect.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-algorithm-for_each_product.h/>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-lambda-ops.h/>
+		#include <chaos-preprocessor-list-spec.h/>
+		#include <chaos-preprocessor-seq-spec.h/>
+		#include <chaos-preprocessor-seq-to_tuple.h/>
+		#include <chaos-preprocessor-string-spec.h/>
+		
+		#define MACRO(s, product, data) \
+		    <SEQ_TO_TUPLE/>(product) \
+		    /**/
+		
+		#define A (<LIST/>) (a, (b, ...))
+		#define B (<LIST/>) (x, (y, ...))
+		
+		<EXPR/>(<FOR_EACH_PRODUCT/>(
+		    MACRO, (A)(B), ~
+		))
+		// (a, x) (a, y) (b, x) (b, y)
+		
+		#if <VARIADICS/>
+		
+		<EXPR/>(<FOR_EACH_PRODUCT/>(
+		    <SEQ_TO_TUPLE_/>(<PARAM/>(1)),
+		    (A)(B)
+		))
+		// (a, x) (a, y) (b, x) (b, y)
+		
+		#endif
+		
+		#define X (<STRING/>) a b c
+		#define Y (<SEQ/>) (+)(-)
+		#define Z (<LIST/>) (?, ...)
+		
+		<EXPR/>(<FOR_EACH_PRODUCT/>(
+		    MACRO, (X)(Y)(Z), ~
+		))
+		// (a, +, ?) (a, -, ?)
+		// (b, +, ?) (b, -, ?)
+		// (c, +, ?) (c, -, ?)
+	</listing>
+	<derivative id="FOR_EACH_PRODUCT_ID"/>
+	<derivative id="FOR_EACH_PRODUCT_" lang="C99"/>
+	<derivative id="FOR_EACH_PRODUCT_S">
+		<usage lang="C99">
+			<syntax><EXPR_S/>(s)(<FOR_EACH_PRODUCT_S/>(s, macro, seq))</syntax>
+		</usage>
+		<usage lang="C99">
+			<syntax><EXPR_S/>(s)(<FOR_EACH_PRODUCT_S/>(s, macro, seq, ...))</syntax>
+		</usage>
+		<usage lang="C/C++">
+			<syntax><EXPR_S/>(s)(<FOR_EACH_PRODUCT_S/>(s, macro, seq, data))</syntax>
+		</usage>
+		<derivative id="FOR_EACH_PRODUCT_S_ID"/>
+		<derivative id="FOR_EACH_PRODUCT_S_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/algorithm/size.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an algorithm that counts the elements in a <link id="generic data structure"/>.
+</overview>
+
+<macro id="SIZE" group="size">
+	<abstract>
+		The <SIZE/> macro counts the elements in its argument.
+	</abstract>
+	<usage>
+		<syntax><SIZE/>(g)</syntax>
+		<param id="g">
+			The <link id="generic data structure"/> whose elements are to be counted.
+		</param>
+	</usage>
+	<para>
+		This macro expands to the number of elements in <var>g</var>.
+	</para>
+	<para>
+		The running time of <SIZE/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
+		The asymptotic upper and lower bounds are Θ(<x-var>n</x-var>+1), where <x-var>n</x-var> is the number of elements in <var>g</var>.
+	</para>
+	<para>
+		This macro uses <link id="bypass semantics"/>.
+		If <link id="bypass semantics"/> are already in effect, <SIZE_BYPASS/> must be used instead.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-algorithm-size.h/>
+		#include <chaos-preprocessor-string-spec.h/>
+		
+		<SIZE/>((<STRING/>) C 9 9) // 3
+	</listing>
+	<derivative id="SIZE_ID"/>
+	<derivative id="SIZE_" lang="C99"/>
+	<derivative id="SIZE_BYPASS">
+		<usage>
+			<syntax><SIZE_BYPASS/>(s, g)</syntax>
+		</usage>
+		<derivative id="SIZE_BYPASS_ID"/>
+		<derivative id="SIZE_BYPASS_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

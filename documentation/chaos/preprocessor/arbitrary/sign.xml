@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/arbitrary/sign.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that extracts the sign of an <link id="arbitrary-precision value"/>.
+</overview>
+
+<macro id="SIGN_AP" group="sign">
+	<abstract>
+		The <SIGN_AP/> macro extracts the sign of an <link id="arbitrary-precision value"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><SIGN_AP/>(x)</syntax>
+		<param id="x">
+			The <link id="arbitrary-precision value"/> whose sign is to be extracted.
+		</param>
+	</usage>
+	<para>
+		If <var>x</var> is an <link id="arbitrary-precision value"/> representing a negative number, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-arbitrary-literal.h/>
+		#include <chaos-preprocessor-arbitrary-sign.h/>
+		#include <chaos-preprocessor-config.h/>
+		
+		#if <VARIADICS/>
+		
+		<SIGN_AP/>(<LITERAL_AP/>(1 2 3)) // 0
+		<SIGN_AP/>(<LITERAL_AP/>((-)1))  // 1
+		
+		#endif
+	</listing>
+	<derivative id="SIGN_AP_ID" lang="C99"/>
+	<derivative id="SIGN_AP_" lang="C99"/>
+</macro>
+
+</header>

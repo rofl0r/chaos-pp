@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/comparison/max.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that expands to the maximum of two values.
+</overview>
+
+<macro id="MAX" group="maximum">
+	<abstract>
+		The <MAX/> macro expands to the maximum of its two arguments.
+	</abstract>
+	<usage>
+		<syntax><MAX/>(x, y)</syntax>
+		<param id="x">
+			The first operand.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="y">
+			The second operand.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+	</usage>
+	<para>
+		If <var>x</var> is greater than or equal to <var>y</var>, this macro expands to <var>x</var>.
+		Otherwise, it expands to <var>y</var>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-comparison-max.h/>
+		
+		<MAX/>(2, 4) // 4
+	</listing>
+	<derivative id="MAX_ID"/>
+	<derivative id="MAX_" lang="C99"/>
+</macro>
+
+</header>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/arbitrary/mod.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an <link id="arbitrary-precision"/> modulus operator.
+</overview>
+
+<macro id="MOD_AP" group="division">
+	<abstract>
+		The <MOD_AP/> macro computes the remainder produced by dividing two <link id="arbitrary-precision values"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><MOD_AP/>(x, y)</syntax>
+		<param id="x">
+			The dividend.
+		</param>
+		<param id="y">
+			The divisor.
+		</param>
+	</usage>
+	<para>
+		This macro expands to an <link id="arbitrary-precision value"/> that represents the remainder produced by dividing <var>x</var> by <var>y</var>.
+		If <var>y</var> is an <link id="arbitrary-precision value"/> representing zero, this macro intentionally produces an error.
+	</para>
+	<para>
+		This macro is a <link id="second-tier"/> algorithm that deduces the current <link id="recursion state"/> and invokes <MOD_AP_S/>.
+		If the current <link id="recursion state"/> is already known, direct use of <MOD_AP_S/> is more efficient.
+	</para>
+	<para>
+		This macro may not be used if <link id="bypass semantics"/> are in effect.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-arbitrary-demote.h/>
+		#include <chaos-preprocessor-arbitrary-mod.h/>
+		#include <chaos-preprocessor-config.h/>
+		
+		#if <VARIADICS/>
+		
+		<DEMOTE_AP/>(<MOD_AP/>(
+		    (1)(2)(3)(4),
+		    (5)(0)
+		))
+		// 34
+		
+		#endif
+	</listing>
+	<derivative id="MOD_AP_ID" lang="C99"/>
+	<derivative id="MOD_AP_" lang="C99"/>
+	<derivative id="MOD_AP_S">
+		<usage lang="C99">
+			<syntax><MOD_AP_S/>(s, x, y)</syntax>
+		</usage>
+		<derivative id="MOD_AP_S_ID" lang="C99"/>
+		<derivative id="MOD_AP_S_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

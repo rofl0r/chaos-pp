@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/control/if.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that acts as an "if-else" construct.
+</overview>
+
+<macro id="IF" group="if">
+	<abstract>
+		The <IF/> macro expands to one of two alternatives depending on its first argument.
+	</abstract>
+	<usage lang="C99">
+		<syntax><IF/>(cond)(t, ...)</syntax>
+		<param id="cond">
+			The condition that determines whether the macro expands to <var>t</var> or <code>__VA_ARGS__</code>.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="t" optional="1">
+			The result of the expansion if <var>cond</var> is non-zero.
+		</param>
+		<param id="..." optional="1">
+			The result of the expansion if <var>cond</var> is <code>0</code>.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><IF/>(cond)(t, f)</syntax>
+		<param id="cond">
+			The condition that determines whether the macro expands to <var>t</var> or <var>f</var>.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="t">
+			The result of the expansion if <var>cond</var> is non-zero.
+		</param>
+		<param id="f">
+			The result of the expansion if <var>cond</var> is <code>0</code>.
+		</param>
+	</usage>
+	<para>
+		If <var>cond</var> expands to <code>0</code>, this macro expands to <var>f</var> or <code>__VA_ARGS__</code>.
+		Otherwise, it expands to <var>t</var>.
+	</para>
+	<para>
+		This macro performs a boolean conversion of <var>cond</var>.
+		If this conversion is not desireable, <IIF/> may be used instead.
+	</para>
+	<para>
+		This macro is lazy.
+		If <var>cond</var> is non-zero, only <var>t</var> is evaluated.
+		Likewise, if <var>cond</var> is <code>0</code>, only <var>f</var> (or <code>__VA_ARGS__</code>) is evaluated.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-control-if.h/>
+		
+		<IF/>(1)(-, +) // -
+		<IF/>(0)(-, +) // +
+	</listing>
+	<derivative id="IF_ID"/>
+	<derivative id="IF_" lang="C99"/>
+</macro>
+
+</header>

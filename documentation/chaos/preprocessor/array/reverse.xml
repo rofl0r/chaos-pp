@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/array/reverse.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that reverses the elements in an <link id="array"/>.
+</overview>
+
+<macro id="ARRAY_REVERSE" type="indirect" group="reversal">
+	<abstract>
+		The <ARRAY_REVERSE/> macro reverses the elements in an <link id="array"/>.
+	</abstract>
+	<usage>
+		<syntax><ARRAY_REVERSE/>(array)</syntax>
+		<param id="array">
+			The <link id="array"/> whose elements are to be reversed.
+			This <link id="array"/> must contain less than <LIMIT_TUPLE/> elements.
+		</param>
+	</usage>
+	<para>
+		This macro expands to an <link id="array"/> containing the elements of <var>array</var> in reverse order.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-array-reverse.h/>
+		
+		#define DATA() (3, (a, b, c))
+		
+		<ARRAY_REVERSE/>(DATA()) // (3, (c, b, a))
+	</listing>
+	<derivative id="ARRAY_REVERSE_ID"/>
+	<derivative id="ARRAY_REVERSE_" lang="C99"/>
+</macro>
+
+</header>

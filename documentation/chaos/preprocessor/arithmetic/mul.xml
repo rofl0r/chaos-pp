@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/arithmetic/mul.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a multiplication operator.
+</overview>
+
+<macro id="MUL" group="multiplication">
+	<abstract>
+		The <MUL/> macro computes the product of two values.
+	</abstract>
+	<usage>
+		<syntax><MUL/>(x, y)</syntax>
+		<param id="x">
+			The multiplicand.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="y">
+			The multiplier.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+	</usage>
+	<para>
+		This macro expands to the product of <var>x</var> and <var>y</var>.
+		If the result is greater than <LIMIT_MAG/>, it is <link id="saturated"/> to <LIMIT_MAG/>.
+	</para>
+	<para>
+		This macro uses <link id="bypass semantics"/>.
+		If <link id="bypass semantics"/> are already in effect, <MUL_BYPASS/> must be used instead.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-arithmetic-mul.h/>
+		
+		<MUL/>(5, 7) // 35
+	</listing>
+	<derivative id="MUL_ID"/>
+	<derivative id="MUL_" lang="C99"/>
+	<derivative id="MUL_BYPASS">
+		<usage>
+			<syntax><MUL_BYPASS/>(s, x, y)</syntax>
+		</usage>
+		<derivative id="MUL_BYPASS_ID"/>
+		<derivative id="MUL_BYPASS_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/array/to_seq.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that converts an <link id="array"/> to a <link id="sequence"/>.
+</overview>
+
+<macro id="ARRAY_TO_SEQ" type="indirect" group="conversion">
+	<abstract>
+		The <ARRAY_TO_SEQ/> macro converts an <link id="array"/> to a <link id="sequence"/>.
+	</abstract>
+	<usage>
+		<syntax><ARRAY_TO_SEQ/>(array)</syntax>
+		<param id="array">
+			The <link id="array"/> to be converted.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="sequence"/> containing the elements of <var>array</var>.
+	</para>
+	<para>
+		The <var>array</var> argument must be an <link id="array"/> containing no more than <LIMIT_TUPLE/> elements.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-array-to_seq.h/>
+		
+		#define DATA() (3, (x, y, z))
+		
+		<ARRAY_TO_SEQ/>(DATA()) // (x)(y)(z)
+	</listing>
+	<derivative id="ARRAY_TO_SEQ_ID"/>
+	<derivative id="ARRAY_TO_SEQ_" lang="C99"/>
+</macro>
+
+</header>

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/algorithm/fold_left.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an algorithm that accumulates the elements of a <link id="generic data structure"/> from the first element to the last element.
+</overview>
+
+<macro id="FOLD_LEFT" type="indirect" group="accumulation">
+	<abstract>
+		The <FOLD_LEFT/> macro accumulates the elements of its second argument with the operation specified by its first argument.
+	</abstract>
+	<usage lang="C99">
+		<syntax><EXPR/>(<FOLD_LEFT/>(op, g, ...))</syntax>
+		<param id="op">
+			<para>
+				The operation that is used to accumulate the elements of <var>g</var>.
+				This operation must be either a <link id="λ-expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				<snippet>
+					op(s, elem<sup>†</sup>, state<sup>‡</sup>)
+				</snippet>
+			</para>
+			<para>
+				<sup>†</sup>
+				If the type of <var>g</var> is non-variadic, <var>elem</var> must be the number of parameters that corresponds to the number of sub-elements in each element of <var>g</var>.
+				Otherwise, <var>elem</var> must be a single parameter.
+			</para>
+			<para>
+				<sup>‡</sup>
+				The <var>state</var> pseudo-parameter must be either <code>...</code> or the number of parameters that corresponds to the number of arguments in the accumulation state, <code>__VA_ARGS__</code>.
+			</para>
+		</param>
+		<param id="g">
+			The <link id="generic data structure"/> whose elements are to be accumulated.
+		</param>
+		<param id="..." optional="1">
+			The initial state of the accumulation.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><EXPR/>(<FOLD_LEFT/>(op, g, state))</syntax>
+		<param id="op">
+			The operation that is used to accumulate the elements of <var>g</var>.
+			This operation must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			<snippet>
+				op(s, elem, state)
+			</snippet>
+		</param>
+		<param id="g">
+			The <link id="generic data structure"/> whose elements are to be accumulated.
+		</param>
+		<param id="state">
+			The initial state of the accumulation.
+		</param>
+	</usage>
+	<para>
+		The <FOLD_LEFT/> macro itself expands to a <link id="deferred expression"/> in terms of <code><NEXT/>(s)</code>.
+		This <link id="deferred expression"/>, when invoked by <EXPR/>, expands to the result of accumulating the elements of <var>g</var>, from left to right, with the user-specified operation.
+		This is illustated by the following pseudo-code:
+		<snippet>
+			op(s, g[length(g) - 1], ... op(s, g[1], op(s, g[0], state)) ... )
+		</snippet>
+	</para>
+	<para>
+		An invocation of the operation with the current <link id="recursion state"/> (<var>s</var>), a particular element (<var>elem</var>), and current state (<var>state</var> or <code>__VA_ARGS__</code>) expands to a new state used in the accumulation of subsequent elements (or as the final result of the algorithm if no further elements exist).
+		The operation may also expand to a <link id="deferred expression"/> in terms of <code><NEXT/>(s)</code> that expands to a new state.
+		Expansion to a <link id="deferred expression"/> allows the operation to recurse on itself if necessary.
+	</para>
+	<para>
+		Invocations of the operation are trampolined such that each invocation is invoked with <code><NEXT/>(<NEXT/>(s))</code>, where <var>s</var> is the original <link id="recursion state"/> at the beginning of the algorithm (i.e. <code><STATE/>()</code>).
+		This maximizes the utility of the <link id="recursion backend"/>.
+	</para>
+	<para>
+		Ignoring the complexity of <var>op</var> (which is invoked once for each element in <var>g</var>), the running time of <FOLD_RIGHT/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
+		The asymptotic upper and lower bounds are Θ(<x-var>n</x-var>+1), where <x-var>n</x-var> is the number of elements in <var>g</var>.
+	</para>
+	<para>
+		This macro deduces the current <link id="recursion state"/> and invokes <FOLD_LEFT_S/>.
+		If the current <link id="recursion state"/> is already known, direct use of <FOLD_LEFT_S/> is more efficient.
+	</para>
+	<para>
+		This macro may not be used if <link id="bypass semantics"/> are in effect.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-cat.h/>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-algorithm-fold_left.h/>
+		#include <chaos-preprocessor-lambda-ops.h/>
+		#include <chaos-preprocessor-list-spec.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		
+		#define OP(s, elem, state) state ## elem
+		
+		<EXPR/>(<FOLD_LEFT/>(
+		    OP,
+		    (<LIST/>) (a, (b, (c, ...))),
+		    _
+		))
+		// _abc
+		
+		#if <VARIADICS/>
+		
+		??=include <PLACEHOLDERS/>(1)
+		
+		<EXPR/>(<FOLD_LEFT/>(
+		    <PRIMITIVE_CAT_/>(_2, _1),
+		    (<LIST/>) (a, (b, (c, ...))),
+		))
+		// abc
+		
+		??=include <PLACEHOLDERS/>(0)
+		
+		#endif
+	</listing>
+	<derivative id="FOLD_LEFT_ID"/>
+	<derivative id="FOLD_LEFT_" lang="C99"/>
+	<derivative id="FOLD_LEFT_S">
+		<usage lang="C99">
+			<syntax><EXPR_S/>(s)(<FOLD_LEFT_S/>(s, op, g, ...))</syntax>
+		</usage>
+		<usage lang="C/C++">
+			<syntax><EXPR_S/>(s)(<FOLD_LEFT_S/>(s, op, g, state))</syntax>
+		</usage>
+		<listing>
+			#include <chaos-preprocessor-algorithm-fold_left.h/>
+			#include <chaos-preprocessor-cat.h/>
+			#include <chaos-preprocessor-config.h/>
+			#include <chaos-preprocessor-control-iif.h/>
+			#include <chaos-preprocessor-detection-is_variadic.h/>
+			#include <chaos-preprocessor-lambda-ops.h/>
+			#include <chaos-preprocessor-recursion-basic.h/>
+			#include <chaos-preprocessor-recursion-expr.h/>
+			#include <chaos-preprocessor-tuple-spec.h/>
+			
+			#if <VARIADICS/>
+			
+			#define OP(s, x, state) \
+			    OP_I(<OBSTRUCT/>(), <NEXT/>(s), x, state) \
+			    /**/
+			#define OP_I(_, s, x, state) \
+			    <IIF/> _(<IS_VARIADIC/>(x))( \
+			        <EXPR_S/>(s) _(<FOLD_LEFT_S/> _( \
+			            s, OP_INDIRECT _(), (<TUPLE/>) x, state \
+			        )), \
+			        <PRIMITIVE_CAT/> _(state, x) \
+			    ) \
+			    /**/
+			#define OP_INDIRECT() OP
+			
+			<EXPR/>(<FOLD_LEFT/>(
+			    OP,
+			    (<TUPLE/>)
+			        ((0), 1, 2, (3, 4), ((5, 6, (7, 8)), 9)),
+			))
+			// 0123456789
+			
+			??=include <PLACEHOLDERS/>(1)
+			
+			<EXPR/>(<FOLD_LEFT/>(
+			    <IIF_/>(<IS_VARIADIC_/>(_1))(
+			        <EXPR_S_/>(_0)(<FOLD_LEFT_S_/>(
+			            _0, <SELF/>(), (<TUPLE/>) _1, _2
+			        )),
+			        <PRIMITIVE_CAT_/>(_2, _1)
+			    ),
+			    (<TUPLE/>)
+			        ((0), 1, 2, (3, 4), ((5, 6, (7, 8)), 9)),
+			))
+			// 0123456789
+			
+			??=include <PLACEHOLDERS/>(0)
+			
+			#endif
+		</listing>
+		<derivative id="FOLD_LEFT_S_ID"/>
+		<derivative id="FOLD_LEFT_S_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/arbitrary/promote.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that converts an integer literal to an <link id="arbitrary-precision value"/>.
+</overview>
+
+<macro id="PROMOTE_AP" group="promotion">
+	<abstract>
+		The <PROMOTE_AP/> macro converts its argument to an <link id="arbitrary-precision value"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><PROMOTE_AP/>(x)</syntax>
+		<param id="x">
+			The value to be converted.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+			This value may also be suffixed with a negation operator.
+		</param>
+	</usage>
+	<para>
+		This macro expands to an <link id="arbitrary-precision value"/> representing <var>x</var>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-arbitrary-promote.h/>
+		#include <chaos-preprocessor-config.h/>
+		
+		#if <VARIADICS/>
+		
+		<PROMOTE_AP/>(123) // (0, (1)(2)(3))
+		<PROMOTE_AP/>(10-) // (1, (1)(0))
+		
+		#endif
+	</listing>
+	<derivative id="PROMOTE_AP_ID" lang="C99"/>
+	<derivative id="PROMOTE_AP_" lang="C99"/>
+</macro>
+
+</header>

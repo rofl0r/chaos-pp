@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/arbitrary/negate.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that negates an <link id="arbitrary-precision value"/>.
+</overview>
+
+<macro id="NEGATE_AP" group="negation">
+	<abstract>
+		The <NEGATE_AP/> macro negates an <link id="arbitrary-precision value"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><NEGATE_AP/>(x)</syntax>
+		<param id="x">
+			The <link id="arbitrary-precision value"/> to be negated.
+		</param>
+	</usage>
+	<para>
+		If <var>x</var> is an <link id="arbitrary-precision value"/> representing zero, this macro expands to <var>x</var>.
+		Otherwise, it expands to an <link id="arbitrary-precision value"/> that represents the negation of <var>x</var>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-arbitrary-demote.h/>
+		#include <chaos-preprocessor-arbitrary-negate.h/>
+		#include <chaos-preprocessor-config.h/>
+		
+		#if <VARIADICS/>
+		
+		<DEMOTE_AP/>(<NEGATE_AP/>(
+		    (0, (1)(2)(3))
+		))
+		// -123
+		
+		<DEMOTE_AP/>(<NEGATE_AP/>(
+		    (1, (1)(2)(3))
+		))
+		// 123
+		
+		#endif
+	</listing>
+	<derivative id="NEGATE_AP_ID" lang="C99"/>
+	<derivative id="NEGATE_AP_" lang="C99"/>
+</macro>
+
+</header>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/cat.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines basic concatenation macros.
+</overview>
+
+<macro id="CAT" type="indirect" group="concatenation">
+	<abstract>
+		The <CAT/> macro concatenates its arguments after they have been expanded.
+	</abstract>
+	<usage lang="C99">
+		<syntax><CAT/>(a, ...)</syntax>
+		<param id="a" optional="1">
+			The left operand of the concatenation.
+		</param>
+		<param id="..." optional="1">
+			The right operand of the concatenation.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><CAT/>(a, b)</syntax>
+		<param id="a">
+			The left operand of the concatenation.
+		</param>
+		<param id="b">
+			The right operand of the concatenation.
+		</param>
+	</usage>
+	<para>
+		This macro concatenates the rightmost preprocessing token of <var>a</var> to the leftmost preprocessing token of <var>b</var> or <code>__VA_ARGS__</code>.
+		<snippet>
+			a ## __VA_ARGS__ // C99
+			a ## b           // C and C++
+		</snippet>
+	</para>
+	<para>
+		This macro allows its arguments to expand on input.
+		This macro's sibling, <PRIMITIVE_CAT/>, does <em>not</em> provide this delay.
+	</para>
+	<para>
+		In C99, if both <var>a</var> and <code>__VA_ARGS__</code> expand to placemarkers, this macro expands to nothing.
+		<snippet><CAT/>(,) //</snippet>
+	</para>
+	<para>
+		Similarly, if either <var>a</var> or <code>__VA_ARGS__</code> expands to a placemarker exclusively, this macro expands to the argument that does not expand to a placemarker.
+		<snippet>
+			<CAT/>(123,)   // 123
+			<CAT/>(, a, b) // a, b
+		</snippet>
+	</para>
+	<listing>
+		#include <chaos-preprocessor-cat.h/>
+		
+		#define A 1
+		#define B 2
+		
+		<CAT/>(A, B) // 12
+	</listing>
+	<derivative id="CAT_ID"/>
+	<derivative id="CAT_" lang="C99"/>
+</macro>
+
+<macro id="PRIMITIVE_CAT" type="indirect" group="concatenation">
+	<abstract>
+		The <PRIMITIVE_CAT/> macro concatenates its arguments before they are expanded.
+	</abstract>
+	<usage lang="C99">
+		<syntax><PRIMITIVE_CAT/>(x, ...)</syntax>
+		<param id="a" optional="1">
+			The left operand of the concatenation.
+		</param>
+		<param id="b" optional="1">
+			The right operand of the concatenation.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><PRIMITIVE_CAT/>(a, b)</syntax>
+		<param id="a">
+			The left operand of the concatenation.
+		</param>
+		<param id="b">
+			The right operand of the concatenation.
+		</param>
+	</usage>
+	<para>
+		This macro behaves identically to <CAT/> except that it <em>does not</em> allow its arguments to expand prior to concatenation.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-cat.h/>
+		
+		#define A 1
+		#define B 2
+		
+		<PRIMITIVE_CAT/>(A, B) // AB
+	</listing>
+	<derivative id="PRIMITIVE_CAT_ID"/>
+	<derivative id="PRIMITIVE_CAT_" lang="C99"/>
+</macro>
+
+</header>

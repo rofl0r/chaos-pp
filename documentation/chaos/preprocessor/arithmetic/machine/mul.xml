@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/arithmetic/machine/mul.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a multiplication operator.
+</overview>
+
+<macro id="MUL_MACHINE" group="multiplication">
+	<abstract>
+		The <MUL_MACHINE/> macro computes the product of two values.
+	</abstract>
+	<usage>
+		<syntax><MUL_MACHINE/>(x, y)</syntax>
+		<param id="x">
+			The multiplicand.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="y">
+			The multiplier.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+	</usage>
+	<para>
+		This macro expands to the product of <var>x</var> and <var>y</var>.
+		If the result is greater than <LIMIT_MAG/>, it is <link id="saturated"/> to <LIMIT_MAG/>.
+	</para>
+	<para>
+		This macro behaves identically to <MUL/> except that it is implemented with the <link id="continuation machine"/>, which can yield significant performance improvements.
+	</para>
+	<para>
+		This macro is a <link id="second-tier"/> algorithm that deduces the current <link id="recursion state"/> and invokes <MUL_MACHINE_S/>.
+		If the current <link id="recursion state"/> is already known, direct use of <MUL_MACHINE_S/> is more efficient.
+	</para>
+	<para>
+		This macro may not be used if <link id="bypass semantics"/> are in effect.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-arithmetic-machine-mul.h/>
+		#include <chaos-preprocessor-config.h/>
+		
+		#if <VARIADICS/>
+		
+		<MUL_MACHINE/>(5, 7) // 35
+		
+		#endif
+	</listing>
+	<derivative id="MUL_MACHINE_ID" lang="C99"/>
+	<derivative id="MUL_MACHINE_" lang="C99"/>
+	<derivative id="MUL_MACHINE_S">
+		<usage lang="C99">
+			<syntax><MUL_MACHINE_S/>(s, x, y)</syntax>
+		</usage>
+		<derivative id="MUL_MACHINE_S_ID" lang="C99"/>
+		<derivative id="MUL_MACHINE_S_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

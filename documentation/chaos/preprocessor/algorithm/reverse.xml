@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/algorithm/reverse.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an algorithm that reverses the elements in a <link id="generic data structure"/>.
+</overview>
+
+<macro id="REVERSE" type="indirect" group="reversal">
+	<abstract>
+		The <REVERSE/> macro reverses the elements in its argument.
+	</abstract>
+	<usage>
+		<syntax><REVERSE/>(g)</syntax>
+		<param id="g">
+			The <link id="generic data structure"/> whose elements are to be reversed.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="generic data structure"/> of the same type as <var>g</var> containing the elements of <var>g</var> in reverse order.
+	</para>
+	<para>
+		The running time of <REVERSE/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
+		The asymptotic upper and lower bounds are Θ(<x-var>n</x-var>+1), where <x-var>n</x-var> is the number of elements in <var>g</var>.
+	</para>
+	<para>
+		This macro uses <link id="bypass semantics"/>.
+		If <link id="bypass semantics"/> are already in effect, <REVERSE_BYPASS/> must be used instead.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-algorithm-reverse.h/>
+		#include <chaos-preprocessor-seq-spec.h/>
+		
+		<REVERSE/>((<SEQ/>) (a)(b)(c))
+		// (<SEQ/>) (c)(b)(a)
+	</listing>
+	<derivative id="REVERSE_ID"/>
+	<derivative id="REVERSE_" lang="C99"/>
+	<derivative id="REVERSE_BYPASS">
+		<usage>
+			<syntax><REVERSE_BYPASS/>(s, g)</syntax>
+		</usage>
+		<derivative id="REVERSE_BYPASS_ID"/>
+		<derivative id="REVERSE_BYPASS_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

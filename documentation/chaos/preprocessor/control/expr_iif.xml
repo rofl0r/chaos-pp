@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/control/expr_iif.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that expands to an expression if a condition is <code>1</code>.
+</overview>
+
+<macro id="EXPR_IIF" group="if">
+	<abstract>
+		The <EXPR_IIF/> macro expands to its second argument if its first argument is <code>1</code>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><EXPR_IIF/>(bit)(...)</syntax>
+		<param id="bit">
+			The condition that determines whether the macro should expand to <code>__VA_ARGS__</code> or nothing.
+			Valid values are <code>0</code> and <code>1</code>.
+		</param>
+		<param id="..." optional="1">
+			The resulting expression if <var>bit</var> is <code>1</code>.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><EXPR_IIF/>(bit)(x)</syntax>
+		<param id="bit">
+			The condition that determines whether the macro should expand to <var>x</var> or nothing.
+			Valid values are <code>0</code> and <code>1</code>.
+		</param>
+		<param id="x">
+			The resulting expression if <var>bit</var> is <code>1</code>.
+		</param>
+	</usage>
+	<para>
+		If <var>bit</var> expands to <code>0</code>, this macro expands to nothing.
+		Otherwise, it expands to <var>x</var> or <code>__VA_ARGS__</code>.
+	</para>
+	<para>
+		This macro does <em>not</em> perform a boolean conversion on <var>bit</var>.
+		If the conversion is desired, <EXPR_IF/> should be used instead.
+	</para>
+	<para>
+		This macro is lazy.
+		If <var>bit</var> is <code>0</code>, <var>x</var> (or <code>__VA_ARGS__</code>) is not evaluated.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-control-expr_iif.h/>
+		
+		#define VALID() 1
+		#define INVALID() VALID(!) // too many arguments
+		
+		<EXPR_IIF/>(1)(VALID())   // 1
+		<EXPR_IIF/>(0)(INVALID()) //
+	</listing>
+	<derivative id="EXPR_IIF_ID"/>
+	<derivative id="EXPR_IIF_" lang="C99"/>
+</macro>
+
+</header>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/arbitrary/sub.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an <link id="arbitrary-precision"/> subtraction operator.
+</overview>
+
+<macro id="SUB_AP" group="subtraction">
+	<abstract>
+		The <SUB_AP/> macro computes the difference between two <link id="arbitrary-precision values"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><SUB_AP/>(x, y)</syntax>
+		<param id="x">
+			The minuend.
+		</param>
+		<param id="y">
+			The subtrahend.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="arbitrary-precision value"/> that represents the difference between <var>x</var> and <var>y</var>.
+	</para>
+	<para>
+		This macro is a <link id="second-tier"/> algorithm that deduces the current <link id="recursion state"/> and invokes <SUB_AP_S/>.
+		If the current <link id="recursion state"/> is already known, direct use of <SUB_AP_S/> is more efficient.
+	</para>
+	<para>
+		This macro may not be used if <link id="bypass semantics"/> are in effect.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-arbitrary-sub.h/>
+		#include <chaos-preprocessor-arbitrary-demote.h/>
+		#include <chaos-preprocessor-config.h/>
+		
+		#if <VARIADICS/>
+		
+		<DEMOTE_AP/>(<DEMOTE_AP/>(
+		    (1)(0)(0)(0)(0),
+		    (1)(9)(9)
+		))
+		// 9801
+		
+		#endif
+	</listing>
+	<derivative id="SUB_AP_ID" lang="C99"/>
+	<derivative id="SUB_AP_" lang="C99"/>
+	<derivative id="SUB_AP_S">
+		<usage lang="C99">
+			<syntax><SUB_AP_S/>(s, x, y)</syntax>
+		</usage>
+		<derivative id="SUB_AP_S_ID" lang="C99"/>
+		<derivative id="SUB_AP_S_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/comparison/min.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that expands to the minimum of two values.
+</overview>
+
+<macro id="MIN" group="maximum">
+	<abstract>
+		The <MIN/> macro expands to the minimum of its two arguments.
+	</abstract>
+	<usage>
+		<syntax><MIN/>(x, y)</syntax>
+		<param id="x">
+			The first operand.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="y">
+			The second operand.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+	</usage>
+	<para>
+		If <var>x</var> is less than or equal to <var>y</var>, this macro expands to <var>x</var>.
+		Otherwise, it expands to <var>y</var>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-comparison-min.h/>
+		
+		<MIN/>(2, 4) // 2
+	</listing>
+	<derivative id="MIN_ID"/>
+	<derivative id="MIN_" lang="C99"/>
+</macro>
+
+</header>

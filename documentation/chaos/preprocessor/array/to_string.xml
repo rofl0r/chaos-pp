@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/array/to_string.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that converts an <link id="array"/> to a <link id="string"/>.
+</overview>
+
+<macro id="ARRAY_TO_STRING" type="indirect" group="conversion">
+	<abstract>
+		The <ARRAY_TO_STRING/> macro converts an <link id="array"/> to a <link id="string"/>.
+	</abstract>
+	<usage>
+		<syntax><ARRAY_TO_STRING/>(array)</syntax>
+		<param id="array">
+			The <link id="array"/> to be converted.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="string"/> containing the elements of <var>array</var>.
+	</para>
+	<para>
+		The <var>array</var> argument must be an <link id="array"/> containing no more than <LIMIT_TUPLE/> elements.
+	</para>
+	<para>
+		A <link id="string"/> may only contain letters, digits, and underscores.
+		This macro makes no attempt to verify that the resulting <link id="string"/> is actually a valid <link id="string"/>.
+		<snippet>
+			<ARRAY_TO_STRING/>((2, (+, -))) // invalid
+		</snippet>
+	</para>
+	<listing>
+		#include <chaos-preprocessor-array-to_string.h/>
+		
+		#define DATA() (3, (x, y, z))
+		
+		<ARRAY_TO_STRING/>(DATA()) // x y z
+	</listing>
+	<derivative id="ARRAY_TO_STRING_ID"/>
+	<derivative id="ARRAY_TO_STRING_" lang="C99"/>
+</macro>
+
+</header>

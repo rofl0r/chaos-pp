@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/control/expr_if.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that expands to an expression if a condition is non-zero.
+</overview>
+
+<macro id="EXPR_IF" group="if">
+	<abstract>
+		The <EXPR_IF/> macro expands to its second argument if its first argument is non-zero.
+	</abstract>
+	<usage lang="C99">
+		<syntax><EXPR_IF/>(cond)(...)</syntax>
+		<param id="cond">
+			The condition that determines whether the macro should expand to <code>__VA_ARGS__</code> or nothing.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="..." optional="1">
+			The resulting expression if <var>cond</var> is non-zero.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><EXPR_IF/>(cond)(x)</syntax>
+		<param id="cond">
+			The condition that determines whether the macro should expand to <var>x</var> or nothing.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="x">
+			The resulting expression if <var>cond</var> is non-zero.
+		</param>
+	</usage>
+	<para>
+		If <var>cond</var> expands to <code>0</code>, this macro expands to nothing.
+		Otherwise, it expands to <var>x</var> or <code>__VA_ARGS__</code>.
+	</para>
+	<para>
+		This macro performs a boolean conversion of <var>cond</var>.
+		If this conversion is not desireable, <EXPR_IIF/> may be used instead.
+	</para>
+	<para>
+		This macro is lazy.
+		If <var>cond</var> is <code>0</code>, <var>x</var> (or <code>__VA_ARGS__</code>) is not evaluated.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-control-expr_if.h/>
+		
+		#define VALID() 1
+		#define INVALID() VALID(!) // too many arguments
+		
+		<EXPR_IF/>(10)(VALID())  // 1
+		<EXPR_IF/>(0)(INVALID()) //
+	</listing>
+	<derivative id="EXPR_IF_ID"/>
+	<derivative id="EXPR_IF_" lang="C99"/>
+</macro>
+
+</header>

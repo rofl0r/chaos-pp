@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/comparison/greater.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a "greater-than" operator.
+</overview>
+
+<macro id="GREATER" group="greater">
+	<abstract>
+		The <GREATER/> macro tests whether its first operand is greater than its second operand.
+	</abstract>
+	<usage>
+		<syntax><GREATER/>(x, y)</syntax>
+		<param id="x">
+			The first operand.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="y">
+			The second operand.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+	</usage>
+	<para>
+		If <var>x</var> is greater than <var>y</var>, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-comparison-greater.h/>
+		
+		<GREATER/>(123, 45) // 1
+		<GREATER/>(12, 345) // 0
+	</listing>
+	<derivative id="GREATER_ID"/>
+	<derivative id="GREATER_" lang="C99"/>
+</macro>
+
+</header>

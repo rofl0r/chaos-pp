@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/arbitrary/demote.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that converts an <link id="arbitrary-precision value"/> to an integer literal.
+</overview>
+
+<macro id="DEMOTE_AP" group="promotion">
+	<abstract>
+		The <DEMOTE_AP/> macro converts its argument to an integer literal.
+	</abstract>
+	<usage lang="C99">
+		<syntax><DEMOTE_AP/>(x)</syntax>
+		<param id="x">
+			The <link id="arbitrary-precision value"/> to be converted.
+		</param>
+	</usage>
+	<para>
+		This macro expands to an integer literal represented by <var>x</var>.
+		If <var>x</var> is an <link id="arbitrary-precision value"/> representing a negative number, this macro prefixes the result with a unary negation operator (<code>-</code>).
+	</para>
+	<listing>
+		#include <chaos-preprocessor-arbitrary-demote.h/>
+		#include <chaos-preprocessor-config.h/>
+		
+		#if <VARIADICS/>
+		
+		<DEMOTE_AP/>((1)(2)(3))   // 123
+		<DEMOTE_AP/>((1, (1)(0))) // -10
+		
+		#endif
+	</listing>
+	<derivative id="DEMOTE_AP_ID" lang="C99"/>
+	<derivative id="DEMOTE_AP_" lang="C99"/>
+</macro>
+
+</header>

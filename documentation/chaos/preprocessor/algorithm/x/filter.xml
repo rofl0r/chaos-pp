@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/algorithm/x/filter.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an <link id="exponential"/> algorithm that filters elements from a <link id="generic data structure"/> according to a user-specified criteria which can be <link id="parametrically resumed"/>.
+</overview>
+
+<macro id="FILTER_X" type="indirect" group="filtration">
+	<abstract>
+		The <FILTER_X/> macro filters elements from its third argument according to the criteria specified by its second argument.
+	</abstract>
+	<usage lang="C99">
+		<syntax><EXPR/>(<FILTER_X/>(size, pred, g))</syntax>
+		<param id="size">
+			The size of the buffer of valid <link id="recursion steps"/> maintained by the algorithm.
+		</param>
+		<param id="pred">
+			<para>
+				The predicate that determines whether an element is to remain in the resulting <link id="generic data structure"/>.
+				This predicate must be either a <link id="λ-expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				<snippet>
+					pred(s, elem<sup>†</sup>)
+				</snippet>
+			</para>
+			<para>
+				<sup>†</sup>
+				If the type of <var>g</var> is non-variadic, <var>elem</var> must be either <code>...</code> or the number of parameters that corresponds to the number of sub-elements in each element of <var>g</var>.
+				Otherwise, <var>elem</var> must be <code>...</code> or a single parameter.
+			</para>
+		</param>
+		<param id="g">
+			The <link id="generic data structure"/> to be filtered.
+		</param>
+	</usage>
+	<usage lang="C99">
+		<syntax><EXPR/>(<FILTER_X/>(size, pred, g, ...))</syntax>
+		<param id="size">
+			The size of the buffer of valid <link id="recursion steps"/> maintained by the algorithm.
+		</param>
+		<param id="pred">
+			<para>
+				The predicate that determines whether an element is to remain in the resulting <link id="generic data structure"/>.
+				This predicate must be either a <link id="λ-expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				<snippet>
+					pred(s, elem<sup>†</sup>, data<sup>‡</sup>)
+				</snippet>
+			</para>
+			<para>
+				<sup>†</sup>
+				If the type of <var>g</var> is non-variadic, <var>elem</var> must be the number of parameters that corresponds to the number of sub-elements in each element of <var>g</var>.
+				Otherwise, <var>elem</var> must be a single parameter.
+			</para>
+			<para>
+				<sup>‡</sup>
+				The <var>data</var> pseudo-parameter must be either <code>...</code> or the number of parameters that corresponds to the number of arguments in the auxiliary data, <code>__VA_ARGS__</code>.
+			</para>
+		</param>
+		<param id="g">
+			The <link id="generic data structure"/> to be filtered.
+		</param>
+		<param id="..." optional="1">
+			Auxiliary data to be passed through the algorithm to the predicate.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><EXPR/>(<FILTER_X/>(size, pred, g, data))</syntax>
+		<param id="size">
+			The size of the buffer of valid <link id="recursion steps"/> maintained by the algorithm.
+		</param>
+		<param id="pred">
+			The predicate that determines whether an element is to remain in the resulting <link id="generic data structure"/>.
+			This predicate must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			<snippet>
+				pred(s, elem, data)
+			</snippet>
+		</param>
+		<param id="g">
+			The <link id="generic data structure"/> to be filtered.
+		</param>
+		<param id="data">
+			Auxiliary data to be passed through the algorithm to the predicate.
+		</param>
+	</usage>
+	<para>
+		This macro behaves identically to <FILTER/> except that the invocations of the predicate are <em>not</em> trampolined, the algorithm makes <link id="exponential"/> use of the <link id="recursion backend"/>, and the algorithm itself yields a trampolined <link id="deferred expression"/> whenever the number of <link id="recursion steps"/> is exhausted.
+		This allows for <link id="parametric resumption"/>.
+	</para>
+	<para>
+		This algorithm maintains a buffer of <var>size</var> <link id="recursion steps"/> available at all times.
+		This guarantees that the predicate has <em>at least</em> <var>size</var> <link id="recursion steps"/> available whenever it is invoked.
+	</para>
+	<para>
+		The <link id="exponential"/> structure of the <code>X</code>-suffixed algorithms yields a total of <x-alpha/> <link id="recursion steps"/>, where <x-var>p</x-var> is the number of <link id="parametric resumptions"/> plus the initial entry, <x-var>s<sub>ω</sub></x-var> is <LIMIT_EXPR/>, <x-var>s</x-var> is the current <link id="recursion state"/> at the beginning of the algorithm (i.e. <code><STATE/>()</code>), <x-var>s<sub>δ</sub></x-var> is the buffer size, and <x-var>z</x-var> is the exponential base.
+		Currently, <x-var>z</x-var> is fixed at two in the <FILTER_X/> algorithm (though it could easily be increased), which reduces the equation to <x-beta/>.
+		Ignoring the complexity of <var>pred</var> (which is invoked once for each element in <var>g</var>), the running time of the algorithm can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
+		The asymptotic upper bound of O(2<x-var>n</x-var>+1), where <x-var>n</x-var> is the number of elements in <var>g</var>, occurs when all of the elements of <var>g</var> are preserved (i.e. when <var>pred</var> always results in <code>1</code>).
+		The asymptotic lower bound of Ω(<x-var>n</x-var>+1) occurs when all of the elements in <var>g</var> are removed (i.e. when <var>pred</var> always results in <code>0</code>).
+		These bounds preserve all low-order terms, which implies that the algorithm can process at least <relative-assoc id="worst.gif">γ</relative-assoc> elements even if the worst case scenario is achieved and <relative-assoc id="best.gif">δ</relative-assoc> elements only if the best case scenario is achieved.
+	</para>
+	<para>
+		This macro deduces the current <link id="recursion state"/> and invokes <FILTER_X_S/>.
+		If the current <link id="recursion state"/> is already known, direct use of <FILTER_X_S/> is more efficient.
+	</para>
+	<para>
+		This macro may not be used if <link id="bypass semantics"/> are in effect.
+	</para>
+	<derivative id="FILTER_X_ID"/>
+	<derivative id="FILTER_X_" lang="C99"/>
+	<derivative id="FILTER_X_S">
+		<usage lang="C99">
+			<syntax><EXPR_S/>(s)(<FILTER_X_S/>(s, size, pred, g))</syntax>
+		</usage>
+		<usage lang="C99">
+			<syntax><EXPR_S/>(s)(<FILTER_X_S/>(s, size, pred, g, ...))</syntax>
+		</usage>
+		<usage lang="C/C++">
+			<syntax><EXPR_S/>(s)(<FILTER_X_S/>(s, size, pred, g, data))</syntax>
+		</usage>
+		<derivative id="FILTER_X_S_ID"/>
+		<derivative id="FILTER_X_S_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

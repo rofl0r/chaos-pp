@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/comparison/not_equal.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an inequality operator.
+</overview>
+
+<macro id="NOT_EQUAL" group="inequality">
+	<abstract>
+		The <NOT_EQUAL/> macro compares to values for inequality.
+	</abstract>
+	<usage>
+		<syntax><NOT_EQUAL/>(x, y)</syntax>
+		<param id="x">
+			The first operand.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="y">
+			The second operand.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+	</usage>
+	<para>
+		If <var>x</var> is not equal to <var>y</var>, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-comparison-not_equal.h/>
+		
+		<NOT_EQUAL/>(12, 34) // 1
+		<NOT_EQUAL/>(56, 56) // 0
+	</listing>
+	<derivative id="NOT_EQUAL_ID"/>
+	<derivative id="NOT_EQUAL_" lang="C99"/>
+</macro>
+
+</header>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/wstringize.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines wide-stringizing macros.
+</overview>
+
+<macro id="WSTRINGIZE" group="stringizing">
+	<abstract>
+		The <WSTRINGIZE/> macro wide-stringizes its argument after it has been expanded.
+	</abstract>
+	<usage lang="C99">
+		<syntax><WSTRINGIZE/>(...)</syntax>
+		<param id="..." optional="1">
+			The argument to be wide-stringized.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><WSTRINGIZE/>(x)</syntax>
+		<param id="x">
+			The argument to be wide-stringized.
+		</param>
+	</usage>
+	<para>
+		This macro allows its argument to expand on input.
+		This macro's sibling, <PRIMITIVE_WSTRINGIZE/>, does <em>not</em> provide this delay.
+	</para>
+	<para>
+		Both leading and trailing whitespace is removed from the argument when it is stringized, and internal whitespace separations are each condensed to a single space character.
+		<snippet>
+			<WSTRINGIZE/>( abc ) // L"abc"
+			<WSTRINGIZE/>(1   2) // L"1 2"
+		</snippet>
+	</para>
+	<para>
+		In C99, if <code>__VA_ARGS__</code> expands to a placemarker, this macro expands to an empty wide string literal.
+		<snippet>
+			<WSTRINGIZE/>() // L""
+		</snippet>
+	</para>
+	<listing>
+		#include <chaos-preprocessor-wstringize.h/>
+		
+		#define A text
+		
+		<WSTRINGIZE/>(A) // L"text"
+	</listing>
+	<derivative id="WSTRINGIZE_ID"/>
+	<derivative id="WSTRINGIZE_" lang="C99"/>
+</macro>
+
+<macro id="PRIMITIVE_WSTRINGIZE" group="stringizing">
+	<abstract>
+		The <PRIMITIVE_WSTRINGIZE/> macro wide-stringizes its argument before it is expanded.
+	</abstract>
+	<usage lang="C99">
+		<syntax><PRIMITIVE_WSTRINGIZE/>(...)</syntax>
+		<param id="..." optional="1">
+			The argument to be wide-stringized.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><PRIMITIVE_WSTRINGIZE/>(x)</syntax>
+		<param id="x">
+			The argument to be wide-stringized.
+		</param>
+	</usage>
+	<para>
+		This macro behaves identically to <WSTRINGIZE/> except that it does not allow its argument to expand before it is wide-stringized.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-wstringize.h/>
+		
+		#define A text
+		
+		<PRIMITIVE_WSTRINGIZE/>(A) // L"A"
+	</listing>
+	<derivative id="PRIMITIVE_WSTRINGIZE_ID"/>
+	<derivative id="PRIMITIVE_WSTRINGIZE_" lang="C99"/>
+</macro>
+
+</header>

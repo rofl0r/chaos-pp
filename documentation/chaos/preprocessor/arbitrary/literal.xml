@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/arbitrary/literal.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that produces an <link id="arbitrary-precision value"/> from a series of digits.
+</overview>
+
+<macro id="LITERAL_AP" group="literal">
+	<abstract>
+		The <LITERAL_AP/> macro converts a series of digits to an <link id="arbitrary-precision value"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><LITERAL_AP/>(literal)</syntax>
+		<param id="literal">
+			The series of digits to be converted to an <link id="arbitrary-precision value"/>.
+			The format of this digit series is similar to a <link id="string"/>, but it is restricted to numerals and is optionally prefixed by a parenthesized negation operator.
+		</param>
+	</usage>
+	<para>
+		This macro expands to an <link id="arbitrary-precision value"/> that represents the series of digits in <var>literal</var>.
+	</para>
+	<para>
+		This macro uses <link id="bypass semantics"/>.
+		If <link id="bypass semantics"/> are already in effect, <LITERAL_AP_BYPASS/> must be used instead.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-arbitrary-literal.h/>
+		#include <chaos-preprocessor-config.h/>
+		
+		#if <VARIADICS/>
+		
+		<LITERAL_AP/>(1 2 3)  // (0, (1)(2)(3))
+		<LITERAL_AP/>((-)2 0) // (1, (2)(0))
+		
+		#endif
+	</listing>
+	<derivative id="LITERAL_AP_ID" lang="C99"/>
+	<derivative id="LITERAL_AP_" lang="C99"/>
+	<derivative id="LITERAL_AP_BYPASS">
+		<usage lang="C99">
+			<syntax><LITERAL_AP_BYPASS/>(s, literal)</syntax>
+		</usage>
+		<derivative id="LITERAL_AP_BYPASS_ID" lang="C99"/>
+		<derivative id="LITERAL_AP_BYPASS_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

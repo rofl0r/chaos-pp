@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/arithmetic/add.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an addition operator.
+</overview>
+
+<macro id="ADD" group="addition">
+	<abstract>
+		The <ADD/> macro computes the sum of two values.
+	</abstract>
+	<usage>
+		<syntax><ADD/>(x, y)</syntax>
+		<param id="x">
+			The first addend.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="y">
+			The second addend.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+	</usage>
+	<para>
+		This macro expands to the sum of <var>x</var> and <var>y</var>.
+		If the result is greater than <LIMIT_MAG/>, it is <link id="saturated"/> to <LIMIT_MAG/>.
+	</para>
+	<para>
+		This macro uses <link id="bypass semantics"/>.
+		If <link id="bypass semantics"/> are already in effect, <ADD_BYPASS/> must be used instead.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-arithmetic-add.h/>
+		
+		<ADD/>(11, 12) // 23
+	</listing>
+	<derivative id="ADD_ID"/>
+	<derivative id="ADD_" lang="C99"/>
+	<derivative id="ADD_BYPASS">
+		<usage>
+			<syntax><ADD_BYPASS/>(s, x, y)</syntax>
+		</usage>
+		<derivative id="ADD_BYPASS_ID"/>
+		<derivative id="ADD_BYPASS_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

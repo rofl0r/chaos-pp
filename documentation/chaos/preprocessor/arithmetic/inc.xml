@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/arithmetic/inc.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a <link id="saturated"/> incrementation operator.
+</overview>
+
+<macro id="INC">
+	<abstract>
+		The <INC/> macro increments a number.
+	</abstract>
+	<usage>
+		<syntax><INC/>(x)</syntax>
+		<param id="x">
+			The value to be incremented.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+	</usage>
+	<para>
+		If <var>x</var> is <LIMIT_MAG/>, this macro expands to <LIMIT_MAG/>.
+		Otherwise, it expands to one greater than <var>x</var>.
+	</para>
+	<x-reference id="DEC"/>
+	<listing>
+		#include <chaos-preprocessor-arithmetic-inc.h/>
+		
+		<INC/>(0) // 1
+		<INC/>(5) // 6
+	</listing>
+	<derivative id="INC_ID"/>
+	<derivative id="INC_" lang="C99"/>
+</macro>
+
+</header>

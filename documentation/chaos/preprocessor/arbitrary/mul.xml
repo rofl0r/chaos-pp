@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/arbitrary/mul.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an <link id="arbitrary-precision"/> multiplication operator.
+</overview>
+
+<macro id="MUL_AP" group="multiplication">
+	<abstract>
+		The <MUL_AP/> macro computes the product of two <link id="arbitrary-precision values"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><MUL_AP/>(x, y)</syntax>
+		<param id="x">
+			The multiplicand.
+		</param>
+		<param id="y">
+			The multiplier.
+		</param>
+	</usage>
+	<para>
+		This macro expands to an <link id="arbitrary-precision value"/> that represents the product of <var>x</var> and <var>y</var>.
+	</para>
+	<para>
+		This macro is a <link id="second-tier"/> algorithm that deduces the current <link id="recursion state"/> and invokes <MUL_AP_S/>.
+		If the current <link id="recursion state"/> is already known, direct use of <MUL_AP_S/> is more efficient.
+	</para>
+	<para>
+		This macro may not be used if <link id="bypass semantics"/> are in effect.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-arbitrary-demote.h/>
+		#include <chaos-preprocessor-arbitrary-mul.h/>
+		#include <chaos-preprocessor-config.h/>
+		
+		#if <VARIADICS/>
+		
+		<DEMOTE_AP/>(<MUL_AP/>(
+		    (9)(8)(7)(6)(5)(4)(3)(2)(1)(0)(9)(8)(7)(6)(5)(4)(3)(2)(1)(0),
+		    (8)(7)(6)(5)(4)(3)(2)(1)(0)(9)(8)(7)(6)(5)(4)(3)(2)(1)(0)(9)
+		))
+		// 8657216899617436368663770766778859929890
+		
+		#endif
+	</listing>
+	<derivative id="MUL_AP_ID" lang="C99"/>
+	<derivative id="MUL_AP_" lang="C99"/>
+	<derivative id="MUL_AP_S">
+		<usage lang="C99">
+			<syntax><MUL_AP_S/>(s, x, y)</syntax>
+		</usage>
+		<derivative id="MUL_AP_S_ID" lang="C99"/>
+		<derivative id="MUL_AP_S_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

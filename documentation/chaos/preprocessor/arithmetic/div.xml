@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/arithmetic/div.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a division operator.
+</overview>
+
+<macro id="DIV" group="division">
+	<abstract>
+		The <DIV/> macro computes the quotient produced by dividing two values.
+	</abstract>
+	<usage>
+		<syntax><DIV/>(x, y)</syntax>
+		<param id="x">
+			The dividend.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="y">
+			The divisor.
+			Valid values range from <code>1</code> to <LIMIT_MAG/>.
+		</param>
+	</usage>
+	<para>
+		This macro expands to the quotient produced by dividing <var>x</var> by <var>y</var>.
+		If <var>y</var> is <code>0</code>, this macro intentionally produces an error.
+	</para>
+	<para>
+		This macro uses <link id="bypass semantics"/>.
+		If <link id="bypass semantics"/> are already in effect, <DIV_BYPASS/> must be used instead.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-arithmetic-div.h/>
+		
+		<DIV/>(10, 3) // 3
+	</listing>
+	<derivative id="DIV_ID"/>
+	<derivative id="DIV_" lang="C99"/>
+	<derivative id="DIV_BYPASS">
+		<usage>
+			<syntax><DIV_BYPASS/>(s, x, y)</syntax>
+		</usage>
+		<derivative id="DIV_BYPASS_ID"/>
+		<derivative id="DIV_BYPASS_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

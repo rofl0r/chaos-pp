@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/array/spec.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines the core <link id="array"/> operations necessary to use an <link id="array"/> as a <link id="generic data structure"/>.
+</overview>
+
+<macro id="ARRAY" group="data-type">
+	<abstract>
+		The <ARRAY/> macro designates the name of the <link id="array"/> data structure.
+	</abstract>
+	<usage>
+		<syntax><ARRAY/></syntax>
+	</usage>
+	<para>
+		This macro expands to <ARRAY/>.
+		In other words, the identifier <ARRAY/> is defined as itself.
+	</para>
+</macro>
+
+<macro id="ARRAY_TAG" group="tag">
+	<abstract>
+		The <ARRAY_TAG/> macro is an identity macro used to compare type names.
+	</abstract>
+	<usage>
+		<syntax><ARRAY_TAG/>(tag)</syntax>
+		<param id="tag">
+			The tag used to distinguish between data structures.
+		</param>
+	</usage>
+	<para>
+		This macro is used by generic algorithms to compare the types of <link id="generic data structures"/>.
+		It should be used for no other purpose.
+	</para>
+	<derivative id="ARRAY_TAG_ID"/>
+	<derivative id="ARRAY_TAG_" lang="C99"/>
+</macro>
+
+<macro id="ARRAY_NIL" group="nil">
+	<abstract>
+		The <ARRAY_NIL/> macro expands to a nil <link id="array"/>.
+	</abstract>
+	<usage>
+		<syntax><ARRAY_NIL/>()</syntax>
+	</usage>
+	<listing>
+		#include <chaos-preprocessor-array-spec.h/>
+		
+		<ARRAY_NIL/>() // (0, ())
+	</listing>
+	<derivative id="ARRAY_NIL_ID"/>
+	<derivative id="ARRAY_NIL_" lang="C99"/>
+</macro>
+
+<macro id="ARRAY_CONS" type="indirect" group="cons">
+	<abstract>
+		The <ARRAY_CONS/> macro appends an element to the head of an <link id="array"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><ARRAY_CONS/>(array, x)</syntax>
+		<param id="array">
+			The <link id="array"/> to which <var>x</var> is to be appended.
+		</param>
+		<param id="x" optional="1">
+			The element to be appended to the head of <var>array</var>.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><ARRAY_CONS/>(array, x)</syntax>
+		<param id="array">
+			The <link id="array"/> to which <var>x</var> is to be appended.
+		</param>
+		<param id="x">
+			The element to be appended to the head of <var>array</var>.
+		</param>
+	</usage>
+	<para>
+		This macro expands to an <link id="array"/> containing the elements of <var>array</var> with <var>x</var> appended to the head.
+	</para>
+	<para>
+		In C and C++, <var>array</var> must be an <link id="array"/> containing less than <LIMIT_TUPLE/> elements.
+		In C99, there is no such restriction.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-array-spec.h/>
+		
+		#define DATA() (2, (b, c))
+		
+		<ARRAY_CONS/>(DATA(), a) // (3, (a, b, c))
+	</listing>
+	<derivative id="ARRAY_CONS_ID"/>
+	<derivative id="ARRAY_CONS_" lang="C99"/>
+</macro>
+
+<macro id="ARRAY_ITEM" type="indirect" group="itemization">
+	<abstract>
+		The <ARRAY_ITEM/> macro is an identity macro used to encapsulate elements.
+	</abstract>
+	<usage lang="C99">
+		<syntax><ARRAY_ITEM/>(x)</syntax>
+		<param id="x" optional="1">
+			The element of an <link id="array"/> to be encapsulated.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><ARRAY_ITEM/>(x)</syntax>
+		<param id="x">
+			The element of an <link id="array"/> to be encapsulated.
+		</param>
+	</usage>
+	<para>
+		This macro is used by generic algorithms to encapsulate elements before they are passed to user-defined macros.
+		Elements in an <link id="array"/> cannot be variadic.
+		Therefore, this macro is a simple identity macro.
+	</para>
+	<derivative id="ARRAY_ITEM_ID"/>
+	<derivative id="ARRAY_ITEM_" lang="C99"/>
+</macro>
+
+<macro id="ARRAY_FIRST" type="indirect" group="first">
+	<abstract>
+		The <ARRAY_FIRST/> macro extracts the first element from an <link id="array"/>.
+	</abstract>
+	<usage>
+		<syntax><ARRAY_FIRST/>(array)</syntax>
+		<param id="array">
+			The <link id="array"/> whose first element is to be extracted.
+		</param>
+	</usage>
+	<para>
+		This macro expands to the first element contained in <var>array</var>.
+	</para>
+	<para>
+		In C and C++, <var>array</var> must contain less than <LIMIT_TUPLE/> elements.
+		In C99, there is no such restriction.
+	</para>
+	<x-reference id="ARRAY_REST"/>
+	<listing>
+		#include <chaos-preprocessor-array-spec.h/>
+		
+		#define DATA() (3, (a, b, c))
+		
+		<ARRAY_FIRST/>(DATA()) // a
+	</listing>
+	<derivative id="ARRAY_FIRST_ID"/>
+	<derivative id="ARRAY_FIRST_" lang="C99"/>
+</macro>
+
+<macro id="ARRAY_REST" type="indirect" group="rest">
+	<abstract>
+		The <ARRAY_REST/> macro removes the first element from an <link id="array"/>.
+	</abstract>
+	<usage>
+		<syntax><ARRAY_REST/>(array)</syntax>
+		<param id="array">
+			The <link id="array"/> whose first element is to be removed.
+		</param>
+	</usage>
+	<para>
+		This macro expands to an <link id="array"/> containing all of the elements of <var>array</var> except the first.
+	</para>
+	<para>
+		In C and C++, <var>array</var> must contain less than <LIMIT_TUPLE/> elements.
+		In C99, there is no such restriction.
+	</para>
+	<x-reference id="ARRAY_FIRST"/>
+	<listing>
+		#include <chaos-preprocessor-array-spec.h/>
+		
+		#define DATA() (3, (a, b, c))
+		
+		<ARRAY_REST/>(DATA()) // (2, (b, c))
+	</listing>
+	<derivative id="ARRAY_REST_ID"/>
+	<derivative id="ARRAY_REST_" lang="C99"/>
+</macro>
+
+<macro id="ARRAY_IS_CONS" group="is-cons">
+	<abstract>
+		The <ARRAY_IS_CONS/> macro is a predicate that tests whether an <link id="array"/> is non-nil.
+	</abstract>
+	<usage>
+		<syntax><ARRAY_IS_CONS/>(array)</syntax>
+		<param id="array">
+			The <link id="array"/> to be tested.
+		</param>
+	</usage>
+	<para>
+		If <var>array</var> is non-nil, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<x-reference id="ARRAY_IS_NIL"/>
+	<listing>
+		#include <chaos-preprocessor-array-spec.h/>
+		
+		<ARRAY_IS_CONS/>((0, ()))     // 0
+		<ARRAY_IS_CONS/>((2, (x, y))) // 1
+	</listing>
+	<derivative id="ARRAY_IS_CONS_ID"/>
+	<derivative id="ARRAY_IS_CONS_" lang="C99"/>
+</macro>
+
+<macro id="ARRAY_IS_NIL" group="is-nil">
+	<abstract>
+		The <ARRAY_IS_NIL/> macro is a predicate that tests whether an <link id="array"/> is nil.
+	</abstract>
+	<usage>
+		<syntax><ARRAY_IS_NIL/>(array)</syntax>
+		<param id="array">
+			The <link id="array"/> to be tested.
+		</param>
+	</usage>
+	<para>
+		If <var>array</var> is nil, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<x-reference id="ARRAY_IS_CONS"/>
+	<listing>
+		#include <chaos-preprocessor-array-spec.h/>
+		
+		<ARRAY_IS_NIL/>((0, ()))     // 1
+		<ARRAY_IS_NIL/>((2, (x, y))) // 0
+	</listing>
+	<derivative id="ARRAY_IS_NIL_ID"/>
+	<derivative id="ARRAY_IS_NIL_" lang="C99"/>
+</macro>
+
+</header>

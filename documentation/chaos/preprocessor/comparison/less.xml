@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/comparison/less.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a "less-than" operator.
+</overview>
+
+<macro id="LESS" group="less">
+	<abstract>
+		The <LESS/> macro tests whether its first operand is less than its second operand.
+	</abstract>
+	<usage>
+		<syntax><LESS/>(x, y)</syntax>
+		<param id="x">
+			The first operand.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="y">
+			The second operand.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+	</usage>
+	<para>
+		If <var>x</var> is less than <var>y</var>, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-comparison-less.h/>
+		
+		<LESS/>(123, 45) // 0
+		<LESS/>(12, 345) // 1
+	</listing>
+	<derivative id="LESS_ID"/>
+	<derivative id="LESS_" lang="C99"/>
+</macro>
+
+</header>

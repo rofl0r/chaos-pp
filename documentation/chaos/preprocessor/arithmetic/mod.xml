@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/arithmetic/mod.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a modulus operator.
+</overview>
+
+<macro id="MOD" group="division">
+	<abstract>
+		The <MOD/> macro computes the remainder produced by dividing two values.
+	</abstract>
+	<usage>
+		<syntax><MOD/>(x, y)</syntax>
+		<param id="x">
+			The dividend.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="y">
+			The divisor.
+			Valid values range from <code>1</code> to <LIMIT_MAG/>.
+		</param>
+	</usage>
+	<para>
+		This macro expands to the remainder produced by dividing <var>x</var> by <var>y</var>.
+		If <var>y</var> is <code>0</code>, this macro intentionally produces an error.
+	</para>
+	<para>
+		This macro uses <link id="bypass semantics"/>.
+		If <link id="bypass semantics"/> are already in effect, <MOD_BYPASS/> must be used instead.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-arithmetic-mod.h/>
+		
+		<MOD/>(10, 3) // 1
+	</listing>
+	<derivative id="MOD_ID"/>
+	<derivative id="MOD_" lang="C99"/>
+	<derivative id="MOD_BYPASS">
+		<usage>
+			<syntax><MOD_BYPASS/>(s, x, y)</syntax>
+		</usage>
+		<derivative id="MOD_BYPASS_ID"/>
+		<derivative id="MOD_BYPASS_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

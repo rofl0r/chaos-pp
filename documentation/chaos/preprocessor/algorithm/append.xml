@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/algorithm/append.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an algorithm that appends one <link id="generic data structure"/> to another.
+</overview>
+
+<macro id="APPEND" type="indirect" group="append">
+	<abstract>
+		The <APPEND/> macro appends its second argument to its first argument.
+	</abstract>
+	<usage>
+		<syntax><APPEND/>(g1, g2)</syntax>
+		<param id="g1">
+			The <link id="generic data structure"/> to which <var>g2</var> is to be appended.
+		</param>
+		<param id="g2">
+			The <link id="generic data structure"/> to be appended to <var>g1</var>.
+		</param>
+	</usage>
+	<para>
+		This macro appends the elements contained in <var>g2</var> to the tail of <var>g1</var>, resulting in a <link id="generic data structure"/> of the same type as <var>g1</var>.
+	</para>
+	<para>
+		The running time of <APPEND/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
+		The asymptotic upper bound of O(<x-var>n</x-var>+<x-var>m</x-var>+2), where <x-var>n</x-var> is the number of elements in <var>g1</var> and <x-var>m</x-var> is the number of elements in <var>g2</var>, occurs when the type of <var>g2</var> differs from the type of <var>g1</var>.
+		The asymptotic lower bound of Ω(<x-var>n</x-var>+1) occurs when <var>g1</var> and <var>g2</var> share the same type.
+	</para>
+	<para>
+		The efficiency of the algorithm's use of the <link id="recursion backend"/> can be described in terms of the total depth of <link id="recursion steps"/> required to complete the algorithm.
+		The asymptotic upper bound of O(max(<x-var>n</x-var>, <x-var>m</x-var>)+1) occurs when the type of <var>g2</var> differs from the type of <var>g1</var>.
+		The asymptotic lower bound of Ω(<x-var>n</x-var>+1) occurs when <var>g1</var> and <var>g2</var> share the same type.
+	</para>
+	<para>
+		This macro uses <link id="bypass semantics"/>.
+		If <link id="bypass semantics"/> are already in effect, <APPEND_BYPASS/> must be used instead.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-algorithm-append.h/>
+		#include <chaos-preprocessor-list-spec.h/>
+		#include <chaos-preprocessor-seq-spec.h/>
+		
+		<APPEND/>(
+		    (<SEQ/>) (a)(b)(c),
+		    (<LIST/>) (x, (y, (z, ...)))
+		)
+		// (<SEQ/>) (a)(b)(c)(x)(y)(z)
+	</listing>
+	<derivative id="APPEND_ID"/>
+	<derivative id="APPEND_" lang="C99"/>
+	<derivative id="APPEND_BYPASS">
+		<usage>
+			<syntax><APPEND_BYPASS/>(s, g1, g2)</syntax>
+		</usage>
+		<derivative id="APPEND_BYPASS_ID"/>
+		<derivative id="APPEND_BYPASS_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

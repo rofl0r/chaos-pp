@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/control/null.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that expands to a logically null header name.
+</overview>
+
+<macro id="NULL">
+	<abstract>
+		The <NULL/> macro expands to a logically null header name.
+	</abstract>
+	<usage>
+		<syntax>#include <NULL/>()</syntax>
+	</usage>
+	<para>
+		Once the directive name of an <code>#include</code> directive is reached by the preprocessor, some header file must be included.
+		This macro expands to a header file that has no effect on the translation unit (i.e. a header with no contents).
+	</para>
+</macro>
+
+</header>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/algorithm/x/for_each_i.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an <link id="exponential"/> algorithm that repeats a user-specified target for each element in a <link id="generic data structure"/> which can be <link id="parametrically resumed"/>.
+</overview>
+
+<macro id="FOR_EACH_I_X" type="indirect" group="for-each">
+	<abstract>
+		The <FOR_EACH_I_X/> macro repeats the target specified by its second argument for each element in its third argument.
+	</abstract>
+	<usage lang="C99">
+		<syntax><EXPR/>(<FOR_EACH_I_X/>(size, macro, g))</syntax>
+		<param id="macro">
+			<para>
+				The target that is to be repeated for each element in <var>g</var>.
+				This target must be either a <link id="λ-expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				<snippet>
+					macro(s, i, elem<sup>†</sup>)
+				</snippet>
+			</para>
+			<para>
+				<sup>†</sup>
+				If the type of <var>g</var> is non-variadic, <var>elem</var> must be <code>...</code> or the number of parameters that corresponds to the number of sub-elements in each element of <var>g</var>.
+				Otherwise, <var>elem</var> must be <code>...</code> or a single parameter.
+			</para>
+		</param>
+		<param id="g">
+			The <link id="generic data structure"/> for which <var>macro</var> is to be repeated for each element.
+		</param>
+	</usage>
+	<usage lang="C99">
+		<syntax><EXPR/>(<FOR_EACH_I_X/>(size, macro, g, ...))</syntax>
+		<param id="macro">
+			<para>
+				The target that is to be repeated for each element in <var>g</var>.
+				This target must be either a <link id="λ-expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				<snippet>
+					macro(s, i, elem<sup>†</sup>, data<sup>‡</sup>)
+				</snippet>
+			</para>
+			<para>
+				<sup>†</sup>
+				If the type of <var>g</var> is non-variadic, <var>elem</var> must be the number of parameters that corresponds to the number of sub-elements in each element of <var>g</var>.
+				Otherwise, <var>elem</var> must be a single parameter.
+			</para>
+			<para>
+				<sup>‡</sup>
+				The <var>data</var> pseudo-parameter must be either <code>...</code> or the number of parameters that corresponds to the number of arguments in the auxiliary data, <code>__VA_ARGS__</code>.
+			</para>
+		</param>
+		<param id="g">
+			The <link id="generic data structure"/> for which <var>macro</var> is to be repeated for each element.
+		</param>
+		<param id="..." optional="1">
+			Auxiliary data to be passed through the algorithm to the target.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><EXPR/>(<FOR_EACH_I_X/>(size, macro, g, data))</syntax>
+		<param id="macro">
+			The target that is to be repeated for each element in <var>g</var>.
+			This target must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			<snippet>
+				macro(s, i, elem, data)
+			</snippet>
+		</param>
+		<param id="g">
+			The <link id="generic data structure"/> for which <var>macro</var> is to be repeated for each element.
+		</param>
+		<param id="data">
+			Auxiliary data to be passed through the algorithm to the target.
+		</param>
+	</usage>
+	<para>
+		This macro behaves identically to <FOR_EACH_I/> except that the invocations of the target are <em>not</em> trampolined, the algorithm makes <link id="exponential"/> use of the <link id="recursion backend"/>, and the algorithm itself yields a trampolined <link id="deferred expression"/> whenever the number of <link id="recursion steps"/> is exhausted.
+		This allows for <link id="parametric resumption"/>.
+	</para>
+	<para>
+		This algorithm maintains a buffer of <var>size</var> <link id="recursion steps"/> available at all times.
+		This guarantees that the target has <em>at least</em> <var>size</var> <link id="recursion steps"/> available whenever it is invoked.
+	</para>
+	<para>
+		The <link id="exponential"/> structure of the <code>X</code>-suffixed algorithms yields a total of <x-alpha/> <link id="recursion steps"/>, where <x-var>p</x-var> is the number of <link id="parametric resumptions"/> plus the initial entry, <x-var>s<sub>ω</sub></x-var> is <LIMIT_EXPR/>, <x-var>s</x-var> is the current <link id="recursion state"/> at the beginning of the algorithm (i.e. <code><STATE/>()</code>), <x-var>s<sub>δ</sub></x-var> is the buffer size, and <x-var>z</x-var> is the exponential base.
+		Currently, <x-var>z</x-var> is fixed at two in the <FOR_EACH_I_X/> algorithm (though it could easily be increased), which reduces the equation to <x-beta/>.
+		Ignoring the complexity of <var>macro</var> (which is invoked once for each element in <var>g</var>), the running time of the algorithm can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
+		The aysmptotic upper and lower bounds are Θ(<x-var>n</x-var>+1), where <x-var>n</x-var> is the number of elements in <var>g</var>.
+		These bounds preserve all low-order terms, which implies that the algorithm can process exactly <relative-assoc id="complexity.gif">γ</relative-assoc> elements, where <x-var>m</x-var> is <LIMIT_MAG/>.
+	</para>
+	<para>
+		This macro deduces the current <link id="recursion state"/> and invokes <FOR_EACH_I_X_S/>.
+		If the current <link id="recursion state"/> is already known, direct use of <FOR_EACH_I_X_S/> is more efficient.
+	</para>
+	<para>
+		This macro may not be used if <link id="bypass semantics"/> are in effect.
+	</para>
+	<derivative id="FOR_EACH_I_X_ID"/>
+	<derivative id="FOR_EACH_I_X_" lang="C99"/>
+	<derivative id="FOR_EACH_I_X_S">
+		<usage lang="C99">
+			<syntax><EXPR_S/>(s)(<FOR_EACH_I_X_S/>(s, size, macro, g))</syntax>
+		</usage>
+		<usage lang="C99">
+			<syntax><EXPR_S/>(s)(<FOR_EACH_I_X_S/>(s, size, macro, g, ...))</syntax>
+		</usage>
+		<usage lang="C/C++">
+			<syntax><EXPR_S/>(s)(<FOR_EACH_I_X_S/>(s, size, macro, g, data))</syntax>
+		</usage>
+		<derivative id="FOR_EACH_I_X_S_ID"/>
+		<derivative id="FOR_EACH_I_X_S_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

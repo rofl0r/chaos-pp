@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/limits.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines macros that specify the physical limits of various library facilities.
+</overview>
+
+<macro id="LIMIT_AS_ARGS" type="object">
+	<abstract>
+		The <LIMIT_AS_ARGS/> macro expands to the maximum arity that is transformable by <AS_ARGS/>.
+	</abstract>
+	<usage>
+		<syntax><LIMIT_AS_ARGS/></syntax>
+	</usage>
+	<para>
+		This macro currently expands to <code>5</code>.
+	</para>
+	<derivative id="LIMIT_AS_ARGS_ID"/>
+	<derivative id="LIMIT_AS_ARGS_" lang="C99"/>
+</macro>
+
+<macro id="LIMIT_AUTO_CAT" type="object">
+	<abstract>
+		The <LIMIT_AUTO_CAT/> macro expands to the maximum number of nested concatenations supported by <AUTO_CAT/> and <PRIMITIVE_AUTO_CAT/>.
+	</abstract>
+	<usage>
+		<syntax><LIMIT_AUTO_CAT/></syntax>
+	</usage>
+	<para>
+		This macro currently expands to <code>16</code>.
+	</para>
+	<derivative id="LIMIT_AUTO_CAT_ID"/>
+	<derivative id="LIMIT_AUTO_CAT_" lang="C99"/>
+</macro>
+
+<macro id="LIMIT_BIND" type="object">
+	<abstract>
+		The <LIMIT_BIND/> macro expands to the maximum number of nested applications of <BIND/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><LIMIT_BIND/></syntax>
+	</usage>
+	<para>
+		This macro currently expands to <code>16</code>.
+	</para>
+	<derivative id="LIMIT_BIND_ID" lang="C99"/>
+	<derivative id="LIMIT_BIND_" lang="C99"/>
+</macro>
+
+<macro id="LIMIT_CLOSURE" type="object">
+	<abstract>
+		The <LIMIT_CLOSURE/> macro expands to the maximum number of arguments supported by the <link id="closure"/> mechanism.
+	</abstract>
+	<usage>
+		<syntax><LIMIT_CLOSURE/></syntax>
+	</usage>
+	<para>
+		This macro currently expands to <code>25</code>.
+	</para>
+	<derivative id="LIMIT_CLOSURE_ID"/>
+	<derivative id="LIMIT_CLOSURE_" lang="C99"/>
+</macro>
+
+<macro id="LIMIT_CONTEXT" type="object">
+	<abstract>
+		The <LIMIT_CONTEXT/> macro expands to the maximum number of nested contexts supported by <CONTEXT/>.
+	</abstract>
+	<usage>
+		<syntax><LIMIT_CONTEXT/></syntax>
+	</usage>
+	<para>
+		This macro currently expands to <code>16</code>.
+	</para>
+	<derivative id="LIMIT_CONTEXT_ID"/>
+	<derivative id="LIMIT_CONTEXT_" lang="C99"/>
+</macro>
+
+<macro id="LIMIT_EQUALIZE" type="object">
+	<abstract>
+		The <LIMIT_EQUALIZE/> macro expands to the maximum number of <link id="equalizing scans"/> supported by <EQUALIZE/>.
+	</abstract>
+	<usage>
+		<syntax><LIMIT_EQUALIZE/></syntax>
+	</usage>
+	<para>
+		This macro currently expands to <code>25</code>.
+	</para>
+	<derivative id="LIMIT_EQUALIZE_ID"/>
+	<derivative id="LIMIT_EQUALIZE_" lang="C99"/>
+</macro>
+
+<macro id="LIMIT_EXPR" type="object">
+	<abstract>
+		The <LIMIT_EXPR/> macro expands to the maximum number of abstract <link id="recursion steps"/> supported by the <link id="recursion backend"/>.
+	</abstract>
+	<usage>
+		<syntax><LIMIT_EXPR/></syntax>
+	</usage>
+	<para>
+		This macro currently expands to <code>512</code>.
+	</para>
+	<derivative id="LIMIT_EXPR_ID"/>
+	<derivative id="LIMIT_EXPR_" lang="C99"/>
+</macro>
+
+<macro id="LIMIT_HIGHPREC" type="object">
+	<abstract>
+		The <LIMIT_HIGHPREC/> macro expands to the maximum number of digits supported by the <link id="high-precision arithmetic"/> mechanism.
+	</abstract>
+	<usage>
+		<syntax><LIMIT_HIGHPREC/></syntax>
+	</usage>
+	<para>
+		This macro currently expands to <code>10</code>.
+	</para>
+	<derivative id="LIMIT_HIGHPREC_ID"/>
+	<derivative id="LIMIT_HIGHPREC_" lang="C99"/>
+</macro>
+
+<macro id="LIMIT_ITERATION" type="object">
+	<abstract>
+		The <LIMIT_ITERATION/> macro expands to the maximum number of iterations per dimension supported by the <link id="file-iteration"/> mechanism and the maximum number of iterations supported by the <link id="local-iteration"/> mechanism.
+	</abstract>
+	<usage>
+		<syntax><LIMIT_ITERATION/></syntax>
+	</usage>
+	<para>
+		This macro currently expands to <code>512</code>.
+	</para>
+	<derivative id="LIMIT_ITERATION_ID"/>
+	<derivative id="LIMIT_ITERATION_" lang="C99"/>
+</macro>
+
+<macro id="LIMIT_ITERATION_DEPTH" type="object">
+	<abstract>
+		The <LIMIT_ITERATION_DEPTH/> macro expands to the maximum number of dimensions supported by the <link id="file-iteration"/> mechanism.
+	</abstract>
+	<usage>
+		<syntax><LIMIT_ITERATION_DEPTH/></syntax>
+	</usage>
+	<para>
+		This macro currently expands to <code>5</code>.
+	</para>
+	<derivative id="LIMIT_ITERATION_DEPTH_ID"/>
+	<derivative id="LIMIT_ITERATION_DEPTH_" lang="C99"/>
+</macro>
+
+<macro id="LIMIT_LAMBDA" type="object">
+	<abstract>
+		The <LIMIT_LAMBDA/> macro expands to the maximum number of <link id="tuple"/> elements supported by the <link id="λ-mechanism"/> without the use of the <OVERRIDE/> operator.
+	</abstract>
+	<usage lang="C99">
+		<syntax><LIMIT_LAMBDA/></syntax>
+	</usage>
+	<para>
+		This macro currently expands to <code>50</code>.
+	</para>
+	<derivative id="LIMIT_LAMBDA_ID" lang="C99"/>
+	<derivative id="LIMIT_LAMBDA_" lang="C99"/>
+</macro>
+
+<macro id="LIMIT_MAG" type="object">
+	<abstract>
+		The <LIMIT_MAG/> macro expands to the maximum numeric magnitude supported by the library (not including the <link id="high-precision"/> and <link id="arbitrary-precision"/> arithmetic mechanisms).
+	</abstract>
+	<usage>
+		<syntax><LIMIT_MAG/></syntax>
+	</usage>
+	<para>
+		This macro currently expands to <code>512</code>.
+	</para>
+	<derivative id="LIMIT_MAG_ID"/>
+	<derivative id="LIMIT_MAG_" lang="C99"/>
+</macro>
+
+<macro id="LIMIT_PHASE" type="object">
+	<abstract>
+		The <LIMIT_PHASE/> macro expands to the maximum amount of <link id="deferral phasing"/> supported by <PHASE/>.
+	</abstract>
+	<usage>
+		<syntax><LIMIT_PHASE/></syntax>
+	</usage>
+	<para>
+		This macro currently expands to <code>5</code>.
+	</para>
+	<derivative id="LIMIT_PHASE_ID"/>
+	<derivative id="LIMIT_PHASE_" lang="C99"/>
+</macro>
+
+<macro id="LIMIT_PLACEHOLDERS" type="object">
+	<abstract>
+		The <LIMIT_PLACEHOLDERS/> macro expands to the maximum number of addressable <link id="λ-placeholders"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><LIMIT_PLACEHOLDERS/></syntax>
+	</usage>
+	<para>
+		This macro currently expands to <code>25</code>.
+	</para>
+	<derivative id="LIMIT_PLACEHOLDERS_ID" lang="C99"/>
+	<derivative id="LIMIT_PLACEHOLDERS_" lang="C99"/>
+</macro>
+
+<macro id="LIMIT_SLOT" type="object">
+	<abstract>
+		The <LIMIT_SLOT/> macro expands to the maximum number of <link id="evaluated slots"/> supported by the library.
+	</abstract>
+	<usage>
+		<syntax><LIMIT_SLOT/></syntax>
+	</usage>
+	<para>
+		This macro currently expands to <code>5</code>.
+	</para>
+	<derivative id="LIMIT_SLOT_ID"/>
+	<derivative id="LIMIT_SLOT_" lang="C99"/>
+</macro>
+
+<macro id="LIMIT_SLOT_VALUE" type="object">
+	<abstract>
+		The <LIMIT_SLOT_VALUE/> macro expands to the maximum number of digits storable in an <link id="evaluated slot"/>.
+	</abstract>
+	<usage>
+		<syntax><LIMIT_SLOT_VALUE/></syntax>
+	</usage>
+	<para>
+		This macro currently expands to <code>10</code>.
+	</para>
+	<derivative id="LIMIT_SLOT_VALUE_ID"/>
+	<derivative id="LIMIT_SLOT_VALUE_" lang="C99"/>
+</macro>
+
+<macro id="LIMIT_TUPLE" type="object">
+	<abstract>
+		The <LIMIT_TUPLE/> macro expands to the maximum number of <link id="tuple"/> elements supported by <link id="tuple"/>-specific primitives.
+	</abstract>
+	<usage>
+		<syntax><LIMIT_TUPLE/></syntax>
+	</usage>
+	<para>
+		This macro currently expands to <code>25</code>.
+	</para>
+	<derivative id="LIMIT_TUPLE_ID"/>
+	<derivative id="LIMIT_TUPLE_" lang="C99"/>
+</macro>
+
+<macro id="LIMIT_VARIADIC_CAT" type="object">
+	<abstract>
+		The <LIMIT_VARIADIC_CAT/> macro expands to the maximum number of elements that can be simultaneously concatenated by <VARIADIC_CAT/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><LIMIT_VARIADIC_CAT/></syntax>
+	</usage>
+	<para>
+		This macro currently expands to <code>25</code>.
+	</para>
+	<derivative id="LIMIT_VARIADIC_CAT_ID" lang="C99"/>
+	<derivative id="LIMIT_VARIADIC_CAT_" lang="C99"/>
+</macro>
+
+</header>

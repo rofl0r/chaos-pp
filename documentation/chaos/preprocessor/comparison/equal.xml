@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/comparison/equal.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an equality operator.
+</overview>
+
+<macro id="EQUAL" group="equality">
+	<abstract>
+		The <EQUAL/> macro compares to values for equality.
+	</abstract>
+	<usage>
+		<syntax><EQUAL/>(x, y)</syntax>
+		<param id="x">
+			The first operand.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="y">
+			The second operand.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+	</usage>
+	<para>
+		If <var>x</var> is equal to <var>y</var>, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-comparison-equal.h/>
+		
+		<EQUAL/>(12, 34) // 0
+		<EQUAL/>(56, 56) // 1
+	</listing>
+	<derivative id="EQUAL_ID"/>
+	<derivative id="EQUAL_" lang="C99"/>
+</macro>
+
+</header>

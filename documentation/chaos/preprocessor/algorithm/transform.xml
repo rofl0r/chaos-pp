@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/algorithm/transform.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an algorithm that transforms the elements of a <link id="generic data structure"/> with a user-specified operation.
+</overview>
+
+<macro id="TRANSFORM" type="indirect" group="transformation">
+	<abstract>
+		The <TRANSFORM/> macro transforms each element of its second argument with the operation specified by its first argument.
+	</abstract>
+	<usage lang="C99">
+		<syntax><EXPR/>(<TRANSFORM/>(op, g))</syntax>
+		<param id="op">
+			<para>
+				The operation used to transform each element of <var>g</var>.
+				This operation must be either a <link id="λ-expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				<snippet>
+					op(s, elem<sup>†</sup>)
+				</snippet>
+			</para>
+			<para>
+				<sup>†</sup>
+				If the type of <var>g</var> is non-variadic, <var>elem</var> must be <code>...</code> or the number of parameters that corresponds to the number of sub-elements in each element of <var>g</var>.
+				Otherwise, <var>elem</var> must be <code>...</code> or a single parameter.
+			</para>
+		</param>
+		<param id="g">
+			The <link id="generic data structure"/> whose elements are to be transformed.
+		</param>
+	</usage>
+	<usage lang="C99">
+		<syntax><EXPR/>(<TRANSFORM/>(op, g, ...))</syntax>
+		<param id="op">
+			<para>
+				The operation used to transformed each element of <var>g</var>.
+				This operation must be either a <link id="λ-expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				<snippet>
+					op(s, elem<sup>†</sup>, data<sup>‡</sup>)
+				</snippet>
+			</para>
+			<para>
+				<sup>†</sup>
+				If the type of <var>g</var> is non-variadic, <var>elem</var> must be the number of parameters that corresponds to the number of sub-elements in each element of <var>g</var>.
+				Otherwise, <var>elem</var> must be a single parameter.
+			</para>
+			<para>
+				<sup>‡</sup>
+				The <var>data</var> pseudo-parameter must be either <code>...</code> or the number of parameters that corresponds to the number of arguments in the auxiliary data, <code>__VA_ARGS__</code>.
+			</para>
+		</param>
+		<param id="g">
+			The <link id="generic data structure"/> whose elements are to be transformed.
+		</param>
+		<param id="..." optional="1">
+			Auxiliary data to be passed through the algorithm to the operation.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><EXPR/>(<TRANSFORM/>(op, g, data))</syntax>
+		<param id="op">
+			The operation used to transformed each element of <var>g</var>.
+			This operation must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			<snippet>
+				op(s, elem, data)
+			</snippet>
+		</param>
+		<param id="g">
+			The <link id="generic data structure"/> whose elements are to be transformed.
+		</param>
+		<param id="data">
+			Auxiliary data to be passed through the algorithm to the operation.
+		</param>
+	</usage>
+	<para>
+		The <TRANSFORM/> macro itself expands to a <link id="deferred expression"/> in terms of <code><NEXT/>(s)</code>.
+		This <link id="deferred expression"/>, when invoked by <EXPR/>, expands to a <link id="generic data structure"/> of the same type as <var>g</var> that contains the transformed elements of <var>g</var>.
+	</para>
+	<para>
+		The operation is invoked with the current <link id="recursion state"/> (<var>s</var>), a particular element (<var>elem</var>), and, if it exists, the auxiliary data (<var>data</var> or <code>__VA_ARGS__</code>).
+		This invocation must expand to an element that replaces the element for which it is invoked or a <link id="deferred expression"/> in terms of <code><NEXT/>(s)</code> that expands to such an element.
+		Expansion to a <link id="deferred expression"/> allows the operation to recurse on itself if necessary.
+	</para>
+	<para>
+		In C99, it is possible to omit the auxiliary data argument altogether.
+		This is different than passing "nothing" as the auxiliary data.
+		<snippet>
+			#define D (<TUPLE/>) (a, b, c)
+			
+			<EXPR/>(
+			    <TRANSFORM/>(OP, D,) // #1
+			    <TRANSFORM/>(OP, D)  // #2
+			)
+		</snippet>
+		The first line passes "nothing" as the auxiliary data, which causes <code>OP</code> to be invoked as (e.g.)...
+		<snippet>OP(s, a,)</snippet>
+		The second line omits the auxiliary data, which causes <code>OP</code> to be invoked as (e.g.)...
+		<snippet>OP(s, a)</snippet>
+		The fundamental difference is that, in the first line, the auxiliary data is empty (which might have a valid meaning as data), but, in the second line, <em>there is no auxiliary data</em>.
+		Hence, the algorithm is overloaded on a <link id="true-optional parameter"/>.
+	</para>
+	<para>
+		Invocations of the operation are trampolined such that each invocation is invoked with <code><NEXT/>(s)</code>, where <var>s</var> is the original <link id="recursion state"/> at the beginning of the algorithm (i.e. <code><STATE/>()</code>).
+		This maximizes the utility of the <link id="recursion backend"/>.
+	</para>
+	<para>
+		Ignoring the complexity of <var>op</var> (which is invoked once for each element in <var>g</var>), the running time of <TRANSFORM/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
+		The asymptotic upper and lower bounds are Θ(<x-var>n</x-var>+1), where <x-var>n</x-var> is the number of elements in <var>g</var>.
+	</para>
+	<para>
+		This macro deduces the current <link id="recursion state"/> and invokes <TRANSFORM_S/>.
+		If the the current <link id="recursion state"/> is already known, direct use of <TRANSFORM_S/> is more efficient.
+	</para>
+	<para>
+		This macro may not be used if <link id="bypass semantics"/> are in effect.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-algorithm-transform.h/>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-control-if.h/>
+		#include <chaos-preprocessor-lambda-ops.h/>
+		#include <chaos-preprocessor-list-spec.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		
+		#define OP(s, elem, data) <IF/>(elem)(elem, data)
+		
+		<EXPR/>(<TRANSFORM/>(
+		    OP,
+		    (<LIST/>) (1, (0, (0, (5, ...)))),
+		    ~
+		))
+		// (<LIST/>) (1, (~, (~, (5, ...))))
+		
+		#if <VARIADICS/>
+		
+		??=include <PLACEHOLDERS/>(1)
+		
+		<EXPR/>(<TRANSFORM/>(
+		    <IF_/>(_1)(_1, ~),
+		    (<LIST/>) (1, (0, (0, (5, ...))))
+		))
+		// (<LIST/>) (1, (~, (~, (5, ...))))
+		
+		??=include <PLACEHOLDERS/>(0)
+		
+		#endif
+	</listing>
+	<derivative id="TRANSFORM_ID"/>
+	<derivative id="TRANSFORM_" lang="C99"/>
+	<derivative id="TRANSFORM_S">
+		<usage lang="C99">
+			<syntax><EXPR_S/>(s)(<TRANSFORM_S/>(s, op, g))</syntax>
+		</usage>
+		<usage lang="C99">
+			<syntax><EXPR_S/>(s)(<TRANSFORM_S/>(s, op, g, ...))</syntax>
+		</usage>
+		<usage lang="C/C++">
+			<syntax><EXPR_S/>(s)(<TRANSFORM_S/>(s, op, g, data))</syntax>
+		</usage>
+		<listing>
+			#include <chaos-preprocessor-algorithm-transform.h/>
+			#include <chaos-preprocessor-config.h/>
+			#include <chaos-preprocessor-control-iif.h/>
+			#include <chaos-preprocessor-detection-is_variadic.h/>
+			#include <chaos-preprocessor-generics-strip.h/>
+			#include <chaos-preprocessor-lambda-ops.h/>
+			#include <chaos-preprocessor-logical-compl.h/>
+			#include <chaos-preprocessor-recursion-basic.h/>
+			#include <chaos-preprocessor-recursion-expr.h/>
+			#include <chaos-preprocessor-tuple-spec.h/>
+			
+			#if <VARIADICS/>
+			
+			#define OP(s, elem) \
+			    OP_I(<OBSTRUCT/>(), <NEXT/>(s), elem) \
+			    /**/
+			#define OP_I(_, s, elem) \
+			    <IIF/> _(<IS_VARIADIC/>(elem))( \
+			        <STRIP/> _( \
+			            <EXPR_S/>(s) _(<TRANSFORM_S/> _( \
+			                s, OP_INDIRECT _(), (<TUPLE/>) elem \
+			            )) \
+			        ), \
+			        <COMPL/> _(elem) \
+			    ) \
+			    /**/
+			#define OP_INDIRECT() OP
+			
+			<EXPR/>(<TRANSFORM/>(
+			    OP,
+			    (<TUPLE/>)
+			        (0, 1, (0, 1, 0, 1), ((0, (1, 0), 1), 0, 1))
+			))
+			// (<TUPLE/>)
+			//     (1, 0, (1, 0, 1, 0), ((1, (0, 1), 0), 1, 0))
+			
+			??=include <PLACEHOLDERS/>(1)
+			
+			<EXPR/>(<TRANSFORM/>(
+			    <IIF_/>(<IS_VARIADIC_/>(_1))(
+			        <STRIP_/>(
+			            <EXPR_S_/>(_0)(<TRANSFORM_S_/>(
+			                _0, <SELF/>(), (<TUPLE/>) _1
+			            ))
+			        ),
+			        <COMPL_/>(_1)
+			    ),
+			    (<TUPLE/>) 
+			        (0, 1, (0, 1, 0, 1), ((0, (1, 0), 1), 0, 1))
+			))
+			// (<TUPLE/>)
+			//     (1, 0, (1, 0, 1, 0), ((1, (0, 1), 0), 1, 0))
+			
+			??=include <PLACEHOLDERS/>(0)
+			
+			#endif
+		</listing>
+		<derivative id="TRANSFORM_S_ID"/>
+		<derivative id="TRANSFORM_S_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

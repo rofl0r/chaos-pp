@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/algorithm/prepend.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an algorithm that prepends one <link id="generic data structure"/> to another.
+</overview>
+
+<macro id="PREPEND" type="indirect" group="append">
+	<abstract>
+		The <PREPEND/> macro prepends its first argument to its second argument.
+	</abstract>
+	<usage>
+		<syntax><PREPEND/>(g1, g2)</syntax>
+		<param id="g1">
+			The <link id="generic data structure"/> to be prepended to <var>g2</var>.
+		</param>
+		<param id="g2">
+			The <link id="generic data structure"/> to which <var>g1</var> is to be prepended.
+		</param>
+	</usage>
+	<para>
+		This macro prepends the elements in <var>g1</var> to the head of <var>g2</var>, resulting in a <link id="generic data structure"/> of the same type as <var>g2</var>.
+	</para>
+	<para>
+		The running time of <PREPEND/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
+		The asymptotic upper and lower bounds are Θ(<x-var>n</x-var>+1), where <x-var>n</x-var> is the number of elements in <var>g1</var>.
+	</para>
+	<para>
+		This macro uses <link id="bypass semantics"/>.
+		If <link id="bypass semantics"/> are already in effect, <PREPEND_BYPASS/> must be used instead.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-algorithm-prepend.h/>
+		#include <chaos-preprocessor-list-spec.h/>
+		#include <chaos-preprocessor-seq-spec.h/>
+		
+		<PREPEND/>(
+		    (<SEQ/>) (a)(b)(c),
+		    (<LIST/>) (x, (y, (z, ...)))
+		)
+		// (<LIST/>) (a, (b, (c, (x, (y, (z, ...))))))
+	</listing>
+	<derivative id="PREPEND_ID"/>
+	<derivative id="PREPEND_" lang="C99"/>
+	<derivative id="PREPEND_BYPASS">
+		<usage>
+			<syntax><PREPEND_BYPASS/>(s, g1, g2)</syntax>
+		</usage>
+		<derivative id="PREPEND_BYPASS_ID"/>
+		<derivative id="PREPEND_BYPASS_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

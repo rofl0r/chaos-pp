@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/control/include_if.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro used to conditionally include a header file.
+</overview>
+
+<macro id="INCLUDE_IF">
+	<abstract>
+		The <INCLUDE_IF/> macro is used to conditionally include a header file.
+	</abstract>
+	<usage>
+		<syntax>#include <INCLUDE_IF/>(cond, file)</syntax>
+		<param id="cond">
+			The condition that determines whether <var>file</var> should be included.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="file">
+			The file to be included if <var>cond</var> is non-zero.
+		</param>
+	</usage>
+	<para>
+		If <var>cond</var> is non-zero, the file specified by <var>file</var> is included.
+		Otherwise, <code><NULL/>()</code> is included.
+	</para>
+	<para>
+		Note that the contents of a filename of the <x-var>h-char-sequence</x-var> form immediately become subject to macro expansion when macro expansion is used on an <code>#include</code> directive.
+		For example,
+		<snippet>
+			#define file other
+
+			#include &lt;file.h&gt;
+			#include <EMPTY/>() &lt;file.h&gt;
+		</snippet>
+		The first <code>#include</code> directive includes <code>&lt;file.h&gt;</code>, but the second includes <code>&lt;other.h&gt;</code>.
+	</para>
+	<x-reference id="NULL"/>
+	<listing>
+		#include <chaos-preprocessor-control-include_if.h/>
+		
+		#define TRACE 1 // externally defined
+		
+		#include &lt;iosfwd&gt;
+		#include <INCLUDE_IF/>(TRACE, &lt;iostream&gt;)
+	</listing>
+	<derivative id="INCLUDE_IF_ID"/>
+	<derivative id="INCLUDE_IF_" lang="C99"/>
+</macro>
+
+</header>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/array/to_tuple.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that converts an <link id="array"/> to a <link id="tuple"/>.
+</overview>
+
+<macro id="ARRAY_TO_TUPLE" type="indirect" group="conversion">
+	<abstract>
+		The <ARRAY_TO_TUPLE/> macro converts an <link id="array"/> to a <link id="tuple"/>.
+	</abstract>
+	<usage>
+		<syntax><ARRAY_TO_TUPLE/>(array)</syntax>
+		<param id="array">
+			The <link id="array"/> to be converted.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="tuple"/> containing the elements of <var>array</var>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-array-to_tuple.h/>
+		
+		#define DATA() (3, (x, y, z))
+		
+		<ARRAY_TO_TUPLE/>(DATA()) // (x, y, z)
+	</listing>
+	<derivative id="ARRAY_TO_TUPLE_ID"/>
+	<derivative id="ARRAY_TO_TUPLE_" lang="C99"/>
+</macro>
+
+</header>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/algorithm/pop_back.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an algorithm that removes the last element from a <link id="generic data structure"/>.
+</overview>
+
+<macro id="POP_BACK" type="indirect" group="push-pop removal">
+	<abstract>
+		The <POP_BACK/> macro removes the last element from its argument.
+	</abstract>
+	<usage>
+		<syntax><POP_BACK/>(g)</syntax>
+		<param id="g">
+			The <link id="generic data structure"/> whose last element is to be removed.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="generic data structure"/> of the same type as <var>g</var> that contains all of the elements of <var>g</var> except the last.
+	</para>
+	<para>
+		The running time of <POP_BACK/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
+		The asymptotic upper and lower bounds are Θ(<x-var>n</x-var>), where <x-var>n</x-var> is the number of elements in <var>g</var>.
+	</para>
+	<para>
+		This macro uses <link id="bypass semantics"/>.
+		If <link id="bypass semantics"/> are already in effect, <POP_BACK_BYPASS/> must be used instead.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-algorithm-pop_back.h/>
+		#include <chaos-preprocessor-list-spec.h/>
+		
+		<POP_BACK/>((<LIST/>) (a, (b, (c, ...))))
+		// (<LIST/>) (a, (b, ...))
+	</listing>
+	<derivative id="POP_BACK_ID"/>
+	<derivative id="POP_BACK_" lang="C99"/>
+	<derivative id="POP_BACK_BYPASS">
+		<usage>
+			<syntax><POP_BACK_BYPASS/>(s, g)</syntax>
+		</usage>
+		<derivative id="POP_BACK_BYPASS_ID"/>
+		<derivative id="POP_BACK_BYPASS_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

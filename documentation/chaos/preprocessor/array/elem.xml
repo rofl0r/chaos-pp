@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/array/elem.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that extracts an element from an <link id="array"/>.
+</overview>
+
+<macro id="ARRAY_ELEM" type="indirect" group="element-access">
+	<abstract>
+		The <ARRAY_ELEM/> macro extracts an element from an <link id="array"/>.
+	</abstract>
+	<usage>
+		<syntax><ARRAY_ELEM/>(i, array)</syntax>
+		<param id="i">
+			The zero-based index of the element to be extracted.
+			Valid values range from <code>0</code> to <LIMIT_TUPLE/>.
+		</param>
+		<param id="array">
+			The <link id="array"/> from which an element is to be extracted.
+		</param>
+	</usage>
+	<para>
+		This macro expands to the <var>i</var>-th element in <var>array</var>.
+		If <var>i</var> is greater than or equal to the size of <var>array</var>, this macro expands to nothing.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-array-elem.h/>
+		
+		#define DATA() (3, (a, b, c))
+		
+		<ARRAY_ELEM/>(0, DATA()) // a
+		<ARRAY_ELEM/>(1, DATA()) // b
+		<ARRAY_ELEM/>(9, DATA()) //
+	</listing>
+	<derivative id="ARRAY_ELEM_ID"/>
+	<derivative id="ARRAY_ELEM_" lang="C99"/>
+</macro>
+
+</header>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/control/auto/while.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a looping construct.
+</overview>
+
+<macro id="AUTO_WHILE" type="object" group="looping">
+	<abstract>
+		The <WHILE/> macro iterates a state with a user-specified operation while a user-specified predicate expands to <code>1</code>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><AUTO_WHILE/>(pred, op, ...)</syntax>
+		<param id="pred">
+			<para>
+				The predicate that determines whether the loop should continue.
+				This predicate must be either a <link id="λ expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				<snippet>
+					pred(s, state<sup>†</sup>)
+				</snippet>
+			</para>
+			<para>
+				<sup>†</sup>
+				The <var>state</var> pseudo-parameter must be either <code>...</code> or the number of parameters that corresponds to the number of arguments in the initial state, <code>__VA_ARGS__</code>.
+			</para>
+		</param>
+		<param id="op">
+			<para>
+				The operation used to iterate the state.
+				This operation must be either a <link id="λ expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				<snippet>
+					op(s, state<sup>†</sup>)
+				</snippet>
+			</para>
+			<para>
+				<sup>†</sup>
+				The <var>state</var> pseudo-parameter must be either <code>...</code> or the number of parameters that corresponds to the number of arguments in the initial state, <code>__VA_ARGS__</code>.
+			</para>
+		</param>
+		<param id="..." optional="1">
+			The initial state of the loop.
+		</param>
+	</usage>
+	<para>
+		The <AUTO_WHILE/> macro is a <link id="higher-order thunk"/> that deduces the current <link id="higher-order entry point"/> and invokes <WHILE/>.
+	</para>
+	<para>
+		This macro may not be used if <link id="bypass semantics"/> are in effect.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-arithmetic-dec.h/>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-control-auto-while.h/>
+		#include <chaos-preprocessor-logical-bool.h/>
+		
+		#if <VARIADICS/>
+		
+		#define PRED(s, x) <BOOL/>(x)
+		#define OP(s, x) <DEC/>(x)
+		
+		<AUTO_WHILE/>(PRED, OP, 10) // 0
+		
+		#endif
+	</listing>
+	<derivative id="AUTO_WHILE_ID" lang="C99"/>
+	<derivative id="AUTO_WHILE_" lang="C99"/>
+</macro>
+
+</header>

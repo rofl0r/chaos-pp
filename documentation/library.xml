@@ -324,6 +324,11 @@
 		<header name="config.h"/>
 		<header name="control.h"/>
 		<directory name="control">
+			<header name="auto.h"/>
+			<directory name="auto">
+				<header name="while.h"/>
+				<header name="while_aux.h"/>
+			</directory>
 			<header name="branch.h"/>
 			<header name="if.h"/>
 			<header name="iif.h"/>

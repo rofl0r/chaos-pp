@@ -74,12 +74,9 @@
 	<para>
 		The <FOR_EACH_I/> macro itself expands to a <link id="deferred expression"/> in terms of <code><NEXT/>(s)</code>.
 		This <link id="deferred expression"/>, when invoked with <EXPR/>, expands to the result of the repeated invocation of the target for each element in <var>g</var>.
-		This is illustrated by the following pseudo-code:
+		This is illustrated by the following pseudo-code (where <var>N</var> is the index of the last element in <var>g</var>):
 		<snippet>
-			macro(s, 0, g[0], data)
-			    macro(s, 1, g[1], data)
-			        ...
-			            macro(s, length(g) - 1, g[length(g) - 1], data)
+			macro(s, 0, g[0], data) macro(s, 1, g[1], data) ... macro(s, N, g[N], data)
 		</snippet>
 	</para>
 	<para>

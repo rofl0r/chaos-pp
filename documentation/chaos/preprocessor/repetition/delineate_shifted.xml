@@ -88,10 +88,7 @@
 		This <link id="deferred expression"/>, when invoked by <EXPR/>, expands to the result of repeating the target <var>count</var> - 1 times (with the delineator specified by <var>sep</var> between each repetition).
 		This is illustrated by the following pseudo-code:
 		<snippet>
-			macro(s, 1, data) sep()
-			    macro(s, 2, data) sep()
-			        ...
-			            macro(s, count - 1, data)
+			macro(s, 1, data) sep() macro(s, 2, data) sep() ... macro(s, count - 1, data)
 		</snippet>
 	</para>
 	<para>

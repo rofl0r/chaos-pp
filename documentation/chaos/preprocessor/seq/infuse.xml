@@ -29,10 +29,7 @@
 	<para>
 		This macro transforms <var>seq</var> into the special form illustrated by the following pseudo-code:
 		<snippet>
-			(data, seq[0])()
-			    (data, seq[1])()
-			        ...
-			            (data, seq[length(seq) - 1])()
+			(data, seq[0])() (data, seq[1])() ... (data, seq[length(seq) - 1])()
 		</snippet>
 		In particular, each element of <var>seq</var> is converted to a binary element with <var>data</var> or <code>__VA_ARGS__</code> as the first sub-element and the original element as the second sub-element.
 		Each of the binary elements is suffixed with nullary parentheses.

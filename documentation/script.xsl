@@ -27,8 +27,8 @@
 
 <xsl:template match="header">
 	<xsl:param name="path"/>
-	<xsl:variable name="enabled" select="'*'"/>
-	<xsl:if test="true() or contains(concat($path, '/', @name), $enabled)">
+	<xsl:variable name="enabled" select="'seq/infuse.h'"/>
+	<xsl:if test="false() or contains(concat($path, '/', @name), $enabled)">
 		<xsl:variable name="sans-suffix" select="concat($path, '/', substring-before(@name, '.'))"/>
 		echo <xsl:value-of select="$sans-suffix"/>.html
 		msxsl <xsl:value-of select="concat($source, '/', $sans-suffix)"/>.xml header.xsl -o <xsl:value-of select="concat($destination, '/', $sans-suffix)"/>.html $@

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/repetition/for_aux.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a predicated repetition algorithm.
+</overview>
+
+<macro id="FOR_AUX" type="indirect" group="repetition">
+	<abstract>
+		The <FOR_AUX/> macro is a predicated repetition construct.
+	</abstract>
+	<usage lang="C99">
+		<syntax><EXPR/>(<FOR_AUX/>(pred, op, macro, data, ...))</syntax>
+		<param id="pred">
+			<para>
+				The predicate that determines whether the algorithm should continue.
+				This predicate must be either a <link id="λ expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				<snippet>
+					pred(s, data<sup>†</sup>, state<sup>‡</sup>)
+				</snippet>
+			</para>
+			<para>
+				<sup>†</sup>
+				If the auxiliary data is parenthetic, the <var>data</var> pseudo-parameter must be the number of parameters that corresponds to the number of sub-elements in the auxiliary data.
+				Otherwise, it must be a single parameter.
+			</para>
+			<para>
+				<sup>‡</sup>
+				The <var>state</var> pseudo-parameter must be either <code>...</code> or the number of parameters that corresponds to the number of arguments in the initial state, <code>__VA_ARGS__</code>.
+			</para>
+		</param>
+		<param id="op">
+			<para>
+				The operation used to iterate the state.
+				This operation must be either a <link id="λ expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				<snippet>
+					op(s, data<sup>†</sup>, state<sup>‡</sup>)
+				</snippet>
+			</para>
+			<para>
+				<sup>†</sup>
+				If the auxiliary data is parenthetic, the <var>data</var> pseudo-parameter must be the number of parameters that corresponds to the number of sub-elements in the auxiliary data.
+				Otherwise, it must be a single parameter.
+			</para>
+			<para>
+				<sup>‡</sup>
+				The <var>state</var> pseudo-parameter must be either <code>...</code> or the number of parameters that corresponds to the number of arguments in the initial state, <code>__VA_ARGS__</code>.
+			</para>
+		</param>
+		<param id="macro">
+			<para>
+				The target to be repeated.
+				This target must be either a <link id="λ expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				<snippet>
+					macro(s, data<sup>†</sup>, state<sup>‡</sup>)
+				</snippet>
+			</para>
+			<para>
+				<sup>†</sup>
+				If the auxiliary data is parenthetic, the <var>data</var> pseudo-parameter must be the number of parameters that corresponds to the number of sub-elements in the auxiliary data.
+				Otherwise, it must be a single parameter.
+			</para>
+			<para>
+				<sup>‡</sup>
+				The <var>state</var> pseudo-parameter must be either <code>...</code> or the number of parameters that corresponds to the number of arguments in the initial state, <code>__VA_ARGS__</code>.
+			</para>
+		</param>
+		<param id="data" optional="1">
+			Auxiliary data to be passed through the algorithm to the predicate, operation, and target.
+			This argument may be either a parenthetic expression of any arity or a non-parenthetic expression.
+		</param>
+		<param id="..." optional="1">
+			The initial state.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><EXPR/>(<FOR_AUX/>(pred, op, macro, data, state))</syntax>
+		<param id="pred">
+			The predicate that determines whether the algorithm should continue.
+			This predicate must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			<snippet>
+				pred(s, data, state)
+			</snippet>
+		</param>
+		<param id="op">
+			The operation used to iterate the state.
+			This operation must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			<snippet>
+				op(s, data, state)
+			</snippet>
+		</param>
+		<param id="macro">
+			The target to be repeated.
+			This target must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			<snippet>
+				macro(s, data, state)
+			</snippet>
+		</param>
+		<param id="data">
+			Auxiliary data to be passed through the algorithm to the predicate, operation, and target.
+			This argument may be either a unary parenthetic expression or a non-parenthetic expression.
+		</param>
+		<param id="state">
+			The initial state.
+		</param>
+	</usage>
+	<para>
+		The <FOR_AUX/> macro itself expands to a <link id="deferred expression"/> in terms of <code><NEXT/>(s)</code>.
+		This <link id="deferred expression"/>, when invoked by <EXPR/>, expands to the result of repeating the target while iterating the state until the predicate expands to <code>0</code>.
+		This is illustrated by the following pseudo-code (where <var>D</var> is <var>data</var>, <var>M</var> is <var>macro</var>, and <var>O</var> is <var>op</var>):
+		<snippet>
+			M(s, D, state) M(s, D, O(s, D, state)) ... M(s, D, O(s, D, ... O(s, D, state) ...))
+		</snippet>
+	</para>
+	<para>
+		The predicate, operation, and target are all invoked with the current <link id="recursion state"/>, the auxiliary data (<var>data</var>), and the current state (<var>state</var> or <code>__VA_ARGS__</code>).
+		The predicate must expands to <code>0</code>, <code>1</code>, or a <link id="deferred expression"/> in terms of <code><NEXT/>(s)</code> that expands to either <code>0</code> or <code>1</code>.
+		If the predicate ultimately expands to <code>0</code> the algorithm terminates.
+		Otherwise, the target is invoked with the current state, the operation operation is applied to the current state to yield a new state, and the algorithm continues.
+		Both the target and the operation may expand to <link id="deferred expressions"/> in terms of <code><NEXT/>(s)</code>.
+		Expansion to a <link id="deferred expression"/> allows the predicate, operation, and target to recurse on themselves if necessary.
+	</para>
+	<para>
+		Invocations of the target (but not the predicate and operation) are trampolined such that each invocation is invoked with <code><NEXT/>(<NEXT/>(s))</code>, where <var>s</var> is the original <link id="recursion state"/> at the beginning of the algorithm (i.e. <code><STATE/>()</code>).
+		This maximizes the utility of the <link id="recursion backend"/>.
+	</para>
+	<para>
+		The auxiliary data, <var>data</var>, is treated differently depending on whether it is parenthetic.
+		If <var>data</var> is non-parenthetic, it is passed directly to the operation as a single argument.
+		In C99, if <var>data</var> is a parenthetic expression of any arity, its sub-elements are passed to the predicate, operation, and target as individual arguments.
+		In C (prior to C99) and C++, if <var>data</var> is a unary parenthetic expression, its sub-element is passed to the operation as a single argument (a parenthetic expression of any other arity is prohibited).
+	</para>
+	<para>
+		Ignoring the complexity of <var>pred</var>, <var>op</var>, and <var>macro</var> (each of which is invoked once for each variation of the state), each iteration of the state requires only a single <link id="recursion step"/>.
+	</para>
+	<para>
+		This macro deduces the current <link id="recursion state"/> and invokes <FOR_AUX_S/>.
+		If the current <link id="recursion state"/> is already known, direct use of <FOR_AUX_S/> is more efficient.
+	</para>
+	<para>
+		This macro may not be used if <link id="bypass semantics"/> are in effect.
+	</para>
+	<derivative id="FOR_AUX_ID"/>
+	<derivative id="FOR_AUX_" lang="C99"/>
+	<derivative id="FOR_AUX_S">
+		<usage lang="C99">
+			<syntax><EXPR_S/>(s)(<FOR_AUX_S/>(s, pred, op, macro, data, ...))</syntax>
+		</usage>
+		<usage lang="C/C++">
+			<syntax><EXPR_S/>(s)(<FOR_AUX_S/>(s, pred, op, macro, data, state))</syntax>
+		</usage>
+		<derivative id="FOR_AUX_S_ID"/>
+		<derivative id="FOR_AUX_S_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

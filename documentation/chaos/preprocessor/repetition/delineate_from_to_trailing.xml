@@ -97,12 +97,9 @@
 	</usage>
 	<para>
 		This macro behaves identically to <DELINEATE_FROM_TO/> except that it inserts a leading delineator if any repetitions exist.
-		This is illustrated by the following pseudo-code:
+		This is illustrated by the following pseudo-code (where <var>M</var> is <var>macro</var>):
 		<snippet>
-			sep() macro(s, from, data) sep()
-			    macro(s, from + 1, data) sep()
-			        ...
-			            macro(s, to - 1, data)
+			sep() M(s, from, data) sep() M(s, from + 1, data) sep() ... M(s, to - 1, data)
 		</snippet>
 	</para>
 	<para>

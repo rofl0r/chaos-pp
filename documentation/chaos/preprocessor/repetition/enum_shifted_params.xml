@@ -30,9 +30,9 @@
 	</usage>
 	<para>
 		This macro expands to the result of repeating <var>param</var> or <code>__VA_ARGS__</code> (concatenated to the current repetition number) <var>count</var> - 1 times (with a comma between each repetition).
-		This is illustrated by the following pseudo-code (where <var>n</var> is <var>count</var> - 1):
+		This is illustrated by the following pseudo-code (where <var>N</var> is <var>count</var> - 1):
 		<snippet>
-			param ## 1, param ## 2, ... param ## n
+			param ## 1, param ## 2, ... param ## N
 		</snippet>
 	</para>
 	<para>
@@ -41,9 +41,9 @@
 			(a, b)
 		</snippet>
 		If <var>param</var> or <code>__VA_ARGS__</code> is a binary parenthetic expression, this macro extracts the two elements and concatenates the current repetition number to each of them.
-		This is illustrated by the following pseudo-code (where <var>n</var> is again <var>count</var> - 1):
+		This is illustrated by the following pseudo-code (where <var>N</var> is again <var>count</var> - 1):
 		<snippet>
-			a ## 1 b ## 1, a ## 2 b ## 2, ... a ## n b ## n
+			a ## 1 b ## 1, a ## 2 b ## 2, ... a ## N b ## N
 		</snippet>
 		In C99, the requirement that a parenthetic expression must be binary is relaxed.
 		It can be any arity provided that there are at least two elements.

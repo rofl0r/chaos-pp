@@ -67,10 +67,7 @@
 		This <link id="deferred expression"/>, when invoked by <EXPR/>, expands to the result of repeating the target <var>count</var> times.
 		This is illustrated by the following pseudo-code:
 		<snippet>
-			macro(s, 0, data)
-			    macro(s, 1, data)
-			        ...
-			            macro(s, count - 1, data)
+			macro(s, 0, data) macro(s, 1, data) ... macro(s, count - 1, data)
 		</snippet>
 	</para>
 	<para>

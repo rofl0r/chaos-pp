@@ -78,10 +78,7 @@
 		This macro behaves identically to <ENUM_FROM_TO/> except that it inserts a leading comma if any repetitions exist.
 		This is illustrated by the following pseudo-code:
 		<snippet>
-			, macro(s, from, data),
-			    macro(s, from + 1, data),
-			        ...
-			            macro(s, to - 1, data)
+			, macro(s, from, data), macro(s, from + 1, data), ... macro(s, to - 1, data)
 		</snippet>
 	</para>
 	<para>

@@ -76,10 +76,7 @@
 		This <link id="deferred expression"/>, when invoked with <EXPR/>, expands to the result of the repeated invocation of the target for each element in <var>g</var>.
 		This is illustrated by the following pseudo-code:
 		<snippet>
-			macro(s, g[0], data)
-			    macro(s, g[1], data)
-			        ...
-			            macro(s, g[length(g) - 1], data)
+			macro(s, g[0], data) macro(s, g[1], data) ... macro(s, g[length(g) - 1], data)
 		</snippet>
 	</para>
 	<para>

@@ -76,7 +76,7 @@
 				macro(s, state)
 			</snippet>
 		</param>
-		<param id="..." optional="1">
+		<param id="state">
 			The initial state.
 		</param>
 	</usage>
@@ -85,10 +85,7 @@
 		This <link id="deferred expression"/>, when invoked by <EXPR/>, expands to the result of repeating the target while iterating the state until the predicate expands to <code>0</code>.
 		This is illustrated by the following pseudo-code:
 		<snippet>
-			macro(s, state)
-			    macro(s, op(s, state))
-			        ...
-			            macro(s, op(s, ... op(s, state) ... ))
+			macro(s, state)  macro(s, op(s, state)) ... macro(s, op(s, ... op(s, state) ... ))
 		</snippet>
 	</para>
 	<para>

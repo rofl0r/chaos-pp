@@ -66,10 +66,7 @@
 		This macro behaves identically to <ENUM/> except that it inserts a leading comma if any repetitions exist.
 		This is illustrated by the following pseudo-code:
 		<snippet>
-			, macro(s, 0, data),
-			    macro(s, 1, data),
-			        ...
-			            macro(s, count - 1, data)
+			, macro(s, 0, data), macro(s, 1, data), ... macro(s, count - 1, data)
 		</snippet>
 	</para>
 	<para>

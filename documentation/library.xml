@@ -311,6 +311,7 @@
 			<header name="enum_trailing.h"/>
 			<header name="enum_trailing_params.h"/>
 			<header name="for.h"/>
+			<header name="for_aux.h"/>
 			<header name="parametric.h"/>
 			<directory name="parametric">
 				<header name="delineate.h"/>
@@ -326,6 +327,7 @@
 				<header name="enum_shifted_trailing.h"/>
 				<header name="enum_trailing.h"/>
 				<header name="for.h"/>
+				<header name="for_aux.h"/>
 				<header name="repeat.h"/>
 				<header name="repeat_from_to.h"/>
 				<header name="repeat_shifted.h"/>
@@ -362,6 +364,9 @@
 				<header name="for.h">
 					<assoc id="complexity.gif"/>
 				</header>
+				<header name="for_aux.h">
+					<assoc id="complexity.gif"/>
+				</header>
 				<header name="repeat.h">
 					<assoc id="complexity.gif"/>
 				</header>
@@ -381,7 +386,9 @@
 			<header name="filter.h"/>
 			<header name="first_n.h"/>
 			<header name="fold_left.h"/>
+			<header name="fold_left_aux.h"/>
 			<header name="fold_right.h"/>
+			<header name="fold_right_aux.h"/>
 			<header name="for_each.h"/>
 			<header name="for_each_i.h"/>
 			<header name="infuse.h"/>
@@ -403,7 +410,9 @@
 			<directory name="variadic">
 				<header name="filter.h"/>
 				<header name="fold_left.h"/>
+				<header name="fold_left_aux.h"/>
 				<header name="fold_right.h"/>
+				<header name="fold_right_aux.h"/>
 				<header name="for_each.h"/>
 				<header name="for_each_i.h"/>
 				<header name="spec.h"/>

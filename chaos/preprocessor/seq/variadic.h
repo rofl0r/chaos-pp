@@ -14,7 +14,9 @@
 #
 # include <chaos/preprocessor/seq/variadic/filter.h>
 # include <chaos/preprocessor/seq/variadic/fold_left.h>
+# include <chaos/preprocessor/seq/variadic/fold_left_aux.h>
 # include <chaos/preprocessor/seq/variadic/fold_right.h>
+# include <chaos/preprocessor/seq/variadic/fold_right_aux.h>
 # include <chaos/preprocessor/seq/variadic/for_each.h>
 # include <chaos/preprocessor/seq/variadic/for_each_i.h>
 # include <chaos/preprocessor/seq/variadic/spec.h>

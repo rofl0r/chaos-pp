@@ -16,8 +16,6 @@
 		It exists as a helper macro for <PARTIAL_CAT/>.
 	</para>
 	<x-reference id="PARTIAL_CAT"/>
-	<derivative id="PARTIAL_ID"/>
-	<derivative id="PARTIAL_" lang="C99"/>
 </macro>
 
 <macro id="PARTIAL_CAT" group="concatenation">

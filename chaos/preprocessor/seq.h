@@ -18,7 +18,9 @@
 # include <chaos/preprocessor/seq/filter.h>
 # include <chaos/preprocessor/seq/first_n.h>
 # include <chaos/preprocessor/seq/fold_left.h>
+# include <chaos/preprocessor/seq/fold_left_aux.h>
 # include <chaos/preprocessor/seq/fold_right.h>
+# include <chaos/preprocessor/seq/fold_right_aux.h>
 # include <chaos/preprocessor/seq/for_each.h>
 # include <chaos/preprocessor/seq/for_each_i.h>
 # include <chaos/preprocessor/seq/infuse.h>

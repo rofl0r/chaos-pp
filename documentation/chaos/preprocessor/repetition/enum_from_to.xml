@@ -79,10 +79,7 @@
 		This <link id="deferred expression"/>, when invoked by <EXPR/>, expands to the result of repeating the target for each number ranging from <var>from</var> to <var>to</var> - 1 (with a comma between each repetition).
 		This is illustrated by the following pseudo-code:
 		<snippet>
-			macro(s, from, data),
-			    macro(s, from + 1, data),
-			        ...
-			            macro(s, to - 1, data)
+			macro(s, from, data), macro(s, from + 1, data), ... macro(s, to - 1, data)
 		</snippet>
 	</para>
 	<para>

@@ -27,13 +27,9 @@
 		</param>
 	</usage>
 	<para>
-		This macro transforms <var>seq</var> into the special form illustrated by the following pseudo-code:
+		This macro transforms <var>seq</var> into the special form illustrated by the following pseudo-code (where <var>R</var> is <TUPLE_REM/> and <var>E</var> is <TUPLE_EAT/>):
 		<snippet>
-			(<TUPLE_REM/>, seq[0])()
-			    (<TUPLE_REM/>, seq[1])()
-			        ...
-			            (<TUPLE_REM/>, seq[length(seq) - 1])()
-			                (<TUPLE_EAT/>, def)
+			(R, seq[0])() (R, seq[1])() ... (R, seq[length(seq) - 1])() (E, def)
 		</snippet>
 		In particular, each element of <var>seq</var> is converted to a binary element with <TUPLE_REM/> as the first sub-element and the original element as the second sub-element.
 		Each of the binary elements is suffixed with nullary parentheses, and the entire result of all such transformations is suffixed with a binary element with <TUPLE_EAT/> as the first sub-element and <var>def</var> or <code>__VA_ARGS__</code> as the second sub-element.

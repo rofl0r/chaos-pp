@@ -12,10 +12,10 @@ cp alternate.css $3/alternate.css
 cp background.gif $3/background.gif
 
 echo creating indices...
+msxsl .library.xml index.xsl -o $3/documents.html library=$1 source=$2
 msxsl .library.xml index.xsl -m headers -o $3/headers.html library=$1 source=$2
 msxsl .library.xml index.xsl -m primary -o $3/macros.html library=$1 source=$2
 msxsl .library.xml index.xsl -m secondary -o $3/master.html library=$1 source=$2
-msxsl .library.xml index.xsl -o $3/documents.html library=$1 source=$2
 
 echo generating symbol table...
 msxsl .library.xml symbol.xsl -o .symbol.xsl library=$1

@@ -18,7 +18,7 @@
 #
 # /* CHAOS_PP_REVIVE */
 #
-# define CHAOS_PP_REVIVE(macro) CHAOS_PP_PRIMITIVE_CAT(macro, ID)()
+# define CHAOS_PP_REVIVE(macro) CHAOS_PP_PRIMITIVE_CAT(macro, _ID)()
 # define CHAOS_PP_REVIVE_ID() CHAOS_PP_REVIVE
 #
 # if CHAOS_PP_VARIADICS

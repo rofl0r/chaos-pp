@@ -51,7 +51,7 @@ li a {
 	font-weight: normal;
 }
 sub, sup {
-	font-family: Georgia, Garamond, serif;
+	font-family: Verdana, sans-serif;
 }
 var {
 	font-family: "Courier New", monospace;
@@ -59,7 +59,7 @@ var {
 	letter-spacing: 1px;
 }
 var.external {
-	font-family: Georgia, Garamond, serif;
+	font-family: Verdana, sans-serif;
 	font-style: italic;
 	letter-spacing: 0px;
 }
@@ -80,8 +80,8 @@ body {
 	background: white;
 	background-image: url(background.gif);
 	color: black;
-	font-family: Georgia, Garamond, serif;
-	font-size: 12pt;
+	font-family: Verdana, sans-serif;
+	font-size: 10pt;
 	margin: 0px;
 	padding: 0px 10px;
 }
@@ -116,8 +116,8 @@ h3.secondary {
 	color: #888888;
 }
 h4 {
-	font-family: Georgia, Garamond, serif;
-	font-size: 12pt;
+	font-family: Verdana, sans-serif;
+	font-size: 10pt;
 	font-weight: bold;
 	margin: 10px 0px;
 	padding: 0px;

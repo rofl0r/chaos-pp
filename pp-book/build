@@ -14,6 +14,7 @@ msxsl .library.xml symbol.xsl -o .symbol.xsl
 echo copying support files...
 mkdir -p "$3"
 cp style.css "$3"/style.css
+cp alternate.css "$3"/alternate.css
 cp background.gif "$3"/background.gif
 
 echo creating indices...

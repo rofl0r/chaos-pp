@@ -55,17 +55,17 @@
     )) \
     /**/
 # define CHAOS_IP_FILTER_PLANAR_INDIRECT() CHAOS_IP_FILTER_PLANAR_I
-# define CHAOS_IP_FILTER_PLANAR_I(s, o, pred, a, b, type, g, pd) \
+# define CHAOS_IP_FILTER_PLANAR_I(s, o, pred, _a, _b, type, g, pd) \
     CHAOS_PP_IIF(CHAOS_PP_IS_CONS(g))( \
         CHAOS_IP_FILTER_PLANAR_II, CHAOS_PP_NIL(type) CHAOS_PP_TUPLE_EAT(9) \
-    )(CHAOS_PP_DEFER(CHAOS_PP_OBSTRUCT)(), s, o, pred, a, b, type, g, pd) \
+    )(CHAOS_PP_DEFER(CHAOS_PP_OBSTRUCT)(), s, o, pred, _a, _b, type, g, pd) \
     /**/
-# define CHAOS_IP_FILTER_PLANAR_II(_, s, o, pred, a, b, type, g, pd) \
-    CHAOS_PP_IIF _(CHAOS_PP_EXPR_S _(o)(a _(o, b() CHAOS_PP_ITEM(type, CHAOS_PP_FIRST(g)), CHAOS_PP_UNPACK pd)))( \
+# define CHAOS_IP_FILTER_PLANAR_II(_, s, o, pred, _a, _b, type, g, pd) \
+    CHAOS_PP_IIF _(CHAOS_PP_EXPR_S _(o)(_a _(o, _b() CHAOS_PP_ITEM(type, CHAOS_PP_FIRST(g)), CHAOS_PP_UNPACK pd)))( \
         CHAOS_PP_CONS, CHAOS_IP_FILTER_PLANAR_III \
     )( \
         CHAOS_PP_DEFER(CHAOS_PP_EXPR_S(s))(CHAOS_PP_DEFER(CHAOS_IP_FILTER_PLANAR_INDIRECT)()( \
-            CHAOS_PP_NEXT(s), o, pred, a, b, type, CHAOS_PP_REST(g), pd \
+            CHAOS_PP_NEXT(s), o, pred, _a, _b, type, CHAOS_PP_REST(g), pd \
         )), \
         CHAOS_PP_FIRST(g) \
     ) \

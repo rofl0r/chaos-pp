@@ -19,13 +19,13 @@
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/logical/bitor.h>
 # include <chaos/preprocessor/logical/compl.h>
-# include <chaos/preprocessor/recursion/auto_rec.h>
+# // include <chaos/preprocessor/recursion/auto_rec.h>
 #
 # /* CHAOS_PP_SCOPE */
 #
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_SCOPE \
-        CHAOS_PP_IIF(CHAOS_PP_IS_NULLARY(CHAOS_IP_SCOPE_A(, ())))( \
+        CHAOS_PP_IIF(CHAOS_PP_IS_NULLARY(CHAOS_IP_SCOPE_0(, ())))( \
             CHAOS_IP_SCOPE_0, CHAOS_PP_CAT(CHAOS_IP_SCOPE_, CHAOS_PP_AUTO_REC(CHAOS_IP_SCOPE_P, 16)) \
         ) \
         /**/

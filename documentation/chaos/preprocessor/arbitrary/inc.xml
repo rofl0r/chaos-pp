@@ -4,12 +4,12 @@
 	The <self/> header defines an <link id="arbitrary-precision"/> incrementation operator.
 </overview>
 
-<macro id="INC_AP" group="decrementation">
+<macro id="ARBITRARY_INC" group="decrementation">
 	<abstract>
-		The <INC_AP/> macro increments an <link id="arbitrary-precision value"/>.
+		The <ARBITRARY_INC/> macro increments an <link id="arbitrary-precision value"/>.
 	</abstract>
 	<usage>
-		<syntax><INC_AP/>(x)</syntax>
+		<syntax><ARBITRARY_INC/>(x)</syntax>
 		<param id="x">
 			The <link id="arbitrary-precision value"/> to be incremented.
 		</param>
@@ -17,29 +17,29 @@
 	<para>
 		This macro results in an <link id="arbitrary-precision value"/> one greater than <var>x</var>.
 	</para>
-	<x-reference id="DEC_AP"/>
+	<x-reference id="ARBITRARY_DEC"/>
 	<listing>
 		#include <chaos-preprocessor-arbitrary-demote.h/>
 		#include <chaos-preprocessor-arbitrary-inc.h/>
 		#include <chaos-preprocessor-arbitrary-literal.h/>
 		
-		<DEMOTE_AP/>(
-		    <INC_AP/>(<LITERAL_AP/>(1 2 3))
+		<ARBITRARY_DEMOTE/>(
+		    <ARBITRARY_INC/>(<ARBITRARY_LITERAL/>(1 2 3))
 		)
 		// 124
 		
-		<DEMOTE_AP/>(
-		    <INC_AP/>(<LITERAL_AP/>((-)1 2 3))
+		<ARBITRARY_DEMOTE/>(
+		    <ARBITRARY_INC/>(<ARBITRARY_LITERAL/>((-)1 2 3))
 		)
 		// -122
 		
-		<DEMOTE_AP/>(
-		    <INC_AP/>(<LITERAL_AP/>((-)1))
+		<ARBITRARY_DEMOTE/>(
+		    <ARBITRARY_INC/>(<ARBITRARY_LITERAL/>((-)1))
 		)
 		// 0
 	</listing>
-	<derivative id="INC_AP_ID"/>
-	<derivative id="INC_AP_" lang="C99"/>
+	<derivative id="ARBITRARY_INC_ID"/>
+	<derivative id="ARBITRARY_INC_" lang="C99"/>
 </macro>
 
 </header>

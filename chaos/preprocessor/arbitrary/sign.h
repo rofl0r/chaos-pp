@@ -17,13 +17,13 @@
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/tuple/rem.h>
 #
-# /* CHAOS_PP_SIGN_AP */
+# /* CHAOS_PP_ARBITRARY_SIGN */
 #
-# define CHAOS_PP_SIGN_AP(x) CHAOS_PP_IS_UNARY(CHAOS_PP_REM x)
-# define CHAOS_PP_SIGN_AP_ID() CHAOS_PP_SIGN_AP
+# define CHAOS_PP_ARBITRARY_SIGN(x) CHAOS_PP_IS_UNARY(CHAOS_PP_REM x)
+# define CHAOS_PP_ARBITRARY_SIGN_ID() CHAOS_PP_ARBITRARY_SIGN
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_SIGN_AP_ CHAOS_PP_LAMBDA(CHAOS_PP_SIGN_AP)
+#    define CHAOS_PP_ARBITRARY_SIGN_ CHAOS_PP_LAMBDA(CHAOS_PP_ARBITRARY_SIGN)
 # endif
 #
 # endif

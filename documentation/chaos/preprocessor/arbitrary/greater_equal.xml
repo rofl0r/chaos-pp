@@ -4,12 +4,12 @@
 	The <self/> header defines an <link id="arbitrary-precision"/> "greater-than-or-equal" operator.
 </overview>
 
-<macro id="GREATER_EQUAL_AP" group="greater-equal">
+<macro id="ARBITRARY_GREATER_EQUAL" group="greater-equal">
 	<abstract>
-		The <GREATER_EQUAL_AP/> macro tests whether its first operand is greater than or equal to its second operand.
+		The <ARBITRARY_GREATER_EQUAL/> macro tests whether its first operand is greater than or equal to its second operand.
 	</abstract>
 	<usage>
-		<syntax><GREATER_EQUAL_AP/>(x, y)</syntax>
+		<syntax><ARBITRARY_GREATER_EQUAL/>(x, y)</syntax>
 		<param id="x">
 			The first operand.
 		</param>
@@ -25,16 +25,16 @@
 		#include <chaos-preprocessor-arbitrary-greater_equal.h/>
 		#include <chaos-preprocessor-arbitrary-literal.h/>
 		
-		<GREATER_EQUAL_AP/>((1)(2)(3), (4)(5)) // 1
-		<GREATER_EQUAL_AP/>((1)(2), (3)(4)(5)) // 0
+		<ARBITRARY_GREATER_EQUAL/>((1)(2)(3), (4)(5)) // 1
+		<ARBITRARY_GREATER_EQUAL/>((1)(2), (3)(4)(5)) // 0
 		
-		<GREATER_EQUAL_AP/>(
-		    <LITERAL_AP/>((-)1), <LITERAL_AP/>((-)1)
+		<ARBITRARY_GREATER_EQUAL/>(
+		    <ARBITRARY_LITERAL/>((-)1), <ARBITRARY_LITERAL/>((-)1)
 		)
 		// 1
 	</listing>
-	<derivative id="GREATER_EQUAL_AP_ID"/>
-	<derivative id="GREATER_EQUAL_AP_" lang="C99"/>
+	<derivative id="ARBITRARY_GREATER_EQUAL_ID"/>
+	<derivative id="ARBITRARY_GREATER_EQUAL_" lang="C99"/>
 </macro>
 
 </header>

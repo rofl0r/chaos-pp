@@ -4,12 +4,12 @@
 	The <self/> header defines an <link id="arbitrary-precision"/> "less-than" operator.
 </overview>
 
-<macro id="LESS_AP" group="less">
+<macro id="ARBITRARY_LESS" group="less">
 	<abstract>
-		The <LESS_AP/> macro tests whether its first operand is less than its second operand.
+		The <ARBITRARY_LESS/> macro tests whether its first operand is less than its second operand.
 	</abstract>
 	<usage>
-		<syntax><LESS_AP/>(x, y)</syntax>
+		<syntax><ARBITRARY_LESS/>(x, y)</syntax>
 		<param id="x">
 			The first operand.
 		</param>
@@ -24,11 +24,11 @@
 	<listing>
 		#include <chaos-preprocessor-arbitrary-less.h/>
 		
-		<LESS_AP/>((1)(2)(3), (4)(5)) // 0
-		<LESS_AP/>((1)(2), (3)(4)(5)) // 1
+		<ARBITRARY_LESS/>((1)(2)(3), (4)(5)) // 0
+		<ARBITRARY_LESS/>((1)(2), (3)(4)(5)) // 1
 	</listing>
-	<derivative id="LESS_AP_ID"/>
-	<derivative id="LESS_AP_" lang="C99"/>
+	<derivative id="ARBITRARY_LESS_ID"/>
+	<derivative id="ARBITRARY_LESS_" lang="C99"/>
 </macro>
 
 </header>

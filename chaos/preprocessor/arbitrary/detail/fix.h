@@ -20,27 +20,27 @@
 # include <chaos/preprocessor/detection/is_unary.h>
 # include <chaos/preprocessor/tuple/rem.h>
 #
-# /* CHAOS_PP_FIX_AP */
+# /* CHAOS_PP_ARBITRARY_FIX */
 #
-# define CHAOS_PP_FIX_AP(x) \
-    CHAOS_PP_IIF(CHAOS_PP_SIGN_AP(x))( \
-        CHAOS_IP_FIX_AP_I(CHAOS_PP_FIX_AP_INTERNAL(CHAOS_PP_REM x)), \
-        CHAOS_PP_FIX_AP_INTERNAL(x) \
+# define CHAOS_PP_ARBITRARY_FIX(x) \
+    CHAOS_PP_IIF(CHAOS_PP_ARBITRARY_SIGN(x))( \
+        CHAOS_IP_ARBITRARY_FIX_I(CHAOS_PP_ARBITRARY_FIX_INTERNAL(CHAOS_PP_REM x)), \
+        CHAOS_PP_ARBITRARY_FIX_INTERNAL(x) \
     ) \
     /**/
 #
-# define CHAOS_IP_FIX_AP_I(x) \
-    CHAOS_PP_INLINE_UNLESS(CHAOS_PP_BOOL_AP_INTERNAL(x))( \
+# define CHAOS_IP_ARBITRARY_FIX_I(x) \
+    CHAOS_PP_INLINE_UNLESS(CHAOS_PP_ARBITRARY_BOOL_INTERNAL(x))( \
         CHAOS_PP_REM \
     )(x) \
     /**/
 #
-# /* CHAOS_PP_FIX_AP_INTERNAL */
+# /* CHAOS_PP_ARBITRARY_FIX_INTERNAL */
 #
-# define CHAOS_PP_FIX_AP_INTERNAL(x) CHAOS_IP_FIX_AP_II(CHAOS_IP_FIX_AP_A x)
+# define CHAOS_PP_ARBITRARY_FIX_INTERNAL(x) CHAOS_IP_ARBITRARY_FIX_II(CHAOS_IP_ARBITRARY_FIX_A x)
 #
-# define CHAOS_IP_FIX_AP_II(c) CHAOS_PP_IIF(CHAOS_PP_IS_UNARY(c))(c, (0))
-# define CHAOS_IP_FIX_AP_A(digit) CHAOS_PP_IF(digit)((digit), CHAOS_IP_FIX_AP_B)
-# define CHAOS_IP_FIX_AP_B(digit) CHAOS_PP_IF(digit)((digit), CHAOS_IP_FIX_AP_A)
+# define CHAOS_IP_ARBITRARY_FIX_II(c) CHAOS_PP_IIF(CHAOS_PP_IS_UNARY(c))(c, (0))
+# define CHAOS_IP_ARBITRARY_FIX_A(digit) CHAOS_PP_IF(digit)((digit), CHAOS_IP_ARBITRARY_FIX_B)
+# define CHAOS_IP_ARBITRARY_FIX_B(digit) CHAOS_PP_IF(digit)((digit), CHAOS_IP_ARBITRARY_FIX_A)
 #
 # endif

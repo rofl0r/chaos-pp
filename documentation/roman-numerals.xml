@@ -174,7 +174,7 @@
 				            TABLE(0, first) \
 				        ) \
 				    )( \
-				        <SUB_AP/>, <ADD_AP/> \
+				        <ARBITRARY_SUB/>, <ARBITRARY_ADD/> \
 				    )(x, TABLE(1, first)) \
 				    /**/
 				

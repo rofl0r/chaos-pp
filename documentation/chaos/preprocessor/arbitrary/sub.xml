@@ -4,12 +4,12 @@
 	The <self/> header defines an <link id="arbitrary-precision"/> subtraction operator.
 </overview>
 
-<macro id="SUB_AP" group="subtraction">
+<macro id="ARBITRARY_SUB" group="subtraction">
 	<abstract>
-		The <SUB_AP/> macro computes the difference between two <link id="arbitrary-precision values"/>.
+		The <ARBITRARY_SUB/> macro computes the difference between two <link id="arbitrary-precision values"/>.
 	</abstract>
 	<usage>
-		<syntax><SUB_AP/>(x, y)</syntax>
+		<syntax><ARBITRARY_SUB/>(x, y)</syntax>
 		<param id="x">
 			The minuend.
 		</param>
@@ -24,14 +24,14 @@
 		#include <chaos-preprocessor-arbitrary-sub.h/>
 		#include <chaos-preprocessor-arbitrary-demote.h/>
 		
-		<DEMOTE_AP/>(<DEMOTE_AP/>(
+		<ARBITRARY_DEMOTE/>(<ARBITRARY_DEMOTE/>(
 		    (1)(0)(0)(0)(0),
 		    (1)(9)(9)
 		))
 		// 9801
 	</listing>
-	<derivative id="SUB_AP_ID"/>
-	<derivative id="SUB_AP_" lang="C99"/>
+	<derivative id="ARBITRARY_SUB_ID"/>
+	<derivative id="ARBITRARY_SUB_" lang="C99"/>
 </macro>
 
 </header>

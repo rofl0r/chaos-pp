@@ -218,12 +218,12 @@
 				        <EXPR_S/> _(s)(BINARY_INDIRECT _()( \
 				            <OBSTRUCT/> _(), <NEXT/>(s), \
 				            <STRING_REST/> _(string), \
-				            <ADD_AP/> _( \
-				                <MUL_AP/> _(x, (2)), \
+				            <ARBITRARY_ADD/> _( \
+				                <ARBITRARY_MUL/> _(x, (2)), \
 				                (<STRING_FIRST/> _(string)) \
 				            ) \
 				        )), \
-				        <DEMOTE_AP/> _(x) \
+				        <ARBITRARY_DEMOTE/> _(x) \
 				    ) \
 				    /**/
 				
@@ -247,7 +247,7 @@
 				
 				#define BINARY(string) BINARY_S(<STATE/>(), string)
 				#define BINARY_S(s, string) \
-				    <DEMOTE_AP/>(<ARRAY_ELEM/>( \
+				    <ARBITRARY_DEMOTE/>(<ARRAY_ELEM/>( \
 				        1, \
 				        <EXPR_S/>(s)(<WHILE_S/>( \
 				            s, \
@@ -262,8 +262,8 @@
 				#define OP(s, string, x) \
 				    (2, ( \
 				        <STRING_REST/>(string), \
-				        <ADD_AP/>( \
-				            <MUL_AP/>(x, (2)), \
+				        <ARBITRARY_ADD/>( \
+				            <ARBITRARY_MUL/>(x, (2)), \
 				            (<STRING_FIRST/>(string)) \
 				        ) \
 				    )) \
@@ -292,7 +292,7 @@
 				
 				#define BINARY(string) BINARY_S(<STATE/>(), string)
 				#define BINARY_S(s, string) \
-				    <DEMOTE_AP/>( \
+				    <ARBITRARY_DEMOTE/>( \
 				        <EXPR_S/>(s)(<FOLD_LEFT_S/>( \
 				            s, OP, (<STRING/>) string, (0) \
 				        )) \
@@ -300,8 +300,8 @@
 				    /**/
 				
 				#define OP(s, bit, x) \
-				    <ADD_AP/>( \
-				        <MUL_AP/>(x, (2)), (bit) \
+				    <ARBITRARY_ADD/>( \
+				        <ARBITRARY_MUL/>(x, (2)), (bit) \
 				    ) \
 				    /**/
 				
@@ -345,7 +345,7 @@
 				
 				#define BINARY(x) BINARY_S(<STATE/>(), x)
 				#define BINARY_S(s, x) \
-				    <DEMOTE_AP/>( \
+				    <ARBITRARY_DEMOTE/>( \
 				        <EXPR_S/>(s)(<FOLD_LEFT_S/>( \
 				            s, ACC, \
 				            (<STRING/>) <SPLIT/>( \
@@ -360,8 +360,8 @@
 				    /**/
 				
 				#define ACC(s, bit, x) \
-				    <ADD_AP/>( \
-				        <MUL_AP/>(x, (2)), (bit) \
+				    <ARBITRARY_ADD/>( \
+				        <ARBITRARY_MUL/>(x, (2)), (bit) \
 				    ) \
 				    /**/
 				
@@ -488,7 +488,7 @@
 				
 				#define BINARY(xs) BINARY_S(<STATE/>(), xs)
 				#define BINARY_S(s, xs) \
-				    <DEMOTE_AP/>( \
+				    <ARBITRARY_DEMOTE/>( \
 				        <EXPR_S/>(s)(<FOLD_LEFT_S/>( \
 				            s, ACC, (XS) xs, (0) \
 				        )) \
@@ -496,8 +496,8 @@
 				    /**/
 				
 				#define ACC(s, bit, x) \
-				    <ADD_AP/>( \
-				        <MUL_AP/>(x, (2)), (bit) \
+				    <ARBITRARY_ADD/>( \
+				        <ARBITRARY_MUL/>(x, (2)), (bit) \
 				    ) \
 				    /**/
 				
@@ -611,16 +611,16 @@
 				
 				#define CONVERT(string, base) CONVERT_S(<STATE/>(), string, base)
 				#define CONVERT_S(s, string, base) \
-				    <DEMOTE_AP/>( \
+				    <ARBITRARY_DEMOTE/>( \
 				        <EXPR_S/>(s)(<FOLD_LEFT_AUX_S/>( \
-				            s, OP, (<STRING/>) string, (<LITERAL_AP/>(base)), (0) \
+				            s, OP, (<STRING/>) string, (<ARBITRARY_LITERAL/>(base)), (0) \
 				        )) \
 				    ) \
 				    /**/
 				
 				#define OP(s, digit, base, x) \
-				    <ADD_AP/>( \
-				        <MUL_AP/>(x, base), HELPER(digit) \
+				    <ARBITRARY_ADD/>( \
+				        <ARBITRARY_MUL/>(x, base), HELPER(digit) \
 				    ) \
 				    /**/
 				

@@ -4,12 +4,12 @@
 	The <self/> header defines an <link id="arbitrary-precision"/> "greater-than" operator.
 </overview>
 
-<macro id="GREATER_AP" group="greater">
+<macro id="ARBITRARY_GREATER" group="greater">
 	<abstract>
-		The <GREATER_AP/> macro tests whether its first operand is greater than its second operand.
+		The <ARBITRARY_GREATER/> macro tests whether its first operand is greater than its second operand.
 	</abstract>
 	<usage>
-		<syntax><GREATER_AP/>(x, y)</syntax>
+		<syntax><ARBITRARY_GREATER/>(x, y)</syntax>
 		<param id="x">
 			The first operand.
 		</param>
@@ -24,11 +24,11 @@
 	<listing>
 		#include <chaos-preprocessor-arbitrary-greater.h/>
 		
-		<GREATER_AP/>((1)(2)(3), (4)(5)) // 1
-		<GREATER_AP/>((1)(2), (3)(4)(5)) // 0
+		<ARBITRARY_GREATER/>((1)(2)(3), (4)(5)) // 1
+		<ARBITRARY_GREATER/>((1)(2), (3)(4)(5)) // 0
 	</listing>
-	<derivative id="GREATER_AP_ID"/>
-	<derivative id="GREATER_AP_" lang="C99"/>
+	<derivative id="ARBITRARY_GREATER_ID"/>
+	<derivative id="ARBITRARY_GREATER_" lang="C99"/>
 </macro>
 
 </header>

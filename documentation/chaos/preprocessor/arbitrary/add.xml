@@ -4,12 +4,12 @@
 	The <self/> header defines an <link id="arbitrary-precision"/> addition operator.
 </overview>
 
-<macro id="ADD_AP" group="addition">
+<macro id="ARBITRARY_ADD" group="addition">
 	<abstract>
-		The <ADD_AP/> macro computes the sum of two <link id="arbitrary-precision values"/>.
+		The <ARBITRARY_ADD/> macro computes the sum of two <link id="arbitrary-precision values"/>.
 	</abstract>
 	<usage>
-		<syntax><ADD_AP/>(x, y)</syntax>
+		<syntax><ARBITRARY_ADD/>(x, y)</syntax>
 		<param id="x">
 			The first addend.
 		</param>
@@ -24,14 +24,14 @@
 		#include <chaos-preprocessor-arbitrary-add.h/>
 		#include <chaos-preprocessor-arbitrary-demote.h/>
 		
-		<DEMOTE_AP/>(<ADD_AP/>(
+		<ARBITRARY_DEMOTE/>(<ARBITRARY_ADD/>(
 		    (9)(8)(7)(6)(5)(4)(3)(2)(1)(0)(9)(8)(7)(6)(5)(4)(3)(2)(1)(0),
 		    (8)(7)(6)(5)(4)(3)(2)(1)(0)(9)(8)(7)(6)(5)(4)(3)(2)(1)(0)(9)
 		))
 		// 186419753208641975319
 	</listing>
-	<derivative id="ADD_AP_ID"/>
-	<derivative id="ADD_AP_" lang="C99"/>
+	<derivative id="ARBITRARY_ADD_ID"/>
+	<derivative id="ARBITRARY_ADD_" lang="C99"/>
 </macro>
 
 </header>

@@ -4,12 +4,12 @@
 	The <self/> header defines an <link id="arbitrary-precision"/> multiplication operator.
 </overview>
 
-<macro id="MUL_AP" group="multiplication">
+<macro id="ARBITRARY_MUL" group="multiplication">
 	<abstract>
-		The <MUL_AP/> macro computes the product of two <link id="arbitrary-precision values"/>.
+		The <ARBITRARY_MUL/> macro computes the product of two <link id="arbitrary-precision values"/>.
 	</abstract>
 	<usage>
-		<syntax><MUL_AP/>(x, y)</syntax>
+		<syntax><ARBITRARY_MUL/>(x, y)</syntax>
 		<param id="x">
 			The multiplicand.
 		</param>
@@ -24,14 +24,14 @@
 		#include <chaos-preprocessor-arbitrary-demote.h/>
 		#include <chaos-preprocessor-arbitrary-mul.h/>
 		
-		<DEMOTE_AP/>(<MUL_AP/>(
+		<ARBITRARY_DEMOTE/>(<ARBITRARY_MUL/>(
 		    (9)(8)(7)(6)(5)(4)(3)(2)(1)(0)(9)(8)(7)(6)(5)(4)(3)(2)(1)(0),
 		    (8)(7)(6)(5)(4)(3)(2)(1)(0)(9)(8)(7)(6)(5)(4)(3)(2)(1)(0)(9)
 		))
 		// 8657216899617436368663770766778859929890
 	</listing>
-	<derivative id="MUL_AP_ID"/>
-	<derivative id="MUL_AP_" lang="C99"/>
+	<derivative id="ARBITRARY_MUL_ID"/>
+	<derivative id="ARBITRARY_MUL_" lang="C99"/>
 </macro>
 
 </header>

@@ -4,12 +4,12 @@
 	The <self/> header defines a macro that converts an integer literal to an <link id="arbitrary-precision value"/>.
 </overview>
 
-<macro id="PROMOTE_AP" group="promotion">
+<macro id="ARBITRARY_PROMOTE" group="promotion">
 	<abstract>
-		The <PROMOTE_AP/> macro converts its argument to an <link id="arbitrary-precision value"/>.
+		The <ARBITRARY_PROMOTE/> macro converts its argument to an <link id="arbitrary-precision value"/>.
 	</abstract>
 	<usage>
-		<syntax><PROMOTE_AP/>(x)</syntax>
+		<syntax><ARBITRARY_PROMOTE/>(x)</syntax>
 		<param id="x">
 			The value to be converted.
 			Valid values range from <code>0</code> to <LIMIT_MAG/>.
@@ -22,11 +22,11 @@
 	<listing>
 		#include <chaos-preprocessor-arbitrary-promote.h/>
 		
-		<PROMOTE_AP/>(123)   // (1)(2)(3)
-		<PROMOTE_AP/>((-)10) // ((1)(0))
+		<ARBITRARY_PROMOTE/>(123)   // (1)(2)(3)
+		<ARBITRARY_PROMOTE/>((-)10) // ((1)(0))
 	</listing>
-	<derivative id="PROMOTE_AP_ID"/>
-	<derivative id="PROMOTE_AP_" lang="C99"/>
+	<derivative id="ARBITRARY_PROMOTE_ID"/>
+	<derivative id="ARBITRARY_PROMOTE_" lang="C99"/>
 </macro>
 
 </header>

@@ -4,12 +4,12 @@
 	The <self/> header defines a macro that converts an <link id="arbitrary-precision value"/> to an integer literal.
 </overview>
 
-<macro id="DEMOTE_AP" group="promotion">
+<macro id="ARBITRARY_DEMOTE" group="promotion">
 	<abstract>
-		The <DEMOTE_AP/> macro converts its argument to an integer literal.
+		The <ARBITRARY_DEMOTE/> macro converts its argument to an integer literal.
 	</abstract>
 	<usage>
-		<syntax><DEMOTE_AP/>(x)</syntax>
+		<syntax><ARBITRARY_DEMOTE/>(x)</syntax>
 		<param id="x">
 			The <link id="arbitrary-precision value"/> to be converted.
 		</param>
@@ -21,11 +21,11 @@
 	<listing>
 		#include <chaos-preprocessor-arbitrary-demote.h/>
 		
-		<DEMOTE_AP/>( (1)(2)(3) ) // 123
-		<DEMOTE_AP/>( ((1)(0))  ) // -10
+		<ARBITRARY_DEMOTE/>( (1)(2)(3) ) // 123
+		<ARBITRARY_DEMOTE/>( ((1)(0))  ) // -10
 	</listing>
-	<derivative id="DEMOTE_AP_ID"/>
-	<derivative id="DEMOTE_AP_" lang="C99"/>
+	<derivative id="ARBITRARY_DEMOTE_ID"/>
+	<derivative id="ARBITRARY_DEMOTE_" lang="C99"/>
 </macro>
 
 </header>

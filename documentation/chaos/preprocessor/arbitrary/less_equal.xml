@@ -4,12 +4,12 @@
 	The <self/> header defines an <link id="arbitrary-precision"/> "less-than-or-equal-to" operator.
 </overview>
 
-<macro id="LESS_EQUAL_AP" group="less-equal">
+<macro id="ARBITRARY_LESS_EQUAL" group="less-equal">
 	<abstract>
-		The <LESS_EQUAL_AP/> macro tests whether its first operand is less than or equal to its second operand.
+		The <ARBITRARY_LESS_EQUAL/> macro tests whether its first operand is less than or equal to its second operand.
 	</abstract>
 	<usage>
-		<syntax><LESS_EQUAL_AP/>(x, y)</syntax>
+		<syntax><ARBITRARY_LESS_EQUAL/>(x, y)</syntax>
 		<param id="x">
 			The first operand.
 		</param>
@@ -25,16 +25,16 @@
 		#include <chaos-preprocessor-arbitrary-less_equal.h/>
 		#include <chaos-preprocessor-arbitrary-literal.h/>
 		
-		<LESS_EQUAL_AP/>((1)(2)(3), (4)(5)) // 0
-		<LESS_EQUAL_AP/>((1)(2), (3)(4)(5)) // 1
+		<ARBITRARY_LESS_EQUAL/>((1)(2)(3), (4)(5)) // 0
+		<ARBITRARY_LESS_EQUAL/>((1)(2), (3)(4)(5)) // 1
 		
-		<LESS_EQUAL_AP/>(
-		    <LITERAL_AP/>((-)1), <LITERAL_AP/>((-)1)
+		<ARBITRARY_LESS_EQUAL/>(
+		    <ARBITRARY_LITERAL/>((-)1), <ARBITRARY_LITERAL/>((-)1)
 		)
 		// 1
 	</listing>
-	<derivative id="LESS_EQUAL_AP_ID"/>
-	<derivative id="LESS_EQUAL_AP_" lang="C99"/>
+	<derivative id="ARBITRARY_LESS_EQUAL_ID"/>
+	<derivative id="ARBITRARY_LESS_EQUAL_" lang="C99"/>
 </macro>
 
 </header>

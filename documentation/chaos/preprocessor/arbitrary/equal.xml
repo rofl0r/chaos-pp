@@ -4,12 +4,12 @@
 	The <self/> header defines an <link id="arbitrary-precision"/> equality operator.
 </overview>
 
-<macro id="EQUAL_AP" group="equality">
+<macro id="ARBITRARY_EQUAL" group="equality">
 	<abstract>
-		The <EQUAL_AP/> macro compares two <link id="arbitrary-precision values"/> for equality.
+		The <ARBITRARY_EQUAL/> macro compares two <link id="arbitrary-precision values"/> for equality.
 	</abstract>
 	<usage>
-		<syntax><EQUAL_AP/>(x, y)</syntax>
+		<syntax><ARBITRARY_EQUAL/>(x, y)</syntax>
 		<param id="x">
 			The first operand.
 		</param>
@@ -24,11 +24,11 @@
 	<listing>
 		#include <chaos-preprocessor-arbitrary-equal.h/>
 		
-		<EQUAL_AP/>((1)(2), (3)(4)) // 0
-		<EQUAL_AP/>((5)(6), (5)(6)) // 1
+		<ARBITRARY_EQUAL/>((1)(2), (3)(4)) // 0
+		<ARBITRARY_EQUAL/>((5)(6), (5)(6)) // 1
 	</listing>
-	<derivative id="EQUAL_AP_ID"/>
-	<derivative id="EQUAL_AP_" lang="C99"/>
+	<derivative id="ARBITRARY_EQUAL_ID"/>
+	<derivative id="ARBITRARY_EQUAL_" lang="C99"/>
 </macro>
 
 </header>

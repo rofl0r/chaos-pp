@@ -4,12 +4,12 @@
 	The <self/> header defines a macro that performs a Boolean conversion on an <link id="arbitrary-precision value"/>.
 </overview>
 
-<macro id="BOOL_AP" group="boolean">
+<macro id="ARBITRARY_BOOL" group="boolean">
 	<abstract>
-		The <BOOL_AP/> macro performs a Boolean conversion on its argument.
+		The <ARBITRARY_BOOL/> macro performs a Boolean conversion on its argument.
 	</abstract>
 	<usage>
-		<syntax><BOOL_AP/>(x)</syntax>
+		<syntax><ARBITRARY_BOOL/>(x)</syntax>
 		<param id="x">
 			The <link id="arbitrary-precision value"/> to be converted.
 		</param>
@@ -21,11 +21,11 @@
 	<listing>
 		#include <chaos-preprocessor-arbitrary-bool.h/>
 		
-		<BOOL_AP/>((0))       // 0
-		<BOOL_AP/>((1)(2)(3)) // 1
+		<ARBITRARY_BOOL/>((0))       // 0
+		<ARBITRARY_BOOL/>((1)(2)(3)) // 1
 	</listing>
-	<derivative id="BOOL_AP_ID"/>
-	<derivative id="BOOL_AP_" lang="C99"/>
+	<derivative id="ARBITRARY_BOOL_ID"/>
+	<derivative id="ARBITRARY_BOOL_" lang="C99"/>
 </macro>
 
 </header>

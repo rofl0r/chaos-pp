@@ -4,12 +4,12 @@
 	The <self/> header defines a macro that extracts the sign of an <link id="arbitrary-precision value"/>.
 </overview>
 
-<macro id="SIGN_AP" group="sign">
+<macro id="ARBITRARY_SIGN" group="sign">
 	<abstract>
-		The <SIGN_AP/> macro extracts the sign of an <link id="arbitrary-precision value"/>.
+		The <ARBITRARY_SIGN/> macro extracts the sign of an <link id="arbitrary-precision value"/>.
 	</abstract>
 	<usage>
-		<syntax><SIGN_AP/>(x)</syntax>
+		<syntax><ARBITRARY_SIGN/>(x)</syntax>
 		<param id="x">
 			The <link id="arbitrary-precision value"/> whose sign is to be extracted.
 		</param>
@@ -22,11 +22,11 @@
 		#include <chaos-preprocessor-arbitrary-literal.h/>
 		#include <chaos-preprocessor-arbitrary-sign.h/>
 		
-		<SIGN_AP/>(<LITERAL_AP/>(1 2 3)) // 0
-		<SIGN_AP/>(<LITERAL_AP/>((-)1))  // 1
+		<ARBITRARY_SIGN/>(<ARBITRARY_LITERAL/>(1 2 3)) // 0
+		<ARBITRARY_SIGN/>(<ARBITRARY_LITERAL/>((-)1))  // 1
 	</listing>
-	<derivative id="SIGN_AP_ID"/>
-	<derivative id="SIGN_AP_" lang="C99"/>
+	<derivative id="ARBITRARY_SIGN_ID"/>
+	<derivative id="ARBITRARY_SIGN_" lang="C99"/>
 </macro>
 
 </header>

@@ -4,12 +4,12 @@
 	The <self/> header defines an <link id="arbitrary-precision"/> inequality operator.
 </overview>
 
-<macro id="NOT_EQUAL_AP" group="inequality">
+<macro id="ARBITRARY_NOT_EQUAL" group="inequality">
 	<abstract>
-		The <NOT_EQUAL_AP/> macro compares two <link id="arbitrary-precision values"/> for inequality.
+		The <ARBITRARY_NOT_EQUAL/> macro compares two <link id="arbitrary-precision values"/> for inequality.
 	</abstract>
 	<usage>
-		<syntax><NOT_EQUAL_AP/>(x, y)</syntax>
+		<syntax><ARBITRARY_NOT_EQUAL/>(x, y)</syntax>
 		<param id="x">
 			The first operand.
 		</param>
@@ -24,11 +24,11 @@
 	<listing>
 		#include <chaos-preprocessor-arbitrary-not_equal.h/>
 		
-		<NOT_EQUAL_AP/>((1)(2), (3)(4)) // 1
-		<NOT_EQUAL_AP/>((5)(6), (5)(6)) // 0
+		<ARBITRARY_NOT_EQUAL/>((1)(2), (3)(4)) // 1
+		<ARBITRARY_NOT_EQUAL/>((5)(6), (5)(6)) // 0
 	</listing>
-	<derivative id="NOT_EQUAL_AP_ID"/>
-	<derivative id="NOT_EQUAL_AP_" lang="C99"/>
+	<derivative id="ARBITRARY_NOT_EQUAL_ID"/>
+	<derivative id="ARBITRARY_NOT_EQUAL_" lang="C99"/>
 </macro>
 
 </header>

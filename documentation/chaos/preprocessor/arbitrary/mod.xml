@@ -4,12 +4,12 @@
 	The <self/> header defines an <link id="arbitrary-precision"/> remainder operator.
 </overview>
 
-<macro id="MOD_AP" group="division">
+<macro id="ARBITRARY_MOD" group="division">
 	<abstract>
-		The <MOD_AP/> macro computes the remainder produced by dividing two <link id="arbitrary-precision values"/>.
+		The <ARBITRARY_MOD/> macro computes the remainder produced by dividing two <link id="arbitrary-precision values"/>.
 	</abstract>
 	<usage>
-		<syntax><MOD_AP/>(x, y)</syntax>
+		<syntax><ARBITRARY_MOD/>(x, y)</syntax>
 		<param id="x">
 			The base.
 		</param>
@@ -25,14 +25,14 @@
 		#include <chaos-preprocessor-arbitrary-demote.h/>
 		#include <chaos-preprocessor-arbitrary-mod.h/>
 		
-		<DEMOTE_AP/>(<MOD_AP/>(
+		<ARBITRARY_DEMOTE/>(<ARBITRARY_MOD/>(
 		    (1)(2)(3)(4),
 		    (5)(0)
 		))
 		// 34
 	</listing>
-	<derivative id="MOD_AP_ID"/>
-	<derivative id="MOD_AP_" lang="C99"/>
+	<derivative id="ARBITRARY_MOD_ID"/>
+	<derivative id="ARBITRARY_MOD_" lang="C99"/>
 </macro>
 
 </header>

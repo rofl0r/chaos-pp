@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- **************************************************************************
+     *                                                                        *
+     *    (C) Copyright Paul Mensonides 2003-2005.                            *
+     *                                                                        *
+     *    Distributed under the Boost Software License, Version 1.0.          *
+     *    (See accompanying file LICENSE).                                    *
+     *                                                                        *
+     *    See http://chaos-pp.sourceforge.net for the most recent version.    *
+     *                                                                        *
+     ************************************************************************** -->
+
+<header name="chaos/preprocessor/string/compare_insensitive.h" author="Paul Mensonides" date="2003-2005">
+<overview>
+	The <self/> header defines an algorithm that compares two <link id="strings"/> for case-insensitive equality.
+</overview>
+
+<macro id="STRING_COMPARE_INSENSITIVE">
+	<abstract>
+		The <STRING_COMPARE_INSENSITIVE/> macro compares two <link id="strings"/> for case-insensitive equality.
+	</abstract>
+	<usage lang="C99">
+		<syntax><STRING_COMPARE_INSENSITIVE/>(a, b)</syntax>
+		<param id="a" optional="1">
+			The first <link id="string"/>.
+		</param>
+		<param id="b" optional="1">
+			The second <link id="string"/>.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><STRING_COMPARE_INSENSITIVE/>(a, b)</syntax>
+		<param id="a">
+			The first <link id="string"/>.
+		</param>
+		<param id="b">
+			The second <link id="string"/>.
+		</param>
+	</usage>
+	<para>
+		If <var>a</var> and <var>b</var> are both the same <link id="string"/> (ignoring case), this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<para>
+		The efficiency of the algorithm's use of the <link id="recursion backend"/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
+		The asymptotic upper bound of O(<x-var>n</x-var>+1), where <x-var>n</x-var> is the number of characters in <var>a</var> and <var>b</var>, occurs when <var>a</var> and <var>a</var> are equal (ignoring case).
+		The asymptotic lower bound of Ω(1) occurs when the first character of <var>a</var> differs from the first character of <var>b</var>.
+	</para>
+	<para>
+		This macro uses <link id="bypass semantics"/>.
+		If <link id="bypass semantics"/> are already in effect, <STRING_COMPARE_INSENSITIVE_BYPASS/> must be used instead.
+	</para>
+	<x-reference id="STRING_COMPARE"/>
+	<listing>
+		#include <chaos-preprocessor-string-compare_insensitive.h/>
+		
+		<STRING_COMPARE_INSENSITIVE/>(a b c, A B C) // 1
+	</listing>
+	<derivative id="STRING_COMPARE_INSENSITIVE_ID"/>
+	<derivative id="STRING_COMPARE_INSENSITIVE_" lang="C99"/>
+	<derivative id="STRING_COMPARE_INSENSITIVE_BYPASS">
+		<usage lang="C99">
+			<syntax><STRING_COMPARE_INSENSITIVE_BYPASS/>(s, a, b)</syntax>
+		</usage>
+		<usage lang="C/C++">
+			<syntax><STRING_COMPARE_INSENSITIVE_BYPASS/>(s, a, b)</syntax>
+		</usage>
+		<derivative id="STRING_COMPARE_INSENSITIVE_BYPASS_ID"/>
+		<derivative id="STRING_COMPARE_INSENSITIVE_BYPASS_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

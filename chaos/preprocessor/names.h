@@ -19,7 +19,7 @@
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/logical/bitor.h>
 # include <chaos/preprocessor/logical/compl.h>
-# // include <chaos/preprocessor/recursion/auto_rec.h>
+# include <chaos/preprocessor/recursion/auto_rec.h>
 #
 # /* CHAOS_PP_SCOPE */
 #

@@ -1,34 +1,36 @@
 clear
 
-destination=chaos-pp
-library=Chaos,Preprocessor,Library
-prefix=CHAOS_PP_
-source=.
-url=http://chaos-pp.sourceforge.net
+# parameters:
+#
+# $1 = source path
+# $2 = destination path
+# $3 = library name (w/spaces replaced by commas)
+# $4 = macro prefix
+# $5 = url
 
-paramset="destination=$destination library=$library prefix=$prefix source=$source url=$url"
+paramset="source=$1 destination=$2 library=$3 prefix=$4 url=$5"
 
 echo expanding library...
-msxsl $source/library.xml library.xsl -o .library.xml $paramset
+msxsl $1/library.xml library.xsl -o .library.xml $paramset
 
 echo generating symbol table...
 msxsl .library.xml symbol.xsl -o .symbol.xsl $paramset
 
 echo initializing registry...
-msxsl $source/register.xml register.xsl -o .register.xsl $paramset
+msxsl $1/register.xml register.xsl -o .register.xsl $paramset
 
 echo copying support files...
-mkdir -p $destination
-cp style.css $destination/style.css
-cp -u background.gif $destination/background.gif
+mkdir -p $2
+cp style.css $2/style.css
+cp background.gif $2/background.gif
 
 echo creating indices...
-msxsl .library.xml index.xsl -o $destination/headers.html $paramset
-msxsl .library.xml index.xsl -m primary -o $destination/macros.html $paramset
-msxsl .library.xml index.xsl -m secondary -o $destination/master.html $paramset
+msxsl .library.xml index.xsl -o $2/headers.html $paramset
+msxsl .library.xml index.xsl -m primary -o $2/macros.html $paramset
+msxsl .library.xml index.xsl -m secondary -o $2/master.html $paramset
 
 echo generating build script...
-msxsl $source/library.xml script.xsl -o .script $paramset
+msxsl $1/library.xml script.xsl -o .script $paramset
 chmod +rx .script
 
 echo

@@ -17,7 +17,7 @@
 # /* CHAOS_PP_TIMES */
 #
 # define CHAOS_PP_TIMES(a, b) \
-    CHAOS_PP_LOOKUP(b, CHAOS_PP_LOOKUP(a, ( \
+    CHAOS_PP_ARBITRARY_LOOKUP(b, CHAOS_PP_ARBITRARY_LOOKUP(a, ( \
         ((0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0)), \
         ((0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (0, 7), (0, 8), (0, 9)), \
         ((0, 0), (0, 2), (0, 4), (0, 6), (0, 8), (1, 0), (1, 2), (1, 4), (1, 6), (1, 8)), \

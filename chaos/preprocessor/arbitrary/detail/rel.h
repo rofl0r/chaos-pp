@@ -14,10 +14,10 @@
 #
 # include <chaos/preprocessor/arbitrary/detail/lookup.h>
 #
-# /* CHAOS_PP_REL */
+# /* CHAOS_PP_ARBITRARY_REL */
 #
-# define CHAOS_PP_REL(a, b) \
-    CHAOS_PP_LOOKUP(a, CHAOS_PP_LOOKUP(b, ( \
+# define CHAOS_PP_ARBITRARY_REL(a, b) \
+    CHAOS_PP_ARBITRARY_LOOKUP(a, CHAOS_PP_ARBITRARY_LOOKUP(b, ( \
         (1, 2, 2, 2, 2, 2, 2, 2, 2, 2), \
         (0, 1, 2, 2, 2, 2, 2, 2, 2, 2), \
         (0, 0, 1, 2, 2, 2, 2, 2, 2, 2), \

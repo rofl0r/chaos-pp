@@ -17,7 +17,7 @@
 # /* CHAOS_PP_MINUS */
 #
 # define CHAOS_PP_MINUS(a, b) \
-    CHAOS_PP_LOOKUP(b, CHAOS_PP_LOOKUP(a, ( \
+    CHAOS_PP_ARBITRARY_LOOKUP(b, CHAOS_PP_ARBITRARY_LOOKUP(a, ( \
         ((0, 0), (1, 9), (1, 8), (1, 7), (1, 6), (1, 5), (1, 4), (1, 3), (1, 2), (1, 1)), \
         ((0, 1), (0, 0), (1, 9), (1, 8), (1, 7), (1, 6), (1, 5), (1, 4), (1, 3), (1, 2)), \
         ((0, 2), (0, 1), (0, 0), (1, 9), (1, 8), (1, 7), (1, 6), (1, 5), (1, 4), (1, 3)), \

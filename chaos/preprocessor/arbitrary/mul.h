@@ -82,7 +82,7 @@
             res, \
             CHAOS_PP_ARBITRARY_FIX_INTERNAL( \
                 CHAOS_PP_SEQ_REVERSE(CHAOS_PP_SCAN(1)( \
-                    CHAOS_IP_ARBITRARY_MUL_M(0) CHAOS_PP_RMERGE(y, (digit), CHAOS_IP_ARBITRARY_MUL_M, digit)() \
+                    CHAOS_IP_ARBITRARY_MUL_M(0) CHAOS_PP_ARBITRARY_RMERGE(y, (digit), CHAOS_IP_ARBITRARY_MUL_M, digit)() \
                 )) \
                 shift \
             ) \
@@ -98,7 +98,7 @@
             res, \
             CHAOS_PP_ARBITRARY_FIX_INTERNAL( \
                 CHAOS_PP_SEQ_REVERSE(CHAOS_PP_SCAN(1)( \
-                    CHAOS_IP_ARBITRARY_MUL_M(0) CHAOS_PP_RMERGE(y, (digit), CHAOS_IP_ARBITRARY_MUL_M, digit)(CHAOS_PP_DEFER(CHAOS_PP_EMPTY)()) \
+                    CHAOS_IP_ARBITRARY_MUL_M(0) CHAOS_PP_ARBITRARY_RMERGE(y, (digit), CHAOS_IP_ARBITRARY_MUL_M, digit)(CHAOS_PP_DEFER(CHAOS_PP_EMPTY)()) \
                 )) \
                 CHAOS_PP_EMPTY shift \
             ) \

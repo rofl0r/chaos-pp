@@ -6,7 +6,7 @@
 
 <macro id="EQUAL" group="equality">
 	<abstract>
-		The <EQUAL/> macro compares to values for equality.
+		The <EQUAL/> macro compares two values for equality.
 	</abstract>
 	<usage>
 		<syntax><EQUAL/>(x, y)</syntax>

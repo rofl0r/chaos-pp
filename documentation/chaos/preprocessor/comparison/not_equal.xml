@@ -6,7 +6,7 @@
 
 <macro id="NOT_EQUAL" group="inequality">
 	<abstract>
-		The <NOT_EQUAL/> macro compares to values for inequality.
+		The <NOT_EQUAL/> macro compares two values for inequality.
 	</abstract>
 	<usage>
 		<syntax><NOT_EQUAL/>(x, y)</syntax>

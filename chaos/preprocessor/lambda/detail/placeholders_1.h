@@ -9,6 +9,8 @@
 #  *                                                                         *
 #  ************************************************************************* */
 #
+# define CHAOS_PP_IS_WITH_PLACEHOLDERS 1
+#
 # define _0 CHAOS_PP_PARAM(0)
 # define _1 CHAOS_PP_PARAM(1)
 # define _2 CHAOS_PP_PARAM(2)

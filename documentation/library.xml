@@ -369,6 +369,7 @@
 		</directory>
 		<header name="slot.h"/>
 		<directory name="slot">
+			<header name="counter.h"/>
 			<header name="slot.h"/>
 		</directory>
 		<header name="string.h"/>

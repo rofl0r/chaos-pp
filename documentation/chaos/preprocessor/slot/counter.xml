@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/slot/counter.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines macros used generate numbers that are unique within a translation unit.
+</overview>
+
+<macro id="COUNTER" type="object">
+	<abstract>
+		The <COUNTER/> macro expands to the current counter value.
+	</abstract>
+	<usage>
+		<syntax><COUNTER/></syntax>
+	</usage>
+	<para>
+		This macro expands to an integer literal.
+		Its initial value is <code>0</code>.
+		Each usage of <UPDATE_COUNTER/> increases the current value by one.
+		Between usages of <UPDATE_COUNTER/>, the value of <COUNTER/> is constant.
+	</para>
+	<x-reference id="UPDATE_COUNTER"/>
+	<listing>
+		#include <chaos-preprocessor-cat.h/>
+		#include <chaos-preprocessor-slot-counter.h/>
+		
+		??=include <UPDATE_COUNTER/>()
+		
+		struct <CAT/>(register_, <COUNTER/>) {
+		    inline <CAT/>(register_, <COUNTER/>)(void) {
+		        return;
+		    }
+		    // ...
+		};
+		
+		??=include <UPDATE_COUNTER/>()
+		
+		struct <CAT/>(register_, <COUNTER/>) {
+		    inline <CAT/>(register_, <COUNTER/>)(void) {
+		        return;
+		    }
+		    // ...
+		};
+	</listing>
+	<derivative id="COUNTER_ID"/>
+	<derivative id="COUNTER_" lang="C99"/>
+</macro>
+
+<macro id="UPDATE_COUNTER">
+	<abstract>
+		The <UPDATE_COUNTER/> macro increments the current counter value.
+	</abstract>
+	<usage>
+		<syntax>??=include <UPDATE_COUNTER/>()</syntax>
+	</usage>
+	<x-reference id="COUNTER"/>
+	<derivative id="UPDATE_COUNTER_ID"/>
+	<derivative id="UPDATE_COUNTER_" lang="C99"/>
+</macro>
+
+</header>

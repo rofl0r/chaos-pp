@@ -185,7 +185,7 @@
 		#if <VARIADICS/>
 		
 		<EXPR/>(<INVOKE/>(
-		    <OVERRIDE/>(a, <PARAM/>(0), <PARAM/>(1)),
+		    <OVERRIDE/>(a, <ARG/>(0), <ARG/>(1)),
 		    b, c
 		))
 		// (a, b, c)
@@ -239,12 +239,12 @@
 	<derivative id="SELF_" lang="C99"/>
 </macro>
 
-<macro id="PARAM" group="placeholders">
+<macro id="ARG" group="placeholders">
 	<abstract>
-		The <PARAM/> macro produces a reference to a <link id="λ placeholder"/>.
+		The <ARG/> macro produces a reference to a <link id="λ placeholder"/>.
 	</abstract>
 	<usage lang="C99">
-		<syntax><PARAM/>(n)</syntax>
+		<syntax><ARG/>(n)</syntax>
 		<param id="n">
 			The index of the <link id="λ placeholder"/> to be referenced.
 			Valid values range from <code>0</code> to <LIMIT_PLACEHOLDERS/> - 1.
@@ -267,7 +267,7 @@
 		
 		<EXPR/>(<INVOKE/>(
 		    <VARIADIC_CAT_/>(
-		        <PARAM/>(0), <PARAM/>(1), <PARAM/>(2)
+		        <ARG/>(0), <ARG/>(1), <ARG/>(2)
 		    ),
 		    x, y, z
 		))
@@ -275,8 +275,8 @@
 		
 		#endif
 	</listing>
-	<derivative id="PARAM_ID" lang="C99"/>
-	<derivative id="PARAM_" lang="C99"/>
+	<derivative id="ARG_ID" lang="C99"/>
+	<derivative id="ARG_" lang="C99"/>
 </macro>
 
 <macro id="PLACEHOLDERS" group="placeholders">
@@ -297,7 +297,7 @@
 	<para>
 		It is important that the definitions of the <link id="λ placeholders"/> only exist temporarily because they are unprefixed macro definitions that will interfere with any other use of those identifiers.
 		Therefore, for every use of <PLACEHOLDERS/> that enables the <link id="λ placeholders"/>, there should be a matching use of <PLACEHOLDERS/> that disables them.
-		The library cannot enforce this directly, but the <WITH_PLACEHOLDERS/> mechanism may be used to enforce it, or the longhand <PARAM/> form may be used instead.
+		The library cannot enforce this directly, but the <WITH_PLACEHOLDERS/> mechanism may be used to enforce it, or the longhand <ARG/> form may be used instead.
 	</para>
 	<para>		
 		Names that begin with an underscore are reserved for the implementation in file scope (C) or the global namespace (C++).
@@ -316,7 +316,7 @@
 
 		<EXPR/>(<INVOKE/>(
 		    <LAMBDA/>(MACRO)(
-		        <PARAM/>(0), <PARAM/>(1)
+		        <ARG/>(0), <ARG/>(1)
 		    ),
 		    1, 2
 		))

@@ -128,7 +128,7 @@
 		#if <VARIADICS/>
 		
 		<EXPR/>(<SEQ_FILTER/>(
-		    <BOOL_/>(<PARAM/>(1)),
+		    <BOOL_/>(<ARG/>(1)),
 		    (4)(6)(0)(0)(8)(0)
 		))
 		// (4)(6)(8)

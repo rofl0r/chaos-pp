@@ -50,8 +50,8 @@
         /**/
 #    define CHAOS_PP_CURRY_BYPASS_ID() CHAOS_PP_CURRY_BYPASS
 #    define CHAOS_PP_CURRY_BYPASS_ CHAOS_PP_LAMBDA(CHAOS_PP_CURRY_BYPASS_ID)()
-#    define CHAOS_IP_CURRY_SHIFT_A(n) CHAOS_PP_PARAM(n), CHAOS_IP_CURRY_SHIFT_B
-#    define CHAOS_IP_CURRY_SHIFT_B(n) CHAOS_PP_PARAM(n), CHAOS_IP_CURRY_SHIFT_A
+#    define CHAOS_IP_CURRY_SHIFT_A(n) CHAOS_PP_ARG(n), CHAOS_IP_CURRY_SHIFT_B
+#    define CHAOS_IP_CURRY_SHIFT_B(n) CHAOS_PP_ARG(n), CHAOS_IP_CURRY_SHIFT_A
 #    define CHAOS_IP_CURRY_INDIRECT() CHAOS_IP_CURRY_I
 #    define CHAOS_IP_CURRY_I(p, s, orig, args, expr) \
         CHAOS_PP_IIF(CHAOS_PP_IS_VARIADIC(p ## expr))( \
@@ -90,7 +90,7 @@
         CHAOS_PP_DEFER(CHAOS_PP_LAMBDA)(CHAOS_IP_CURRY_E(, s, p ## orig, p ## args, CHAOS_PP_COMMA, CHAOS_PP_FLAG_DATA(p ## flag))) \
         /**/
 #    define CHAOS_IP_CURRY_0xLPAREN(...) CHAOS_PP_FLAG(0xLPAREN)
-#    define CHAOS_IP_CURRY_0xPARAM(p, s, orig, args, flag) CHAOS_PP_LAMBDA(CHAOS_PP_TUPLE_ELEM(?, CHAOS_PP_FLAG_DATA(p ## flag), p ## args))
+#    define CHAOS_IP_CURRY_0xARG(p, s, orig, args, flag) CHAOS_PP_LAMBDA(CHAOS_PP_TUPLE_ELEM(?, CHAOS_PP_FLAG_DATA(p ## flag), p ## args))
 #    define CHAOS_IP_CURRY_0xRPAREN(...) CHAOS_PP_FLAG(0xRPAREN)
 #    define CHAOS_IP_CURRY_0xSELF(p, s, orig, ...) CHAOS_PP_ESCAPE(p ## orig)
 # endif

@@ -88,7 +88,7 @@
 #    define CHAOS_IP_PARSE_0xESCAPE(p, s, orig, args, flag) CHAOS_PP_ELEMENT(CHAOS_PP_FLAG_DATA(p ## flag))
 #    define CHAOS_IP_PARSE_0xLAMBDA(p, s, orig, args, flag) CHAOS_IP_PARSE_E(, s, p ## orig, p ## args, CHAOS_PP_OPERATOR(CHAOS_PP_COMMA), CHAOS_PP_FLAG_DATA(p ## flag))
 #    define CHAOS_IP_PARSE_0xLPAREN(...) CHAOS_PP_OPERATOR(CHAOS_PP_LPAREN)
-#    define CHAOS_IP_PARSE_0xPARAM(p, s, orig, args, flag) \
+#    define CHAOS_IP_PARSE_0xARG(p, s, orig, args, flag) \
         CHAOS_PP_DEFER(CHAOS_PP_EXPR_S(s))(CHAOS_PP_DEFER(CHAOS_IP_PARSE_INDIRECT)()( \
             , CHAOS_PP_PREV(s), p ## orig, p ## args, CHAOS_PP_TUPLE_ELEM(?, CHAOS_PP_FLAG_DATA(p ## flag), p ## args) \
         )) \

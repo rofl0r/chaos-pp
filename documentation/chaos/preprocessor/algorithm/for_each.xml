@@ -135,7 +135,7 @@
 		#if <VARIADICS/>
 		
 		<EXPR/>(<FOR_EACH/>(
-		    <PARAM/>(1)[0],
+		    <ARG/>(1)[0],
 		    (<LIST/>) (x, (y, (z, ...))),
 		))
 		// x[0] y[0] z[0]

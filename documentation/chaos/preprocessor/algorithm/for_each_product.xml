@@ -131,7 +131,7 @@
 		#if <VARIADICS/>
 		
 		<EXPR/>(<FOR_EACH_PRODUCT/>(
-		    <SEQ_TO_TUPLE_/>(<PARAM/>(1)),
+		    <SEQ_TO_TUPLE_/>(<ARG/>(1)),
 		    (A)(B)
 		))
 		// (a, x) (a, y) (b, x) (b, y)

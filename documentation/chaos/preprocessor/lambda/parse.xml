@@ -45,7 +45,7 @@
 		#if <VARIADICS/>
 		
 		<EXPR/>(<EXECUTE/>(<PARSE/>(
-		    <STRINGIZE_/>(<PARAM/>(0)),
+		    <STRINGIZE_/>(<ARG/>(0)),
 		    text
 		)))
 		// "text"

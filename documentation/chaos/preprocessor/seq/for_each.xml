@@ -138,7 +138,7 @@
 		// [a, b] [c, d] [e, f]
 		
 		<EXPR/>(<SEQ_FOR_EACH/>(
-		    <LAMBDA/>([) <PARAM/>(1) ],
+		    <LAMBDA/>([) <ARG/>(1) ],
 		    (x)(y)(z)
 		))
 		// [x] [y] [z]

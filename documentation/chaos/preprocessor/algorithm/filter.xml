@@ -138,7 +138,7 @@
 		// (<STRING/>) 1 2 3
 		
 		<EXPR/>(<FILTER/>(
-		    <BOOL_/>(<PARAM/>(1)),
+		    <BOOL_/>(<ARG/>(1)),
 		    (<STRING/>) 1 0 2 0 3
 		))
 		// (<STRING/>) 1 2 3

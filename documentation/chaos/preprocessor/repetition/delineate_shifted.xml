@@ -167,7 +167,7 @@
 		
 		<EXPR/>(<DELINEATE_SHIFTED/>(
 		    3, <COMMA/>,
-		    <PRIMITIVE_CAT_/>(class T, <PARAM/>(1))
+		    <PRIMITIVE_CAT_/>(class T, <ARG/>(1))
 		))
 		// class T2, class T3
 		

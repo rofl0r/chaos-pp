@@ -36,6 +36,8 @@
 		<usage lang="C99">
 			<syntax><TUPLE_SIZE_BYPASS/>(s, tuple)</syntax>
 		</usage>
+		<derivative id="TUPLE_SIZE_BYPASS_ID" lang="C99"/>
+		<derivative id="TUPLE_SIZE_BYPASS_" lang="C99"/>
 	</derivative>
 </macro>
 

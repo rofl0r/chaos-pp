@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <header name="chaos/preprocessor/arbitrary/mod.h" author="Paul Mensonides" date="2003-2004">
 <overview>
-	The <self/> header defines an <link id="arbitrary-precision"/> modulus operator.
+	The <self/> header defines an <link id="arbitrary-precision"/> remainder operator.
 </overview>
 
 <macro id="MOD_AP" group="division">
@@ -11,10 +11,10 @@
 	<usage>
 		<syntax><MOD_AP/>(x, y)</syntax>
 		<param id="x">
-			The dividend.
+			The base.
 		</param>
 		<param id="y">
-			The divisor.
+			The modulus.
 		</param>
 	</usage>
 	<para>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <header name="chaos/preprocessor/arithmetic/mod.h" author="Paul Mensonides" date="2003-2004">
 <overview>
-	The <self/> header defines a modulus operator.
+	The <self/> header defines a remainder operator.
 </overview>
 
 <macro id="MOD" group="division">
@@ -11,11 +11,11 @@
 	<usage>
 		<syntax><MOD/>(x, y)</syntax>
 		<param id="x">
-			The dividend.
+			The base.
 			Valid values range from <code>0</code> to <LIMIT_MAG/>.
 		</param>
 		<param id="y">
-			The divisor.
+			The modulus.
 			Valid values range from <code>1</code> to <LIMIT_MAG/>.
 		</param>
 	</usage>

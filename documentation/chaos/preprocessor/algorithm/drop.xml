@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<header name="chaos/preprocessor/algorithm/rest_n.h" author="Paul Mensonides" date="2003-2004">
+<header name="chaos/preprocessor/algorithm/drop.h" author="Paul Mensonides" date="2003-2004">
 <overview>
 	The <self/> header defines an algorithm that yields the remainder of a <link id="generic data structure"/> after removing a user-specified number of elements.
 </overview>
 
-<macro id="REST_N" type="indirect" group="range">
+<macro id="DROP" type="indirect" group="range">
 	<abstract>
-		The <REST_N/> macro removes the number of elements specified by its first argument from the head of its second argument.
+		The <DROP/> macro removes the number of elements specified by its first argument from the head of its second argument.
 	</abstract>
 	<usage>
-		<syntax><REST_N/>(n, g)</syntax>
+		<syntax><DROP/>(n, g)</syntax>
 		<param id="n">
 			The number of elements to be removed.
 			Valid values range from <code>0</code> to <LIMIT_MAG/>.
@@ -28,26 +28,26 @@
 	</para>
 	<para>
 		This macro uses <link id="bypass semantics"/>.
-		If <link id="bypass semantics"/> are already in effect, <REST_N_BYPASS/> must be used instead.
+		If <link id="bypass semantics"/> are already in effect, <DROP_BYPASS/> must be used instead.
 	</para>
 	<listing>
-		#include <chaos-preprocessor-algorithm-rest_n.h/>
+		#include <chaos-preprocessor-algorithm-drop.h/>
 		#include <chaos-preprocessor-list-core.h/>
 		
-		<REST_N/>(
+		<DROP/>(
 		    3,
 		    (<LIST/>) (a, (b, (c, (d, (e, ...)))))
 		)
 		// (<LIST/>) (d, (e, ...))
 	</listing>
-	<derivative id="REST_N_ID"/>
-	<derivative id="REST_N_" lang="C99"/>
-	<derivative id="REST_N_BYPASS">
+	<derivative id="DROP_ID"/>
+	<derivative id="DROP_" lang="C99"/>
+	<derivative id="DROP_BYPASS">
 		<usage>
-			<syntax><REST_N_BYPASS/>(s, n, g)</syntax>
+			<syntax><DROP_BYPASS/>(s, n, g)</syntax>
 		</usage>
-		<derivative id="REST_N_BYPASS_ID"/>
-		<derivative id="REST_N_BYPASS_" lang="C99"/>
+		<derivative id="DROP_BYPASS_ID"/>
+		<derivative id="DROP_BYPASS_" lang="C99"/>
 	</derivative>
 </macro>
 

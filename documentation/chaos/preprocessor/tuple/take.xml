@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<header name="chaos/preprocessor/tuple/first_n.h" author="Paul Mensonides" date="2003-2004">
+<header name="chaos/preprocessor/tuple/take.h" author="Paul Mensonides" date="2003-2004">
 <overview>
 	The <self/> header defines an algorithm that extracts a user-specified number of elements from the beginning of a <link id="tuple"/>.
 </overview>
 
-<macro id="TUPLE_FIRST_N" type="indirect" group="range">
+<macro id="TUPLE_TAKE" type="indirect" group="range">
 	<abstract>
-		The <TUPLE_FIRST_N/> macro extracts the number of elements specified by its first argument from its second argument.
+		The <TUPLE_TAKE/> macro extracts the number of elements specified by its first argument from its second argument.
 	</abstract>
 	<usage lang="C99">
-		<syntax><TUPLE_FIRST_N/>(n, tuple)</syntax>
+		<syntax><TUPLE_TAKE/>(n, tuple)</syntax>
 		<param id="n">
 			The number of elements to be extracted.
 			Valid values range from <code>0</code> to <LIMIT_MAG/>.
@@ -24,7 +24,7 @@
 	</para>
 	<para>
 		The efficiency of the algorithm's use of the <link id="recursion backend"/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
-		The asymptotic upper and lower bounds are <assoc id="complexity/first_n.gif">Θ</assoc>, where <x-var>n</x-var> is <var>n</var>.
+		The asymptotic upper and lower bounds are <assoc id="complexity/take.gif">Θ</assoc>, where <x-var>n</x-var> is <var>n</var>.
 	</para>
 	<para>
 		This macro operates on the nil <link id="tuple"/> representation used by the core <link id="tuple"/> operations defined in <chaos-preprocessor-tuple-core.h/>.
@@ -32,15 +32,15 @@
 	</para>
 	<para>
 		This macro uses <link id="bypass semantics"/>.
-		If <link id="bypass semantics"/> are already in effect, <TUPLE_FIRST_N_BYPASS/> must be used instead.
+		If <link id="bypass semantics"/> are already in effect, <TUPLE_TAKE_BYPASS/> must be used instead.
 	</para>
 	<listing>
 		#include <chaos-preprocessor-config.h/>
-		#include <chaos-preprocessor-tuple-first_n.h/>
+		#include <chaos-preprocessor-tuple-take.h/>
 		
 		#if <VARIADICS/>
 		
-		<TUPLE_FIRST_N/>(
+		<TUPLE_TAKE/>(
 		    12,
 		    (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z)
 		)
@@ -48,14 +48,14 @@
 		
 		#endif
 	</listing>
-	<derivative id="TUPLE_FIRST_N_ID" lang="C99"/>
-	<derivative id="TUPLE_FIRST_N_" lang="C99"/>
-	<derivative id="TUPLE_FIRST_N_BYPASS">
+	<derivative id="TUPLE_TAKE_ID" lang="C99"/>
+	<derivative id="TUPLE_TAKE_" lang="C99"/>
+	<derivative id="TUPLE_TAKE_BYPASS">
 		<usage lang="C99">
-			<syntax><TUPLE_FIRST_N_BYPASS/>(s, n, tuple)</syntax>
+			<syntax><TUPLE_TAKE_BYPASS/>(s, n, tuple)</syntax>
 		</usage>
-		<derivative id="TUPLE_FIRST_N_BYPASS_ID" lang="C99"/>
-		<derivative id="TUPLE_FIRST_N_BYPASS_" lang="C99"/>
+		<derivative id="TUPLE_TAKE_BYPASS_ID" lang="C99"/>
+		<derivative id="TUPLE_TAKE_BYPASS_" lang="C99"/>
 	</derivative>
 </macro>
 

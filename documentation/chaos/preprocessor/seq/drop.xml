@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<header name="chaos/preprocessor/seq/rest_n.h" author="Paul Mensonides" date="2003-2004">
+<header name="chaos/preprocessor/seq/drop.h" author="Paul Mensonides" date="2003-2004">
 <overview>
 	The <self/> header defines a macro that yields the remainder of a <link id="sequence"/> after removing a user-specified number of elements.
 </overview>
 
-<macro id="SEQ_REST_N" type="indirect" group="range">
+<macro id="SEQ_DROP" type="indirect" group="range">
 	<abstract>
-		The <SEQ_REST_N/> macro removes the number of elements specified by its first argument from the head of its second argument.
+		The <SEQ_DROP/> macro removes the number of elements specified by its first argument from the head of its second argument.
 	</abstract>
 	<usage lang="C99">
-		<syntax><SEQ_REST_N/>(n, seq)</syntax>
+		<syntax><SEQ_DROP/>(n, seq)</syntax>
 		<param id="n">
 			The number of elements to be removed.
 			Valid values range from <code>0</code> to <LIMIT_MAG/>.
@@ -19,7 +19,7 @@
 		</param>
 	</usage>
 	<usage lang="C/C++">
-		<syntax><SEQ_REST_N/>(n, seq)</syntax>
+		<syntax><SEQ_DROP/>(n, seq)</syntax>
 		<param id="n">
 			The number of elements to be removed.
 			Valid values range from <code>0</code> to <LIMIT_MAG/>.
@@ -34,19 +34,19 @@
 	</para>
 	<listing>
 		#include <chaos-preprocessor-config.h/>
-		#include <chaos-preprocessor-seq-rest_n.h/>
+		#include <chaos-preprocessor-seq-drop.h/>
 		
-		<SEQ_REST_N/>(2, (a)(b)(c)(d)) // (c)(d)
-		<SEQ_REST_N/>(0, (x)(y)(z))    // (x)(y)(z)
+		<SEQ_DROP/>(2, (a)(b)(c)(d)) // (c)(d)
+		<SEQ_DROP/>(0, (x)(y)(z))    // (x)(y)(z)
 		
 		#if <VARIADICS/>
 		
-		<SEQ_REST_N/>(0,) //
+		<SEQ_DROP/>(0,) //
 		
 		#endif
 	</listing>
-	<derivative id="SEQ_REST_N_ID"/>
-	<derivative id="SEQ_REST_N_" lang="C99"/>
+	<derivative id="SEQ_DROP_ID"/>
+	<derivative id="SEQ_DROP_" lang="C99"/>
 </macro>
 
 </header>

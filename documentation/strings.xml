@@ -52,7 +52,7 @@
 			For example,
 			<snippet>
 				<APPEND/>(
-				    <REST_N/>(3, (<STRING/>) a b c),
+				    <DROP/>(3, (<STRING/>) a b c),
 				    (<STRING/>) x y
 				)
 				// (<STRING/>) x y

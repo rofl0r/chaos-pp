@@ -90,14 +90,14 @@
 			Therefore, a "would-be" nil <link id="sequence"/> result from a <link id="sequence"/>-specific primitive is undefined.
 			For example,
 			<snippet>
-				<SEQ_REST_N/>(2, (a)(b)(c)) // (c)
-				<SEQ_REST_N/>(3, (a)(b)(c)) // undefined
+				<SEQ_DROP/>(2, (a)(b)(c)) // (c)
+				<SEQ_DROP/>(3, (a)(b)(c)) // undefined
 			</snippet>
 			The result of generic algorithm that yields a nil <link id="sequence"/> is well-defined provided that it is used only as a <link id="generic data structure"/>--meaning that it can be passed to other generic algorithms, etc.--or used by the core operations in <chaos-preprocessor-seq-core.h/> after the type prefix is stripped.
 			For example,
 			<snippet>
 				<APPEND/>(
-				    <REST_N/>(3, (<SEQ/>) (a)(b)(c)),
+				    <DROP/>(3, (<SEQ/>) (a)(b)(c)),
 				    (<SEQ/>) (x)(y)
 				)
 				// (<SEQ/>) (x)(y)

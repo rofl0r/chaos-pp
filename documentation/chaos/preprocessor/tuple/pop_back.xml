@@ -27,7 +27,7 @@
 	</para>
 	<para>
 		This macro uses <link id="bypass semantics"/>.
-		If <link id="bypass semantics"/> are already in effect, <TUPLE_FIRST_N_BYPASS/> must be used instead.
+		If <link id="bypass semantics"/> are already in effect, <TUPLE_POP_BACK_BYPASS/> must be used instead.
 	</para>
 	<listing>
 		#include <chaos-preprocessor-config.h/>

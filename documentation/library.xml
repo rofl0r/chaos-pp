@@ -201,13 +201,13 @@
 					<binary-file name="for_each_product-functional.gif"/>
 				</directory>
 				<header name="concat.h"/>
+				<header name="drop.h"/>
 				<directory name="efficiency">
 					<binary-file name="for_each_product.gif"/>
 				</directory>
 				<header name="elem.h"/>
 				<header name="enumerate.h"/>
 				<header name="filter.h"/>
-				<header name="first_n.h"/>
 				<header name="fold_left.h"/>
 				<header name="fold_left_aux.h"/>
 				<header name="fold_right.h"/>
@@ -228,9 +228,9 @@
 				<header name="range.h"/>
 				<header name="remove.h"/>
 				<header name="replace.h"/>
-				<header name="rest_n.h"/>
 				<header name="reverse.h"/>
 				<header name="size.h"/>
+				<header name="take.h"/>
 				<header name="transform.h"/>
 				<header name="x.h"/>
 				<directory name="x">
@@ -539,11 +539,11 @@
 				<header name="binary_transform.h"/>
 				<header name="concat.h"/>
 				<header name="core.h"/>
+				<header name="drop.h"/>
 				<header name="duplex.h"/>
 				<header name="elem.h"/>
 				<header name="enumerate.h"/>
 				<header name="filter.h"/>
-				<header name="first_n.h"/>
 				<header name="fold_left.h"/>
 				<header name="fold_left_aux.h"/>
 				<header name="fold_right.h"/>
@@ -556,9 +556,9 @@
 				<header name="range.h"/>
 				<header name="remove.h"/>
 				<header name="replace.h"/>
-				<header name="rest_n.h"/>
 				<header name="reverse.h"/>
 				<header name="size.h"/>
+				<header name="take.h"/>
 				<header name="to_array.h"/>
 				<header name="to_list.h"/>
 				<header name="to_string.h"/>
@@ -596,9 +596,9 @@
 				<header name="batch.h"/>
 				<directory name="complexity">
 					<binary-file name="concat.gif"/>
+					<binary-file name="drop.gif"/>
 					<binary-file name="elem_alt.gif"/>
 					<binary-file name="filter.gif"/>
-					<binary-file name="first_n.gif"/>
 					<binary-file name="fold_left.gif"/>
 					<binary-file name="fold_left_aux.gif"/>
 					<binary-file name="fold_right.gif"/>
@@ -610,9 +610,9 @@
 					<binary-file name="range.gif"/>
 					<binary-file name="remove.gif"/>
 					<binary-file name="replace.gif"/>
-					<binary-file name="rest_n.gif"/>
 					<binary-file name="reverse_alt.gif"/>
 					<binary-file name="size.gif"/>
+					<binary-file name="take.gif"/>
 					<binary-file name="to_list_alt.gif"/>
 					<binary-file name="to_seq_alt.gif"/>
 					<binary-file name="to_string_alt.gif"/>
@@ -620,6 +620,7 @@
 				</directory>
 				<header name="concat.h"/>
 				<header name="core.h"/>
+				<header name="drop.h"/>
 				<header name="eat.h"/>
 				<directory name="efficiency">
 					<binary-file name="fold_left.gif"/>
@@ -628,7 +629,6 @@
 				</directory>
 				<header name="elem.h"/>
 				<header name="filter.h"/>
-				<header name="first_n.h"/>
 				<header name="fold_left.h"/>
 				<header name="fold_left_aux.h"/>
 				<header name="fold_right.h"/>
@@ -638,12 +638,12 @@
 				<header name="insert.h"/>
 				<header name="pop_back.h"/>
 				<header name="range.h"/>
-				<header name="rest_n.h"/>
 				<header name="rem.h"/>
 				<header name="remove.h"/>
 				<header name="replace.h"/>
 				<header name="reverse.h"/>
 				<header name="size.h"/>
+				<header name="take.h"/>
 				<header name="to_list.h"/>
 				<header name="to_seq.h"/>
 				<header name="to_string.h"/>

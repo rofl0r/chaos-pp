@@ -25,7 +25,6 @@
 # include <chaos/preprocessor/extended.h>
 # include <chaos/preprocessor/facilities.h>
 # include <chaos/preprocessor/generics.h>
-# include <chaos/preprocessor/highprec.h>
 # include <chaos/preprocessor/iteration.h>
 # include <chaos/preprocessor/lambda.h>
 # include <chaos/preprocessor/limits.h>

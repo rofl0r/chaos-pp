@@ -86,12 +86,6 @@
 		<item value="generic data structure"/>
 		<item value="generic data structures"/>
 	</document>
-	<document id="high-precision">
-		<item value="high-precision"/>
-		<item value="high-precision arithmetic"/>
-		<item value="high-precision value"/>
-		<item value="high-precision values"/>
-	</document>
 	<document id="il">
 		<item value="IL expression"/>
 		<item value="IL expressions"/>
@@ -391,26 +385,6 @@
 				<header name="is_type.h"/>
 				<header name="strip.h"/>
 				<header name="typeof.h"/>
-			</directory>
-			<header name="highprec.h"/>
-			<directory name="highprec">
-				<header name="add.h"/>
-				<header name="bool.h"/>
-				<header name="demote.h"/>
-				<header name="div.h"/>
-				<header name="equal.h"/>
-				<header name="greater.h"/>
-				<header name="greater_equal.h"/>
-				<header name="less.h"/>
-				<header name="less_equal.h"/>
-				<header name="literal.h"/>
-				<header name="mod.h"/>
-				<header name="mul.h"/>
-				<header name="negate.h"/>
-				<header name="not_equal.h"/>
-				<header name="promote.h"/>
-				<header name="sign.h"/>
-				<header name="sub.h"/>
 			</directory>
 			<header name="iteration.h"/>
 			<directory name="iteration">

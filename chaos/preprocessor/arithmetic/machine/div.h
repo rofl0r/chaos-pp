@@ -16,8 +16,11 @@
 # include <chaos/preprocessor/arithmetic/machine/sub.h>
 # include <chaos/preprocessor/comparison/less_equal.h>
 # include <chaos/preprocessor/config.h>
+# include <chaos/preprocessor/control/expr_iif.h>
 # include <chaos/preprocessor/control/iif.h>
+# include <chaos/preprocessor/debug/division_by_zero.h>
 # include <chaos/preprocessor/lambda/ops.h>
+# include <chaos/preprocessor/logical/not.h>
 # include <chaos/preprocessor/recursion/expr.h>
 # include <chaos/preprocessor/recursion/machine.h>
 #
@@ -32,7 +35,10 @@
 # /* CHAOS_PP_DIV_MACHINE_S */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_DIV_MACHINE_S(s, x, y) CHAOS_PP_EXPR_S(s)(CHAOS_PP_MACHINE_S(s, (, 0xCHAOS(0xDIV), x, y, 0xCHAOS(0xSTOP),)))
+#    define CHAOS_PP_DIV_MACHINE_S(s, x, y) \
+        CHAOS_PP_EXPR_IIF(CHAOS_PP_NOT(y))(CHAOS_PP_DIVISION_BY_ZERO()) \
+        CHAOS_PP_EXPR_S(s)(CHAOS_PP_MACHINE_S(s, (, 0xCHAOS(0xDIV), x, y, 0xCHAOS(0xSTOP),))) \
+        /**/
 #    define CHAOS_PP_DIV_MACHINE_S_ID() CHAOS_PP_DIV_MACHINE_S
 #    define CHAOS_PP_DIV_MACHINE_S_ CHAOS_PP_LAMBDA(CHAOS_PP_DIV_MACHINE_S)
 #    define CHAOS_PP_INSTRUCTION_0xCHAOS_0xDIV(s, p, x, y, k, ...) (, 0xCHAOS(0xDIV2), x, y, 0, k, __VA_ARGS__)

@@ -84,7 +84,7 @@
         /**/
 #    define CHAOS_IP_TUPLE_FILTER_2(s, o, pred, _p, tuple, pd) \
         CHAOS_PP_IIF(CHAOS_PP_TUPLE_IS_CONS(tuple))( \
-            CHAOS_IP_TUPLE_FILTER_2_I, CHAOS_PP_TUPLE_NIL() CHAOS_PP_EAT \
+            CHAOS_IP_TUPLE_FILTER_2_I, CHAOS_PP_EAT \
         )(CHAOS_PP_OBSTRUCT(), s, o, pred, _p, tuple, pd) \
         /**/
 #    define CHAOS_IP_TUPLE_FILTER_2_I(_, s, o, pred, _p, tuple, pd) \

@@ -75,7 +75,7 @@
         /**/
 #    define CHAOS_IP_TUPLE_FIRST_N_1(s, n, tuple) \
         CHAOS_PP_IF(n)( \
-            CHAOS_IP_TUPLE_FIRST_N_1_I, CHAOS_PP_TUPLE_NIL() CHAOS_PP_EAT \
+            CHAOS_IP_TUPLE_FIRST_N_1_I, CHAOS_PP_EAT \
         )(CHAOS_PP_OBSTRUCT(), s, n, tuple) \
         /**/
 #    define CHAOS_IP_TUPLE_FIRST_N_1_I(_, s, n, tuple) \

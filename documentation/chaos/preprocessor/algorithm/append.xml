@@ -33,7 +33,7 @@
 		This macro appends the elements contained in <var>g2</var> to the tail of <var>g1</var>, resulting in a <link id="generic data structure"/> of the same type as <var>g1</var>.
 	</para>
 	<para>
-		The efficiency of the algorithm's use of the <link id="recursion backend"/> can be described in terms of the number of steps required to complete the algorithm.
+		The efficiency of the algorithm's use of the <link id="recursion backend"/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
 		The asymptotic upper bound of O(<x-var>n</x-var>+<x-var>m</x-var>+2), where <x-var>n</x-var> is the number of elements in <var>g1</var> and <x-var>m</x-var> is the number of elements in <var>g2</var>, occurs when the type of <var>g2</var> differs from the type of <var>g1</var>.
 		The asymptotic lower bound of Ω(<x-var>n</x-var>+1) occurs when <var>g1</var> and <var>g2</var> share the same type.
 	</para>

@@ -40,7 +40,14 @@
 			<LINK rel="stylesheet" type="text/css" href="{$root}/style.css"/>
 		</HEAD>
 		<BODY>
-			<H4>Headers</H4>
+			<xsl:choose>
+				<xsl:when test="false()">
+					<H4>Headers <SMALL>(<xsl:value-of select="count(header)"/>)</SMALL></H4>
+				</xsl:when>
+				<xsl:otherwise>
+					<H4>Headers</H4>
+				</xsl:otherwise>
+			</xsl:choose>
 			<UL>
 				<xsl:for-each select="header">
 					<xsl:sort select="@name"/>
@@ -62,7 +69,14 @@
 			<LINK rel="stylesheet" type="text/css" href="{$root}/style.css"/>
 		</HEAD>
 		<BODY>
-			<H4>Macros <SMALL><A href="{$root}/master.html">(show derivatives)</A></SMALL></H4>
+			<xsl:choose>
+				<xsl:when test="false()">
+					<H4>Macros <SMALL>(<xsl:value-of select="count(macro[@type = 'PRIMARY'])"/>)</SMALL></H4>
+				</xsl:when>
+				<xsl:otherwise>
+					<H4>Macros <SMALL><A href="{$root}/master.html">(show derivatives)</A></SMALL></H4>
+				</xsl:otherwise>
+			</xsl:choose>
 			<UL>
 				<xsl:for-each select="macro[@type = 'PRIMARY']">
 					<xsl:sort select="@id"/>
@@ -84,7 +98,14 @@
 			<LINK rel="stylesheet" type="text/css" href="{$root}/style.css"/>
 		</HEAD>
 		<BODY>
-			<H4>Macros <SMALL><A href="{$root}/macros.html">(hide derivatives)</A></SMALL></H4>
+			<xsl:choose>
+				<xsl:when test="false()">
+					<H4>Macros <SMALL>(<xsl:value-of select="count(macro)"/>)</SMALL></H4>
+				</xsl:when>
+				<xsl:otherwise>
+					<H4>Macros <SMALL><A href="{$root}/macros.html">(hide derivatives)</A></SMALL></H4>
+				</xsl:otherwise>
+			</xsl:choose>
 			<UL>
 				<xsl:for-each select="macro">
 					<xsl:sort select="@id"/>

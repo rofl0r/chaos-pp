@@ -21,12 +21,6 @@
 # include <chaos/preprocessor/logical/compl.h>
 # include <chaos/preprocessor/tuple/rem.h>
 #
-# /* CHAOS_PP_TUPLE */
-#
-# if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_TUPLE CHAOS_PP_TUPLE
-# endif
-#
 # /* CHAOS_PP_TUPLE_TAG */
 #
 # if CHAOS_PP_VARIADICS

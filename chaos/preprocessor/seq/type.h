@@ -23,10 +23,6 @@
 # include <chaos/preprocessor/tuple/eat.h>
 # include <chaos/preprocessor/tuple/rem.h>
 #
-# /* CHAOS_PP_SEQ */
-#
-# define CHAOS_PP_SEQ CHAOS_PP_SEQ
-#
 # /* CHAOS_PP_SEQ_TAG */
 #
 # define CHAOS_PP_SEQ_TAG(x) x

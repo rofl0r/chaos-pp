@@ -19,7 +19,7 @@
 #
 # /* CHAOS_PP_INCLUDE_IF */
 #
-# define CHAOS_PP_INCLUDE_IF(cond, file) CHAOS_PP_IF(cond)(file, CHAOS_PP_NULL())
+# define CHAOS_PP_INCLUDE_IF(cond, file) CHAOS_PP_IF_SHADOW(cond)(file, CHAOS_PP_NULL())
 # define CHAOS_PP_INCLUDE_IF_ID() CHAOS_PP_INCLUDE_IF
 #
 # if CHAOS_PP_VARIADICS

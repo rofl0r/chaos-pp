@@ -46,7 +46,7 @@
         CHAOS_IP_TUPLE_ELEM_I( \
             i, \
             CHAOS_PP_EXPAND( \
-                CHAOS_PP_DEFER(CHAOS_PP_PRIMITIVE_CAT(CHAOS_IP_TUPLE_ELEM_E_, size)) \
+                CHAOS_PP_DEFER(CHAOS_PP_PRIMITIVE_CAT_SHADOW(CHAOS_IP_TUPLE_ELEM_E_, size)) \
                     (CHAOS_PP_OBSTRUCT CHAOS_PP_COMMA_IF(size) CHAOS_PP_TUPLE_REM(size) tuple) \
             ) \
         ) \

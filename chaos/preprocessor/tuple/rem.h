@@ -23,7 +23,7 @@
 #    define CHAOS_PP_TUPLE_REM_ CHAOS_PP_LAMBDA(CHAOS_PP_TUPLE_REM)
 #    define CHAOS_IP_TUPLE_REM_I(...) __VA_ARGS__
 # else
-#    define CHAOS_PP_TUPLE_REM(size) CHAOS_PP_PRIMITIVE_CAT(CHAOS_IP_TUPLE_REM_, size)
+#    define CHAOS_PP_TUPLE_REM(size) CHAOS_PP_PRIMITIVE_CAT_SHADOW(CHAOS_IP_TUPLE_REM_, size)
 #    define CHAOS_IP_TUPLE_REM_0()
 #    define CHAOS_IP_TUPLE_REM_1(a) a
 #    define CHAOS_IP_TUPLE_REM_2(a, b) a, b

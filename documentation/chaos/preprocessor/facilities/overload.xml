@@ -27,7 +27,7 @@
 	<para>
 		The number of arguments is never zero--even in situations such as the following:
 		<snippet>
-			<OVERLOAD/>(XYZ_,)()
+			<QUICK_OVERLOAD/>(XYZ_,)()
 		</snippet>
 		The above is interpreted as a single empty argument.
 	</para>

@@ -22,6 +22,7 @@ msxsl $1/register.xml register.xsl -o .register.xsl $paramset
 echo copying support files...
 mkdir -p $2
 cp style.css $2/style.css
+cp alternate.css $2/alternate.css
 cp background.gif $2/background.gif
 
 echo creating indices...

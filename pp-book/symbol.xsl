@@ -24,31 +24,17 @@
 			<meta:output method="html" doctype-public="-//W3C//DTD HTML 4.0 Strict//EN" indent="yes" encoding="UTF-8"/>
 			<xsl:for-each select="header">
 				<meta:template match="{translate(@name, '/', '-')}">
-					<code>
-						<a href="{{$root}}/{substring-before(@name, '.')}.html" class="header">
-							<xsl:call-template name="header-name:format">
-								<xsl:with-param name="file" select="@name"/>
-							</xsl:call-template>
-						</a>
-					</code>
+					<code><a href="{{$root}}/{substring-before(@name, '.')}.html" class="header"><xsl:call-template name="header-name:format"><xsl:with-param name="file" select="@name"/></xsl:call-template></a></code>
 				</meta:template>
 			</xsl:for-each>
 			<xsl:for-each select="macro">
 				<meta:template match="{@id}" name="{@id}">
-					<code>
-						<a href="{{$root}}/{substring-before(@header, '.')}.html#{@id}" class="{@type}">
-							<xsl:value-of select="concat(/library/@macro-prefix, @id)"/>
-						</a>
-					</code>
+					<code><a href="{{$root}}/{substring-before(@header, '.')}.html#{@id}" class="{@type}"><xsl:value-of select="concat(/library/@macro-prefix, @id)"/></a></code>
 				</meta:template>
 			</xsl:for-each>
 			<xsl:for-each select="alias">
 				<meta:template match="{@id}" name="{@id}">
-					<code>
-						<a href="{{$root}}/{substring-before(@header, '.')}.html#{@aliased-id}" class="alias">
-							<xsl:value-of select="concat(/library/@macro-prefix, @id)"/>
-						</a>
-					</code>
+					<code><a href="{{$root}}/{substring-before(@header, '.')}.html#{@aliased-id}" class="alias"><xsl:value-of select="concat(/library/@macro-prefix, @id)"/></a></code>
 				</meta:template>
 			</xsl:for-each>
 			<meta:template match="link" priority="-1">

@@ -1,6 +1,7 @@
 # $1 = library specification file
 # $2 = source path
 # $3 = destination path
+# $4 = regular expression
 
 echo expanding library...
 msxsl $1 library.xsl -o .library.xml source=$2

@@ -31,7 +31,7 @@
 		The structure of this algorithm causes approximately Θ(<x-var>n</x-var><sup>2</sup>) element scans (where <x-var>n</x-var> is the number of elements in <var>seq</var>).
 		This scanning may be inefficient when <var>seq</var> contains a large number of elements.
 		In such a situation in C99, it may be more efficient to use <SEQ_REVERSE_DUPLEX/> instead.
-		The structure of the <SEQ_REVERSE_DUPLEX/> algorithm causes approximately Θ(<x-var>n</x-var>∙log<sub>2</sub><x-var>n</x-var>) element scans.
+		The structure of the <SEQ_REVERSE_DUPLEX/> algorithm causes approximately Θ(<x-var>n</x-var>∙lg<x-var>n</x-var>) element scans.
 		On the other hand, though both <SEQ_REVERSE/> and <SEQ_REVERSE_DUPLEX/> invoke approximately Θ(<x-var>n</x-var>) macros, the discarded constant multiple is significantly larger for <SEQ_REVERSE_DUPLEX/>.
 		This causes <SEQ_REVERSE/> to be more efficient when <x-var>n</x-var> is smaller.
 		Thus, as <x-var>n</x-var> increases, at some point (depending on the preprocessor) <SEQ_REVERSE_DUPLEX/> is likely to become more efficient.
@@ -76,7 +76,7 @@
 		This macro expansion may be inefficient when <var>seq</var> contains a small number of elements.
 		In such a situation, it is more efficient to use <SEQ_REVERSE/> instead.
 		On the other hand, the structure of the <SEQ_REVERSE/> algorithm causes approximately Θ(<x-var>n</x-var><sup>2</sup>) element scans.
-		The structure of the <SEQ_REVERSE_DUPLEX/> algorithm causes approximately Θ(<x-var>n</x-var>∙log<sub>2</sub><x-var>n</x-var>) element scans.
+		The structure of the <SEQ_REVERSE_DUPLEX/> algorithm causes approximately Θ(<x-var>n</x-var>∙lg<x-var>n</x-var>) element scans.
 		Thus, as <x-var>n</x-var> increases, at some point (depending on the preprocessor) <SEQ_REVERSE_DUPLEX/> is likely to become more efficient.
 	</para>
 	<para>

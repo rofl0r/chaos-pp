@@ -32,7 +32,7 @@ chmod +rx .script
 
 echo executing script...
 echo "" > .temp.xml
-./.script $@
+./.script $@ ".*"
 
 echo deleting temporary files...
 rm .library.xml .meta.xsl .script .symbol.xsl .temp.xml

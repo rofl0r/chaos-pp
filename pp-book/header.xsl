@@ -49,8 +49,11 @@
 			<xsl:when test="contains(substring-after(/header/@name, '/'), '/')">
 				<xsl:value-of select="substring-after(substring-after(/header/@name, '/'), '/')"/>
 			</xsl:when>
-			<xsl:otherwise>
+			<xsl:when test="contains(/header/@name, '/')">
 				<xsl:value-of select="substring-after(/header/@name, '/')"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="/header/@name"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:variable>

@@ -34,7 +34,17 @@
 		If <link id="bypass semantics"/> are already in effect, <TUPLE_CONCAT_BYPASS/> must be used instead.
 	</para>
 	<listing>
+		#include <chaos-preprocessor-config.h/>
 		#include <chaos-preprocessor-tuple-concat.h/>
+		
+		#if <VARIADICS/>
+		
+		<TUPLE_CONCAT/>(
+		    (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z)
+		)
+		// abcdefghijklmnopqrstuvwxyz
+		
+		#endif
 	</listing>
 	<derivative id="TUPLE_CONCAT_ID" lang="C99"/>
 	<derivative id="TUPLE_CONCAT_" lang="C99"/>

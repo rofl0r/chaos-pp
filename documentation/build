@@ -21,7 +21,7 @@ msxsl $1/register.xml register.xsl -o .register.xsl $paramset
 
 echo copying support files...
 mkdir -p $2
-cp style.css $2/style.css
+cp alternate.css $2/style.css
 cp alternate.css $2/alternate.css
 cp background.gif $2/background.gif
 
@@ -29,6 +29,7 @@ echo creating indices...
 msxsl .library.xml index.xsl -o $2/headers.html $paramset
 msxsl .library.xml index.xsl -m primary -o $2/macros.html $paramset
 msxsl .library.xml index.xsl -m secondary -o $2/master.html $paramset
+msxsl $1/register.xml index.xsl -o $2/documents.html $paramset
 
 echo generating build script...
 msxsl $1/library.xml script.xsl -o .script $paramset
@@ -36,5 +37,14 @@ chmod +rx .script
 
 echo
 ./.script $paramset
+
+# custom (generate this later...)
+echo generating register documents...
+msxsl $1/register/active-arguments.xml document.xsl -o $2/active-arguments.html $paramset
+msxsl $1/register/arrays.xml document.xsl -o $2/arrays.html $paramset
+msxsl $1/register/lists.xml document.xsl -o $2/lists.html $paramset
+msxsl $1/register/sequences.xml document.xsl -o $2/sequences.html $paramset
+msxsl $1/register/strings.xml document.xsl -o $2/strings.html $paramset
+msxsl $1/register/tuples.xml document.xsl -o $2/tuples.html $paramset
 
 rm .library.xml .symbol.xsl .register.xsl .script

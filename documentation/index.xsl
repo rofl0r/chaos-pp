@@ -87,6 +87,7 @@
 			<UL>
 				<xsl:for-each select="document">
 					<xsl:sort select="@title"/>
+					<xsl:sort select="@level"/>
 					<!-- document titles need to be lookup up -->
 					<LI><A href="{$root}/{@id}.html" class="LISTITEM"><xsl:value-of select="@title"/></A></LI>
 				</xsl:for-each>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/tuple/insert.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an algorithm that inserts an element into a <link id="tuple"/>
+</overview>
+
+<macro id="TUPLE_INSERT" type="indirect" group="insertion">
+	<abstract>
+		The <TUPLE_INSERT/> macro inserts its third argument into its second argument before the index specified by its first argument.
+	</abstract>
+	<usage lang="C99">
+		<syntax><TUPLE_INSERT/>(i, tuple, x)</syntax>
+		<param id="i">
+			The position at which the element is to be inserted.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="tuple" optional="1">
+			The <link id="tuple"/> into which the element is to be inserted.
+		</param>
+		<param id="x" optional="1">
+			The element to be inserted.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="tuple"/> with the elements of <var>tuple</var> with <var>x</var> inserted at position <var>i</var>.
+		Consequently, <var>tuple</var> must contain at least <var>i</var> elements.
+	</para>
+	<para>
+		The running time of <TUPLE_INSERT/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
+		The asymptotic upper and lower bounds are <assoc id="complexity/insert.gif">Θ</assoc>, where <x-var>n</x-var> is <var>i</var>.
+	</para>
+	<para>
+		This macro operates on the nil <link id="tuple"/> representation used by the core <link id="tuple"/> operations defined in <chaos-preprocessor-tuple-core.h/>.
+		Specifically, <code>()</code> is a one-element <link id="tuple"/>, not a zero-element <link id="tuple"/>.
+	</para>
+	<para>
+		This macro uses <link id="bypass semantics"/>.
+		If <link id="bypass semantics"/> are already in effect, <TUPLE_INSERT_BYPASS/> must be used instead.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-tuple-insert.h/>
+		
+		#if <VARIADICS/>
+		
+		<TUPLE_INSERT/>(0, (a, b, c), _) // (_, a, b, c)
+		<TUPLE_INSERT/>(1, (a, b, c), _) // (a, _, b, c)
+		<TUPLE_INSERT/>(2, (a, b, c), _) // (a, b, _, c)
+		<TUPLE_INSERT/>(3, (a, b, c), _) // (a, b, c, _)
+		
+		#endif
+	</listing>
+	<derivative id="TUPLE_INSERT_ID" lang="C99"/>
+	<derivative id="TUPLE_INSERT_" lang="C99"/>
+	<derivative id="TUPLE_INSERT_BYPASS">
+		<usage lang="C99">
+			<syntax><TUPLE_INSERT_BYPASS/>(s, i, tuple, x)</syntax>
+		</usage>
+		<derivative id="TUPLE_INSERT_BYPASS_ID" lang="C99"/>
+		<derivative id="TUPLE_INSERT_BYPASS_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

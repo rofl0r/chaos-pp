@@ -62,7 +62,7 @@
 # /* CHAOS_PP_PREFIX */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_PREFIX(id) CHAOS_PP_ALTERNATE(id, CHAOS_PP_)
+#    define CHAOS_PP_PREFIX(id) CHAOS_PP_ALTERNATE(id, CHAOS_PP_ ## id)
 #    define CHAOS_PP_PREFIX_ID() CHAOS_PP_PREFIX
 #    define CHAOS_PP_PREFIX_ CHAOS_PP_LAMBDA(CHAOS_PP_PREFIX_ID)()
 # endif
@@ -70,12 +70,12 @@
 # /* CHAOS_PP_ALTERNATE */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_ALTERNATE(id, pre) \
+#    define CHAOS_PP_ALTERNATE(a, b) \
         CHAOS_PP_IIF( \
             CHAOS_PP_BITOR \
                 (CHAOS_PP_IS_NULLARY(CHAOS_IP_BIND_0(, ()))) \
                 (CHAOS_PP_COMPL(CHAOS_PP_IS_NULLARY(CHAOS_PP_EXTERN(, ())))) \
-        )(id, pre ## id) \
+        )(a, b) \
         /**/
 #    define CHAOS_PP_ALTERNATE_ID() CHAOS_PP_ALTERNATE
 #    define CHAOS_PP_ALTERNATE_ CHAOS_PP_LAMBDA(CHAOS_PP_ALTERNATE)

@@ -16,11 +16,11 @@
 # include <chaos/preprocessor/control/iif.h>
 # include <chaos/preprocessor/generics/spec.h>
 # include <chaos/preprocessor/generics/typeof.h>
-# include <chaos/preprocessor/lambda/call.h>
 # include <chaos/preprocessor/lambda/ops.h>
-# include <chaos/preprocessor/punctuation/comma.h>
+# include <chaos/preprocessor/lambda/planar.h>
 # include <chaos/preprocessor/recursion/basic.h>
 # include <chaos/preprocessor/recursion/expr.h>
+# include <chaos/preprocessor/tuple/eat.h>
 #
 # /* CHAOS_PP_FOLD_RIGHT */
 #
@@ -44,21 +44,25 @@
 #
 # define CHAOS_PP_FOLD_RIGHT_S_ID() CHAOS_PP_FOLD_RIGHT_S
 #
-# define CHAOS_IP_FOLD_RIGHT_U(s, op, g, ps) CHAOS_IP_FOLD_RIGHT_I(CHAOS_PP_NEXT(s), op, CHAOS_PP_CALL(op), CHAOS_PP_TYPEOF(g), g, ps)
-# define CHAOS_IP_FOLD_RIGHT_INDIRECT() CHAOS_IP_FOLD_RIGHT_I
-# define CHAOS_IP_FOLD_RIGHT_I(s, op, _o, type, g, ps) \
-    CHAOS_PP_IIF(CHAOS_PP_IS_CONS(g))( \
-        CHAOS_IP_FOLD_RIGHT_II, CHAOS_PP_UNPACK ps CHAOS_PP_TUPLE_EAT(7) \
-    )(CHAOS_PP_OBSTRUCT(), s, op, _o, type, g, ps) \
-    /**/
-# define CHAOS_IP_FOLD_RIGHT_II(_, s, op, _o, type, g, ps) \
-    CHAOS_PP_EXPR_S(s) _(CHAOS_IP_FOLD_RIGHT_III _( \
-        CHAOS_PP_NEXT(s), op, _o, type, g, \
-        (CHAOS_PP_EXPR_S(s) _(CHAOS_IP_FOLD_RIGHT_INDIRECT _()(CHAOS_PP_NEXT(s), op, _o, type, CHAOS_PP_REST(g), ps))) \
+# define CHAOS_IP_FOLD_RIGHT_U(s, op, g, ps) \
+    CHAOS_PP_EXPR_S(s)(CHAOS_IP_FOLD_RIGHT_I( \
+        CHAOS_PP_NEXT(s), CHAOS_PP_NEXT(s), \
+        op, CHAOS_PP_PLANAR(op), CHAOS_PP_TYPEOF(g), g, ps \
     )) \
     /**/
-# define CHAOS_IP_FOLD_RIGHT_III(s, op, _o, type, g, ps) \
-    _o()(s, op, CHAOS_PP_ITEM(type, CHAOS_PP_FIRST(g)) CHAOS_PP_COMMA() CHAOS_PP_UNPACK ps) \
+# define CHAOS_IP_FOLD_RIGHT_INDIRECT() CHAOS_IP_FOLD_RIGHT_I
+# define CHAOS_IP_FOLD_RIGHT_I(s, o, op, _o, type, g, ps) \
+    CHAOS_PP_IIF(CHAOS_PP_IS_CONS(g))( \
+        CHAOS_IP_FOLD_RIGHT_II, CHAOS_PP_UNPACK ps CHAOS_PP_TUPLE_EAT(8) \
+    )(CHAOS_PP_OBSTRUCT(), s, o, op, _o, type, g, ps) \
+    /**/
+# define CHAOS_IP_FOLD_RIGHT_II(_, s, o, op, _o, type, g, ps) \
+    _o()(o, op) \
+        CHAOS_PP_ITEM(type, CHAOS_PP_FIRST(g)), \
+        CHAOS_PP_EXPR_S(s) _(CHAOS_IP_FOLD_RIGHT_INDIRECT _()( \
+            CHAOS_PP_NEXT(s), o, op, _o, type, CHAOS_PP_REST(g), ps \
+        )) \
+    CHAOS_PP_PLANAR_CLOSE() \
     /**/
 #
 # endif

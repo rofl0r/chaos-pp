@@ -101,6 +101,21 @@ PRE {
 	margin: 0px;
 	padding: 0px;
 }
+TABLE {
+	background-color: #eeeeee;
+	border-collapse: collapse;
+	margin: 0px;
+	padding: 0px;
+}
+TD {
+	border: 1px solid black;
+	margin: 0px;
+	padding: 2px 10px;
+}
+TR {
+	margin: 0px;
+	padding: 0px;
+}
 SAMP {
 	background-color: #eeeeee;
 	border: 1px solid black;

@@ -106,4 +106,32 @@
 	</xsl:choose>
 </xsl:template>
 
+<xsl:template match="para/table">
+	<xsl:variable name="push"><xsl:call-template name="push"/></xsl:variable>
+	<xsl:variable name="pull"><xsl:call-template name="pull"/></xsl:variable>
+	<xsl:choose>
+		<xsl:when test="concat($push, $pull) = ''">
+			<DIV><TABLE cellspacing="0"><xsl:apply-templates select="row"/></TABLE></DIV>
+		</xsl:when>
+		<xsl:otherwise>
+			<DIV class="{concat($push, $pull)}"><TABLE cellspacing="0"><xsl:apply-templates select="row"/></TABLE></DIV>
+		</xsl:otherwise>
+	</xsl:choose>
+</xsl:template>
+
+<xsl:template match="table/row">
+	<TR><xsl:apply-templates select="column"/></TR>
+</xsl:template>
+
+<xsl:template match="table/row/column">
+	<xsl:choose>
+		<xsl:when test="count(@align)">
+			<TD align="{@align}"><xsl:apply-templates/></TD>
+		</xsl:when>
+		<xsl:otherwise>
+			<TD><xsl:apply-templates/></TD>
+		</xsl:otherwise>
+	</xsl:choose>	
+</xsl:template>
+
 </xsl:stylesheet>

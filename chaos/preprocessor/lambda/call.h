@@ -35,4 +35,6 @@
 #    define CHAOS_IP_CALL_II(s, macro, im) CHAOS_PP_DEFER(CHAOS_PP_EXPR_S)(s)(CHAOS_PP_DEFER(CHAOS_PP_EXPR_S)(s)(CHAOS_PP_DEFER(macro)(s, im)))
 # endif
 #
+# define CHAOS_PP_CALL_ID() CHAOS_PP_CALL
+#
 # endif

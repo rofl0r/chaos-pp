@@ -45,12 +45,12 @@
 #
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_FOLD_RIGHT_AUX_X_S(s, size, op, g, data, ...) \
-        CHAOS_IP_FOLD_RIGHT_AUX_X_U(s, size, op, g, CHAOS_PP_INLINE_WHEN(CHAOS_PP_IS_VARIADIC(data))(CHAOS_PP_TUPLE_REM(?))(data), (__VA_ARGS__)) \
+        CHAOS_IP_FOLD_RIGHT_AUX_X_U(s, size, op, g, CHAOS_PP_INLINE_WHEN(CHAOS_PP_IS_VARIADIC(data))(CHAOS_PP_REM)(data), (__VA_ARGS__)) \
         /**/
 #    define CHAOS_PP_FOLD_RIGHT_AUX_X_S_ CHAOS_PP_LAMBDA(CHAOS_PP_FOLD_RIGHT_AUX_X_S_ID)()
 # else
 #    define CHAOS_PP_FOLD_RIGHT_AUX_X_S(s, size, op, g, data, state) \
-        CHAOS_IP_FOLD_RIGHT_AUX_X_U(s, size, op, g, CHAOS_PP_INLINE_WHEN(CHAOS_PP_IS_UNARY(data))(CHAOS_PP_TUPLE_REM(1))(data), (state)) \
+        CHAOS_IP_FOLD_RIGHT_AUX_X_U(s, size, op, g, CHAOS_PP_INLINE_WHEN(CHAOS_PP_IS_UNARY(data))(CHAOS_PP_REM)(data), (state)) \
         /**/
 # endif
 #

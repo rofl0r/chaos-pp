@@ -38,7 +38,7 @@
 #    define CHAOS_PP_LITERAL_AP_BYPASS(s, literal) \
         CHAOS_PP_CLEAN_AP(CHAOS_PP_IIF(CHAOS_PP_IS_UNARY(literal))( \
             (1, CHAOS_PP_EXPR_S(s)(CHAOS_IP_LITERAL_AP_I( \
-                CHAOS_PP_OBSTRUCT(), CHAOS_PP_PREV(s), CHAOS_PP_TUPLE_EAT(?) literal \
+                CHAOS_PP_OBSTRUCT(), CHAOS_PP_PREV(s), CHAOS_PP_EAT literal \
             ))), \
             (0, CHAOS_PP_EXPR_S(s)(CHAOS_IP_LITERAL_AP_I( \
                 CHAOS_PP_OBSTRUCT(), CHAOS_PP_PREV(s), literal \

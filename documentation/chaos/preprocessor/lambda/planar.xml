@@ -87,7 +87,7 @@
 		#define FOLD_RIGHT_A_INDIRECT() FOLD_RIGHT_A
 		#define FOLD_RIGHT_A(bit, ...) \
 		    <IIF/>(bit)( \
-		        FOLD_RIGHT_B, <TUPLE_EAT/>(?) \
+		        FOLD_RIGHT_B, <EAT/> \
 		    )(__VA_ARGS__) \
 		    /**/
 		#define FOLD_RIGHT_B(s, op, _o, ...) \

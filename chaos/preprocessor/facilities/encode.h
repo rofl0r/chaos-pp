@@ -31,7 +31,7 @@
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_DECODE(...) \
         CHAOS_PP_INLINE_WHEN(CHAOS_PP_IS_VARIADIC(__VA_ARGS__))( \
-            CHAOS_PP_TUPLE_REM(?) \
+            CHAOS_PP_REM \
         ) __VA_ARGS__ \
         /**/
 #    define CHAOS_PP_DECODE_ID() CHAOS_PP_DECODE

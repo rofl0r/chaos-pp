@@ -68,7 +68,7 @@
     /**/
 # define CHAOS_IP_FOR_X_0(_, s, jump, fix, mode, pred, _p, op, _o, macro, _m, ps) \
     _(1, CHAOS_PP_IIF)(_(0, _p)()(s, pred, CHAOS_PP_REM ps))( \
-        _(1, CHAOS_PP_EXPR_S)(s), CHAOS_PP_TUPLE_EAT(1) \
+        _(1, CHAOS_PP_EXPR_S)(s), CHAOS_PP_EAT \
     )( \
         _(1, CHAOS_IP_FOR_X_INDIRECT)()( \
             CHAOS_PP_NEXT(s), jump, fix, 1, pred, _p, op, _o, macro, _m, ps \

@@ -82,7 +82,7 @@
         r(1, px, n, s, macro, _m, __VA_ARGS__)(), CHAOS_PP_INC(n), s, macro, _m, __VA_ARGS__ \
         /**/
 #    define CHAOS_IP_SEQ_FOR_EACH_I_B_I(i, ...) \
-        CHAOS_PP_IIF(i)(CHAOS_IP_SEQ_FOR_EACH_I_B_II, CHAOS_PP_TUPLE_EAT(?))(__VA_ARGS__) \
+        CHAOS_PP_IIF(i)(CHAOS_IP_SEQ_FOR_EACH_I_B_II, CHAOS_PP_EAT)(__VA_ARGS__) \
         /**/
 #    define CHAOS_IP_SEQ_FOR_EACH_I_B_II(px, n, s, macro, _m, ...) \
         _m()(s, macro, n, CHAOS_PP_REM px __VA_ARGS__) CHAOS_IP_SEQ_FOR_EACH_I_B_INDIRECT \

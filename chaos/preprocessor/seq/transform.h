@@ -60,7 +60,7 @@
 #
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_IP_SEQ_TRANSFORM_I(i, ...) \
-        CHAOS_PP_IIF(i)(CHAOS_IP_SEQ_TRANSFORM_II, CHAOS_PP_TUPLE_EAT(?))(__VA_ARGS__) \
+        CHAOS_PP_IIF(i)(CHAOS_IP_SEQ_TRANSFORM_II, CHAOS_PP_EAT)(__VA_ARGS__) \
         /**/
 #    define CHAOS_IP_SEQ_TRANSFORM_II(s, op, _o, pd, ...) (_o()(s, op, __VA_ARGS__ CHAOS_PP_EXPOSE(pd))) CHAOS_IP_SEQ_TRANSFORM_INDIRECT
 # else

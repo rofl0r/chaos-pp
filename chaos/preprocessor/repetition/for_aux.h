@@ -41,12 +41,12 @@
 #
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_FOR_AUX_S(s, pred, op, macro, data, ...) \
-        CHAOS_IP_FOR_AUX_U(s, pred, op, macro, CHAOS_PP_INLINE_WHEN(CHAOS_PP_IS_VARIADIC(data))(CHAOS_PP_TUPLE_REM(?))(data), (__VA_ARGS__)) \
+        CHAOS_IP_FOR_AUX_U(s, pred, op, macro, CHAOS_PP_INLINE_WHEN(CHAOS_PP_IS_VARIADIC(data))(CHAOS_PP_REM)(data), (__VA_ARGS__)) \
         /**/
 #    define CHAOS_PP_FOR_AUX_S_ CHAOS_PP_LAMBDA(CHAOS_PP_FOR_AUX_S_ID)()
 # else
 #    define CHAOS_PP_FOR_AUX_S(s, pred, op, macro, data, state) \
-        CHAOS_IP_FOR_AUX_U(s, pred, op, macro, CHAOS_PP_INLINE_WHEN(CHAOS_PP_IS_UNARY(data))(CHAOS_PP_TUPLE_REM(1))(data), (state)) \
+        CHAOS_IP_FOR_AUX_U(s, pred, op, macro, CHAOS_PP_INLINE_WHEN(CHAOS_PP_IS_UNARY(data))(CHAOS_PP_REM)(data), (state)) \
         /**/
 # endif
 #
@@ -63,7 +63,7 @@
 # define CHAOS_IP_FOR_AUX_INDIRECT() CHAOS_IP_FOR_AUX_II
 # define CHAOS_IP_FOR_AUX_II(_, s, o, pred, _p, op, _o, macro, _m, data, ps) \
     CHAOS_PP_IIF _(_p()(s, pred, CHAOS_PP_REM data CHAOS_PP_COMMA() CHAOS_PP_REM ps))( \
-        CHAOS_PP_EXPR_S(s), CHAOS_PP_TUPLE_EAT(1) \
+        CHAOS_PP_EXPR_S(s), CHAOS_PP_EAT \
     )( \
         _m _()(o, macro, CHAOS_PP_REM data CHAOS_PP_COMMA _() CHAOS_PP_REM ps) \
         CHAOS_IP_FOR_AUX_INDIRECT _()( \

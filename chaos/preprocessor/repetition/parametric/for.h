@@ -65,7 +65,7 @@
     /**/
 # define CHAOS_IP_FOR_PARAMETRIC_III(_, s, o, buffer, shelf, pred, _p, op, _o, macro, _m, ps) \
     _(1, CHAOS_PP_IIF)(_(0, _p)()(s, pred, CHAOS_PP_REM ps))( \
-        _(1, CHAOS_PP_EXPR_S)(s), CHAOS_PP_TUPLE_EAT(1) \
+        _(1, CHAOS_PP_EXPR_S)(s), CHAOS_PP_EAT \
     )( \
         _(1, _m)()(CHAOS_PP_NEXT(o), macro, CHAOS_PP_REM ps) \
         _(1, CHAOS_IP_FOR_PARAMETRIC_INDIRECT)()( \

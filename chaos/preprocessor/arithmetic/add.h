@@ -64,7 +64,7 @@
     _(1, CHAOS_PP_IIF)( \
         CHAOS_PP_BITAND(CHAOS_PP_NOT_EQUAL(x, CHAOS_PP_LIMIT_MAG))(CHAOS_PP_BOOL(y)) \
     )( \
-        _(1, CHAOS_PP_EXPR_S)(s), x CHAOS_PP_TUPLE_EAT(1) \
+        _(1, CHAOS_PP_EXPR_S)(s), x CHAOS_PP_EAT \
     )( \
         _(1, CHAOS_IP_ADD_INDIRECT)()( \
             CHAOS_PP_PREV(s), jump, CHAOS_PP_INC(x), CHAOS_PP_DEC(y) \

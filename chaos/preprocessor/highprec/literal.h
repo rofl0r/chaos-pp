@@ -38,7 +38,7 @@
 #    define CHAOS_PP_LITERAL_HP_BYPASS(s, literal) \
         CHAOS_PP_FIX_HP(CHAOS_PP_IIF(CHAOS_PP_IS_UNARY(literal))( \
             (CHAOS_PP_EXPR_S(s)(CHAOS_IP_LITERAL_HP_I( \
-                CHAOS_PP_OBSTRUCT(), CHAOS_PP_PREV(s), CHAOS_PP_TUPLE_EAT(1) literal, 10, \
+                CHAOS_PP_OBSTRUCT(), CHAOS_PP_PREV(s), CHAOS_PP_EAT literal, 10, \
             )), 1), \
             (CHAOS_PP_EXPR_S(s)(CHAOS_IP_LITERAL_HP_I( \
                 CHAOS_PP_OBSTRUCT(), CHAOS_PP_PREV(s), literal, 10, \
@@ -50,7 +50,7 @@
 #    define CHAOS_PP_LITERAL_HP_BYPASS(s, literal) \
         CHAOS_PP_FIX_HP(CHAOS_PP_IIF(CHAOS_PP_IS_UNARY(literal))( \
             (CHAOS_PP_EXPR_S(s)(CHAOS_IP_LITERAL_HP_I( \
-                CHAOS_PP_OBSTRUCT(), CHAOS_PP_PREV(s), CHAOS_PP_TUPLE_EAT(1) literal, 10, CHAOS_IP_LITERAL_HP_ID \
+                CHAOS_PP_OBSTRUCT(), CHAOS_PP_PREV(s), CHAOS_PP_EAT literal, 10, CHAOS_IP_LITERAL_HP_ID \
             )), 1), \
             (CHAOS_PP_EXPR_S(s)(CHAOS_IP_LITERAL_HP_I( \
                 CHAOS_PP_OBSTRUCT(), CHAOS_PP_PREV(s), literal, 10, CHAOS_IP_LITERAL_HP_ID \

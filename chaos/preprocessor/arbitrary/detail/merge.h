@@ -42,7 +42,7 @@
 #    define CHAOS_IP_MERGE_AP_F(res, x) res x
 #    define CHAOS_IP_MERGE_AP_R(res, x) x res
 #    define CHAOS_IP_MERGE_AP_I(p, seq, z, swap, op, def, dir) \
-        CHAOS_PP_EXPAND(CHAOS_PP_TUPLE_EAT(?) CHAOS_PP_SPLIT( \
+        CHAOS_PP_EXPAND(CHAOS_PP_EAT CHAOS_PP_SPLIT( \
             0, \
             CHAOS_PP_EXPAND( \
                 CHAOS_IP_MERGE_AP_II seq, CHAOS_PP_SEQ_REVERSE(p ## z)(def), swap, op, def, CHAOS_PP_IIF(dir)(CHAOS_IP_MERGE_AP_F, CHAOS_IP_MERGE_AP_R) \

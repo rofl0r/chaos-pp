@@ -25,7 +25,7 @@
 #    define CHAOS_PP_INSTRUCTION_0xCHAOS_0xARBITRARY_0xIS_SHORTER(s, p, x, y, k, ...) \
         CHAOS_PP_IIF(CHAOS_PP_IS_VARIADIC(p ## x))( \
             CHAOS_PP_IIF(CHAOS_PP_IS_VARIADIC(p ## y))( \
-                (, 0xCHAOS(0xARBITRARY(0xIS_SHORTER)), CHAOS_PP_TUPLE_EAT(?) p ## x, CHAOS_PP_TUPLE_EAT(?) p ## y, k, p ## __VA_ARGS__), \
+                (, 0xCHAOS(0xARBITRARY(0xIS_SHORTER)), CHAOS_PP_EAT p ## x, CHAOS_PP_EAT p ## y, k, p ## __VA_ARGS__), \
                 (, k, 0, p ## __VA_ARGS__) \
             ), \
             (, k, CHAOS_PP_IS_VARIADIC(p ## y), p ## __VA_ARGS__) \

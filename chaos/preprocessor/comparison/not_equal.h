@@ -25,9 +25,9 @@
 # define CHAOS_PP_NOT_EQUAL(x, y) \
     CHAOS_PP_IS_NULLARY( \
         CHAOS_PP_EXPAND(CHAOS_PP_PRIMITIVE_CAT(CHAOS_IP_LESS_, x)( \
-            CHAOS_PP_TUPLE_EAT(1), \
+            CHAOS_PP_EAT, \
             CHAOS_PP_PRIMITIVE_CAT(CHAOS_IP_LESS_, y) CHAOS_PP_TUPLE_EAT(2) \
-        ))(CHAOS_PP_TUPLE_EAT(1), ()) \
+        ))(CHAOS_PP_EAT, ()) \
     ) \
     /**/
 # define CHAOS_PP_NOT_EQUAL_ID() CHAOS_PP_NOT_EQUAL

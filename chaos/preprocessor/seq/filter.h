@@ -62,7 +62,7 @@
 #
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_IP_SEQ_FILTER_I(i, ...) \
-        CHAOS_PP_IIF(i)(CHAOS_IP_SEQ_FILTER_II, CHAOS_PP_TUPLE_EAT(?))(CHAOS_PP_OBSTRUCT(), __VA_ARGS__) \
+        CHAOS_PP_IIF(i)(CHAOS_IP_SEQ_FILTER_II, CHAOS_PP_EAT)(CHAOS_PP_OBSTRUCT(), __VA_ARGS__) \
         /**/
 #    define CHAOS_IP_SEQ_FILTER_II(_, s, pred, _p, pd, ...) \
         CHAOS_PP_INLINE_WHEN _(_p()(s, pred, __VA_ARGS__ CHAOS_PP_EXPOSE(pd)))( \

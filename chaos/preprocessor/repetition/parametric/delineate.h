@@ -66,7 +66,7 @@
     /**/
 # define CHAOS_IP_DELINEATE_PARAMETRIC_II(_, s, o, count, s1, s2, macro, _m, pd) \
     _(1, CHAOS_PP_IF)(count)( \
-        _(1, CHAOS_PP_EXPR_S)(s), CHAOS_PP_TUPLE_EAT(1) \
+        _(1, CHAOS_PP_EXPR_S)(s), CHAOS_PP_EAT \
     )( \
         _(1, CHAOS_IP_DELINEATE_PARAMETRIC_INDIRECT)()( \
             CHAOS_PP_NEXT(s), o, CHAOS_PP_DEC(count), s2, s2, macro, _m, pd \

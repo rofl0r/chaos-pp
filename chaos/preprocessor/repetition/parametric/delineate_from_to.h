@@ -62,7 +62,7 @@
     /**/
 # define CHAOS_IP_DELINEATE_FROM_TO_PARAMETRIC_II(_, s, o, from, to, s1, s2, macro, _m, pd) \
     _(1, CHAOS_PP_IIF)(CHAOS_PP_NOT_EQUAL(from, to))( \
-        _(1, CHAOS_PP_EXPR_S)(s), CHAOS_PP_TUPLE_EAT(1) \
+        _(1, CHAOS_PP_EXPR_S)(s), CHAOS_PP_EAT \
     )( \
         _(1, s1)() _(1, _m)()(o, macro, from _(1, CHAOS_PP_EXPOSE)(pd)) \
         _(1, CHAOS_IP_DELINEATE_FROM_TO_PARAMETRIC_INDIRECT)()( \

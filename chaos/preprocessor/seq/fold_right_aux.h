@@ -43,7 +43,7 @@
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_SEQ_FOLD_RIGHT_AUX_S(s, op, seq, data, ...) \
         CHAOS_PP_EXPAND(CHAOS_IP_SEQ_FOLD_RIGHT_AUX_I( \
-            CHAOS_PP_SEQ_INFUSE(seq, 1, CHAOS_PP_NEXT(s), op, CHAOS_PP_PLANAR(op), CHAOS_PP_INLINE_WHEN(CHAOS_PP_IS_VARIADIC(data))(CHAOS_PP_TUPLE_REM(?))(data))(0,), \
+            CHAOS_PP_SEQ_INFUSE(seq, 1, CHAOS_PP_NEXT(s), op, CHAOS_PP_PLANAR(op), CHAOS_PP_INLINE_WHEN(CHAOS_PP_IS_VARIADIC(data))(CHAOS_PP_REM)(data))(0,), \
             (__VA_ARGS__) \
         )) \
         /**/
@@ -51,7 +51,7 @@
 # else
 #    define CHAOS_PP_SEQ_FOLD_RIGHT_AUX_S(s, op, seq, data, state) \
         CHAOS_PP_EXPAND(CHAOS_IP_SEQ_FOLD_RIGHT_AUX_I( \
-            CHAOS_PP_SEQ_INFUSE(seq, (1, CHAOS_PP_NEXT(s), op, CHAOS_PP_PLANAR(op), CHAOS_PP_INLINE_WHEN(CHAOS_PP_IS_UNARY(data))(CHAOS_PP_TUPLE_REM(1))(data)))((0, ~, ~, ~, ~), ~), \
+            CHAOS_PP_SEQ_INFUSE(seq, (1, CHAOS_PP_NEXT(s), op, CHAOS_PP_PLANAR(op), CHAOS_PP_INLINE_WHEN(CHAOS_PP_IS_UNARY(data))(CHAOS_PP_REM)(data)))((0, ~, ~, ~, ~), ~), \
             (state) \
         )) \
         /**/
@@ -64,7 +64,7 @@
 # define CHAOS_IP_SEQ_FOLD_RIGHT_AUX_B_INDIRECT() CHAOS_IP_SEQ_FOLD_RIGHT_AUX_B
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_IP_SEQ_FOLD_RIGHT_AUX_A(i, ...) CHAOS_PP_IIF(i)(CHAOS_IP_SEQ_FOLD_RIGHT_AUX_A_I, CHAOS_PP_TUPLE_EAT(?))(__VA_ARGS__)
+#    define CHAOS_IP_SEQ_FOLD_RIGHT_AUX_A(i, ...) CHAOS_PP_IIF(i)(CHAOS_IP_SEQ_FOLD_RIGHT_AUX_A_I, CHAOS_PP_EAT)(__VA_ARGS__)
 #    define CHAOS_IP_SEQ_FOLD_RIGHT_AUX_A_I(s, op, _o, data, ...) _o()(s, op) CHAOS_PP_REM data, __VA_ARGS__, CHAOS_IP_SEQ_FOLD_RIGHT_AUX_A_INDIRECT
 #    define CHAOS_IP_SEQ_FOLD_RIGHT_AUX_B(i, ...) CHAOS_PP_INLINE_WHEN(i)(CHAOS_PP_PLANAR_CLOSE() CHAOS_IP_SEQ_FOLD_RIGHT_AUX_B_INDIRECT)
 # else

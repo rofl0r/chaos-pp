@@ -44,7 +44,7 @@
 #
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_IP_SEQ_UNZIP_INDIRECT() CHAOS_IP_SEQ_UNZIP_I
-#    define CHAOS_IP_SEQ_UNZIP_I(id, zip) id(?)((CHAOS_PP_TUPLE_REM(?) zip) CHAOS_IP_SEQ_UNZIP_INDIRECT)
+#    define CHAOS_IP_SEQ_UNZIP_I(id, zip) id(?)((CHAOS_PP_REM zip) CHAOS_IP_SEQ_UNZIP_INDIRECT)
 # endif
 #
 # endif

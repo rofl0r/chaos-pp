@@ -49,7 +49,7 @@
 			These algorithms all invoke user-defined operations with the entire <link id="sequence"/> element wrapped in parentheses.
 			For example,
 			<snippet>
-				#define MACRO(s, type, _) <TUPLE_REM/>(?) type
+				#define MACRO(s, type, _) <REM/> type
 				
 				<EXPR/>(<VARIADIC_SEQ_FOR_EACH/>(
 				    MACRO, (int)(std::pair&lt;int, int&gt;)(double), ~

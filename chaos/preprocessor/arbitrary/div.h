@@ -80,12 +80,12 @@
        /**/
 #    define CHAOS_PP_INSTRUCTION_0xCHAOS_0xARBITRARY_0xDIV2(s, p, x, y, rem, k, ...) \
         CHAOS_PP_IIF(CHAOS_PP_IS_UNARY(p ## y))( \
-            (, 0xCHAOS(0xARBITRARY(0xDIV2)), CHAOS_PP_TUPLE_EAT(?) p ## x, CHAOS_PP_TUPLE_EAT(?) p ## y, rem(CHAOS_PP_SEQ_FIRST(p ## x)), k, p ## __VA_ARGS__), \
+            (, 0xCHAOS(0xARBITRARY(0xDIV2)), CHAOS_PP_EAT p ## x, CHAOS_PP_EAT p ## y, rem(CHAOS_PP_SEQ_FIRST(p ## x)), k, p ## __VA_ARGS__), \
             (, k, p ## rem, p ## x, p ## __VA_ARGS__) \
         ) \
         /**/
 #    define CHAOS_PP_INSTRUCTION_0xCHAOS_0xARBITRARY_0xDIV3(s, p, rem, pool, digit, y, res, k, ...) \
-        (, 0xCHAOS(0xARBITRARY(0xDIV4)), CHAOS_PP_IIF(CHAOS_PP_IS_UNARY(CHAOS_PP_TUPLE_EAT(?) p ## rem))(, (0)) p ## rem, p ## pool, digit, p ## y, p ## res, k, p ## __VA_ARGS__) \
+        (, 0xCHAOS(0xARBITRARY(0xDIV4)), CHAOS_PP_IIF(CHAOS_PP_IS_UNARY(CHAOS_PP_EAT p ## rem))(, (0)) p ## rem, p ## pool, digit, p ## y, p ## res, k, p ## __VA_ARGS__) \
         /**/
 #    define CHAOS_PP_INSTRUCTION_0xCHAOS_0xARBITRARY_0xDIV4(s, p, rem, pool, digit, y, res, k, ...) \
         (, 0xCHAOS(0xARBITRARY(0xDIV5)), CHAOS_PP_DIVIDE(CHAOS_PP_SEQ_FIRST(p ## rem), CHAOS_PP_SEQ_FIRST(CHAOS_PP_SEQ_REST(p ## rem)), digit), p ## rem, p ## pool, digit, p ## y, p ## res, k, p ## __VA_ARGS__) \
@@ -111,7 +111,7 @@
         /**/
 #    define CHAOS_PP_INSTRUCTION_0xCHAOS_0xARBITRARY_0xDIV10(s, p, rem, pool, digit, y, res, k, ...) \
         CHAOS_PP_IIF(CHAOS_PP_SEQ_IS_CONS(pool))( \
-            (, 0xCHAOS(0xARBITRARY(0xDIV4)), p ## rem(CHAOS_PP_SEQ_FIRST(p ## pool)), CHAOS_PP_TUPLE_EAT(?) p ## pool, digit, p ## y, p ## res, k, p ## __VA_ARGS__), \
+            (, 0xCHAOS(0xARBITRARY(0xDIV4)), p ## rem(CHAOS_PP_SEQ_FIRST(p ## pool)), CHAOS_PP_EAT p ## pool, digit, p ## y, p ## res, k, p ## __VA_ARGS__), \
             (, k, (CHAOS_PP_CLEAN_AP_INTERNAL(p ## res), CHAOS_PP_CLEAN_AP_INTERNAL(p ## rem)), p ## __VA_ARGS__) \
         ) \
         /**/

@@ -54,7 +54,7 @@
 #    define CHAOS_IP_PARSE_INDIRECT() CHAOS_IP_PARSE_I
 #    define CHAOS_IP_PARSE_I(p, s, orig, args, expr) \
         CHAOS_PP_IIF(CHAOS_PP_IS_VARIADIC(p ## expr))( \
-            CHAOS_IP_PARSE_II, CHAOS_PP_ELEMENT(p ## expr) CHAOS_PP_TUPLE_EAT(?) \
+            CHAOS_IP_PARSE_II, CHAOS_PP_ELEMENT(p ## expr) CHAOS_PP_EAT \
         )(, CHAOS_PP_OBSTRUCT(), s, p ## orig, p ## args, (CHAOS_PP_SEQ_FIRST(p ## expr)), CHAOS_PP_SEQ_REST(p ## expr)) \
         /**/
 #    define CHAOS_IP_PARSE_II(p, _, s, orig, args, first, rest) \
@@ -73,7 +73,7 @@
 #    define CHAOS_IP_PARSE_E_INDIRECT() CHAOS_IP_PARSE_E_I
 #    define CHAOS_IP_PARSE_E_I(p, s, orig, args, s1, s2, ...) \
         CHAOS_PP_IIF(CHAOS_PP_IS_EMPTY_NON_FUNCTION(p ## __VA_ARGS__))( \
-            CHAOS_PP_TUPLE_EAT(?), CHAOS_IP_PARSE_E_II \
+            CHAOS_PP_EAT, CHAOS_IP_PARSE_E_II \
         )(, CHAOS_PP_OBSTRUCT(), s, p ## orig, p ## args, p ## s1, p ## s2, p ## __VA_ARGS__) \
         /**/
 #    define CHAOS_IP_PARSE_E_II(p, _, s, orig, args, s1, s2, x, ...) \
@@ -84,7 +84,7 @@
         /**/
 #    define CHAOS_IP_PARSE_(p, s, orig, args, expr) \
         CHAOS_PP_OPERATOR(CHAOS_PP_LPAREN) \
-        CHAOS_IP_PARSE_E(, s, p ## orig, p ## args, CHAOS_PP_OPERATOR(CHAOS_PP_COMMA), CHAOS_PP_TUPLE_REM(?) p ## expr) \
+        CHAOS_IP_PARSE_E(, s, p ## orig, p ## args, CHAOS_PP_OPERATOR(CHAOS_PP_COMMA), CHAOS_PP_REM p ## expr) \
         CHAOS_PP_OPERATOR(CHAOS_PP_RPAREN) \
         /**/
 #    define CHAOS_IP_PARSE_0xCOMMA(...) CHAOS_PP_OPERATOR(CHAOS_PP_COMMA)

@@ -102,7 +102,7 @@
 # endif
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_IP_ARRAY_REST_I(size, tuple) (CHAOS_PP_DEC(size), (CHAOS_PP_SPLIT(1, CHAOS_PP_TUPLE_REM(?) tuple)))
+#    define CHAOS_IP_ARRAY_REST_I(size, tuple) (CHAOS_PP_DEC(size), (CHAOS_PP_SPLIT(1, CHAOS_PP_REM tuple)))
 # else
 #    define CHAOS_IP_ARRAY_REST_II(size, tuple) CHAOS_IP_ARRAY_REST_ ## size tuple
 #    define CHAOS_IP_ARRAY_REST_I(size, tuple) CHAOS_IP_ARRAY_REST_ ## size tuple

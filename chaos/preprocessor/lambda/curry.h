@@ -58,7 +58,7 @@
 #    define CHAOS_IP_CURRY_INDIRECT() CHAOS_IP_CURRY_I
 #    define CHAOS_IP_CURRY_I(p, s, orig, args, expr) \
         CHAOS_PP_IIF(CHAOS_PP_IS_VARIADIC(p ## expr))( \
-            CHAOS_IP_CURRY_II, expr CHAOS_PP_TUPLE_EAT(?) \
+            CHAOS_IP_CURRY_II, expr CHAOS_PP_EAT \
         )(, CHAOS_PP_OBSTRUCT(), s, p ## orig, p ## args, (CHAOS_PP_SEQ_FIRST(p ## expr)), CHAOS_PP_SEQ_REST(p ## expr)) \
         /**/
 #    define CHAOS_IP_CURRY_II(p, _, s, orig, args, first, rest) \
@@ -77,7 +77,7 @@
 #    define CHAOS_IP_CURRY_E_INDIRECT() CHAOS_IP_CURRY_E_I
 #    define CHAOS_IP_CURRY_E_I(p, s, orig, args, s1, s2, ...) \
         CHAOS_PP_IIF(CHAOS_PP_IS_EMPTY_NON_FUNCTION(p ## __VA_ARGS__))( \
-            CHAOS_PP_TUPLE_EAT(?), CHAOS_IP_CURRY_E_II \
+            CHAOS_PP_EAT, CHAOS_IP_CURRY_E_II \
         )(, CHAOS_PP_OBSTRUCT(), s, p ## orig, p ## args, p ## s1, p ## s2, p ## __VA_ARGS__) \
         /**/
 #    define CHAOS_IP_CURRY_E_II(p, _, s, orig, args, s1, s2, x, ...) \
@@ -86,7 +86,7 @@
             CHAOS_IP_CURRY_E_INDIRECT _()(, CHAOS_PP_PREV(s), p ## orig, p ## args, p ## s2, p ## s2, p ## __VA_ARGS__) \
         ) \
         /**/
-#    define CHAOS_IP_CURRY_(p, s, orig, args, expr) (CHAOS_IP_CURRY_E(, s, p ## orig, p ## args, CHAOS_PP_COMMA, CHAOS_PP_TUPLE_REM(?) p ## expr))
+#    define CHAOS_IP_CURRY_(p, s, orig, args, expr) (CHAOS_IP_CURRY_E(, s, p ## orig, p ## args, CHAOS_PP_COMMA, CHAOS_PP_REM p ## expr))
 #    define CHAOS_IP_CURRY_0xCOMMA(...) CHAOS_PP_FLAG(0xCOMMA)
 #    define CHAOS_IP_CURRY_0xESCAPE(p, s, orig, args, flag) CHAOS_PP_ESCAPE(CHAOS_PP_FLAG_DATA(p ## flag))
 #    define CHAOS_IP_CURRY_0xLAMBDA(p, s, orig, args, flag) \

@@ -34,7 +34,7 @@
 			#define ABC(n) ABC_ ## n
 			#define ABC_0(x) x <INDIRECT/>(0)
 			
-			<INDIRECT/>(0)(ABC)(a)(ABC)(b)(<TUPLE_EAT/>(1)) // a b
+			<INDIRECT/>(0)(ABC)(a)(ABC)(b)(<EAT/>) // a b
 		</snippet>
 	</para>
 	<listing>
@@ -51,7 +51,7 @@
 		        <EXPR/>(<SEQ_FOR_EACH/>( \
 		            COUNT_A, seq, ~ \
 		        )) \
-		        (<TUPLE_REM/>(1)) \
+		        (<REM/>) \
 		    ) \
 		    /**/
 		#define COUNT_A(s, x, _) (COUNT_B)(x)

@@ -89,12 +89,12 @@
 # /* CHAOS_PP_SEQ_REST */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_SEQ_REST(seq) CHAOS_PP_TUPLE_EAT(?) seq
+#    define CHAOS_PP_SEQ_REST(seq) CHAOS_PP_EAT seq
 #    define CHAOS_PP_SEQ_REST_ CHAOS_PP_LAMBDA(CHAOS_PP_SEQ_REST_ID)()
 # else
 #    define CHAOS_PP_SEQ_REST(seq) \
-        CHAOS_PP_IIF(CHAOS_PP_IS_UNARY(CHAOS_PP_TUPLE_EAT(1) seq ~))( \
-            CHAOS_PP_TUPLE_EAT(1) seq, CHAOS_PP_SEQ_NIL() \
+        CHAOS_PP_IIF(CHAOS_PP_IS_UNARY(CHAOS_PP_EAT seq ~))( \
+            CHAOS_PP_EAT seq, CHAOS_PP_SEQ_NIL() \
         ) \
         /**/
 # endif

@@ -86,7 +86,7 @@
     CHAOS_PP_DEFER(CHAOS_IP_ADD_HP_II)( \
         _(0) \
         (x0, y0)(_)(x1, y1)(_)(x2, y2)(_)(x3, y3)(_)(x4, y4)(_) \
-        (x5, y5)(_)(x6, y6)(_)(x7, y7)(_)(x8, y8)(_)(x9, y9)(CHAOS_PP_TUPLE_REM(1)) \
+        (x5, y5)(_)(x6, y6)(_)(x7, y7)(_)(x8, y8)(_)(x9, y9)(CHAOS_PP_REM) \
     ) \
     /**/
 # define CHAOS_IP_ADD_HP_II(j, i, h, g, f, e, d, c, b, a, overflow) \

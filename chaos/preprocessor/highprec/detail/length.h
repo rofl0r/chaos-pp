@@ -33,7 +33,7 @@
 # define CHAOS_IP_LENGTH_HP_I(_, a, b, c, d, e, f, g, h, i, j) \
     _(1) \
     (a, 10)(_)(b, 9)(_)(c, 8)(_)(d, 7)(_)(e, 6)(_) \
-    (f, 5)(_)(g, 4)(_)(h, 3)(_)(i, 2)(_)(1, 1)(CHAOS_PP_TUPLE_EAT(1)) \
+    (f, 5)(_)(g, 4)(_)(h, 3)(_)(i, 2)(_)(1, 1)(CHAOS_PP_EAT) \
     /**/
 # define CHAOS_IP_LENGTH_HP_M(x) CHAOS_IP_LENGTH_HP_ ## x
 # define CHAOS_IP_LENGTH_HP_0(n, r) CHAOS_PP_INDIRECT(0)

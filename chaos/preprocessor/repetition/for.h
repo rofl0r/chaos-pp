@@ -55,7 +55,7 @@
 # define CHAOS_IP_FOR_INDIRECT() CHAOS_IP_FOR_II
 # define CHAOS_IP_FOR_II(_, s, o, pred, _p, op, _o, macro, _m, ps) \
     CHAOS_PP_IIF _(_p()(s, pred, CHAOS_PP_REM ps))( \
-        CHAOS_PP_EXPR_S(s), CHAOS_PP_TUPLE_EAT(1) \
+        CHAOS_PP_EXPR_S(s), CHAOS_PP_EAT \
     )( \
         _m _()(o, macro, CHAOS_PP_REM ps) \
         CHAOS_IP_FOR_INDIRECT _()( \

@@ -16,10 +16,16 @@
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/seq/spec.h>
 #
+# /* CHAOS_PP_VARIADIC_SEQ */
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_PP_VARIADIC_SEQ CHAOS_PP_VARIADIC_SEQ
+# endif
+#
 # /* CHAOS_PP_VARIADIC_SEQ_TAG */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_VARIADIC_SEQ_TAG(x) CHAOS_PP_SEQ_TAG(x)
+#    define CHAOS_PP_VARIADIC_SEQ_TAG(tag) CHAOS_PP_SEQ_TAG(tag)
 #    define CHAOS_PP_VARIADIC_SEQ_TAG_ID() CHAOS_PP_VARIADIC_SEQ_TAG
 #    define CHAOS_PP_VARIADIC_SEQ_TAG_ CHAOS_PP_LAMBDA(CHAOS_PP_VARIADIC_SEQ_TAG)
 # endif

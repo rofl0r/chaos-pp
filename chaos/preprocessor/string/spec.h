@@ -23,9 +23,13 @@
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/logical/compl.h>
 #
+# /* CHAOS_PP_STRING */
+#
+# define CHAOS_PP_STRING CHAOS_PP_STRING
+#
 # /* CHAOS_PP_STRING_TAG */
 #
-# define CHAOS_PP_STRING_TAG(x) x
+# define CHAOS_PP_STRING_TAG(tag) tag
 # define CHAOS_PP_STRING_TAG_ID() CHAOS_PP_STRING_TAG
 #
 # if CHAOS_PP_VARIADICS

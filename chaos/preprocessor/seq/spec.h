@@ -23,9 +23,13 @@
 # include <chaos/preprocessor/tuple/eat.h>
 # include <chaos/preprocessor/tuple/rem.h>
 #
+# /* CHAOS_PP_SEQ */
+#
+# define CHAOS_PP_SEQ CHAOS_PP_SEQ
+#
 # /* CHAOS_PP_SEQ_TAG */
 #
-# define CHAOS_PP_SEQ_TAG(x) x
+# define CHAOS_PP_SEQ_TAG(tag) tag
 # define CHAOS_PP_SEQ_TAG_ID() CHAOS_PP_SEQ_TAG
 #
 # if CHAOS_PP_VARIADICS

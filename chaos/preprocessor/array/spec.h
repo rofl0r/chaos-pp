@@ -29,9 +29,13 @@
 # include <chaos/preprocessor/tuple/rem.h>
 # include <chaos/preprocessor/tuple/spec.h>
 #
+# /* CHAOS_PP_ARRAY */
+#
+# define CHAOS_PP_ARRAY CHAOS_PP_ARRAY
+#
 # /* CHAOS_PP_ARRAY_TAG */
 #
-# define CHAOS_PP_ARRAY_TAG(x) x
+# define CHAOS_PP_ARRAY_TAG(tag) tag
 # define CHAOS_PP_ARRAY_TAG_ID() CHAOS_PP_ARRAY_TAG
 #
 # if CHAOS_PP_VARIADICS

@@ -19,9 +19,13 @@
 # include <chaos/preprocessor/logical/compl.h>
 # include <chaos/preprocessor/tuple/rem.h>
 #
+# /* CHAOS_PP_LIST */
+#
+# define CHAOS_PP_LIST CHAOS_PP_LIST
+#
 # /* CHAOS_PP_LIST_TAG */
 #
-# define CHAOS_PP_LIST_TAG(x) x
+# define CHAOS_PP_LIST_TAG(tag) tag
 # define CHAOS_PP_LIST_TAG_ID() CHAOS_PP_LIST_TAG
 #
 # if CHAOS_PP_VARIADICS

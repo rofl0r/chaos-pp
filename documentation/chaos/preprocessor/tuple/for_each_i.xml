@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/tuple/for_each_i.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an algorithm that repeats a user-specified target for each element in a <link id="tuple"/>.
+</overview>
+
+<macro id="TUPLE_FOR_EACH_I" type="indirect" group="for-each">
+	<abstract>
+		The <TUPLE_FOR_EACH_I/> macro repeats the target specified by its first argument for each element in its second argument.
+	</abstract>
+	<usage lang="C99">
+		<syntax><EXPR/>(<TUPLE_FOR_EACH_I/>(macro, tuple))</syntax>
+		<param id="macro">
+			The target that is repeated for each element in <var>tuple</var>.
+			This target must be either a <link id="λ expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			<snippet>
+				macro(s, i, elem)
+			</snippet>
+		</param>
+		<param id="tuple" optional="1">
+			The <link id="tuple"/> for which <var>macro</var> is to be repeated for each element.
+		</param>
+	</usage>
+	<usage lang="C99">
+		<syntax><EXPR/>(<TUPLE_FOR_EACH_I/>(macro, tuple, ...))</syntax>
+		<param id="macro">
+			<para>
+				The target that is repeated for each element in <var>tuple</var>.
+				This target must be either a <link id="λ expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				<snippet>
+					macro(s, i, elem, data<sup>†</sup>)
+				</snippet>
+			</para>
+			<para>
+				<sup>†</sup>
+				The <var>data</var> pseudo-parameter must be either <code>...</code> or the number of parameters that corresponds to the number of arguments in the auxiliary data, <code>__VA_ARGS__</code>.
+			</para>
+		</param>
+		<param id="tuple" optional="1">
+			The <link id="tuple"/> for which <var>macro</var> is to be repeated for each element.
+		</param>
+		<param id="..." optional="1">
+			Auxiliary data to be passed through the algorithm to the target.
+		</param>
+	</usage>
+	<para>
+		The <TUPLE_FOR_EACH_I/> macro itself expands to a <link id="deferred expression"/> in terms of <code><NEXT/>(s)</code>.
+		This <link id="deferred expression"/>, when invoked with <EXPR/>, expands to the result of the repeated invocation of the target for each element in <var>tuple</var>.
+		This is illustrated by the following pseudo-code (where <var>T</var> is <var>tuple</var> and <var>N</var> is the index of the last element in <var>tuple</var>):
+		<snippet>
+			macro(s, 0, T[0], data) macro(s, 0, T[1], data) ... macro(s, N, T[N], data)
+		</snippet>
+	</para>
+	<para>
+		The target is invoked with the current <link id="recursion state"/> (<var>s</var>), the index of a particular element (<var>i</var>), a particular element (<var>elem</var>), and, if it exists, the auxiliary data (<code>__VA_ARGS__</code>).
+		This target may expand to a <link id="deferred expression"/> in terms of <code><NEXT/>(s)</code>.
+		This allows the target to recurse on itself if necessary.
+	</para>
+	<para>
+		It is possible to omit the auxiliary data argument altogether.
+		This is different than passing "nothing" as the auxiliary data.
+		<snippet>
+			#define D (a, b, c)
+			
+			<EXPR/>(
+			    <TUPLE_FOR_EACH_I/>(MACRO, D,) // #1
+			    <TUPLE_FOR_EACH_I/>(MACRO, D)  // #2
+			)
+		</snippet>
+		The first line passed "nothing" as the auxiliary data, which causes <code>MACRO</code> to be invoked as (e.g.)...
+		<snippet>MACRO(s, 0, a,)</snippet>
+		The second line omits the auxiliary data, which causes <code>MACRO</code> to be invoked as (e.g.)...
+		<snippet>MACRO(s, 0, a)</snippet>
+		The fundamental difference is that, in the first line, the auxiliary data is empty (which might have a valid meaning as data), but, in the second line, <em>there is no auxiliary data</em>.
+		Hence, the algorithm is overloaded on a <link id="true-optional parameter"/>.
+	</para>
+	<para>
+		Invocations of the target are trampolined such that each invocation is invoked with <code><NEXT/>(s)</code>, where <var>s</var> is the original <link id="recursion state"/> at the beginning of the algorithm (i.e. <code><STATE/>()</code>).
+		This maximizes the utility of the <link id="recursion backend"/>.
+	</para>
+	<para>
+		Ignoring the complexity of <var>macro</var> (which is invoked once for each element in <var>tuple</var>), the running time of <TUPLE_FOR_EACH_I/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
+		The asymptotic upper and lower bounds are <assoc id="complexity/for_each_i.gif">Θ</assoc>, where <x-var>n</x-var> is the number of elements in <var>tuple</var>.
+	</para>
+	<para>
+		This macro deduces the current <link id="recursion state"/> and invokes <TUPLE_FOR_EACH_I_S/>.
+		If the current <link id="recursion state"/> is already known, direct use of <TUPLE_FOR_EACH_I_S/> is more efficient.
+	</para>
+	<para>
+		This macro may not be used if <link id="bypass semantics"/> are in effect.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-punctuation-comma_if.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		#include <chaos-preprocessor-tuple-for_each_i.h/>
+		
+		#if <VARIADICS/>
+		
+		#define MACRO(s, i, elem) <COMMA_IF/>(i) elem[i]
+		
+		<EXPR/>(<TUPLE_FOR_EACH_I/>(
+		    MACRO, (a, b, c, d, e, f, g, h, i, j, k, l)
+		))
+		// a[0], b[1], c[2], d[3], e[4], f[5], g[6], h[7], i[8], j[9], k[10], l[11]
+		
+		#endif
+	</listing>
+	<derivative id="TUPLE_FOR_EACH_I_ID" lang="C99"/>
+	<derivative id="TUPLE_FOR_EACH_I_" lang="C99"/>
+	<derivative id="TUPLE_FOR_EACH_I_S">
+		<usage lang="C99">
+			<syntax><EXPR_S/>(s)(<TUPLE_FOR_EACH_I_S/>(s, macro, tuple))</syntax>
+		</usage>
+		<usage lang="C99">
+			<syntax><EXPR_S/>(s)(<TUPLE_FOR_EACH_I_S/>(s, macro, tuple, ...))</syntax>
+		</usage>
+		<derivative id="TUPLE_FOR_EACH_I_S_ID" lang="C99"/>
+		<derivative id="TUPLE_FOR_EACH_I_S_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

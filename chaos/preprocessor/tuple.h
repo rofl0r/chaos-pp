@@ -23,6 +23,8 @@
 # include <chaos/preprocessor/tuple/fold_left_aux.h>
 # include <chaos/preprocessor/tuple/fold_right.h>
 # include <chaos/preprocessor/tuple/fold_right_aux.h>
+# include <chaos/preprocessor/tuple/for_each.h>
+# include <chaos/preprocessor/tuple/for_each_i.h>
 # include <chaos/preprocessor/tuple/rem.h>
 # include <chaos/preprocessor/tuple/rest_n.h>
 # include <chaos/preprocessor/tuple/reverse.h>

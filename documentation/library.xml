@@ -598,6 +598,8 @@
 					<binary-file name="fold_left_aux.gif"/>
 					<binary-file name="fold_right.gif"/>
 					<binary-file name="fold_right_aux.gif"/>
+					<binary-file name="for_each.gif"/>
+					<binary-file name="for_each_i.gif"/>
 					<binary-file name="rest_n.gif"/>
 					<binary-file name="size.gif"/>
 					<binary-file name="to_list_alt.gif"/>
@@ -619,6 +621,8 @@
 				<header name="fold_left_aux.h"/>
 				<header name="fold_right.h"/>
 				<header name="fold_right_aux.h"/>
+				<header name="for_each.h"/>
+				<header name="for_each_i.h"/>
 				<header name="rest_n.h"/>
 				<header name="rem.h"/>
 				<header name="reverse.h"/>

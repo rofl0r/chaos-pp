@@ -13,7 +13,7 @@
 	</usage>
 	<para>
 		This macro is used to intercept concatenations of numbers ranging from <code>0</code> to <LIMIT_MAG/>.
-		When a number in this range is concatenated to the result of this macro produces a new macro that expands to nothing.
+		When a number in this range is concatenated to the result of this macro, a new macro name is produced which expands to nothing.
 	</para>
 	<para>
 		This macro is primarily useful in situations where the library automatically concatenates numbers to user-specified arguments.

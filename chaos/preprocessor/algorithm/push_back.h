@@ -55,7 +55,7 @@
             )), \
             CHAOS_PP_FIRST _(g) \
         ), \
-        CHAOS_PP_CONS _(CHAOS_PP_NIL _(CHAOS_PP_TYPEOF _(g)), CHAOS_PP_UNPACK px) \
+        CHAOS_PP_CONS _(g, CHAOS_PP_UNPACK px) \
     ) \
     /**/
 #

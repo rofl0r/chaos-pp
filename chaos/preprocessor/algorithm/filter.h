@@ -55,7 +55,7 @@
 # define CHAOS_IP_FILTER_INDIRECT() CHAOS_IP_FILTER_I
 # define CHAOS_IP_FILTER_I(s, o, pred, _p, type, g, pd) \
     CHAOS_PP_IIF(CHAOS_PP_IS_CONS(g))( \
-        CHAOS_IP_FILTER_II, CHAOS_PP_NIL(type) CHAOS_PP_TUPLE_EAT(8) \
+        CHAOS_IP_FILTER_II, g CHAOS_PP_TUPLE_EAT(8) \
     )(CHAOS_PP_DEFER(CHAOS_PP_OBSTRUCT)(), s, o, pred, _p, type, g, pd) \
     /**/
 # define CHAOS_IP_FILTER_II(_, s, o, pred, _p, type, g, pd) \

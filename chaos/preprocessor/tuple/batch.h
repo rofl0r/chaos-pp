@@ -18,6 +18,7 @@
 # include <chaos/preprocessor/facilities/expand.h>
 # include <chaos/preprocessor/facilities/split.h>
 # include <chaos/preprocessor/lambda/ops.h>
+# include <chaos/preprocessor/punctuation/comma.h>
 # include <chaos/preprocessor/recursion/basic.h>
 # include <chaos/preprocessor/tuple/core.h>
 # include <chaos/preprocessor/tuple/rem.h>
@@ -27,14 +28,9 @@
 # if CHAOS_PP_VARIADICS
 #    define CHAOS_PP_TUPLE_IS_BATCH(n, tuple) \
         CHAOS_PP_IIF(CHAOS_PP_TUPLE_IS_CONS(tuple))( \
-            CHAOS_PP_SPLIT( \
-                0, \
-                CHAOS_PP_SPLIT( \
-                    1, \
-                    CHAOS_IP_TUPLE_IS_BATCH_A(n, CHAOS_IP_TUPLE_IS_BATCH_B, CHAOS_PP_REM tuple), \
-                    1, 1 \
-                ) \
-            ), \
+            CHAOS_PP_SPLIT(0, CHAOS_PP_SPLIT(1, \
+                CHAOS_IP_TUPLE_IS_BATCH_A(n, CHAOS_IP_TUPLE_IS_BATCH_B, CHAOS_PP_REM tuple), 1, 1 \
+            )), \
             0 \
         ) \
         /**/
@@ -159,6 +155,50 @@
 #    define CHAOS_IP_TUPLE_SANS_BATCH_23(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, ...) (__VA_ARGS__)
 #    define CHAOS_IP_TUPLE_SANS_BATCH_24(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, ...) (__VA_ARGS__)
 #    define CHAOS_IP_TUPLE_SANS_BATCH_25(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, ...) (__VA_ARGS__)
+# endif
+#
+# /* CHAOS_PP_TUPLE_BATCH_FORK */
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_PP_TUPLE_BATCH_FORK(n, tuple) \
+        CHAOS_PP_IIF(CHAOS_PP_TUPLE_IS_CONS(tuple))( \
+            CHAOS_PP_SPLIT(0, CHAOS_PP_SPLIT(1, \
+                CHAOS_PP_PRIMITIVE_CAT(CHAOS_IP_TUPLE_BATCH_FORK_, n)( \
+                    CHAOS_PP_COMMA, CHAOS_PP_REM tuple \
+                ),, \
+            )), \
+            0 \
+        ) \
+        /**/
+#    define CHAOS_PP_TUPLE_BATCH_FORK_ID() CHAOS_PP_TUPLE_BATCH_FORK
+#    define CHAOS_PP_TUPLE_BATCH_FORK_ CHAOS_PP_LAMBDA(CHAOS_PP_TUPLE_BATCH_FORK)
+# endif
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_IP_TUPLE_BATCH_FORK_2(_, im) CHAOS_IP_TUPLE_IS_BATCH_2(im, _() 1,)
+#    define CHAOS_IP_TUPLE_BATCH_FORK_3(_, im) CHAOS_IP_TUPLE_IS_BATCH_3(im, _() 2, _() 1,)
+#    define CHAOS_IP_TUPLE_BATCH_FORK_4(_, im) CHAOS_IP_TUPLE_IS_BATCH_4(im, _() 3, _() 2, _() 1,)
+#    define CHAOS_IP_TUPLE_BATCH_FORK_5(_, im) CHAOS_IP_TUPLE_IS_BATCH_5(im, _() 4, _() 3, _() 2, _() 1,)
+#    define CHAOS_IP_TUPLE_BATCH_FORK_6(_, im) CHAOS_IP_TUPLE_IS_BATCH_6(im, _() 5, _() 4, _() 3, _() 2, _() 1,)
+#    define CHAOS_IP_TUPLE_BATCH_FORK_7(_, im) CHAOS_IP_TUPLE_IS_BATCH_7(im, _() 6, _() 5, _() 4, _() 3, _() 2, _() 1,)
+#    define CHAOS_IP_TUPLE_BATCH_FORK_8(_, im) CHAOS_IP_TUPLE_IS_BATCH_8(im, _() 7, _() 6, _() 5, _() 4, _() 3, _() 2, _() 1,)
+#    define CHAOS_IP_TUPLE_BATCH_FORK_9(_, im) CHAOS_IP_TUPLE_IS_BATCH_9(im, _() 8, _() 7, _() 6, _() 5, _() 4, _() 3, _() 2, _() 1,)
+#    define CHAOS_IP_TUPLE_BATCH_FORK_10(_, im) CHAOS_IP_TUPLE_IS_BATCH_10(im, _() 9, _() 8, _() 7, _() 6, _() 5, _() 4, _() 3, _() 2, _() 1,)
+#    define CHAOS_IP_TUPLE_BATCH_FORK_11(_, im) CHAOS_IP_TUPLE_IS_BATCH_11(im, _() 10, _() 9, _() 8, _() 7, _() 6, _() 5, _() 4, _() 3, _() 2, _() 1,)
+#    define CHAOS_IP_TUPLE_BATCH_FORK_12(_, im) CHAOS_IP_TUPLE_IS_BATCH_12(im, _() 11, _() 10, _() 9, _() 8, _() 7, _() 6, _() 5, _() 4, _() 3, _() 2, _() 1,)
+#    define CHAOS_IP_TUPLE_BATCH_FORK_13(_, im) CHAOS_IP_TUPLE_IS_BATCH_13(im, _() 12, _() 11, _() 10, _() 9, _() 8, _() 7, _() 6, _() 5, _() 4, _() 3, _() 2, _() 1,)
+#    define CHAOS_IP_TUPLE_BATCH_FORK_14(_, im) CHAOS_IP_TUPLE_IS_BATCH_14(im, _() 13, _() 12, _() 11, _() 10, _() 9, _() 8, _() 7, _() 6, _() 5, _() 4, _() 3, _() 2, _() 1,)
+#    define CHAOS_IP_TUPLE_BATCH_FORK_15(_, im) CHAOS_IP_TUPLE_IS_BATCH_15(im, _() 14, _() 13, _() 12, _() 11, _() 10, _() 9, _() 8, _() 7, _() 6, _() 5, _() 4, _() 3, _() 2, _() 1,)
+#    define CHAOS_IP_TUPLE_BATCH_FORK_16(_, im) CHAOS_IP_TUPLE_IS_BATCH_16(im, _() 15, _() 14, _() 13, _() 12, _() 11, _() 10, _() 9, _() 8, _() 7, _() 6, _() 5, _() 4, _() 3, _() 2, _() 1,)
+#    define CHAOS_IP_TUPLE_BATCH_FORK_17(_, im) CHAOS_IP_TUPLE_IS_BATCH_17(im, _() 16, _() 15, _() 14, _() 13, _() 12, _() 11, _() 10, _() 9, _() 8, _() 7, _() 6, _() 5, _() 4, _() 3, _() 2, _() 1,)
+#    define CHAOS_IP_TUPLE_BATCH_FORK_18(_, im) CHAOS_IP_TUPLE_IS_BATCH_18(im, _() 17, _() 16, _() 15, _() 14, _() 13, _() 12, _() 11, _() 10, _() 9, _() 8, _() 7, _() 6, _() 5, _() 4, _() 3, _() 2, _() 1,)
+#    define CHAOS_IP_TUPLE_BATCH_FORK_19(_, im) CHAOS_IP_TUPLE_IS_BATCH_19(im, _() 18, _() 17, _() 16, _() 15, _() 14, _() 13, _() 12, _() 11, _() 10, _() 9, _() 8, _() 7, _() 6, _() 5, _() 4, _() 3, _() 2, _() 1,)
+#    define CHAOS_IP_TUPLE_BATCH_FORK_20(_, im) CHAOS_IP_TUPLE_IS_BATCH_20(im, _() 19, _() 18, _() 17, _() 16, _() 15, _() 14, _() 13, _() 12, _() 11, _() 10, _() 9, _() 8, _() 7, _() 6, _() 5, _() 4, _() 3, _() 2, _() 1,)
+#    define CHAOS_IP_TUPLE_BATCH_FORK_21(_, im) CHAOS_IP_TUPLE_IS_BATCH_21(im, _() 20, _() 19, _() 18, _() 17, _() 16, _() 15, _() 14, _() 13, _() 12, _() 11, _() 10, _() 9, _() 8, _() 7, _() 6, _() 5, _() 4, _() 3, _() 2, _() 1,)
+#    define CHAOS_IP_TUPLE_BATCH_FORK_22(_, im) CHAOS_IP_TUPLE_IS_BATCH_22(im, _() 21, _() 20, _() 19, _() 18, _() 17, _() 16, _() 15, _() 14, _() 13, _() 12, _() 11, _() 10, _() 9, _() 8, _() 7, _() 6, _() 5, _() 4, _() 3, _() 2, _() 1,)
+#    define CHAOS_IP_TUPLE_BATCH_FORK_23(_, im) CHAOS_IP_TUPLE_IS_BATCH_23(im, _() 22, _() 21, _() 20, _() 19, _() 18, _() 17, _() 16, _() 15, _() 14, _() 13, _() 12, _() 11, _() 10, _() 9, _() 8, _() 7, _() 6, _() 5, _() 4, _() 3, _() 2, _() 1,)
+#    define CHAOS_IP_TUPLE_BATCH_FORK_24(_, im) CHAOS_IP_TUPLE_IS_BATCH_24(im, _() 23, _() 22, _() 21, _() 20, _() 19, _() 18, _() 17, _() 16, _() 15, _() 14, _() 13, _() 12, _() 11, _() 10, _() 9, _() 8, _() 7, _() 6, _() 5, _() 4, _() 3, _() 2, _() 1,)
+#    define CHAOS_IP_TUPLE_BATCH_FORK_25(_, im) CHAOS_IP_TUPLE_IS_BATCH_25(im, _() 24, _() 23, _() 22, _() 21, _() 20, _() 19, _() 18, _() 17, _() 16, _() 15, _() 14, _() 13, _() 12, _() 11, _() 10, _() 9, _() 8, _() 7, _() 6, _() 5, _() 4, _() 3, _() 2, _() 1,)
 # endif
 #
 # endif

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/logical/compl.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a bit complement operator.
+</overview>
+
+<macro id="COMPL" group="not">
+	<abstract>
+		The <COMPL/> macro expands to the bit complement of its operand.
+	</abstract>
+	<usage>
+		<syntax><COMPL/>(bit)</syntax>
+		<param id="bit">
+			The value whose bit complement is to be produced.
+			Valid values are <code>0</code> and <code>1</code>.
+		</param>
+	</usage>
+	<para>
+		If <var>bit</var> is <code>0</code>, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-logical-compl.h/>
+		
+		<COMPL/>(1) // 0
+		<COMPL/>(0) // 1
+		
+		<COMPL/>(<COMPL/>(1)) // 1
+	</listing>
+	<derivative id="COMPL_ID"/>
+	<derivative id="COMPL_" lang="C99"/>
+</macro>
+
+</header>

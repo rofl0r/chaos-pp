@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/facilities/encode.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines macros used to encode and decode arguments containing commas.
+</overview>
+
+<macro id="ENCODE" type="indirect" group="encoding">
+	<abstract>
+		The <ENCODE/> macro encodes its arguments by wrapping them in parentheses.
+	</abstract>
+	<usage lang="C99">
+		<syntax><ENCODE/>(...)</syntax>
+		<param id="..." optional="1">
+			The arguments to be encoded.
+		</param>
+	</usage>
+	<para>
+		This macro is used as a complement to <DECODE/> to pass an argument that is <em>logically</em> a single argument but is <em>physically</em> more than one argument.
+	</para>
+	<derivative id="ENCODE_ID" lang="C99"/>
+	<derivative id="ENCODE_" lang="C99"/>
+</macro>
+
+<macro id="DECODE" type="indirect" group="encoding">
+	<abstract>
+		The <DECODE/> macro decodes an argument.
+	</abstract>
+	<usage lang="C99">
+		<syntax><DECODE/>(...)</syntax>
+		<param id="..." optional="1">
+			The argument to be decoded.
+		</param>
+	</usage>
+	<para>
+		This macro is used to decode arguments possibly encoded with <ENCODE/>.
+	</para>
+	<para>
+		If <code>__VA_ARGS__</code> is a parenthetic expression, this macro expands to the contents of that parenthetic expression.
+		Otherwise, it expands to <code>__VA_ARGS__</code>.
+	</para>
+	<para>
+		The common use case for this macro is currently theoretical, as C++ does not yet allow variadic arguments.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-facilities-encode.h/>
+		
+		#if <VARIADICS/>
+		
+		#define MACRO(type) <DECODE/>(type)
+		
+		MACRO(int) // int
+		MACRO(<ENCODE/>(std::pair&lt;int, int&gt;)) // std::pair&lt;int, int&gt;
+		
+		#endif
+	</listing>
+	<derivative id="DECODE_ID" lang="C99"/>
+	<derivative id="DECODE_" lang="C99"/>
+</macro>
+
+</header>

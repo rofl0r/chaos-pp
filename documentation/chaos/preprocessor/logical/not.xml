@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/logical/not.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a logical "not" operator.
+</overview>
+
+<macro id="NOT" group="not">
+	<abstract>
+		The <NOT/> macro expands to the logical "not" of its operand.
+	</abstract>
+	<usage>
+		<syntax><NOT/>(x)</syntax>
+		<param id="x">
+			The operand whose logical "not" is to be produced.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+	</usage>
+	<para>
+		If <var>x</var> is <code>0</code>, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<para>
+		This macro performs a boolean conversion on its operand.
+		If this conversion is undesireable, <COMPL/> may be used instead.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-logical-not.h/>
+		
+		<NOT/>(9) // 0
+		<NOT/>(0) // 1
+		
+		<NOT/>(<NOT/>(100)) // 1
+	</listing>
+	<derivative id="NOT_ID"/>
+	<derivative id="NOT_" lang="C99"/>
+</macro>
+
+</header>

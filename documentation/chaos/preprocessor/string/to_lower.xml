@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/string/to_lower.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an algorithm that converts a <link id="string"/> to lowercase.
+</overview>
+
+<macro id="TO_LOWER" type="indirect">
+	<abstract>
+		The <TO_LOWER/> macro converts a character to lowercase.
+	</abstract>
+	<usage>
+		<syntax><TO_LOWER/>(c)</syntax>
+		<param id="c">
+			The character to be converted to lowercase.
+			Valid values are the numerals (<code>0</code> through <code>9</code>), the alphabetic characters in the basic source character set (<code>a</code> through <code>z</code> and <code>A</code> through <code>Z</code>), and the underscore (<code>_</code>).
+		</param>
+	</usage>
+	<para>
+		If <var>c</var> is an uppercase letter, this macro expands to the letter's lowercase equivalent.
+		Otherwise, it expands to <var>c</var>.
+	</para>
+	<x-reference id="TO_UPPER"/>
+	<listing>
+		#include <chaos-preprocessor-string-to_lower.h/>
+		
+		<TO_LOWER/>(a) // a
+		<TO_LOWER/>(A) // a
+		<TO_LOWER/>(0) // 0
+		<TO_LOWER/>(_) // _
+	</listing>
+	<derivative id="TO_LOWER_ID"/>
+	<derivative id="TO_LOWER_" lang="C99"/>
+</macro>
+
+<macro id="STRING_TO_LOWER" type="indirect">
+	<abstract>
+		The <STRING_TO_LOWER/> macro converts its argument to lowercase.
+	</abstract>
+	<usage lang="C99">
+		<syntax><STRING_TO_LOWER/>(string)</syntax>
+		<param id="string" optional="1">
+			The <link id="string"/> to be converted to lowercase.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><STRING_TO_LOWER/>(string)</syntax>
+		<param id="string">
+			The <link id="string"/> to be converted to lowercase.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="string"/> containing the elements of <var>string</var> converted to lowercase.
+		For example,
+		<snippet>
+			<STRING_TO_LOWER/>(C H A O S) // c h a o s
+		</snippet>
+	</para>
+	<para>
+		This macro uses <link id="bypass semantics"/>.
+		If <link id="bypass semantics"/> are already in effect, <STRING_TO_LOWER_BYPASS/> must be used instead.
+	</para>
+	<x-reference id="STRING_TO_UPPER"/>
+	<listing>
+		#include <chaos-preprocessor-algorithm-concat.h/>
+		#include <chaos-preprocessor-string-spec.h/>
+		#include <chaos-preprocessor-string-to_lower.h/>
+		#include <chaos-preprocessor-string-to_upper.h/>
+		
+		<CONCAT/>(
+		    (<STRING/>) <STRING_TO_LOWER/>(
+		        A B c _ 1 0
+		    )
+		)
+		// abc_10
+
+		#define PROPER(string) \
+		    PROPER_I(<STRING_TO_LOWER/>(string)) \
+		    /**/
+		#define PROPER_I(string) \
+		    <TO_UPPER/>(<STRING_FIRST/>(string)) \
+		    <STRING_REST/>(string) \
+		    /**/
+		
+		PROPER(C H A O S) // C h a o s
+	</listing>
+	<derivative id="STRING_TO_LOWER_ID"/>
+	<derivative id="STRING_TO_LOWER_" lang="C99"/>
+	<derivative id="STRING_TO_LOWER_BYPASS">
+		<usage lang="C99">
+			<syntax><STRING_TO_LOWER_BYPASS/>(s, string)</syntax>
+		</usage>
+		<usage lang="C/C++">
+			<syntax><STRING_TO_LOWER_BYPASS/>(s, string)</syntax>
+		</usage>
+		<derivative id="STRING_TO_LOWER_BYPASS_ID"/>
+		<derivative id="STRING_TO_LOWER_BYPASS_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/facilities/default.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines macros used to apply default values for <link id="true-optional parameters"/>.
+</overview>
+
+<macro id="DEFAULT" type="indirect" group="default">
+	<abstract>
+		The <DEFAULT/> macro is used to apply a default argument value if a <link id="true-optional argument"/> doesn't exist.
+	</abstract>
+	<usage lang="C99">
+		<syntax><DEFAULT/>(def, ...)</syntax>
+		<param id="def" optional="1">
+			The default value to be used if no <link id="true-optional argument"/> exists in <code>__VA_ARGS__</code>.
+		</param>
+		<param id="..." optional="1">
+			The argument that possibly contains a <link id="true-optional argument"/>.
+		</param>
+	</usage>
+	<para>
+		If <code>__VA_ARGS__</code> contains more than a single argument, this macro expands to the second argument.
+		Otherwise, it expands to <var>def</var>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-facilities-default.h/>
+		#include <chaos-preprocessor-facilities-optional.h/>
+		
+		#define MACRO(...) \
+		    MACRO_I( \
+		        <NON_OPTIONAL/>(__VA_ARGS__), \
+		        <DEFAULT/>(Chaos, __VA_ARGS__) \
+		    ) \
+		    /**/
+		#define MACRO_I(a, b) b Preprocessor [a]
+		
+		MACRO(+)        // Chaos Preprocessor [+]
+		MACRO(-, Boost) // Boost Preprocessor [-]
+	</listing>
+	<derivative id="DEFAULT_ID" lang="C99"/>
+	<derivative id="DEFAULT_" lang="C99"/>
+</macro>
+
+<macro id="DEFAULT_AT" type="indirect" group="default">
+	<abstract>
+		The <DEFAULT_AT/> macro is used to apply a default argument value for <link id="true-optional parameters"/> other than just the first.
+	</abstract>
+	<usage lang="C99">
+		<syntax><DEFAULT_AT/>(i, def, ...)</syntax>
+		<param id="i">
+			The index of the <link id="true-optional argument"/> possibly contained in <code>__VA_ARGS__</code>.
+		</param>
+		<param id="def" optional="1">
+			The default value to be used if the <var>i</var>-th <link id="true-optional argument"/> does not exist.
+		</param>
+		<param id="..." optional="1">
+			The argument that possibly contains <link id="true-optional arguments"/>.
+		</param>
+	</usage>
+	<para>
+		If an <var>i</var>-th <link id="true-optional argument"/> exists, this macro expands to that argument.
+		Otherwise, it expands to <var>def</var>.
+	</para>
+	<para>
+		This macro uses <link id="bypass semantics"/>.
+		If <link id="bypass semantics"/> are already in effect, <DEFAULT_AT_BYPASS/> must be used instead.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-facilities-default.h/>
+		#include <chaos-preprocessor-facilities-optional.h/>
+		
+		#if <VARIADICS/>
+		
+		// NAME(first, last =&gt; Mensonides, middle =&gt; /**/)
+		
+		#define NAME(...) \
+		    NAME_I( \
+		        <NON_OPTIONAL/>(__VA_ARGS__), \
+		        <DEFAULT_AT/>(0, Mensonides, __VA_ARGS__), \
+		        <DEFAULT_AT/>(1,, __VA_ARGS__) \
+		    ) \
+		    /**/
+		#define NAME_I(first, last, middle) first middle last
+		
+		NAME(Paul)                    // Paul Mensonides
+		NAME(Paul, Mensonides, Jelle) // Paul Jelle Mensonides
+		
+		#endif
+	</listing>
+	<derivative id="DEFAULT_AT_ID" lang="C99"/>
+	<derivative id="DEFAULT_AT_" lang="C99"/>
+	<derivative id="DEFAULT_AT_BYPASS">
+		<usage lang="C99">
+			<syntax><DEFAULT_AT_BYPASS/>(s, i, def, ...)</syntax>
+		</usage>
+		<derivative id="DEFAULT_AT_BYPASS_ID" lang="C99"/>
+		<derivative id="DEFAULT_AT_BYPASS_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/punctuation/paren.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines macros that expand to parentheses.
+</overview>
+
+<macro id="LPAREN">
+	<abstract>
+		The <LPAREN/> macro expands to a left parenthesis.
+	</abstract>
+	<usage>
+		<syntax><LPAREN/>()</syntax>
+	</usage>
+	<para>
+		This macro expands to a left parenthesis preprocessing token.
+	</para>
+	<x-reference id="RPAREN"/>
+	<listing>
+		#include <chaos-preprocessor-punctuation-paren.h/>
+		
+		#define MACRO(x) x
+		
+		MACRO(<LPAREN/>()) // (
+	</listing>
+	<derivative id="LPAREN_ID"/>
+	<derivative id="LPAREN_" lang="C99"/>
+</macro>
+
+<macro id="RPAREN">
+	<abstract>
+		The <RPAREN/> macro expands to a right parenthesis.
+	</abstract>
+	<usage>
+		<syntax><RPAREN/>()</syntax>
+	</usage>
+	<para>
+		This macro expands to a right parenthesis preprocessing token.
+	</para>
+	<x-reference id="LPAREN"/>
+	<listing>
+		#include <chaos-preprocessor-punctuation-paren.h/>
+		
+		#define MACRO(x) x
+		
+		MACRO(<RPAREN/>()) // )
+	</listing>
+	<derivative id="RPAREN_ID"/>
+	<derivative id="RPAREN_" lang="C99"/>
+</macro>
+
+</header>

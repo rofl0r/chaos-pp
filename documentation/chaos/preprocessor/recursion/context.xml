@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/recursion/context.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines macros used to store and retrieve context data.
+</overview>
+
+<macro id="CONTEXT">
+	<abstract>
+		The <CONTEXT/> creates a retrievable context.
+	</abstract>
+	<usage lang="C99">
+		<syntax><CONTEXT/>(bit)(...)</syntax>
+		<param id="bit">
+			The context data to be created.
+			Valid values are <code>0</code> and <code>1</code>.
+		</param>
+		<param id="..." optional="1">
+			The <link id="deferred expression"/> to be expanded within the context.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><CONTEXT/>(bit)(x)</syntax>
+		<param id="bit">
+			The context data to be created.
+			Valid values are <code>0</code> and <code>1</code>.
+		</param>
+		<param id="x">
+			The <link id="deferred expression"/> to be expanded within the context.
+		</param>
+	</usage>
+	<para>
+		This macro introduces a context value which can be retrieved via <RETRIEVE/>, <ABSOLUTE/>, or <RELATIVE/>.
+		If <var>bit</var> expands to <code>0</code>, then a directly nested invocation of <RETRIEVE/> inside the <var>x</var> or <code>__VA_ARGS__</code> will expand to <code>0</code>.
+		Otherwise, it will expand to <code>1</code>.
+		<snippet>
+			#define MACRO() <RETRIEVE/>()
+			
+			<CONTEXT/>(0)(<DEFER/>(MACRO)()) // 0
+			<CONTEXT/>(1)(<DEFER/>(MACRO)()) // 1
+		</snippet>
+	</para>
+	<para>
+		This macro employs <link id="automatic recursion"/>, and allows the establishment of up to <LIMIT_CONTEXT/> nested contexts.
+		The most current context can be accessed with <RETRIEVE/>, contexts relative to the current context can be accessed with <RELATIVE/>, and absolute contexts can be accessed with <ABSOLUTE/>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-recursion-basic.h/>
+		#include <chaos-preprocessor-recursion-context.h/>
+		
+		#define A() <CONTEXT/>(0)(<DEFER/>(B)())
+		#define B() <CONTEXT/>(1)(<DEFER/>(C)())
+		#define C() \
+		    <ABSOLUTE/>(1) \
+		        <ABSOLUTE/>(2) \
+		            <RETRIEVE/>() \
+		    /**/
+		
+		<CONTEXT/>(1)(<DEFER/>(A)()) // 1 0 1
+	</listing>
+	<derivative id="CONTEXT_ID"/>
+	<derivative id="CONTEXT_" lang="C99"/>
+</macro>
+
+<macro id="ABSOLUTE">
+	<abstract>
+		The <ABSOLUTE/> macro retrieves the context value of a context at an absolute position.
+	</abstract>
+	<usage>
+		<syntax><ABSOLUTE/>(n)</syntax>
+		<param id="n">
+			The index of the context frame whose context value is to be retrieved.
+			Valid values range from <code>1</code> to <LIMIT_CONTEXT/>.
+		</param>
+	</usage>
+	<para>
+		This macro expands to the context value at position <var>n</var>.
+		If no context is present at position <var>n</var>, this macro expands to nothing.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-recursion-basic.h/>
+		#include <chaos-preprocessor-recursion-context.h/>
+		
+		#define A() <CONTEXT/>(0)(<DEFER/>(B)())
+		#define B() <CONTEXT/>(1)(<DEFER/>(C)())
+		#define C() \
+		    <ABSOLUTE/>(1) \
+		        <ABSOLUTE/>(2) \
+		            <ABSOLUTE/>(3) \
+		    /**/
+		
+		<CONTEXT/>(0)(<DEFER/>(A)()) // 0 0 1
+	</listing>
+	<derivative id="ABSOLUTE_ID"/>
+	<derivative id="ABSOLUTE_" lang="C99"/>
+</macro>
+
+<macro id="RELATIVE">
+	<abstract>
+		The <RELATIVE/> macro retrieves the context value of a context relative to the current context.
+	</abstract>
+	<usage>
+		<syntax><RELATIVE/>(n)</syntax>
+		<param id="n">
+			The offset from the current context to the context frame whose context value is to be retrieved.
+			Valid values range <code>0</code> to <LIMIT_CONTEXT/> - 1.
+		</param>
+	</usage>
+	<para>
+		This macro expands to the context value of the context <var>n</var> outer frames from the current context frame.
+		In other words, <RELATIVE/>(0) expands to the current context value, <RELATIVE/>(1) expands to the next outer context, <RELATIVE/>(2) expands to the next outer context after that, and so on.
+		If no context exists <var>n</var> frames outward, this macro expands to <code>0</code>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-recursion-basic.h/>
+		#include <chaos-preprocessor-recursion-context.h/>
+		
+		#define A() <CONTEXT/>(1)(<DEFER/>(B)())
+		#define B() <CONTEXT/>(0)(<DEFER/>(C)())
+		#define C() \
+		    <RELATIVE/>(0) \
+		        <RELATIVE/>(1) \
+		            <RELATIVE/>(2) \
+		    /**/
+		
+		<CONTEXT/>(1)(<DEFER/>(A)()) // 0 1 1
+	</listing>
+	<derivative id="RELATIVE_ID"/>
+	<derivative id="RELATIVE_" lang="C99"/>
+</macro>
+
+<macro id="RETRIEVE">
+	<abstract>
+		The <RETRIEVE/> macro retrieves the context value of the most current context.
+	</abstract>
+	<usage>
+		<syntax><RETRIEVE/>()</syntax>
+	</usage>
+	<para>
+		If the most current context value is <code>1</code>, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-control-expr_iif.h/>
+		#include <chaos-preprocessor-recursion-basic.h/>
+		#include <chaos-preprocessor-recursion-context.h/>
+		
+		#define A(x) \
+		    <EXPR_IIF/>(<RETRIEVE/>())(x B) \
+		    /**/
+		#define B(x) \
+		    <EXPR_IIF/>(<RETRIEVE/>())(x A) \
+		    /**/
+		
+		<CONTEXT/>(1)(
+		    <DEFER/>(A)(+)(-)(*)(/)(%)
+		)(...)
+		// + - * / %
+	</listing>
+	<derivative id="RETRIEVE_ID"/>
+	<derivative id="RETRIEVE_" lang="C99"/>
+</macro>
+
+</header>

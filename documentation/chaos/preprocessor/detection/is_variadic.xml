@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/detection/is_variadic.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro used to detect parenthetic expressions.
+</overview>
+
+<macro id="IS_VARIADIC" group="parenthetic">
+	<abstract>
+		The <IS_VARIADIC/> macro detects whether its argument begins with a parenthetic expression of any arity.
+	</abstract>
+	<usage lang="C99">
+		<syntax><IS_VARIADIC/>(...)</syntax>
+		<param id="..." optional="1">
+			The expression to be tested.
+		</param>
+	</usage>
+	<para>
+		If <var>x</var> or <code>__VA_ARGS__</code> begins with a parenthetic expression, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-detection-is_variadic.h/>
+		
+		#if <VARIADICS/>
+		
+		<IS_VARIADIC/>(++) // 0
+		
+		<IS_VARIADIC/>(())     // 1
+		<IS_VARIADIC/>((a))    // 1
+		<IS_VARIADIC/>((a, b)) // 1
+		
+		#endif
+	</listing>
+	<derivative id="IS_VARIADIC_ID" lang="C99"/>
+	<derivative id="IS_VARIADIC_" lang="C99"/>
+</macro>
+
+</header>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/string/to_upper.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an algorithm that converts a <link id="string"/> to uppercase.
+</overview>
+
+<macro id="TO_UPPER" type="indirect">
+	<abstract>
+		The <TO_UPPER/> macro converts a character to uppercase.
+	</abstract>
+	<usage>
+		<syntax><TO_UPPER/>(c)</syntax>
+		<param id="c">
+			The character to be converted to uppercase.
+			Valid values are the numerals (<code>0</code> through <code>9</code>), the alphabetic characters in the basic source character set (<code>a</code> through <code>z</code> and <code>A</code> through <code>Z</code>), and the underscore (<code>_</code>).
+		</param>
+	</usage>
+	<para>
+		If <var>c</var> is an lowercase letter, this macro expands to the letter's uppercase equivalent.
+		Otherwise, it expands to <var>c</var>.
+	</para>
+	<x-reference id="TO_LOWER"/>
+	<listing>
+		#include <chaos-preprocessor-string-to_upper.h/>
+		
+		<TO_UPPER/>(a) // A
+		<TO_UPPER/>(A) // A
+		<TO_UPPER/>(0) // 0
+		<TO_UPPER/>(_) // _
+	</listing>
+	<derivative id="TO_UPPER_ID"/>
+	<derivative id="TO_UPPER_" lang="C99"/>
+</macro>
+
+<macro id="STRING_TO_UPPER" type="indirect">
+	<abstract>
+		The <STRING_TO_UPPER/> macro converts its argument to uppercase.
+	</abstract>
+	<usage lang="C99">
+		<syntax><STRING_TO_UPPER/>(string)</syntax>
+		<param id="string" optional="1">
+			The <link id="string"/> to be converted to uppercase.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><STRING_TO_UPPER/>(string)</syntax>
+		<param id="string">
+			The <link id="string"/> to be converted to uppercase.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="string"/> containing the elements of <var>string</var> converted to uppercase.
+		For example,
+		<snippet>
+			<STRING_TO_UPPER/>(c h a o s) // C H A O S
+		</snippet>
+	</para>
+	<para>
+		This macro uses <link id="bypass semantics"/>.
+		If <link id="bypass semantics"/> are already in effect, <STRING_TO_UPPER_BYPASS/> must be used instead.
+	</para>
+	<x-reference id="STRING_TO_LOWER"/>
+	<listing>
+		#include <chaos-preprocessor-algorithm-concat.h/>
+		#include <chaos-preprocessor-string-spec.h/>
+		#include <chaos-preprocessor-string-to_upper.h/>
+		
+		<CONCAT/>(
+		    (<STRING/>) <STRING_TO_UPPER/>(
+		        a b C _ 1 0
+		    )
+		)
+		// ABC_10
+	</listing>
+	<derivative id="STRING_TO_UPPER_ID"/>
+	<derivative id="STRING_TO_UPPER_" lang="C99"/>
+	<derivative id="STRING_TO_UPPER_BYPASS">
+		<usage lang="C99">
+			<syntax><STRING_TO_UPPER_BYPASS/>(s, string)</syntax>
+		</usage>
+		<usage lang="C/C++">
+			<syntax><STRING_TO_UPPER_BYPASS/>(s, string)</syntax>
+		</usage>
+		<derivative id="STRING_TO_UPPER_BYPASS_ID"/>
+		<derivative id="STRING_TO_UPPER_BYPASS_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

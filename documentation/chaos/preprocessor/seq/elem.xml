@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/seq/elem.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that extracts an element from a <link id="sequence"/>.
+</overview>
+
+<macro id="SEQ_ELEM" type="indirect" group="element-access">
+	<abstract>
+		The <SEQ_ELEM/> macro extracts an element from a <link id="sequence"/>.
+	</abstract>
+	<usage>
+		<syntax><SEQ_ELEM/>(i, seq)</syntax>
+		<param id="i">
+			The zero-based index of the element to be extracted.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="seq">
+			The <link id="sequence"/> from which an element is to be extracted.
+		</param>
+	</usage>
+	<para>
+		This macro extracts the <var>i</var>-th element of <var>seq</var>.
+		Consequently, <var>seq</var> must contain at least <var>i</var> + 1 elements.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-seq-elem.h/>
+		
+		#define A (a)(b)(c)
+		
+		<SEQ_ELEM/>(0, A) // a
+		<SEQ_ELEM/>(1, A) // b
+		<SEQ_ELEM/>(2, A) // c
+		
+		#if <VARIADICS/>
+		
+		#define B (a, b)(c)(d, e, f)
+		
+		<SEQ_ELEM/>(0, B) // a, b
+		<SEQ_ELEM/>(1, B) // c
+		<SEQ_ELEM/>(2, B) // d, e, f
+		
+		#endif
+	</listing>
+	<derivative id="SEQ_ELEM_ID"/>
+	<derivative id="SEQ_ELEM_" lang="C99"/>
+</macro>
+
+</header>

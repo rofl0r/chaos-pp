@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/highprec/literal.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that produces a <link id="high-precision value"/> from a series of digits.
+</overview>
+
+<macro id="LITERAL_HP" group="literal">
+	<abstract>
+		The <LITERAL_HP/> macro converts a series of digits to a <link id="high-precision value"/>.
+	</abstract>
+	<usage>
+		<syntax><LITERAL_HP/>(literal)</syntax>
+		<param id="literal">
+			The series of digits to be converted to a <link id="high-precision value"/>.
+			The format of this digit series is similar to a <link id="string"/>, but it is restricted to numerals and is optionally prefixed by a parenthesized negation operator.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="high-precision value"/> that represents the series of digits in <var>literal</var>.
+	</para>
+	<para>
+		This macro uses <link id="bypass semantics"/>.
+		If <link id="bypass semantics"/> are already in effect, <LITERAL_HP_BYPASS/> must be used instead.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-highprec-demote.h/>
+		#include <chaos-preprocessor-highprec-literal.h/>
+		#include <chaos-preprocessor-highprec-mul.h/>
+		
+		<DEMOTE_HP/>(<MUL_HP/>(
+		    <LITERAL_HP/>((-)8 7), <LITERAL_HP/>(6 7)
+		))
+		// -5829
+	</listing>
+	<derivative id="LITERAL_HP_ID"/>
+	<derivative id="LITERAL_HP_" lang="C99"/>
+	<derivative id="LITERAL_HP_BYPASS">
+		<usage>
+			<syntax><LITERAL_HP_BYPASS/>(s, literal)</syntax>
+		</usage>
+		<derivative id="LITERAL_HP_BYPASS_ID"/>
+		<derivative id="LITERAL_HP_BYPASS_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

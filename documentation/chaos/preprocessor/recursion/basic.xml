@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/recursion/basic.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines macros used to produce <link id="deferred expressions"/>.
+</overview>
+
+<macro id="DEFER" group="deferral">
+	<abstract>
+		The <DEFER/> macro facilitates the <link id="deferral"/> of a macro invocation through a single scan.
+	</abstract>
+	<usage>
+		<syntax><DEFER/>(macro)</syntax>
+		<param id="macro">
+			The macro name of a macro invocation to be <link id="deferred"/>.
+		</param>
+	</usage>
+	<para>
+		This macro prevents <var>macro</var> from expanding during the first scan against arguments that exist following the invocation of <DEFER/>.
+		For example,
+		<snippet>
+			#define A() +
+			<DEFER/>(A)() // A ()
+		</snippet>
+		A subsequent scan is required in order to invoke <code>A</code>.
+		As in,
+		<snippet>
+			#define A() +
+			<EXPAND/>(<DEFER/>(A)()) // +
+		</snippet>
+	</para>
+	<x-reference id="REFER"/>
+	<listing>
+		#include <chaos-preprocessor-recursion-basic.h/>
+		
+		#define ID(x) x
+		
+		#define A() <DEFER/>(B)()
+		#define B() <DEFER/>(A)()
+		
+		A() ID(A() ID(A() ID(A()))) // B() A() B() A()
+	</listing>
+	<derivative id="DEFER_ID"/>
+	<derivative id="DEFER_" lang="C99"/>
+</macro>
+
+<macro id="REFER">
+	<abstract>
+		The <REFER/> macro is an identity macro.
+	</abstract>
+	<usage>
+		<syntax><REFER/>(macro)</syntax>
+		<param id="macro">
+			The macro nameof a macro invocation.
+		</param>
+	</usage>
+	<para>
+		This macro is signature compatible with <DEFER/>, but it does not <link id="defer"/> the invocation of <var>macro</var> against arguments that exist following the invocation of <REFER/>.
+	</para>
+	<x-reference id="DEFER"/>
+	<listing>
+		#include <chaos-preprocessor-recursion-basic.h/>
+		
+		#define A(mode) mode(B)(+)
+		#define B(x) x
+		
+		A(<DEFER/>) // B(+)
+		A(<REFER/>) // +
+	</listing>
+	<derivative id="REFER_ID"/>
+	<derivative id="REFER_" lang="C99"/>
+</macro>
+
+<macro id="OBSTRUCT" group="deferral">
+	<abstract>
+		The <OBSTRUCT/> macro facilitates the <link id="deferral"/> of a macro invocation through two scans.
+	</abstract>
+	<usage lang="C99">
+		<syntax><OBSTRUCT/>(macro)</syntax>
+		<param id="macro" optional="1">
+			The macro name of a macro invocation to be <link id="obstructed"/>.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><OBSTRUCT/>()</syntax>
+	</usage>
+	<para>
+		This macro is used as an obstruction that disappears after two scans.
+		The behavior is similar to <DEFER/> except that the resulting expression is <link id="deferred"/> through two scans instead of one.
+	</para>
+	<para>
+		Normal usage consists of inserting an invocation of this macro between the macro to be <link id="obstructed"/> and the arguments to that macro.
+		<snippet>
+			#define X(a, b) a + b
+			<EXPAND/>(X <OBSTRUCT/>()(1, 2)) // X(1, 2)
+		</snippet>
+		This usage is the normal usage because an invocation of <OBSTRUCT/> is often used as an argument to another macro, ultimately producing a shorthand single-scan <link id="deferral"/>:
+		<snippet>
+			#define X(a, b) Y(<OBSTRUCT/>(), a, b)
+			#define Y(_, a, b) a _() b _()
+			
+			// vs.
+			
+			#define Z(a, b) <DEFER/>(a)() <DEFER/>(b)()
+			
+			#define P() +
+			#define M() -
+			
+			X(P, M) // P() M()
+			Z(P, M) // P() M()
+		</snippet>
+	</para>
+	<para>
+		In C99, this macro may take the macro name as an argument.
+		This yields syntax similar to <DEFER/>.
+		<snippet>
+			#define X(...) __VA_ARGS__
+			<EXPAND/>(<OBSTRUCT/>(X)(!)) // X(!)
+		</snippet>
+	</para>
+	<listing>
+		#include <chaos-preprocessor-arithmetic-dec.h/>
+		#include <chaos-preprocessor-control-iif.h/>
+		#include <chaos-preprocessor-logical-bool.h/>
+		#include <chaos-preprocessor-recursion-basic.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		
+		#define WHILE(pred, op, state) \
+		    WHILE_S(<STATE/>(), pred, op, state) \
+		    /**/
+		#define WHILE_S(s, pred, op, state) \
+		    WHILE_I( \
+		        <OBSTRUCT/>(), <NEXT/>(s), \
+		        pred, op, state \
+		    ) \
+		    /**/
+		#define WHILE_INDIRECT() WHILE_I
+		#define WHILE_I(_, s, pred, op, state) \
+		    <IIF/> _(pred _(s, state))( \
+		        <EXPR_S/>(s) _(WHILE_INDIRECT _()( \
+		            <OBSTRUCT/> _(), <NEXT/>(s), \
+		            pred, op, op _(s, state) \
+		        )), \
+		        state \
+		    ) \
+		    /**/
+		
+		#define PRED(s, x) <BOOL/>(x)
+		#define OP(s, x) <DEC/>(x)
+		
+		<EXPR/>(WHILE(
+		    PRED, OP, 100
+		))
+		// 0
+	</listing>
+	<derivative id="OBSTRUCT_ID"/>
+	<derivative id="OBSTRUCT_" lang="C99"/>
+</macro>
+
+</header>

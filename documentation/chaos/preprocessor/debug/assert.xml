@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/debug/assert.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines assertion macros.
+</overview>
+
+<macro id="ASSERT" group="assertion">
+	<abstract>
+		The <ASSERT/> macro intentionally causes an error if its argument is zero.
+	</abstract>
+	<usage>
+		<syntax><ASSERT/>(cond)</syntax>
+		<param id="cond">
+			The condition used to trigger the assertion.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+	</usage>
+	<para>
+		If <var>cond</var> evaluates to non-zero, this macro expands to nothing.
+		Otherwise, it intentionally causes an error.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-debug-assert.h/>
+		
+		<ASSERT/>(<VARIADICS/>)
+	</listing>
+	<derivative id="ASSERT_ID"/>
+	<derivative id="ASSERT_" lang="C99"/>
+</macro>
+
+<macro id="ASSERT_MSG" group="assertion">
+	<abstract>
+		The <ASSERT_MSG/> macro expands to a user-specified message if its first argument is <code>0</code>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><ASSERT_MSG/>(cond, ...)</syntax>
+		<param id="cond">
+			The condition used to trigger the assertion.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="..." optional="1">
+			The resulting message if <var>cond</var> is <code>0</code>.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><ASSERT_MSG/>(cond, msg)</syntax>
+		<param id="cond">
+			The condition used to trigger the assertion.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="msg">
+			The resulting message if <var>cond</var> is <code>0</code>.
+		</param>
+	</usage>
+	<para>
+		If <var>cond</var> evaluates to non-zero, this macro expands to nothing.
+		Otherwise, it expands to <var>msg</var> or <code>__VA_ARGS__</code>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-debug-assert.h/>
+		
+		<ASSERT_MSG/>(<VARIADICS/>, "Variadics macros are required";)
+	</listing>
+	<derivative id="ASSERT_MSG_ID"/>
+	<derivative id="ASSERT_MSG_" lang="C99"/>
+</macro>
+
+</header>

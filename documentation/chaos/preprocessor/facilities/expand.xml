@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/facilities/expand.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro used to cause a singular delayed expansion.
+</overview>
+
+<macro id="EXPAND" type="indirect">
+	<abstract>
+		The <EXPAND/> macro effectively causes its argument to expand twice.
+	</abstract>
+	<usage lang="C99">
+		<syntax><EXPAND/>(...)</syntax>
+		<param id="..." optional="1">
+			The argument to be expanded.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><EXPAND/>(x)</syntax>
+		<param id="x">
+			The argument to be expanded.
+		</param>
+	</usage>
+	<para>
+		This macro expands to its argument.
+	</para>
+	<para>
+		The argument <var>x</var> (or <code>__VA_ARGS__</code>) is scanned for macro replacement once on entry to this macro and again during the rescanning of this macro's replacement list.
+	</para>
+	<para>
+		The result of the use of this macro in a context that causes the expansion of a library primitive during the secondary expansion is undefined.
+		<snippet>
+			#define ARGS (text)
+			
+			<EXPAND/>(<WSTRINGIZE/> ARGS) // undefined
+		</snippet>
+		Secondary expansion of library primitives such as the above may or may not work as desired depending on whether the primitive internally uses <EXPAND/>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-facilities-expand.h/>
+		
+		#define MACRO(a, b) a + b
+		#define ARGS (1, 2)
+		
+		MACRO ARGS                  // MACRO (1 + 2)
+		<EXPAND/>(MACRO ARGS) // 1 + 2
+	</listing>
+	<derivative id="EXPAND_ID"/>
+	<derivative id="EXPAND_" lang="C99"/>
+</macro>
+
+</header>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/tuple/to_list.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that converts a <link id="tuple"/> to a <link id="list"/>.
+</overview>
+
+<macro id="TUPLE_TO_LIST" type="indirect" group="conversion">
+	<abstract>
+		The <TUPLE_TO_LIST/> macro converts a <link id="tuple"/> to a <link id="list"/>.
+	</abstract>
+	<usage>
+		<syntax><TUPLE_TO_LIST/>(size, tuple)</syntax>
+		<param id="size">
+			The size of the <link id="tuple"/> to be converted.
+			Valid values range from <code>0</code> to <LIMIT_TUPLE/>.
+		</param>
+		<param id="tuple">
+			The <link id="tuple"/> to be converted.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="list"/> containing the elements of <var>tuple</var>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-tuple-to_list.h/>
+		
+		#define DATA() (x, y, z)
+		
+		<TUPLE_TO_LIST/>(3, DATA()) // (x, (y, (z, ...)))
+	</listing>
+	<derivative id="TUPLE_TO_LIST_ID"/>
+	<derivative id="TUPLE_TO_LIST_" lang="C99"/>
+</macro>
+
+</header>

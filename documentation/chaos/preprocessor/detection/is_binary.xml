@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/detection/is_binary.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro used to detect binary parenthetic expressions.
+</overview>
+
+<macro id="IS_BINARY" group="parenthetic">
+	<abstract>
+		The <IS_BINARY/> macro detects whether its argument begins with a binary parenthetic expression.
+	</abstract>
+	<usage lang="C99">
+		<syntax><IS_BINARY/>(...)</syntax>
+		<param id="..." optional="1">
+			The expression to be tested.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><IS_BINARY/>(x)</syntax>
+		<param id="x">
+			The expression to be tested.
+		</param>
+	</usage>
+	<para>
+		If <var>x</var> or <code>__VA_ARGS__</code> begins with a binary parenthetic expression, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<para>
+		The expression to be tested must begin with a binary parenthetic expression or a non-parenthetic expression.
+		A parenthetic expression of any other arity is invalid input.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-detection-is_binary.h/>
+		
+		<IS_BINARY/>(++)     // 0
+		<IS_BINARY/>((a, b)) // 1
+	</listing>
+	<derivative id="IS_BINARY_ID"/>
+	<derivative id="IS_BINARY_" lang="C99"/>
+</macro>
+
+</header>

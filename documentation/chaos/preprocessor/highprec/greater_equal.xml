@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/highprec/greater_equal.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a <link id="high-precision"/> "greater-than-or-equal" operator.
+</overview>
+
+<macro id="GREATER_EQUAL_HP" group="greater-equal">
+	<abstract>
+		The <GREATER_EQUAL_HP/> macro tests whether its first operand is greater than or equal to its second operand.
+	</abstract>
+	<usage>
+		<syntax><GREATER_EQUAL_HP/>(x, y)</syntax>
+		<param id="x">
+			The first operand.
+		</param>
+		<param id="y">
+			The second operand.
+		</param>
+	</usage>
+	<para>
+		If <var>x</var> is greater than or equal to <var>y</var>, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-highprec-greater_equal.h/>
+		#include <chaos-preprocessor-highprec-literal.h/>
+		
+		#define A() <LITERAL_HP/>(1 2 3)
+		#define B() <LITERAL_HP/>(4 5)
+		
+		<GREATER_EQUAL_HP/>(A(), B()) // 1
+		<GREATER_EQUAL_HP/>(B(), A()) // 0
+		
+		#define C() <LITERAL_HP/>((-)1)
+		
+		<GREATER_EQUAL_HP/>(C(), C()) // 1
+	</listing>
+	<derivative id="GREATER_EQUAL_HP_ID"/>
+	<derivative id="GREATER_EQUAL_HP_" lang="C99"/>
+</macro>
+
+</header>

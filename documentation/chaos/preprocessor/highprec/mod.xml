@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/highprec/mod.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a <link id="high-precision"/> modulus operator.
+</overview>
+
+<macro id="AUTO_MOD" group="division">
+	<abstract>
+		The <AUTO_MOD/> macro computes the remainder produced by dividing two values.
+	</abstract>
+	<usage>
+		<syntax><AUTO_MOD/>(x, y)</syntax>
+		<param id="x">
+			The dividend.
+			This value may be either an integer literal (optionally with a negation suffix) in the range of <code>0</code> to <LIMIT_MAG/> or a <link id="high-precision value"/>.
+		</param>
+		<param id="y">
+			The divisor.
+			This value may be either an integer literal (optionally with a negation suffix) in the range of <code>1</code> to <LIMIT_MAG/> or a <link id="high-precision value"/>.
+		</param>
+	</usage>
+	<para>
+		This macro expands to the remainder produced by dividing <var>x</var> by <var>y</var>.
+		If both <var>x</var> and <var>y</var> are integer literals (possibly with a negation suffix) the result is an integer literal.
+		Otherwise, the result is a <link id="high-precision value"/>.
+		If <var>y</var> is a <link id="high-precision value"/> representing zero, this macro intentionally produces an error.
+	</para>
+	<para>
+		This macro uses <link id="bypass semantics"/>.
+		If <link id="bypass semantics"/> are already in effect, <AUTO_MOD_BYPASS/> must be used instead.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-highprec-demote.h/>
+		#include <chaos-preprocessor-highprec-mod.h/>
+		#include <chaos-preprocessor-highprec-promote.h/>
+		
+		<AUTO_MOD/>(125, -5) // 0
+		
+		<DEMOTE_HP/>(<AUTO_MOD/>(
+		    <PROMOTE_HP/>(37), 2
+		))
+		// 1
+	</listing>
+	<derivative id="AUTO_MOD_ID"/>
+	<derivative id="AUTO_MOD_" lang="C99"/>
+	<derivative id="AUTO_MOD_BYPASS">
+		<usage>
+			<syntax><AUTO_MOD_BYPASS/>(s, x, y)</syntax>
+		</usage>
+		<derivative id="AUTO_MOD_BYPASS_ID"/>
+		<derivative id="AUTO_MOD_BYPASS_" lang="C99"/>
+	</derivative>
+</macro>
+
+<macro id="MOD_HP" group="division">
+	<abstract>
+		The <MOD_HP/> macro computes the remainder produced by dividing two <link id="high-precision values"/>.
+	</abstract>
+	<usage>
+		<syntax><MOD_HP/>(x, y)</syntax>
+		<param id="x">
+			The dividend.
+		</param>
+		<param id="y">
+			The divisor.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="high-precision value"/> that represents the remainder produced by dividing <var>x</var> by <var>y</var>.
+		If <var>y</var> is a <link id="high-precision value"/> representing zero, this macro intentionally produces an error.
+	</para>
+	<para>
+		This macro uses <link id="bypass semantics"/>.
+		If <link id="bypass semantics"/> are already in effect, <MOD_HP_BYPASS/> must be used instead.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-highprec-demote.h/>
+		#include <chaos-preprocessor-highprec-literal.h/>
+		#include <chaos-preprocessor-highprec-mod.h/>
+		
+		<DEMOTE_HP/>(<MOD_HP/>(
+		    <LITERAL/>(1 2 3 4 5),
+		    <LITERAL/>(2)
+		))
+		// 1
+	</listing>
+	<derivative id="MOD_HP_ID"/>
+	<derivative id="MOD_HP_" lang="C99"/>
+	<derivative id="MOD_HP_BYPASS">
+		<usage>
+			<syntax><MOD_HP_BYPASS/>(s, x, y)</syntax>
+		</usage>
+		<derivative id="MOD_HP_BYPASS_ID"/>
+		<derivative id="MOD_HP_BYPASS_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

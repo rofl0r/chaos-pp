@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/extended/partial_cat.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a concatenation macro that selectively allows each argument to expand on input.
+</overview>
+
+<macro id="PARTIAL" type="object">
+	<abstract>
+		The <PARTIAL/> macro is used as a partial operand to <PARTIAL_CAT/>.
+	</abstract>
+	<usage>
+		<syntax><PARTIAL/></syntax>
+	</usage>
+	<para>
+		By itself, the <PARTIAL/> macro expands to nothing.
+		It exists as a helper macro for <PARTIAL_CAT/>.
+	</para>
+	<x-reference id="PARTIAL_CAT"/>
+	<derivative id="PARTIAL_ID"/>
+	<derivative id="PARTIAL_" lang="C99"/>
+</macro>
+
+<macro id="PARTIAL_CAT" group="concatenation">
+	<abstract>
+		The <PARTIAL_CAT/> macro is a concatenation macro that selectively allows each argument to expand before concatenation.
+	</abstract>
+	<usage lang="C99">
+		<syntax><PARTIAL_CAT/>(i, j)(<PARTIAL/> a, ... <PARTIAL/>)</syntax>
+		<param id="i">
+			The argument that determines whether <var>a</var> is allowed to expand.
+			Valid values are <code>0</code> and <code>1</code>.
+		</param>
+		<param id="j">
+			The argument that determines whether <code>__VA_ARGS__</code> is allowed to expand.
+			Valid values are <code>0</code> and <code>1</code>.
+		</param>
+		<param id="a" optional="1">
+			The left operand of the concatenation.
+		</param>
+		<param id="..." optional="1">
+			The right operand of the concatenation.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><PARTIAL_CAT/>(i, j)(<PARTIAL/> a, b <PARTIAL/>)</syntax>
+		<param id="i">
+			The argument that determines whether <var>a</var> is allowed to expand.
+			Valid values are <code>0</code> and <code>1</code>.
+		</param>
+		<param id="j">
+			The argument that determines whether <var>b</var> is allowed to expand.
+			Valid values are <code>0</code> and <code>1</code>.
+		</param>
+		<param id="a">
+			The left operand of the concatenation.
+		</param>
+		<param id="b">
+			The right operand of the concatenation.
+		</param>
+	</usage>
+	<para>
+		This macro concatenates the rightmost preprocessing token of <var>a</var> to the leftmost preprocessing token of <var>b</var> or <code>__VA_ARGS__</code>.
+	</para>
+	<para>
+		If <var>i</var> is <code>1</code>, <var>a</var> is allowed to expand prior to concatenation.
+		Otherwise, it is not allowed to expand prior to concatenation.
+		Likewise, if <var>j</var> is <code>1</code>, <var>b</var> or <code>__VA_ARGS__</code> is allowed to expand prior to concatenation.
+		Otherwise, it is not allowed to expand prior to concatenation.
+	</para>
+	<x-reference id="PARTIAL"/>
+	<listing>
+		#include <chaos-preprocessor-extended-partial_cat.h/>
+		
+		<PARTIAL_CAT/>(0, 1)(
+		    <PARTIAL/> __LINE__, __LINE__ <PARTIAL/>
+		)
+		// __LINE__4
+	</listing>
+	<derivative id="PARTIAL_CAT_ID"/>
+	<derivative id="PARTIAL_CAT_" lang="C99"/>
+</macro>
+
+</header>

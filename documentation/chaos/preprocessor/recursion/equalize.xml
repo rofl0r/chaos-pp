@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/recursion/equalize.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro used to <link id="equalize"/> the number of scans on an argument.
+</overview>
+
+<macro id="EQUALIZE">
+	<abstract>
+		The <EQUALIZE/> macro is used to <link id="equalize"/> the number of scans on an argument.
+	</abstract>
+	<usage lang="C99">
+		<syntax><EQUALIZE/>(n)(x)</syntax>
+		<param id="n">
+			The number of scans to which <var>x</var> should be subjected.
+			Valid values range from <code>1</code> to <LIMIT_EQUALIZE/>.
+		</param>
+		<param id="x" optional="1">
+			The argument to which scans are to be applied.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><EQUALIZE/>(n)(x)</syntax>
+		<param id="n">
+			The number of scans to which <var>x</var> should be subjected.
+			Valid values range from <code>1</code> to <LIMIT_EQUALIZE/>.
+		</param>
+		<param id="x">
+			The argument to which scans are to be applied.
+		</param>
+	</usage>
+	<para>
+		This macro expands to <var>x</var> after applying <var>n</var> scans to it.
+	</para>
+	<para>
+		This macro should be used only for the purposes of <link id="equalization"/>.
+		Specifically, <var>x</var> may not be an <link id="active argument"/>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-recursion-delve.h/>
+		#include <chaos-preprocessor-recursion-equalize.h/>
+		
+		#define A(p) B(p)
+		#define B(p) p C(p)
+		#define C(p) p
+		
+		<HALT/>(A(<DELVE/>())) // 3 4
+		
+		#define X(p) Y(p)
+		#define Y(p) <EQUALIZE/>(1)(p) Z(p)
+		#define Z(p) p
+		
+		<HALT/>(X(<DELVE/>())) // 4 4
+	</listing>
+	<derivative id="EQUALIZE_ID"/>
+	<derivative id="EQUALIZE_" lang="C99"/>
+</macro>
+
+</header>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/seq/zip.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that encapsulates each element of a <link id="sequence"/>.
+</overview>
+
+<macro id="SEQ_ZIP" type="indirect">
+	<abstract>
+		The <SEQ_ZIP/> macro encapsulates each element of its argument.
+	</abstract>
+	<usage lang="C99">
+		<syntax><SEQ_ZIP/>(seq)</syntax>
+		<param id="seq" optional="1">
+			The <link id="sequence"/> whose elements are to be encapsulated.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="sequence"/> containing each element of <var>seq</var> enclosed in parentheses.
+		This is illustrated by the following pseudo-code:
+		<snippet>
+			((seq[0]))((seq[1])) ... ((seq[length(seq) - 1]))
+		</snippet>
+	</para>
+	<para>
+		This macro is used primarily by algorithms that operate specifically on <link id="variadic sequences"/>.
+		Normally, such algorithms "zip" the entire <link id="sequence"/> on which they operate and invoke the corresponding non-variadic <link id="sequence"/> algorithm.
+		(The purpose of doing such a thing is to prevent an argument clash with the state or auxiliary data arguments of various algorithms.)
+	</para>
+	<x-reference id="SEQ_UNZIP"/>
+	<derivative id="SEQ_ZIP_ID" lang="C99"/>
+	<derivative id="SEQ_ZIP_" lang="C99"/>
+</macro>
+
+<macro id="SEQ_UNZIP" type="indirect">
+	<abstract>
+		The <SEQ_UNZIP/> macro restores a <link id="sequence"/> previously encoded with <SEQ_ZIP/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><SEQ_UNZIP/>(seq)</syntax>
+		<param id="seq" optional="1">
+			The <link id="sequence"/> to be restored.
+		</param>
+	</usage>
+	<para>
+		This macro removes the parentheses from each element of <var>seq</var>.
+		Consequently, each element of <var>seq</var> must actually <em>be</em> parenthesized.
+		<snippet>
+			<SEQ_UNZIP/>(
+			    ((a, b))((x, y, z))((p))
+			)
+			// (a, b)(x, y, z)(p)
+		</snippet>
+	</para>
+	<para>
+		This macro is used primarily by <em>some</em> algorithms that operate specifically on <link id="variadic sequences"/>.
+		Such algorithms "zip" the entire <link id="sequence"/> on which they operate and invoke the corresponding non-variadic <link id="sequence"/> algorithm.
+		The result of that invocation is subsequently "unzipped" to yield the final result.
+		(An example of such an algorithm is <VARIADIC_SEQ_FILTER/>.)
+	</para>
+	<x-reference id="SEQ_ZIP"/>
+	<derivative id="SEQ_UNZIP_ID" lang="C99"/>
+	<derivative id="SEQ_UNZIP_" lang="C99"/>
+</macro>
+
+</header>

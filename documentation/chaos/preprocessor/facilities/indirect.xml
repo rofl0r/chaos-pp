@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/facilities/indirect.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro used to facilitate sequential indirection.
+</overview>
+
+<macro id="INDIRECT">
+	<abstract>
+		The <INDIRECT/> macro facilitates sequential indirection.
+	</abstract>
+	<usage>
+		<syntax><INDIRECT/>(n)(macro)</syntax>
+		<param id="n">
+			The value to be indirected to <var>macro</var>.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="macro">
+			The macro to be invoked with <var>n</var>.
+			This argument must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			<snippet>
+				macro(n)
+			</snippet>
+		</param>
+	</usage>
+	<para>
+		This macro facilitates sequential indirection that passes a value from on iteration to the next.
+		It halves the number of macros required to implement this type of operation.
+	</para>
+	<para>
+		This macro invokes <var>macro</var> with <var>n</var>.
+		The intent is that <var>macro(n)</var> expands to another macro such that <var>n</var> is preserved through encoding in a macro name.
+		For example,
+		<snippet>
+			#define ABC(n) ABC_ ## n
+			#define ABC_0(x) x <INDIRECT/>(0)
+			
+			<INDIRECT/>(0)(ABC)(a)(ABC)(b)(<TUPLE_EAT/>(1)) // a b
+		</snippet>
+	</para>
+	<listing>
+		#include <chaos-preprocessor-arithmetic-inc.h/>
+		#include <chaos-preprocessor-control-if.h/>
+		#include <chaos-preprocessor-facilities-indirect.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		#include <chaos-preprocessor-seq-for_each.h/>
+		#include <chaos-preprocessor-tuple-rem.h/>
+		
+		#define COUNT(seq) \
+		    <EXPR/>( \
+		        <INDIRECT/>(0) \
+		        <EXPR/>(<SEQ_FOR_EACH/>( \
+		            COUNT_A, seq, ~ \
+		        )) \
+		        (<TUPLE_REM/>(1)) \
+		    ) \
+		    /**/
+		#define COUNT_A(s, x, _) (COUNT_B)(x)
+		#define COUNT_B(n) COUNT_ ## n
+		#define COUNT_C(n, x) \
+		    <INDIRECT/>(<IF/>(x)( \
+		        <INC/>(n), n \
+		    )) \
+		    /**/
+		#define COUNT_0(x) COUNT_C(0, x)
+		#define COUNT_1(x) COUNT_C(1, x)
+		#define COUNT_2(x) COUNT_C(2, x)
+		#define COUNT_3(x) COUNT_C(3, x)
+		#define COUNT_4(x) COUNT_C(4, x)
+		#define COUNT_5(x) COUNT_C(5, x)
+		// ...
+		
+		COUNT((1)(0)(3)(2)(0)(0)) // 3
+		COUNT((0)(0)(0)(2)(0)(0)) // 1
+	</listing>
+	<derivative id="INDIRECT_ID"/>
+	<derivative id="INDIRECT_" lang="C99"/>
+</macro>
+
+</header>

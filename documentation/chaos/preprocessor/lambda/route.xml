@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/lambda/route.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro used to abstract the difference between the invocation of a macro and a <link id="λ-expression"/> as well as explicitly route the point of invocation.
+</overview>
+
+<macro id="WAYPOINT" type="indirect" group="invocation">
+	<abstract>
+		The <WAYPOINT/> macro provides a context used to cause the expansion of invocations routed with <ROUTE/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><WAYPOINT/>(...)</syntax>
+		<param id="..." optional="1">
+			The argument whose routed invocations are to be expanded.
+		</param>
+	</usage>
+	<para>
+		This macro is used to specify the point at which certain invocations are to expand.
+	</para>
+	<para>
+		This macro may not be used when <link id="bypass semantics"/> are in effect.
+	</para>
+	<derivative id="WAYPOINT_ID" lang="C99"/>
+	<derivative id="WAYPOINT_" lang="C99"/>
+</macro>
+
+<macro id="ROUTE" group="invocation">
+	<abstract>
+		The <ROUTE/> macro is used to delay the invocation of a macro or <link id="λ-expression"/> until the context introduced by <WAYPOINT/> is present.
+	</abstract>
+	<usage lang="C99">
+		<syntax><ROUTE/>(x)()(s, x, ...)</syntax>
+		<param id="x">
+			<para>
+				The macro or <link id="λ-expression"/> to be invoked.
+				If this argument is a macro, it must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				<snippet>
+					macro(s, args<sup>†</sup>)
+				</snippet>
+			</para>
+			<para>
+				<sup>†</sup>
+				The <var>args</var> pseudo-parameter must be either <code>...</code> or the number of parameters that corresponds to the number of arguments in <code>__VA_ARGS__</code> are <link id="intermediate"/> expansion.
+			</para>
+		</param>
+		<param id="s">
+			The <link id="recursion state"/> in terms of which the resulting <link id="deferred expression"/> is to be generated.
+		</param>
+		<param id="..." optional="1">
+			The <link id="intermediate"/> argument or arguments that are to comprise the trailing arguments passed to <var>x</var>.
+		</param>
+	</usage>
+	<para>
+		This macro expands to an <link id="active"/> expression that, when introduced into the context created by <WAYPOINT/> expands to a <link id="deferred expression"/> in terms of <var>s</var> that contains an invocation of <var>x</var>.
+		It also allows this <link id="deferred expression"/>, when invoked, to expand to a <link id="deferred expression"/> in terms of <code><NEXT/>(s)</code>.
+	</para>
+	<para>
+		Normal usage consists of invoking <ROUTE/> without the trailing invocations, passing that result around, and finishing the invocation at another time.
+		This avoids repeatedly detecting the difference between a macro name and a <link id="λ-expression"/>.
+		<snippet>
+			#define MACRO(s, x) \
+			    <WAYPOINT/>(MACRO_I(s, x, <ROUTE/>(x))) \
+			    /**/
+			#define MACRO_I(s, x, _x) _x()(s, x, ~)
+		</snippet>
+	</para>
+	<para>
+		This macro is similar in function to <TRAMPOLINE/>, but allows for an arbitrary number of scans over the resulting expression before expansion.
+		The <TRAMPOLINE/> macro is much trickier to use than <ROUTE/> to accomplish the same overall effect, but the use of <ROUTE/> is significantly more expensive because it is <link id="active"/>.
+	</para>
+	<para>
+		This macro may not be used when <link id="bypass semantics"/> are in effect.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-arithmetic-dec.h/>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-control-expr_if.h/>
+		#include <chaos-preprocessor-lambda-ops.h/>
+		#include <chaos-preprocessor-lambda-route.h/>
+		#include <chaos-preprocessor-recursion-basic.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		
+		#if <VARIADICS/>
+		
+		#define REPEAT(count, macro, ...) \
+		    REPEAT_S(<STATE/>(), count, macro, __VA_ARGS__) \
+		    /**/
+		#define REPEAT_S(s, count, macro, ...) \
+		    <WAYPOINT/>(<EXPR_S/>(s)(REPEAT_I( \
+		        <OBSTRUCT/>(), <NEXT/>(s), <NEXT/>(s), \
+		        count, macro, <ROUTE/>(macro), __VA_ARGS__ \
+		    ))) \
+		    /**/
+		#define REPEAT_INDIRECT() REPEAT_I
+		#define REPEAT_I(_, s, o, count, macro, _m, ...) \
+		    <EXPR_IF/> _(count)( \
+		        <EXPR_S/>(s) _(REPEAT_INDIRECT _()( \
+		            <OBSTRUCT/> _(), <NEXT/>(s), o, \
+		            <DEC/>(count), macro, _m, __VA_ARGS__ \
+		        )) \
+		        _m()(o, macro, <DEC/>(count), __VA_ARGS__) \
+		    ) \
+		    /**/
+		
+		#define MACRO(s, n, _) <EXPR_S/>(s)(n)
+		
+		<EXPR/>(REPEAT(5, MACRO,)) // 0 1 2 3 4
+		
+		??=include <PLACEHOLDERS/>(1)
+		
+		<EXPR/>(REPEAT(
+		    5,
+		    <EXPR_S_/>(_0)(_1),
+		))
+		// 0 1 2 3 4
+		
+		??=include <PLACEHOLDERS/>(0)
+		
+		#endif
+	</listing>
+	<derivative id="ROUTE_ID" lang="C99"/>
+	<derivative id="ROUTE_" lang="C99"/>
+</macro>
+
+</header>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/facilities/overload.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro used to facilitate overloading of macros.
+</overview>
+
+<macro id="OVERLOAD">
+	<abstract>
+		The <OVERLOAD/> macro facilitates overloading of macros on the number of arguments.
+	</abstract>
+	<usage lang="C99">
+		<syntax><OVERLOAD/>(pre, ...)(...)</syntax>
+		<param id="pre">
+			The prefix of a set of overloaded macros.
+		</param>
+		<param id="..." optional="1">
+			The arguments to be passed to an overloaded macro.
+		</param>
+	</usage>
+	<para>
+		This macro counts the number of arguments in <code>__VA_ARGS__</code> and expands to an expression of the following form:
+		<snippet>
+			pre ## count(__VA_ARGS__)
+		</snippet>
+	</para>
+	<para>
+		The number of arguments is never zero--even in situations such as the following:
+		<snippet>
+			<OVERLOAD/>(XYZ_,)()
+		</snippet>
+		The above is interpreted as a single empty argument.
+	</para>
+	<para>
+		This macro uses <link id="bypass semantics"/>.
+		If <link id="bypass semantics"/> are already in effect, <OVERLOAD_BYPASS/> must be used instead.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-facilities-overload.h/>
+		
+		#define MACRO_1(a) a
+		#define MACRO_2(a, b) a + b
+		#define MACRO_3(a, b, c) a + b + c
+		
+		#if <VARIADICS/>
+		
+		#define MACRO(...) \
+		    <OVERLOAD/>(MACRO_, __VA_ARGS__)(__VA_ARGS__) \
+		    /**/
+		
+		MACRO(1)       // 1
+		MACRO(1, 2)    // 1 + 2
+		MACRO(1, 2, 3) // 1 + 2 + 3
+		
+		#endif
+	</listing>
+	<derivative id="OVERLOAD_ID" lang="C99"/>
+	<derivative id="OVERLOAD_" lang="C99"/>
+	<derivative id="OVERLOAD_BYPASS">
+		<usage lang="C99">
+			<syntax><OVERLOAD_BYPASS/>(s, pre, ...)(...)</syntax>
+		</usage>
+		<derivative id="OVERLOAD_BYPASS_ID" lang="C99"/>
+		<derivative id="OVERLOAD_BYPASS_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

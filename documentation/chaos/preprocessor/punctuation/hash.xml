@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/punctuation/hash.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines macros that expand to hash marks.
+</overview>
+
+<macro id="HASH">
+	<abstract>
+		The <HASH/> macro expands to a single hash mark.
+	</abstract>
+	<usage>
+		<syntax><HASH/>()</syntax>
+	</usage>
+	<para>
+		The hash mark preprocessing token (<code>#</code>) may not be used in the replacement list of a function-like macro unless it is used as the stringizing operator.
+		This macro facilitates the introduction of the hash mark preprocessing token in such contexts.
+	</para>
+	<x-reference id="DIGRAPH_HASH"/>
+	<listing>
+		#include <chaos-preprocessor-punctuation-hash.h/>
+		#include <chaos-preprocessor-stringize.h/>
+		
+		#define FUNCTION(p) \
+		    <STRINGIZE/>(<HASH/>() p) \
+		    /**/
+		
+		FUNCTION(abc) // "# abc"
+	</listing>
+	<derivative id="HASH_ID"/>
+	<derivative id="HASH_" lang="C99"/>
+</macro>
+
+<macro id="HASH_HASH">
+	<abstract>
+		The <HASH_HASH/> macro expands to a double hash mark.
+	</abstract>
+	<usage>
+		<syntax><HASH_HASH/>()</syntax>
+	</usage>
+	<para>
+		The double hash mark preprocessing token (<code>##</code>) may not be used in the replacement list of a macro unless it is used as the token-pasting operator.
+		This macro facilitates the introduction of the double hash mark preprocessing token in such contexts.
+	</para>
+	<x-reference id="DIGRAPH_HASH_HASH"/>
+	<listing>
+		#include <chaos-preprocessor-punctuation-hash.h/>
+		#include <chaos-preprocessor-stringize.h/>
+		
+		#define FUNCTION(p) \
+		    <STRINGIZE/>(p <HASH_HASH/>() p) \
+		    /**/
+		
+		FUNCTION(x) // "x ## x"
+	</listing>
+	<derivative id="HASH_HASH_ID"/>
+	<derivative id="HASH_HASH_" lang="C99"/>
+</macro>
+
+<macro id="DIGRAPH_HASH">
+	<abstract>
+		The <DIGRAPH_HASH/> macro expands to the digraph hash mark.
+	</abstract>
+	<usage>
+		<syntax><DIGRAPH_HASH/>()</syntax>
+	</usage>
+	<para>
+		The digraph hash mark preprocessing token (<code>%:</code>) may not be used in the replacement list of a function-like macro unless it is used as the stringizing operator.
+		This macro facilitates the introduction of the digraph hash mark preprocessing token in such contexts.
+	</para>
+	<x-reference id="HASH"/>
+	<listing>
+		#include <chaos-preprocessor-punctuation-hash.h/>
+		#include <chaos-preprocessor-stringize.h/>
+		
+		#define FUNCTION(p) \
+		    <STRINGIZE/>(<DIGRAPH_HASH/>() p) \
+		    /**/
+		
+		FUNCTION(abc) // "%: abc"
+	</listing>
+	<derivative id="DIGRAPH_HASH_ID"/>
+	<derivative id="DIGRAPH_HASH_" lang="C99"/>
+</macro>
+
+<macro id="DIGRAPH_HASH_HASH">
+	<abstract>
+		The <DIGRAPH_HASH_HASH/> macro expands to a double digraph hash mark.
+	</abstract>
+	<usage>
+		<syntax><DIGRAPH_HASH_HASH/>()</syntax>
+	</usage>
+	<para>
+		The double digraph hash mark preprocessing token (<code>%:%:</code>) may not be used in the replacement list of a macro unless it is used as the token-pasting operator.
+		This macro facilitates the introduction of the double digraph hash mark preprocessing token in such contexts.
+	</para>
+	<x-reference id="HASH_HASH"/>
+	<listing>
+		#include <chaos-preprocessor-punctuation-hash.h/>
+		#include <chaos-preprocessor-stringize.h/>
+		
+		#define FUNCTION(p) \
+		    <STRINGIZE/>(p <DIGRAPH_HASH_HASH/>() p) \
+		    /**/
+		
+		FUNCTION(x) // "x %:%: x"
+	</listing>
+	<derivative id="DIGRAPH_HASH_HASH_ID"/>
+	<derivative id="DIGRAPH_HASH_HASH_" lang="C99"/>
+</macro>
+
+</header>

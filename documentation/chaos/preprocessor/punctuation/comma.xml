@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/punctuation/comma.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that expands to a comma.
+</overview>
+
+<macro id="COMMA">
+	<abstract>
+		The <COMMA/> macro expands to a comma.
+	</abstract>
+	<usage>
+		<syntax><COMMA/>()</syntax>
+	</usage>
+	<para>
+		When invoked, this macro expands to a comma preprocessing token.
+	</para>
+	<x-reference id="COMMA_IF"/>
+	<listing>
+		#include <chaos-preprocessor-punctuation-comma.h/>
+		
+		#define MACRO(p) a p() b
+		
+		MACRO(<COMMA/>) // a, b
+	</listing>
+	<derivative id="COMMA_ID"/>
+	<derivative id="COMMA_" lang="C99"/>
+</macro>
+
+</header>

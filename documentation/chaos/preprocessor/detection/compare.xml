@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/detection/compare.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that compares identifiers.
+</overview>
+
+<macro id="COMPARE">
+	<abstract>
+		The <COMPARE/> macro detects whether two registered identifiers are the same.
+	</abstract>
+	<usage>
+		<syntax><COMPARE/>(a, b)</syntax>
+		<param id="a">
+			The first identifier.
+		</param>
+		<param id="b">
+			The second identifier.
+		</param>
+	</usage>
+	<para>
+		If <var>a</var> and <var>b</var> are both the same identifier and that identifier is registered, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<para>
+		All of the C and C++ keywords are pre-registered by the library.
+		Further identifiers can be registered with a macro definition as follows (where <code>xyz</code> is a placeholder for some identifier):
+		<snippet>
+			#define CHAOS_PP_COMPARE_xyz(x) x
+		</snippet>
+		Registration of the identifier <code>ID</code> is prohibited, because that would form <COMPARE_ID/>, which is a library primitive.
+	</para>
+	<x-reference id="PRIMITIVE_COMPARE"/>
+	<listing>
+		#include <chaos-preprocessor-detection-compare.h/>
+		
+		#define A int
+		
+		<COMPARE/>(A, int)    // 1
+		<COMPARE/>(A, double) // 0
+		
+		#define CHAOS_PP_COMPARE_boost(x) x
+		
+		#define B boost
+		
+		<COMPARE/>(B, abc)   // 0
+		<COMPARE/>(B, boost) // 1
+	</listing>
+	<derivative id="COMPARE_ID"/>
+	<derivative id="COMPARE_" lang="C99"/>
+</macro>
+
+<macro id="PRIMITIVE_COMPARE">
+	<abstract>
+		The <PRIMITIVE_COMPARE/> macro detects whether two registered identifiers are the same.
+	</abstract>
+	<usage>
+		<syntax><PRIMITIVE_COMPARE/>(a, b)</syntax>
+		<param id="a">
+			The first identifier.
+		</param>
+		<param id="b">
+			The second identifier.
+		</param>
+	</usage>
+	<para>
+		This macro behaves identically to <COMPARE/> except that it <em>does not</em> provide the delay necessary to allow its arguments to expand on input.
+	</para>
+	<x-reference id="COMPARE"/>
+	<listing>
+		#include <chaos-preprocessor-detection-compare.h/>
+		
+		#define Object Result
+		
+		#define CHAOS_PP_COMPARE_Object(x) x
+		
+		<COMPARE/>(Object, Object)           // 0
+		<PRIMITIVE_COMPARE/>(Object, Object) // 1
+	</listing>
+	<derivative id="PRIMITIVE_COMPARE_ID"/>
+	<derivative id="PRIMITIVE_COMPARE_" lang="C99"/>
+</macro>
+
+</header>

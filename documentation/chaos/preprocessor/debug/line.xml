@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/debug/line.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that encodes <link id="file-iteration"/> information in <code>#line</code> directives.
+</overview>
+
+<macro id="LINE">
+	<abstract>
+		The <LINE/> macro encodes the current iteration values of all currently active <link id="file-iterations"/>.
+	</abstract>
+	<usage>
+		<syntax>??=line <LINE/>(line, file)</syntax>
+		<param id="line">
+			The new line number of the trailing line.
+			The predefined macro <code>__LINE__</code> is commonly used,
+			though this offsets the actual line by one.
+		</param>
+		<param id="file">
+			Typically the name of the current file.
+			However, this argument can be any informative text.
+			This text is internally stringized, so quotation marks are unnecessary.
+		</param>
+	</usage>
+	<para>
+		If a <link id="file-iteration"/> is currently in progress, this macro inserts debugging information about the state of the <link id="file-iteration"/>.
+		This information includes the current iteration values from the outermost to innermost iterations.
+		If a <link id="file-iteration"/> is <em>not</em> in progress, this macro does not insert any extra information.
+	</para>
+	<para>
+		This information is useful when errors might be spanning multiple iterations of the same source text.
+		Finding any errors is sometimes less than straightforward.
+		Use of this macro can provide the information needed to make this much easier.
+	</para>
+	<listing>
+		// sample.hpp
+		#if !<IS_ITERATING/>
+		
+		#ifndef SAMPLE_HPP
+		#define SAMPLE_HPP
+		
+		#include <chaos-preprocessor-cat.h/>
+		#include <chaos-preprocessor-debug-line.h/>
+		#include <chaos-preprocessor-iteration-file.h/>
+		#include <chaos-preprocessor-iteration-local.h/>
+		#include <chaos-preprocessor-repetition-enum_params.h/>
+		
+		#if !defined(VECTOR_ARITY) || VECTOR_ARITY &lt; 1
+		#undef VECTOR_ARITY
+		#define VECTOR_ARITY 15
+		#endif
+		
+		template&lt;unsigned arity&gt; struct vector;
+		
+		// typedef vector&lt;2&gt;::inner&lt;signed, unsigned&gt; duo;
+		//
+		// duo::subscript&lt;0&gt;::type // signed
+		// duo::subscript&lt;1&gt;::type // unsigned
+		
+		#define <ITERATION_PARAMS/> (1)(VECTOR_ARITY)("sample.hpp")
+		??=include <ITERATE/>()
+		
+		#endif // SAMPLE_HPP
+		
+		#else
+		??=include \
+		    <LINE/>(__LINE__, sample.hpp - iterating type vector) \
+		    /**/
+		
+		template&lt;&gt; struct vector&lt;<ITERATION/>()&gt; {
+		    template&lt;<ENUM_PARAMS/>(<ITERATION/>(), class T)&gt;
+		    struct inner {
+		        template&lt;unsigned, class = void&gt; struct subscript;
+		        #define <LOCAL_LIMITS/> \
+		            (0, <ITERATION/>() - 1) \
+		            /**/
+		        #define <LOCAL_MACRO/>(n) \
+		            template&lt;class _&gt; struct subscript&lt;n, _&gt; { \
+		                typedef <PRIMITIVE_CAT/>(T, n) type; \
+		            }; \
+		            /**/
+		        ??=include <LOCAL_ITERATE/>()
+		    };
+		};
+		
+		#endif
+	</listing>
+	<derivative id="LINE_ID"/>
+	<derivative id="LINE_" lang="C99"/>
+</macro>
+
+</header>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/recursion/phase.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro used to relatively alter the <link id="deferral phase"/> of an expression.
+</overview>
+
+<macro id="PHASE" group="deferral">
+	<abstract>
+		The <PHASE/> macro is used to relatively alter the <link id="deferral phase"/> of an expression.
+	</abstract>
+	<usage>
+		<syntax><PHASE/>(offset)(n, macro)</syntax>
+		<param id="offset">
+			The <link id="deferral phase"/> offset.
+			Valid values range from <code>0</code> to <LIMIT_PHASE/> - <var>n</var>.
+		</param>
+		<param id="n">
+			The base <link id="deferral"/> quantity.
+			Valid values range from <code>0</code> to <LIMIT_PHASE/> - <var>offset</var>.
+		</param>
+		<param id="macro">
+			The macro whose invocation is to be <link id="deferred"/>.
+		</param>
+	</usage>
+	<para>
+		This macro <link id="defers"/> the invocation of <var>macro</var> through <var>offset</var> + <var>base</var> scans.
+	</para>
+	<para>
+		Typical usage involves passing either the first part of the above invocation (i.e. <code><PHASE/>(offset)</code>) to another macro that is written in terms of the rest of the invocation.
+		For example,
+		<snippet>
+			#define A(p) \
+			    p(0, B)() p(1, B)() p(2, B)() \
+			    /**/
+			#define B() 1
+			
+			A(<PHASE/>(0)) // #1
+			A(<PHASE/>(1)) // #2
+		</snippet>
+		The first invocation expands to three invocations of <code>B</code>.
+		Of these, the first is actually invoked, the second is delayed through one scan, and the third is delayed through two scans.
+		The second invocation has the effect of increasing the <link id="deferral"/> of each of these by <code>1</code>.
+		The first of the three resulting invocations is delayed through one scan, the second is delayed through two scans, and the third is delayed through three scans.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-arithmetic-dec.h/>
+		#include <chaos-preprocessor-arithmetic-sub.h/>
+		#include <chaos-preprocessor-comparison-not_equal.h/>
+		#include <chaos-preprocessor-control-if.h/>
+		#include <chaos-preprocessor-control-iif.h/>
+		#include <chaos-preprocessor-limits.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		#include <chaos-preprocessor-recursion-phase.h/>
+		#include <chaos-preprocessor-tuple-eat.h/>
+		
+		#define REPEAT(count, macro, data) \
+		    REPEAT_S(<STATE/>(), count, macro, data) \
+		    /**/
+		#define REPEAT_S(s, count, macro, data) \
+		    REPEAT_I( \
+		        <NEXT/>(s), <NEXT/>(s), \
+		        count, macro, data \
+		    ) \
+		    /**/
+		#define REPEAT_INDIRECT() REPEAT_I
+		#define REPEAT_I(s, o, count, macro, data) \
+		    <IF/>(count)( \
+		        <IIF/>( \
+		            <NOT_EQUAL/>(s, <LIMIT_EXPR/>) \
+		        )( \
+		            REPEAT_II, REPEAT_III \
+		        ), \
+		        <TUPLE_EAT/>(6) \
+		    )(<PHASE/>(0), s, o, <DEC/>(count), macro, data) \
+		    /**/
+		#define REPEAT_II(_, s, o, count, macro, data) \
+		    _(1, <EXPR_S/>)(s)(_(1, REPEAT_INDIRECT)()( \
+		        <NEXT/>(s), o, count, macro, data \
+		    )) \
+		    _(1, macro)(s, count, data) \
+		    /**/
+		#define REPEAT_III(_, s, o, count, macro, data) \
+		    REPEAT_II(<PHASE/>(1), o, o, count, macro, data) \
+		    /**/
+
+		#define S <SUB/>(<LIMIT_EXPR/>, 6)
+		#define MACRO(s, n, data) n
+		
+		<EXPR_S/>(S)(<EXPR_S/>(S)(
+		    REPEAT_S(S, 10, MACRO, ~)
+		))
+		// 0 1 2 3 4 5 6 7 8 9
+	</listing>
+	<derivative id="PHASE_ID"/>
+	<derivative id="PHASE_" lang="C99"/>
+</macro>
+
+</header>

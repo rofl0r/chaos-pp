@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/recursion/expr.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines the <link id="recursion backend"/>.
+</overview>
+
+<macro id="STATE">
+	<abstract>
+		The <STATE/> macro deduces the current <link id="recursion state"/>.
+	</abstract>
+	<usage>
+		<syntax><STATE/>()</syntax>
+	</usage>
+	<para>
+		This macro expands to the current <link id="recursion state"/>.
+	</para>
+	<para>
+		This macro utilizes <link id="automatic recursion"/>.
+		In addition to the restrictions that that implies, this macro may not be used if <link id="bypass semantics"/> are in effect.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-arithmetic-dec.h/>
+		#include <chaos-preprocessor-control-expr_iif.h/>
+		#include <chaos-preprocessor-logical-bool.h/>
+		#include <chaos-preprocessor-recursion-basic.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		
+		#define FOR(pred, op, macro, state) \
+		    FOR_S(<STATE/>(), pred, op, macro, state) \
+		    /**/
+		#define FOR_S(s, pred, op, macro, state) \
+		    FOR_I( \
+		        <OBSTRUCT/>(), <NEXT/>(s), \
+		        pred, op, macro, state \
+		    ) \
+		    /**/
+		#define FOR_INDIRECT() FOR_I
+		#define FOR_I(_, s, pred, op, macro, state) \
+		    <EXPR_IIF/> _(pred _(s, state))( \
+		        macro _(s, state) \
+		        <EXPR_S/>(s) _(FOR_INDIRECT _()( \
+		            <OBSTRUCT/> _(), <NEXT/>(s), \
+		            pred, op, macro, op _(s, state) \
+		        )) \
+		    ) \
+		    /**/
+		
+		#define PRED(s, state) <BOOL/>(state)
+		#define OP(s, state) <DEC/>(state)
+		#define MACRO(s, state) state
+		
+		<EXPR/>(FOR(
+		    PRED, OP, MACRO, 10
+		))
+		// 10 9 8 7 6 5 4 3 2 1
+	</listing>
+	<derivative id="STATE_ID"/>
+	<derivative id="STATE_" lang="C99"/>
+</macro>
+
+<macro id="IS_VALID">
+	<abstract>
+		The <IS_VALID/> macro tests whether a particular <link id="recursion state"/> is currently valid.
+	</abstract>
+	<usage>
+		<syntax><IS_VALID/>(s)</syntax>
+		<param id="s">
+			The <link id="recursion state"/> to be tested.
+		</param>
+	</usage>
+	<para>
+		If the <link id="recursion state"/> denoted by <var>s</var> is currently valid, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<derivative id="IS_VALID_ID"/>
+	<derivative id="IS_VALID_" lang="C99"/>
+</macro>
+
+<macro id="NEXT">
+	<abstract>
+		The <NEXT/> macro increases a <link id="recursion state"/>.
+	</abstract>
+	<usage>
+		<syntax><NEXT/>(s)</syntax>
+		<param id="s">
+			The <link id="recursion state"/> to be increased.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="recursion state"/> one <link id="recursion step"/> greater than <var>s</var>.
+	</para>
+	<x-reference id="PREV"/>
+	<derivative id="NEXT_ID"/>
+	<derivative id="NEXT_" lang="C99"/>
+</macro>
+
+<macro id="PREV">
+	<abstract>
+		The <PREV/> macro decreases a <link id="recursion state"/>.
+	</abstract>
+	<usage>
+		<syntax><PREV/>(s)</syntax>
+		<param id="s">
+			The <link id="recursion state"/> to be decreased.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="recursion state"/> one <link id="recursion step"/> less than <var>s</var>.
+	</para>
+	<x-reference id="NEXT"/>
+	<derivative id="PREV_ID"/>
+	<derivative id="PREV_" lang="C99"/>
+</macro>
+
+<macro id="ADJUST">
+	<abstract>
+		The <ADJUST/> macro adjusts its argument.
+	</abstract>
+	<usage>
+		<syntax><ADJUST/>(s)</syntax>
+		<param id="s">
+			The <link id="recursion state"/> to be adjusted.
+		</param>
+	</usage>
+	<para>
+		If <var>s</var> is a valid <link id="recursion state"/>, this macro expands to <var>s</var>.
+		Otherwise, it expands to the result of invoking <STATE/>.
+	</para>
+	<para>
+		This macro utilizes <link id="automatic recursion"/>.
+		In addition to the restrictions that that implies, this macro may not be used if <link id="bypass semantics"/> are in effect.
+	</para>
+	<derivative id="ADJUST_ID"/>
+	<derivative id="ADJUST_" lang="C99"/>
+</macro>
+
+<macro id="EXPR" type="object">
+	<abstract>
+		The <EXPR/> macro represents an abstract entry point into the <link id="recursion backend"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><EXPR/>(...)</syntax>
+		<param id="..." optional="1">
+			The argument to be expanded.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><EXPR/>(x)</syntax>
+		<param id="x">
+			The argument to be expanded.
+		</param>
+	</usage>
+	<para>
+		The <EXPR/> macro itself is an object-like macro that expands to the current entry point into the <link id="recursion backend"/>.
+		This entry point is, in turn, invoked with <var>x</var> or <code>__VA_ARGS__</code> resulting in <var>x</var> or <code>__VA_ARGS__</code>.
+	</para>
+	<para>
+		The secondary invocation with <var>x</var> or <code>__VA_ARGS__</code> causes the argument to be scanned twice.
+		This double scan of <var>x</var> or <code>__VA_ARGS__</code> is the essence of <link id="abstract recursion"/> with the preprocessor.
+	</para>
+	<boilerplate type="s"/>
+	<x-reference id="EXPR_S"/>
+	<listing>
+		#include <chaos-preprocessor-arithmetic-dec.h/>
+		#include <chaos-preprocessor-control-expr_if.h/>
+		#include <chaos-preprocessor-recursion-basic.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		
+		#define COUNT(x) \
+		    <EXPR/>(COUNT_I( \
+		        <OBSTRUCT/>(), x \
+		    )) \
+		    /**/
+		#define COUNT_INDIRECT() COUNT_I
+		#define COUNT_I(_, n) \
+		    <EXPR_IF/> _(n)( \
+		        <EXPR_ID/> _()(COUNT_INDIRECT _()( \
+		            <OBSTRUCT/> _(), <DEC/>(n) \
+		        )) \
+		        n \
+		    ) \
+		    /**/
+		
+		COUNT(10) // 1 2 3 4 5 6 7 8 9 10
+	</listing>
+	<derivative id="EXPR_ID"/>
+	<derivative id="EXPR_" lang="C99"/>
+</macro>
+
+<macro id="EXPR_S">
+	<abstract>
+		The <EXPR_S/> macro represents an physical entry point into the <link id="recursion backend"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><EXPR_S/>(s)(...)</syntax>
+		<param id="s">
+			The <link id="recursion state"/> that denotes the point of entry into the <link id="recursion backend"/>.
+		</param>
+		<param id="..." optional="1">
+			The argument to be expanded.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><EXPR_S/>(s)(x)</syntax>
+		<param id="s">
+			The <link id="recursion state"/> that denotes the point of entry into the <link id="recursion backend"/>.
+		</param>
+		<param id="x">
+			The argument to be expanded.
+		</param>
+	</usage>
+	<para>
+		The invocation of <EXPR_S/> with <var>s</var> expands to the entry point into the <link id="recursion backend"/> specified by <var>s</var>.
+		This entry point is, in turn, invoked with <var>x</var> or <code>__VA_ARGS__</code> resulting in <var>x</var> or <code>__VA_ARGS__</code>.
+	</para>
+	<para>
+		The secondary invocation with <var>x</var> or <code>__VA_ARGS__</code> causes the argument to be scanned twice.
+		This double scan of <var>x</var> or <code>__VA_ARGS__</code> is the essence of <link id="abstract recursion"/> with the preprocessor.
+	</para>
+	<x-reference id="EXPR"/>
+	<listing>
+		#include <chaos-preprocessor-arithmetic-dec.h/>
+		#include <chaos-preprocessor-control-expr_if.h/>
+		#include <chaos-preprocessor-recursion-basic.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		
+		#define COUNT(x) COUNT_S(<STATE/>(), x)
+		#define COUNT_S(s, x) \
+		    <EXPR_S/>(s)(COUNT_I( \
+		        <OBSTRUCT/>(), <NEXT/>(s), x \
+		    )) \
+		    /**/
+		#define COUNT_INDIRECT() COUNT_I
+		#define COUNT_I(_, s, n) \
+		    <EXPR_IF/> _(n)( \
+		        <EXPR_S/>(s) _(COUNT_INDIRECT _()( \
+		            <OBSTRUCT/> _(), <NEXT/>(s), \
+		            <DEC/>(n) \
+		        )) \
+		        n \
+		    ) \
+		    /**/
+		
+		COUNT(10) // 1 2 3 4 5 6 7 8 9 10
+	</listing>
+	<derivative id="EXPR_S_ID"/>
+	<derivative id="EXPR_S_" lang="C99"/>
+</macro>
+
+</header>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/logical/bitxnor.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a logical XNOR operator.
+</overview>
+
+<macro id="BITXNOR" group="xnor">
+	<abstract>
+		The <BITXNOR/> macro expands to the logical XNOR of its operands.
+	</abstract>
+	<usage>
+		<syntax><BITXNOR/>(x)(y)</syntax>
+		<param id="x">
+			The left operand.
+			Valid values are <code>0</code> and <code>1</code>.
+		</param>
+		<param id="y">
+			The right operand.
+			Valid values are <code>0</code> and <code>1</code>.		
+		</param>
+	</usage>
+	<para>
+		If either <var>x</var> or <var>y</var> is <code>1</code> exclusively, this macro expands to <code>0</code>.
+		Otherwise, it expands to <code>1</code>.
+	</para>
+	<para>
+		This macro does <em>not</em> perform a boolean conversion on its operands.
+		If this conversion is desireable, <XNOR/> may be used instead.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-debug-failure.h/>
+		#include <chaos-preprocessor-logical-bitxnor.h/>
+		
+		<BITXNOR/>(0)(1) // 0
+		<BITXNOR/>(1)(1) // 1
+	</listing>
+	<derivative id="BITXNOR_ID"/>
+	<derivative id="BITXNOR_" lang="C99"/>
+</macro>
+
+</header>

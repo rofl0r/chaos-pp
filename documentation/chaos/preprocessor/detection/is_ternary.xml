@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/detection/is_ternary.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro used to detect ternary parenthetic expressions.
+</overview>
+
+<macro id="IS_TERNARY" group="parenthetic">
+	<abstract>
+		The <IS_TERNARY/> macro detects whether its argument begins with a ternary parenthetic expression.
+	</abstract>
+	<usage lang="C99">
+		<syntax><IS_TERNARY/>(...)</syntax>
+		<param id="..." optional="1">
+			The expression to be tested.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><IS_TERNARY/>(x)</syntax>
+		<param id="x">
+			The expression to be tested.
+		</param>
+	</usage>
+	<para>
+		If <var>x</var> or <code>__VA_ARGS__</code> begins with a ternary parenthetic expression, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<para>
+		The expression to be tested must begin with a ternary parenthetic expression or a non-parenthetic expression.
+		A parenthetic expression of any other arity is invalid input.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-detection-is_ternary.h/>
+		
+		<IS_TERNARY/>(++)        // 0
+		<IS_TERNARY/>((a, b, c)) // 1
+	</listing>
+	<derivative id="IS_TERNARY_ID"/>
+	<derivative id="IS_TERNARY_" lang="C99"/>
+</macro>
+
+</header>

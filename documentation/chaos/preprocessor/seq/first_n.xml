@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/seq/first_n.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that extracts a user-specified number of elements from the beginning of a <link id="sequence"/>.
+</overview>
+
+<macro id="SEQ_FIRST_N" type="indirect" group="range">
+	<abstract>
+		The <SEQ_FIRST_N/> macro extracts the number of elements specified by its first argument from it second argument.
+	</abstract>
+	<usage lang="C99">
+		<syntax><SEQ_FIRST_N/>(n, seq)</syntax>
+		<param id="n">
+			The number of elements to be extracted.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="seq" optional="1">
+			The <link id="sequence"/> from which elements are to be extracted.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><SEQ_FIRST_N/>(n, seq)</syntax>
+		<param id="n">
+			The number of elements to be extracted.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="seq">
+			The <link id="sequence"/> from which elements are to be extracted.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="sequence"/> containing the first <var>n</var> elements of <var>seq</var>.
+		Consequently, <var>seq</var> must contain at least <var>n</var> elements.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-seq-first_n.h/>
+		
+		#define A (a)(b)(c)(d)(e)
+		
+		<SEQ_FIRST_N/>(3, A) // (a)(b)(c)
+		<SEQ_FIRST_N/>(0, A) //
+		
+		#if <VARIADICS/>
+		
+		<SEQ_FIRST_N/>(2, (a, b)(c)(d, e, f)) // (a, b)(c)
+		<SEQ_FIRST_N/>(0,) //
+		
+		#endif
+	</listing>
+	<derivative id="SEQ_FIRST_N_ID"/>
+	<derivative id="SEQ_FIRST_N_" lang="C99"/>
+</macro>
+
+</header>

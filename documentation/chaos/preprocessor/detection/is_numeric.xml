@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/detection/is_numeric.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that detects whether its argument is a number.
+</overview>
+
+<macro id="IS_NUMERIC">
+	<abstract>
+		The <IS_NUMERIC/> macro detects whether its argument is a number.
+	</abstract>
+	<usage lang="C99">
+		<syntax><IS_NUMERIC/>(x)</syntax>
+		<param id="x" optional="1">
+			The argument to be tested.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><IS_NUMERIC/>(x)</syntax>
+		<param id="x">
+			The argument to be tested.
+		</param>
+	</usage>
+	<para>
+		If <var>x</var> is a number between <var>0</var> and <LIMIT_MAG/>, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<para>
+		Input to this macro is restricted to numbers and identifiers.
+		Specifically, operators are invalid input.
+		<snippet>
+			<IS_NUMERIC/>(+) // invalid
+		</snippet>
+		This restriction is relaxed somewhat in C99.
+		In C99, <var>x</var> may be empty or may be a parenthetic expression.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-detection-is_numeric.h/>
+		
+		<IS_NUMERIC/>(ABC) // 0
+		<IS_NUMERIC/>(123) // 1
+	</listing>
+	<derivative id="IS_NUMERIC_ID"/>
+	<derivative id="IS_NUMERIC_" lang="C99"/>
+</macro>
+
+</header>

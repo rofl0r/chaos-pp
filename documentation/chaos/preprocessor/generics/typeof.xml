@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/generics/typeof.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that extracts the type of a <link id="generic data structure"/>.
+</overview>
+
+<macro id="TYPEOF">
+	<abstract>
+		The <TYPEOF/> macro extracts the type of its argument.
+	</abstract>
+	<usage>
+		<syntax><TYPEOF/>(g)</syntax>
+		<param id="g">
+			The <link id="generic data structure"/> whose type is to extracted.
+		</param>
+	</usage>
+	<para>
+		This macro expands to the type of <var>g</var>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-generics-typeof.h/>
+		#include <chaos-preprocessor-list-spec.h/>
+		
+		<TYPEOF/>((<LIST/>) (a, (b, (c, ...)))) // <LIST/>
+	</listing>
+	<derivative id="TYPEOF_ID"/>
+	<derivative id="TYPEOF_" lang="C99"/>
+</macro>
+
+</header>

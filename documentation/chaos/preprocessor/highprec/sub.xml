@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/highprec/sub.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a <link id="high-precision"/> subtraction operator.
+</overview>
+
+<macro id="AUTO_SUB" group="subtraction">
+	<abstract>
+		The <AUTO_SUB/> macro computes the difference between two values.
+	</abstract>
+	<usage>
+		<syntax><AUTO_SUB/>(x, y)</syntax>
+		<param id="x">
+			The minuend.
+			This value may be either an integer literal (possibly with a negation suffix) in the range of <code>0</code> to <LIMIT_MAG/> or a <link id="high-precision value"/>.
+		</param>
+		<param id="y">
+			The subtrahend.
+			This value may be either an integer literal (possibly with a negation suffix) in the range of <code>0</code> to <LIMIT_MAG/> or a <link id="high-precision value"/>.
+		</param>
+	</usage>
+	<para>
+		This macro expands to the difference between <var>x</var> and <var>y</var>.
+		If both <var>x</var> and <var>y</var> are integer literals (possibly with a negation suffix) the result is an integer literal.
+		Otherwise, the result is a <link id="high-precision value"/>.
+		If the result is larger than <LIMIT_HIGHPREC/> digits, this macro intentionally produces an error.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-highprec-sub.h/>
+		#include <chaos-preprocessor-highprec-demote.h/>
+		#include <chaos-preprocessor-highprec-promote.h/>
+		
+		<AUTO_SUB/>(200, 67) // 133
+		
+		<DEMOTE_HP/>(<AUTO_SUB/>(
+		    <PROMOTE_HP/>(500), 98
+		))
+		// 402
+	</listing>
+	<derivative id="AUTO_SUB_ID"/>
+	<derivative id="AUTO_SUB_" lang="C99"/>
+</macro>
+
+<macro id="SUB_HP" group="subtraction">
+	<abstract>
+		The <SUB_HP/> macro computes the difference between two <link id="high-precision values"/>.
+	</abstract>
+	<usage>
+		<syntax><SUB_HP/>(x, y)</syntax>
+		<param id="x">
+			The minuend.
+		</param>
+		<param id="y">
+			The subtrahend.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="high-precision value"/> that represents the difference between <var>x</var> and <var>y</var>.
+		If the result is larget than <LIMIT_HIGHPREC/> digits, this macro intentionally produces an error.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-highprec-sub.h/>
+		#include <chaos-preprocessor-highprec-demote.h/>
+		#include <chaos-preprocessor-highprec-literal.h/>
+		
+		<DEMOTE_HP/>(<SUB_HP/>(
+		    <LITERAL_HP/>((-)2 3),
+		    <LITERAL_HP/>(1 0)
+		))
+		// -33
+	</listing>
+	<derivative id="SUB_HP_ID"/>
+	<derivative id="SUB_HP_" lang="C99"/>
+</macro>
+
+</header>

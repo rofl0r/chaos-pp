@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/tuple/eat.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that eats a <link id="tuple"/>.
+</overview>
+
+<macro id="TUPLE_EAT">
+	<abstract>
+		The <TUPLE_EAT/> macro eats a <link id="tuple"/> of the specified size.
+	</abstract>
+	<usage lang="C99">
+		<syntax><TUPLE_EAT/>(size) tuple</syntax>
+		<param id="size" optional="1">
+			This argument exists only for compatibility.
+			It is otherwise ignored.
+		</param>
+		<param id="tuple">
+			The <link id="tuple"/> to be eaten.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><TUPLE_EAT/>(size) tuple</syntax>
+		<param id="size">
+			The size of the <link id="tuple"/> to be eaten.
+			Valid values range from <code>0</code> to <LIMIT_TUPLE/>.
+		</param>
+		<param id="tuple">
+			The <link id="tuple"/> to be eaten.
+		</param>
+	</usage>
+	<para>
+		The <TUPLE_EAT/> macro itself expands to a macro capable of being invoked against a <link id="tuple"/> of arity <var>size</var>.
+		This macro, when invoked against <var>tuple</var>, expands to nothing.
+		<snippet>
+			<TUPLE_EAT/>(3)(a, b, c) //
+		</snippet>
+	</para>
+	<para>
+		Note that in C99, the <TUPLE_EAT/> macro expands to a macro capable of being invoked against a <link id="tuple"/> of <em>any</em> arity.
+		The <var>size</var> parameter is ignored.
+	</para>
+	<x-reference id="TUPLE_REM"/>
+	<listing>
+		#include <chaos-preprocessor-arithmetic-dec.h/>
+		#include <chaos-preprocessor-control-if.h/>
+		#include <chaos-preprocessor-limits.h/>
+		#include <chaos-preprocessor-recursion-basic.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		#include <chaos-preprocessor-tuple-eat.h/>
+		
+		#define T_MINUS(n) T_MINUS_BYPASS(<LIMIT_EXPR/>, n)
+		#define T_MINUS_BYPASS(s, n) \
+		    <EXPR_S/>(s)(T_MINUS_I( \
+		        <PREV/>(s), n \
+		    )) \
+		    /**/
+		#define T_MINUS_INDIRECT() T_MINUS_I
+		#define T_MINUS_I(s, n) \
+		    n <IF/>(n)( \
+		        T_MINUS_II, ?! <TUPLE_EAT/>(3) \
+		    )(<OBSTRUCT/>(), s, n) \
+		    /**/
+		#define T_MINUS_II(_, s, n) \
+		    <EXPR_S/>(s) _(T_MINUS_INDIRECT _()( \
+		        <PREV/>(s), <DEC/>(n) \
+		    )) \
+		    /**/
+		
+		T_MINUS(10) // 10 9 8 7 6 5 4 3 2 1 0 ?!
+	</listing>
+	<derivative id="TUPLE_EAT_ID"/>
+	<derivative id="TUPLE_EAT_" lang="C99"/>
+</macro>
+
+</header>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/facilities/binary.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines macros that extract elements from a binary <link id="tuple"/>.
+</overview>
+
+<macro id="BINARY" group="element-access">
+	<abstract>
+		The <BINARY/> macro extracts an element from a binary <link id="tuple"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><BINARY/>(i)(a, ...)</syntax>
+		<param id="i">
+			The index of the element to be extracted.
+			Valid values are <code>0</code> and <code>1</code>.
+		</param>
+		<param id="a" optional="1">
+			The first element of the <link id="tuple"/>.
+		</param>
+		<param id="..." optional="1">
+			The second element of the <link id="tuple"/>.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><BINARY/>(i)(a, b)</syntax>
+		<param id="i">
+			The index of the element to be extracted.
+			Valid values are <code>0</code> and <code>1</code>.
+		</param>
+		<param id="a">
+			The first element of the <link id="tuple"/>.
+		</param>
+		<param id="b">
+			The second element of the <link id="tuple"/>.
+		</param>
+	</usage>
+	<para>
+		If <var>i</var> is <code>0</code>, this macro expands to <var>a</var>.
+		Otherwise, it expands to <var>b</var> or <code>__VA_ARGS__</code>.
+	</para>
+	<para>
+		This macro is lazy.
+		If <var>i</var> is <code>0</code>, <var>b</var> (or <code>__VA_ARGS__</code>) is not evaluated.
+		Likewise, if <var>i</var> is <code>1</code>, <var>a</var> is not evaluated.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-facilities-binary.h/>
+		
+		<BINARY/>(0)(x, y) // x
+		<BINARY/>(1)(x, y) // y
+	</listing>
+	<derivative id="BINARY_ID"/>
+	<derivative id="BINARY_" lang="C99"/>
+</macro>
+
+<macro id="BINARY_CTOR" type="indirect" group="element-access">
+	<abstract>
+		The <BINARY_CTOR/> macro extracts an element from a binary <link id="tuple"/>.
+	</abstract>
+	<usage>
+		<syntax><BINARY_CTOR/>(i, tuple)</syntax>
+		<param id="i">
+			The index of the element to be extracted.
+			Valid values are <code>0</code> and <code>1</code>.
+		</param>
+		<param id="tuple">
+			The binary <link id="tuple"/> from which an element is to be extracted.
+		</param>
+	</usage>
+	<para>
+		This macro operates similarly to <BINARY/>.
+		Unlike <BINARY/>, however, the <link id="tuple"/> is "constructed" at the expense of lazy evaluation.
+	</para>
+	<para>
+		In C99, the <var>tuple</var> argument need not be strictly binary.
+		However, the macro behaves <em>as if</em> it is binary yielding the first argument or the arguments after the first depending on <var>i</var>.
+		<snippet>
+			<BINARY_CTOR/>(0, (a, b, c)) // a
+			<BINARY_CTOR/>(1, (a, b, c)) // b, c
+		</snippet>
+	</para>
+	<listing>
+		#include <chaos-preprocessor-facilities-binary.h/>
+		
+		#define BIN (a, b)
+		
+		<BINARY_CTOR/>(0, BIN) // a
+		<BINARY_CTOR/>(1, BIN) // b
+	</listing>
+	<derivative id="BINARY_CTOR_ID"/>
+	<derivative id="BINARY_CTOR_" lang="C99"/>
+</macro>
+
+</header>

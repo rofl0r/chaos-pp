@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/string/spec.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines the core <link id="string"/> operations necessary to use a <link id="string"/> as a <link id="generic data structure"/>.
+</overview>
+
+<macro id="STRING" group="data-type">
+	<abstract>
+		The <STRING/> macro designates the name of the <link id="string"/> data structure.
+	</abstract>
+	<usage>
+		<syntax><STRING/></syntax>
+	</usage>
+	<para>
+		This macro expands to <STRING/>.
+		In other words, the identifier <STRING/> is defined as itself.
+	</para>
+</macro>
+
+<macro id="STRING_TAG" group="tag">
+	<abstract>
+		The <STRING_TAG/> macro is an identity macro used to compare type names.
+	</abstract>
+	<usage>
+		<syntax><STRING_TAG/>(tag)</syntax>
+		<param id="tag">
+			The tag used to distinguish between data structures.
+		</param>
+	</usage>
+	<para>
+		This macro is used by generic algorithms to compare the types of <link id="generic data structures"/>.
+		It should be used for no other purpose.
+	</para>
+	<derivative id="STRING_TAG_ID"/>
+	<derivative id="STRING_TAG_" lang="C99"/>
+</macro>
+
+<macro id="STRING_NIL" group="nil">
+	<abstract>
+		The <STRING_NIL/> macro expands to a nil <link id="string"/>.
+	</abstract>
+	<usage>
+		<syntax><STRING_NIL/>()</syntax>
+	</usage>
+	<para>
+		In C99, this macro expands to nothing.
+		(More generally, a nil <link id="string"/> is an empty sequence of preprocessing tokens.)
+		In C++ (and C prior to C99), there is no such thing as a nil <link id="string"/> because "nothing" cannot be passed as an argument.
+		Hence, in C++ (and C prior to C99), this macro expands to a rogue value (that is uniquely recognized by the other macros in this header) such that generic algorithms can behave <em>as if</em> nil <link id="strings"/> exist.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-string-spec.h/>
+		
+		#if <VARIADICS/>
+		
+		<STRING_NIL/>() //
+		
+		#else
+		
+		<STRING_NIL/>() // unspecified
+		
+		#endif
+		
+		<STRING_CONS/>(
+		    <STRING_CONS/>(
+		        <STRING_NIL/>(),
+		        b
+		    ),
+		    a
+		)
+		// a
+	</listing>
+	<derivative id="STRING_NIL_ID"/>
+	<derivative id="STRING_NIL_" lang="C99"/>
+</macro>
+
+<macro id="STRING_CONS" type="indirect" group="cons">
+	<abstract>
+		The <STRING_CONS/> macro appends an element to the head of a <link id="string"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><STRING_CONS/>(string, x)</syntax>
+		<param id="string" optional="1">
+			The <link id="string"/> to which <var>x</var> is to be appended.
+		</param>
+		<param id="x">
+			The element to be appended to the head of <var>string</var>.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><STRING_CONS/>(string, x)</syntax>
+		<param id="string">
+			The <link id="string"/> to which <var>x</var> is to be appended.
+		</param>
+		<param id="x">
+			The element to be appended to the head of <var>string</var>.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="string"/> containing the elements of <var>string</var> with <var>x</var> appended to the head.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-string-spec.h/>
+		
+		<STRING_CONS/>(
+		    <STRING_CONS/>(
+		        <STRING_CONS/>(
+		            <STRING_NIL/>(), z
+		        ), y
+		    ), x
+		)
+		// x y z
+	</listing>
+	<derivative id="STRING_CONS_ID"/>
+	<derivative id="STRING_CONS_" lang="C99"/>
+</macro>
+
+<macro id="STRING_ITEM" type="indirect" group="itemization">
+	<abstract>
+		The <STRING_ITEM/> macro is an identity macro used to encapsulate elements.
+	</abstract>
+	<usage>
+		<syntax><STRING_ITEM/>(x)</syntax>
+		<param id="x">
+			The element of a <link id="string"/> to be encapsulated.
+		</param>
+	</usage>
+	<para>
+		This macro is used by generic algorithms to encapsulate elements before they are passed to user-defined macros.
+		Elements in a <link id="string"/> cannot be variadic.
+		Therefore, this macro is a simple identity macro.
+	</para>
+	<derivative id="STRING_ITEM_ID"/>
+	<derivative id="STRING_ITEM_" lang="C99"/>
+</macro>
+
+<macro id="STRING_FIRST" type="indirect" group="first">
+	<abstract>
+		The <STRING_FIRST/> macro extracts the first element from a <link id="string"/>.
+	</abstract>
+	<usage>
+		<syntax><STRING_FIRST/>(string)</syntax>
+		<param id="string">
+			The <link id="string"/> whose first element is to be extracted.
+		</param>
+	</usage>
+	<para>
+		This macro expands to the first element contained in <var>string</var>.
+	</para>
+	<x-reference id="STRING_REST"/>
+	<listing>
+		#include <chaos-preprocessor-string-spec.h/>
+		
+		#define DATA() d a t a
+		
+		<STRING_FIRST/>(DATA()) // d
+	</listing>
+	<derivative id="STRING_FIRST_ID"/>
+	<derivative id="STRING_FIRST_" lang="C99"/>
+</macro>
+
+<macro id="STRING_REST" type="indirect" group="rest">
+	<abstract>
+		The <STRING_REST/> macro removes the first element from a <link id="string"/>.
+	</abstract>
+	<usage>
+		<syntax><STRING_REST/>(string)</syntax>
+		<param id="string">
+			The <link id="string"/> whose first element is to be removed.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="string"/> containing all of the elements of <var>string</var> except the first.
+	</para>
+	<x-reference id="STRING_FIRST"/>
+	<listing>
+		#include <chaos-preprocessor-string-spec.h/>
+		
+		#define DATA() d a t a
+		
+		<STRING_REST/>(DATA()) // a t a
+	</listing>
+	<derivative id="STRING_REST_ID"/>
+	<derivative id="STRING_REST_" lang="C99"/>
+</macro>
+
+<macro id="STRING_IS_CONS" group="is-cons">
+	<abstract>
+		The <STRING_IS_CONS/> macro is a predicate that tests whether a <link id="string"/> is non-nil.
+	</abstract>
+	<usage lang="C99">
+		<syntax><STRING_IS_CONS/>(string)</syntax>
+		<param id="string" optional="1">
+			The <link id="string"/> to be tested.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><STRING_IS_CONS/>(string)</syntax>
+		<param id="string">
+			The <link id="string"/> to be tested.
+		</param>
+	</usage>
+	<para>
+		If <var>string</var> is non-nil, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<x-reference id="STRING_IS_NIL"/>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-string-spec.h/>
+		
+		#if <VARIADICS/>
+		
+		<STRING_IS_CONS/>() // 0
+		
+		#endif
+		
+		<STRING_IS_CONS/>(<STRING_NIL/>()) // 0
+		<STRING_IS_CONS/>(x y z)                 // 1
+	</listing>
+	<derivative id="STRING_IS_CONS_ID"/>
+	<derivative id="STRING_IS_CONS_" lang="C99"/>
+</macro>
+
+<macro id="STRING_IS_NIL" group="is-nil">
+	<abstract>
+		The <STRING_IS_NIL/> macro is a predicate that tests whether a <link id="string"/> is nil.
+	</abstract>
+	<usage lang="C99">
+		<syntax><STRING_IS_NIL/>(string)</syntax>
+		<param id="string" optional="1">
+			The <link id="string"/> to be tested.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><STRING_IS_NIL/>(string)</syntax>
+		<param id="string">
+			The <link id="string"/> to be tested.
+		</param>
+	</usage>
+	<para>
+		If <var>string</var> is nil, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<x-reference id="STRING_IS_CONS"/>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-string-spec.h/>
+		
+		#if <VARIADICS/>
+		
+		<STRING_IS_NIL/>() // 1
+		
+		#endif
+		
+		<STRING_IS_NIL/>(<STRING_NIL/>()) // 1
+		<STRING_IS_NIL/>(x y z)                 // 0
+	</listing>
+	<derivative id="STRING_IS_NIL_ID"/>
+	<derivative id="STRING_IS_NIL_" lang="C99"/>
+</macro>
+
+</header>

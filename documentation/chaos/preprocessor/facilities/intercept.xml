@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/facilities/intercept.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that intercepts the concatenation of a numeric value.
+</overview>
+
+<macro id="INTERCEPT">
+	<abstract>
+		The <INTERCEPT/> macro expands to an entity that expands to nothing when a number is concatenated to it.
+	</abstract>
+	<usage>
+		<syntax><INTERCEPT/></syntax>
+	</usage>
+	<para>
+		This macro is used to intercept concatenations of numbers ranging from <code>0</code> to <LIMIT_MAG/>.
+		When a number in this range is concatenated to the result of this macro produces a new macro that expands to nothing.
+	</para>
+	<para>
+		This macro is primarily useful in situations where the library automatically concatenates numbers to user-specified arguments.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-facilities-intercept.h/>
+		#include <chaos-preprocessor-repetition-enum_params.h/>
+		
+		<ENUM_PARAMS/>(3, class T)
+		// class T0, class T1, class T2
+		
+		<ENUM_PARAMS/>(3, class <INTERCEPT/>)
+		// class, class, class
+		
+		<ENUM_PARAMS/>(3, (class T, = U))
+		// class T0 = U0, class T1 = U1, class T2 = U2
+		
+		<ENUM_PARAMS/>(3, (class T, = int <INTERCEPT/>))
+		// class T0 = int, class T1 = int, class T2 = int
+	</listing>
+	<derivative id="INTERCEPT_ID"/>
+	<derivative id="INTERCEPT_" lang="C99"/>
+</macro>
+
+</header>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/seq/filter.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an algorithm that filters elements from a <link id="sequence"/> according to a user-specified criteria.
+</overview>
+
+<macro id="SEQ_FILTER" type="indirect" group="filtration">
+	<abstract>
+		The <SEQ_FILTER/> macro filters elements from its second argument according to the criteria specified by its first argument.
+	</abstract>
+	<usage lang="C99">
+		<syntax><EXPR/>(<SEQ_FILTER/>(pred, seq))</syntax>
+		<param id="pred">
+			<para>
+				The predicate that determines whether an element is to remain in the resulting <link id="sequence"/>.
+				This predicate must be either a <link id="λ-expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				<snippet>
+					pred(s, elem<sup>†</sup>)
+				</snippet>
+			</para>
+			<para>
+				<sup>†</sup>
+				If <var>seq</var> contains elements that have varying arities, <var>elem</var> must be <code>...</code>.
+				Otherwise, <var>elem</var> must be the number of parameters that corresponds to the arity of each element in <var>seq</var>.
+			</para>
+		</param>
+		<param id="seq" optional="1">
+			The <link id="sequence"/> to be filtered.
+		</param>
+	</usage>
+	<usage lang="C99">
+		<syntax><EXPR/>(<SEQ_FILTER/>(pred, seq, ...))</syntax>
+		<param id="pred">
+			<para>
+				The predicate that determines whether an element is to remain in the resulting <link id="sequence"/>.
+				This predicate must be either a <link id="λ-expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				<snippet>
+					pred(s, elem<sup>†</sup>, data<sup>‡</sup>)
+				</snippet>
+			</para>
+			<para>
+				<sup>†</sup>
+				The <var>elem</var> pseudo-parameter must be the number of parameters that corresponds to the arity of each element in <var>seq</var>.
+			</para>
+			<para>
+				<sup>‡</sup>
+				The <var>data</var> pseudo-parameter must be either <code>...</code> or the number of parameters that corresponds to the number of arguments in the auxiliary data, <code>__VA_ARGS__</code>.
+			</para>
+		</param>
+		<param id="seq" optional="1">
+			The <link id="sequence"/> to be filtered.
+		</param>
+		<param id="..." optional="1">
+			Auxiliary data to be passed through the algorithm to the predicate.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><EXPR/>(<SEQ_FILTER/>(pred, seq, data))</syntax>
+		<param id="pred">
+			The predicate that determines whether an element is to remain in the resulting <link id="sequence"/>.
+			This predicate must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			<snippet>
+				pred(s, elem, data)
+			</snippet>
+		</param>
+		<param id="seq">
+			The <link id="sequence"/> to be filtered.
+		</param>
+		<param id="data">
+			Auxiliary data to be passed through the algorithm to the predicate.
+		</param>
+	</usage>
+	<para>
+		The <SEQ_FILTER/> macro itself expands to a <link id="deferred expression"/> in terms of <code><NEXT/>(s)</code>.
+		This <link id="deferred expression"/>, when invoked by <EXPR/>, expands to a <link id="sequence"/> that contains the elements for which the predicate expands to <code>1</code>.
+	</para>
+	<para>
+		The predicate is invoked for each element in <var>seq</var> with the current <link id="recursion state"/> (<var>s</var>), the current element (<var>elem</var>), and, if it exists, the auxiliary data (<var>data</var> or <code>__VA_ARGS__</code>).
+		This invocation must expand to <code>0</code>, <code>1</code>, or a <link id="deferred expression"/> in terms of <code><NEXT/>(s)</code> that expands to either <code>0</code> or <code>1</code>.
+		Expansion to a <link id="deferred expression"/> allows the predicate to recurse on itself if necessary.
+	</para>
+	<para>
+		In C99, it is possible to omit the auxiliary data argument altogether.
+		This is different than passing "nothing" as the auxiliary data.
+		<snippet>
+			<EXPR/>(
+			    <SEQ_FILTER/>(PRED, (a)(b)(c),) // #1
+			    <SEQ_FILTER/>(PRED, (a)(b)(c))  // #2
+			)
+		</snippet>
+		The first line passes "nothing" as the auxiliary data, which causes <code>PRED</code> to be invoked as (e.g.)...
+		<snippet>PRED(s, a,)</snippet>
+		The second line omits the auxiliary data, which causes <code>PRED</code> to be invoked as (e.g.)...
+		<snippet>PRED(s, a)</snippet>
+		The fundamental difference is that, in the first line, the auxiliary data is empty (which might have a valid meaning as data), but, in the second line, <em>there is no auxiliary data</em>.
+		Hence, the algorithm is overloaded on a <link id="true-optional parameter"/>.
+	</para>
+	<para>
+		Invocations of the predicate are trampolined such that each invocation is invoked with <code><NEXT/>(s)</code>, where <var>s</var> is the original <link id="recursion state"/> at the beginning of the algorithm (i.e. <code><STATE/>()</code>).
+		This maximizes the utility of the <link id="recursion backend"/>.
+	</para>
+	<para>
+		This macro uses <link id="sequential iteration"/>.
+		As a result, the running time of <SEQ_FILTER/>, described in terms of the number of <link id="recursion steps"/> required to complete the algorithm and ignoring the complexity of <var>pred</var>, is a constant Θ(1).
+		As such, the algorithm is theoretically capable of processing an <em>infinite</em> number of elements.
+	</para>
+	<para>
+		This macro deduces the current <link id="recursion state"/> and invokes <SEQ_FILTER_S/>.
+		If the current <link id="recursion state"/> is already known, direct use of <SEQ_FILTER_S/> is more efficient.
+	</para>
+	<para>
+		This macro may not be used if <link id="bypass semantics"/> are in effect.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-lambda-ops.h/>
+		#include <chaos-preprocessor-logical-bool.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		#include <chaos-preprocessor-seq-filter.h/>
+		
+		#define PRED(s, elem, data) <BOOL/>(elem)
+		
+		<EXPR/>(<SEQ_FILTER/>(
+		    PRED, (4)(6)(0)(0)(8)(0), ~
+		))
+		// (4)(6)(8)
+		
+		#if <VARIADICS/>
+		
+		<EXPR/>(<SEQ_FILTER/>(
+		    <BOOL_/>(<PARAM/>(1)),
+		    (4)(6)(0)(0)(8)(0)
+		))
+		// (4)(6)(8)
+		
+		#endif
+	</listing>
+	<derivative id="SEQ_FILTER_ID"/>
+	<derivative id="SEQ_FILTER_" lang="C99"/>
+	<derivative id="SEQ_FILTER_S">
+		<usage lang="C99">
+			<syntax><EXPR_S/>(s)(<SEQ_FILTER_S/>(s, pred, seq))</syntax>
+		</usage>
+		<usage lang="C99">
+			<syntax><EXPR_S/>(s)(<SEQ_FILTER_S/>(s, pred, seq, ...))</syntax>
+		</usage>
+		<usage lang="C/C++">
+			<syntax><EXPR_S/>(s)(<SEQ_FILTER_S/>(s, pred, seq, data))</syntax>
+		</usage>
+		<derivative id="SEQ_FILTER_S_ID"/>
+		<derivative id="SEQ_FILTER_S_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

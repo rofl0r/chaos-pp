@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/lambda/parse.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an algorithm that parses a <link id="λ-expression"/> into an <link id="IL expression"/>.
+</overview>
+
+<macro id="PARSE" type="indirect">
+	<abstract>
+		The <PARSE/> macro parses a <link id="λ-expression"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><PARSE/>(expr)</syntax>
+		<param id="expr" optional="1">
+			The <link id="λ-expression"/> to be parsed.
+		</param>
+	</usage>
+	<usage lang="C99">
+		<syntax><PARSE/>(expr, ...)</syntax>
+		<param id="expr" optional="1">
+			The <link id="λ-expression"/> to be parsed.
+		</param>
+		<param id="..." optional="1">
+			The arguments used to replace <link id="λ-placeholders"/> in <var>expr</var>.
+		</param>
+	</usage>
+	<para>
+		This macro expands to an <link id="IL expression"/> that represents <var>expr</var> suitable for interpretation by <EXECUTE/>.
+	</para>
+	<para>
+		The <code>__VA_ARGS__</code> arguments are used to replace <link id="λ-placeholders"/> in <var>expr</var>.
+		The first of these corresponds to the zero-th <link id="λ-placeholder"/>, the second to the first, and so on.
+	</para>
+	<para>
+		This macro uses <link id="bypass semantics"/>.
+		If <link id="bypass semantics"/> are already in effect, <PARSE_BYPASS/> must be used instead.
+	</para>
+	<x-reference id="EXECUTE"/>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-stringize.h/>
+		#include <chaos-preprocessor-lambda-execute.h/>
+		#include <chaos-preprocessor-lambda-parse.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		
+		#if <VARIADICS/>
+		
+		<EXPR/>(<EXECUTE/>(<PARSE/>(
+		    <STRINGIZE_/>(<PARAM/>(0)),
+		    text
+		)))
+		// "text"
+		
+		#endif
+	</listing>
+	<derivative id="PARSE_ID" lang="C99"/>
+	<derivative id="PARSE_" lang="C99"/>
+	<derivative id="PARSE_BYPASS">
+		<usage lang="C99">
+			<syntax><PARSE_BYPASS/>(s, expr)</syntax>
+		</usage>
+		<usage lang="C99">
+			<syntax><PARSE_BYPASS/>(s, expr, ...)</syntax>
+		</usage>
+		<derivative id="PARSE_BYPASS_ID" lang="C99"/>
+		<derivative id="PARSE_BYPASS_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

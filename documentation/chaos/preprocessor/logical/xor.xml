@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/logical/xor.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a logical XOR operator.
+</overview>
+
+<macro id="XOR" group="xor">
+	<abstract>
+		The <XOR/> macro expands to the logical XOR of its operands.
+	</abstract>
+	<usage>
+		<syntax><XOR/>(p)(q)</syntax>
+		<param id="p">
+			The left operand.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="q">
+			The right operand.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+	</usage>
+	<para>
+		If either <var>p</var> or <var>q</var> is non-zero exclusively, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<para>
+		This macro performs a boolean conversion on each operand.
+		If this conversion is undesireable, <BITXOR/> may be used instead.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-logical-xor.h/>
+		
+		<XOR/>(4)(7) // 0
+		<XOR/>(5)(0) // 1
+	</listing>
+	<derivative id="XOR_ID"/>
+	<derivative id="XOR_" lang="C99"/>
+</macro>
+
+</header>

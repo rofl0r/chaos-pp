@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/lambda/invoke.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that invokes a <link id="λ-expression"/>.
+</overview>
+
+<macro id="INVOKE" type="indirect">
+	<abstract>
+		The <INVOKE/> macro invokes a <link id="λ-expression"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><INVOKE/>(expr)</syntax>
+		<param id="expr" optional="1">
+			The <link id="λ-expression"/> to be invoked.
+		</param>
+	</usage>
+	<usage lang="C99">
+		<syntax><INVOKE/>(expr, ...)</syntax>
+		<param id="expr" optional="1">
+			The <link id="λ-expression"/> to be invoked.
+		</param>
+		<param id="..." optional="1">
+			The arguments used to replace <link id="λ-placeholders"/> in <var>expr</var>.
+		</param>
+	</usage>
+	<para>
+		This macro produces the <link id="deferred expression"/> represented by <var>expr</var>.
+	</para>
+	<para>
+		The <code>__VA_ARGS__</code> arguments are used to replace <link id="λ-placeholders"/> in <var>expr</var>.
+		The first of these corresponds to the zero-th <link id="λ-placeholder"/>, the second to the first, and so on.
+	</para>
+	<para>
+		This macro uses <link id="bypass semantics"/>.
+		If <link id="bypass semantics"/> are already in effect, <INVOKE_BYPASS/> must be used instead.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-cat.h/>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-lambda-invoke.h/>
+		#include <chaos-preprocessor-lambda-ops.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		
+		#if <VARIADICS/>
+		
+		??=include <PLACEHOLDERS/>(1)
+		
+		<EXPR/>(<INVOKE/>(
+		    <CAT_/>(_0, <PRIMITIVE_CAT_/>(_1, _2)),
+		    x, y, z
+		))
+		// xyz
+		
+		??=include <PLACEHOLDERS/>(0)
+		
+		#endif
+	</listing>
+	<derivative id="INVOKE_ID" lang="C99"/>
+	<derivative id="INVOKE_" lang="C99"/>
+	<derivative id="INVOKE_BYPASS">
+		<usage lang="C99">
+			<syntax><INVOKE_BYPASS/>(s, expr)</syntax>
+		</usage>
+		<usage lang="C99">
+			<syntax><INVOKE_BYPASS/>(s, expr, ...)</syntax>
+		</usage>
+		<derivative id="INVOKE_BYPASS_ID" lang="C99"/>
+		<derivative id="INVOKE_BYPASS_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

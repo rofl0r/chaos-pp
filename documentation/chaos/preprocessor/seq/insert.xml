@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/seq/insert.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that inserts an element into a <link id="sequence"/>.
+</overview>
+
+<macro id="SEQ_INSERT" type="indirect" group="insertion">
+	<abstract>
+		The <SEQ_INSERT/> macro inserts its third argument into its second argument before the index specified by its first argument.
+	</abstract>
+	<usage lang="C99">
+		<syntax><SEQ_INSERT/>(i, seq, ...)</syntax>
+		<param id="i">
+			The position at which the element is to be inserted.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="seq" optional="1">
+			The <link id="sequence"/> into which the element is to be inserted.
+		</param>
+		<param id="..." optional="1">
+			The element to be inserted.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><SEQ_INSERT/>(i, seq, x)</syntax>
+		<param id="i">
+			The position at which the element is to be inserted.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="seq">
+			The <link id="sequence"/> into which the element is to be inserted.
+		</param>
+		<param id="x">
+			The element to be inserted.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="sequence"/> with the elements of <var>seq</var> with <var>x</var> (or <code>__VA_ARGS__</code>) inserted at position <var>i</var>.
+		Consequently, <var>seq</var> must have at least <var>i</var> elements.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-seq-insert.h/>
+		
+		<SEQ_INSERT/>(2, (a)(b)(d)(e), c) // (a)(b)(c)(d)(e)
+		<SEQ_INSERT/>(3, (x)(y)(z), !)    // (x)(y)(z)(!)
+		
+		#if <VARIADICS/>
+		
+		<SEQ_INSERT/>(1, (a, b)(e, f), c, d) // (a, b)(c, d)(e, f)
+		<SEQ_INSERT/>(0,, ~)                 // (~)
+		
+		#endif
+	</listing>
+	<derivative id="SEQ_INSERT_ID"/>
+	<derivative id="SEQ_INSERT_" lang="C99"/>
+</macro>
+
+</header>

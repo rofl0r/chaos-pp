@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/debug/failure.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that produces an error if it is invoked.
+</overview>
+
+<macro id="FAILURE" group="assertion">
+	<abstract>
+		The <FAILURE/> macro intentionally produces an error if invoked.
+	</abstract>
+	<usage>
+		<syntax><FAILURE/>()</syntax>
+	</usage>
+	<derivative id="FAILURE_ID"/>
+	<derivative id="FAILURE_" lang="C99"/>
+</macro>
+
+</header>

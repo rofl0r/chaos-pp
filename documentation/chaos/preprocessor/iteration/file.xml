@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/iteration/file.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines the interface to the <link id="file-iteration"/> mechanism.
+</overview>
+
+<macro id="IS_ITERATING">
+	<abstract>
+		The <IS_ITERATING/> macro is a flag used to determine if a <link id="file-iteration"/> is in progress.
+	</abstract>
+	<usage>
+		<syntax><IS_ITERATING/></syntax>
+	</usage>
+	<para>
+		If a <link id="file-iteration"/> is in progress, this macro expands to <code>1</code>.
+		Otherwise, this macro is not defined.
+	</para>
+	<x-reference id="ITERATION_DEPTH"/>
+</macro>
+
+<macro id="ITERATION_PARAMS">
+	<abstract>
+		The <ITERATION_PARAMS/> macro is a user-defined <link id="named external argument"/> that specifies the parameters of a <link id="file-iteration"/>.
+	</abstract>
+	<usage>
+		<syntax>#define <ITERATION_PARAMS/> (lower)(upper)(file)</syntax>
+		<param id="lower">
+			The lower bound of the <link id="file-iteration"/>.
+			Valid values range from <code>0</code> to <LIMIT_ITERATION/>.
+		</param>
+		<param id="upper">
+			The upper bound of the <link id="file-iteration"/>.
+			Valid values range from <code>0</code> to <LIMIT_ITERATION/>.
+		</param>
+		<param id="file">
+			The quoted path of the file to be iterated.
+		</param>
+	</usage>
+	<usage>
+		<syntax>#define <ITERATION_PARAMS/> (lower)(upper)(file)(flags)</syntax>
+		<param id="lower">
+			The lower bound of the <link id="file-iteration"/>.
+			Valid values range from <code>0</code> to <LIMIT_ITERATION/>.
+		</param>
+		<param id="upper">
+			The upper bound of the <link id="file-iteration"/>.
+			Valid values range from <code>0</code> to <LIMIT_ITERATION/>.
+		</param>
+		<param id="file">
+			The quoted path of the file to be iterated.
+		</param>
+		<param id="flags">
+			Auxiliary flags used primarily to distinguish sibling iterations of the same file.
+		</param>
+	</usage>
+	<para>
+		This macro is defined by the user to specify the parameters of a <link id="file-iteration"/>.
+		At the start of a <link id="file-iteration"/>, these parameters are evaluated and stored, and the macro is undefined by the library for subsequent (or nested) reuse.
+	</para>
+	<para>
+		The <var>lower</var>, <var>upper</var>, and <var>flags</var> parameters are all fully evaluated.
+		This implies that they may contain arithmetic, logical, and bitwise expressions.
+		<snippet>
+			#define <ITERATION_PARAMS/> (S)(S + 10)("file.h")
+		</snippet>
+	</para>
+	<para>
+		Note that if <var>upper</var> is <em>less</em> than <var>lower</var>, the <link id="file-iteration"/> mechanism will iterate in reverse.
+	</para>
+	<para>
+		The file path specified by <var>file</var> must be in the <x-var>q-char-sequence</x-var> form because the <link id="file-iteration"/> mechanism must store this value in <code>__FILE__</code> with the <code>#line</code> directive so that it can undefine the <ITERATION_PARAMS/> macro.
+		Fortunately, file paths specified in the <x-var>q-char-sequence</x-var> form that are not found are searched for as if was they were written in the <x-var>h-char-sequence</x-var> form.
+	</para>
+	<x-reference id="ITERATE"/>
+</macro>
+
+<macro id="ITERATE">
+	<abstract>
+		The <ITERATE/> macro is used to initiate a <link id="file-iteration"/>.
+	</abstract>
+	<usage>
+		<syntax>??=include <ITERATE/>()</syntax>
+	</usage>
+	<para>
+		The <ITERATION_PARAMS/> macro must be defined prior to initiating a <link id="file-iteration"/>.
+	</para>
+	<listing>
+		// file.h
+		#if !<IS_ITERATING/>
+		
+		#ifndef FILE_H
+		#define FILE_H
+		
+		#include <chaos-preprocessor-facilities-identity.h/>
+		#include <chaos-preprocessor-iteration-file.h/>
+		#include <chaos-preprocessor-repetition-delineate_params.h/>
+		#include <chaos-preprocessor-repetition-enum_params.h/>
+		
+		#define <ITERATION_PARAMS/> (1)(10)("file.h")
+		??=include <ITERATE/>()
+		
+		#endif // FILE_H
+		
+		#else
+		
+		#define N <ITERATION/>()
+		
+		template&lt;<ENUM_PARAMS/>(N, class T)&gt;
+		T0 add(<ENUM_PARAMS/>(N, (T, p))) {
+		    return <DELINEATE_PARAMS/>(N, <IDENTITY/>(+), p);
+		}
+		
+		#undef N
+		
+		#endif
+	</listing>
+	<x-reference id="ITERATION_PARAMS"/>
+	<derivative id="ITERATE_ID"/>
+	<derivative id="ITERATE_" lang="C99"/>
+</macro>
+
+<macro id="ITERATION_DEPTH">
+	<abstract>
+		The <ITERATION_DEPTH/> macro expands to the current <link id="file-iteration"/> depth.
+	</abstract>
+	<usage>
+		<syntax><ITERATION_DEPTH/>()</syntax>
+	</usage>
+	<para>
+		If a <link id="file-iteration"/> is not in progress, this macro expands to <code>0</code>.
+		Otherwise, this macro expands to the current dimension of iteration.
+	</para>
+	<x-reference id="IS_ITERATING"/>
+	<derivative id="ITERATION_DEPTH_ID"/>
+	<derivative id="ITERATION_DEPTH_" lang="C99"/>
+</macro>
+
+<macro id="FRAME_ITERATION" group="iteration(value) iteration(frame)">
+	<abstract>
+		The <FRAME_ITERATION/> macro expands to the iteration value of a specific <link id="file-iteration"/> dimension.
+	</abstract>
+	<usage>
+		<syntax><FRAME_ITERATION/>(i)</syntax>
+		<param id="i">
+			The dimension whose iteration value is to be retrieved.
+			Valid values range from <code>1</code> to <code><ITERATION_DEPTH/>()</code>.
+		</param>
+	</usage>
+	<para>
+		This macro may only be used if a <link id="file-iteration"/> is in progress.
+	</para>
+	<listing>
+		// file.h
+		#if !<IS_ITERATING/>
+		
+		#ifndef FILE_H
+		#define FILE_H
+		
+		#include <chaos-preprocessor-iteration-file.h/>
+		
+		#define <ITERATION_PARAMS/> (1)(10)("file.h")
+		??=include <ITERATE/>()
+		
+		#endif // FILE_H
+		
+		#elif <ITERATION_DEPTH/>() == 1
+		
+		#define <ITERATION_PARAMS/> \
+		    (1)(<ITERATION/>())("file.h") \
+		    /**/
+		??=include <ITERATE/>()
+		
+		#else
+		
+		I == <FRAME_ITERATION/>(1)
+		    J == <FRAME_ITERATION/>(2)
+		
+		#endif
+	</listing>
+	<derivative id="FRAME_ITERATION_ID"/>
+	<derivative id="FRAME_ITERATION_" lang="C99"/>
+</macro>
+
+<macro id="FRAME_START" group="iteration(start) iteration(frame)">
+	<abstract>
+		The <FRAME_START/> macro expands to the lower bound of a specific <link id="file-iteration"/> dimension.
+	</abstract>
+	<usage>
+		<syntax><FRAME_START/>(i)</syntax>
+		<param id="i">
+			The dimension whose lower bound is to be retrieved.
+			Valid values range from <code>1</code> to <code><ITERATION_DEPTH/>()</code>.
+		</param>
+	</usage>
+	<para>
+		This macro may only be used if a <link id="file-iteration"/> is in progress.
+	</para>
+	<derivative id="FRAME_START_ID"/>
+	<derivative id="FRAME_START_" lang="C99"/>
+</macro>
+
+<macro id="FRAME_FINISH" group="iteration(finish) iteration(frame)">
+	<abstract>
+		The <FRAME_FINISH/> macro expands to the upper bound of a specific <link id="file-iteration"/> dimension.
+	</abstract>
+	<usage>
+		<syntax><FRAME_FINISH/>(i)</syntax>
+		<param id="i">
+			The dimension whose upper bound is to be retrieved.
+			Valid values range from <code>1</code> to <code><ITERATION_DEPTH/>()</code>.
+		</param>
+	</usage>
+	<para>
+		This macro may only be used if a <link id="file-iteration"/> is in progress.
+	</para>
+	<derivative id="FRAME_FINISH_ID"/>
+	<derivative id="FRAME_FINISH_" lang="C99"/>
+</macro>
+
+<macro id="FRAME_FLAGS" group="iteration(flags) iteration(frame)">
+	<abstract>
+		The <FRAME_FLAGS/> macro expands to the flags associated with a specific <link id="file-iteration"/> dimension.
+	</abstract>
+	<usage>
+		<syntax><FRAME_FLAGS/>(i)</syntax>
+		<param id="i">
+			The dimension whose associated flags is are to be retrieved.
+			Valid values range from <code>1</code> to <code><ITERATION_DEPTH/>()</code>.
+		</param>
+	</usage>
+	<para>
+		This macro may only be used if a <link id="file-iteration"/> is in progress.
+	</para>
+	<derivative id="FRAME_FLAGS_ID"/>
+	<derivative id="FRAME_FLAGS_" lang="C99"/>
+</macro>
+
+<macro id="RELATIVE_ITERATION" group="iteration(value) iteration(relative)">
+	<abstract>
+		The <RELATIVE_ITERATION/> macro expands to the iteration value of a <link id="file-iteration"/> dimension relative to the current dimension.
+	</abstract>
+	<usage>
+		<syntax><RELATIVE_ITERATION/>(i)</syntax>
+		<param id="i">
+			The offset to the dimension whose iteration value is to be retrieved.
+			Valid values range from <code>0</code> to <code><ITERATION_DEPTH/>()</code> - 1.
+		</param>
+	</usage>
+	<para>
+		The <var>i</var> argument is interpreted as the dimensional offset <em>backwards</em>.
+		Hence, <code><RELATIVE_ITERATION/>(0)</code> is equivalent to <code><ITERATION/>()</code>, <code><RELATIVE_ITERATION/>(1)</code> is equivalent to <code><FRAME_ITERATION/>(<DEC/>(<ITERATION_DEPTH/>()))</code> (i.e. the iteration value of the next outer iteration), and so on.
+	</para>
+	<para>
+		This macro may only be used if a <link id="file-iteration"/> is in progress.
+	</para>
+	<derivative id="RELATIVE_ITERATION_ID"/>
+	<derivative id="RELATIVE_ITERATION_" lang="C99"/>
+</macro>
+
+<macro id="RELATIVE_START" group="iteration(start) iteration(relative)">
+	<abstract>
+		The <RELATIVE_START/> macro expands to the lower bound of a <link id="file-iteration"/> dimension relative to the current dimension.
+	</abstract>
+	<usage>
+		<syntax><RELATIVE_START/>(i)</syntax>
+		<param id="i">
+			The offset to the dimension whose lower bound is to be retrieved.
+			Valid values range from <code>0</code> to <code><ITERATION_DEPTH/>()</code> - 1.
+		</param>
+	</usage>
+	<para>
+		The <var>i</var> argument is interpreted as the dimensional offset <em>backwards</em>.
+	</para>
+	<para>
+		This macro may only be used if a <link id="file-iteration"/> is in progress.
+	</para>
+	<derivative id="RELATIVE_START_ID"/>
+	<derivative id="RELATIVE_START_" lang="C99"/>
+</macro>
+
+<macro id="RELATIVE_FINISH" group="iteration(finish) iteration(relative)">
+	<abstract>
+		The <RELATIVE_FINISH/> macro expands to the upper bound of a <link id="file-iteration"/> dimension relative to the current dimension.
+	</abstract>
+	<usage>
+		<syntax><RELATIVE_FINISH/>(i)</syntax>
+		<param id="i">
+			The offset to the dimension whose upper bound is to be retrieved.
+			Valid values range from <code>0</code> to <code><ITERATION_DEPTH/>()</code> - 1.
+		</param>
+	</usage>
+	<para>
+		The <var>i</var> argument is interpreted as the dimensional offset <em>backwards</em>.
+	</para>
+	<para>
+		This macro may only be used if a <link id="file-iteration"/> is in progress.
+	</para>
+	<derivative id="RELATIVE_FINISH_ID"/>
+	<derivative id="RELATIVE_FINISH_" lang="C99"/>
+</macro>
+
+<macro id="RELATIVE_FLAGS" group="iteration(flags) iteration(relative)">
+	<abstract>
+		The <RELATIVE_FLAGS/> macro expands to the flags associated with a <link id="file-iteration"/> dimension relative to the current dimension.
+	</abstract>
+	<usage>
+		<syntax><RELATIVE_FLAGS/>(i)</syntax>
+		<param id="i">
+			The offset to the dimension whose associated flags is are to be retrieved.
+			Valid values range from <code>0</code> to <code><ITERATION_DEPTH/>()</code> - 1.
+		</param>
+	</usage>
+	<para>
+		The <var>i</var> argument is interpreted as the dimensional offset <em>backwards</em>.
+	</para>
+	<para>
+		This macro may only be used if a <link id="file-iteration"/> is in progress.
+	</para>
+	<derivative id="RELATIVE_FLAGS_ID"/>
+	<derivative id="RELATIVE_FLAGS_" lang="C99"/>
+</macro>
+
+<macro id="ITERATION" group="iteration(value) iteration(current)">
+	<abstract>
+		The <ITERATION/> macro expands to the iteration value of the current <link id="file-iteration"/> dimension.
+	</abstract>
+	<usage>
+		<syntax><ITERATION/>()</syntax>
+	</usage>
+	<para>
+		This macro may only be used if a <link id="file-iteration"/> is in progress.
+	</para>
+	<listing>
+		// file.h
+		#if !<IS_ITERATING/>
+		
+		#ifndef FILE_H
+		#define FILE_H
+		
+		#include <chaos-preprocessor-iteration-file.h/>
+		
+		#define <ITERATION_PARAMS/> (1)(10)("file.h")
+		??=include <ITERATE/>()
+		
+		#endif // FILE_H
+		
+		#elif <ITERATION_DEPTH/>() == 1
+		
+		I == <ITERATION/>()
+		
+		#define <ITERATION_PARAMS/> \
+		    (1)(<ITERATION/>())("file.h") \
+		    /**/
+		??=include <ITERATE/>()
+		
+		#else
+		
+		    J == <ITERATION/>()
+		
+		#endif
+	</listing>
+	<derivative id="ITERATION_ID"/>
+	<derivative id="ITERATION_" lang="C99"/>
+</macro>
+
+<macro id="ITERATION_START" group="iteration(start) iteration(current)">
+	<abstract>
+		The <ITERATION_START/> macro expands to the lower bound of the current <link id="file-iteration"/> dimension.
+	</abstract>
+	<usage>
+		<syntax><ITERATION_START/>()</syntax>
+	</usage>
+	<para>
+		This macro may only be used if a <link id="file-iteration"/> is in progress.
+	</para>
+	<derivative id="ITERATION_START_ID"/>
+	<derivative id="ITERATION_START_" lang="C99"/>
+</macro>
+
+<macro id="ITERATION_FINISH" group="iteration(finish) iteration(current)">
+	<abstract>
+		The <ITERATION_FINISH/> macro expands to the upper bound of the current <link id="file-iteration"/> dimension.
+	</abstract>
+	<usage>
+		<syntax><ITERATION_FINISH/>()</syntax>
+	</usage>
+	<para>
+		This macro may only be used if a <link id="file-iteration"/> is in progress.
+	</para>
+	<derivative id="ITERATION_FINISH_ID"/>
+	<derivative id="ITERATION_FINISH_" lang="C99"/>
+</macro>
+
+<macro id="ITERATION_FLAGS" group="iteration(flags) iteration(current)">
+	<abstract>
+		The <ITERATION_FLAGS/> macro expands to the flags associated with the current <link id="file-iteration"/> dimension.
+	</abstract>
+	<usage>
+		<syntax><ITERATION_FLAGS/>()</syntax>
+	</usage>
+	<para>
+		This macro may only be used if a <link id="file-iteration"/> is in progress.
+	</para>
+	<derivative id="ITERATION_FLAGS_ID"/>
+	<derivative id="ITERATION_FLAGS_" lang="C99"/>
+</macro>
+
+</header>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/lambda/closure.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines the interface to the <link id="closure"/> mechanism.
+</overview>
+
+<macro id="CLOSURE" group="closure">
+	<abstract>
+		The <CLOSURE/> macro forms a <link id="closure"/> on an indirection macro.
+	</abstract>
+	<usage>
+		<syntax><CLOSURE/>(macro, arity)</syntax>
+		<param id="macro">
+			The macro that, when invoked, produces the macro on which a <link id="closure"/> is to be formed.
+			This argument must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			<snippet>
+				macro()
+			</snippet>
+			The invocation of <var>macro</var> must expand to a macro name that refers to a macro capable of being invoked with <var>arity</var> arguments.
+		</param>
+		<param id="arity">
+			The arity of the macro on which a closure is to be formed.
+			Valid values range from <code>0</code> to <LIMIT_CLOSURE/>.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="closure"/> on <var>macro</var> that requires a minimum of <var>arity</var> arguments to be fully bound.
+		When fully bound and dispatched, this <link id="closure"/> expands to a <link id="deferred expression"/> similar to the following pseudo-code:
+		<snippet>
+			macro()(arg[0], arg[1], ... arg[arity])
+		</snippet>
+	</para>
+	<para>
+		The <link id="closure"/> produced by this macro performs an indirection.
+		This prevents the actual macro name to which the indirection refers from passing through itself in certain situations.
+		If this indirection is undesirable, <DIRECT_CLOSURE/> may be used instead.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-lambda-closure.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		
+		#define A(a, b, c) { a, b, c }
+		#define A_ID() A
+		
+		#define B(a, b) { a, b }
+		#define B_ID() B
+		
+		#define X(cl) Y(cl(x))
+		#define Y(cl) Z(cl(y))
+		#define Z(cl) <EXPR/>(<DISPATCH/>(cl(z)))
+		
+		X(<CLOSURE/>(A_ID, 3)) // { x, y, z }
+		X(<CLOSURE/>(B_ID, 2)) // { x, y }
+	</listing>
+	<derivative id="CLOSURE_ID"/>
+	<derivative id="CLOSURE_" lang="C99"/>
+</macro>
+
+<macro id="DIRECT_CLOSURE" type="indirect" group="closure">
+	<abstract>
+		The <DIRECT_CLOSURE/> macro forms a closure on a macro.
+	</abstract>
+	<usage>
+		<syntax><DIRECT_CLOSURE/>(macro, arity)</syntax>
+		<param id="macro">
+			The macro on which a <link id="closure"/> is to be formed.
+			This macro must be capable of being invoked with <var>arity</var> arguments.
+		</param>
+		<param id="arity">
+			The arity of the macro on which a closure is to be formed.
+			Valid values range from <code>0</code> to <LIMIT_CLOSURE/>.
+		</param>
+	</usage>
+	<para>
+		This macro behaves identically to <CLOSURE/> except that it does not perform an indirection.
+		This is illustrated by the following pseudo-code:
+		<snippet>
+			macro(arg[0], arg[1], ... arg[arity])
+		</snippet>
+	</para>
+	<listing>
+		#include <chaos-preprocessor-lambda-closure.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		
+		#define MACRO(a, b) int[a][b]
+		
+		#define X(cl) Y(cl(x))
+		#define Y(cl) <EXPR/>(<DISPATCH/>(cl(y)))
+		
+		X(<DIRECT_CLOSURE/>(MACRO, 2)) // int[x][y]
+	</listing>
+	<derivative id="DIRECT_CLOSURE_ID"/>
+	<derivative id="DIRECT_CLOSURE_" lang="C99"/>
+</macro>
+
+<macro id="IS_BOUND" group="closure">
+	<abstract>
+		The <IS_BOUND/> macro determines if a <link id="closure"/> has enough arguments bound to be dispatched.
+	</abstract>
+	<usage>
+		<syntax><IS_BOUND/>(cl)</syntax>
+		<param id="cl">
+			The <link id="closure"/> to be tested.
+		</param>
+	</usage>
+	<para>
+		If <var>cl</var> is fully bound, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-control-iif.h/>
+		#include <chaos-preprocessor-lambda-closure.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		
+		#define A(a) { a }
+		#define B(a, b) { a + b }
+		
+		#define X(cl) <EXPR/>(Y(cl(1)))
+		#define Y(cl) \
+		    <IIF/>(<IS_BOUND/>(cl))( \
+		        <DISPATCH/>(cl), \
+		        Z(cl(2)) \
+		    ) \
+		    /**/
+		#define Z(cl) <DISPATCH/>(cl)
+		
+		X(<DIRECT_CLOSURE/>(A, 1)) // { 1 }
+		X(<DIRECT_CLOSURE/>(B, 2)) // { 1 + 2 }
+	</listing>
+	<derivative id="IS_BOUND_ID"/>
+	<derivative id="IS_BOUND_" lang="C99"/>
+</macro>
+
+<macro id="DISPATCH" type="indirect" group="closure">
+	<abstract>
+		The <DISPATCH/> macro dispatches a fully bound <link id="closure"/>.
+	</abstract>
+	<usage>
+		<syntax><DISPATCH/>(cl)</syntax>
+		<param id="cl">
+			The fully bound <link id="closure"/> to be dispatched.
+		</param>
+	</usage>
+	<para>
+		This macro produces a <link id="deferred expression"/> that dispatches <var>cl</var>.
+		This <link id="deferred expression"/> takes one of the following two forms depending on whether <CLOSURE/> or <DIRECT_CLOSURE/> was used to form the <link id="closure"/>:
+		<snippet>
+			macro()(arg[0], arg[1], ... arg[2])
+			macro(arg[0], arg[1], ... arg[2])
+		</snippet>
+	</para>
+	<listing>
+		#include <chaos-preprocessor-lambda-closure.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		
+		#define MACRO(a, b) #a #b
+		
+		#define I \
+		    <DISPATCH/>( \
+		        <DIRECT_CLOSURE/>(MACRO, 2)(x)(y) \
+		    ) \
+		    /**/
+		
+		I                // MACRO(x, y)
+		<EXPR/>(I) // "x" "y"
+	</listing>
+	<derivative id="DISPATCH_ID"/>
+	<derivative id="DISPATCH_" lang="C99"/>
+</macro>
+
+</header>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/generics/strip.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that removes the type prefix of a <link id="generic data structure"/>.
+</overview>
+
+<macro id="STRIP" type="indirect">
+	<abstract>
+		The <STRIP/> macro removes the type prefix from its argument.
+	</abstract>
+	<usage>
+		<syntax><STRIP/>(g)</syntax>
+		<param id="g">
+			The <link id="generic data structure"/> whose type prefix is to be stripped.
+		</param>
+	</usage>
+	<para>
+		This macro expands to the underlying data structure of <var>g</var>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-generics-spec.h/>
+		#include <chaos-preprocessor-generics-strip.h/>
+		#include <chaos-preprocessor-tuple-spec.h/>
+		
+		#if <VARIADICS/>
+		
+		#define X \
+		    <CONS/>( \
+		        <CONS/>( \
+		            <NIL/>(<TUPLE/>), b \
+		        ), a \
+		    ) \
+		    /**/
+		
+		X                 // (<TUPLE/>) (a, b)
+		<STRIP/>(X) // (a, b)
+		
+		#endif
+	</listing>
+	<derivative id="STRIP_ID"/>
+	<derivative id="STRIP_" lang="C99"/>
+</macro>
+
+</header>

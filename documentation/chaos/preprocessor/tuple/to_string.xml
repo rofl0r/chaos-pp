@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/tuple/to_string.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that converts a <link id="tuple"/> to a <link id="string"/>.
+</overview>
+
+<macro id="TUPLE_TO_STRING" type="indirect" group="conversion">
+	<abstract>
+		The <TUPLE_TO_STRING/> macro converts a <link id="tuple"/> to a <link id="string"/>.
+	</abstract>
+	<usage>
+		<syntax><TUPLE_TO_STRING/>(size, tuple)</syntax>
+		<param id="size">
+			The size of the <link id="tuple"/> to be converted.
+			Valid values range from <code>0</code> to <LIMIT_TUPLE/>.
+		</param>
+		<param id="tuple">
+			The <link id="tuple"/> to be converted.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="string"/> containing the elements of <var>tuple</var>.
+	</para>
+	<para>
+		A <link id="string"/> may only contain letters, digits, and underscores.
+		This macro makes no attempt to verify that the resulting <link id="string"/> is actually a valid <link id="string"/>.
+		<snippet>
+			<TUPLE_TO_STRING/>(2, (+, -)) // invalid
+		</snippet>
+	</para>
+	<listing>
+		#include <chaos-preprocessor-tuple-to_string.h/>
+		
+		#define DATA() (x, y, z)
+		
+		<TUPLE_TO_STRING/>(3, DATA()) // x y z
+	</listing>
+	<derivative id="TUPLE_TO_STRING_ID"/>
+	<derivative id="TUPLE_TO_STRING_" lang="C99"/>
+</macro>
+
+</header>

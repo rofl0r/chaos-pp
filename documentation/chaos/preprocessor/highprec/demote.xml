@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/highprec/demote.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that converts a <link id="high-precision value"/> to an integer literal.
+</overview>
+
+<macro id="DEMOTE_HP" group="promotion">
+	<abstract>
+		The <DEMOTE_HP/> macro converts its argument to an integer literal.
+	</abstract>
+	<usage>
+		<syntax><DEMOTE_HP/>(x)</syntax>
+		<param id="x">
+			The <link id="high-precision value"/> to be converted.
+		</param>
+	</usage>
+	<para>
+		This macro expands to an integer literal represented by <var>x</var>.
+		If <var>x</var> is a <link id="high-precision value"/> representing a negative number, this macro prefixes the result with a unary negation operator (<code>-</code>).
+	</para>
+	<listing>
+		#include <chaos-preprocessor-highprec-demote.h/>
+		#include <chaos-preprocessor-highprec-literal.h/>
+		
+		<DEMOTE_HP/>(<LITERAL_HP/>(1 2 3)) // 123
+		<DEMOTE_HP/>(<LITERAL_HP/>((-)1 0) // -10
+	</listing>
+	<derivative id="DEMOTE_HP_ID"/>
+	<derivative id="DEMOTE_HP_" lang="C99"/>
+</macro>
+
+</header>

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/tuple/rem.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines macros that remove the parentheses from a <link id="tuple"/>.
+</overview>
+
+<macro id="TUPLE_REM">
+	<abstract>
+		The <TUPLE_REM/> macro removes the parentheses from a <link id="tuple"/> of the specified size.
+	</abstract>
+	<usage lang="C99">
+		<syntax><TUPLE_REM/>(size) tuple</syntax>
+		<param id="size" optional="1">
+			This argument exists only for compatibility.
+			It is otherwise ignored.
+		</param>
+		<param id="tuple">
+			The <link id="tuple"/> from which parentheses are to be removed.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><TUPLE_REM/>(size) tuple</syntax>
+		<param id="size">
+			The size of the <link id="tuple"/> from which parentheses are to be removed.
+			Valid values range from <code>0</code> to <LIMIT_TUPLE/>.
+		</param>
+		<param id="tuple">
+			The <link id="tuple"/> from which parentheses are to be removed.
+		</param>
+	</usage>
+	<para>
+		The <TUPLE_REM/> macro itself expands to a macro capable of being invoked against a <link id="tuple"/> of arity <var>size</var>.
+		This macro, when invoked against <var>tuple</var>, expands to the contents of the <link id="tuple"/>.
+		<snippet>
+			<TUPLE_REM/>(3)(a, b, c) // a, b, c
+		</snippet>
+	</para>
+	<para>
+		Note that in C99, the <TUPLE_REM/> macro expands to a macro capable of removing the parentheses from a <link id="tuple"/> of <em>any</em> arity.
+		The <var>size</var> parameter is ignored.
+	</para>
+	<x-reference id="TUPLE_EAT"/>
+	<x-reference id="TUPLE_REM_CTOR"/>
+	<listing>
+		#include <chaos-preprocessor-facilities-expand.h/>
+		#include <chaos-preprocessor-recursion-basic.h/>
+		#include <chaos-preprocessor-tuple-rem.h/>
+		
+		#define A(x, y) \
+		    <EXPAND/>( \
+		        <DEFER/>(B)( \
+		            <TUPLE_REM/>(2) x, \
+		            <TUPLE_REM/>(2) y \
+		        ) \
+		    ) \
+		    /**/
+		#define B(a, b, c, d) a + b + c + d
+		
+		A((1, 2), (3, 4)) // 1 + 2 + 3 + 4
+	</listing>
+	<derivative id="TUPLE_REM_ID"/>
+	<derivative id="TUPLE_REM_" lang="C99"/>
+</macro>
+
+<macro id="TUPLE_REM_CTOR" type="indirect">
+	<abstract>
+		The <TUPLE_REM_CTOR/> macro removes the parentheses from a <link id="tuple"/> of the specified size.
+	</abstract>
+	<usage lang="C99">
+		<syntax><TUPLE_REM_CTOR/>(size, tuple)</syntax>
+		<param id="size" optional="1">
+			This argument exists only for compatibility.
+			It is otherwise ignored.
+		</param>
+		<param id="tuple">
+			The <link id="tuple"/> from which parentheses are to be removed.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><TUPLE_REM_CTOR/>(size, tuple)</syntax>
+		<param id="size">
+			The size of the <link id="tuple"/> from which parentheses are to be removed.
+			Valid values range from <code>0</code> to <LIMIT_TUPLE/>.
+		</param>
+		<param id="tuple">
+			The <link id="tuple"/> from which parentheses are to be removed.
+		</param>
+	</usage>
+	<para>
+		This macro expands to the contents of <var>tuple</var>.
+		<snippet>
+			<TUPLE_REM_CTOR/>(3, (a, b, c)) // a, b, c
+		</snippet>
+	</para>
+	<para>
+		Note that in C99, the <TUPLE_REM_CTOR/> macro is capable of removing the parenthese from a <link id="tuple"/> of <em>any</em> size.
+		Thus, the <var>size</var> parameter is ignored.
+	</para>
+	<para>
+		The primary purpose of this macro is remove the parentheses from a <link id="tuple"/> that is the result of a macro invocation.
+		In such a circumstance, use of <TUPLE_REM/> will not expand the against the <link id="tuple"/> without the manual introduction of another scan:
+		<snippet>
+			#define A (a, b, c)
+			
+			<EXPAND/>(<TUPLE_REM/>(3) A) // a, b, c
+		</snippet>
+		This macro aids in this situation by allowing the <link id="tuple"/> argument to expand prior to parentheses removal:
+		<snippet>
+			<TUPLE_REM_CTOR/>(3, A) // a, b, c
+		</snippet>
+	</para>
+	<x-reference id="TUPLE_REM"/>
+	<derivative id="TUPLE_REM_CTOR_ID"/>
+	<derivative id="TUPLE_REM_CTOR_" lang="C99"/>
+</macro>
+
+<macro id="UNPACK" type="indirect">
+	<abstract>
+		The <UNPACK/> macro removes the parentheses from a unary <link id="tuple"/> in C++ (and C prior to C99) or from a <link id="tuple"/> of any arity in C99.
+	</abstract>
+	<usage lang="C99">
+		<syntax><UNPACK/> tuple</syntax>
+		<param id="tuple">
+			The <link id="tuple"/> from which parentheses are to be removed.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><UNPACK/> tuple</syntax>
+		<param id="tuple">
+			The unary <link id="tuple"/> from which parentheses are to be removed.
+		</param>
+	</usage>
+	<para>
+		This macro is used primarily in algorithms as a generalization between the allowance of variadic data or state in C99 and the rigidity of unary data or state in C++ (and C prior to C99) such that the implementation (other than the interface) can be shared in both C99 and C/C++ configurations.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-arithmetic-dec.h/>
+		#include <chaos-preprocessor-cat.h/>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-control-expr_if.h/>
+		#include <chaos-preprocessor-facilities-binary.h/>
+		#include <chaos-preprocessor-punctuation-comma_if.h/>
+		#include <chaos-preprocessor-recursion-basic.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		#include <chaos-preprocessor-tuple-rem.h/>
+		
+		#if <VARIADICS/>
+		
+		#define REPEAT(count, macro, ...) \
+		    REPEAT_S(<STATE/>(), count, macro, __VA_ARGS__) \
+		    /**/
+		#define REPEAT_S(s, count, macro, ...) \
+		    REPEAT_I( \
+		        <OBSTRUCT/>(), <NEXT/>(s), \
+		        count, macro, (__VA_ARGS__) \
+		    ) \
+		    /**/
+		
+		#else
+		
+		#define REPEAT(count, macro, data) \
+		    REPEAT_S(<STATE/>(), count, macro, data) \
+		    /**/
+		#define REPEAT_S(s, count, macro, data) \
+		    REPEAT_I( \
+		        <OBSTRUCT/>(), <NEXT/>(s), \
+		        count, macro, (data) \
+		    ) \
+		    /**/
+		
+		#endif
+		
+		#define REPEAT_INDIRECT() REPEAT_I
+		#define REPEAT_I(_, s, count, macro, pd) \
+		    <EXPR_IF/> _(count)( \
+		        <EXPR_S/>(s) _(REPEAT_INDIRECT _()( \
+		            <OBSTRUCT/> _(), <NEXT/>(s), \
+		            <DEC/>(count), macro, pd \
+		        )) \
+		        macro _(s, <DEC/>(count), <UNPACK/> pd) \
+		    ) \
+		    /**/
+		
+		#if <VARIADICS/>
+		
+		#define MACRO(s, n, x, y) <COMMA_IF/>(n) class x ## n = y
+		
+		<EXPR/>(REPEAT(
+		    3, MACRO, T, U
+		))
+		// class T0 = U, class T1 = U, class T2 = U
+		
+		#else
+		
+		#define MACRO(s, n, xy) \
+		    <COMMA_IF/>(n) \
+		    class <CAT/>(<BINARY/>(0) xy, n) \
+		        = <BINARY/>(1) xy \
+		    /**/
+		
+		<EXPR/>(REPEAT(
+		    3, MACRO, (T, U)
+		))
+		// class T0 = U, class T1 = U, class T2 = U
+		
+		#endif
+	</listing>
+	<derivative id="UNPACK_ID"/>
+	<derivative id="UNPACK_" lang="C99"/>
+</macro>
+
+</header>

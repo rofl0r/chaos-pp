@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/lambda/planar.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines macros used to abstract the difference between the invocation of a macro and a <link id="λ-expression"/>.
+</overview>
+
+<macro id="PLANAR" group="invocation">
+	<abstract>
+		The <PLANAR/> macro abstracts the difference between a partial invocation of a macro and a partial invocation of a <link id="λ-expression"/>.
+	</abstract>
+	<usage>
+		<syntax><PLANAR/>(x)()(s, x)</syntax>
+		<param id="x">
+			The macro name or <link id="λ-expression"/> to be invoked.
+		</param>
+		<param id="s">
+			The <link id="recursion state"/> in terms of which the resulting <link id="deferred expression"/> is to be generated.
+		</param>
+	</usage>
+	<para>
+		This macro expands to an <link id="deferred expression"/> in terms of <var>s</var>.
+		This <link id="deferred expression"/>, when invoked, expands to another <link id="deferred expression"/> in terms of <code><NEXT/>(s)</code>.
+		This last <link id="deferred expression"/> contains the <em>first half</em> of an invocation of <var>x</var>.
+		This is demonstrated by the following pseudo-code:
+		<snippet>
+			x(<NEXT/>(s),
+		</snippet>
+		Note that the above pseudo-code is dramatically simplified from the actual result.
+		It is intended to be illustrative only.
+	</para>
+	<para>
+		The partial invocation mentioned previously must be closed before <var>x</var> is actually invoked.
+		This is accomplished with <PLANAR_CLOSE/>, with any other arguments to <var>x</var> beyond <var>s</var> in between:
+		<snippet>
+			<PLANAR/>(x)()(s, x) ... <PLANAR_CLOSE/>()
+		</snippet>
+		For example, the expression...
+		<snippet>
+			<PLANAR/>(MACRO)()(s, MACRO) p, q <PLANAR_CLOSE/>()
+		</snippet>
+		roughly results in...
+		<snippet>
+			MACRO(<NEXT/>(s), p, q)
+		</snippet>
+	</para>
+	<para>
+		The primarily utility of <PLANAR/> and <PLANAR_CLOSE/> is that usage allows the the arguments in between the <PLANAR/> and <PLANAR_CLOSE/> invocations to fully expand before <var>x</var> is ever invoked--even if the arguments are other uses of <PLANAR/> and <PLANAR_CLOSE/>.
+		This allows direct use of the token-pasting and stringizing operators inside <var>x</var>.
+		The result is effectively a trampolined invocation of <var>x</var>, but it is unlike <TRAMPOLINE/> because it spends a single <link id="recursion step"/>.
+	</para>
+	<para>
+		Normal usage consists of invoking <PLANAR/> without the trailing invocations, passing that result around, and finishing the invocation at another time.
+		This avoids repeatedly detecting the difference between a macro name and a <link id="λ-expression"/>.
+		<snippet>
+			#define MACRO(s, x) MACRO_I(s, x, <PLANAR/>(x))
+			#define MACRO_I(s, x, _x) _x()(s, x) ~ <PLANAR_CLOSE/>()
+		</snippet>
+	</para>
+	<x-reference id="PLANAR_CLOSE"/>
+	<listing>
+		#include <chaos-preprocessor-cat.h/>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-control-expr_iif.h/>
+		#include <chaos-preprocessor-control-iif.h/>
+		#include <chaos-preprocessor-lambda-planar.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		#include <chaos-preprocessor-seq-infuse.h/>
+		#include <chaos-preprocessor-tuple-eat.h/>
+		
+		#if <VARIADICS/>
+		
+		#define FOLD_RIGHT(op, seq, ...) \
+		    FOLD_RIGHT_S(<STATE/>(), op, seq, __VA_ARGS__) \
+		    /**/
+		#define FOLD_RIGHT_S(s, op, seq, ...) \
+		    <EXPR_S/>(s)(FOLD_RIGHT_I( \
+		        <SEQ_INFUSE/>( \
+		            seq, \
+		            1, <NEXT/>(s), op, <PLANAR/>(op) \
+		        )(0,), \
+		        __VA_ARGS__ \
+		    )) \
+		    /**/
+		#define FOLD_RIGHT_I(bin, ...) \
+		    FOLD_RIGHT_A bin __VA_ARGS__ FOLD_RIGHT_C bin \
+		    /**/
+		#define FOLD_RIGHT_A_INDIRECT() FOLD_RIGHT_A
+		#define FOLD_RIGHT_A(bit, ...) \
+		    <IIF/>(bit)( \
+		        FOLD_RIGHT_B, <TUPLE_EAT/>(?) \
+		    )(__VA_ARGS__) \
+		    /**/
+		#define FOLD_RIGHT_B(s, op, _o, ...) \
+		    _o()(s, op) __VA_ARGS__, FOLD_RIGHT_A_INDIRECT \
+		    /**/
+		#define FOLD_RIGHT_C_INDIRECT() FOLD_RIGHT_C
+		#define FOLD_RIGHT_C(bit, ...) \
+		    <EXPR_IIF/>(bit)( \
+		        <PLANAR_CLOSE/>() FOLD_RIGHT_C_INDIRECT \
+		    ) \
+		    /**/
+		
+		#define OP(s, elem, state) state ## elem
+		
+		<EXPR/>(FOLD_RIGHT(
+		    OP, (a)(b)(c),
+		))
+		// cba
+		
+		??=include <PLACEHOLDERS/>(1)
+		
+		<EXPR/>(FOLD_RIGHT(
+		    <PRIMITIVE_CAT_/>(_2, _1),
+		    (a)(b)(c),
+		))
+		// cba
+		
+		??=include <PLACEHOLDERS/>(0)
+		
+		#endif
+	</listing>
+	<derivative id="PLANAR_ID"/>
+	<derivative id="PLANAR_" lang="C99"/>
+</macro>
+
+<macro id="PLANAR_CLOSE">
+	<abstract>
+		The <PLANAR_CLOSE/> macro closes a partial invocation introduced by <PLANAR/>.
+	</abstract>
+	<usage>
+		<syntax><PLANAR_CLOSE/>()</syntax>
+	</usage>
+	<x-reference id="PLANAR"/>
+	<derivative id="PLANAR_CLOSE_ID"/>
+	<derivative id="PLANAR_CLOSE_" lang="C99"/>
+</macro>
+
+</header>

@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/generics/spec.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines the operations necessary to manipulate <link id="generic data structures"/>.
+</overview>
+
+<macro id="TAG" group="tag">
+	<abstract>
+		The <TAG/> macro is used to compare types.
+	</abstract>
+	<usage>
+		<syntax><TAG/>(type)</syntax>
+		<param id="type">
+			The type of the tag to be produced.
+		</param>
+	</usage>
+	<para>
+		This macro produces a tag macro name used by generic algorithms to compare types.
+	</para>
+	<derivative id="TAG_ID"/>
+	<derivative id="TAG_" lang="C99"/>
+</macro>
+
+<macro id="NIL" group="nil">
+	<abstract>
+		The <NIL/> macro expands to a nil <link id="generic data structure"/>.
+	</abstract>
+	<usage>
+		<syntax><NIL/>(type)</syntax>
+		<param id="type">
+			The type of the <link id="generic data structure"/> to be produced.
+		</param>
+	</usage>
+	<listing>
+		#include <chaos-preprocessor-array-spec.h/>
+		#include <chaos-preprocessor-generics-spec.h/>
+		#include <chaos-preprocessor-list-spec.h/>
+		
+		<NIL/>(<ARRAY/>) // (0, ())
+		<NIL/>(<LIST/>)  // ...
+	</listing>
+	<derivative id="NIL_ID"/>
+	<derivative id="NIL_" lang="C99"/>
+</macro>
+
+<macro id="CONS" type="indirect" group="cons">
+	<abstract>
+		The <ARRAY_CONS/> macro appends an element to the head of a <link id="generic data structure"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><CONS/>(g, ...)</syntax>
+		<param id="g">
+			The <link id="generic data structure"/> to which <code>__VA_ARGS__</code> is to be appended.
+		</param>
+		<param id="..." optional="1">
+			The element to be appended to the head of <var>g</var>.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><CONS/>(g, x)</syntax>
+		<param id="g">
+			The <link id="generic data structure"/> to which <var>x</var> is to be appended.
+		</param>
+		<param id="x">
+			The element to be appended to the head of <var>g</var>.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="generic data structure"/> of the same type as <var>g</var> containing the elements of <var>g</var> with <var>x</var> (or <code>__VA_ARGS__</code>) appended to the head.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-generics-spec.h/>
+		#include <chaos-preprocessor-list-spec.h/>
+		
+		<CONS/>(<NIL/>(<LIST/>), a)
+		// (<LIST/>) (a, ...)
+		
+		<CONS/>((<LIST/>) (y, (z, ...)), x)
+		// (<LIST/>) (x, (y, (z, ...)))
+	</listing>
+	<derivative id="CONS_ID"/>
+	<derivative id="CONS_" lang="C99"/>
+</macro>
+
+<macro id="ITEM" type="indirect" group="itemization">
+	<abstract>
+		The <ITEM/> macro is used to encapsulate elements.
+	</abstract>
+	<usage lang="C99">
+		<syntax><ITEM/>(type, ...)</syntax>
+		<param id="type">
+			The type of the <link id="generic data structure"/> from which <code>__VA_ARGS__</code> was extracted.
+		</param>
+		<param id="..." optional="1">
+			The element that was extracted from a <link id="generic data structure"/>.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><ITEM/>(type, x)</syntax>
+		<param id="type">
+			The type of the <link id="generic data structure"/> from which <var>x</var> was extracted.
+		</param>
+		<param id="x">
+			The element that was extracted from a <link id="generic data structure"/>.
+		</param>
+	</usage>
+	<para>
+		This macro is used by generic algorithms to encapsulate elements before they are passed to user-defined macros.
+	</para>
+	<derivative id="ITEM_ID"/>
+	<derivative id="ITEM_" lang="C99"/>
+</macro>
+
+<macro id="FIRST" type="indirect" group="first">
+	<abstract>
+		The <FIRST/> macro extracts the first element from a <link id="generic data structure"/>.
+	</abstract>
+	<usage>
+		<syntax><FIRST/>(g)</syntax>
+		<param id="g">
+			The <link id="generic data structure"/> whose first element is to be extracted.
+		</param>
+	</usage>
+	<para>
+		This macro expands to the first element contained in <var>g</var>.
+	</para>
+	<x-reference id="REST"/>
+	<listing>
+		#include <chaos-preprocessor-generics-spec.h/>
+		#include <chaos-preprocessor-list-spec.h/>
+		#include <chaos-preprocessor-string-spec.h/>
+		
+		<FIRST/>((<LIST/>) (1, (2, (3, ...)))) // a
+		<FIRST/>((<STRING/>) 1 2 3 4 5)        // 1
+	</listing>
+	<derivative id="FIRST_ID"/>
+	<derivative id="FIRST_" lang="C99"/>
+</macro>
+
+<macro id="REST" type="indirect" group="rest">
+	<abstract>
+		The <REST/> macro removes the first element from a <link id="generic data structure"/>.
+	</abstract>
+	<usage>
+		<syntax><REST/>(g)</syntax>
+		<param id="g">
+			The <link id="generic data structure"/> whose first element is to be removed.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="generic data structure"/> of the same type as <var>g</var> containing all the elements of <var>g</var> except the first.
+	</para>
+	<x-reference id="FIRST"/>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-generics-spec.h/>
+		#include <chaos-preprocessor-seq-spec.h/>
+		#include <chaos-preprocessor-tuple-spec.h/>
+		
+		<REST/>((<SEQ/>) (X)(Y)(Z)) // (<SEQ/>) (Y)(Z)
+		
+		#if <VARIADICS/>
+		
+		<REST/>((<TUPLE/>) (a, b, c, d, e))
+		// (<TUPLE/>) (b, c, d, e)
+		
+		#endif
+	</listing>
+	<derivative id="REST_ID"/>
+	<derivative id="REST_" lang="C99"/>
+</macro>
+
+<macro id="IS_CONS" group="is-cons">
+	<abstract>
+		The <IS_CONS/> macro is a predicate that tests whether a <link id="generic data structure"/> is non-nil.
+	</abstract>
+	<usage>
+		<syntax><IS_CONS/>(g)</syntax>
+		<param id="g">
+			The <link id="generic data structure"/> to be tested.
+		</param>
+	</usage>
+	<para>
+		If <var>g</var> is non-nil, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<x-reference id="IS_NIL"/>
+	<listing>
+		#include <chaos-preprocessor-generics-spec.h/>
+		#include <chaos-preprocessor-list-spec.h/>
+		
+		<IS_CONS/>((<LIST/>) ...)                // 0
+		<IS_CONS/>((<LIST/>) (a, (b, (c, ...)))) // 1
+	</listing>
+	<derivative id="IS_CONS_ID"/>
+	<derivative id="IS_CONS_" lang="C99"/>
+</macro>
+
+<macro id="IS_NIL" group="is-nil">
+	<abstract>
+		The <IS_NIL/> macro is a predicate that tests whether a <link id="generic data structure"/> is nil.
+	</abstract>
+	<usage>
+		<syntax><IS_NIL/>(g)</syntax>
+		<param id="g">
+			The <link id="generic data structure"/> to be tested.
+		</param>
+	</usage>
+	<para>
+		If <var>g</var> is nil, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<x-reference id="IS_CONS"/>
+	<listing>
+		#include <chaos-preprocessor-array-spec.h/>
+		#include <chaos-preprocessor-generics-spec.h/>
+		
+		<IS_NIL/>((<ARRAY/>) (0, ()))     // 1
+		<IS_NIL/>((<ARRAY/>) (2, (x, y))) // 0
+	</listing>
+	<derivative id="IS_NIL_ID"/>
+	<derivative id="IS_NIL_" lang="C99"/>
+</macro>
+
+</header>

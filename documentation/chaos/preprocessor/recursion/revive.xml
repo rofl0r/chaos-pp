@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/recursion/revive.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro used to re-enable a macro name that was previously disabled (i.e. "painted blue").
+</overview>
+
+<macro id="REVIVE">
+	<abstract>
+		The <REVIVE/> macro re-enables a macro name preprocessing token that was previously disabled.
+	</abstract>
+	<usage>
+		<syntax><REVIVE/>(macro)</syntax>
+		<param id="macro">
+			The macro name to be re-enabled.
+			This macro name must have a derivative form suffixed with <code>_ID</code> that is a nullary macro that expands to <var>macro</var> (i.e. an indirection macro).
+		</param>
+	</usage>
+	<para>
+		This macro concatenates <code>_ID</code> to <var>macro</var> and invokes the result with nullary parentheses.
+		<snippet>
+			<PRIMITIVE_CAT/>(macro, _ID)()
+		</snippet>
+		It is intended that an appropriate indirection macro exists for <var>macro</var>.
+		For example, assuming that <var>macro</var> is <code>ABC</code>, then <code>ABC_ID()</code> should expand to <code>ABC</code>.
+	</para>
+	<para>
+		Macro name preprocessing tokens get permanently disabled when they are created in (or just pass through) the context created by the macro to which they refer.
+		Even when a disabled macro name is no longer inside that context, it remains disabled--permanently.
+		Hence, the creation of a new preprocessing token is required, which is what <REVIVE/> does through concatenation and an indirection macro.
+		Note that if a macro name preprocessing token is "revived" when the context is still present, it will just immediately get disabled again.
+		Consequently, this macro is <em>not</em> a substitute for recursion.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-facilities-expand.h/>
+		#include <chaos-preprocessor-recursion-revive.h/>
+		
+		<EXPAND/>(<EXPAND/>)(++) // <EXPAND/>(++)
+		
+		<REVIVE/>(
+		    <EXPAND/>(<EXPAND/>)
+		)(++)
+		// ++
+		
+		#define ABC(x) x
+		#define ABC_ID() ABC
+		
+		ABC(ABC)(--)                  // ABC(--)
+		<REVIVE/>(ABC(ABC))(--) // --
+	</listing>
+	<derivative id="REVIVE_ID"/>
+	<derivative id="REVIVE_" lang="C99"/>
+</macro>
+
+</header>

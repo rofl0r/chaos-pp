@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/detection/is_one.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that whether a configuration flag is defined as <code>1</code>.
+</overview>
+
+<macro id="IS_ONE">
+	<abstract>
+		The <IS_ONE/> macro detects whether its argument is defined as <code>1</code>.
+	</abstract>
+	<usage>
+		<syntax><IS_ONE/>(id)</syntax>
+		<param id="id">
+			The identifier to be tested.
+		</param>
+	</usage>
+	<para>
+		This macro detects whether its argument is defined as <code>1</code>.
+	</para>
+	<para>
+		The <var>id</var> argument must expand to <code>0</code>, expand to <code>1</code>, expand to nothing, or not expand at all.
+		Any other input is undefined.
+	</para>
+	<x-reference id="IS_EMPTY"/>
+	<x-reference id="IS_FLAG"/>
+	<listing>
+		#include <chaos-preprocessor-detection-is_one.h/>
+		
+		#define A
+		#define B 0
+		#define C 1
+		
+		<IS_ONE/>(A) // 0
+		<IS_ONE/>(B) // 0
+		<IS_ONE/>(C) // 1
+		<IS_ONE/>(D) // 0
+	</listing>
+	<derivative id="IS_ONE_ID"/>
+	<derivative id="IS_ONE_" lang="C99"/>
+</macro>
+
+</header>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/seq/remove.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that removes an element from a <link id="sequence"/>.
+</overview>
+
+<macro id="SEQ_REMOVE" type="indirect" group="removal">
+	<abstract>
+		The <SEQ_REMOVE/> macro removes the element at the index specified by its first argument from its second argument.
+	</abstract>
+	<usage>
+		<syntax><SEQ_REMOVE/>(i, seq)</syntax>
+		<param id="i">
+			The zero-based index of the element to be removed.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="seq">
+			The <link id="sequence"/> from which an element is to be removed.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="sequence"/> containing all of the elements of <var>seq</var> except the <var>i</var>-th element.
+		Consequently, <var>seq</var> must contain at least <var>i</var> + 1 elements.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-seq-remove.h/>
+		
+		<SEQ_REMOVE/>(2, (a)(b)(c)(d)(e)) // (a)(b)(d)(e)
+		
+		#if <VARIADICS/>
+		
+		<SEQ_REMOVE/>(1, (a, b)(c)(d, e, f)) // (a, b)(d, e, f)
+		
+		#endif
+	</listing>
+	<derivative id="SEQ_REMOVE_ID"/>
+	<derivative id="SEQ_REMOVE_" lang="C99"/>
+</macro>
+
+</header>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/facilities/apply.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro used to abstract empty arguments.
+</overview>
+
+<macro id="APPLY" type="indirect" group="emptiness">
+	<abstract>
+		The <APPLY/> macro is used to abstract empty arguments.
+	</abstract>
+	<usage lang="C99">
+		<syntax><APPLY/>(...)</syntax>
+		<param id="..." optional="1">
+			The argument to be applied.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><APPLY/>(x)</syntax>
+		<param id="x">
+			The argument to be applied.
+		</param>
+	</usage>
+	<para>
+		If <var>x</var> is a unary parenthetic expression, this macro expands to the contents of that unary parenthetic expression.
+		In C99, if <code>__VA_ARGS__</code> is a parenthetic expression of any arity, this macro expands to the contents of that parenthetic expression.
+		Otherwise, this macro expands to nothing.
+	</para>
+	<para>
+		In C and C++, <var>x</var> must be either a unary parenthetic expression or a non-parenthetic expression.
+		Any other input is invalid.
+	</para>
+	<para>
+		This macro is used to simulate empty arguments--primarily in C (prior to C99) and C++.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-facilities-apply.h/>
+		
+		#define MACRO(cv) <APPLY/>(cv)
+		
+		MACRO((const))    // const
+		MACRO((volatile)) // volatile
+		MACRO(.)          //
+	</listing>
+	<derivative id="APPLY_ID"/>
+	<derivative id="APPLY_" lang="C99"/>
+</macro>
+
+</header>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/extended/reverse_cat.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines concatenation macros that reverse their operands prior to concatenation.
+</overview>
+
+<macro id="REVERSE_CAT" type="indirect" group="concatenation">
+	<abstract>
+		The <REVERSE_CAT/> macro concatenates its arguments after they have been expanded.
+	</abstract>
+	<usage lang="C99">
+		<syntax><REVERSE_CAT/>(a, ...)</syntax>
+		<param id="a" optional="1">
+			The right operand of the concatenation.
+		</param>
+		<param id="..." optional="1">
+			The left operand of the concatenation.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><REVERSE_CAT/>(a, b)</syntax>
+		<param id="a">
+			The right operand of the concatenation.
+		</param>
+		<param id="b">
+			The left operand of the concatenation.
+		</param>
+	</usage>
+	<para>
+		This macro behaves identically to <CAT/> except that it concatenates the rightmost preprocessing token of <var>a</var> to the leftmost preprocessing token of <var>b</var> or <code>__VA_ARGS__</code>.
+		<snippet>
+			__VA_ARGS__ ## a // C99
+			b ## a           // C and C++
+		</snippet>
+	</para>
+	<listing>
+		#include <chaos-preprocessor-extended-reverse_cat.h/>
+		
+		#define A 1
+		#define B 2
+		
+		<REVERSE_CAT/>(A, B) // 21
+	</listing>
+	<derivative id="REVERSE_CAT_ID"/>
+	<derivative id="REVERSE_CAT_" lang="C99"/>
+</macro>
+
+<macro id="PRIMITIVE_REVERSE_CAT" type="indirect" group="concatenation">
+	<abstract>
+		The <PRIMITIVE_REVERSE_CAT/> macro concatenates its arguments before they are expanded.
+	</abstract>
+	<usage lang="C99">
+		<syntax><PRIMITIVE_REVERSE_CAT/>(a, ...)</syntax>
+		<param id="a" optional="1">
+			The right operand of the concatenation.
+		</param>
+		<param id="..." optional="1">
+			The left operand of the concatenation.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><PRIMITIVE_REVERSE_CAT/>(a, b)</syntax>
+		<param id="a">
+			The right operand of the concatenation.
+		</param>
+		<param id="b">
+			The left operand of the concatenation.
+		</param>
+	</usage>
+	<para>
+		This macro behaves identically to <PRIMITIVE_CAT/> except that it concatenates the rightmost preprocessing token of <var>a</var> to the leftmost preprocessing token of <var>b</var> or <code>__VA_ARGS__</code>.
+		<snippet>
+			__VA_ARGS__ ## a // C99
+			b ## a           // C and C++
+		</snippet>
+	</para>
+	<listing>
+		#include <chaos-preprocessor-extended-reverse_cat.h/>
+		
+		#define A 1
+		#define B 2
+		
+		<PRIMITIVE_REVERSE_CAT/>(A, B) // BA
+	</listing>
+	<derivative id="PRIMITIVE_REVERSE_CAT_ID"/>
+	<derivative id="PRIMITIVE_REVERSE_CAT_" lang="C99"/>
+</macro>
+
+</header>

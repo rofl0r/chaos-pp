@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/repetition/delineate_params.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an algorithm that delineates a sequence of preprocessing tokens a specified number of times.
+</overview>
+
+<macro id="DELINEATE_PARAMS" group="parameters">
+	<abstract>
+		The <DELINEATE_PARAMS/> macro repeats its third argument--concatenated to the current repetition number--the number of times specified by its first argument with the delineator specified by its second argument between each repetition.
+	</abstract>
+	<usage lang="C99">
+		<syntax><DELINEATE_PARAMS/>(count, sep, ...)</syntax>
+		<param id="count">
+			The number of times that <code>__VA_ARGS__</code> is to be repeated.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="sep">
+			The delineator to be situated between each repetition of <code>__VA_ARGS__</code>.
+			This delineator must be a macro name compatible with the following pseudo-signature:
+			<snippet>
+				sep()
+			</snippet>
+		</param>
+		<param id="..." optional="1">
+			The sequence of preprocessing tokens to be repeated.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><DELINEATE_PARAMS/>(count, sep, param)</syntax>
+		<param id="count">
+			The number of times that <code>__VA_ARGS__</code> is to be repeated.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="sep">
+			The delineator to be situated between each repetition of <code>__VA_ARGS__</code>.
+			This delineator must be a macro name compatible with the following pseudo-signature:
+			<snippet>
+				sep()
+			</snippet>
+		</param>
+		<param id="param">
+			The sequence of preprocessing tokens to be repeated.
+		</param>
+	</usage>
+	<para>
+		This macro expands to the result of repeating <var>param</var> or <code>__VA_ARGS__</code> (concatenated to the current repetition number) <var>count</var> times (with the delineate specified by <var>sep</var> between each repetition).
+		This is illustrated by the following pseudo-code (where <var>n</var> is <var>count</var> - 1):
+		<snippet>
+			param ## 0 sep() param ## 1 sep() ... param ## n
+		</snippet>
+	</para>
+	<para>
+		The rightmost preprocessing token of <var>param</var> or <code>__VA_ARGS__</code> must be either pasteable to a number or be a binary parenthetic expression such as
+		<snippet>
+			(a, b)
+		</snippet>
+		If <var>param</var> or <code>__VA_ARGS__</code> is a binary parenthetic expression, this macro extracts the two elements and concatenates the current repetition number to each of them.
+		This is illustrated by the following pseudo-code (where <var>n</var> is again <var>count</var> - 1):
+		<snippet>
+			a ## 0 b ## 0 sep() a ## 1 b ## 1 sep() ... a ## n b ## n
+		</snippet>
+		In C99, the requirement that a parenthetic expression must be binary is relaxed.
+		It can be any arity provided that there are at least two elements.
+		<snippet>
+			(a, ...)
+		</snippet>
+		In that circumstance, the current repetition number is concatenated to both the first of the two elements and to the all the rest of the elements as a single unit.
+	</para>
+	<para>
+		This secondary mechanism is intended to make it easy to define parameter lists, such as the following:
+		<snippet>
+			T0 p0, T1 p1, ... T2 p2
+		</snippet>
+	</para>
+	<para>
+		The running time of <DELINEATE_PARAMS/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
+		The asymptotic upper and lower bounds are Θ(<x-var>n</x-var>+1), where <x-var>n</x-var> is <var>count</var>.
+	</para>
+	<para>
+		Note that <DELINEATE_PARAMS/> is functionally equivalent to <ENUM_PARAMS/> when <var>sep</var> is <COMMA/>.
+	</para>
+	<para>
+		This macro uses <link id="bypass semantics"/>.
+		If <link id="bypass semantics"/> are already in effect, <DELINEATE_PARAMS_BYPASS/> must be used instead.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-facilities-intercept.h/>
+		#include <chaos-preprocessor-punctuation-comma.h/>
+		#include <chaos-preprocessor-repetition-delineate_params.h/>
+		
+		<DELINEATE_PARAMS/>(
+		    3, <COMMA/>, class T
+		)
+		// class T0, class T1, class T2
+		
+		<DELINEATE_PARAMS/>(
+		    3, <COMMA/>, (class T, = U)
+		)
+		// class T0 = U0, class T1 = U1, class T2 = U2
+		
+		<DELINEATE_PARAMS/>(
+		    3, <COMMA/>, (class T, = void <INTERCEPT/>)
+		)
+		// class T0 = void, class T1 = void, class T2 = void
+	</listing>
+	<derivative id="DELINEATE_PARAMS_ID"/>
+	<derivative id="DELINEATE_PARAMS_" lang="C99"/>
+	<derivative id="DELINEATE_PARAMS_BYPASS">
+		<usage lang="C99">
+			<syntax><DELINEATE_PARAMS_BYPASS/>(s, count, sep, ...)</syntax>
+		</usage>
+		<usage lang="C/C++">
+			<syntax><DELINEATE_PARAMS_BYPASS/>(s, count, sep, param)</syntax>
+		</usage>
+		<derivative id="DELINEATE_PARAMS_BYPASS_ID"/>
+		<derivative id="DELINEATE_PARAMS_BYPASS_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

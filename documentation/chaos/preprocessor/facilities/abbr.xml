@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/facilities/abbr.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro used to abbreviate interface macros.
+</overview>
+
+<macro id="ABBR" group="scope">
+	<abstract>
+		The <ABBR/> macro is used to abbreviate library interface macros.
+	</abstract>
+	<usage>
+		<syntax><ABBR/>(id)</syntax>
+		<param id="id">
+			The <em>unprefixed</em> name of a library primitive.
+		</param>
+	</usage>
+	<para>
+		This macro prefixes <var>id</var> with <code>CHAOS_PP_</code>.
+		It is intended to be is passed as an argument to another macro such that it can be used as an abbreviation of the prefix <code>CHAOS_PP_</code>.
+		For example,
+		<snippet>
+			#define INTERFACE(arg) IMPLEMENTATION(<ABBR/>, arg)
+			#define IMPLEMENTATION(_, arg) _(APPLY)(arg)
+			
+			INTERFACE(...)    //
+			INTERFACE((const) // const
+		</snippet>
+	</para>
+	<para>
+		The argument <var>id</var> is <em>not</em> allowed to expand prior to prefixing.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-cat.h/>
+		#include <chaos-preprocessor-facilities-abbr.h/>
+		
+		#define MACRO(a, b, c, d) MACRO_I(<ABBR/>, a, b, c, d)
+		#define MACRO_I(_, a, b, c, d) \
+		    _(CAT)( \
+		        _(PRIMITIVE_CAT)(a, b), \
+		        _(PRIMITIVE_CAT)(c, d) \
+		    ) \
+		    /**/
+		
+		MACRO(1, 2, 3, 4) // 1234
+	</listing>
+	<derivative id="ABBR_ID"/>
+	<derivative id="ABBR_" lang="C99"/>
+</macro>
+
+</header>

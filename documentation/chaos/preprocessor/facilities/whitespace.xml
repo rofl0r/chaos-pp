@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/facilities/whitespace.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines macros used to remove whitespace from an argument.
+</overview>
+
+<macro id="NO_LEADING" type="indirect" group="whitespace">
+	<abstract>
+		The <NO_LEADING/> macro removes leading whitespace from its argument.
+	</abstract>
+	<usage lang="C99">
+		<syntax><NO_LEADING/>(...)</syntax>
+		<param id="..." optional="1">
+			The argument whose leading whitespace is to be removed.
+		</param>
+	</usage>
+	<para>
+		This macro removes leading whitespace (if any) from its argument by concatenating a placemarker to the first preprocessing token of <code>__VA_ARGS__</code>.
+	</para>
+	<para>
+		This macro is only useful for subsequent production of string literals (via the stringizing operator) or <x-var>header-name</x-var> preprocessing tokens of the <x-var>h-char-sequence</x-var> form.
+	</para>
+	<derivative id="NO_LEADING_ID" lang="C99"/>
+	<derivative id="NO_LEADING_" lang="C99"/>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-facilities-empty.h/>
+		#include <chaos-preprocessor-facilities-whitespace.h/>
+		
+		#if <VARIADICS/>
+		
+		#define SPACE <EMPTY/>() <EMPTY/>()
+		
+		#define A(...) __VA_ARGS__
+		#define B(...) <NO_LEADING/>(__VA_ARGS__)
+		
+		!A(SPACE X) // ! X
+		!B(SPACE X) // !X
+		
+		#endif
+	</listing>
+</macro>
+
+<macro id="NO_TRAILING" type="indirect" group="whitespace">
+	<abstract>
+		The <NO_TRAILING/> macro removes trailing whitespace from its argument.
+	</abstract>
+	<usage lang="C99">
+		<syntax><NO_TRAILING/>(...)</syntax>
+		<param id="..." optional="1">
+			The argument whose trailing whitespace is to be removed.
+		</param>
+	</usage>
+	<para>
+		This macro removes trailing whitespace (if any) from its argument by concatenating a placemarker to the last preprocessing token of <code>__VA_ARGS__</code>.
+	</para>
+	<para>
+		This macro is only useful for subsequent production of string literals (via the stringizing operator) or <x-var>header-name</x-var> preprocessing tokens of the <x-var>h-char-sequence</x-var> form.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-facilities-empty.h/>
+		#include <chaos-preprocessor-facilities-whitespace.h/>
+		
+		#if <VARIADICS/>
+		
+		#define SPACE <EMPTY/>() <EMPTY/>()
+		
+		#define A(...) __VA_ARGS__
+		#define B(...) <NO_TRAILING/>(__VA_ARGS__)
+		
+		A(X SPACE)! // X !
+		B(X SPACE)! // X!
+		
+		#endif
+	</listing>
+	<derivative id="NO_TRAILING_ID" lang="C99"/>
+	<derivative id="NO_TRAILING_" lang="C99"/>
+</macro>
+
+<macro id="CLEAN" type="indirect" group="whitespace">
+	<abstract>
+		The <CLEAN/> macro removes leading and trailing whitespace from its argument.
+	</abstract>
+	<usage lang="C99">
+		<syntax><CLEAN/>(...)</syntax>
+		<param id="..." optional="1">
+			The argument whose leading and trailing whitespace is to be removed.
+		</param>
+	</usage>
+	<para>
+		This macro removes both leading and trailing whitespace (if any) from its argument by concatenating a placemarker to both the first and the last preprocessing token of <code>__VA_ARGS__</code>.
+	</para>
+	<para>
+		This macro is only useful for subsequent production of string literals (via the stringizing operator) or <x-var>header-name</x-var> preprocessing tokens of the <x-var>h-char-sequence</x-var> form.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-facilities-empty.h/>
+		#include <chaos-preprocessor-facilities-whitespace.h/>
+		
+		#if <VARIADICS/>
+		
+		#define SPACE <EMPTY/>() <EMPTY/>()
+		
+		#define A(...) __VA_ARGS__
+		#define B(...) <CLEAN/>(__VA_ARGS__)
+		
+		[A(SPACE X SPACE)] // [ X ]
+		[B(SPACE X SPACE)] // [X]
+		
+		#endif
+	</listing>
+	<derivative id="CLEAN_ID" lang="C99"/>
+	<derivative id="CLEAN_" lang="C99"/>
+</macro>
+
+</header>

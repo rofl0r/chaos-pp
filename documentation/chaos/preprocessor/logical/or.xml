@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/logical/or.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a logical OR operator.
+</overview>
+
+<macro id="OR" group="or">
+	<abstract>
+		The <OR/> macro expands to the logical OR of its operands.
+	</abstract>
+	<usage>
+		<syntax><OR/>(p)(q)</syntax>
+		<param id="p">
+			The left operand.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="q">
+			The right operand.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+	</usage>
+	<para>
+		If either <var>p</var> or <var>q</var> is non-zero, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<para>
+		This macro performs a boolean conversion on each operand.
+		If this conversion is undesireable, <BITOR/> may be used instead.
+	</para>
+	<para>
+		This macro is lazy.
+		If <var>p</var> is non-zero, <var>q</var> is not evaluated.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-debug-failure.h/>
+		#include <chaos-preprocessor-logical-or.h/>
+		
+		<OR/>(5)(7) // 1
+		<OR/>(0)(1) // 1
+		
+		<OR/>(10)(<FAILURE/>()) // 1
+	</listing>
+	<derivative id="OR_ID"/>
+	<derivative id="OR_" lang="C99"/>
+</macro>
+
+</header>

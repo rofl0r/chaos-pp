@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/extended/variadic_cat.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro capable of concatenating a variable number of arguments.
+</overview>
+
+<macro id="VARIADIC_CAT" type="indirect" group="concatenation">
+	<abstract>
+		The <VARIADIC_CAT/> macro concatenates its arguments.
+	</abstract>
+	<usage lang="C99">
+		<syntax><VARIADIC_CAT/>(...)</syntax>
+		<param id="..." optional="1">
+			The argument(s) to be concatenated.
+		</param>
+	</usage>
+	<para>
+		Each argument in <code>__VA_ARGS__</code> is allowed to expand prior to concatenation.
+	</para>
+	<para>
+		This macro can concatenate up to a maximum of <LIMIT_VARIADIC_CAT/> arguments.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-extended-variadic_cat.h/>
+		
+		#if <VARIADICS/>
+		
+		<VARIADIC_CAT/>(1, 2, 3, 4) // 1234
+		
+		#endif
+	</listing>
+	<derivative id="VARIADIC_CAT_ID" lang="C99"/>
+	<derivative id="VARIADIC_CAT_" lang="C99"/>
+</macro>
+
+</header>

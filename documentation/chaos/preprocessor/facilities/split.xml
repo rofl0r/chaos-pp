@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/facilities/split.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that extracts an element from a binary <link id="intermediate"/>.
+</overview>
+
+<macro id="SPLIT" type="indirect">
+	<abstract>
+		The <SPLIT/> macro extracts an element from a binary <link id="intermediate"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><SPLIT/>(i, ...)</syntax>
+		<param id="i">
+			The index of the element to be extracted.
+			Valid values are <codee>0</codee> and <code>1</code>.
+		</param>
+		<param id="..." optional="1">
+			The <link id="intermediate"/> from which an element is to be extracted.
+			This <link id="intermediate"/> must expand to <em>at least</em> two elements.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><SPLIT/>(i, im)</syntax>
+		<param id="i">
+			The index of the element to be extracted.
+			Valid values are <codee>0</codee> and <code>1</code>.
+		</param>
+		<param id="im">
+			The <link id="intermediate"/> from which an element is to be extracted.
+			This <link id="intermediate"/> must expand to two elements.
+		</param>
+	</usage>
+	<para>
+		If <var>i</var> is <code>0</code>, this macro expands to the first element of <var>im</var> or <code>__VA_ARGS__</code>.
+		Otherwise, it expands to the second element of <var>im</var> or the elements after the first in <code>__VA_ARGS__</code>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-facilities-split.h/>
+		
+		#define A() p, q
+		
+		<SPLIT/>(0, A()) // p
+		<SPLIT/>(1, A()) // q
+		
+		#if <VARIADICS/>
+		
+		#define B() x, y, z
+		
+		<SPLIT/>(0, B()) // x
+		<SPLIT/>(1, B()) // y, z
+		
+		#endif
+	</listing>
+	<derivative id="SPLIT_ID"/>
+	<derivative id="SPLIT_" lang="C99"/>
+</macro>
+
+</header>

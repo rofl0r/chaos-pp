@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/generics/is_type.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that determines if a <link id="generic data structure"/> is a certain type.
+</overview>
+
+<macro id="IS_TYPE">
+	<abstract>
+		The <IS_TYPE/> macro determines if its second argument is of the type specified by its first argument.
+	</abstract>
+	<usage>
+		<syntax><IS_TYPE/>(type, g)</syntax>
+		<param id="type">
+			The type to be tested against.
+		</param>
+		<param id="g">
+			The <link id="generic data structure"/> to be tested.
+		</param>
+	</usage>
+	<para>
+		If <var>g</var> is of type <var>type</var>, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<para>
+		In some cases, a primitive form of inheritance exists between types with different names.
+		One such example is the <link id="variadic sequence"/> and <link id="sequence"/> types.
+		A <link id="sequence"/> is a <link id="variadic sequence"/>, but not vice versa:
+		<snippet>
+			<IS_TYPE/>(
+			    <SEQ/>, (<VARIADIC_SEQ/>) (a)(b, c)
+			)
+			// 0
+			
+			<IS_TYPE/>(
+			    <VARIADIC_SEQ/>, (<SEQ/>) (a)(b)(c)
+			)
+			// 1
+		</snippet>
+	</para>
+	<listing>
+		#include <chaos-preprocessor-generics-is_type.h/>
+		#include <chaos-preprocessor-list-spec.h/>
+		#include <chaos-preprocessor-seq-spec.h/>
+		
+		<IS_TYPE/>(
+		    <LIST/>, (<SEQ/>) (a)(b)(c)
+		)
+		// 0
+		
+		<IS_TYPE/>(
+		    <LIST/>, (<LIST/>) (a, (b, (c, ...)))
+		)
+		// 1
+	</listing>
+	<derivative id="IS_TYPE_ID"/>
+	<derivative id="IS_TYPE_" lang="C99"/>
+</macro>
+
+</header>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/slot/slot.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines the <link id="evaluated slot"/> mechanism.
+</overview>
+
+<macro id="VALUE">
+	<abstract>
+		The <VALUE/> macro is a user-defined <link id="named external argument"/> that specifies the expression to be evaluated and assigned to a <link id="slot index"/>.
+	</abstract>
+	<usage>
+		<syntax>#define <VALUE/> expr</syntax>
+		<param id="expr">
+			The expression that is to be evaluated.
+		</param>
+	</usage>
+	<para>
+		This macro is defined by the user immediately preceding an invocation of <ASSIGN_SLOT/>, which, in turn, evaluates the expression contained in <VALUE/> and assigns it to a <link id="slot index"/>.
+		After that assignment, <VALUE/> is undefined automatically.
+	</para>
+	<x-reference id="ASSIGN_SLOT"/>
+	<x-reference id="SLOT"/>
+</macro>
+
+<macro id="ASSIGN_SLOT">
+	<abstract>
+		The <ASSIGN_SLOT/> macro fully evaluates a numeric expression.
+	</abstract>
+	<usage>
+		<syntax>??=include <ASSIGN_SLOT/>(i)</syntax>
+		<param id="i">
+			The <link id="slot index"/> that is to be assigned.
+			Valid values range from <code>1</code> to <LIMIT_SLOT/>.
+		</param>
+	</usage>
+	<para>
+		This macro evaluates the numeric expression contained in the <link id="named external argument"/> <VALUE/> and assigns it to the <var>i</var>-th <link id="evaluated slot"/>.
+		If <VALUE/> is <em>not</em> defined prior to the use of this macro, it is given the default value of <code>0</code>.
+		The numeric expression must evaluate to a value that is 1 to <LIMIT_SLOT_VALUE/> digits (base-10).
+		The range of the expression is also possibly constricted by the preprocessor in use.
+		Specifically, the preprocessor must be capable of evaluating the expression on an <code>#if</code> or <code>#elif</code> directive.
+	</para>
+	<para>
+		After <ASSIGN_SLOT/> has assigned the resulting value of <VALUE/> to the <var>i</var>-th <link id="evaluated slot"/>, it undefines <VALUE/>.
+	</para>
+	<x-reference id="SLOT"/>
+	<x-reference id="VALUE"/>
+	<listing>
+		#include <chaos-preprocessor-slot-slot.h/>
+		
+		#define <VALUE/> 1 + 2 + 3
+		??=include <ASSIGN_SLOT/>(1)
+		
+		<SLOT/>(1) // 6
+	</listing>
+	<derivative id="ASSIGN_SLOT_ID"/>
+	<derivative id="ASSIGN_SLOT_" lang="C99"/>
+</macro>
+
+<macro id="SLOT">
+	<abstract>
+		The <SLOT/> macro retrieves a value previously evaluated by <ASSIGN_SLOT/>.
+	</abstract>
+	<usage>
+		<syntax><SLOT/>(i)</syntax>
+		<param id="i">
+			The <link id="slot index"/> of the value that is to be retrieved.
+			Valid values range from <code>1</code> to <LIMIT_SLOT/>.
+		</param>
+	</usage>
+	<para>
+		This macro retrieves the value that was previously assigned to the <link id="slot index"/> <var>i</var>.
+		If the <link id="slot index"/> specified by <var>i</var> has never been assigned, this macro expands to <code>0</code>.
+	</para>
+	<x-reference id="ASSIGN_SLOT"/>
+	<x-reference id="VALUE"/>
+	<listing>
+		#include <chaos-preprocessor-slot-slot.h/>
+		
+		#define X() 4
+		
+		#define <VALUE/> 1 + 2 + 3 + X()
+		??=include <ASSIGN_SLOT/>(1)
+		
+		#undef X
+		
+		<SLOT/>(1) // 10
+		
+		#define <VALUE/> <SLOT/>(1) * <SLOT/>(1)
+		??=include <ASSIGN_SLOT/>(1)
+		
+		<SLOT/>(1) // 100
+	</listing>
+	<derivative id="SLOT_ID"/>
+	<derivative id="SLOT_" lang="C99"/>
+</macro>
+
+</header>

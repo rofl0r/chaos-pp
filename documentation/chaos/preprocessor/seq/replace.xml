@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/seq/replace.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that replaces an element in a <link id="sequence"/>.
+</overview>
+
+<macro id="SEQ_REPLACE" type="indirect" group="replacement">
+	<abstract>
+		The <SEQ_REPLACE/> macro replaces the element at the index specified by its first argument in its second argument with the element specified by its third argument.
+	</abstract>
+	<usage lang="C99">
+		<syntax><SEQ_REPLACE/>(i, seq, ...)</syntax>
+		<param id="i">
+			The zero-based index of the element to be replaced.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="seq">
+			The <link id="sequence"/> in which an element is to be replaced.
+		</param>
+		<param id="..." optional="1">
+			The element used to replace the element at index <var>i</var> in <var>seq</var>.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><SEQ_REPLACE/>(i, seq, x)</syntax>
+		<param id="i">
+			The zero-based index of the element to be replaced.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="seq">
+			The <link id="sequence"/> in which an element is to be replaced.
+		</param>
+		<param id="x">
+			The element used to replace the element at index <var>i</var> in <var>seq</var>.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="sequence"/> containing the elements of <var>seq</var> except with the <var>i</var>-th element replaced by <var>x</var> (or <code>__VA_ARGS__</code>).
+		Consequently, <var>seq</var> must contain at least <var>i</var> + 1 elements.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-seq-replace.h/>
+		
+		<SEQ_REPLACE/>(2, (a)(b)(c)(d)(e), +)
+		// (a)(b)(+)(d)(e)
+		
+		#if <VARIADICS/>
+		
+		<SEQ_REPLACE/>(1, (a, b)(c)(d, e, f)(g), x, y)
+		// (a, b)(x, y)(d, e, f)(g)
+		
+		#endif
+	</listing>
+	<derivative id="SEQ_REPLACE_ID"/>
+	<derivative id="SEQ_REPLACE_" lang="C99"/>
+</macro>
+
+</header>

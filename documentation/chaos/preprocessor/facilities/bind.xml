@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/facilities/bind.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines macros used to selectively qualify unprefixed macro names.
+</overview>
+
+<macro id="BIND" type="object" group="scope">
+	<abstract>
+		The <BIND/> macro is used to introduce a context that allows unprefixed macros to qualify themselves.
+	</abstract>
+	<usage lang="C99">
+		<syntax><BIND/>(, ...)</syntax>
+		<param id="..." optional="1">
+			Any number of preprocessing tokens.
+		</param>
+	</usage>
+	<para>
+		This macro is used as a binding context on unprefixed macros that utilize <PREFIX/>.
+	</para>
+	<para>
+		This macro employs <link id="automatic recursion"/> up to a nested binding depth of <LIMIT_BIND/>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-cat.h/>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-facilities-bind.h/>
+		
+		#if <VARIADICS/>
+		
+		#define CAT <PREFIX/>(CAT)
+		
+		CAT(x, CAT(y, z)) // CAT(x, CAT(y, z))
+		
+		<BIND/>(, CAT(x, CAT(y, z))) // xyz
+		
+		#endif
+	</listing>
+	<derivative id="BIND_ID" lang="C99"/>
+	<derivative id="BIND_" lang="C99"/>
+</macro>
+
+<macro id="PREFIX" group="scope">
+	<abstract>
+		The <PREFIX/> macro is used to define unprefixed names that are isolated from core language interference.
+	</abstract>
+	<usage lang="C99">
+		<syntax><PREFIX/>(id)</syntax>
+		<param id="id">
+			The unprefixed name of a library primitive.
+		</param>
+	</usage>
+	<para>
+		This macro is used to define unprefixed variants of library primitives that are incapable of interferring with the core language.
+	</para>
+	<para>
+		Normal usage consists of starting with a prefixed name and defining an object-like macro of the form:
+		<snippet>
+			#define id <PREFIX/>(id)
+		</snippet>
+		For example,
+		<snippet>
+			#define STRINGIZE <PREFIX/>(STRINGIZE)
+		</snippet>
+		This defines an object-like macro that expands to <STRINGIZE/> if (and only if) it is expanded in a context introduced by <BIND/>.
+		Otherwise, it expands to plain <code>STRINGIZE</code>.
+	</para>
+	<para>
+		This effectively renders unprefixed macro names from conflicting with anything but other unprefixed macro names.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-cat.h/>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-stringize.h/>
+		
+		#if <VARIADICS/>
+		
+		CAT(L, STRINGIZE(text)) // CAT(L, STRINGIZE(text))
+		
+		<BIND/>(, CAT(L, STRINGIZE(text))) // L"text
+		
+		#endif
+	</listing>
+	<derivative id="PREFIX_ID" lang="C99"/>
+	<derivative id="PREFIX_" lang="C99"/>
+</macro>
+
+<macro id="EXTERN" group="scope">
+	<abstract>
+		The <EXTERN/> macro is used to bypass the context introduced via <BIND/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><EXTERN/>(, id)</syntax>
+		<param id="id">
+			The unprefixed name of a library primitive.
+		</param>
+	</usage>
+	<para>
+		This macro is used to override the context introduced via <BIND/>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-bind.h/>
+		#include <chaos-preprocessor-stringize.h/>
+		
+		#if <VARIADICS/>
+		
+		#define STRINGIZE <PREFIX/>(STRINGIZE)
+		
+		<BIND/>(,
+		    STRINGIZE(text)
+		    <EXTERN/>(, STRINGIZE)(text)
+		)
+		// "text" "STRINGIZE(text)"
+		
+		#endif
+	</listing>
+	<derivative id="EXTERN_ID" lang="C99"/>
+	<derivative id="EXTERN_" lang="C99"/>
+</macro>
+
+<macro id="ALTERNATE" group="scope">
+	<abstract>
+		The <ALTERNATE/> macro works similarly to <PREFIX/>, but allows the use of an alternate mapping.
+	</abstract>
+	<usage lang="C99">
+		<syntax><ALTERNATE/>(a, b)</syntax>
+		<param id="a">
+			The unprefixed name of a macro.
+		</param>
+		<param id="b">
+			The the prefixed name of a macro.
+		</param>
+	</usage>
+	<para>
+		This macro behaves similarly to <PREFIX/> except that an arbitrary mapping other than <code>CHAOS_PP_</code>-prefixing can be applied.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-facilities-bind.h/>
+		
+		#if <VARIADICS/>
+		
+		#define LIB_MACRO(x) x
+		
+		#define MACRO <ALTERNATE/>(MACRO, LIB_MACRO)
+		
+		MACRO(1) // MACRO(1)
+		
+		<BIND/>(, MACRO(1)) // 1
+		
+		#endif
+	</listing>
+	<derivative id="ALTERNATE_ID" lang="C99"/>
+	<derivative id="ALTERNATE_" lang="C99"/>
+</macro>
+
+</header>

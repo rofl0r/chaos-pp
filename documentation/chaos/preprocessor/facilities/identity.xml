@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/facilities/identity.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that creates an invokable entity.
+</overview>
+
+<macro id="IDENTITY" type="indirect" group="emptiness">
+	<abstract>
+		The <IDENTITY/> macro constructs an invokable entity from its argument.
+	</abstract>
+	<usage lang="C99">
+		<syntax><IDENTITY/>(...)</syntax>
+		<param id="..." optional="1">
+			The result produced when the result of this macro is invoked.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><IDENTITY/>(x)</syntax>
+		<param id="x">
+			The result produced when the result of this macro is invoked.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a nullary invokable entity that, when invoked with <code>()</code>, expands to <var>x</var> or <code>__VA_ARGS__</code>.
+	</para>
+	<para>
+		This macro is often used as a complement to <EMPTY/> to simulate empty arguments in C (prior to C99) and C++.
+	</para>
+	<para>
+		Note that, despite its name, <IDENTITY/> is not an "identity" function in the pure sense (i.e. <code>λx.x</code> in the lambda calculus).
+	</para>
+	<listing>
+		#include <chaos-preprocessor-facilities-empty.h/>
+		#include <chaos-preprocessor-facilities-identity.h/>
+		
+		#define A(cv) cv()
+		
+		A(<EMPTY/>)           //
+		A(<IDENTITY/>(const)) // const
+	</listing>
+	<derivative id="IDENTITY_ID"/>
+	<derivative id="IDENTITY_" lang="C99"/>
+</macro>
+
+</header>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/detection/is_empty.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines macros that detect emptiness.
+</overview>
+
+<macro id="IS_EMPTY">
+	<abstract>
+		The <IS_EMPTY/> macro detects whether its argument is defined as a configuration flag with an empty replacement list.
+	</abstract>
+	<usage>
+		<syntax><IS_EMPTY/>(id)</syntax>
+		<param id="id">
+			The identifier to be tested.
+		</param>
+	</usage>
+	<para>
+		This macro detects whether its argument is defined with an empty replacement list <em>as opposed to</em> defined as <code>0</code>, defined as <code>1</code>, or undefined.
+	</para>
+	<para>
+		This macro is <em>not</em> a general purpose emptiness detection macro.
+		The <var>id</var> argument must expand to <code>0</code>, expand to <code>1</code>, expand to nothing, or not expand at all.
+		Any other input is undefined.
+	</para>
+	<x-reference id="IS_FLAG"/>
+	<x-reference id="IS_ONE"/>
+	<listing>
+		#include <chaos-preprocessor-detection-is_empty.h/>
+		
+		#define A
+		#define B 0
+		#define C 1
+		
+		<IS_EMPTY/>(A) // 1
+		<IS_EMPTY/>(B) // 0
+		<IS_EMPTY/>(C) // 0
+		<IS_EMPTY/>(D) // 0
+	</listing>
+	<derivative id="IS_EMPTY_ID"/>
+	<derivative id="IS_EMPTY_" lang="C99"/>
+</macro>
+
+<macro id="IS_EMPTY_NON_FUNCTION">
+	<abstract>
+		The <IS_EMPTY_NON_FUNCTION/> macro is a general purpose, but limited, emptiness-detection primitive.
+	</abstract>
+	<usage lang="C99">
+		<syntax><IS_EMPTY_NON_FUNCTION/>(...)</syntax>
+		<param id="..." optional="1">
+			The expression to be tested.
+		</param>
+	</usage>
+	<para>
+		If <code>__VA_ARGS__</code> is empty, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<para>
+		Though this macro is a general purpose macro (unlike <IS_EMPTY/>), it is not a complete solution to emptiness detection.
+		Specifically, <code>__VA_ARGS__</code> may not terminate with the name of a function-like macro:
+		<snippet>
+			#define FUNC() /* ... */
+			
+			<IS_EMPTY_NON_FUNCTION/>(FUNC) // invalid
+		</snippet>
+		(Full-fledged detection of emptiness is not possible without well-defined token-pasting semantics when token-pasting does not yield a single preprocessing token.)
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-detection-is_empty.h/>
+		
+		#if <VARIADICS/>
+		
+		#define AB
+		
+		<IS_EMPTY_NON_FUNCTION/>(AB) // 1
+		<IS_EMPTY_NON_FUNCTION/>(&amp;&amp;) // 0
+		
+		#endif
+	</listing>
+	<derivative id="IS_EMPTY_NON_FUNCTION_ID" lang="C99"/>
+	<derivative id="IS_EMPTY_NON_FUNCTION_" lang="C99"/>
+</macro>
+
+</header>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/recursion/auto_rec.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a binary search used to implement <link id="automatic recursion"/>.
+</overview>
+
+<macro id="AUTO_REC">
+	<abstract>
+		The <AUTO_REC/> macro performs a binary search using the predicate specified by its first argument.
+	</abstract>
+	<usage>
+		<syntax><AUTO_REC/>(pred, n2)</syntax>
+		<param id="pred">
+			The predicate that determines if the search should continue.
+			This predicate must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			<snippet>
+				pred(n)
+			</snippet>
+		</param>
+		<param id="n2">
+			The size of the group to be searched.
+			Valid values are powers of two from <code>2</code> to <LIMIT_MAG/>.
+		</param>
+	</usage>
+	<para>
+		This macro expands to the first number in the range of <code>1</code> to <var>n</var> for which <var>pred</var> expands to <code>1</code>.
+		The predicate must expand to <code>0</code> for all values preceding this value.
+		Further, the predicate must expand to <code>1</code> for all values following this value.
+		In other words, the group must be ordered with all numbers for which the predicate returns <code>0</code> preceding all numbers for which the predicate returns <code>1</code>.
+	</para>
+	<para>
+		The predicate may not use any macro that employs <link id="automatic recursion"/>, nor can the predicate invoke macros that require or perform deduction of the <link id="recursion state"/>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-arithmetic-dec.h/>
+		#include <chaos-preprocessor-arithmetic-inc.h/>
+		#include <chaos-preprocessor-cat.h/>
+		#include <chaos-preprocessor-control-expr_if.h/>
+		#include <chaos-preprocessor-detection-is_nullary.h/>
+		#include <chaos-preprocessor-punctuation-comma_if.h/>
+		#include <chaos-preprocessor-recursion-auto_rec.h/>
+		#include <chaos-preprocessor-recursion-basic.h/>
+		
+		#define USER_1(x) x
+		#define USER_2(x) x
+		#define USER_3(x) x
+		#define USER_4(x) x
+		#define USER_5(x) x
+		#define USER_6(x) x
+		#define USER_7(x) x
+		#define USER_8(x) x
+		
+		#define STATE() <AUTO_REC/>(STATE_P, 8)
+		#define STATE_P(n) <IS_NULLARY/>(USER_ ## n(()))
+		
+		#define USER USER_S(STATE())
+		#define USER_S(s) <PRIMITIVE_CAT/>(USER_, s)
+		
+		#define REPEAT(count, macro, data) \
+		    REPEAT_S(STATE(), count, macro, data) \
+		    /**/
+		#define REPEAT_S(s, count, macro, data) \
+		    REPEAT_I( \
+		        <OBSTRUCT/>(), <INC/>(s), \
+		        count, macro, data \
+		    ) \
+		    /**/
+		#define REPEAT_INDIRECT() REPEAT_I
+		#define REPEAT_I(_, s, count, macro, data) \
+		    <EXPR_IF/> _(count)( \
+		        USER_S(s) _(REPEAT_INDIRECT _()( \
+		            <OBSTRUCT/> _(), <INC/>(s), \
+		            <DEC/>(count), macro, data \
+		        )) \
+		        macro _(s, <DEC/>(count), data) \
+		    ) \
+		    /**/
+		
+		#define FIXED(s, n, text) <COMMA_IF/>(n) text
+		#define TTP(s, n, prefix) \
+		    <COMMA_IF/>(n) \
+		    template&lt; \
+		        USER(REPEAT(<INC/>(n), FIXED, class)) \
+		    &gt; class prefix ## n \
+		    /**/
+		
+		USER(REPEAT(3, TTP, T))
+		// template&lt;class&gt; class T0,
+		// template&lt;class, class&gt; class T1,
+		// template&lt;class, class, class&gt; class T2
+	</listing>
+	<derivative id="AUTO_REC_ID"/>
+	<derivative id="AUTO_REC_" lang="C99"/>
+</macro>
+
+</header>

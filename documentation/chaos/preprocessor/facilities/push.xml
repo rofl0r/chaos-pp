@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/facilities/push.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that splices two arguments.
+</overview>
+
+<macro id="PUSH" type="indirect">
+	<abstract>
+		The <PUSH/> macro splices two arguments by placing them directly adjacent to each other.
+	</abstract>
+	<usage lang="C99">
+		<syntax><PUSH/>(a, ...)</syntax>
+		<param id="a" optional="1">
+			The first argument.
+		</param>
+		<param id="..." optional="1">
+			The second argument.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><PUSH/>(a, b)</syntax>
+		<param id="a">
+			The first argument.
+		</param>
+		<param id="b">
+			The second argument.
+		</param>
+	</usage>
+	<para>
+		This macro facilitates the placement of two macro arguments directly adjacent to one another which is impossible directly.
+		<snippet>
+			#define A(x, y) <STRINGIZE/>(x y)
+			
+			A(1,2) // "1 2"
+		</snippet>
+		Normally, such whitespace has no semantic effect, but it can during the subsequent production of string literals (via the stringizing operator) or <x-var>header-name</x-var> preprocessing tokens of the <x-var>h-char-sequence</x-var> form.
+		<snippet>
+			#define B(x, y) <STRINGIZE/>(<PUSH/>(x,y))
+			
+			B(1,2) // "12"
+		</snippet>
+	</para>
+	<para>
+		Note that an argument can include surrounding whitespace:
+		<snippet>
+			#define C(x) [x]
+			
+			C(y)   // [y]
+			C( z ) // [ z ]
+		</snippet>
+		There is nothing that can be done about this in C (prior to C99) and C++ except to be extremely careful when whitespace matters.
+		In C99, however, this macro strips leading and trailing whitespace.
+	</para>
+	<para>
+		Also note that this macro <em>does not</em> concatenate the two arguments.
+		For example,
+		<snippet>
+			<PUSH/>(+,+)
+		</snippet>
+		does not result in a single <code>++</code> preprocessing token.
+		Rather, it results in two adjacent <code>+</code> preprocessing tokens with no intervening whitespace.
+		This occurs because the preprocessor operates on preprocessing tokens, not on their textual representation.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-facilities-push.h/>
+		
+		#define H(a, b) &lt;<PUSH/>(a,b).h&gt;
+		
+		#include H(+, +) // &lt;++.h&gt;
+		#include H(+, -) // &lt;+-.h&gt;
+	</listing>
+	<derivative id="PUSH_ID"/>
+	<derivative id="PUSH_" lang="C99"/>
+</macro>
+
+</header>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/logical/nor.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a logical NOR operator.
+</overview>
+
+<macro id="NOR" group="nor">
+	<abstract>
+		The <NOR/> macro expands to the logical NOR of its operands.
+	</abstract>
+	<usage>
+		<syntax><NOR/>(p)(q)</syntax>
+		<param id="p">
+			The left operand.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="q">
+			The right operand.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+	</usage>
+	<para>
+		If <var>p</var> and <var>q</var> are both <code>0</code>, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<para>
+		This macro performs a boolean conversion on each operand.
+		If this conversion is undesireable, <BITNOR/> may be used instead.
+	</para>
+	<para>
+		This macro is lazy.
+		If <var>p</var> is non-zero, <var>q</var> is not evaluated.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-debug-failure.h/>
+		#include <chaos-preprocessor-logical-nor.h/>
+		
+		<NOR/>(5)(7) // 0
+		<NOR/>(0)(0) // 1
+		
+		<NOR/>(10)(<FAILURE/>()) // 0
+	</listing>
+	<derivative id="NOR_ID"/>
+	<derivative id="NOR_" lang="C99"/>
+</macro>
+
+</header>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/lambda/curry.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a mechanism that curries the <link id="λ-placeholders"/> in a <link id="λ-expression"/>.
+</overview>
+
+<macro id="CURRY" type="indirect">
+	<abstract>
+		The <CURRY/> macro curries the <link id="λ-placeholders"/> in a <link id="λ-expression"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><CURRY/>(expr)</syntax>
+		<param id="expr" optional="1">
+			The <link id="λ-expression"/> whose <link id="λ-placeholders"/> are to be curried.
+		</param>
+	</usage>
+	<usage lang="C99">
+		<syntax><CURRY/>(expr, ...)</syntax>
+		<param id="expr" optional="1">
+			The <link id="λ-expression"/> whose <link id="λ-placeholders"/> are to be curried.
+		</param>
+		<param id="..." optional="1">
+			The arguments used to replace <link id="λ-placeholders"/> in <var>expr</var>.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="λ-expression"/> where the <link id="λ-placeholders"/> in <var>expr</var> have been replaced by arguments from <code>__VA_ARGS__</code> or curried.
+		All uses of the <SELF/> operator are also replaced.
+	</para>
+	<para>
+		As many <link id="λ-placeholders"/> as there are arguments in <code>__VA_ARGS__</code> are replaced by those arguments, and the remaining <link id="λ-placeholders"/> are shifted down.
+		For example, if <var>E</var> is a <link id="λ-expression"/> in terms of <code>_0</code>, <code>_1</code>, and <code>_2</code>, then...
+		<snippet>
+			<CURRY/>(E, X)
+		</snippet>
+		...results in a <link id="λ-expression"/> with <code>_0</code> replaced by <var>X</var>, <code>_1</code> replaced by <code>_0</code>, and <code>_2</code> replaced by <code>_1</code>.
+		Further, if two arguments are applied
+		<snippet>
+			<CURRY/>(E, X, Y)
+		</snippet>
+		...the resulting <link id="λ-expression"/> has <code>_0</code> replaced by <var>X</var>, <code>_1</code> replaced by <var>Y</var>, and <code>_2</code> replaced by <code>_0</code>.
+	</para>
+	<para>
+		This macro uses <link id="bypass semantics"/>.
+		If <link id="bypass semantics"/> are already in effect, <CURRY_BYPASS/> must be used instead.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-cat.h/>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-lambda-curry.h/>
+		#include <chaos-preprocessor-lambda-invoke.h/>
+		#include <chaos-preprocessor-lambda-ops.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		
+		#if <VARIADICS/>
+		
+		??=include <PLACEHOLDERS/>(1)
+		
+		<INVOKE/>(
+		    <CAT_/>(class T, _0) <LAMBDA/>(=) _1,
+		    x, y
+		)
+		// <CAT_ID/>()(class T, x) = y
+		
+		<INVOKE/>(
+		    <CURRY/>(
+		        <CURRY/>(
+		            <CAT_/>(class T, _0) <LAMBDA/>(=) _1,
+		            x
+		        ),
+		        y
+		    )
+		)
+		// <CAT_ID/>()(class T, x) = y
+		
+		??=include <PLACEHOLDERS/>(0)
+		
+		#endif
+	</listing>
+	<derivative id="CURRY_ID" lang="C99"/>
+	<derivative id="CURRY_" lang="C99"/>
+	<derivative id="CURRY_BYPASS">
+		<usage lang="C99">
+			<syntax><CURRY_BYPASS/>(s, expr)</syntax>
+		</usage>
+		<usage lang="C99">
+			<syntax><CURRY_BYPASS/>(s, expr, ...)</syntax>
+		</usage>
+		<derivative id="CURRY_BYPASS_ID" lang="C99"/>
+		<derivative id="CURRY_BYPASS_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

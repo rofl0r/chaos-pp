@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/list/spec.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines the core <link id="list"/> operations necessary to use a <link id="list"/> as a <link id="generic data structure"/>.
+</overview>
+
+<macro id="LIST" group="data-type">
+	<abstract>
+		The <LIST/> macro designates the name of the <link id="list"/> data structure.
+	</abstract>
+	<usage>
+		<syntax><LIST/></syntax>
+	</usage>
+	<para>
+		This macro expands to <LIST/>.
+		In other words, the identifier <LIST/> is defined as itself.
+	</para>
+</macro>
+
+<macro id="LIST_TAG" group="tag">
+	<abstract>
+		The <LIST_TAG/> macro is an identity macro used to compare type names.
+	</abstract>
+	<usage>
+		<syntax><LIST_TAG/>(tag)</syntax>
+		<param id="tag">
+			The tag used to distinguish between data structures.
+		</param>
+	</usage>
+	<para>
+		This macro is used by generic algorithms to compare the types of <link id="generic data structures"/>.
+		It should be used for no other purpose.
+	</para>
+	<derivative id="LIST_TAG_ID"/>
+	<derivative id="LIST_TAG_" lang="C99"/>
+</macro>
+
+<macro id="LIST_NIL" group="nil">
+	<abstract>
+		The <LIST_NIL/> macro expands to a nil <link id="list"/>.
+	</abstract>
+	<usage>
+		<syntax><LIST_NIL/>()</syntax>
+	</usage>
+	<listing>
+		#include <chaos-preprocessor-list-spec.h/>
+		
+		<LIST_NIL/>() // ...
+	</listing>
+	<derivative id="LIST_NIL_ID"/>
+	<derivative id="LIST_NIL_" lang="C99"/>
+</macro>
+
+<macro id="LIST_CONS" type="indirect" group="cons">
+	<abstract>
+		The <LIST_CONS/> macro appends an element to the head of an <link id="array"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><LIST_CONS/>(list, x)</syntax>
+		<param id="list">
+			The <link id="list"/> to which <var>x</var> is to be appended.
+		</param>
+		<param id="x" optional="1">
+			The element to be appended to the head of <var>list</var>.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><LIST_CONS/>(list, x)</syntax>
+		<param id="list">
+			The <link id="list"/> to which <var>x</var> is to be appended.
+		</param>
+		<param id="x">
+			The element to be appended to the head of <var>list</var>.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="list"/> containing the elements of <var>list</var> with <var>x</var> appended to the head.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-list-spec.h/>
+		
+		#define DATA() (b, (c, ...))
+		
+		<LIST_CONS/>(DATA(), a) // (a, (b, (c, ...)))
+	</listing>
+	<derivative id="LIST_CONS_ID"/>
+	<derivative id="LIST_CONS_" lang="C99"/>
+</macro>
+
+<macro id="LIST_ITEM" type="indirect" group="itemization">
+	<abstract>
+		The <LIST_ITEM/> macro is an identity macro used to encapsulate elements.
+	</abstract>
+	<usage lang="C99">
+		<syntax><LIST_ITEM/>(x)</syntax>
+		<param id="x" optional="1">
+			The element of a <link id="list"/> to be encapsulated.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><LIST_ITEM/>(x)</syntax>
+		<param id="x">
+			The element of a <link id="list"/> to be encapsulated.
+		</param>
+	</usage>
+	<para>
+		This macro is used by generic algorithms to encapsulate elements before they are passed to user-defined macros.
+		Elements in a <link id="list"/> cannot be variadic.
+		Therefore, this macro is a simple identity macro.
+	</para>
+	<derivative id="LIST_ITEM_ID"/>
+	<derivative id="LIST_ITEM_" lang="C99"/>
+</macro>
+
+<macro id="LIST_FIRST" type="indirect" group="first">
+	<abstract>
+		The <LIST_FIRST/> macro extracts the first element from a <link id="list"/>.
+	</abstract>
+	<usage>
+		<syntax><LIST_FIRST/>(list)</syntax>
+		<param id="list">
+			The <link id="list"/> whose first element is to be extracted.
+		</param>
+	</usage>
+	<para>
+		This macro expands to the first element contained in <var>list</var>.
+	</para>
+	<x-reference id="LIST_REST"/>
+	<listing>
+		#include <chaos-preprocessor-list-spec.h/>
+		
+		#define DATA() (a, (b, (c, ...)))
+		
+		<LIST_FIRST/>(DATA()) // a
+	</listing>
+	<derivative id="LIST_FIRST_ID"/>
+	<derivative id="LIST_FIRST_" lang="C99"/>
+</macro>
+
+<macro id="LIST_REST" type="indirect" group="rest">
+	<abstract>
+		The <LIST_REST/> macro removes the first element from a <link id="list"/>.
+	</abstract>
+	<usage>
+		<syntax><LIST_REST/>(list)</syntax>
+		<param id="list">
+			The <link id="list"/> whose first element is to be removed.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="list"/> containing all of the elements of <var>list</var> except the first.
+	</para>
+	<x-reference id="LIST_FIRST"/>
+	<listing>
+		#include <chaos-preprocessor-list-spec.h/>
+		
+		#define DATA() (a, (b, (c, ...)))
+		
+		<LIST_REST/>(DATA()) // (b, (c, ...))
+	</listing>
+	<derivative id="LIST_REST_ID"/>
+	<derivative id="LIST_REST_" lang="C99"/>
+</macro>
+
+<macro id="LIST_IS_CONS" group="is-cons">
+	<abstract>
+		The <LIST_IS_CONS/> macro is a predicate that tests whether a <link id="list"/> is non-nil.
+	</abstract>
+	<usage>
+		<syntax><LIST_IS_CONS/>(list)</syntax>
+		<param id="list">
+			The <link id="list"/> to be tested.
+		</param>
+	</usage>
+	<para>
+		If <var>list</var> is non-nil, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<x-reference id="LIST_IS_NIL"/>
+	<listing>
+		#include <chaos-preprocessor-list-spec.h/>
+		
+		<LIST_IS_CONS/>(...)           // 0
+		<LIST_IS_CONS/>((x, (y, ...))) // 1
+	</listing>
+	<derivative id="LIST_IS_CONS_ID"/>
+	<derivative id="LIST_IS_CONS_" lang="C99"/>
+</macro>
+
+<macro id="LIST_IS_NIL" group="is-nil">
+	<abstract>
+		The <LIST_IS_NIL/> macro is a predicate that tests whether a <link id="list"/> is nil.
+	</abstract>
+	<usage>
+		<syntax><LIST_IS_NIL/>(list)</syntax>
+		<param id="list">
+			The <link id="list"/> to be tested.
+		</param>
+	</usage>
+	<para>
+		If <var>list</var> is nil, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<x-reference id="LIST_IS_CONS"/>
+	<listing>
+		#include <chaos-preprocessor-list-spec.h/>
+		
+		<LIST_IS_NIL/>(...)           // 1
+		<LIST_IS_NIL/>((x, (y, ...))) // 0
+	</listing>
+	<derivative id="LIST_IS_NIL_ID"/>
+	<derivative id="LIST_IS_NIL_" lang="C99"/>
+</macro>
+
+</header>

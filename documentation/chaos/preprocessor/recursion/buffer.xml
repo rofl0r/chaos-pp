@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/recursion/buffer.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro used to maintain a buffer of valid <link id="recursion steps"/>.
+</overview>
+
+<macro id="BUFFER" group="buffer">
+	<abstract>
+		The <BUFFER/> macro is used to maintain a buffer of valid <link id="recursion steps"/>.
+	</abstract>
+	<usage>
+		<syntax><BUFFER/>(size)</syntax>
+		<param id="size">
+			The size of the buffer to be maintained.
+		</param>
+	</usage>
+	<para>
+		This macro is used to produce a <link id="recursion state"/> <var>size</var> steps ahead of <var>s</var>.
+	</para>
+	<para>
+		This <link id="recursion state"/> is used by some algorithms to guarantee that user-defined macros (or <link id="λ-expressions"/>) have at least <var>size</var> <link id="recursion steps"/> available when they are invoked.
+		Such an algorithm increases this <link id="recursion state"/> as the actual <link id="recursion state"/> increases.
+		When this auxiliary <link id="recursion state"/> reaches <LIMIT_EXPR/>, the algorithm performs a <link id="parametric"/> or <link id="exponential"/> jump.
+	</para>
+	<para>
+		This macro deduces the current <link id="recursion state"/> and invokes <BUFFER_S/>.
+		If the current <link id="recursion state"/> is already known, direct use of <BUFFER_S/> is more efficient.
+	</para>
+	<para>
+		This macro may not be used if <link id="bypass semantics"/> are in effect.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-arithmetic-dec.h/>
+		#include <chaos-preprocessor-arithmetic-sub.h/>
+		#include <chaos-preprocessor-comparison-not_equal.h/>
+		#include <chaos-preprocessor-control-if.h/>
+		#include <chaos-preprocessor-control-iif.h/>
+		#include <chaos-preprocessor-lambda-call.h/>
+		#include <chaos-preprocessor-limits.h/>
+		#include <chaos-preprocessor-punctuation-comma.h/>
+		#include <chaos-preprocessor-recursion-basic.h/>
+		#include <chaos-preprocessor-recursion-buffer.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		#include <chaos-preprocessor-tuple-eat.h/>
+		
+		#define REPEAT(size, count, macro, data) \
+		    REPEAT_S(<STATE/>(), size, count, macro, data) \
+		    /**/
+		#define REPEAT_S(s, size, count, macro, data) \
+		    REPEAT_I( \
+		        <NEXT/>(s), <BUFFER_S/>(s, size), \
+		        count, macro, data \
+		    ) \
+		    /**/
+		#define REPEAT_I(s, buffer, count, macro, data) \
+		    REPEAT_II( \
+		        s, s, buffer, buffer, \
+		        count, macro, <CALL/>(macro), data \
+		    ) \
+		    /**/
+		#define REPEAT_INDIRECT() REPEAT_II
+		#define REPEAT_II(s, o, buffer, orig, count, macro, _m, data) \
+		    <IIF/>( \
+		        <NOT_EQUAL/>(buffer, <LIMIT_EXPR/>) \
+		    )( \
+		        <IF/>(count)( \
+		            REPEAT_A, <TUPLE_EAT/>(9) \
+		        ), \
+		        REPEAT_B \
+		    )( \
+		        <OBSTRUCT/>(), s, o, buffer, orig, \
+		        count, macro, _m, data \
+		    ) \
+		    /**/
+		#define REPEAT_A(_, s, o, buffer, orig, count, macro, _m, data) \
+		    <EXPR_S/>(s) _(REPEAT_INDIRECT _()( \
+		        <NEXT/>(s), o, <NEXT/>(buffer), orig, \
+		        <DEC/>(count), macro, _m, data \
+		    )) \
+		    _m()(s, macro, <DEC/>(count) <COMMA/>() data) \
+		    /**/
+		#define REPEAT_B(_, s, o, buffer, orig, count, macro, _m, data) \
+		    <EXPR_S/> <OBSTRUCT/>()(o)( \
+		        REPEAT_INDIRECT <OBSTRUCT/>()()( \
+		            <NEXT/>(o), o, <NEXT/>(orig), orig, \
+		            count, macro, _m, data \
+		        ) \
+		    ) \
+		    /**/
+		
+		#define A(s, n, _) &lt; n &gt;
+		#define B(s) \
+		    <EXPR_S/>(s)(<EXPR_S/>(s)( \
+		        <EXPR_S/>(s)(<EXPR_S/>(s)( \
+		            REPEAT_S(s, 5, 15, A, ~) \
+		        )) \
+		    )) \
+		    /**/
+		
+		B(<SUB/>(<LIMIT_EXPR/>, 10))
+	</listing>
+	<derivative id="BUFFER_ID"/>
+	<derivative id="BUFFER_" lang="C99"/>
+	<derivative id="BUFFER_S">
+		<usage>
+			<syntax><BUFFER_S/>(s, size)</syntax>
+		</usage>
+		<derivative id="BUFFER_S_ID"/>
+		<derivative id="BUFFER_S_" lang="C99"/>
+	</derivative>
+</macro>
+
+<macro id="FIXED" group="buffer">
+	<overview>
+		The <FIXED/> macro is used to maintain a buffer of valid <link id="recursion steps"/>.
+	</overview>
+	<usage>
+		<syntax><FIXED/>(size)</syntax>
+		<param id="size">
+			The size of the buffer to be maintained.
+		</param>
+	</usage>
+	<para>
+		This macro is used to produce a <link id="recursion state"/> <var>size</var> steps prior to the end of the <link id="recursion backend"/>.
+	</para>
+	<para>
+		This <link id="recursion state"/> is used by some algorithms to guarantee that user-defined macros (or <link id="λ-expressions"/>) have at least <var>size</var> <link id="recursion steps"/> available when they are invoked.
+		When the actual <link id="recursion state"/> reaches this auxiliary <link id="recursion state"/>, the algorithm performs a <link id="parametric"/> or <link id="exponential"/> jump.
+	</para>
+	<para>
+		This macro deduces the current <link id="recursion state"/> and invokes <FIXED_S/>.
+		If the current <link id="recursion state"/> is already known, direct use of <FIXED_S/> is more efficient.
+	</para>
+	<para>
+		This macro may not be used if <link id="bypass semantics"/> are in effect.
+	</para>
+	<derivative id="FIXED_ID"/>
+	<derivative id="FIXED_" lang="C99"/>
+	<derivative id="FIXED_S">
+		<usage>
+			<syntax><FIXED_S/>(s, size)</syntax>
+		</usage>
+		<derivative id="FIXED_S_ID"/>
+		<derivative id="FIXED_S_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

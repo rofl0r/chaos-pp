@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/detection/is_flag.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that whether a configuration flag is set.
+</overview>
+
+<macro id="IS_FLAG">
+	<abstract>
+		The <IS_FLAG/> macro detects whether its argument is defined as <code>1</code> or with an empty replacement list.
+	</abstract>
+	<usage>
+		<syntax><IS_FLAG/>(id)</syntax>
+		<param id="id">
+			The identifier to be tested.
+		</param>
+	</usage>
+	<para>
+		This macro detects whether its argument is defined as <code>1</code> or with an empty replacement list.
+	</para>
+	<para>
+		The <var>id</var> argument must expand to <code>0</code>, expand to <code>1</code>, expand to nothing, or not expand at all.
+		Any other input is undefined.
+	</para>
+	<x-reference id="IS_EMPTY"/>
+	<x-reference id="IS_ONE"/>
+	<listing>
+		#include <chaos-preprocessor-detection-is_flag.h/>
+		
+		#define A
+		#define B 0
+		#define C 1
+		
+		<IS_FLAG/>(A) // 1
+		<IS_FLAG/>(B) // 0
+		<IS_FLAG/>(C) // 1
+		<IS_FLAG/>(D) // 0
+	</listing>
+	<derivative id="IS_FLAG_ID"/>
+	<derivative id="IS_FLAG_" lang="C99"/>
+</macro>
+
+</header>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/seq/pop_back.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that removes the last element from a <link id="sequence"/>.
+</overview>
+
+<macro id="SEQ_POP_BACK" type="indirect" group="push-pop removal">
+	<abstract>
+		The <SEQ_POP_BACK/> macro removes the last element from its argument.
+	</abstract>
+	<usage>
+		<syntax><SEQ_POP_BACK/>(seq)</syntax>
+		<param id="seq">
+			The <link id="sequence"/> whose last element is to be removed.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="sequence"/> that contains all of the elements of <var>seq</var> except the last.
+	</para>
+	<para>
+		This macro uses <link id="sequential iteration"/>.
+		As a result, the algorithm is theoretically capable of processing an <em>infinite</em> number of elements.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-seq-pop_back.h/>
+		
+		<SEQ_POP_BACK/>((a)(b)(c)) // (a)(b)
+		
+		#if <VARIADICS/>
+		
+		<SEQ_POP_BACK/>((a, b)(c)(d, e, f)) // (a, b)(c)
+		
+		#endif
+	</listing>
+	<derivative id="SEQ_POP_BACK_ID"/>
+	<derivative id="SEQ_POP_BACK_" lang="C99"/>
+</macro>
+
+</header>

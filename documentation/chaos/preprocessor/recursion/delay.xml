@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/recursion/delay.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that delays the invocation of a macro.
+</overview>
+
+<macro id="DELAY" group="deferral">
+	<abstract>
+		The <DELAY/> macro delays the expansion of a macro through an arbitrary number of scans.
+	</abstract>
+	<usage>
+		<syntax><DELAY/>(count, macro)</syntax>
+		<param id="count">
+			The number of scans through which the invocation of macro should delayed.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="macro">
+			The macro whose invocation is to be delayed.
+		</param>
+	</usage>
+	<para>
+		This macro delays the invocation of <var>macro</var> through <var>count</var> scans.
+	</para>
+	<para>
+		Normal usage includes the invocation of this macro followed by the argument list to <var>macro</var>.
+		For example,
+		<snippet>
+			#define MACRO(a, b, c) // ...
+			<DELAY/>(5, MACRO)(~, ~, ~)
+		</snippet>
+	</para>
+	<listing>
+		#include <chaos-preprocessor-recursion-delay.h/>
+		#include <chaos-preprocessor-punctuation-comma.h/>
+		#include <chaos-preprocessor-punctuation-paren.h/>
+		
+		#define A(x) B(x)
+		#define B(x) C(x)
+		#define C(x) x
+		
+		A(
+		    <DELAY/>(2, <RPAREN/>)()
+		    <DELAY/>(2, <COMMA/>)()
+		    <DELAY/>(2, <LPAREN/>)()
+		)
+		// ) , (
+	</listing>
+	<derivative id="DELAY_ID"/>
+	<derivative id="DELAY_" lang="C99"/>
+</macro>
+
+</header>

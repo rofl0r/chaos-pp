@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/seq/size.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that counts the elements in a <link id="sequence"/>.
+</overview>
+
+<macro id="SEQ_SIZE" group="size">
+	<abstract>
+		The <SEQ_SIZE/> macro counts the elements in its argument.
+	</abstract>
+	<usage lang="C99">
+		<syntax><SEQ_SIZE/>(seq)</syntax>
+		<param id="seq" optional="1">
+			The <link id="sequence"/> whose elements are to be counted.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><SEQ_SIZE/>(seq)</syntax>
+		<param id="seq">
+			The <link id="sequence"/> whose elements are to be counted.
+		</param>
+	</usage>
+	<para>
+		This macro expands to the number of elements in <var>seq</var>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-seq-size.h/>
+		
+		<SEQ_SIZE/>((+)(-)(*)(/)(%)) // 5
+		
+		#if <VARIADICS/>
+		
+		<SEQ_SIZE/>((1)(2, 2)(3, 3, 3)) // 3
+		
+		#endif
+	</listing>
+	<derivative id="SEQ_SIZE_ID"/>
+	<derivative id="SEQ_SIZE_" lang="C99"/>
+</macro>
+
+</header>

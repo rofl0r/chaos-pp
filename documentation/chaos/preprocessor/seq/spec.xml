@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/seq/spec.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines the core <link id="sequence"/> operations necessary to use a <link id="sequence"/> as a <link id="generic data structure"/>.
+</overview>
+
+<macro id="SEQ" group="data-type">
+	<abstract>
+		The <SEQ/> macro designates the name of the <link id="sequence"/> data structure.
+	</abstract>
+	<usage>
+		<syntax><SEQ/></syntax>
+	</usage>
+	<para>
+		This macro expands to <SEQ/>.
+		In other words, the identifier <SEQ/> is defined as itself.
+	</para>
+</macro>
+
+<macro id="SEQ_TAG" group="tag">
+	<abstract>
+		The <SEQ_TAG/> macro is an identity macro used to compare type names.
+	</abstract>
+	<usage>
+		<syntax><SEQ_TAG/>(tag)</syntax>
+		<param id="tag">
+			The tag used to distinguish between data structures.
+		</param>
+	</usage>
+	<para>
+		This macro is used by generic algorithms to compare the types of <link id="generic data structures"/>.
+		It should be used for no other purpose.
+	</para>
+	<derivative id="SEQ_TAG_ID"/>
+	<derivative id="SEQ_TAG_" lang="C99"/>
+</macro>
+
+<macro id="SEQ_NIL" group="nil">
+	<abstract>
+		The <SEQ_NIL/> macro expands to a nil <link id="sequence"/>.
+	</abstract>
+	<usage>
+		<syntax><SEQ_NIL/>()</syntax>
+	</usage>
+	<para>
+		In C99, this macro expands to nothing.
+		(More generally, a nil <link id="sequence"/> is an empty sequence of preprocessing tokens.)
+		In C++ (and C prior to C99), there is no such thing as a nil <link id="sequence"/> because "nothing" cannot be passed as an argument.
+		Hence, in C++ (and C prior to C99), this macro expands to a rogue value (that is uniquely recognized by the other macros in this header) such that generic algorithms can behave <em>as if</em> nil <link id="sequences"/> exist.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-seq-spec.h/>
+		
+		#if <VARIADICS/>
+		
+		<SEQ_NIL/>() //
+		
+		#else
+		
+		<SEQ_NIL/>() // unspecified
+		
+		#endif
+		
+		<SEQ_CONS/>(
+		    <SEQ_CONS/>(
+		        <SEQ_NIL/>(),
+		        b
+		    ),
+		    a
+		)
+		// (a)(b)
+	</listing>
+	<derivative id="SEQ_NIL_ID"/>
+	<derivative id="SEQ_NIL_" lang="C99"/>
+</macro>
+
+<macro id="SEQ_CONS" type="indirect" group="cons">
+	<abstract>
+		The <SEQ_CONS/> macro appends an element to the head of a <link id="sequence"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><SEQ_CONS/>(seq, ...)</syntax>
+		<param id="seq" optional="1">
+			The <link id="sequence"/> to which <code>__VA_ARGS__</code> is to be appended.
+		</param>
+		<param id="..." optional="1">
+			The element to be appended to the head of <var>seq</var>.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><SEQ_CONS/>(seq, x)</syntax>
+		<param id="seq">
+			The <link id="sequence"/> to which <var>x</var> is to be appended.
+		</param>
+		<param id="x">
+			The element to be appended to the head of <var>seq</var>.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="sequence"/> containing the elements of <var>seq</var> with <var>x</var> (or <code>__VA_ARGS__</code>) appended to the head.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-seq-spec.h/>
+		
+		<SEQ_CONS/>((y)(z), x) // (x)(y)(z)
+		
+		#if <VARIADICS/>
+		
+		<SEQ_CONS/>((a, b)(c, d), +, -) // (+, -)(a, b)(c, d)
+		<SEQ_CONS/>(, x)                // (x)
+		
+		#else
+		
+		<SEQ_CONS/>(<SEQ_NIL/>(), *) // (*)
+		
+		#endif
+	</listing>
+	<derivative id="SEQ_CONS_ID"/>
+	<derivative id="SEQ_CONS_" lang="C99"/>
+</macro>
+
+<macro id="SEQ_ITEM" type="indirect" group="itemization">
+	<abstract>
+		The <SEQ_ITEM/> macro is an identity macro used to encapsulate elements.
+	</abstract>
+	<usage lang="C99">
+		<syntax><SEQ_ITEM/>(...)</syntax>
+		<param id="..." optional="1">
+			The element of a <link id="sequence"/> to be encapsulated.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><SEQ_ITEM/>(x)</syntax>
+		<param id="x">
+			The element of a <link id="sequence"/> to be encapsulated.
+		</param>
+	</usage>
+	<para>
+		This macro is used by generic algorithms to encapsulate elements before they are passed to user-defined macros.
+	</para>
+	<para>
+		Though elements of a <link id="sequence"/> <em>can</em> have more than one sub-element in C99, this macro assumes that each element is the same arity.
+		As such, it is a simple identity macro.
+		(The <VARIADIC_SEQ_ITEM/> macro, on the other hand, assumes that elements have differing arities.)
+	</para>
+	<derivative id="SEQ_ITEM_ID"/>
+	<derivative id="SEQ_ITEM_" lang="C99"/>
+</macro>
+
+<macro id="SEQ_FIRST" type="indirect" group="first">
+	<abstract>
+		The <SEQ_FIRST/> macro extracts the first element from a <link id="sequence"/>.
+	</abstract>
+	<usage>
+		<syntax><SEQ_FIRST/>(seq)</syntax>
+		<param id="seq">
+			The <link id="sequence"/> whose first element is to be extracted.
+		</param>
+	</usage>
+	<para>
+		This macro expands to the first element contained in <var>seq</var>.
+	</para>
+	<x-reference id="SEQ_REST"/>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-seq-spec.h/>
+		
+		<SEQ_FIRST/>((1)(2)(3)) // 1
+		
+		#if <VARIADICS/>
+		
+		<SEQ_FIRST/>((a, b)(c, d)(e, f)) // a, b
+		
+		#endif
+	</listing>
+	<derivative id="SEQ_FIRST_ID"/>
+	<derivative id="SEQ_FIRST_" lang="C99"/>
+</macro>
+
+<macro id="SEQ_REST" type="indirect" group="rest">
+	<abstract>
+		The <SEQ_REST/> macro removes the first element from a <link id="sequence"/>.
+	</abstract>
+	<usage>
+		<syntax><SEQ_REST/>(seq)</syntax>
+		<param id="seq">
+			The <link id="sequence"/> whose first element is to be removed.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="sequence"/> containing all of the elements of <var>seq</var> except the first.
+	</para>
+	<x-reference id="SEQ_FIRST"/>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-seq-spec.h/>
+		
+		<SEQ_REST/>((a)(b)(c)) // (b)(c)
+		
+		#if <VARIADICS/>
+		
+		<SEQ_REST/>((a, b)(c)(d, e, f)) // (c)(d, e, f)
+		
+		#endif
+	</listing>
+	<derivative id="SEQ_REST_ID"/>
+	<derivative id="SEQ_REST_" lang="C99"/>
+</macro>
+
+<macro id="SEQ_IS_CONS" group="is-cons">
+	<abstract>
+		The <SEQ_IS_CONS/> macro is a predicate that test whether a <link id="sequence"/> is non-nil.
+	</abstract>
+	<usage lang="C99">
+		<syntax><SEQ_IS_CONS/>(seq)</syntax>
+		<param id="seq" optional="1">
+			The <link id="sequence"/> to be tested.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><SEQ_IS_CONS/>(seq)</syntax>
+		<param id="seq">
+			The <link id="sequence"/> to be tested.
+		</param>
+	</usage>
+	<para>
+		If <var>seq</var> is non-nil, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<x-reference id="SEQ_IS_NIL"/>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-seq-spec.h/>
+		
+		<SEQ_IS_CONS/>((1)(2)(3))          // 1
+		<SEQ_IS_CONS/>(<SEQ_NIL/>()) // 0
+		
+		#if <VARIADICS/>
+		
+		<SEQ_IS_CONS/>()             // 0
+		<SEQ_IS_CONS/>((a, b)(c, d)) // 1
+		
+		#endif
+	</listing>
+	<derivative id="SEQ_IS_CONS_ID"/>
+	<derivative id="SEQ_IS_CONS_" lang="C99"/>
+</macro>
+
+<macro id="SEQ_IS_NIL" group="is-nil">
+	<abstract>
+		The <SEQ_IS_NIL/> macro is a predicate that tests whether a <link id="sequence"/> is nil.
+	</abstract>
+	<usage lang="C99">
+		<syntax><SEQ_IS_NIL/>(seq)</syntax>
+		<param id="seq" optional="1">
+			The <link id="sequence"/> to be tested.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><SEQ_IS_NIL/>(seq)</syntax>
+		<param id="seq">
+			The <link id="sequence"/> to be tested.
+		</param>
+	</usage>
+	<para>
+		If <var>seq</var> is nil, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<x-reference id="SEQ_IS_CONS"/>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-seq-spec.h/>
+		
+		<SEQ_IS_NIL/>((a)(b)(c))          // 0
+		<SEQ_IS_NIL/>(<SEQ_NIL/>()) // 1
+		
+		#if <VARIADICS/>
+		
+		<SEQ_IS_NIL/>()             // 1
+		<SEQ_IS_NIL/>((a, b)(c, d)) // 0
+		
+		#endif
+	</listing>
+	<derivative id="SEQ_IS_NIL_ID"/>
+	<derivative id="SEQ_IS_NIL_" lang="C99"/>
+</macro>
+
+</header>

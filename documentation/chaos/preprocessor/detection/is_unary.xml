@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/detection/is_unary.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro used to detect unary parenthetic expressions.
+</overview>
+
+<macro id="IS_UNARY" group="parenthetic">
+	<abstract>
+		The <IS_UNARY/> macro detects whether its argument begins with a unary parenthetic expression.
+	</abstract>
+	<usage lang="C99">
+		<syntax><IS_UNARY/>(...)</syntax>
+		<param id="..." optional="1">
+			The expression to be tested.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><IS_UNARY/>(x)</syntax>
+		<param id="x">
+			The expression to be tested.
+		</param>
+	</usage>
+	<para>
+		If <var>x</var> or <code>__VA_ARGS__</code> begins with a unary parenthetic expression, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<para>
+		The expression to be tested must begin with a unary parenthetic expression or a non-parenthetic expression.
+		A parenthetic expression of any other arity is invalid input.
+	</para>
+	<para>
+		In C99, a nullary parenthetic expression <em>is</em> a unary parenthetic expression that contains an empty element.
+		Therefore, this macro expands to <code>1</code> if <code>__VA_ARGS__</code> begins with a nullary parenthetic expression.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-detection-is_unary.h/>
+		
+		<IS_UNARY/>(++)  // 0
+		<IS_UNARY/>((a)) // 1
+	</listing>
+	<derivative id="IS_UNARY_ID"/>
+	<derivative id="IS_UNARY_" lang="C99"/>
+</macro>
+
+</header>

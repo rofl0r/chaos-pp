@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/seq/variadic/transform.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an algorithm that transforms the elements of a <link id="variadic sequence"/> with a user-specified operation.
+</overview>
+
+<macro id="VARIADIC_SEQ_TRANSFORM" type="indirect" group="transformation">
+	<abstract>
+		The <VARIADIC_SEQ_TRANSFORM/> macro transforms each element of its second argument with the operation specified by its first argument.
+	</abstract>
+	<usage lang="C99">
+		<syntax><EXPR/>(<VARIADIC_SEQ_TRANSFORM/>(op, seq))</syntax>
+		<param id="op">
+			The operation used to transform each element of <var>seq</var>.
+			This operation must be either a <link id="λ-expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			<snippet>
+				op(s, tuple)
+			</snippet>
+		</param>
+		<param id="seq">
+			The <link id="variadic sequence"/> whose elements are to be transformed.
+		</param>
+	</usage>
+	<usage lang="C99">
+		<syntax><EXPR/>(<VARIADIC_SEQ_TRANSFORM/>(op, seq, ...))</syntax>
+		<param id="op">
+			<para>
+				The operation used to transformed each element of <var>seq</var>.
+				This operation must be either a <link id="λ-expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				<snippet>
+					op(s, tuple, data<sup>†</sup>)
+				</snippet>
+			</para>
+			<para>
+				<sup>†</sup>
+				The <var>data</var> pseudo-parameter must be either <code>...</code> or the number of parameters that corresponds to the number of arguments in the auxiliary data, <code>__VA_ARGS__</code>.
+			</para>
+		</param>
+		<param id="seq">
+			The <link id="variadic sequence"/> whose elements are to be transformed.
+		</param>
+		<param id="..." optional="1">
+			Auxiliary data to be passed through the algorithm to the operation.
+		</param>
+	</usage>
+	<para>
+		This macro behaves identically to <SEQ_TRANSFORM/> except that each element is wrapped in parentheses prior to being passed to the operation.
+		For example, instead of the the operation being invoked as...
+		<snippet>
+			op(s, elem, data)
+		</snippet>
+		it is invoked as...
+		<snippet>
+			op(s, (elem), data)
+		</snippet>
+	</para>
+	<para>
+		This macro deduces the current <link id="recursion state"/> and invokes <VARIADIC_SEQ_TRANSFORM_S/>.
+		If the current <link id="recursion state"/> is already known, direct use of <VARIADIC_SEQ_TRANSFORM_S/> is more efficient.
+	</para>
+	<para>
+		This macro may not be used if <link id="bypass semantics"/> are in effect.
+	</para>
+	<derivative id="VARIADIC_SEQ_TRANSFORM_ID"/>
+	<derivative id="VARIADIC_SEQ_TRANSFORM_" lang="C99"/>
+	<derivative id="VARIADIC_SEQ_TRANSFORM_S">
+		<usage lang="C99">
+			<syntax><EXPR_S/>(s)(<VARIADIC_SEQ_TRANSFORM_S/>(s, op, seq))</syntax>
+		</usage>
+		<usage lang="C99">
+			<syntax><EXPR_S/>(s)(<VARIADIC_SEQ_TRANSFORM_S/>(s, op, seq, ...))</syntax>
+		</usage>
+		<usage lang="C/C++">
+			<syntax><EXPR_S/>(s)(<VARIADIC_SEQ_TRANSFORM_S/>(s, op, seq, data))</syntax>
+		</usage>
+	</derivative>
+</macro>
+
+</header>

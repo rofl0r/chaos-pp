@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/seq/fold_right.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an algorithm that accumulates the elements of a <link id="sequence"/> from the last element to the first element.
+</overview>
+
+<macro id="SEQ_FOLD_RIGHT" type="indirect" group="accumulation">
+	<abstract>
+		The <SEQ_FOLD_RIGHT/> macro accumulates the elements of its second argument with the operation specified by its first argument.
+	</abstract>
+	<usage lang="C99">
+		<syntax><EXPR/>(<SEQ_FOLD_RIGHT/>(op, seq, ...))</syntax>
+		<param id="op">
+			<para>
+				The operation that is used to accumulate the elements of <var>seq</var>.
+				This operation must be either a <link id="λ-expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				<snippet>
+					op(s, elem<sup>†</sup>, state<sup>‡</sup>)
+				</snippet>
+			</para>
+			<para>
+				<sup>†</sup>
+				The <var>elem</var> pseudo-parameter must be the number of parameters that corresponds to the arity of each element in <var>seq</var>.
+			</para>
+			<para>
+				<sup>‡</sup>
+				The <var>state</var> pseudo-parameter must be either <code>...</code> or the number of parameters that corresponds to the number of arguments in the auxiliary data, <code>__VA_ARGS__</code>.
+			</para>
+		</param>
+		<param id="seq" optional="1">
+			The <link id="sequence"/> whose elements are to be accumulated.
+		</param>
+		<param id="..." optional="1">
+			The initial state of the accumulation.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><EXPR/>(<SEQ_FOLD_RIGHT/>(op, seq, state))</syntax>
+		<param id="op">
+			The operation that is used to accumulate the elements of <var>seq</var>.
+			This operation must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			<snippet>
+				op(s, elem, state)
+			</snippet>
+		</param>
+		<param id="seq">
+			The <link id="sequence"/> whose elements are to be accumulated.
+		</param>
+		<param id="state">
+			The initial state of the accumulation.
+		</param>
+	</usage>
+	<para>
+		The <SEQ_FOLD_RIGHT/> macro itself expands to a <link id="deferred expression"/> in terms of <code><NEXT/>(s)</code>.
+		This <link id="deferred expression"/>, when invoked by <EXPR/>, expands to the result of accumulating the elements of <var>seq</var>, from right to left, with the user-specified operation.
+		This is illustrated by the following pseudo-code:
+		<snippet>
+			op(s, seq[0], 
+			    op(s, seq[1],
+			        ...
+			            op(s, seq[length(seq) - 1], state)
+			        ...
+			    )
+			)
+		</snippet>
+	</para>
+	<para>
+		An invocation of the operation with the current <link id="recursion state"/> (<var>s</var>), a particular element (<var>elem</var>), and the current state (<var>state</var> or <code>__VA_ARGS__</code>) expands to a new state used in the accumulation of subsequent elements (or as the final result of the algorithm if no further elements exist).
+		The operation may also expand to a <link id="deferred expression"/> in terms of <code><NEXT/>(s)</code> that expands to a new state.
+		Expansion to a <link id="deferred expression"/> allows the operation to recurse on itself if necessary.
+	</para>
+	<para>
+		Invocations of the operation are trampolined such that each invocation is invoked with <code><NEXT/>(<NEXT/>(s))</code>, where <var>s</var> is the original <link id="recursion state"/> at the beginning of the algorithm (i.e. <code><STATE/>()</code>).
+		This maximizes the utility of the <link id="recursion backend"/>.
+	</para>
+	<para>
+		This macro uses <link id="sequential iteration"/>.
+		As a result, the running time of <SEQ_FOLD_RIGHT/>, described in terms of the number of <link id="recursion steps"/> required to complete the algorithm and ignoring the complexity of <var>op</var>, is a constant Θ(2).
+		As such, the algorithm is theoretically capable of processing an <em>infinite</em> number of elements.
+	</para>
+	<para>
+		This macro deduces the current <link id="recursion state"/> and invokes <SEQ_FOLD_RIGHT_S/>.
+		If the current <link id="recursion state"/> is already known, direct use of <SEQ_FOLD_RIGHT_S/> is more efficient.
+	</para>
+	<para>
+		This macro may not be used if <link id="bypass semantics"/> are in effect.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-cat.h/>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-lambda-ops.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		#include <chaos-preprocessor-seq-fold_left.h/>
+		
+		#define OP(s, elem, _) _ ## elem
+		
+		<EXPR/>(<SEQ_FOLD_RIGHT/>(
+		    OP, (a)(b)(c)(d)(e)(f), _
+		))
+		// _abcdef
+		
+		#if <VARIADICS/>
+		
+		??=include <PLACEHOLDERS/>(1)
+		
+		<EXPR/>(<SEQ_FOLD_RIGHT/>(
+		    <PRIMITIVE_CAT_/>(_2, _1),
+		    (a)(b)(c)(d)(e)(f),
+		))
+		// abcdef
+		
+		??=include <PLACEHOLDERS/>(0)
+		
+		#endif
+	</listing>
+	<derivative id="SEQ_FOLD_RIGHT_ID"/>
+	<derivative id="SEQ_FOLD_RIGHT_" lang="C99"/>
+	<derivative id="SEQ_FOLD_RIGHT_S">
+		<usage lang="C99">
+			<syntax><EXPR_S/>(s)(<SEQ_FOLD_RIGHT_S/>(s, op, seq, ...))</syntax>
+		</usage>
+		<usage lang="C/C++">
+			<syntax><EXPR_S/>(s)(<SEQ_FOLD_RIGHT_S/>(s, op, seq, state))</syntax>
+		</usage>
+		<derivative id="SEQ_FOLD_RIGHT_S_ID"/>
+		<derivative id="SEQ_FOLD_RIGHT_S_" lang="C99"/>
+	</derivative>
+</macro>
+
+</header>

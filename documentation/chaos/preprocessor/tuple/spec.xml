@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/tuple/spec.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines the core <link id="tuple"/> operations necessary to use a <link id="tuple"/> as a <link id="generic data structure"/>.
+</overview>
+
+<macro id="TUPLE" group="data-type">
+	<abstract>
+		The <TUPLE/> macro designates the name of the <link id="tuple"/> data structure.
+	</abstract>
+	<usage lang="C99">
+		<syntax><TUPLE/></syntax>
+	</usage>
+	<para>
+		This macro expands to <TUPLE/>.
+		In other words, the identifier <TUPLE/> is defined as itself.
+	</para>
+</macro>
+
+<macro id="TUPLE_TAG" group="tag">
+	<abstract>
+		The <TUPLE_TAG/> macro is an identity macro used to compare type names.
+	</abstract>
+	<usage lang="C99">
+		<syntax><TUPLE_TAG/>(tag)</syntax>
+		<param id="tag">
+			The tag used to distinguish between data structures.
+		</param>
+	</usage>
+	<para>
+		This macro is used by generic algorithms to compare the types of <link id="generic data structure"/>.
+		It should be used for no other purpose.
+	</para>
+	<derivative id="TUPLE_TAG_ID" lang="C99"/>
+	<derivative id="TUPLE_TAG_" lang="C99"/>
+</macro>
+
+<macro id="TUPLE_NIL" group="nil">
+	<abstract>
+		The <TUPLE_NIL/> macro expands to a nil <link id="tuple"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><TUPLE_NIL/>()</syntax>
+	</usage>
+	<para>
+		This macro expands to nothing.
+	</para>
+	<para>
+		Note that a nil <link id="tuple"/> is an empty sequence of preprocessing tokens.
+		In particular, when a <link id="tuple"/> is used a <link id="generic data structure"/>, nullary parentheses (e.g. <code>()</code>) are considered to be a unary <link id="tuple"/>.
+		(This differs from the <link id="tuple"/>-specific macros which treat <code>()</code> as a zero-element <link id="tuple"/>.)
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-tuple-spec.h/>
+		
+		#if <VARIADICS/>
+		
+		<TUPLE_NIL/>()                         //
+		<TUPLE_CONS/>(<TUPLE_NIL/>(), +) // (+)
+		
+		#endif
+	</listing>
+	<derivative id="TUPLE_NIL_ID" lang="C99"/>
+	<derivative id="TUPLE_NIL_" lang="C99"/>
+</macro>
+
+<macro id="TUPLE_CONS" type="indirect" group="cons">
+	<abstract>
+		The <TUPLE_CONS/> macro appends an element to the head of a <link id="tuple"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><TUPLE_CONS/>(tuple, x)</syntax>
+		<param id="tuple" optional="1">
+			The <link id="tuple"/> to which <var>x</var> is to be appended.
+		</param>
+		<param id="x" optional="1">
+			The element to be appended to the head of <var>tuple</var>.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="tuple"/> containing the elements of <var>tuple</var> with <var>x</var> appended to the head.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-tuple-spec.h/>
+		
+		#if <VARIADICS/>
+		
+		<TUPLE_CONS/>(<TUPLE_NIL/>(), a) // (a)
+		<TUPLE_CONS/>(, a)                     // (a)
+		<TUPLE_CONS/>((), a)                   // (, a)
+		
+		#endif
+	</listing>
+	<derivative id="TUPLE_CONS_ID" lang="C99"/>
+	<derivative id="TUPLE_CONS_" lang="C99"/>
+</macro>
+
+<macro id="TUPLE_ITEM" type="indirect" group="itemization">
+	<abstract>
+		The <TUPLE_ITEM/> macro is an identity macro used to encapsulate elements.
+	</abstract>
+	<usage lang="C99">
+		<syntax><TUPLE_ITEM/>(x)</syntax>
+		<param id="x" optional="1">
+			The element of a <link id="tuple"/> to be encapsulated.
+		</param>
+	</usage>
+	<para>
+		This macro is used by generic algorithms to encapsulate elements before they are passed to user-defined macros.
+		Elements in a <link id="tuple"/> cannot be variadic.
+		Therefore, this macro is a simple identity macro.
+	</para>
+	<derivative id="TUPLE_ITEM_ID" lang="C99"/>
+	<derivative id="TUPLE_ITEM_" lang="C99"/>
+</macro>
+
+<macro id="TUPLE_FIRST" type="indirect" group="first">
+	<abstract>
+		The <TUPLE_FIRST/> macro extracts the first element from a <link id="tuple"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><TUPLE_FIRST/>(tuple)</syntax>
+		<param id="tuple">
+			The <link id="tuple"/> whose first element is to be extracted.
+		</param>
+	</usage>
+	<para>
+		This macro expands to the first element contained in <var>tuple</var>.
+	</para>
+	<x-reference id="TUPLE_REST"/>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-tuple-spec.h/>
+		
+		#if <VARIADICS/>
+		
+		#define DATA() (a, b, c)
+		
+		<TUPLE_FIRST/>(DATA()) // a
+		
+		#endif
+	</listing>
+	<derivative id="TUPLE_FIRST_ID" lang="C99"/>
+	<derivative id="TUPLE_FIRST_" lang="C99"/>
+</macro>
+
+<macro id="TUPLE_REST" type="indirect" group="rest">
+	<abstract>
+		The <TUPLE_REST/> macro removes the first element from a <link id="tuple"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><TUPLE_REST/>(tuple)</syntax>
+		<param id="tuple">
+			The <link id="tuple"/> whose first element is to be removed.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="tuple"/> containing all of the elements of <var>tuple</var> except the first.
+	</para>
+	<x-reference id="TUPLE_FIRST"/>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-tuple-spec.h/>
+		
+		#if <VARIADICS/>
+		
+		#define DATA() (a, b, c)
+		
+		<TUPLE_REST/>(DATA()) // (b, c)
+		
+		#endif
+	</listing>
+	<derivative id="TUPLE_REST_ID" lang="C99"/>
+	<derivative id="TUPLE_REST_" lang="C99"/>
+</macro>
+
+<macro id="TUPLE_IS_CONS" group="is-cons">
+	<abstract>
+		The <TUPLE_IS_CONS/> macro is a predicate that tests whether a <link id="tuple"/> is non-nil.
+	</abstract>
+	<usage lang="C99">
+		<syntax><TUPLE_IS_CONS/>(tuple)</syntax>
+		<param id="tuple" optional="1">
+			The <link id="tuple"/> to be tested.
+		</param>
+	</usage>
+	<para>
+		If <var>tuple</var> is non-nil, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<x-reference id="TUPLE_IS_NIL"/>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-tuple-spec.h/>
+		
+		#if <VARIADICS/>
+		
+		<TUPLE_IS_CONS/>()                     // 0
+		<TUPLE_IS_CONS/>(<TUPLE_NIL/>()) // 0
+		<TUPLE_IS_CONS/>((x, y, z))            // 1
+		
+		#endif
+	</listing>
+	<derivative id="TUPLE_IS_CONS_ID" lang="C99"/>
+	<derivative id="TUPLE_IS_CONS_" lang="C99"/>
+</macro>
+
+<macro id="TUPLE_IS_NIL" group="is-nil">
+	<abstract>
+		The <TUPLE_IS_NIL/> macro is a predicate that tests whether a <link id="tuple"/> is nil.
+	</abstract>
+	<usage lang="C99">
+		<syntax><TUPLE_IS_NIL/>(tuple)</syntax>
+		<param id="tuple" optional="1">
+			The <link id="tuple"/> to be tested.
+		</param>
+	</usage>
+	<para>
+		If <var>tuple</var> is nil, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<x-reference id="TUPLE_IS_CONS"/>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-tuple-spec.h/>
+		
+		#if <VARIADICS/>
+		
+		<TUPLE_IS_NIL/>()                     // 1
+		<TUPLE_IS_NIL/>(<TUPLE_NIL/>()) // 1
+		<TUPLE_IS_NIL/>((x, y, z))            // 0
+		
+		#endif
+	</listing>
+	<derivative id="TUPLE_IS_NIL_ID" lang="C99"/>
+	<derivative id="TUPLE_IS_NIL_" lang="C99"/>
+</macro>
+
+</header>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/repetition/enum_shifted.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an algorithm that enumerates a user-specified target a specified number of times.
+</overview>
+
+<macro id="ENUM_SHIFTED" type="indirect" group="enumeration">
+	<abstract>
+		The <ENUM_SHIFTED/> macro enumerates its second argument one less time than the number specified by its first argument.
+	</abstract>
+	<usage lang="C99">
+		<syntax><EXPR/>(<ENUM_SHIFTED/>(count, macro))</syntax>
+		<param id="count">
+			One greater than the number of times that <var>macro</var> is to be repeated.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="macro">
+			The target that is to be repeated <var>count</var> times.
+			This target must be either a <link id="λ-expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			<snippet>
+				macro(s, n)
+			</snippet>
+		</param>
+	</usage>
+	<usage lang="C99">
+		<syntax><EXPR/>(<ENUM_SHIFTED/>(count, macro, ...))</syntax>
+		<param id="count">
+			One greater than the number of times that <var>macro</var> is to be repeated.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="macro">
+			<para>
+				The target that is to be repeated <var>count</var> times.
+				This target must be either a <link id="λ-expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				<snippet>
+					macro(s, n, data<sup>†</sup>)
+				</snippet>
+			</para>
+			<para>
+				<sup>†</sup>
+				The <var>data</var> pseudo-parameter must be either <code>...</code> or the number of parameters that corresponds to the number of arguments in the auxiliary data, <code>__VA_ARGS__</code>.
+			</para>
+		</param>
+		<param id="..." optional="1">
+			Auxiliary data to be passed through the algorithm to the target.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><EXPR/>(<ENUM_SHIFTED/>(count, macro, data))</syntax>
+		<param id="count">
+			One greater than the number of times that <var>macro</var> is to be repeated.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="macro">
+			The target that is to be repeated <var>count</var> times.
+			This target must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			<snippet>
+				macro(s, n, data)
+			</snippet>
+		</param>
+		<param id="data">
+			Auxiliary data to be passed through the algorithm to the target.
+		</param>
+	</usage>
+	<para>
+		The <ENUM_SHIFTED/> macro itself expands to a <link id="deferred expression"/> in terms of <code><NEXT/>(s)</code>.
+		This <link id="deferred expression"/>, when invoked by <EXPR/>, expands to the result of repeating the target <var>count</var> - 1 times (with a comma between each repetition).
+		This is illustrated by the following pseudo-code:
+		<snippet>
+			macro(s, 1, data),
+			    macro(s, 2, data),
+			        ...
+			            macro(s, count - 1, data)
+		</snippet>
+	</para>
+	<para>
+		The target is invoked repeatedly (from <code>1</code> to <var>count</var> - 1) with the current <link id="recursion state"/> (<var>s</var>), the current repetition (<var>n</var>), and, if it exists, the auxiliary data (<var>data</var> or <code>__VA_ARGS__</code>).
+		This target may expand to a <link id="deferred expression"/> in terms of <code><NEXT/>(s)</code>.
+		This allows the target to recurse on itself if necessary.
+	</para>
+	<para>
+		In C99, it is possible to omit the auxiliary data argument altogether.
+		This is different than passing "nothing" as the auxiliary data.
+		<snippet>
+			<EXPR/>(
+			    <ENUM_SHIFTED/>(10, MACRO,) // #1
+			    <ENUM_SHIFTED/>(10, MACRO)  // #2
+			)
+		</snippet>
+		The first line passes "nothing" as the auxiliary data, which causes <code>MACRO</code> to be invoked as (e.g.)...
+		<snippet>MACRO(s, 0,)</snippet>
+		The second line omits the auxiliary data, which causes <code>MACRO</code> to be invoked as (e.g.)...
+		<snippet>MACRO(s, 0)</snippet>
+		The fundamental difference is that, in the first line, the auxiliary data is empty (which might have a valid meaning as data), but, in the second line, <em>there is no auxiliary data</em>.
+		Hence, the algorithm is overloaded on a <link id="true-optional parameter"/>.
+	</para>
+	<para>
+		Invocations of the target are trampolined such that each invocation is invoked with <code><NEXT/>(s)</code>, where <var>s</var> is the original <link id="recursion state"/> at the beginning of the algorithm (i.e. <code><STATE/>()</code>).
+		This maximizes the utility of the <link id="recursion backend"/>.
+	</para>
+	<para>
+		Ignoring the complexity of <var>macro</var> (which is invoked exactly <var>count</var> - 1 times), the running time of <ENUM_SHIFTED/> can be described in terms of the number of <link id="recursion steps"/> required to complete the algorithm.
+		The asymptotic upper and lower bounds are Θ(<x-var>n</x-var>), where <x-var>n</x-var> is <var>count</var>.
+	</para>
+	<para>
+		This macro differs from <ENUM/> simply by omitting the first repetition which can be useful in many contexts.
+	</para>
+	<para>
+		This macro deduces the current <link id="recursion state"/> and invokes <ENUM_SHIFTED_S/>.
+		If the current <link id="recursion state"/> is already known, direct use of <ENUM_SHIFTED_S/> is more efficient.
+	</para>
+	<para>
+		This macro may not be used if <link id="bypass semantics"/> are in effect.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-arithmetic-inc.h/>
+		#include <chaos-preprocessor-cat.h/>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-lambda-ops.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		#include <chaos-preprocessor-repetition-enum.h/>
+		#include <chaos-preprocessor-repetition-enum_shifted.h/>
+		
+		#define FIXED(s, n, text) text
+		
+		#define TTP(s, n, id) \
+		    template&lt; \
+		        <EXPR_S/>(s)(<ENUM_S/>( \
+		            s, <INC/>(n), FIXED, class \
+		        )) \
+		    &gt; class id ## n \
+		    /**/
+		
+		<EXPR/>(<ENUM_SHIFTED/>(3, TTP, T))
+		// template&lt;class, class&gt; class T1,
+		// template&lt;class, class, class&gt; class T2
+		
+		#if <VARIADICS/>
+		
+		??=include <PLACEHOLDERS/>(1)
+		
+		<EXPR/>(<ENUM_SHIFTED/>(
+		    3,
+		    <LAMBDA/>(template&lt;)
+		        <EXPR_S_/>(_0)(<ENUM_S_/>(
+		            _0, <INC_/>(_1), <LAMBDA_/>(class)
+		        ))
+		    <LAMBDA/>(&gt;) <PRIMITIVE_CAT_/>(class T, _1)
+		))
+		// template&lt;class, class&gt; class T1,
+		// template&lt;class, class, class&gt; class T2
+		
+		??=include <PLACEHOLDERS/>(0)
+		
+		#endif
+	</listing>
+	<derivative id="ENUM_SHIFTED_ID"/>
+	<derivative id="ENUM_SHIFTED_" lang="C99"/>
+	<derivative id="ENUM_SHIFTED_S">
+		<usage lang="C99">
+			<syntax><EXPR_S/>(s)(<ENUM_SHIFTED_S/>(s, count, macro))</syntax>
+		</usage>
+		<usage lang="C99">
+			<syntax><EXPR_S/>(s)(<ENUM_SHIFTED_S/>(s, count, macro, ...))</syntax>
+		</usage>
+		<usage lang="C/C++">
+			<syntax><EXPR_S/>(s)(<ENUM_SHIFTED_S/>(s, count, macro, data))</syntax>
+		</usage>
+	</derivative>
+</macro>
+
+</header>

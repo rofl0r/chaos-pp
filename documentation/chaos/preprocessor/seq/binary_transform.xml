@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/seq/binary_transform.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines algorithms that facilitate <link id="sequential iteration"/> of <link id="sequences"/>.
+</overview>
+
+<macro id="SEQ_BINARY_TRANSFORM" type="indirect" group="sequential-iteration">
+	<abstract>
+		The <SEQ_BINARY_TRANSFORM/> macro converts a <link id="sequence"/> to a special from that facilitates <link id="sequential iteration"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><SEQ_BINARY_TRANSFORM/>(seq, ...)</syntax>
+		<param id="seq" optional="1">
+			The <link id="sequence"/> to be transformed.
+		</param>
+		<param id="..." optional="1">
+			The contents of the trailing special form.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><SEQ_BINARY_TRANSFORM/>(seq, def)</syntax>
+		<param id="seq">
+			The <link id="sequence"/> to be transformed.
+		</param>
+		<param id="def">
+			The contents of the trailing special form.
+		</param>
+	</usage>
+	<para>
+		This macro transforms <var>seq</var> into the special form illustrated by the following pseudo-code:
+		<snippet>
+			(<TUPLE_REM/>, seq[0])()
+			    (<TUPLE_REM/>, seq[1])()
+			        ...
+			            (<TUPLE_REM/>, seq[length(seq) - 1])()
+			                (<TUPLE_EAT/>, def)
+		</snippet>
+		In particular, each element of <var>seq</var> is converted to a binary element with <TUPLE_REM/> as the first sub-element and the original element as the second sub-element.
+		Each of the binary elements is suffixed with nullary parentheses, and the entire result of all such transformations is suffixed with a binary element with <TUPLE_EAT/> as the first sub-element and <var>def</var> or <code>__VA_ARGS__</code> as the second sub-element.
+	</para>
+	<para>
+		This form facilitates <link id="sequential iteration"/> where each <TUPLE_REM/> implies "continue" and the <TUPLE_EAT/> implies "stop".
+		The nullary parentheses after each element makes it easy to use a single macro and an indirection macro to perform <link id="sequential iteration"/> rather than two near identical macros that otherwise would be required.
+		For example,
+		<snippet>
+			#define A(seq) B(<SEQ_BINARY_TRANSFORM/>(seq, ~))
+			#define B(bin) C bin
+			#define C(m, elem) m(1)(&lt;elem&gt; C_INDIRECT)
+			#define C_INDIRECT() C
+			
+			A((a)(b)(c)(d)) // &lt;a&gt; &lt;b&gt; &lt;c&gt; &lt;d&gt;
+		</snippet>
+	</para>
+	<para>
+		This macro uses <link id="sequential iteration"/>.
+		As a result, the algorithm is theoretically capable of processing an <em>infinite</em> number of elements.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-facilities-expand.h/>
+		#include <chaos-preprocessor-punctuation-comma.h/>
+		#include <chaos-preprocessor-seq-binary_transform.h/>
+		
+		#define ENUM(seq) \
+		    <EXPAND/>( \
+		        ENUM_A <SEQ_BINARY_TRANSFORM/>(seq, ~) \
+		    ) \
+		    /**/
+
+		#if <VARIADICS/>
+		
+		#define ENUM_A(m, ...) m(?)(__VA_ARGS__ ENUM_INDIRECT)
+		#define ENUM_B(m, ...) m(?)(, __VA_ARGS__ ENUM_INDIRECT)
+		
+		#else
+		
+		#define ENUM_A(m, x) m(1)(x ENUM_INDIRECT)
+		#define ENUM_B(m, x) m(1)(<COMMA/>() x ENUM_INDIRECT)
+		
+		#endif
+
+		#define ENUM_INDIRECT() ENUM_B
+		
+		ENUM((a)(b)(c)) // a, b, c
+		
+		#if <VARIADICS/>
+		
+		ENUM(
+		    (std::pair&lt;int, int&gt;)
+		    (std::basic_string&lt;char, std::char_traits&lt;char&gt; &gt;)
+		    (std::vector&lt;double&gt;)
+		)
+		// std::pair&lt;int, int&gt;,
+		// std::basic_string&lt;char, std::char_traits&lt;char&gt; &gt;,
+		// std::vector&lt;double&gt;
+		
+		#endif
+	</listing>
+	<derivative id="SEQ_BINARY_TRANSFORM_ID"/>
+	<derivative id="SEQ_BINARY_TRANSFORM_" lang="C99"/>
+</macro>
+
+<macro id="SEQ_BINARY_TRANSFORM_2ND" type="indirect" group="sequential-iteration">
+	<abstract>
+		The <SEQ_BINARY_TRANSFORM_2ND/> macro converts a <link id="sequence"/> to a special form that facilitates <link id="sequential iteration"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><SEQ_BINARY_TRANSFORM_2ND/>(seq, ...)</syntax>
+		<param id="seq">
+			The <link id="sequence"/> to be transformed.
+		</param>
+		<param id="..." optional="1">
+			The contents of the trailing special form.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><SEQ_BINARY_TRANSFORM_2ND/>(seq, def)</syntax>
+		<param id="seq">
+			The <link id="sequence"/> to be transformed.
+		</param>
+		<param id="def">
+			The contents of the trailing special form.
+		</param>
+	</usage>
+	<para>
+		This macro transforms <var>seq</var> into the special form illustrated by the following pseudo-code:
+		<snippet>
+			(1, seq[0])()
+			    (1, seq[1])()
+			        ...
+			            (1, seq[length(seq) - 1])()
+			                (0, def)
+		</snippet>
+		In particular, each element of <var>seq</var> is converted to a binary element with <code>1</code> as the first sub-element and the original element as the second sub-element.
+		Each of the binary elements is suffixed with nullary parentheses, and the entire result of all such transformations is suffixed with a binary element with <code>0</code> as the first sub-element and <var>def</var> or <code>__VA_ARGS__</code> as the second sub-element.
+	</para>
+	<para>
+		This form facilitates <link id="sequential iteration"/> where each <code>1</code> implies "continue" and the <code>0</code> implies "stop".
+		The nullary parentheses after each element makes it easy to use a single macro and an indirection macro to perform <link id="sequential iteration"/> rather than two near identical macros that otherwise would be required.
+	</para>
+	<para>
+		This macro is very similar to <SEQ_BINARY_TRANSFORM/>, but it is slightly more general.
+		It simplifies the production of, for example, <link id="deferred expressions"/>.
+	</para>
+	<para>
+		This macro uses <link id="sequential iteration"/>.
+		As a result, the algorithm is theoretically capable of processing an <em>infinite</em> number of elements.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-control-expr_iif.h/>
+		#include <chaos-preprocessor-facilities-expand.h/>
+		#include <chaos-preprocessor-punctuation-comma_if.h/>
+		#include <chaos-preprocessor-seq-binary_transform.h/>
+		
+		#define ENUM(seq) \
+		    <EXPAND/>( \
+		        ENUM_A <SEQ_BINARY_TRANSFORM_2ND/>(seq, ~) \
+		    ) \
+		    /**/
+		
+		#if <VARIADICS/>
+		
+		#define ENUM_A(bit, ...) \
+		    <EXPR_IIF/>(bit)(__VA_ARGS__ ENUM_INDIRECT) \
+		    /**/
+		#define ENUM_B(bit, ...) \
+		    <COMMA_IF/>(bit) ENUM_A(bit, __VA_ARGS__) \
+		    /**/
+		
+		#else
+		
+		#define ENUM_A(bit, x) <EXPR_IIF/>(bit)(x ENUM_INDIRECT)
+		#define ENUM_B(bit, x) <COMMA_IF/>(bit) ENUM_A(bit, x)
+		
+		#endif
+		
+		#define ENUM_INDIRECT() ENUM_B
+		
+		ENUM((a)(b)(c)) // a, b, c
+		
+		#if <VARIADICS/>
+		
+		ENUM(
+		    (std::pair&lt;int, int&gt;)
+		    (std::basic_string&lt;char, std::char_traits&lt;char&gt; &gt;)
+		    (std::vector&lt;double&gt;)
+		)
+		// std::pair&lt;int, int&gt;,
+		// std::basic_string&lt;char, std::char_traits&lt;char&gt; &gt;,
+		// std::vector&lt;double&gt;
+		
+		#endif
+	</listing>
+	<derivative id="SEQ_BINARY_TRANSFORM_2ND_ID"/>
+	<derivative id="SEQ_BINARY_TRANSFORM_2ND_" lang="C99"/>
+</macro>
+
+</header>

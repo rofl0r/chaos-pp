@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/seq/infuse.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines an algorithm that facilitates <link id="sequential iteration"/> of <link id="sequences"/> while embedding auxiliary data.
+</overview>
+
+<macro id="SEQ_INFUSE" type="indirect" group="sequential-iteration">
+	<abstract>
+		The <SEQ_INFUSE/> macro converts a <link id="sequence"/> to a special form that facilitates <link id="sequential iteration"/> while embedding auxiliary data.
+	</abstract>
+	<usage lang="C99">
+		<syntax><SEQ_INFUSE/>(seq, ...)</syntax>
+		<param id="seq" optional="1">
+			The <link id="sequence"/> to be transformed.
+		</param>
+		<param id="..." optional="1">
+			The auxiliary data to be embedded into each element of <var>seq</var>.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><SEQ_INFUSE/>(seq, data)</syntax>
+		<param id="seq">
+			The <link id="sequence"/> to be transformed.
+		</param>
+		<param id="data">
+			The auxiliary data to be embedded into each element of <var>seq</var>.
+		</param>
+	</usage>
+	<para>
+		This macro transforms <var>seq</var> into the special form illustrated by the following pseudo-code:
+		<snippet>
+			(data, seq[0])()
+			    (data, seq[1])()
+			        ...
+			            (data, seq[length(seq) - 1])()
+		</snippet>
+		In particular, each element of <var>seq</var> is converted to a binary element with <var>data</var> or <code>__VA_ARGS__</code> as the first sub-element and the original element as the second sub-element.
+		Each of the binary elements is suffixed with nullary parentheses.
+	</para>
+	<para>
+		This form facilitates <link id="sequential iteration"/>.
+		The nullary parentheses after each element makes it easy to use a single macro and an indirection macro to perform <link id="sequential iteration"/> rather than two near identical macros that otherwise would be required.
+		For example,
+		<snippet>
+			#define A(macro, seq) B(<SEQ_INFUSE/>(seq, (1, macro)))
+			#define B(bin) C bin ((0, ~), ~)
+			#define C(pair, x) \
+			    <EXPR_IIF/>(<BINARY/>(0) pair)( \
+			        <BINARY/>(1) pair(x) C_INDIRECT \
+			    ) \
+			    /**/
+			#define C_INDIRECT() C
+			
+			#define MACRO(x) !x
+			
+			A(MACRO, (a)(b)(c)) // !a !b !c
+		</snippet>
+	</para>
+	<para>
+		Note that, unlike <SEQ_BINARY_TRANSFORM/> and <SEQ_BINARY_TRANSFORM_2ND/>, this macro does <em>not</em> add the terminal special form.
+	</para>
+	<para>
+		This macro uses <link id="sequential iteration"/>.
+		As a result, the algorithm is theoretically capable of processing an <em>infinite</em> number of elements.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-control-expr_iif.h/>
+		#include <chaos-preprocessor-facilities-expand.h/>
+		#include <chaos-preprocessor-recursion-basic.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		#include <chaos-preprocessor-seq-infuse.h/>
+		
+		#if <VARIADICS/>
+		
+		#define FOR_EACH(macro, seq, data) \
+		    FOR_EACH_I(<SEQ_INFUSE/>(seq, 1, macro, data)) \
+		    /**/
+		#define FOR_EACH_I(bin) FOR_EACH_II bin (0, ~, ~, ~)
+		#define FOR_EACH_II(bit, macro, data, ...) \
+		    <EXPR_IIF/>(bit)( \
+		        <OBSTRUCT/>(macro)(data, __VA_ARGS__) \
+		        FOR_EACH_INDIRECT \
+		    ) \
+		    /**/
+		
+		#else
+		
+		#define FOR_EACH(macro, seq, data) \
+		    FOR_EACH_I(<SEQ_INFUSE/>(seq, (1, macro, data))) \
+		    /**/
+		#define FOR_EACH_I(bin) FOR_EACH_II bin ((0, ~, ~), ~)
+		#define FOR_EACH_II(tuple, x) \
+		    <EXPAND/>( \
+		        <DEFER/>(FOR_EACH_III)( \
+		            <TUPLE_REM/>(3) tuple, x \
+		        ) \
+		    ) \
+		    /**/
+		#define FOR_EACH_III(bit, macro, data, x) \
+		    <EXPR_IIF/>(bit)( \
+		        macro <OBSTRUCT/>()(data, x) \
+		        FOR_EACH_INDIRECT \
+		    ) \
+		    /**/
+		
+		#endif
+		
+		#define FOR_EACH_INDIRECT() FOR_EACH_II
+		
+		#define A(data, x) \
+		    <EXPR/>(FOR_EACH(B, x, data)) \
+		    /**/
+		#define B(data, x) data x
+		
+		<EXPR/>(FOR_EACH(
+		    A,
+		    ((a)(b)(c))((p)(q))((x)(y)(z)), +
+		))
+		// + a + b + c + p + q + x + y + z
+		
+		#if <VARIADICS/>
+		
+		#define C(_, ...) &lt;__VA_ARGS__&gt;
+		
+		<EXPR/>(FOR_EACH(
+		    C,
+		    (a, b)(c)(d, e, f)(g, h), ~
+		))
+		// &lt;a, b&gt; &lt;c&gt; &lt;d, e, f&gt; &lt;g, h&gt;
+		
+		#endif
+	</listing>
+	<derivative id="SEQ_INFUSE_ID"/>
+	<derivative id="SEQ_INFUSE_" lang="C99"/>
+</macro>
+
+</header>

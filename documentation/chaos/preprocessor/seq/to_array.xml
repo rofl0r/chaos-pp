@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/seq/to_array.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that converts a <link id="sequence"/> to an <link id="array"/>.
+</overview>
+
+<macro id="SEQ_TO_ARRAY" type="indirect" group="conversion">
+	<abstract>
+		The <SEQ_TO_ARRAY/> macro converts a <link id="sequence"/> to an <link id="array"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><SEQ_TO_ARRAY/>(seq)</syntax>
+		<param id="seq" optional="1">
+			The <link id="sequence"/> to be converted.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><SEQ_TO_ARRAY/>(seq)</syntax>
+		<param id="seq">
+			The <link id="sequence"/> to be converted.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="array"/> containing the elements of <var>seq</var>.
+	</para>
+	<para>
+		In C99, <link id="sequences"/> can contain elements of arities other than one.
+		If such a <link id="sequence"/> is converted to an <link id="array"/>, the resulting <link id="array"/> will be invalid.
+		<snippet>
+			<SEQ_TO_ARRAY/>((a, b)(c)) // invalid
+		</snippet>
+		This macro makes no attempt to diagnose that situation.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-seq-to_array.h/>
+		
+		<SEQ_TO_ARRAY/>((a)(b)(c)(d)) // (4, (a, b, c, d))
+	</listing>
+	<derivative id="SEQ_TO_ARRAY_ID"/>
+	<derivative id="SEQ_TO_ARRAY_" lang="C99"/>
+</macro>
+
+</header>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/generics/is_elemental.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that determines if the type of a <link id="generic data structure"/> is elemental.
+</overview>
+
+<macro id="IS_ELEMENTAL">
+	<abstract>
+		The <IS_ELEMENTAL/> macro determines if the type represented by its argument is elemental.
+	</abstract>
+	<usage>
+		<syntax><IS_ELEMENTAL/>(type)</syntax>
+		<param id="type">
+			The type to be tested.
+		</param>
+	</usage>
+	<para>
+		If the type represented by <var>type</var> is elemental, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<para>
+		The type of a <link id="generic data structure"/> is elemental if the elements contained therein are not variadic (i.e. the contained elements are all the same arity).
+		Consequently, in C (prior to C99) and C++ this macro always expands to <code>1</code> because only unary elements are supported.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-generics-is_elemental.h/>
+		#include <chaos-preprocessor-list-spec.h/>
+		#include <chaos-preprocessor-seq-variadic-spec.h/>
+		
+		<IS_ELEMENTAL/>(<LIST/>) // 1
+		
+		#if <VARIADICS/>
+		
+		<IS_ELEMENTAL/>(<VARIADIC_SEQ/>) // 0
+		
+		#endif
+	</listing>
+	<derivative id="IS_ELEMENTAL_ID"/>
+	<derivative id="IS_ELEMENTAL_" lang="C99"/>
+</macro>
+
+</header>

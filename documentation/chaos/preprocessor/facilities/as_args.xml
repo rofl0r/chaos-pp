@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/facilities/as_args.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a facility used to map an <link id="array"/> to individual arguments in invocations of user-defined macros by library algorithms.
+</overview>
+
+<macro id="AS_ARGS">
+	<abstract>
+		The <AS_ARGS/> macro is used to map an <link id="array"/> to individual arguments in invocations of user-defined macros by library algorithms.
+	</abstract>
+	<usage>
+		<syntax><AS_ARGS/>(n)</syntax>
+		<param id="n">
+			The arity of the library algorithm target macro.
+			Valid values range from <code>2</code> to <LIMIT_AS_ARGS/>.
+		</param>
+	</usage>
+	<para>
+		This macro may be used with every library algorithm that allows a user-defined macro to expand to a <link id="deferred expression"/> and contains a state or auxiliary data argument.
+		These algorithms also allow a double user-specified operation as a macro name (i.e. a non-<link id="λ-expression"/>) of the following form:
+		<snippet>
+			B A
+		</snippet>
+		The <code>A</code> macro is invoked as normal but expands to the argument list for the invocation of <code>B</code>.
+		An invocation of the <AS_ARGS/> macro plays the role of <code>A</code> against some user-specified macro <code>B</code>.
+	</para>
+	<para>
+		The function of this macro is to produce a macro of arity <var>n</var> that transforms the argument list that it is passed by incrementing its first argument (<var>s</var>) and converting its last argument (a state or auxiliary data argument) from an <link id="array"/> to a comma-separated list of arguments:
+		<snippet>
+			(s, (2, (x, y)))       // (<NEXT/>(s), x, y)
+			(s, p, (3, (a, b, c))) // (<NEXT/>(s), p, a, b, c)
+		</snippet>
+		This minimizes the amount of data structure access that is necessary when variadic arguments cannot be used.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-arithmetic-dec.h/>
+		#include <chaos-preprocessor-arithmetic-inc.h/>
+		#include <chaos-preprocessor-array-elem.h/>
+		#include <chaos-preprocessor-control-while.h/>
+		#include <chaos-preprocessor-facilities-as_args.h/>
+		#include <chaos-preprocessor-logical-bool.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		
+		#define ADD(x, y) \
+		    <ARRAY_ELEM/>(0, <EXPR/>(<WHILE/>( \
+		        ADD_P <AS_ARGS/>(2), \
+		        ADD_O <AS_ARGS/>(2), \
+		        (2, (x, y)) \
+		    ))) \
+		    /**/
+		#define ADD_P(s, x, y) <BOOL/>(y)
+		#define ADD_O(s, x, y) \
+		    (2, (<INC/>(x), <DEC/>(y))) \
+		    /**/
+		
+		ADD(4, 5) // 9
+	</listing>
+	<derivative id="AS_ARGS_ID"/>
+	<derivative id="AS_ARGS_" lang="C99"/>
+</macro>
+
+</header>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/highprec/negate.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that negates a <link id="high-precision value"/>.
+</overview>
+
+<macro id="NEGATE_HP" group="negation">
+	<abstract>
+		The <NEGATE_HP/> macro negates a <link id="high-precision value"/>.
+	</abstract>
+	<usage>
+		<syntax><NEGATE_HP/>(x)</syntax>
+		<param id="x">
+			The <link id="high-precision value"/> to be negated.
+		</param>
+	</usage>
+	<para>
+		If <var>x</var> is a <link id="high-precision value"/> representing zero, this macro expands to <var>x</var>.
+		Otherwise, it expands to a <link id="high-precision value"/> that represents the negation of <var>x</var>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-highprec-demote.h/>
+		#include <chaos-preprocessor-highprec-literal.h/>
+		#include <chaos-preprocessor-highprec-negate.h/>
+		
+		<DEMOTE_HP/>(<NEGATE_HP/>(
+		    <LITERAL_HP/>(1 2 3)
+		))
+		// -123
+		
+		<DEMOTE_HP/>(<NEGATE_HP/>(
+		    <LITERAL_HP/>((-)1 2 3)
+		))
+		// 123
+	</listing>
+	<derivative id="NEGATE_HP_ID"/>
+	<derivative id="NEGATE_HP_" lang="C99"/>
+</macro>
+
+</header>

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/facilities/optional.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines facilities used to create <link id="true-optional arguments"/>.
+</overview>
+
+<macro id="IS_OPTIONAL" group="optional">
+	<abstract>
+		The <IS_OPTIONAL/> macro tests whether a <link id="true-optional argument"/> is unused.
+	</abstract>
+	<usage lang="C99">
+		<syntax><IS_OPTIONAL/>(...)</syntax>
+		<param id="..." optional="1">
+			The argument to be tested.
+		</param>
+	</usage>
+	<para>
+		If <code>__VA_ARGS__</code> contains only a single argument, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-facilities-optional.h/>
+		
+		#if <VARIADICS/>
+		
+		#define MACRO(...) <IS_OPTIONAL/>(__VA_ARGS__)
+		
+		MACRO(a)    // 1
+		MACRO(a, b) // 0
+		
+		#endif
+	</listing>
+	<derivative id="IS_OPTIONAL_ID" lang="C99"/>
+	<derivative id="IS_OPTIONAL_" lang="C99"/>
+</macro>
+
+<macro id="OPTIONAL" type="indirect" group="optional">
+	<abstract>
+		The <OPTIONAL/> macro extracts a <link id="true-optional argument"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><OPTIONAL/>(...)</syntax>
+		<param id="..." optional="1">
+			The argument from which a <link id="true-optional argument"/> is to be extracted.
+		</param>
+	</usage>
+	<para>
+		If <code>__VA_ARGS__</code> contains more than a single argument, this macro expands to the arguments following the first.
+		Otherwise, it expands to nothing.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-facilities-optional.h/>
+		
+		#if <VARIADICS/>
+		
+		#define MACRO(...) \
+		    MACRO_I( \
+		        <NON_OPTIONAL/>(__VA_ARGS__), \
+		        <OPTIONAL/>(__VA_ARGS__) \
+		    ) \
+		    /**/
+		#define MACRO_I(a, ...) (a)-(__VA_ARGS__)
+		
+		MACRO(1)    // (1)-()
+		MACRO(1, 2) // (1)-(2)
+		
+		#endif
+	</listing>
+	<derivative id="OPTIONAL_ID" lang="C99"/>
+	<derivative id="OPTIONAL_" lang="C99"/>
+</macro>
+
+<macro id="NON_OPTIONAL" type="indirect" group="optional">
+	<abstract>
+		The <NON_OPTIONAL/> macro extracts the non-optional argument to which a <link id="true-optional argument"/> may be attached.
+	</abstract>
+	<usage lang="C99">
+		<syntax><NON_OPTIONAL/>(...)</syntax>
+		<param id="..." optional="1">
+			The argument from which the non-optional argument is to be extracted.
+		</param>
+	</usage>
+	<para>
+		This macro expands to the first argument of <code>__VA_ARGS__</code>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-facilities-optional.h/>
+		
+		#define MACRO(...) <NON_OPTIONAL/>(__VA_ARGS__)
+		
+		MACRO(a)    // a
+		MACRO(a, b) // a
+	</listing>
+	<derivative id="NON_OPTIONAL_ID" lang="C99"/>
+	<derivative id="NON_OPTIONAL_" lang="C99"/>
+</macro>
+
+<macro id="PACK_OPTIONAL" type="indirect" group="optional">
+	<abstract>
+		The <PACK_OPTIONAL/> argument is used to preserve a <link id="true-optional argument"/> (or lack thereof) in subsequent invocations.
+	</abstract>
+	<usage lang="C99">
+		<syntax><PACK_OPTIONAL/>(...)</syntax>
+		<param id="..." optional="1">
+			The argument whose <link id="true-optional argument"/> is to be packed.
+		</param>
+	</usage>
+	<para>
+		If <code>__VA_ARGS__</code> contains more than a single argument, this macro expands to an expression of the form...
+		<snippet>
+			(, args)
+		</snippet>
+		...where <code>args</code> is a placeholder for all the arguments in <code>__VA_ARGS__</code> except the first.
+		Otherwise, this macro expands to nullary parentheses.
+	</para>
+	<para>
+		The result of this macro is subsequently unpacked by <EXPOSE/> in a <link id="deferred context"/> context to propogate a <link id="true-optional argument"/>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-arithmetic-dec.h/>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-control-expr_if.h/>
+		#include <chaos-preprocessor-facilities-optional.h/>
+		#include <chaos-preprocessor-recursion-basic.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		
+		#if <VARIADICS/>
+		
+		#define REPEAT(count, ...) \
+		    REPEAT_S(<STATE/>(), count, __VA_ARGS__) \
+		    /**/
+		#define REPEAT_S(s, count, ...) \
+		    REPEAT_I( \
+		        <OBSTRUCT/>(), <NEXT/>(s), count, \
+		        <NON_OPTIONAL/>(__VA_ARGS__), \
+		        <PACK_OPTIONAL/>(__VA_ARGS__) \
+		    ) \
+		    /**/
+		#define REPEAT_INDIRECT() REPEAT_I
+		#define REPEAT_I(_, s, count, macro, data) \
+		    <EXPR_IF/> _(count)( \
+		        <EXPR_S/>(s) _(REPEAT_INDIRECT _()( \
+		            <OBSTRUCT/> _(), <NEXT/>(s), \
+		            <DEC/>(count), macro, data \
+		        )) \
+		        macro _(s, <DEC/>(count) <EXPOSE/>(data)) \
+		    ) \
+		    /**/
+		
+		#define M1(s, n) &lt; n &gt;
+		#define M2(s, n, data) &lt; n, data &gt;
+		
+		<EXPR/>(REPEAT(3, M1))    // &lt; 0 &gt; &lt; 1 &gt; &lt; 2 &gt;
+		<EXPR/>(REPEAT(3, M2, ~)) // &lt; 0, ~ &gt; &lt; 1, ~ &gt; &lt; 2, ~ &gt;
+		
+		#endif
+	</listing>
+	<derivative id="PACK_OPTIONAL_ID" lang="C99"/>
+	<derivative id="PACK_OPTIONAL_" lang="C99"/>
+</macro>
+
+<macro id="EXPOSE" type="indirect" group="optional">
+	<abstract>
+		The <EXPOSE/> macro unpacks an argument previously packed with <PACK_OPTIONAL/>.
+	</abstract>
+	<usage>
+		<syntax><EXPOSE/>(pack)</syntax>
+		<param id="pack">
+			The parenthetic expression to be unpacked.
+		</param>
+	</usage>
+	<para>
+		In C99, this macro expands to the contents of the parenthetic expression <var>pack</var> (which may or may not contain a leading comma).
+		<snippet>
+			#define A ()
+			#define B (, data)
+			
+			<EXPOSE/>(A) //
+			<EXPOSE/>(B) // , data
+		</snippet>
+		In C and C++, <var>pack</var> must be a unary parenthetic expression, and this macro expands to the element contained by the unary parenthetic expression plus a leading comma.
+		<snippet>
+			#define A (data)
+			<EXPOSE/>(A) // , data
+		</snippet>
+	</para>
+	<para>
+		This macro is used to propogate <link id="true-optional arguments"/> in <link id="deferred contexts"/>.
+	</para>
+	<derivative id="EXPOSE_ID"/>
+	<derivative id="EXPOSE_" lang="C99"/>
+</macro>
+
+</header>

@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/seq/variadic/spec.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines the core <link id="variadic sequence"/> operations necessary to use a <link id="variadic sequence"/> as a <link id="generic data structure"/>.
+</overview>
+
+<macro id="VARIADIC_SEQ" group="data-type">
+	<abstract>
+		The <VARIADIC_SEQ/> macro designates the name of the <link id="variadic sequence"/> data structure.
+	</abstract>
+	<usage lang="C99">
+		<syntax><VARIADIC_SEQ/></syntax>
+	</usage>
+	<para>
+		This macro expands to <VARIADIC_SEQ/>.
+		In other words, the identifier <VARIADIC_SEQ/> is defined as itself.
+	</para>
+</macro>
+
+<macro id="VARIADIC_SEQ_TAG" group="tag">
+	<abstract>
+		The <VARIADIC_SEQ_TAG/> macro is an identity macro used to compare type names.
+	</abstract>
+	<usage lang="C99">
+		<syntax><VARIADIC_SEQ_TAG/>(tag)</syntax>
+		<param id="tag">
+			The tag used to distinguish between data structures.
+		</param>
+	</usage>
+	<para>
+		This macro is used by generic algorithms to compare the types of <link id="generic data structures"/>.
+		It should be used for no other purpose.
+	</para>
+	<derivative id="VARIADIC_SEQ_TAG_ID" lang="C99"/>
+	<derivative id="VARIADIC_SEQ_TAG_" lang="C99"/>
+</macro>
+
+<macro id="VARIADIC_SEQ_NIL" group="nil">
+	<abstract>
+		The <VARIADIC_SEQ_NIL/> macro expands to a nil <link id="variadic sequence"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><VARIADIC_SEQ_NIL/>()</syntax>
+	</usage>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-seq-variadic-spec.h/>
+		
+		#if <VARIADICS/>
+		
+		<VARIADIC_SEQ_NIL/>() //
+		
+		#endif
+	</listing>
+	<derivative id="VARIADIC_SEQ_NIL_ID" lang="C99"/>
+	<derivative id="VARIADIC_SEQ_NIL_" lang="C99"/>
+</macro>
+
+<macro id="VARIADIC_SEQ_CONS" type="indirect" group="cons">
+	<abstract>
+		The <VARIADIC_SEQ_CONS/> macro appends an element to the head of a <link id="variadic sequence"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><VARIADIC_SEQ_CONS/>(seq, ...)</syntax>
+		<param id="seq" optional="1">
+			The <link id="variadic sequence"/> to which <code>__VA_ARGS__</code> is to be appended.
+		</param>
+		<param id="..." optional="1">
+			The element to be appended to the head of <var>seq</var>.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="variadic sequence"/> containing the elements of <var>seq</var> with <code>__VA_ARGS__</code> appended to the head.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-seq-variadic-spec.h/>
+		
+		#if <VARIADICS/>
+		
+		<VARIADIC_SEQ_CONS/>((a, b)(c), +, -) // (+, -)(a, b)(c)
+		
+		#endif
+	</listing>
+	<derivative id="VARIADIC_SEQ_CONS_ID" lang="C99"/>
+	<derivative id="VARIADIC_SEQ_CONS_" lang="C99"/>
+</macro>
+
+<macro id="VARIADIC_SEQ_ITEM" type="indirect" group="itemization">
+	<abstract>
+		The <VARIADIC_SEQ_ITEM/> macro is an identity macro used to encapsulate elements.
+	</abstract>
+	<usage lang="C99">
+		<syntax><VARIADIC_SEQ_ITEM/>(...)</syntax>
+		<param id="..." optional="1">
+			The element of a <link id="variadic sequence"/> to be encapsulated.
+		</param>
+	</usage>
+	<para>
+		This macro is used by generic algorithms to encapsulate elements before they are passed to user-defined macros.
+	</para>
+	<para>
+		This macro expands to its argument wrapped in parentheses (i.e. <code>(__VA_ARGS__)</code>).
+	</para>
+	<derivative id="VARIADIC_SEQ_ITEM_ID" lang="C99"/>
+	<derivative id="VARIADIC_SEQ_ITEM_" lang="C99"/>
+</macro>
+
+<macro id="VARIADIC_SEQ_FIRST" type="indirect" group="first">
+	<abstract>
+		The <VARIADIC_SEQ_FIRST/> macro extracts the first element from a <link id="variadic sequence"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><VARIADIC_SEQ_FIRST/>(seq)</syntax>
+		<param id="seq">
+			The <link id="variadic sequence"/> whose first element is to be extracted.
+		</param>
+	</usage>
+	<para>
+		This macro expands to the first element contained in <var>seq</var>.
+	</para>
+	<x-reference id="VARIADIC_SEQ_REST"/>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-seq-variadic-spec.h/>
+		
+		#if <VARIADICS/>
+		
+		<VARIADIC_SEQ_FIRST/>((a, b)()(e, f, g)) // a, b
+		
+		#endif
+	</listing>
+	<derivative id="VARIADIC_SEQ_FIRST_ID" lang="C99"/>
+	<derivative id="VARIADIC_SEQ_FIRST_" lang="C99"/>
+</macro>
+
+<macro id="VARIADIC_SEQ_REST" type="indirect" group="rest">
+	<abstract>
+		The <VARIADIC_SEQ_REST/> macro removes the first element from a <link id="variadic sequence"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><VARIADIC_SEQ_REST/>(seq)</syntax>
+		<param id="seq">
+			The <link id="variadic sequence"/> whose first element is to be removed.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="variadic sequence"/> containing all of the elements of <var>seq</var> except the first.
+	</para>
+	<x-reference id="VARIADIC_SEQ_FIRST"/>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-seq-variadic-spec.h/>
+		
+		#if <VARIADICS/>
+		
+		<VARIADIC_SEQ_REST/>((a, b)(c)(d, e, f)) // (c)(d, e, f)
+		
+		#endif
+	</listing>
+	<derivative id="VARIADIC_SEQ_REST_ID" lang="C99"/>
+	<derivative id="VARIADIC_SEQ_REST_" lang="C99"/>
+</macro>
+
+<macro id="VARIADIC_SEQ_IS_CONS" group="is-cons">
+	<abstract>
+		The <VARIADIC_SEQ_IS_CONS/> macro is a predicate that test whether a <link id="variadic sequence"/> is non-nil.
+	</abstract>
+	<usage lang="C99">
+		<syntax><VARIADIC_SEQ_IS_CONS/>(seq)</syntax>
+		<param id="seq" optional="1">
+			The <link id="variadic sequence"/> to be tested.
+		</param>
+	</usage>
+	<para>
+		If <var>seq</var> is non-nil, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<x-reference id="VARIADIC_SEQ_IS_NIL"/>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-seq-variadic-spec.h/>
+		
+		#if <VARIADICS/>
+		
+		<VARIADIC_SEQ_IS_CONS/>()             // 0
+		<VARIADIC_SEQ_IS_CONS/>((a, b)(c, d)) // 1
+		
+		#endif
+	</listing>
+	<derivative id="VARIADIC_SEQ_IS_CONS_ID" lang="C99"/>
+	<derivative id="VARIADIC_SEQ_IS_CONS_" lang="C99"/>
+</macro>
+
+<macro id="VARIADIC_SEQ_IS_NIL" group="is-nil">
+	<abstract>
+		The <VARIADIC_SEQ_IS_NIL/> macro is a predicate that tests whether a <link id="variadic sequence"/> is nil.
+	</abstract>
+	<usage lang="C99">
+		<syntax><VARIADIC_SEQ_IS_NIL/>(seq)</syntax>
+		<param id="seq" optional="1">
+			The <link id="variadic sequence"/> to be tested.
+		</param>
+	</usage>
+	<para>
+		If <var>seq</var> is nil, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<x-reference id="VARIADIC_SEQ_IS_CONS"/>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-seq-variadic-spec.h/>
+		
+		#if <VARIADICS/>
+		
+		<VARIADIC_SEQ_IS_NIL/>()             // 1
+		<VARIADIC_SEQ_IS_NIL/>((a, b)(c, d)) // 0
+		
+		#endif
+	</listing>
+	<derivative id="VARIADIC_SEQ_IS_NIL_ID" lang="C99"/>
+	<derivative id="VARIADIC_SEQ_IS_NIL_" lang="C99"/>
+</macro>
+
+</header>

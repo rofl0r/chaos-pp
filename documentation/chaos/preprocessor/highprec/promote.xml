@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/highprec/promote.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that converts an integer literal to a <link id="high-precision value"/>.
+</overview>
+
+<macro id="PROMOTE_HP" group="promotion">
+	<abstract>
+		The <PROMOTE_HP/> macro converts its argument to a <link id="high-precision value"/>.
+	</abstract>
+	<usage>
+		<syntax><PROMOTE_HP/>(x)</syntax>
+		<param id="x">
+			The value to be converted.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+			This value may also be suffixed with a negation operator.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="high-precision value"/> representing <var>x</var>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-highprec-add.h/>
+		#include <chaos-preprocessor-highprec-demote.h/>
+		#include <chaos-preprocessor-highprec-promote.h/>
+		
+		<DEMOTE_HP/>(<ADD_HP/>(
+		    <PROMOTE_HP/>(123), <PROMOTE_HP/>(123)
+		))
+		// 246
+		
+		<DEMOTE_HP/>(<ADD_HP/>(
+		    <PROMOTE_HP/>(10-), <PROMOTE_HP/>(5)
+		))
+		// -5
+	</listing>
+	<derivative id="PROMOTE_HP_ID"/>
+	<derivative id="PROMOTE_HP_" lang="C99"/>
+</macro>
+
+</header>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/highprec/greater.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a <link id="high-precision"/> "greater-than" operator.
+</overview>
+
+<macro id="GREATER_HP" group="greater">
+	<abstract>
+		The <GREATER_HP/> macro tests whether its first operand is greater than its second operand.
+	</abstract>
+	<usage>
+		<syntax><GREATER_HP/>(x, y)</syntax>
+		<param id="x">
+			The first operand.
+		</param>
+		<param id="y">
+			The second operand.
+		</param>
+	</usage>
+	<para>
+		If <var>x</var> is greater than <var>y</var>, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-highprec-greater.h/>
+		#include <chaos-preprocessor-highprec-literal.h/>
+		
+		#define X() <LITERAL_HP/>(1 2 3)
+		#define Y() <LITERAL_HP/>(4 5)
+		
+		<GREATER_HP/>(X(), Y()) // 1
+		<GREATER_HP/>(Y(), X()) // 0
+	</listing>
+	<derivative id="GREATER_HP_ID"/>
+	<derivative id="GREATER_HP_" lang="C99"/>
+</macro>
+
+</header>

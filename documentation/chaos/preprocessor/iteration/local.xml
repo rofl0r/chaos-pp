@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/iteration/local.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines the interface to the <link id="local-iteration"/> mechanism.
+</overview>
+
+<macro id="LOCAL_LIMITS" group="local-iteration">
+	<abstract>
+		The <LOCAL_LIMITS/> macro is a user-defined <link id="named external argument"/> that specifies the lower and upper bounds of a <link id="local-iteration"/>.
+	</abstract>
+	<usage>
+		<syntax>#define <LOCAL_LIMITS/> (lower, upper)</syntax>
+		<param id="lower">
+			The lower bound of the <link id="local-iteration"/>.
+			Valid values range from <code>0</code> to <LIMIT_ITERATION/>.
+		</param>
+		<param id="upper">
+			The upper bound of the <link id="local-iteration"/>.
+			Valid values range from <code>0</code> to <LIMIT_ITERATION/>.
+		</param>
+	</usage>
+	<para>
+		This macro is defined by the user to specify the boundaries of a <link id="local-iteration"/>.
+		It is automatically undefined by the library.
+	</para>
+	<para>
+		Both <var>lower</var> and <var>upper</var> parameters are fully evaluated.
+		This implies that they may contain arithmetic, logical, and bitwise expressions.
+		<snippet>
+			#define <LOCAL_LIMITS/> (S, S + 10)
+		</snippet>
+	</para>
+	<para>
+		Note that if <var>upper</var> is <em>less</em> than <var>lower</var>, the <link id="local-iteration"/> mechanism will iterate in reverse.
+	</para>
+</macro>
+
+<macro id="LOCAL_MACRO" group="local-iteration">
+	<abstract>
+		The <LOCAL_MACRO/> macro is a user-defined <link id="named external argument"/> that specifies the iterated macro of a <link id="local-iteration"/>.
+	</abstract>
+	<usage>
+		<syntax>#define <LOCAL_MACRO/>(n) rep</syntax>
+		<param id="n">
+			The current iteration value.
+		</param>
+		<param id="rep" optional="1">
+			The replacement list to be repeated.
+		</param>
+	</usage>
+	<para>
+		This macro is defined by the user to specify the iterated macro of a <link id="local-iteration"/>.
+		It is automatically undefined by the library.
+	</para>
+	<para>
+		This macro is repeatedly invoked by the <link id="local-iteration"/> mechanism with values in the range specified by <LOCAL_LIMITS/>.
+	</para>
+</macro>
+
+<macro id="LOCAL_ITERATE" group="local-iteration">
+	<abstract>
+		The <LOCAL_ITERATE/> macro is used to initiate a <link id="local-iteration"/>.
+	</abstract>
+	<usage>
+		<syntax>??=include <LOCAL_ITERATE/>()</syntax>
+	</usage>
+	<para>
+		Both the <LOCAL_LIMITS/> macro and the <LOCAL_MACRO/> macro must be defined prior to initiating a <link id="local-iteration"/>.
+	</para>
+	<listing>
+		#include &lt;iostream&gt;
+		
+		#include <chaos-preprocessor-facilities-identity.h/>
+		#include <chaos-preprocessor-facilities-intercept.h/>
+		#include <chaos-preprocessor-iteration-local.h/>
+		#include <chaos-preprocessor-repetition-enum_params.h/>
+		
+		template&lt;class&gt; char arity(void);
+		
+		#define ARITY(id) (sizeof(arity&lt;id&gt;()) - 1)
+		
+		#define <LOCAL_LIMITS/> (0, 5)
+		#define <LOCAL_MACRO/>(n) \
+		    template&lt; \
+		        template&lt; \
+		            <ENUM_PARAMS/>(n, class <INTERCEPT/>) \
+		        &gt; class \
+		    &gt; char (&amp; arity(void))[n + 1]; \
+		    /**/
+		
+		??=include <LOCAL_ITERATE/>()
+		
+		class X { };
+		template&lt;class&gt; class Y { };
+		template&lt;class, class&gt; class Z { };
+		
+		int main(int argc, char* argv[]) {
+		    std::cout
+		        &lt;&lt; ARITY(X) &lt;&lt; ' '
+		        &lt;&lt; ARITY(Y) &lt;&lt; ' '
+		        &lt;&lt; ARITY(Z) &lt;&lt; '\n';
+		    return 0;
+		}
+	</listing>
+	<derivative id="LOCAL_ITERATE_ID"/>
+	<derivative id="LOCAL_ITERATE_" lang="C99"/>
+</macro>
+
+</header>

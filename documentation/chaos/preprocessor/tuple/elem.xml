@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/tuple/elem.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that extracts an element from a <link id="tuple"/>.
+</overview>
+
+<macro id="VARIADIC_ELEM" type="indirect" group="element-access">
+	<abstract>
+		The <VARIADIC_ELEM/> macro extracts an element of a variadic list of arguments.
+	</abstract>
+	<usage lang="C99">
+		<syntax><VARIADIC_ELEM/>(i, ...)</syntax>
+		<param id="i">
+			The zero-based index of the element to extract.
+			Valid values range from <code>0</code> to <LIMIT_TUPLE/> - 1.
+		</param>
+		<param id="..." optional="1">
+			The variadic list of arguments from which an element is to be extracted.
+		</param>
+		<para>
+			This macro expands to the <var>i</var>-th argument within <code>__VA_ARGS__</code>.
+			If the <var>i</var>-th element doesn't exist, this macro expands to nothing.
+		</para>
+	</usage>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-tuple-elem.h/>
+		
+		#if <VARIADICS/>
+		
+		<VARIADIC_ELEM/>(0, a, b, c, d, e) // a
+		<VARIADIC_ELEM/>(2, x, y, z)       // z
+		
+		#endif
+	</listing>
+	<derivative id="VARIADIC_ELEM_ID"/>
+	<derivative id="VARIADIC_ELEM_" lang="C99"/>
+</macro>
+
+<macro id="TUPLE_ELEM" type="indirect" group="element-access">
+	<abstract>
+		The <TUPLE_ELEM/> macro extracts an element from a <link id="tuple"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><TUPLE_ELEM/>(size, i, tuple)</syntax>
+		<param id="size">
+			This argument exists only for compatibility.
+			It is otherwise ignored.
+		</param>
+		<param id="i">
+			The zero-based index of the element to be extracted.
+			Valid values range from <code>0</code> to <LIMIT_TUPLE/> - 1.
+		</param>
+		<param id="tuple">
+			The <link id="tuple"/> from which an element is to be extracted.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><TUPLE_ELEM/>(size, i, tuple)</syntax>
+		<param id="size">
+			The size of the <link id="tuple"/> from which an element is to be extracted.
+			Valid values range from <code>0</code> to <LIMIT_TUPLE/>.
+		</param>
+		<param id="i">
+			The zero-based index of the element to be extracted.
+			Valid values range from <code>0</code> to <LIMIT_TUPLE/> - 1.
+		</param>
+		<param id="tuple">
+			The <link id="tuple"/> from which an element is to be extracted.
+		</param>
+	</usage>
+	<para>
+		This macro expands to the <var>i</var>-th element of <var>tuple</var>.
+		If the <var>i</var>-th element doesn't exist, this macro expands to nothing.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-tuple-elem.h/>
+		
+		<TUPLE_ELEM/>(3, 0, (a, b, c)) // a
+		
+		#if <VARIADICS/>
+		
+		<TUPLE_ELEM/>(, 2, (x, y, z)) // z
+		
+		#endif
+	</listing>
+	<derivative id="TUPLE_ELEM_ID"/>
+	<derivative id="TUPLE_ELEM_" lang="C99"/>
+</macro>
+
+</header>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/recursion/delve.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a mechanism used to count the number of scans that an argument undergoes as it travels through a macro.
+</overview>
+
+<macro id="DELVE">
+	<abstract>
+		The <DELVE/> macro counts the number of scans that it undergoes.
+	</abstract>
+	<usage>
+		<syntax><DELVE/>()</syntax>
+	</usage>
+	<para>
+		This macro counts the number of scans that it undergoes while passing through other macros.
+		It finally expands to that count when the context created by <HALT/> is detected.
+	</para>
+	<x-reference id="HALT"/>
+	<listing>
+		#include <chaos-preprocessor-recursion-delve.h/>
+		
+		#define A(x) B(x)
+		#define B(x) C(x)
+		#define C(x) x
+		
+		<HALT/>(
+		    A(<DELVE/>())
+		    B(<DELVE/>())
+		    C(<DELVE/>())
+		)
+		// 4 3 2
+	</listing>
+	<derivative id="DELVE_ID"/>
+	<derivative id="DELVE_" lang="C99"/>
+</macro>
+
+<macro id="HALT" type="indirect">
+	<abstract>
+		The <HALT/> macro is an identity macro used to create a context that causes invocations of <DELVE/> to stop counting.
+	</abstract>
+	<usage lang="C99">
+		<syntax><HALT/>(...)</syntax>
+		<param id="..." optional="1">
+			The argument possibly containing invocations of <DELVE/> to be halted.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><HALT/>(x)</syntax>
+		<param id="x">
+			The argument possibly containing invocations of <DELVE/> to be halted.
+		</param>
+	</usage>
+	<para>
+		This macro expands to <var>x</var> or <code>__VA_ARGS__</code> causing any invocations of <DELVE/> therein to expand to their current counts.
+	</para>
+	<x-reference id="DELVE"/>
+	<listing>
+		#include <chaos-preprocessor-recursion-delve.h/>
+		
+		#define A(x) B(x, x)
+		#define B(x, y) x C(x)
+		#define C(x) x
+		
+		<HALT/>(A(<DELVE/>())) // 3 4
+	</listing>
+	<derivative id="HALT_ID"/>
+	<derivative id="HALT_" lang="C99"/>
+</macro>
+
+</header>

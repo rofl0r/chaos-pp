@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/lambda/execute.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines <link id="IL operators"/> and a macro that executes <link id="IL expressions"/>.
+</overview>
+
+<macro id="ELEMENT" type="indirect" group="il">
+	<abstract>
+		The <ELEMENT/> macro is an <link id="IL operator"/> that produces an <link id="IL statement"/> representing arbitrary preprocessing tokens.
+	</abstract>
+	<usage lang="C99">
+		<syntax><ELEMENT/>(...)</syntax>
+		<param id="..." optional="1">
+			The preprocessing tokens to be represented as an <link id="IL statement"/>.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><ELEMENT/>(x)</syntax>
+		<param id="x">
+			The preprocessing tokens to be represented as an <link id="IL statement"/>.
+		</param>
+	</usage>
+	<para>
+		This macro produces an <link id="IL statement"/> representing <var>x</var> or <code>__VA_ARGS__</code>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-lambda-execute.h/>
+		
+		<EXECUTE/>(
+		    <ELEMENT/>(x) <ELEMENT/>(+) <ELEMENT/>(y)
+		)
+		// x + y
+	</listing>
+	<derivative id="ELEMENT_ID"/>
+	<derivative id="ELEMENT_" lang="C99"/>
+</macro>
+
+<macro id="OPERATOR" group="il">
+	<abstract>
+		The <OPERATOR/> macro is an <link id="IL operator"/> that produces an <link id="IL statement"/> representing a nullary operator.
+	</abstract>
+	<usage>
+		<syntax><OPERATOR/>(id)</syntax>
+		<param id="id">
+			The operator to be represented as an <link id="IL statement"/>.
+			This operator must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			<snippet>
+				id()
+			</snippet>
+		</param>
+	</usage>
+	<para>
+		This macro produces an <link id="IL statement"/> representing an invocation of <var>id</var>.
+		It is used primarily to encode preprocessing tokens that are operative (i.e. those that interfere with macro expansion because they have syntactic meaning, such as commas and parentheses).
+	</para>
+	<listing>
+		#include <chaos-preprocessor-lambda-execute.h/>
+		#include <chaos-preprocessor-punctuation-comma.h/>
+		#include <chaos-preprocessor-punctuation-paren.h/>
+		
+		<EXECUTE/>(
+		    <OPERATOR/>(<RPAREN/>)
+		        <OPERATOR/>(<COMMA/>)
+		            <OPERATOR/>(<LPAREN/>)
+		)
+		// ) , (
+	</listing>
+	<derivative id="OPERATOR_ID"/>
+	<derivative id="OPERATOR_" lang="C99"/>
+</macro>
+
+<macro id="EXECUTE" type="indirect" group="il">
+	<abstract>
+		The <EXECUTE/> macro executes an <link id="IL expression"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><EXECUTE/>(il)</syntax>
+		<param id="il" optional="1">
+			The <link id="IL expression"/> to be executed.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><EXECUTE/>(il)</syntax>
+		<param id="il">
+			The <link id="IL expression"/> to be executed.
+		</param>
+	</usage>
+	<para>
+		This macro produces the <link id="deferred expression"/> represented by <var>il</var>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-cat.h/>
+		#include <chaos-preprocessor-lambda-execute.h/>
+		#include <chaos-preprocessor-punctuation-comma.h/>
+		#include <chaos-preprocessor-punctuation-paren.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		
+		#define IL \
+		    <ELEMENT/>(<CAT_ID/>) \
+		    <ELEMENT/>(()) \
+		    <OPERATOR/>(<LPAREN/>) \
+		    <ELEMENT/>(1) \
+		    <OPERATOR/>(<COMMA/>) \
+		    <ELEMENT/>(2) \
+		    <OPERATOR/>(<RPAREN/>) \
+		    /**/
+		
+		<EXECUTE/>(IL) // <CAT_ID/>()(1, 2)
+		
+		<EXPR/>(
+		    <EXECUTE/>(IL)
+		)
+		// 12
+	</listing>
+	<derivative id="EXECUTE_ID"/>
+	<derivative id="EXECUTE_" lang="C99"/>
+</macro>
+
+</header>

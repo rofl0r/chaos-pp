@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/extended/auto_cat.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a recursive concatenation macro.
+</overview>
+
+<macro id="AUTO_CAT" type="object" group="concatenation">
+	<abstract>
+		The <AUTO_CAT/> macro is a concatenation macro that employs <link id="automatic recursion"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><AUTO_CAT/>(a, ...)</syntax>
+		<param id="a" optional="1">
+			The left operand of the concatenation.
+		</param>
+		<param id="..." optional="1">
+			The right operand of the concatenation.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><AUTO_CAT/>(a, b)</syntax>
+		<param id="a">
+			The left operand of the concatenation.
+		</param>
+		<param id="b">
+			The right operand of the concatenation.
+		</param>
+	</usage>
+	<para>
+		This macro behaves identically to <CAT/> except that it utilizes <link id="automatic recursion"/>.
+		It supports up to <LIMIT_AUTO_CAT/> nested concatenations.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-extended-auto_cat.h/>
+		
+		#define AA <AUTO_CAT/>(B, B)
+		#define BB <AUTO_CAT/>(C, C)
+		#define CC 1
+		
+		<AUTO_CAT/>(A, A) // 1
+	</listing>
+	<derivative id="AUTO_CAT_ID"/>
+	<derivative id="AUTO_CAT_" lang="C99"/>
+</macro>
+
+<macro id="PRIMITIVE_AUTO_CAT" type="object" group="concatenation">
+	<abstract>
+		The <PRIMITIVE_AUTO_CAT/> macro is a concatenation macro that employs <link id="automatic recursion"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><PRIMITIVE_AUTO_CAT/>(a, ...)</syntax>
+		<param id="a" optional="1">
+			The left operand of the concatenation.
+		</param>
+		<param id="..." optional="1">
+			The right operand of the concatenation.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><PRIMITIVE_AUTO_CAT/>(a, b)</syntax>
+		<param id="a">
+			The left operand of the concatenation.
+		</param>
+		<param id="b">
+			The right operand of the concatenation.
+		</param>
+	</usage>
+	<para>
+		This macro behaves identically to <PRIMITIVE_CAT/> except that it utilizes <link id="automatic recursion"/>.
+		It supports up to <LIMIT_AUTO_CAT/> nested concatenations.
+	</para>
+	<derivative id="PRIMITIVE_AUTO_CAT_ID"/>
+	<derivative id="PRIMITIVE_AUTO_CAT_" lang="C99"/>
+</macro>
+
+</header>

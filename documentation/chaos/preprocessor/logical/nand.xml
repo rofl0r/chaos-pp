@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/logical/nand.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a logical NAND operator.
+</overview>
+
+<macro id="NAND" group="nand">
+	<abstract>
+		The <NAND/> macro expands to the logical NAND of its operands.
+	</abstract>
+	<usage>
+		<syntax><NAND/>(p)(q)</syntax>
+		<param id="p">
+			The left operand.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="q">
+			The right operand.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+	</usage>
+	<para>
+		If both <var>p</var> and <var>q</var> are non-zero, this macro expands to <code>0</code>.
+		Otherwise, it expands to <code>1</code>.
+	</para>
+	<para>
+		This macro performs a boolean conversion on each operand.
+		If this conversion is undesireable, <BITNAND/> may be used instead.
+	</para>
+	<para>
+		This macro is lazy.
+		If <var>p</var> is <code>0</code>, <var>q</var> is not evaluated.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-debug-failure.h/>
+		#include <chaos-preprocessor-logical-nand.h/>
+		
+		<NAND/>(5)(7) // 0
+		<NAND/>(3)(0) // 1
+		
+		<NAND/>(0)(<FAILURE/>()) // 1
+	</listing>
+	<derivative id="NAND_ID"/>
+	<derivative id="NAND_" lang="C99"/>
+</macro>
+
+</header>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/recursion/rail.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro used to delay the invocation of another macro through an arbitrary number of scans.
+</overview>
+
+<macro id="RAIL" group="deferral">
+	<abstract>
+		The <RAIL/> macro creates a <link id="rail"/> of its argument.
+	</abstract>
+	<usage>
+		<syntax><RAIL/>(macro)</syntax>
+		<param id="macro">
+			The macro whose invocation is to be delayed.
+		</param>
+	</usage>
+	<para>
+		This macro delays the invocation of <var>macro</var> until the context introduced by <WALL/> is found.
+	</para>
+	<para>
+		Normal usage includes the invocation of this macro followed by the argument list to <var>macro</var>.
+		For example,
+		<snippet>
+			#define MACRO(a, b, c) // ...
+			<RAIL/>(MACRO)(~, ~, ~)
+		</snippet>
+	</para>
+	<para>
+		If and when the <WALL/> context is found, this macro expands to a <link id="deferred expression"/> that contains an invocation of <var>macro</var> against the trailing arguments.
+	</para>
+	<x-reference id="WALL"/>
+	<listing>
+		#include <chaos-preprocessor-punctuation-comma.h/>
+		#include <chaos-preprocessor-punctuation-paren.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		#include <chaos-preprocessor-recursion-rail.h/>
+		
+		#define A(x) B(x)
+		#define B(x) C(x)
+		#define C(x) x
+		
+		A(<COMMA/>()) // error
+		
+		<EXPR/>(<WALL/>(
+		    A(
+		        <RAIL/>(<RPAREN/>)()
+		        <RAIL/>(<COMMA/>)()
+		        <RAIL/>(<LPAREN/>)()
+		    )
+		))
+		// ) , (
+	</listing>
+	<derivative id="RAIL_ID"/>
+	<derivative id="RAIL_" lang="C99"/>
+</macro>
+
+<macro id="WALL" type="indirect">
+	<abstract>
+		The <WALL/> macro causes <link id="rails"/> to expand.
+	</abstract>
+	<usage lang="C99">
+		<syntax><WALL/>(...)</syntax>
+		<param id="..." optional="1">
+			The argument whose <link id="rails"/> are to be expanded.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><WALL/>(x)</syntax>
+		<param id="x">
+			The argument whose <link id="rails"/> are to be expanded.
+		</param>
+	</usage>
+	<para>
+		This macro is an identity macro that expands to <var>x</var> or <code>__VA_ARGS__</code> except that all <link id="rails"/> created by <RAIL/> that are contained in <var>x</var> or <code>__VA_ARGS__</code> are expanded to <link id="deferred expressions"/>.
+		Consequently, normal usage includes a wrapping <EXPR/> or similar to evaluate the resulting <link id="deferred expressions"/> if any.
+		For example,
+		<snippet>
+			<EXPR/>(<WALL/>(...))
+		</snippet>
+	</para>
+	<x-reference id="RAIL"/>
+	<derivative id="WALL_ID"/>
+	<derivative id="WALL_" lang="C99"/>
+</macro>
+
+</header>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/facilities/type.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro used to non-intrusively encode types that contain open commas.
+</overview>
+
+<macro id="TYPE" type="indirect" group="encoding">
+	<abstract>
+		The <TYPE/> macro is a <link id="rail"/> used to encode types that contain open commas.
+	</abstract>
+	<usage lang="C99">
+		<syntax><TYPE/>(...)</syntax>
+		<param id="..." optional="1">
+			The type containing open commas to be encoded.
+		</param>
+	</usage>
+	<para>
+		This macro expands to <code>__VA_ARGS__</code> when (and only when) the context introduced by <WALL/> macro is present.
+	</para>
+	<para>
+		The common use case for this macro is currently theoretical, as C++ does not yet allow variadic arguments.
+	</para>
+	<x-reference id="WALL"/>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-facilities-type.h/>
+		#include <chaos-preprocessor-recursion-rail.h/>
+		
+		#if <VARIADICS/>
+		
+		#define MACRO(type) type
+		
+		MACRO(int) // int
+		
+		<WALL/>(
+		    MACRO(<TYPE/>(std::pair&lt;int, int&gt;))
+		)
+		// std::pair&lt;int, int&gt;
+		
+		#endif
+	</listing>
+	<derivative id="TYPE_ID" lang="C99"/>
+	<derivative id="TYPE_" lang="C99"/>
+</macro>
+
+</header>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/tuple/reverse.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that reverses the elements in a <link id="tuple"/>.
+</overview>
+
+<macro id="TUPLE_REVERSE" type="indirect" group="reversal">
+	<abstract>
+		The <TUPLE_REVERSE/> macro reverses the elements in a <link id="tuple"/> of the specified size.
+	</abstract>
+	<usage>
+		<syntax><TUPLE_REVERSE/>(size, tuple)</syntax>
+		<param id="size">
+			The size of the <link id="tuple"/> whose elements are to be reversed.
+			Valid values range from <code>0</code> to <LIMIT_TUPLE/>.
+		</param>
+		<param id="tuple">
+			The <link id="tuple"/> whose elements are to be reversed.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="tuple"/> containing the elements of <var>tuple</var> in reverse order.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-tuple-reverse.h/>
+		
+		<TUPLE_REVERSE/>(3, (a, b, c)) // (c, b, a)
+	</listing>
+	<derivative id="TUPLE_REVERSE_ID"/>
+	<derivative id="TUPLE_REVERSE_" lang="C99"/>
+</macro>
+
+</header>

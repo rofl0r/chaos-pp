@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/lambda/ops.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines basic operators used to build <link id="λ-expressions"/>.
+</overview>
+
+<macro id="LAMBDA" type="indirect">
+	<abstract>
+		The <LAMBDA/> macro is used to create a <link id="λ-binding"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><LAMBDA/>(...)</syntax>
+		<param id="..." optional="1">
+			The argument on which a <link id="λ-binding"/> is to be created.
+		</param>
+	</usage>
+	<para>
+		This macro produces a <link id="λ-expression"/> containing <code>__VA_ARGS__</code>.
+	</para>
+	<para>
+		The primary purpose of this macro is to bind certain elements of a <link id="λ-expression"/> such that the parsing mechanism can parse <em>past</em> those elements.
+		Technically, just about <em>any</em> sequence of preprocessing tokens is a <link id="λ-expression"/>.
+		Because of the limitations of the preprocessor, however, the <link id="λ-mechanism"/> cannot parse past certain types of preprocessing tokens.
+		For example, in the following code:
+		<snippet>
+			<INVOKE/>(+ _1, x)
+		</snippet>
+		The <link id="λ-mechanism"/> cannot reach the <code>_1</code>, and consequently cannot replace it.
+		This macro may be used in such situations to bind preprocessing tokens.
+		<snippet>
+			<INVOKE/>(<LAMBDA/>(+) _1, x) // + x
+		</snippet>
+	</para>
+	<para>
+		Another purpose of this macro is to create <link id="λ-expressions"/> that contain open commas.
+		One of the rules of a <link id="λ-expression"/> is that it must be passable as a single argument, so an expression such as
+		<snippet>
+			a, b
+		</snippet>
+		cannot be a <link id="λ-expression"/>.
+		This macro allows for the creation of such expressions.
+		<snippet>
+			<LAMBDA/>(a, b)
+		</snippet>
+	</para>
+	<para>
+		Finally, the last purpose of this macro is to define <link id="λ-bindings"/> on macro names.
+		For an arbitrary macro <code>MACRO</code>, this is commonly accomplished in one of two ways.
+		The first is...
+		<snippet>
+			#define MACRO_ <LAMBDA/>(MACRO)
+		</snippet>
+		The second is...
+		<snippet>
+			#define MACRO_ <LAMBDA/>(MACRO_ID)()
+		</snippet>
+		The second form requires an indirection macro, <code>MACRO_ID</code>, that expands to <code>MACRO</code> when invoked with nullary parentheses.
+		This indirection acts as a buffer that allows the resulting <link id="λ-expression"/> to pass through <code>MACRO</code> without the identifier <code>MACRO</code> becoming disabled.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-arithmetic-dec.h/>
+		#include <chaos-preprocessor-arithmetic-inc.h/>
+		#include <chaos-preprocessor-cat.h/>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-control-while.h/>
+		#include <chaos-preprocessor-lambda-invoke.h/>
+		#include <chaos-preprocessor-lambda-ops.h/>
+		#include <chaos-preprocessor-logical-bool.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		#include <chaos-preprocessor-tuple-elem.h/>
+		
+		#if <VARIADICS/>
+		
+		??=include <PLACEHOLDERS/>(1)
+		
+		<EXPR/>(<INVOKE/>(
+		    <CAT_/>(class T, _0) <LAMBDA/>(=) _1,
+		    x, y
+		))
+		// class Tx = y
+		
+		#define ADD(x, y) \
+		    <VARIADIC_ELEM/>( \
+		        0, \
+		        <EXPR/>(<WHILE/>( \
+		            <BOOL_/>(_2), \
+		            <LAMBDA/>( \
+		                <INC_/>(_1), <DEC_/>(_2) \
+		            ), \
+		            x, y \
+		        )) \
+		    ) \
+		    /**/
+		
+		ADD(5, 6) // 11
+		
+		#define MACRO(a, b) { a, b }
+		#define MACRO_ID() MACRO
+		#define MACRO_ <LAMBDA/>(MACRO_ID)()
+		
+		<EXPR/>(<INVOKE/>(
+		    MACRO_(_0, _1),
+		    p, q \
+		))
+		// { p, q }
+		
+		??=include <PLACEHOLDERS/>(0)
+		
+		#endif
+	</listing>
+	<derivative id="LAMBDA_ID" lang="C99"/>
+	<derivative id="LAMBDA_" lang="C99"/>
+</macro>
+
+<macro id="ESCAPE" type="indirect">
+	<abstract>
+		The <ESCAPE/> macro produces a <link id="λ-expression"/> whose contents are not parsed by the <link id="λ-mechanism"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><ESCAPE/>(...)</syntax>
+		<param id="..." optional="1">
+			The preprocessing tokens to be escaped.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="λ-expression"/> that prevents <code>__VA_ARGS__</code> from being parsed by the <link id="λ-mechanism"/>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-cat.h/>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-lambda-invoke.h/>
+		#include <chaos-preprocessor-lambda-ops.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		
+		#if <VARIADICS/>
+		
+		??=include <PLACEHOLDERS/>(1)
+		
+		<EXPR/>(<INVOKE/>(
+		    <EXPR/>(<INVOKE/>(
+		        _0,
+		        <ESCAPE/>(
+		            <CAT_/>(class T, _0) <LAMBDA/>(=) _1
+		        )
+		    )),
+		    x, int
+		))
+		// class Tx = int
+		
+		??=include <PLACEHOLDERS/>(0)
+		
+		#endif
+	</listing>
+	<derivative id="ESCAPE_ID" lang="C99"/>
+	<derivative id="ESCAPE_" lang="C99"/>
+</macro>
+
+<macro id="OVERRIDE" type="indirect">
+	<abstract>
+		The <OVERRIDE/> macro provides a means for the <link id="λ-mechanism"/> to parse <link id="tuples"/> that contain more than <LIMIT_LAMBDA/> elements.
+	</abstract>
+	<usage lang="C99">
+		<syntax><OVERRIDE/>(...)</syntax>
+		<param id="..." optional="1">
+			The elements of a <link id="tuple"/>.
+		</param>
+	</usage>
+	<para>
+		The <link id="λ-mechanism"/> stores internal data in <link id="tuple"/> elements beyond <LIMIT_LAMBDA/> elements.
+		This imposes a restriction on <link id="λ-expressions"/> such that they cannot contain <link id="tuples"/> containing more than <LIMIT_LAMBDA/> elements.
+		This macro overrides that restriction by explicitly telling the <link id="λ-mechanism"/> that a <link id="tuple"/> is to be parsed as a <link id="tuple"/> rather than as internal data.
+	</para>
+	<para>
+		This macro is a more explicit form of the following <link id="λ-expression"/>:
+		<snippet>
+			(<LAMBDA/>(__VA_ARGS__))
+		</snippet>
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-lambda-invoke.h/>
+		#include <chaos-preprocessor-lambda-ops.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		
+		#if <VARIADICS/>
+		
+		<EXPR/>(<INVOKE/>(
+		    <OVERRIDE/>(a, <PARAM/>(0), <PARAM/>(1)),
+		    b, c
+		))
+		// (a, b, c)
+		
+		#endif
+	</listing>
+	<derivative id="OVERRIDE_ID" lang="C99"/>
+	<derivative id="OVERRIDE_" lang="C99"/>
+</macro>
+
+<macro id="SELF">
+	<abstract>
+		The <SELF/> macro expands to the <link id="λ-expression"/> currently being parsed.
+	</abstract>
+	<usage lang="C99">
+		<syntax><SELF/>()</syntax>
+	</usage>
+	<para>
+		This macro expands to the <link id="λ-expression"/> currently being parsed.
+		This allows a <link id="λ-expression"/> to recurse on itself.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-arithmetic-dec.h/>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-lambda-invoke.h/>
+		#include <chaos-preprocessor-lambda-ops.h/>
+		#include <chaos-preprocessor-punctuation-comma_if.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		
+		#if <VARIADICS/>
+		
+		??=include <PLACEHOLDERS/>(1)
+		
+		<EXPR/>(<INVOKE/>(
+		    <EXPR_IF_/>(_0)(
+		        <EXPR_/>(<INVOKE_/>(
+		            <SELF/>(), <DEC_/>(_0)
+		        ))
+		        <COMMA_IF_/>(<DEC_/>(_0))
+		        <CAT_/>(class T, <DEC_/>(_0))
+		    ),
+		    3
+		))
+		// class T0, class T2, class T3
+		
+		??=include <PLACEHOLDERS/>(0)
+		
+		#endif
+	</listing>
+	<derivative id="SELF_ID" lang="C99"/>
+	<derivative id="SELF_" lang="C99"/>
+</macro>
+
+<macro id="PARAM" group="placeholders">
+	<abstract>
+		The <PARAM/> macro produces a reference to a <link id="λ-placeholder"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax><PARAM/>(n)</syntax>
+		<param id="n">
+			The index of the <link id="λ-placeholder"/> to be referenced.
+			Valid values range from <code>0</code> to <LIMIT_PLACEHOLDERS/> - 1.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a reference to the <var>n</var>-th <link id="λ-placeholder"/>.
+	</para>
+	<para>
+		This macro is an longhand form of direct use of the <link id="λ-placeholders"/> (e.g. <code>_0</code>, <code>_1</code>, etc.) which are more convenient to use, but cannot always be defined.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-extended-variadic_cat.h/>
+		#include <chaos-preprocessor-lambda-invoke.h/>
+		#include <chaos-preprocessor-lambda-ops.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		
+		#if <VARIADICS/>
+		
+		<EXPR/>(<INVOKE/>(
+		    <VARIADIC_CAT_/>(
+		        <PARAM/>(0), <PARAM/>(1), <PARAM/>(2)
+		    ),
+		    x, y, z
+		))
+		// xyz
+		
+		#endif
+	</listing>
+	<derivative id="PARAM_ID" lang="C99"/>
+	<derivative id="PARAM_" lang="C99"/>
+</macro>
+
+<macro id="PLACEHOLDERS" group="placeholders">
+	<abstract>
+		The <PLACEHOLDERS/> macro is used to define and undefine the <link id="λ-placeholders"/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax>??=include <PLACEHOLDERS/>(bit)</syntax>
+		<param id="bit">
+			The value that determines whether the <link id="λ-placeholders"/> should be defined or undefined.
+			Valid values are <code>0</code> and <code>1</code>.
+		</param>
+	</usage>
+	<para>
+		If <var>bit</var> expands to <code>1</code>, the <link id="λ-placeholders"/> (e.g. <code>_0</code>, <code>_1</code>, etc.) are defined by the library.
+		Otherwise, they are undefined.
+	</para>
+	<para>
+		It is important that the definitions of the <link id="λ-placeholders"/> only exist temporarily because they are unprefixed macro definitions that will interfere with any other use of those identifiers.
+		Therefore, for every use of <PLACEHOLDERS/> that enables the <link id="λ-placeholders"/>, there should be a matching use of <PLACEHOLDERS/> that disables them.
+		The library cannot enforce this directly, but the <WITH_PLACEHOLDERS/> mechanism may be used to enforce it, or the longhand <PARAM/> form may be used instead.
+	</para>
+	<para>		
+		Names that begin with an underscore are reserved for the implementation in file scope (C) or the global namespace (C++).
+		Consequently, if a standard header is included while the <link id="λ-placeholders"/> are defined, the result is undefined behavior.
+		As a general rule, no "normal" headers should be included while the <link id="λ-placeholders"/> are defined.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-lambda-invoke.h/>
+		#include <chaos-preprocessor-lambda-ops.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		
+		#define MACRO(x, y) x + y
+		
+		#if <VARIADICS/>
+
+		<EXPR/>(<INVOKE/>(
+		    <LAMBDA/>(MACRO)(
+		        <PARAM/>(0), <PARAM/>(1)
+		    ),
+		    1, 2
+		))
+		// 1 + 2
+		
+		??=include <PLACEHOLDERS/>(1)
+		
+		<EXPR/>(<INVOKE/>(
+		    <LAMBDA/>(MACRO)(_0, _1),
+		    1, 2
+		))
+		// 1 + 2
+		
+		??=include <PLACEHOLDERS/>(0)
+		
+		#endif
+	</listing>
+	<derivative id="PLACEHOLDERS_ID" lang="C99"/>
+	<derivative id="PLACEHOLDERS_" lang="C99"/>
+</macro>
+
+<macro id="INCLUDE" group="placeholders">
+	<abstract>
+		The <INCLUDE/> macro is a user-defined <link id="named external argument"/> that specifies the file that should be included by <WITH_PLACEHOLDERS/>.
+	</abstract>
+	<usage lang="C99">
+		<syntax>#define <INCLUDE/> file</syntax>
+		<param id="file">
+			The quoted path of the file to be included.
+		</param>
+	</usage>
+	<para>
+		This macro is defined by the user prior to the use of <WITH_PLACEHOLDERS/>.
+		When <WITH_PLACEHOLDERS/> is used, the file specified by <var>file</var> is included with the <link id="λ-placeholders"/> defined.
+		Upon completion of the inclusion, the <link id="λ-placeholders"/> are undefined.
+	</para>
+	<para>
+		This macro is automatically undefined by the library.
+	</para>
+</macro>
+
+<macro id="IS_WITH_PLACEHOLDERS" group="placeholders">
+	<abstract>
+		The <IS_WITH_PLACEHOLDERS/> is defined when the <link id="λ-placeholders"/> are defined.
+	</abstract>
+	<usage lang="C99">
+		<syntax><IS_WITH_PLACEHOLDERS/></syntax>
+	</usage>
+	<para>
+		If the <link id="λ-placeholders"/> are defined, this macro expands to <code>1</code>.
+		Otherwise, it is not defined.
+	</para>
+</macro>
+
+<macro id="WITH_PLACEHOLDERS" group="placeholders">
+	<abstract>
+		The <WITH_PLACEHOLDERS/> macro is used to include a file with the <link id="λ-placeholders"/> defined only for that file.
+	</abstract>
+	<usage lang="C99">
+		<syntax>??=include <WITH_PLACEHOLDERS/>()</syntax>
+	</usage>
+	<para>
+		This macro defines the <link id="λ-placeholders"/> (e.g. <code>_0</code>, <code>_1</code>, <code>_2</code>, etc.), includes the file specified by the <link id="named external argument"/> <INCLUDE/>, and then undefines the <link id="λ-placeholders"/>.
+		This functionality can be used to enforce the guideline that every definition of the unsafe <link id="λ-placeholders"/> is followed by a corresponding undefinition.
+	</para>
+	<listing>
+		// file.h
+		#if !<IS_WITH_PLACEHOLDERS/>
+		
+		#ifndef FILE_H
+		#define FILE_H
+		
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-extended-variadic_cat.h/>
+		#include <chaos-preprocessor-lambda-invoke.h/>
+		#include <chaos-preprocessor-lambda-ops.h/>
+		
+		#if <VARIADICS/>
+		
+		#define <INCLUDE/> "file.h"
+		??=include <WITH_PLACEHOLDERS/>()
+		
+		#endif
+		
+		#endif // FILE_H
+		
+		#else
+		
+		<EXPR/>(<INVOKE/>(
+		    <VARIADIC_CAT_/>(_0, _1, _2, _3, _4, _5),
+		    a, b, c, d, e
+		))
+		// abcde
+		
+		#endif
+	</listing>
+	<derivative id="WITH_PLACEHOLDERS_ID" lang="C99"/>
+	<derivative id="WITH_PLACEHOLDERS_" lang="C99"/>
+</macro>
+
+</header>

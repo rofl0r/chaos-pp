@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header name="chaos/preprocessor/seq/range.h" author="Paul Mensonides" date="2003-2004">
+<overview>
+	The <self/> header defines a macro that extracts a range of elements from a <link id="sequence"/>.
+</overview>
+
+<macro id="SEQ_RANGE" type="indirect" group="range">
+	<abstract>
+		The <SEQ_RANGE/> macro extracts the range of elements specified by its first two arguments from its third argument.
+	</abstract>
+	<usage lang="C99">
+		<syntax><SEQ_RANGE/>(i, len, seq)</syntax>
+		<param id="i">
+			The zero-based index of the first element to be extracted.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="len">
+			The number of elements to be extracted.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="seq" optional="1">
+			The <link id="sequence"/> from which elements are to be extracted.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><SEQ_RANGE/>(i, len, seq)</syntax>
+		<param id="i">
+			The zero-based index of the first element to be extracted.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="len">
+			The number of elements to be extracted.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="seq">
+			The <link id="sequence"/> from which elements are to be extracted.
+		</param>
+	</usage>
+	<para>
+		This macro expands to a <link id="sequence"/> containing <var>len</var> elements from <var>seq</var> starting at the <var>i</var>-th element of <var>seq</var>.
+		Consequently, <var>seq</var> must contain the entire range specified by <var>i</var> and <var>len</var>.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-seq-range.h/>
+		
+		<SEQ_RANGE/>(1, 3, (a)(b)(c)(d)(e)) // (b)(c)(d)
+		
+		#if <VARIADICS/>
+		
+		<SEQ_RANGE/>(0, 0,) //
+		<SEQ_RANGE/>(1, 2, (a, b)(c)(d, e)(f)) // (c)(d, e)
+		
+		#endif
+	</listing>
+	<derivative id="SEQ_RANGE_ID"/>
+	<derivative id="SEQ_RANGE_" lang="C99"/>
+</macro>
+
+</header>

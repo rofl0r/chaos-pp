@@ -13,6 +13,8 @@
 # define CHAOS_PREPROCESSOR_REPETITION_H
 #
 # include <chaos/preprocessor/repetition/delineate.h>
+# include <chaos/preprocessor/repetition/delineate_from_to.h>
+# include <chaos/preprocessor/repetition/delineate_from_to_trailing.h>
 # include <chaos/preprocessor/repetition/delineate_params.h>
 # include <chaos/preprocessor/repetition/delineate_shifted.h>
 # include <chaos/preprocessor/repetition/delineate_shifted_params.h>
@@ -21,6 +23,8 @@
 # include <chaos/preprocessor/repetition/delineate_trailing.h>
 # include <chaos/preprocessor/repetition/delineate_trailing_params.h>
 # include <chaos/preprocessor/repetition/enum.h>
+# include <chaos/preprocessor/repetition/enum_from_to.h>
+# include <chaos/preprocessor/repetition/enum_from_to_trailing.h>
 # include <chaos/preprocessor/repetition/enum_params.h>
 # include <chaos/preprocessor/repetition/enum_shifted.h>
 # include <chaos/preprocessor/repetition/enum_shifted_params.h>

@@ -32,7 +32,7 @@
 # /* CHAOS_PP_MOD_BYPASS */
 #
 # define CHAOS_PP_MOD_BYPASS(s, x, y) \
-    CHAOS_PP_TUPLE_ELEM( \
+    CHAOS_PP_TUPLE_ELEM_SHADOW( \
         4, 1, \
         (CHAOS_PP_EXPR_S(s)(CHAOS_IP_DIV_1(CHAOS_PP_OBSTRUCT(), CHAOS_PP_PREV(s), 0, x, y, 0))) \
     ) \

@@ -39,7 +39,7 @@
 # /* CHAOS_PP_MUL_BYPASS */
 #
 # define CHAOS_PP_MUL_BYPASS(s, x, y) \
-    CHAOS_PP_TUPLE_ELEM( \
+    CHAOS_PP_TUPLE_ELEM_SHADOW( \
         4, 0, \
         (CHAOS_PP_EXPR_S(s)(CHAOS_IP_MUL_1(CHAOS_PP_OBSTRUCT(), CHAOS_PP_PREV(s), 0, x, y, 0))) \
     ) \
@@ -53,17 +53,17 @@
 # define CHAOS_IP_MUL_INDIRECT(n) CHAOS_IP_MUL_ ## n
 # define CHAOS_IP_MUL_0(s, im) CHAOS_IP_MUL_1(CHAOS_PP_OBSTRUCT(), s, im)
 # define CHAOS_IP_MUL_1(_, s, r, x, y, z) \
-    CHAOS_PP_IIF _( \
+    CHAOS_PP_IIF_SHADOW _( \
         CHAOS_PP_BITAND(CHAOS_PP_IS_VALID(s))(CHAOS_PP_NOT_EQUAL(r, CHAOS_PP_LIMIT_MAG)) \
     )( \
-        CHAOS_PP_IF _(z)( \
-            CHAOS_PP_EXPONENTIAL(s, CHAOS_PP_PREV, CHAOS_IP_MUL_INDIRECT, CHAOS_PP_TUPLE_REM(4)(CHAOS_PP_INC(r), x, y, CHAOS_PP_DEC(z))), \
+        CHAOS_PP_IF_SHADOW _(z)( \
+            CHAOS_PP_EXPONENTIAL(s, CHAOS_PP_PREV, CHAOS_IP_MUL_INDIRECT, CHAOS_PP_TUPLE_REM_SHADOW(4)(CHAOS_PP_INC(r), x, y, CHAOS_PP_DEC(z))), \
             CHAOS_PP_IF _(y)( \
-                CHAOS_PP_EXPONENTIAL(s, CHAOS_PP_PREV, CHAOS_IP_MUL_INDIRECT, CHAOS_PP_TUPLE_REM(4)(r, x, CHAOS_PP_DEC(y), x)), \
-                CHAOS_PP_TUPLE_REM(4) _(r, x, y, z) \
+                CHAOS_PP_EXPONENTIAL(s, CHAOS_PP_PREV, CHAOS_IP_MUL_INDIRECT, CHAOS_PP_TUPLE_REM_SHADOW(4)(r, x, CHAOS_PP_DEC(y), x)), \
+                CHAOS_PP_TUPLE_REM_SHADOW(4) _(r, x, y, z) \
             ) \
         ), \
-        CHAOS_PP_TUPLE_REM(4) _(r, x, y, z) \
+        CHAOS_PP_TUPLE_REM_SHADOW(4) _(r, x, y, z) \
     ) \
     /**/
 #

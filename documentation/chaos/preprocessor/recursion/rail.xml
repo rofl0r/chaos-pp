@@ -4,7 +4,7 @@
 	The <self/> header defines a macro used to delay the invocation of another macro through an arbitrary number of scans.
 </overview>
 
-<macro id="RAIL" group="deferral">
+<macro id="RAIL" group="deferral rail">
 	<abstract>
 		The <RAIL/> macro creates a <link id="rail"/> of its argument.
 	</abstract>
@@ -28,7 +28,6 @@
 	<para>
 		If and when the <WALL/> context is found, this macro expands to a <link id="deferred expression"/> that contains an invocation of <var>macro</var> against the trailing arguments.
 	</para>
-	<x-reference id="WALL"/>
 	<listing>
 		#include <chaos-preprocessor-punctuation-comma.h/>
 		#include <chaos-preprocessor-punctuation-paren.h/>
@@ -54,7 +53,38 @@
 	<derivative id="RAIL_" lang="C99"/>
 </macro>
 
-<macro id="WALL" type="indirect">
+<macro id="UNSAFE_RAIL" group="deferral rail">
+	<abstract>
+		The <UNSAFE_RAIL/> macro creates a <link id="rail"/> of its argument.
+	</abstract>
+	<usage>
+		<syntax><UNSAFE_RAIL/>(macro)</syntax>
+		<param id="macro">
+			The macro whose invocation is to be delayed.
+		</param>
+	</usage>
+	<para>
+		This macro delays the invocation of <var>macro</var> until the context introduced by <WALL/> is found.
+	</para>
+	<para>
+		Normal usage includes the invocation of this macro followed by the argument list to <var>macro</var>.
+		For example,
+		<snippet>
+			#define MACRO(a, b, c) // ...
+			<UNSAFE_RAIL/>(MACRO)(~, ~, ~)
+		</snippet>
+	</para>
+	<para>
+		If and when the <WALL/> context is found, this macro expands to an invocation of <var>macro</var> against the trailing arguments.
+		This is similar in function to <RAIL/>, but it does not yield a <link id="deferred expression"/>.
+		The direct invocation makes <UNSAFE_RAIL/> less robust because <var>macro</var> is expanded in the <WALL/> context (which implies that no <link id="rails"/> can result from the invocation of <var>macro</var>).
+		The benefit of <UNSAFE_RAIL/> is that no outer <EXPR/> is required, which is syntactically cleaner.
+	</para>
+	<derivative id="UNSAFE_RAIL_ID"/>
+	<derivative id="UNSAFE_RAIL_" lang="C99"/>
+</macro>
+
+<macro id="WALL" type="indirect" group="rail">
 	<abstract>
 		The <WALL/> macro causes <link id="rails"/> to expand.
 	</abstract>

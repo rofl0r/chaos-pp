@@ -13,5 +13,6 @@
 # define CHAOS_PREPROCESSOR_CONTROL_X_H
 #
 # include <chaos/preprocessor/control/x/while.h>
+# include <chaos/preprocessor/control/x/while_aux.h>
 #
 # endif

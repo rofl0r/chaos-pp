@@ -12,78 +12,110 @@
 # ifndef CHAOS_PREPROCESSOR_ARBITRARY_MUL_H
 # define CHAOS_PREPROCESSOR_ARBITRARY_MUL_H
 #
-# include <chaos/preprocessor/arbitrary/add.h>
-# include <chaos/preprocessor/arbitrary/detail/clean.h>
-# include <chaos/preprocessor/arbitrary/detail/is_shorter.h>
-# include <chaos/preprocessor/arbitrary/detail/merge.h>
-# include <chaos/preprocessor/arbitrary/detail/namespace.h>
+# include <chaos/_preprocessor/arbitrary/add.h>
+# include <chaos/_preprocessor/arbitrary/detail/fix.h>
+# include <chaos/_preprocessor/arbitrary/detail/merge.h>
+# include <chaos/_preprocessor/arbitrary/detail/plus.h>
+# include <chaos/_preprocessor/arbitrary/detail/scan.h>
+# include <chaos/_preprocessor/arbitrary/detail/special.h>
+# include <chaos/_preprocessor/arbitrary/detail/times.h>
+# include <chaos/_preprocessor/arbitrary/sign.h>
 # include <chaos/preprocessor/config.h>
-# include <chaos/preprocessor/control/iif.h>
-# include <chaos/preprocessor/extended/variadic_cat.h>
+# include <chaos/preprocessor/control/inline_unless.h>
+# include <chaos/preprocessor/control/inline_when.h>
 # include <chaos/preprocessor/facilities/binary.h>
-# include <chaos/preprocessor/highprec/detail/times.h>
+# include <chaos/preprocessor/facilities/empty.h>
+# include <chaos/preprocessor/facilities/split.h>
 # include <chaos/preprocessor/lambda/ops.h>
 # include <chaos/preprocessor/logical/bitxor.h>
-# include <chaos/preprocessor/recursion/expr.h>
-# include <chaos/preprocessor/recursion/machine.h>
-# include <chaos/preprocessor/seq/core.h>
+# include <chaos/preprocessor/punctuation/comma.h>
+# include <chaos/preprocessor/punctuation/paren.h>
+# include <chaos/preprocessor/recursion/basic.h>
 # include <chaos/preprocessor/seq/reverse.h>
+# include <chaos/preprocessor/tuple/elem.h>
+# include <chaos/preprocessor/tuple/rem.h>
 #
 # /* CHAOS_PP_MUL_AP */
 #
+# define CHAOS_PP_MUL_AP(x, y) CHAOS_IP_MUL_AP_I(CHAOS_PP_FIX_AP(x), CHAOS_PP_FIX_AP(y))
+# define CHAOS_PP_MUL_AP_ID() CHAOS_PP_MUL_AP
+#
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_MUL_AP(x, y) CHAOS_PP_MUL_AP_S(CHAOS_PP_STATE(), x, y)
-#    define CHAOS_PP_MUL_AP_ID() CHAOS_PP_MUL_AP
 #    define CHAOS_PP_MUL_AP_ CHAOS_PP_LAMBDA(CHAOS_PP_MUL_AP)
 # endif
 #
-# /* CHAOS_PP_MUL_AP_S */
+# define CHAOS_IP_MUL_AP_I(x, y) \
+    CHAOS_PP_INLINE_UNLESS(CHAOS_PP_BITXOR(CHAOS_PP_SIGN_AP(x))(CHAOS_PP_SIGN_AP(y)))( \
+        CHAOS_PP_REM \
+    )(CHAOS_PP_MUL_AP_INTERNAL( \
+        CHAOS_PP_INLINE_WHEN(CHAOS_PP_SIGN_AP(x))(CHAOS_PP_REM) x, \
+        CHAOS_PP_INLINE_WHEN(CHAOS_PP_SIGN_AP(y))(CHAOS_PP_REM) y \
+    )) \
+    /**/
+#
+# /* CHAOS_PP_MUL_AP_INTERNAL */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_MUL_AP_S(s, x, y) CHAOS_IP_MUL_AP_I(s, CHAOS_PP_SUPER_CLEAN_AP(x), CHAOS_PP_SUPER_CLEAN_AP(y))
-#    define CHAOS_PP_MUL_AP_S_ID() CHAOS_PP_MUL_AP_S
-#    define CHAOS_PP_MUL_AP_S_ CHAOS_PP_LAMBDA(CHAOS_PP_MUL_AP_S)
-# endif
-#
-# if CHAOS_PP_VARIADICS
-#    define CHAOS_IP_MUL_AP_I(s, x, y) \
-        CHAOS_PP_CLEAN_AP((CHAOS_PP_BITXOR(CHAOS_PP_BINARY(0) x)(CHAOS_PP_BINARY(0) y), CHAOS_PP_MUL_AP_INTERNAL(s, CHAOS_PP_BINARY(1) x, CHAOS_PP_BINARY(1) y))) \
-        /**/
-# endif
-#
-# if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_MUL_AP_INTERNAL(s, x, y) CHAOS_PP_EXPR_S(s)(CHAOS_PP_MACHINE_S(s, (, 0xCHAOS(0xARBITRARY(0xMUL)), x, y, 0xCHAOS(0xSTOP),)))
-# endif
-#
-# if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_INSTRUCTION_0xCHAOS_0xARBITRARY_0xMUL(s, p, x, y, k, ...) \
-        (, 0xCHAOS(0xARBITRARY(0xIS_SHORTER)), p ## x, p ## y, 0xCHAOS(0xARBITRARY(0xMUL2)), p ## x, p ## y, k, p ## __VA_ARGS__) \
-        /**/
-#    define CHAOS_PP_INSTRUCTION_0xCHAOS_0xARBITRARY_0xMUL2(s, p, bit, x, y, k, ...) \
-        CHAOS_PP_IIF(bit)( \
-            (, 0xCHAOS(0xARBITRARY(0xMUL3)), (0),, p ## y, CHAOS_PP_SEQ_REVERSE(p ## x), k, p ## __VA_ARGS__), \
-            (, 0xCHAOS(0xARBITRARY(0xMUL3)), (0),, p ## x, CHAOS_PP_SEQ_REVERSE(p ## y), k, p ## __VA_ARGS__) \
+#    define CHAOS_PP_MUL_AP_INTERNAL(x, y) \
+        CHAOS_PP_SPLIT( \
+            0, \
+            CHAOS_PP_SCAN(2)(CHAOS_IP_MUL_AP_A x(00), y,, CHAOS_PP_BINARY(1) CHAOS_PP_SPECIAL_CLOSE(x)) \
         ) \
         /**/
-#    define CHAOS_PP_INSTRUCTION_0xCHAOS_0xARBITRARY_0xMUL3(s, p, res, z, x, ry, k, ...) \
-        CHAOS_PP_IIF(CHAOS_PP_SEQ_IS_CONS(ry))( \
-            (, 0xCHAOS(0xARBITRARY(0xMERGE)), p ## x,, CHAOS_IP_MUL_AP_M, CHAOS_PP_SEQ_FIRST(p ## ry), 1, 0xCHAOS(0xARBITRARY(0xMUL4)), p ## res, p ## z, p ## x, CHAOS_PP_SEQ_REST(p ## ry), k, p ## __VA_ARGS__), \
-            (, k, p ## res, p ## __VA_ARGS__) \
+# else
+#    define CHAOS_PP_MUL_AP_INTERNAL(x, y) \
+        CHAOS_PP_TUPLE_ELEM( \
+            4, 0, \
+            (CHAOS_PP_SCAN(2)( \
+                CHAOS_IP_MUL_AP_A x(00) CHAOS_PP_DEFER(CHAOS_PP_TUPLE_REM)(4)(~, y, (), CHAOS_PP_BINARY(1)) CHAOS_PP_SPECIAL_CLOSE(x) \
+            )) \
         ) \
         /**/
-#    define CHAOS_PP_INSTRUCTION_0xCHAOS_0xARBITRARY_0xMUL4(s, p, merge, res, z, x, ry, k, ...) \
-        (, 0xCHAOS(0xARBITRARY(0xADD)), res, CHAOS_PP_CLEAN_AP_INTERNAL(CHAOS_PP_SEQ_REVERSE(CHAOS_IP_MUL_AP_M(0) p ## merge()) p ## z), 0xCHAOS(0xARBITRARY(0xMUL3)), p ## z(0), p ## x, p ## ry, k, p ## __VA_ARGS__) \
-        /**/
-#    define CHAOS_IP_MUL_AP_M(x) CHAOS_IP_MUL_AP_ ## x
-#    define CHAOS_IP_MUL_AP_0(x, y) CHAOS_IP_ADD_AP_A(CHAOS_PP_TIMES(x, y))
-#    define CHAOS_IP_MUL_AP_1(x, y) CHAOS_IP_ADD_AP_B(CHAOS_PP_TIMES(x, y), 1)
-#    define CHAOS_IP_MUL_AP_2(x, y) CHAOS_IP_ADD_AP_B(CHAOS_PP_TIMES(x, y), 2)
-#    define CHAOS_IP_MUL_AP_3(x, y) CHAOS_IP_ADD_AP_B(CHAOS_PP_TIMES(x, y), 3)
-#    define CHAOS_IP_MUL_AP_4(x, y) CHAOS_IP_ADD_AP_B(CHAOS_PP_TIMES(x, y), 4)
-#    define CHAOS_IP_MUL_AP_5(x, y) CHAOS_IP_ADD_AP_B(CHAOS_PP_TIMES(x, y), 5)
-#    define CHAOS_IP_MUL_AP_6(x, y) CHAOS_IP_ADD_AP_B(CHAOS_PP_TIMES(x, y), 6)
-#    define CHAOS_IP_MUL_AP_7(x, y) CHAOS_IP_ADD_AP_B(CHAOS_PP_TIMES(x, y), 7)
-#    define CHAOS_IP_MUL_AP_8(x, y) CHAOS_IP_ADD_AP_B(CHAOS_PP_TIMES(x, y), 8)
 # endif
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_IP_MUL_AP_A(digit) CHAOS_PP_SPECIAL(digit)(CHAOS_IP_MUL_AP_II CHAOS_PP_DEFER(CHAOS_PP_LPAREN)() digit, CHAOS_IP_MUL_AP_B)
+#    define CHAOS_IP_MUL_AP_B(digit) CHAOS_PP_SPECIAL(digit)(CHAOS_IP_MUL_AP_II CHAOS_PP_DEFER(CHAOS_PP_LPAREN)() digit, CHAOS_IP_MUL_AP_A)
+#    define CHAOS_IP_MUL_AP_II(...) CHAOS_IP_MUL_AP_III(__VA_ARGS__)
+#    define CHAOS_IP_MUL_AP_III(digit, res, y, shift, add) \
+        add( \
+            res, \
+            CHAOS_PP_FIX_AP_INTERNAL( \
+                CHAOS_PP_SEQ_REVERSE(CHAOS_PP_SCAN(1)( \
+                    CHAOS_IP_MUL_AP_M(0) CHAOS_PP_RMERGE(y, (digit), CHAOS_IP_MUL_AP_M, digit)() \
+                )) \
+                shift \
+            ) \
+        ), \
+        y, shift(0), CHAOS_PP_ADD_AP_INTERNAL \
+        /**/
+# else
+#    define CHAOS_IP_MUL_AP_A(digit) CHAOS_PP_SPECIAL(digit)(CHAOS_IP_MUL_AP_II CHAOS_PP_DEFER(CHAOS_PP_LPAREN)() digit CHAOS_PP_COMMA() CHAOS_IP_MUL_AP_B)
+#    define CHAOS_IP_MUL_AP_B(digit) CHAOS_PP_SPECIAL(digit)(CHAOS_IP_MUL_AP_II CHAOS_PP_DEFER(CHAOS_PP_LPAREN)() digit CHAOS_PP_COMMA() CHAOS_IP_MUL_AP_A)
+#    define CHAOS_IP_MUL_AP_II(digit, im) CHAOS_IP_MUL_AP_III(digit, im)
+#    define CHAOS_IP_MUL_AP_III(digit, res, y, shift, add) \
+        add( \
+            res, \
+            CHAOS_PP_FIX_AP_INTERNAL( \
+                CHAOS_PP_SEQ_REVERSE(CHAOS_PP_SCAN(1)( \
+                    CHAOS_IP_MUL_AP_M(0) CHAOS_PP_RMERGE(y, (digit), CHAOS_IP_MUL_AP_M, digit)(CHAOS_PP_DEFER(CHAOS_PP_EMPTY)()) \
+                )) \
+                CHAOS_PP_EMPTY shift \
+            ) \
+        ), \
+        y, shift(0), CHAOS_PP_ADD_AP_INTERNAL \
+        /**/
+# endif
+#
+# define CHAOS_IP_MUL_AP_M(carry) CHAOS_IP_MUL_AP_ ## carry
+# define CHAOS_IP_MUL_AP_0(x, y) CHAOS_PP_PLUS_3RD(0)(CHAOS_PP_TIMES(x, y))
+# define CHAOS_IP_MUL_AP_1(x, y) CHAOS_PP_PLUS_3RD(1)(CHAOS_PP_TIMES(x, y), 1)
+# define CHAOS_IP_MUL_AP_2(x, y) CHAOS_PP_PLUS_3RD(1)(CHAOS_PP_TIMES(x, y), 2)
+# define CHAOS_IP_MUL_AP_3(x, y) CHAOS_PP_PLUS_3RD(1)(CHAOS_PP_TIMES(x, y), 3)
+# define CHAOS_IP_MUL_AP_4(x, y) CHAOS_PP_PLUS_3RD(1)(CHAOS_PP_TIMES(x, y), 4)
+# define CHAOS_IP_MUL_AP_5(x, y) CHAOS_PP_PLUS_3RD(1)(CHAOS_PP_TIMES(x, y), 5)
+# define CHAOS_IP_MUL_AP_6(x, y) CHAOS_PP_PLUS_3RD(1)(CHAOS_PP_TIMES(x, y), 6)
+# define CHAOS_IP_MUL_AP_7(x, y) CHAOS_PP_PLUS_3RD(1)(CHAOS_PP_TIMES(x, y), 7)
+# define CHAOS_IP_MUL_AP_8(x, y) CHAOS_PP_PLUS_3RD(1)(CHAOS_PP_TIMES(x, y), 8)
 #
 # endif

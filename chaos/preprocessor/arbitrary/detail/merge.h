@@ -12,49 +12,100 @@
 # ifndef CHAOS_PREPROCESSOR_ARBITRARY_DETAIL_MERGE_H
 # define CHAOS_PREPROCESSOR_ARBITRARY_DETAIL_MERGE_H
 #
-# include <chaos/preprocessor/arbitrary/detail/is_shorter.h>
-# include <chaos/preprocessor/arbitrary/detail/namespace.h>
+# include <chaos/_preprocessor/arbitrary/detail/is_shorter.h>
+# include <chaos/_preprocessor/arbitrary/detail/scan.h>
+# include <chaos/_preprocessor/arbitrary/detail/special.h>
+# include <chaos/_preprocessor/arbitrary/detail/swap.h>
 # include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/control/iif.h>
-# include <chaos/preprocessor/facilities/expand.h>
+# include <chaos/preprocessor/facilities/empty.h>
 # include <chaos/preprocessor/facilities/split.h>
-# include <chaos/preprocessor/recursion/basic.h>
-# include <chaos/preprocessor/recursion/machine.h>
+# include <chaos/preprocessor/punctuation/comma.h>
 # include <chaos/preprocessor/punctuation/paren.h>
-# include <chaos/preprocessor/seq/binary_transform.h>
+# include <chaos/preprocessor/recursion/basic.h>
 # include <chaos/preprocessor/seq/core.h>
-# include <chaos/preprocessor/seq/detail/close.h>
 # include <chaos/preprocessor/seq/reverse.h>
 # include <chaos/preprocessor/tuple/eat.h>
+# include <chaos/preprocessor/tuple/elem.h>
+# include <chaos/preprocessor/tuple/rem.h>
 #
-# /* CHAOS_PP_INSTRUCTION_0xCHAOS_0xARBITRARY_0xMERGE */
+# /* CHAOS_PP_FMERGE */
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_INSTRUCTION_0xCHAOS_0xARBITRARY_0xMERGE(s, p, x, y, op, def, dir, k, ...) \
-        (, 0xCHAOS(0xARBITRARY(0xIS_SHORTER)), p ## x, p ## y, 0xCHAOS(0xARBITRARY(0xMERGE2)), p ## x, p ## y, op, def, dir, k, p ## __VA_ARGS__) \
-        /**/
-#    define CHAOS_PP_INSTRUCTION_0xCHAOS_0xARBITRARY_0xMERGE2(s, p, bit, x, y, op, def, dir, k, ...) \
-        (, k, CHAOS_IP_MERGE_AP_ ## bit(, p ## x, p ## y, op, def, dir), p ## __VA_ARGS__) \
-        /**/
-#    define CHAOS_IP_MERGE_AP_0(p, x, y, op, def, dir) CHAOS_IP_MERGE_AP_I(, CHAOS_PP_SEQ_BINARY_TRANSFORM(p ## x,), p ## y,, op, def, dir)
-#    define CHAOS_IP_MERGE_AP_1(p, x, y, op, def, dir) CHAOS_IP_MERGE_AP_I(, CHAOS_PP_SEQ_BINARY_TRANSFORM(p ## y,), p ## x, CHAOS_IP_MERGE_AP_S, op, def, dir)
-#    define CHAOS_IP_MERGE_AP_S(a, b) (b, a)
-#    define CHAOS_IP_MERGE_AP_F(res, x) res x
-#    define CHAOS_IP_MERGE_AP_R(res, x) x res
-#    define CHAOS_IP_MERGE_AP_I(p, seq, z, swap, op, def, dir) \
-        CHAOS_PP_EXPAND(CHAOS_PP_EAT CHAOS_PP_SPLIT( \
+#    define CHAOS_PP_FMERGE(x, y, op, def) \
+        CHAOS_PP_SCAN(1)(CHAOS_PP_EAT CHAOS_PP_SPLIT( \
             0, \
-            CHAOS_PP_EXPAND( \
-                CHAOS_IP_MERGE_AP_II seq, CHAOS_PP_SEQ_REVERSE(p ## z)(def), swap, op, def, CHAOS_PP_IIF(dir)(CHAOS_IP_MERGE_AP_F, CHAOS_IP_MERGE_AP_R) \
-                CHAOS_PP_SEQ_CLOSE(seq) \
+            CHAOS_PP_IIF(CHAOS_PP_IS_SHORTER(x, y))( \
+                CHAOS_PP_SCAN(1)(CHAOS_IP_FMERGE_A y(00), CHAOS_PP_SEQ_REVERSE(x), op, def, CHAOS_PP_SWAP CHAOS_PP_SPECIAL_CLOSE(y)), \
+                CHAOS_PP_SCAN(1)(CHAOS_IP_FMERGE_A x(00), CHAOS_PP_SEQ_REVERSE(y), op, def, CHAOS_PP_SPECIAL_CLOSE(x)) \
             ) \
         )) \
         /**/
-#    define CHAOS_IP_MERGE_AP_INDIRECT() CHAOS_IP_MERGE_AP_II
-#    define CHAOS_IP_MERGE_AP_II(id, n) id(?)(CHAOS_PP_OBSTRUCT(CHAOS_IP_MERGE_AP_III) CHAOS_PP_LPAREN() n, CHAOS_IP_MERGE_AP_INDIRECT)
-#    define CHAOS_IP_MERGE_AP_III(...) CHAOS_IP_MERGE_AP_IV(__VA_ARGS__)
-#    define CHAOS_IP_MERGE_AP_IV(n, res, z, swap, op, def, dir) \
-        dir(res, (op) swap(n, CHAOS_PP_SEQ_FIRST(z))), CHAOS_PP_SEQ_REST(z)(def), swap, op, def, dir \
+# else
+#    define CHAOS_PP_FMERGE(x, y, op, def) \
+        CHAOS_PP_SCAN(1)(CHAOS_PP_EAT CHAOS_PP_TUPLE_ELEM( \
+            5, 0, \
+            (CHAOS_PP_IIF(CHAOS_PP_IS_SHORTER(x, y))( \
+                CHAOS_PP_SCAN(1)(CHAOS_IP_FMERGE_A y(00) CHAOS_PP_DEFER(CHAOS_PP_TUPLE_REM)(5)(CHAOS_PP_EMPTY, CHAOS_PP_SEQ_REVERSE(x), op, def, CHAOS_PP_SWAP) CHAOS_PP_SPECIAL_CLOSE(y)), \
+                CHAOS_PP_SCAN(1)(CHAOS_IP_FMERGE_A x(00) CHAOS_PP_DEFER(CHAOS_PP_TUPLE_REM)(5)(CHAOS_PP_EMPTY, CHAOS_PP_SEQ_REVERSE(y), op, def, CHAOS_PP_NO_SWAP) CHAOS_PP_SPECIAL_CLOSE(x)) \
+            )) \
+        )()) \
+        /**/
+# endif
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_IP_FMERGE_A(digit) CHAOS_PP_SPECIAL(digit)(CHAOS_IP_FMERGE_I CHAOS_PP_DEFER(CHAOS_PP_LPAREN)() digit, CHAOS_IP_FMERGE_B)
+#    define CHAOS_IP_FMERGE_B(digit) CHAOS_PP_SPECIAL(digit)(CHAOS_IP_FMERGE_I CHAOS_PP_DEFER(CHAOS_PP_LPAREN)() digit, CHAOS_IP_FMERGE_A)
+#    define CHAOS_IP_FMERGE_I(...) CHAOS_IP_FMERGE_II(__VA_ARGS__)
+#    define CHAOS_IP_FMERGE_II(digit, res, y, op, def, swap) \
+        (op) swap(digit, CHAOS_PP_SEQ_FIRST(y)) res, CHAOS_PP_SEQ_REST(y(def)), op, def, swap \
+        /**/
+# else
+#    define CHAOS_IP_FMERGE_A(digit) CHAOS_PP_SPECIAL(digit)(CHAOS_IP_FMERGE_I CHAOS_PP_DEFER(CHAOS_PP_LPAREN)() digit CHAOS_PP_COMMA() CHAOS_IP_FMERGE_B)
+#    define CHAOS_IP_FMERGE_B(digit) CHAOS_PP_SPECIAL(digit)(CHAOS_IP_FMERGE_I CHAOS_PP_DEFER(CHAOS_PP_LPAREN)() digit CHAOS_PP_COMMA() CHAOS_IP_FMERGE_A)
+#    define CHAOS_IP_FMERGE_I(digit, im) CHAOS_IP_FMERGE_II(digit, im)
+#    define CHAOS_IP_FMERGE_II(digit, res, y, op, def, swap) \
+        (op) swap(digit, CHAOS_PP_SEQ_FIRST(y)) res, CHAOS_PP_SEQ_REST(y(def)), op, def, swap \
+        /**/
+# endif
+#
+# /* CHAOS_PP_RMERGE */
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_PP_RMERGE(x, y, op, def) \
+        CHAOS_PP_SPLIT( \
+            0, \
+            CHAOS_PP_IIF(CHAOS_PP_IS_SHORTER(x, y))( \
+                CHAOS_PP_SCAN(1)(CHAOS_IP_RMERGE_A y(00) CHAOS_PP_EAT, CHAOS_PP_SEQ_REVERSE(x), op, def, CHAOS_PP_SWAP CHAOS_PP_SPECIAL_CLOSE(y)), \
+                CHAOS_PP_SCAN(1)(CHAOS_IP_RMERGE_A x(00) CHAOS_PP_EAT, CHAOS_PP_SEQ_REVERSE(y), op, def, CHAOS_PP_SPECIAL_CLOSE(x)) \
+            ) \
+        ) \
+        /**/
+# else
+#    define CHAOS_PP_RMERGE(x, y, op, def) \
+        CHAOS_PP_TUPLE_ELEM( \
+            5, 0, \
+            (CHAOS_PP_IIF(CHAOS_PP_IS_SHORTER(x, y))( \
+                CHAOS_PP_SCAN(1)(CHAOS_IP_RMERGE_A y(00) CHAOS_PP_DEFER(CHAOS_PP_TUPLE_REM)(5)(CHAOS_PP_EAT, CHAOS_PP_SEQ_REVERSE(x), op, def, CHAOS_PP_SWAP) CHAOS_PP_SPECIAL_CLOSE(y)), \
+                CHAOS_PP_SCAN(1)(CHAOS_IP_RMERGE_A x(00) CHAOS_PP_DEFER(CHAOS_PP_TUPLE_REM)(5)(CHAOS_PP_EAT, CHAOS_PP_SEQ_REVERSE(y), op, def, CHAOS_PP_NO_SWAP) CHAOS_PP_SPECIAL_CLOSE(x)) \
+            )) \
+        ) \
+        /**/
+# endif
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_IP_RMERGE_A(digit) CHAOS_PP_SPECIAL(digit)(CHAOS_IP_RMERGE_I CHAOS_PP_DEFER(CHAOS_PP_LPAREN)() digit, CHAOS_IP_RMERGE_B)
+#    define CHAOS_IP_RMERGE_B(digit) CHAOS_PP_SPECIAL(digit)(CHAOS_IP_RMERGE_I CHAOS_PP_DEFER(CHAOS_PP_LPAREN)() digit, CHAOS_IP_RMERGE_A)
+#    define CHAOS_IP_RMERGE_I(...) CHAOS_IP_RMERGE_II(__VA_ARGS__)
+#    define CHAOS_IP_RMERGE_II(digit, res, y, op, def, swap) \
+        res(op) swap(digit, CHAOS_PP_SEQ_FIRST(y)), CHAOS_PP_SEQ_REST(y(def)), op, def, swap \
+        /**/
+# else
+#    define CHAOS_IP_RMERGE_A(digit) CHAOS_PP_SPECIAL(digit)(CHAOS_IP_RMERGE_I CHAOS_PP_DEFER(CHAOS_PP_LPAREN)() digit CHAOS_PP_COMMA() CHAOS_IP_RMERGE_B)
+#    define CHAOS_IP_RMERGE_B(digit) CHAOS_PP_SPECIAL(digit)(CHAOS_IP_RMERGE_I CHAOS_PP_DEFER(CHAOS_PP_LPAREN)() digit CHAOS_PP_COMMA() CHAOS_IP_RMERGE_A)
+#    define CHAOS_IP_RMERGE_I(digit, im) CHAOS_IP_RMERGE_II(digit, im)
+#    define CHAOS_IP_RMERGE_II(digit, res, y, op, def, swap) \
+        res(op) swap(digit, CHAOS_PP_SEQ_FIRST(y)), CHAOS_PP_SEQ_REST(y(def)), op, def, swap \
         /**/
 # endif
 #

@@ -12,16 +12,17 @@
 # ifndef CHAOS_PREPROCESSOR_ARBITRARY_SIGN_H
 # define CHAOS_PREPROCESSOR_ARBITRARY_SIGN_H
 #
-# include <chaos/preprocessor/arbitrary/detail/clean.h>
 # include <chaos/preprocessor/config.h>
-# include <chaos/preprocessor/facilities/binary.h>
+# include <chaos/preprocessor/detection/is_unary.h>
 # include <chaos/preprocessor/lambda/ops.h>
+# include <chaos/preprocessor/tuple/rem.h>
 #
 # /* CHAOS_PP_SIGN_AP */
 #
+# define CHAOS_PP_SIGN_AP(x) CHAOS_PP_IS_UNARY(CHAOS_PP_REM x)
+# define CHAOS_PP_SIGN_AP_ID() CHAOS_PP_SIGN_AP
+#
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_SIGN_AP(x) CHAOS_PP_BINARY_CTOR(0, CHAOS_PP_SUPER_CLEAN_AP(x))
-#    define CHAOS_PP_SIGN_AP_ID() CHAOS_PP_SIGN_AP
 #    define CHAOS_PP_SIGN_AP_ CHAOS_PP_LAMBDA(CHAOS_PP_SIGN_AP)
 # endif
 #

@@ -9,30 +9,26 @@
 #  *                                                                    *
 #  ******************************************************************** */
 #
-# ifndef CHAOS_PREPROCESSOR_ARBITRARY_DETAIL_UTILITY_H
-# define CHAOS_PREPROCESSOR_ARBITRARY_DETAIL_UTILITY_H
+# ifndef CHAOS_PREPROCESSOR_ARBITRARY_DETAIL_SCAN_H
+# define CHAOS_PREPROCESSOR_ARBITRARY_DETAIL_SCAN_H
 #
+# include <chaos/preprocessor/cat.h>
 # include <chaos/preprocessor/config.h>
-# include <chaos/preprocessor/control/iif.h>
-# include <chaos/preprocessor/logical/compl.h>
-# include <chaos/preprocessor/recursion/machine.h>
 #
-# /* CHAOS_PP_INSTRUCTION_0xCHAOS_0xCOMPL */
+# /* CHAOS_PP_SCAN */
 #
-# if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_INSTRUCTION_0xCHAOS_0xCOMPL(s, p, bit, k, ...) (, k, CHAOS_PP_COMPL(bit), p ## __VA_ARGS__)
-# endif
-#
-# /* CHAOS_PP_INSTRUCTION_0xCHAOS_0xEVAL */
+# define CHAOS_PP_SCAN(level) CHAOS_PP_PRIMITIVE_CAT(CHAOS_IP_SCAN_, level)
 #
 # if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_INSTRUCTION_0xCHAOS_0xEVAL(s, p, k, ...) k
-# endif
-#
-# /* CHAOS_PP_INSTRUCTION_0xCHAOS_0xIIF */
-#
-# if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_INSTRUCTION_0xCHAOS_0xIIF(s, p, bit, t, f, k, ...) (, k, CHAOS_PP_IIF(bit)(p ## t, p ## f), p ## __VA_ARGS__)
+#    define CHAOS_IP_SCAN_1(...) __VA_ARGS__
+#    define CHAOS_IP_SCAN_2(...) __VA_ARGS__
+#    define CHAOS_IP_SCAN_3(...) __VA_ARGS__
+#    define CHAOS_IP_SCAN_4(...) __VA_ARGS__
+# else
+#    define CHAOS_IP_SCAN_1(x) x
+#    define CHAOS_IP_SCAN_2(x) x
+#    define CHAOS_IP_SCAN_3(x) x
+#    define CHAOS_IP_SCAN_4(x) x
 # endif
 #
 # endif

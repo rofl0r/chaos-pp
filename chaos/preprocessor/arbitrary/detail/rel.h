@@ -9,16 +9,26 @@
 #  *                                                                    *
 #  ******************************************************************** */
 #
-# ifndef CHAOS_PREPROCESSOR_ARBITRARY_NAMESPACE_H
-# define CHAOS_PREPROCESSOR_ARBITRARY_NAMESPACE_H
+# ifndef CHAOS_PREPROCESSOR_ARBITRARY_DETAIL_REL_H
+# define CHAOS_PREPROCESSOR_ARBITRARY_DETAIL_REL_H
 #
-# include <chaos/preprocessor/config.h>
-# include <chaos/preprocessor/recursion/machine.h>
+# include <chaos/_preprocessor/arbitrary/detail/lookup.h>
 #
-# /* CHAOS_PP_INSTRUCTION_0xCHAOS_0xARBITRARY */
+# /* CHAOS_PP_REL */
 #
-# if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_INSTRUCTION_0xCHAOS_0xARBITRARY(id) CHAOS_PP_INSTRUCTION_0xCHAOS_0xARBITRARY_ ## id
-# endif
+# define CHAOS_PP_REL(a, b) \
+    CHAOS_PP_LOOKUP(a, CHAOS_PP_LOOKUP(b, ( \
+        (1, 2, 2, 2, 2, 2, 2, 2, 2, 2), \
+        (0, 1, 2, 2, 2, 2, 2, 2, 2, 2), \
+        (0, 0, 1, 2, 2, 2, 2, 2, 2, 2), \
+        (0, 0, 0, 1, 2, 2, 2, 2, 2, 2), \
+        (0, 0, 0, 0, 1, 2, 2, 2, 2, 2), \
+        (0, 0, 0, 0, 0, 1, 2, 2, 2, 2), \
+        (0, 0, 0, 0, 0, 0, 1, 2, 2, 2), \
+        (0, 0, 0, 0, 0, 0, 0, 1, 2, 2), \
+        (0, 0, 0, 0, 0, 0, 0, 0, 1, 2), \
+        (0, 0, 0, 0, 0, 0, 0, 0, 0, 1) \
+    ))) \
+    /**/
 #
 # endif

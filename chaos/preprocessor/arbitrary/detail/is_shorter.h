@@ -12,25 +12,23 @@
 # ifndef CHAOS_PREPROCESSOR_ARBITRARY_DETAIL_IS_SHORTER_H
 # define CHAOS_PREPROCESSOR_ARBITRARY_DETAIL_IS_SHORTER_H
 #
-# include <chaos/preprocessor/arbitrary/detail/namespace.h>
-# include <chaos/preprocessor/config.h>
-# include <chaos/preprocessor/control/iif.h>
-# include <chaos/preprocessor/detection/is_variadic.h>
-# include <chaos/preprocessor/recursion/machine.h>
+# include <chaos/_preprocessor/arbitrary/detail/scan.h>
+# include <chaos/_preprocessor/arbitrary/detail/special.h>
+# include <chaos/preprocessor/detection/is_unary.h>
+# include <chaos/preprocessor/punctuation/paren.h>
+# include <chaos/preprocessor/recursion/basic.h>
 # include <chaos/preprocessor/tuple/eat.h>
 #
-# /* CHAOS_PP_INSTRUCTION_0xCHAOS_0xARBITRARY_0xIS_SHORTER */
+# /* CHAOS_PP_IS_SHORTER */
 #
-# if CHAOS_PP_VARIADICS
-#    define CHAOS_PP_INSTRUCTION_0xCHAOS_0xARBITRARY_0xIS_SHORTER(s, p, x, y, k, ...) \
-        CHAOS_PP_IIF(CHAOS_PP_IS_VARIADIC(p ## x))( \
-            CHAOS_PP_IIF(CHAOS_PP_IS_VARIADIC(p ## y))( \
-                (, 0xCHAOS(0xARBITRARY(0xIS_SHORTER)), CHAOS_PP_EAT p ## x, CHAOS_PP_EAT p ## y, k, p ## __VA_ARGS__), \
-                (, k, 0, p ## __VA_ARGS__) \
-            ), \
-            (, k, CHAOS_PP_IS_VARIADIC(p ## y), p ## __VA_ARGS__) \
-        ) \
-        /**/
-# endif
+# define CHAOS_PP_IS_SHORTER(x, y) \
+    CHAOS_PP_IS_UNARY(CHAOS_PP_SCAN(1)( \
+        CHAOS_IP_IS_SHORTER_A x(00) y ~ CHAOS_PP_SPECIAL_CLOSE(x) \
+    )) \
+    /**/
+#
+# define CHAOS_IP_IS_SHORTER_A(digit) CHAOS_PP_SPECIAL(digit)(CHAOS_IP_IS_SHORTER_I CHAOS_PP_DEFER(CHAOS_PP_LPAREN)() CHAOS_IP_IS_SHORTER_B)
+# define CHAOS_IP_IS_SHORTER_B(digit) CHAOS_PP_SPECIAL(digit)(CHAOS_IP_IS_SHORTER_I CHAOS_PP_DEFER(CHAOS_PP_LPAREN)() CHAOS_IP_IS_SHORTER_A)
+# define CHAOS_IP_IS_SHORTER_I(y) CHAOS_PP_EAT y
 #
 # endif

@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document id="Introduction" author="Paul Mensonides" date="2003-2004">
 	<section>
-		<para>...</para>
+		<para>
+			<em>NOTE: THIS DOCUMENT IS INCOMPLETE.</em>
+		</para>
+	</section>
+	<section id="Welcome to Chaos!">
+		<para>
+			The Chaos Preprocessor Library is a generative metaprogramming framework for C and C++ that builds on the techniques used in the <assoc id="http://www.boost.org/libs/preprocessor/doc/index.html">Boost Preprocessor Library</assoc>.
+			It is primarily intended to push the state-of-the-art in the field of preprocessor metaprogramming.
+			As such, it assumes a strictly conformant preprocessor in an effort to deduce limitations and provide motivation for vendors to fix their broken preprocessors.
+			This reduces the current portability of the library, as many preprocessors have serious conformancy issues.
+			At the same time, it functions as a reference implementation of advanced preprocessor metaprogramming concepts, idioms, and techniques.
+		</para>
+		<para>
+			If you find Chaos to be interesting, you many find Chaos' sister project, <assoc id="Order?">Order</assoc>, to be interesting as well.
+			Both Order and Chaos are distributed under the <assoc id="license.html">Boost Software License</assoc>.
+		</para>
 	</section>
 </document>

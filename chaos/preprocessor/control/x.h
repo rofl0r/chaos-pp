@@ -9,9 +9,9 @@
 #  *                                                                         *
 #  ************************************************************************* */
 #
-# ifndef CHAOS_PREPROCESSOR_CONTROL_PARAMETRIC_H
-# define CHAOS_PREPROCESSOR_CONTROL_PARAMETRIC_H
+# ifndef CHAOS_PREPROCESSOR_CONTROL_X_H
+# define CHAOS_PREPROCESSOR_CONTROL_X_H
 #
-# include <chaos/preprocessor/control/parametric/while.h>
+# include <chaos/preprocessor/control/x/while.h>
 #
 # endif

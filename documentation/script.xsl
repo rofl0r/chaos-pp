@@ -27,7 +27,7 @@
 
 <xsl:template match="header">
 	<xsl:param name="path"/>
-	<xsl:variable name="enabled" select="'algorithm'"/>
+	<xsl:variable name="enabled" select="'*'"/>
 	<xsl:if test="true() or contains(concat($path, '/', @name), $enabled)">
 		<xsl:variable name="sans-suffix" select="concat($path, '/', substring-before(@name, '.'))"/>
 		echo <xsl:value-of select="$sans-suffix"/>.html

@@ -14,7 +14,7 @@
 			At the same time, it functions as a reference implementation of advanced preprocessor metaprogramming concepts, idioms, and techniques.
 		</para>
 		<para>
-			If you find Chaos to be interesting, you many find Chaos' sister project, <assoc id="Order?">Order</assoc>, to be interesting as well.
+			If you find Chaos to be interesting, you may find Chaos' sister project, <assoc id="Order?">Order</assoc>, to be interesting as well.
 			Both Order and Chaos are distributed under the <assoc id="license.html">Boost Software License</assoc>.
 		</para>
 	</section>

@@ -98,6 +98,9 @@
 #    define CHAOS_IP_MERGE_0xOPEN(p, s, o, orig, args, flag) \
         CHAOS_PP_DEFER(CHAOS_PP_OPEN)(CHAOS_IP_MERGE_E(, s, o, p ## orig, p ## args, CHAOS_PP_COMMA, CHAOS_PP_FLAG_DATA(p ## flag))) \
         /**/
+#    define CHAOS_IP_MERGE_0xOVERRIDE(p, s, o, orig, args, flag) \
+        CHAOS_PP_DEFER(CHAOS_PP_OVERRIDE)(CHAOS_IP_MERGE_E(, s, o, p ## orig, p ## args, CHAOS_PP_COMMA, CHAOS_PP_FLAG_DATA(p ## flag))) \
+        /**/
 #    define CHAOS_IP_MERGE_0xPARAM(p, s, o, orig, args, flag) CHAOS_PP_LAMBDA(CHAOS_PP_TUPLE_ELEM(?, CHAOS_PP_FLAG_DATA(p ## flag), p ## args))
 #    define CHAOS_IP_MERGE_0xRPAREN(...) CHAOS_PP_FLAG(0xRPAREN)
 #    define CHAOS_IP_MERGE_0xSELF(p, s, o, orig, ...) CHAOS_PP_ESCAPE(orig)

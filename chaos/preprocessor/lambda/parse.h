@@ -91,6 +91,7 @@
 #    define CHAOS_IP_PARSE_0xLAMBDA(p, s, o, orig, args, flag) CHAOS_IP_PARSE_E(, s, o, p ## orig, p ## args,, CHAOS_PP_FLAG_DATA(p ## flag))
 #    define CHAOS_IP_PARSE_0xLPAREN(...) CHAOS_PP_OPERATOR(CHAOS_PP_LPAREN)
 #    define CHAOS_IP_PARSE_0xOPEN(p, s, o, orig, args, flag) CHAOS_IP_PARSE_E(, s, o, p ## orig, p ## args, CHAOS_PP_OPERATOR(CHAOS_PP_COMMA), CHAOS_PP_FLAG_DATA(p ## flag))
+#    define CHAOS_IP_PARSE_0xOVERRIDE(p, s, o, orig, args, flag) CHAOS_PP_OPERATOR(CHAOS_PP_LPAREN) CHAOS_IP_PARSE_0xOPEN(, s, o, p ## orig, p ## args, p ## flag) CHAOS_PP_OPERATOR(CHAOS_PP_RPAREN)
 #    define CHAOS_IP_PARSE_0xPARAM(p, s, o, orig, args, flag) \
         CHAOS_PP_DEFER(CHAOS_PP_EXPR_S(s))(CHAOS_PP_DEFER(CHAOS_IP_PARSE_INDIRECT)()( \
             , CHAOS_PP_NEXT(s), o, p ## orig, p ## args, CHAOS_PP_TUPLE_ELEM(?, CHAOS_PP_FLAG_DATA(p ## flag), p ## args) \

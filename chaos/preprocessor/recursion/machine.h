@@ -19,6 +19,18 @@
 # include <chaos/preprocessor/recursion/basic.h>
 # include <chaos/preprocessor/recursion/expr.h>
 #
+# /* CHAOS_PP_INSTRUCTION_0xCHAOS */
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_PP_INSTRUCTION_0xCHAOS(id) CHAOS_PP_INSTRUCTION_0xCHAOS_ ## id
+# endif
+#
+# /* CHAOS_PP_INSTRUCTION_0xCHAOS_0xSTOP */
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_PP_INSTRUCTION_0xCHAOS_0xSTOP(s, p, x, ...) , p ## x
+# endif
+#
 # /* CHAOS_PP_MACHINE */
 #
 # if CHAOS_PP_VARIADICS
@@ -35,7 +47,6 @@
             1, CHAOS_PP_DEFER(CHAOS_PP_PRIMITIVE_CAT(CHAOS_IP_MACHINE_, s)) k \
         ) \
         /**/
-#    define CHAOS_PP_INSTRUCTION_0xSTOP(s, p, x, ...) , p ## x
 #    define CHAOS_IP_MACHINE_1(p, f, ...) CHAOS_PP_EXPR_S(2)(CHAOS_IP_MACHINE_2 CHAOS_PP_EXPR_S(2)(CHAOS_IP_MACHINE_2 CHAOS_PP_INSTRUCTION_ ## f(2,, p ## __VA_ARGS__)))
 #    define CHAOS_IP_MACHINE_2(p, f, ...) CHAOS_PP_EXPR_S(3)(CHAOS_IP_MACHINE_3 CHAOS_PP_EXPR_S(3)(CHAOS_IP_MACHINE_3 CHAOS_PP_INSTRUCTION_ ## f(3,, p ## __VA_ARGS__)))
 #    define CHAOS_IP_MACHINE_3(p, f, ...) CHAOS_PP_EXPR_S(4)(CHAOS_IP_MACHINE_4 CHAOS_PP_EXPR_S(4)(CHAOS_IP_MACHINE_4 CHAOS_PP_INSTRUCTION_ ## f(4,, p ## __VA_ARGS__)))

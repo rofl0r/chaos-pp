@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!-- **************************************************************************
+     *                                                                        *
+     *    (C) Copyright Paul Mensonides 2003-2004.                            *
+     *                                                                        *
+     *    Distributed under the Boost Software License, Version 1.0.          *
+     *    (See accompanying file LICENSE).                                    *
+     *                                                                        *
+     *    See http://chaos-pp.sourceforge.net for the most recent version.    *
+     *                                                                        *
+     ************************************************************************** -->
+
 <header name="chaos/preprocessor/lambda/curry.h" author="Paul Mensonides" date="2003-2004">
 <overview>
 	The <self/> header defines a mechanism that curries the <link id="λ placeholders"/> in a <link id="λ expression"/>.

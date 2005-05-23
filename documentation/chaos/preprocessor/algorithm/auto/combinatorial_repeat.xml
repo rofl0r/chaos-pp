@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- **************************************************************************
+     *                                                                        *
+     *    (C) Copyright Paul Mensonides 2003-2005.                            *
+     *                                                                        *
+     *    Distributed under the Boost Software License, Version 1.0.          *
+     *    (See accompanying file LICENSE).                                    *
+     *                                                                        *
+     *    See http://chaos-pp.sourceforge.net for the most recent version.    *
+     *                                                                        *
+     ************************************************************************** -->
+
+<header name="chaos/preprocessor/algorithm/auto/combinatorial_repeat.h" author="Paul Mensonides" date="2003-2005">
+<overview>
+	The <self/> header defines an algorithm that produces a combinatorial repetition of a dataset.
+</overview>
+
+<macro id="AUTO_COMBINATORIAL_REPEAT" type="object" group="cartesian">
+	<abstract>
+		The <AUTO_COMBINATORIAL_REPEAT/> macro generates repetitions for all possible strings (in the mathematical sense) up to the length specified by its first argument of an alphabet specified by its third argument.
+	</abstract>
+	<usage lang="C99">
+		<syntax><AUTO_COMBINATORIAL_REPEAT/>(count, macro, g)</syntax>
+		<param id="count">
+			The maximum length of the strings to be generated.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="macro">
+			The target that is to be repeated for each string.
+			This target must be either a <link id="λ expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			<snippet>
+				macro(s, size, product)
+			</snippet>
+		</param>
+		<param id="g">
+			The <link id="generic data structure"/> containing the alphabet used to construct strings.
+		</param>
+	</usage>
+	<usage lang="C99">
+		<syntax><AUTO_COMBINATORIAL_REPEAT/>(count, macro, g, ...)</syntax>
+		<param id="count">
+			The maximum length of the strings to be generated.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="macro">
+			<para>
+				The target that is to be repeated for each string.
+				This target must be either a <link id="λ expression"/> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				<snippet>
+					macro(s, size, product, data<sup>†</sup>)
+				</snippet>
+			</para>
+			<para>
+				<sup>†</sup>
+				The <var>data</var> pseudo-parameter must be either <code>...</code> or the number of parameters that corresponds to the number of arguments in the auxiliary data, <code>__VA_ARGS__</code>.
+			</para>
+		</param>
+		<param id="g">
+			The <link id="generic data structure"/> containing the alphabet used to construct strings.
+		</param>
+		<param id="..." optional="1">
+			Auxiliary data to be passed through the algorithm to the target.
+		</param>
+	</usage>
+	<para>
+		The <AUTO_COMBINATORIAL_REPEAT/> macro is a <link id="higher-order thunk"/> that deduces the current <link id="higher-order entry point"/> and invokes <COMBINATORIAL_REPEAT/>.
+	</para>
+	<para>
+		This macro may not be used if <link id="bypass semantics"/> are in effect.
+	</para>
+	<derivative id="AUTO_COMBINATORIAL_REPEAT_ID" lang="C99"/>
+	<derivative id="AUTO_COMBINATORIAL_REPEAT_" lang="C99"/>
+</macro>
+
+</header>

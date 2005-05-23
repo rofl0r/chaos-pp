@@ -12,6 +12,7 @@
 # ifndef CHAOS_PREPROCESSOR_ALGORITHM_AUTO_H
 # define CHAOS_PREPROCESSOR_ALGORITHM_AUTO_H
 #
+# include <chaos/preprocessor/algorithm/auto/combinatorial_repeat.h>
 # include <chaos/preprocessor/algorithm/auto/filter.h>
 # include <chaos/preprocessor/algorithm/auto/fold_left.h>
 # include <chaos/preprocessor/algorithm/auto/fold_left_aux.h>

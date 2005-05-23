@@ -201,6 +201,7 @@
 				<header name="append.h"/>
 				<header name="auto.h"/>
 				<directory name="auto">
+					<header name="combinatorial_repeat.h"/>
 					<header name="filter.h"/>
 					<header name="fold_left.h"/>
 					<header name="fold_left_aux.h"/>
@@ -212,6 +213,7 @@
 					<header name="transform.h"/>
 				</directory>
 				<header name="cast.h"/>
+				<header name="combinatorial_repeat.h"/>
 				<directory name="complexity">
 					<binary-file name="for_each_product.gif"/>
 					<binary-file name="for_each_product-functional.gif"/>

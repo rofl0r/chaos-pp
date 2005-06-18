@@ -654,6 +654,7 @@
 			</directory>
 			<header name="string.h"/>
 			<directory name="string">
+				<header name="charize.h"/>
 				<header name="compare.h"/>
 				<header name="compare_insensitive.h"/>
 				<header name="core.h"/>

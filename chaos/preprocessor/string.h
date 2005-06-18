@@ -12,6 +12,7 @@
 # ifndef CHAOS_PREPROCESSOR_STRING_H
 # define CHAOS_PREPROCESSOR_STRING_H
 #
+# include <chaos/preprocessor/string/charize.h>
 # include <chaos/preprocessor/string/compare.h>
 # include <chaos/preprocessor/string/compare_insensitive.h>
 # include <chaos/preprocessor/string/core.h>

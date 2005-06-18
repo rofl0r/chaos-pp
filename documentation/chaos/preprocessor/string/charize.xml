@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- **************************************************************************
+     *                                                                        *
+     *    (C) Copyright Paul Mensonides 2003-2005.                            *
+     *                                                                        *
+     *    Distributed under the Boost Software License, Version 1.0.          *
+     *    (See accompanying file LICENSE).                                    *
+     *                                                                        *
+     *    See http://chaos-pp.sourceforge.net for the most recent version.    *
+     *                                                                        *
+     ************************************************************************** -->
+
+<header name="chaos/preprocessor/string/charize.h" author="Paul Mensonides" date="2003-2005">
+<overview>
+	The <self/> header defines a macro that converts a character to a character literal.
+</overview>
+
+<macro id="CHARIZE" group="stringizing">
+	<abstract>
+		The <CHARIZE/> macro converts its argument to a character literal.
+	</abstract>
+	<usage>
+		<syntax><CHARIZE/>(c)</syntax>
+		<param id="c">
+			The character to be converted.
+			Valid values are the underscore (<code>_</code>), the decimal numerals (<code>0</code> through <code>9</code>), and the lowercase and uppercase letters (<code>a</code> through <code>z</code> and <code>A</code> through <code>Z</code>).
+		</param>
+	</usage>
+	<para>
+		This macro is <em>not</em> a general-purpose "charizing" macro.
+		Input to this macro is restricted to characters that can be elements in a <link id="string"/> data structure.
+		For example,
+		<snippet>
+			<CHARIZE/>(+) // invalid
+		</snippet>
+	</para>
+	<listing>
+		#include <chaos-preprocessor-algorithm-for_each.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		#include <chaos-preprocessor-string-charize.h/>
+		#include <chaos-preprocessor-string-core.h/>
+		
+		#define TO_CHAR_SEQ(string) \
+		    <EXPR/>(<FOR_EACH/>( \
+		        TO_CHAR_SEQ_I, (<STRING/>) string, ~ \
+		    )) \
+		    /**/
+		
+		#define TO_CHAR_SEQ_I(s, c, _) (<CHARIZE/>(c))
+		
+		TO_CHAR_SEQ(t e m p l a t e) // ('t')('e')('m')('p')('l')('a')('t')('e')
+	</listing>
+	<derivative id="CHARIZE_ID"/>
+	<derivative id="CHARIZE_" lang="C99"/>
+</macro>
+
+</header>

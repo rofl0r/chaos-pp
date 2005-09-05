@@ -75,7 +75,7 @@
     /**/
 # define CHAOS_IP_DIV_0(_, s, jump, mode, r, x, y, z, ex) \
     CHAOS_PP_IIF(CHAOS_PP_LESS(x, y))( \
-        CHAOS_PP_BINARY(ex)(r, x) CHAOS_PP_TUPLE_EAT(7), CHAOS_IP_DIV_1 \
+        CHAOS_PP_BINARY(ex)(r, x) CHAOS_PP_TUPLE_EAT(9), CHAOS_IP_DIV_1 \
     )(_, s, jump, mode, CHAOS_PP_INC(r), x, y, y, ex) \
     /**/
 # define CHAOS_IP_DIV_1(_, s, jump, mode, r, x, y, z, ex) \

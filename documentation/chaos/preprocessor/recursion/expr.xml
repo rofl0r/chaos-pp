@@ -207,7 +207,7 @@
 
 <macro id="EXPR_S">
 	<abstract>
-		The <EXPR_S/> macro represents an physical entry point into the <link id="recursion backend"/>.
+		The <EXPR_S/> macro represents a physical entry point into the <link id="recursion backend"/>.
 	</abstract>
 	<usage lang="C99">
 		<syntax><EXPR_S/>(s)(...)</syntax>

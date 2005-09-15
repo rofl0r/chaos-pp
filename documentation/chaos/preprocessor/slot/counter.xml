@@ -69,7 +69,7 @@
 
 <macro id="SEED" type="object" group="counter">
 	<abstract>
-		The <SEED/> macro is defines the initial value (in a translation unit) of <COUNTER/>.
+		The <SEED/> macro defines the initial value (in a translation unit) of <COUNTER/>.
 	</abstract>
 	<usage>
 		<syntax>#define <SEED/> x</syntax>

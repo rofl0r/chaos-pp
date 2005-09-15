@@ -16,7 +16,7 @@
 	The <self/> header defines macros used generate numbers that are unique within a translation unit.
 </overview>
 
-<macro id="COUNTER" type="object">
+<macro id="COUNTER" type="object" group="counter">
 	<abstract>
 		The <COUNTER/> macro expands to the current counter value.
 	</abstract>
@@ -25,11 +25,11 @@
 	</usage>
 	<para>
 		This macro expands to an integer literal.
-		Its initial value is <code>0</code>.
+		Its initial value defaults to <code>0</code>.
+		This initial value (per translation unit) can be overridden by defining <SEED/>.
 		Each usage of <UPDATE_COUNTER/> increases the current value by one.
 		Between usages of <UPDATE_COUNTER/>, the value of <COUNTER/> is constant.
 	</para>
-	<x-reference id="UPDATE_COUNTER"/>
 	<listing>
 		#include <chaos-preprocessor-cat.h/>
 		#include <chaos-preprocessor-slot-counter.h/>
@@ -56,16 +56,34 @@
 	<derivative id="COUNTER_" lang="C99"/>
 </macro>
 
-<macro id="UPDATE_COUNTER">
+<macro id="UPDATE_COUNTER" group="counter">
 	<abstract>
 		The <UPDATE_COUNTER/> macro increments the current counter value.
 	</abstract>
 	<usage>
 		<syntax>??=include <UPDATE_COUNTER/>()</syntax>
 	</usage>
-	<x-reference id="COUNTER"/>
 	<derivative id="UPDATE_COUNTER_ID"/>
 	<derivative id="UPDATE_COUNTER_" lang="C99"/>
+</macro>
+
+<macro id="SEED" type="object" group="counter">
+	<abstract>
+		The <SEED/> macro is defines the initial value (in a translation unit) of <COUNTER/>.
+	</abstract>
+	<usage>
+		<syntax>#define <SEED/> x</syntax>
+		<param id="x">
+			The integer literal to be used as the initial value of <COUNTER/>.
+		</param>
+	</usage>
+	<para>
+		If defined by the user, this macro must be defined prior to including any library headers.
+		If it is not defined by the user, it defaults to <code>0</code>.
+	</para>
+	<para>
+		This macro can be defined on the command line such that unique numbers can be generated across multiple translation units.
+	</para>
 </macro>
 
 </header>

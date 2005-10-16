@@ -114,6 +114,20 @@
 	<derivative id="LIMIT_EQUALIZE_" lang="C99"/>
 </macro>
 
+<macro id="LIMIT_EXPANDER" type="object">
+	<abstract>
+		The <LIMIT_EXPANDER/> macro expands to the maximum arity supported by <EXPANDER/>.
+	</abstract>
+	<usage>
+		<syntax><LIMIT_EXPANDER/></syntax>
+	</usage>
+	<para>
+		This macro currently expands to <code>5</code>.
+	</para>
+	<derivative id="LIMIT_EXPANDER_ID"/>
+	<derivative id="LIMIT_EXPANDER_" lang="C99"/>
+</macro>
+
 <macro id="LIMIT_EXPR" type="object">
 	<abstract>
 		The <LIMIT_EXPR/> macro expands to the maximum number of abstract <link id="recursion steps"/> supported by the <link id="recursion backend"/>.

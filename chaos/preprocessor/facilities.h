@@ -20,6 +20,7 @@
 # include <chaos/preprocessor/facilities/empty.h>
 # include <chaos/preprocessor/facilities/encode.h>
 # include <chaos/preprocessor/facilities/expand.h>
+# include <chaos/preprocessor/facilities/expander.h>
 # include <chaos/preprocessor/facilities/identity.h>
 # include <chaos/preprocessor/facilities/indirect.h>
 # include <chaos/preprocessor/facilities/intercept.h>

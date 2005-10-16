@@ -24,6 +24,9 @@
 		<item value="arbitrary-precision value"/>
 		<item value="arbitrary-precision values"/>
 	</document>
+	<document id="argument-remap">
+		<item value="argument remapper"/>
+	</document>
 	<document id="arrays">
 		<item value="array"/>
 		<item value="arrays"/>
@@ -398,6 +401,7 @@
 				<header name="empty.h"/>
 				<header name="encode.h"/>
 				<header name="expand.h"/>
+				<header name="expander.h"/>
 				<header name="identity.h"/>
 				<header name="indirect.h"/>
 				<header name="intercept.h"/>

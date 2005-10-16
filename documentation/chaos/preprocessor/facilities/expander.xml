@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- **************************************************************************
+     *                                                                        *
+     *    (C) Copyright Paul Mensonides 2003-2005.                            *
+     *                                                                        *
+     *    Distributed under the Boost Software License, Version 1.0.          *
+     *    (See accompanying file LICENSE).                                    *
+     *                                                                        *
+     *    See http://chaos-pp.sourceforge.net for the most recent version.    *
+     *                                                                        *
+     ************************************************************************** -->
+
+<header name="chaos/preprocessor/facilities/expander.h" author="Paul Mensonides" date="2003-2005">
+<overview>
+	The <self/> header defines a macro used to expand state arguments or auxiliary data arguments passed by algorithms to user-defined predicates, operations, and targets.
+</overview>
+
+<macro id="EXPANDER" type="object">
+	<abstract>
+		The <EXPANDER/> macro expands to a macro that converts the contents of a state or auxiliary data argument (passed as a <link id="sequence"/>) to a list of arguments.
+	</abstract>
+	<usage>
+		<syntax><EXPANDER/>(arity)</syntax>
+		<param id="arity">
+			The arity required by an algorithm of a predicate, operation, or target passed to it.
+			Valid values range from <code>2</code> to <LIMIT_EXPANDER/>.
+		</param>
+	</usage>
+	<para>
+		This macro expands to an <link id="argument remapper"/> that is suffixed to macros passed to algorithms.
+		This <link id="argument remapper"/> converts the contents of its last argument (which must be a <link id="sequence"/>) to a list of arguments to the predicate, operation, or target to be invoked by the algorithm.
+		For example,
+		<snippet>
+			#define M(s, n, x, y) x + y + n
+			
+			<EXPR/>(<REPEAT/>(
+			    3, M <EXPANDER/>(3), (a)(b)
+			))
+		</snippet>
+	</para>
+	<para>
+		Note that the generated <link id="argument remapper"/> applies <NEXT/> to the <link id="recursion state"/> passed to it by algorithms.
+		This is required to preserve the validity of the <link id="recursion state"/>.
+	</para>
+	<para>
+		In the above code snippet, the <REPEAT/> algorithm requires a ternary target to repeat.
+		It passes the <link id="recursion state"/> (<var>s</var>), the index of the current repetition (<var>n</var>), and the auxiliary data argument.
+		The <EXPANDER/> macro is used to transform that ternary argument list into a (in this case) quaternary argument list.
+		Specifically, it translates <code>(s, n, (a)(b))</code> into <code>(<NEXT/>(s), n, a, b)</code>, which is then applied to <code>M</code>.
+	</para>
+	<para>
+		The utility of this macro is limited to code that cannot use variadic macros.
+		In such circumstances, use of this macro often avoids many tedious uses of (e.g.) <TUPLE_ELEM/> or <SEQ_ELEM/> to extract elements from state or auxiliary data arguments.
+		For example, the following is the above code snippet rewritten without <EXPANDER/>...
+		<snippet>
+			#define M(s, n, xy) \
+			    <SEQ_ELEM/>(0, xy) + <SEQ_ELEM/>(1, xy) + n \
+			    /**/
+			
+			<EXPR/>(<REPEAT/>(
+			   3, M, (a)(b)
+			))
+		</snippet>
+		Code that <em>can</em> use variadic macros, on the other hand, can simply pass variadic state or auxiliary data arguments.
+		<snippet>
+			#define M(s, n, x, y) x + y + n
+			
+			<EXPR/>(<REPEAT/>(
+			    3, M, a, b
+			))
+		</snippet>
+	</para>
+	<listing>
+		#include <chaos-preprocessor-arithmetic-dec.h/>
+		#include <chaos-preprocessor-arithmetic-inc.h/>
+		#include <chaos-preprocessor-control-while.h/>
+		#include <chaos-preprocessor-facilities-expander.h/>
+		#include <chaos-preprocessor-logical-bool.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		#include <chaos-preprocessor-seq-elem.h/>
+		
+		#define ADD(x, y) \
+		    <SEQ_ELEM/>( \
+		        0, \
+		        <EXPR/>(<WHILE/>( \
+		            PRED, \
+		            OP <EXPANDER/>(2), \
+		            (x)(y) \
+		        )) \
+		    ) \
+		    /**/
+		
+		#define PRED(s, seq) \
+		    <BOOL/>(<SEQ_ELEM/>(1, seq)) \
+		    /**/
+		
+		#define OP(s, x, y) \
+		    (<INC/>(x))(<DEC/>(y)) \
+		    /**/
+		
+		ADD(13, 7) // 20
+	</listing>
+	<derivative id="EXPANDER_ID"/>
+	<derivative id="EXPANDER_" lang="C99"/>
+</macro>
+
+</header>

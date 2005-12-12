@@ -23,14 +23,18 @@
 		if
 			echo license | grep -q "$4"
 		then
-			echo document: license.html
+			echo '[*]' document: license.html
 			msxsl license.xml document.xsl -o "$3"/license.html
+		else
+			echo '[ ]' document: license.html
 		fi
 		if
 			echo unknown | grep -q "$4"
 		then
-			echo document: unknown.html
+			echo '[*]' document: unknown.html
 			msxsl unknown.xml document.xsl -o "$3"/unknown.html
+		else
+			echo '[ ]' document: unknown.html
 		fi
 		<xsl:apply-templates select="binary-file | directory | document | header">
 			<xsl:with-param name="path" select="''"/>
@@ -55,8 +59,10 @@
 		if
 			echo <xsl:value-of select="concat($path, @id)"/> | grep -q "$4"
 		then
-			echo document: <xsl:value-of select="concat($path, @id)"/>.html
+			echo '[*]' document: <xsl:value-of select="concat($path, @id)"/>.html
 			msxsl "$2"/<xsl:value-of select="concat($path, @id)"/>.xml document.xsl -o "$3"/<xsl:value-of select="concat($path, @id)"/>.html
+		else
+			echo '[ ]' document: <xsl:value-of select="concat($path, @id)"/>.html
 		fi
 	</xsl:template>
 
@@ -66,9 +72,11 @@
 		if
 			echo <xsl:value-of select="concat($path, @name)"/> | grep -q "$4"
 		then
-			echo <xsl:value-of select="$sans-suffix"/>.html
+			echo '[*]' <xsl:value-of select="$sans-suffix"/>.html
 			msxsl "$2"/<xsl:value-of select="$sans-suffix"/>.xml .meta.xsl -o .temp.xml
 			msxsl .temp.xml header.xsl -o "$3"/<xsl:value-of select="$sans-suffix"/>.html library="$1"
+		else
+			echo '[ ]' <xsl:value-of select="$sans-suffix"/>.html
 		fi
 	</xsl:template>
 

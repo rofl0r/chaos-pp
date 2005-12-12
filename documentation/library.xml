@@ -125,6 +125,7 @@
 		<item value="λ placeholder"/>
 		<item value="λ placeholders"/>
 	</document>
+	<document id="lazy"/>
 	<document id="lists">
 		<item value="list"/>
 		<item value="lists"/>
@@ -141,6 +142,8 @@
 	<document id="overview"/>
 	<document id="parametrics">
 		<item value="parametric"/>
+		<item value="parametric application"/>
+		<item value="parametric applications"/>
 		<item value="parametric resumption"/>
 		<item value="parametric resumptions"/>
 		<item value="parametrically resumed"/>
@@ -478,6 +481,7 @@
 				<header name="context.h"/>
 				<header name="delay.h"/>
 				<header name="delve.h"/>
+				<header name="dynamic.h"/>
 				<header name="equalize.h"/>
 				<header name="expr.h"/>
 				<header name="higher_order.h"/>

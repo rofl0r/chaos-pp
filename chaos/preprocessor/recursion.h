@@ -19,6 +19,7 @@
 # include <chaos/preprocessor/recursion/context.h>
 # include <chaos/preprocessor/recursion/delay.h>
 # include <chaos/preprocessor/recursion/delve.h>
+# include <chaos/preprocessor/recursion/dynamic.h>
 # include <chaos/preprocessor/recursion/equalize.h>
 # include <chaos/preprocessor/recursion/expr.h>
 # include <chaos/preprocessor/recursion/higher_order.h>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- **************************************************************************
+     *                                                                        *
+     *    (C) Copyright Paul Mensonides 2003-2005.                            *
+     *                                                                        *
+     *    Distributed under the Boost Software License, Version 1.0.          *
+     *    (See accompanying file LICENSE).                                    *
+     *                                                                        *
+     *    See http://chaos-pp.sourceforge.net for the most recent version.    *
+     *                                                                        *
+     ************************************************************************** -->
+
+<header name="chaos/preprocessor/recursion/dynamic.h" author="Paul Mensonides" date="2003-2005">
+<overview>
+	The <self/> header defines a macro that utilizes a <link id="sequence"/> to build a <link id="parametric application"/> of the <link id="recursion backend"/>.
+</overview>
+
+<macro id="DYNAMIC" type="indirect">
+	<abstract>
+		The <DYNAMIC/> macro utilizes its first argument to build a <link id="parametric application"/> of the <link id="recursion backend"/> around a macro invocation.
+	</abstract>
+	<usage lang="C99">
+		<syntax><EXPR/>(<DYNAMIC/>(seq, macro, args))</syntax>
+		<param id="seq" optional="1">
+			The <link id="sequence"/> to be used to generate the <link id="parametric application"/>.
+		</param>
+		<param id="macro">
+			The macro to be invoked inside the <link id="parametric application"/>.
+		</param>
+		<param id="args">
+			The argument list to be applied to <var>macro</var>.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><EXPR/>(<DYNAMIC/>(seq, macro, args))</syntax>
+		<param id="seq">
+			The <link id="sequence"/> to be used to generate the <link id="parametric application"/>.
+		</param>
+		<param id="macro">
+			The macro to be invoked inside the <link id="parametric application"/>.
+		</param>
+		<param id="args">
+			The argument list to be applied to <var>macro</var>.
+		</param>
+	</usage>
+	<para>
+		The <DYNAMIC/> macro itself expands to a <link id="deferred expression"/> in terms of <code><NEXT/>(s)</code>.
+		This <link id="deferred expression"/> contains as many <link id="parametric applications"/> of <code><EXPR_S/>(s)(...)</code> surrounding the application of <var>args</var> to <var>macro</var> as there are elements in <var>seq</var>.
+		For example, if <code><NEXT/>(s)</code> is <code>2</code>, the expression
+		<snippet>
+			<DYNAMIC/>((1)(2)(3), MACRO, (...))
+		</snippet>
+		results in the <link id="deferred expression"/>
+		<snippet>
+			<EXPR_S/>(2)(<EXPR_S/>(2)(<EXPR_S/>(2)(
+			    MACRO(...)
+			)))
+		</snippet>
+		This <link id="deferred expression"/>, when invoked by <EXPR/>, expands to the result of <code>MACRO(...)</code> scanned three additional times.
+		I.e. the expression <code>MACRO(...)</code> is scanned one time more than there are elements in <var>seq</var>.
+	</para>
+	<para>
+		The primary utility of this macro is to provide <link id="recursion steps"/> for an algorithm whose recursion requirements are linear (or better) and easily computed as a <link id="sequence"/> from its input--while guaranting constant usage of the <link id="recursion backend"/>.
+		This is often the case with algorithms that operate on <link id="sequences"/>.
+	</para>
+	<para>
+		Note that the number of <link id="parametric applications"/> can be doubled simply by doubling <var>seq</var>.
+		This might be done, for example, by an algorithm that requires two <link id="recursion steps"/> for each element in a <link id="sequence"/>.
+		<snippet>
+			#define ALGO(seq) \
+			    <DYNAMIC/>(seq seq, ALGO_I, (seq)) \
+			    /**/
+			#define ALGO_I(seq) // ...
+		</snippet>
+		A fixed number of additional steps can be added simply by adding <link id="sequence"/> elements, such as <code>seq(~)(~)</code>, as the contents of each element are irrelevent.
+	</para>
+	<para>
+		Because the <link id="recursion steps"/> needed by an algorithm are supplied via the external <link id="parametric applications"/>, an algorithm need not internally cascade the <link id="recursion backend"/> (which is the usual case in recursive algorithms).
+		Instead, it can just generate a <link id="deferred expression"/> whenever it needs to recurse.
+	</para>
+	<para>
+		This macro deduces the current <link id="recursion state"/> and invokes <DYNAMIC_S/>.
+		If the current <link id="recursion state"/> is already known, direct use of <DYNAMIC_S/> is more efficient.
+	</para>
+	<para>
+		This macro may not be used if <link id="bypass semantics"/> are in effect.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-config.h/>
+		#include <chaos-preprocessor-control-iif.h/>
+		#include <chaos-preprocessor-recursion-basic.h/>
+		#include <chaos-preprocessor-recursion-dynamic.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		#include <chaos-preprocessor-seq-core.h/>
+		#include <chaos-preprocessor-tuple-eat.h/>
+		
+		#define FOR_EACH(macro, seq, data) \
+		    <DYNAMIC/>(seq, FOR_EACH_A, (macro, seq, data)) \
+		    /**/
+		
+		#define FOR_EACH_INDIRECT() FOR_EACH_A
+		#define FOR_EACH_A(macro, seq, data) \
+		    <IIF/>(<SEQ_IS_CONS/>(seq))( \
+		        FOR_EACH_B, <TUPLE_EAT/>(4) \
+		    )(<OBSTRUCT/>(), macro, seq, data) \
+		    /**/
+		#define FOR_EACH_B(_, macro, seq, data) \
+		    macro _(<SEQ_HEAD/>(seq), data) \
+		    FOR_EACH_INDIRECT _()(macro, <SEQ_TAIL/>(seq), data) \
+		    /**/
+		
+		#define M(x, _) &lt; x &gt;
+		
+		<EXPR/>(FOR_EACH(
+		    M, (a)(b)(c)(d)(e)(f)(g)(h)(i)(j), ~
+		))
+		// &lt; a &gt; &lt; b &gt; &lt; c &gt; &lt; d &gt; &lt; e &gt; &lt; f &gt; &lt; g &gt; &lt; h &gt; &lt; i &gt; &lt; j &gt;
+	</listing>
+	<derivative id="DYNAMIC_ID"/>
+	<derivative id="DYNAMIC_" lang="C99"/>
+	<derivative id="DYNAMIC_S">
+		<usage lang="C99">
+			<syntax><EXPR_S/>(s)(<DYNAMIC_S/>(s, seq, macro, args))</syntax>
+		</usage>
+		<usage lang="C++">
+			<syntax><EXPR_S/>(s)(<DYNAMIC_S/>(s, seq, macro, args))</syntax>
+		</usage>
+	</derivative>
+</macro>
+
+</header>

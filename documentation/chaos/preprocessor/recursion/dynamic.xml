@@ -126,6 +126,8 @@
 		<usage lang="C++">
 			<syntax><EXPR_S/>(s)(<DYNAMIC_S/>(s, seq, macro, args))</syntax>
 		</usage>
+		<derivative id="DYNAMIC_S_ID"/>
+		<derivative id="DYNAMIC_S_" lang="C99"/>
 	</derivative>
 </macro>
 

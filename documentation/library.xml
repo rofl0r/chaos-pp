@@ -125,7 +125,7 @@
 		<item value="λ placeholder"/>
 		<item value="λ placeholders"/>
 	</document>
-	<document id="lazy"/>
+	<!-- <document id="lazy"/> -->
 	<document id="lists">
 		<item value="list"/>
 		<item value="lists"/>
@@ -207,6 +207,7 @@
 				<header name="append.h"/>
 				<header name="auto.h"/>
 				<directory name="auto">
+					<header name="bubblesort.h"/>
 					<header name="combinatorial_repeat.h"/>
 					<header name="filter.h"/>
 					<header name="fold_left.h"/>
@@ -216,8 +217,11 @@
 					<header name="for_each.h"/>
 					<header name="for_each_i.h"/>
 					<header name="for_each_product.h"/>
+					<header name="insertion_sort.h"/>
+					<header name="merge_sort.h"/>
 					<header name="transform.h"/>
 				</directory>
+				<header name="bubblesort.h"/>
 				<header name="cast.h"/>
 				<header name="combinatorial_repeat.h"/>
 				<directory name="complexity">
@@ -240,6 +244,8 @@
 				<header name="for_each_i.h"/>
 				<header name="for_each_product.h"/>
 				<header name="insert.h"/>
+				<header name="insertion_sort.h"/>
+				<header name="merge_sort.h"/>
 				<header name="parametric.h"/>
 				<directory name="parametric">
 					<header name="for_each.h"/>

@@ -14,6 +14,7 @@
 #
 # include <chaos/preprocessor/algorithm/append.h>
 # include <chaos/preprocessor/algorithm/auto.h>
+# include <chaos/preprocessor/algorithm/bubblesort.h>
 # include <chaos/preprocessor/algorithm/cast.h>
 # include <chaos/preprocessor/algorithm/combinatorial_repeat.h>
 # include <chaos/preprocessor/algorithm/concat.h>
@@ -29,6 +30,8 @@
 # include <chaos/preprocessor/algorithm/for_each_i.h>
 # include <chaos/preprocessor/algorithm/for_each_product.h>
 # include <chaos/preprocessor/algorithm/insert.h>
+# include <chaos/preprocessor/algorithm/insertion_sort.h>
+# include <chaos/preprocessor/algorithm/merge_sort.h>
 # include <chaos/preprocessor/algorithm/parametric.h>
 # include <chaos/preprocessor/algorithm/pop_back.h>
 # include <chaos/preprocessor/algorithm/prepend.h>

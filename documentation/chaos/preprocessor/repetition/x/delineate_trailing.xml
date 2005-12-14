@@ -21,7 +21,7 @@
 		The <DELINEATE_TRAILING_X/> macro delineates its fourth argument the number of times specified by its second argument.
 	</abstract>
 	<usage lang="C99">
-		<syntax><EXPR/><DELINEATE_TRAILING_X/>(size, count, sep, macro))</syntax>
+		<syntax><EXPR/>(<DELINEATE_TRAILING_X/>(size, count, sep, macro))</syntax>
 		<param id="size">
 			The size of the buffer of valid <link id="recursion steps"/> maintained by the algorithm.
 		</param>

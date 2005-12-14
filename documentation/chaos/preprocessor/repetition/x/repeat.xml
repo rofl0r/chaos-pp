@@ -21,7 +21,7 @@
 		The <REPEAT_X/> macro repeats its third argument the number of times specified by its second argument.
 	</abstract>
 	<usage lang="C99">
-		<syntax><EXPR/><REPEAT_X/>(size, count, macro))</syntax>
+		<syntax><EXPR/>(<REPEAT_X/>(size, count, macro))</syntax>
 		<param id="size">
 			The size of the buffer of valid <link id="recursion steps"/> maintained by the algorithm.
 		</param>

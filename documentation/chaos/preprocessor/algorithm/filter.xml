@@ -194,7 +194,7 @@
 			        elem \
 			    ) \
 			    /**/
-			#define PRED_INDIRECT() PRED_I
+			#define PRED_INDIRECT() PRED
 			
 			<EXPR/>(<FILTER/>(
 			    PRED,

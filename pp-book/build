@@ -40,6 +40,7 @@ msxsl "$1" meta.xsl -o .meta.xsl source="$2"
 echo generating script...
 msxsl "$1" script.xsl -o .script
 chmod +rx .script
+dos2unix .script
 
 echo executing script...
 echo "" > .temp.xml

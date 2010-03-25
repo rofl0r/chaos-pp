@@ -16,6 +16,7 @@
 	<xsl:output method="text" encoding="UTF-8"/>
 
 	<xsl:template match="/library">
+    #!/bin/bash
 		# $1 == library specification file
 		# $2 == source path
 		# $3 == destination path
@@ -24,7 +25,7 @@
 			echo license | grep -q "$4"
 		then
 			echo '[*]' document: license.html
-			msxsl license.xml document.xsl -o "$3"/license.html
+      xsltproc -o "$3"/license.html document.xsl license.xml
 		else
 			echo '[ ]' document: license.html
 		fi
@@ -32,7 +33,7 @@
 			echo unknown | grep -q "$4"
 		then
 			echo '[*]' document: unknown.html
-			msxsl unknown.xml document.xsl -o "$3"/unknown.html
+      xsltproc -o "$3"/unknown.html document.xsl unknown.xml
 		else
 			echo '[ ]' document: unknown.html
 		fi
@@ -60,7 +61,7 @@
 			echo <xsl:value-of select="concat($path, @id)"/> | grep -q "$4"
 		then
 			echo '[*]' document: <xsl:value-of select="concat($path, @id)"/>.html
-			msxsl "$2"/<xsl:value-of select="concat($path, @id)"/>.xml document.xsl -o "$3"/<xsl:value-of select="concat($path, @id)"/>.html
+      xsltproc -o "$3"/<xsl:value-of select="concat($path, @id)"/>.html document.xsl "$2"/<xsl:value-of select="concat($path, @id)"/>.xml
 		else
 			echo '[ ]' document: <xsl:value-of select="concat($path, @id)"/>.html
 		fi
@@ -73,8 +74,8 @@
 			echo <xsl:value-of select="concat($path, @name)"/> | grep -q "$4"
 		then
 			echo '[*]' <xsl:value-of select="$sans-suffix"/>.html
-			msxsl "$2"/<xsl:value-of select="$sans-suffix"/>.xml .meta.xsl -o .temp.xml
-			msxsl .temp.xml header.xsl -o "$3"/<xsl:value-of select="$sans-suffix"/>.html library="$1"
+      xsltproc -o .temp.xml .meta.xsl "$2"/<xsl:value-of select="$sans-suffix"/>.xml
+      xsltproc -o "$3"/<xsl:value-of select="$sans-suffix"/>.html --stringparam library "$1" header.xsl .temp.xml
 		else
 			echo '[ ]' <xsl:value-of select="$sans-suffix"/>.html
 		fi

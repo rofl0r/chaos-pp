@@ -11,7 +11,7 @@
      *                                                                        *
      ************************************************************************** -->
 
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:meta="λ">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:meta="http://chaos-pp.sourceforge.net/meta">
 
 	<xsl:output method="xml" indent="yes" encoding="UTF-8"/>
 

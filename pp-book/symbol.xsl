@@ -11,7 +11,7 @@
      *                                                                        *
      ************************************************************************** -->
 
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:meta="λ" xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:meta="http://chaos-pp.sourceforge.net/meta" xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl">
 
 	<xsl:import href="header-name.xsl"/>
 	<xsl:import href="string.xsl"/>

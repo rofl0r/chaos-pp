@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # **************************************************************************
 # *                                                                        *
 # *    (C) Copyright Paul Mensonides 2003-2005.                            *
@@ -17,10 +19,10 @@
 clear
 
 echo expanding library...
-msxsl "$1" library.xsl -o .library.xml source="$2"
+xsltproc -o .library.xml --stringparam source "$2" library.xsl "$1"
 
 echo generating symbol table...
-msxsl .library.xml symbol.xsl -o .symbol.xsl
+xsltproc -o .symbol.xsl symbol.xsl .library.xml
 
 echo copying support files...
 mkdir -p "$3"
@@ -29,18 +31,17 @@ cp alternate.css "$3"/alternate.css
 cp background.gif "$3"/background.gif
 
 echo creating indices...
-msxsl .library.xml index.xsl -o "$3"/documents.html source="$2"
-msxsl .library.xml index.xsl -m headers -o "$3"/headers.html source="$2"
-msxsl .library.xml index.xsl -m primary -o "$3"/primary.html source="$2"
-msxsl .library.xml index.xsl -m secondary -o "$3"/secondary.html source="$2"
+xsltproc -o "$3"/documents.html --stringparam mode documents --stringparam source "$2" index.xsl .library.xml
+xsltproc -o "$3"/headers.html --stringparam mode headers --stringparam source "$2" index.xsl .library.xml
+xsltproc -o "$3"/primary.html --stringparam mode primaries --stringparam source "$2" index.xsl .library.xml
+xsltproc -o "$3"/secondary.html --stringparam mode secondaries --stringparam source "$2" index.xsl .library.xml
 
 echo generating meta-transformations...
-msxsl "$1" meta.xsl -o .meta.xsl source="$2"
+xsltproc -o .meta.xsl --stringparam source "$2" meta.xsl "$1"
 
 echo generating script...
-msxsl "$1" script.xsl -o .script
+xsltproc -o .script script.xsl "$1"
 chmod +rx .script
-dos2unix .script
 
 echo executing script...
 echo "" > .temp.xml

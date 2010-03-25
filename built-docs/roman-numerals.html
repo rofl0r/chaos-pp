@@ -45,17 +45,23 @@ int main(void) {
 			This is a preprocessor version (that assumes variadics and placemarkers)....
 			</p></div>
 <div><div><pre>#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/algorithm/for_each_i.html" class="header">&lt;chaos/preprocessor/algorithm/for_each_i.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/algorithm/size.html" class="header">&lt;chaos/preprocessor/algorithm/size.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arithmetic/sub.html" class="header">&lt;chaos/preprocessor/arithmetic/sub.h&gt;</a></code>
 #include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/config.html" class="header">&lt;chaos/preprocessor/config.h&gt;</a></code>
 #include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/recursion/expr.html" class="header">&lt;chaos/preprocessor/recursion/expr.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/repetition/repeat.html" class="header">&lt;chaos/preprocessor/repetition/repeat.h&gt;</a></code>
 #include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/seq/elem.html" class="header">&lt;chaos/preprocessor/seq/elem.h&gt;</a></code>
 #include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/string/core.html" class="header">&lt;chaos/preprocessor/string/core.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/tuple/eat.html" class="header">&lt;chaos/preprocessor/tuple/eat.h&gt;</a></code>
 
 #if <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/config.html#VARIADICS" class="primary">CHAOS_PP_VARIADICS</a></code>
 
 #define ROMAN(string) ROMAN_S(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/recursion/expr.html#STATE" class="primary">CHAOS_PP_STATE</a></code>(), string)
 #define ROMAN_S(s, string) \
-    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/recursion/expr.html#EXPR" class="primary">CHAOS_PP_EXPR</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/algorithm/for_each_i.html#FOR_EACH_I" class="primary">CHAOS_PP_FOR_EACH_I</a></code>( \
-        TARGET, (<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/string/core.html#STRING" class="primary">CHAOS_PP_STRING</a></code>) string \
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/recursion/expr.html#EXPR_S" class="primary">CHAOS_PP_EXPR_S</a></code>(s)(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/algorithm/for_each_i.html#FOR_EACH_I_S" class="secondary">CHAOS_PP_FOR_EACH_I_S</a></code>( \
+        s, TARGET, (<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/string/core.html#STRING" class="primary">CHAOS_PP_STRING</a></code>) <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/recursion/expr.html#EXPR_S" class="primary">CHAOS_PP_EXPR_S</a></code>(s)(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/repetition/repeat.html#REPEAT_S" class="secondary">CHAOS_PP_REPEAT_S</a></code>( \
+            s, <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arithmetic/sub.html#SUB" class="primary">CHAOS_PP_SUB</a></code>(4, <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/algorithm/size.html#SIZE" class="primary">CHAOS_PP_SIZE</a></code>((<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/string/core.html#STRING" class="primary">CHAOS_PP_STRING</a></code>) string)), 0 <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/tuple/eat.html#EAT" class="primary">CHAOS_PP_EAT</a></code> \
+        )) string \
     )) \
     /**/
 

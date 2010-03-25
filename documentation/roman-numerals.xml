@@ -54,17 +54,23 @@
 			This is a preprocessor version (that assumes variadics and placemarkers)....
 			<snippet>
 				#include <chaos-preprocessor-algorithm-for_each_i.h/>
+				#include <chaos-preprocessor-algorithm-size.h/>
+				#include <chaos-preprocessor-arithmetic-sub.h/>
 				#include <chaos-preprocessor-config.h/>
 				#include <chaos-preprocessor-recursion-expr.h/>
+				#include <chaos-preprocessor-repetition-repeat.h/>
 				#include <chaos-preprocessor-seq-elem.h/>
 				#include <chaos-preprocessor-string-core.h/>
+				#include <chaos-preprocessor-tuple-eat.h/>
 				
 				#if <VARIADICS/>
 				
 				#define ROMAN(string) ROMAN_S(<STATE/>(), string)
 				#define ROMAN_S(s, string) \
-				    <EXPR/>(<FOR_EACH_I/>( \
-				        TARGET, (<STRING/>) string \
+				    <EXPR_S/>(s)(<FOR_EACH_I_S/>( \
+				        s, TARGET, (<STRING/>) <EXPR_S/>(s)(<REPEAT_S/>( \
+				            s, <SUB/>(4, <SIZE/>((<STRING/>) string)), 0 <EAT/> \
+				        )) string \
 				    )) \
 				    /**/
 				

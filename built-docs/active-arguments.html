@@ -1,0 +1,265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Active Arguments - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+<body>
+<p>
+			An <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./active-arguments.html">active argument</a> is an argument that expands each time that it is scanned by the preprocessor.
+			For example,
+			</p>
+<div><pre>#define A(n) \
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/recursion/basic.html#DEFER" class="primary">CHAOS_PP_DEFER</a></code>(A_INDIRECT)()(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arithmetic/inc.html#INC" class="primary">CHAOS_PP_INC</a></code>(n)) \
+    /**/
+#define A_INDIRECT() A
+
+#define X(arg) arg
+#define Y(arg) X(arg)
+#define Z(arg) Y(arg)
+
+   A(0)   // A_INDIRECT()(1)
+X( A(0) ) // A_INDIRECT()(2)
+Y( A(0) ) // A_INDIRECT()(3)
+Z( A(0) ) // A_INDIRECT()(4)</pre></div>
+<p>
+			In the above, each invocation of <code>A</code> is subjected to a different number of scans, which causes the results to be different each time.
+		</p>
+<hr>
+<h4>Terminal State</h4>
+<div><p>
+			Normally, unlike the example in the previous section, an <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./active-arguments.html">active argument</a> eventually reaches a terminal, or inactive, state.
+			For example,
+			</p></div>
+<div><div><pre>#define B(n) \
+    n <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/control/when.html#WHEN" class="primary">CHAOS_PP_WHEN</a></code>(n)( \
+        B_INDIRECT <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/recursion/basic.html#OBSTRUCT" class="primary">CHAOS_PP_OBSTRUCT</a></code>()()(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arithmetic/dec.html#DEC" class="primary">CHAOS_PP_DEC</a></code>(n)) \
+    ) \
+    /**/
+#define B_INDIRECT() B
+
+#define ID(x) x
+
+#define SCAN(x) ID(ID(ID(ID(ID(x)))))
+
+SCAN( B(0) ) // 0
+SCAN( B(1) ) // 1 0
+SCAN( B(2) ) // 2 1 0
+SCAN( B(3) ) // 3 2 1 0</pre></div></div>
+<div><p>
+			Here, each invocation of <code>B</code> creates an <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./active-arguments.html">active argument</a> that eventually reaches a terminal state.
+			However, each invocation reaches that terminal state at a different time (i.e. after a different number of scans).
+		</p></div>
+<div><p>
+			Not all useful <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./active-arguments.html">active arguments</a> reach a terminal state.
+			The following code produces an infinite <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./lists.html">list</a>:
+			</p></div>
+<div><div><pre>#define HEAD(list) HEAD_I list
+#define HEAD_I(head, tail) head
+
+#define TAIL(list) TAIL_I list
+#define TAIL_I(head, tail) tail
+
+#define STREAM(x, op, data) (x, STREAM_I(x, op, data))
+#define STREAM_INDIRECT() STREAM_I
+#define STREAM_I(x, op, data) \
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/control/iif.html#IIF" class="primary">CHAOS_PP_IIF</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/detection/is_nullary.html#IS_NULLARY" class="primary">CHAOS_PP_IS_NULLARY</a></code>(TAIL_I(~, ())))( \
+        STREAM_INDIRECT <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/recursion/basic.html#OBSTRUCT" class="primary">CHAOS_PP_OBSTRUCT</a></code>()()(x, op, data) \
+            <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/tuple/eat.html#TUPLE_EAT" class="primary">CHAOS_PP_TUPLE_EAT</a></code>(3), \
+        STREAM_II \
+    )(op(x, data), op, data) \
+    /**/
+#define STREAM_II(x, op, data) \
+    (x, <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/recursion/basic.html#DEFER" class="primary">CHAOS_PP_DEFER</a></code>(STREAM_INDIRECT)()(x, op, data)) \
+    /**/
+
+#define NATURALS STREAM(0, NATURALS_OP, ~)
+#define NATURALS_OP(x, _) <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arithmetic/inc.html#INC" class="primary">CHAOS_PP_INC</a></code>(x)
+
+HEAD(NATURALS)             // 0
+HEAD(TAIL(NATURALS))       // 1
+HEAD(TAIL(TAIL(NATURALS))) // 2</pre></div></div>
+<div><p>
+			The <code>NATURALS</code> macro conceptually expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./lists.html">list</a> of all natural numbers.
+			(Because this code is using <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./saturation.html">saturation arithmetic</a>, the value eventually will reach <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/limits.html#LIMIT_MAG" class="primary">CHAOS_PP_LIMIT_MAG</a></code>, causing an infinite <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./lists.html">list</a> of values <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./saturation.html">saturated</a> to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/limits.html#LIMIT_MAG" class="primary">CHAOS_PP_LIMIT_MAG</a></code> from that point on.)
+		</p></div>
+<hr>
+<h4>Multiple Dimensions</h4>
+<div><p>
+			The preprocessor's "normal" scanning can be considered the first dimension of activity.
+			An argument passed in a macro invocation is scanned in what can be considered the second dimension of activity.
+			Typically, this initial argument scan simply expands to a terminal result.
+			This behavior is so typical, in fact, and has no effect on encapsulation (unless the argument is used as an operand of <code>#</code> or <code>##</code>), that it is not enough to be considered an <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./active-arguments.html">active argument</a>.
+			When an initial argument scan <em>does not</em> expand to a terminal result, that argument can properly be called an <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./active-arguments.html">active argument</a>.
+		</p></div>
+<div><p>
+			All of the uses of <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./active-arguments.html">active arguments</a> that have been considered so far have been <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./active-arguments.html">active</a> in the second dimension.
+			These can be called first-level <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./active-arguments.html">active arguments</a>.
+			However, <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./active-arguments.html">active arguments</a> themselves invoke other macros, possibly passing arguments.
+			Those arguments are scanned in a higher dimension yet--yielding third, fourth, and fifth (and so on) dimensions of scanning and, therefore, second-, third-, and fourth-level (etc.) <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./active-arguments.html">active arguments</a>.
+			A second-level <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./active-arguments.html">active argument</a> occurs, for example, when a first-level <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./active-arguments.html">active argument</a> invokes a macro with an <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./active-arguments.html">active argument</a>.
+			The <code>STREAM</code> macro defined in the previous section has a parameter intended to be used as auxiliary data.
+			If an <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./active-arguments.html">active argument</a> is passed as the auxiliary data, it effectively becomes a second-level <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./active-arguments.html">active argument</a>.
+			The following code demonstrates this:
+			</p></div>
+<div><div><pre>#define SCANS STREAM(0, SCANS_OP, <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/recursion/delve.html#DELVE" class="primary">CHAOS_PP_DELVE</a></code>())
+#define SCANS_OP(x, d) <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/recursion/delve.html#HALT" class="primary">CHAOS_PP_HALT</a></code>(d)
+
+HEAD(TAIL(TAIL(TAIL(SCANS))))</pre></div></div>
+<div><p>
+			(The result isn't shown here because the generated elements are the number of scans endured by the auxiliary data argument at the point when the element is created.
+			That number of scans is not guaranteed to be a specific value by the library.
+			However, each element <em>will</em> have a value that is some magnitude <em>higher</em> than the previous element.)
+			In this example, the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./active-arguments.html">active argument</a> constructed by <code>SCANS</code> is scanned repeatedly as it passes through <code>HEAD</code> and <code>TAIL</code>.
+			Each of those scans causes invocations that pass the auxiliary data--which is itself <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./active-arguments.html">active</a>.
+			The following example uses multi-level <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./active-arguments.html">active arguments</a> more explicitly:
+			</p></div>
+<div><div><pre>#define A(n) \
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/control/when.html#WHEN" class="primary">CHAOS_PP_WHEN</a></code>(n)( \
+        A_INDIRECT <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/recursion/basic.html#OBSTRUCT" class="primary">CHAOS_PP_OBSTRUCT</a></code>()()(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arithmetic/dec.html#DEC" class="primary">CHAOS_PP_DEC</a></code>(n)) \
+        n \
+    ) \
+    /**/
+#define A_INDIRECT() A
+
+#define I(x) x
+
+( I(I(I(I(I( A(3) ))))) ) // ( 1 2 3 )
+
+#define B(n) \
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/control/when.html#WHEN" class="primary">CHAOS_PP_WHEN</a></code>(n)( \
+        B_INDIRECT <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/recursion/basic.html#OBSTRUCT" class="primary">CHAOS_PP_OBSTRUCT</a></code>()()(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arithmetic/dec.html#DEC" class="primary">CHAOS_PP_DEC</a></code>(n)) \
+        ( I(I(I(I(I( A(n) ))))) ) \
+    ) \
+    /**/
+#define B_INDIRECT() B
+
+#define J(x) x
+
+( J(J(J(J(J( B(3) ))))) ) // ( ( 1 ) ( 1 2 ) ( 1 2 3 ) )
+
+#define C(n) \
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/control/when.html#WHEN" class="primary">CHAOS_PP_WHEN</a></code>(n)( \
+        C_INDIRECT <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/recursion/basic.html#OBSTRUCT" class="primary">CHAOS_PP_OBSTRUCT</a></code>()()(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arithmetic/dec.html#DEC" class="primary">CHAOS_PP_DEC</a></code>(n)) \
+        ( J(J(J(J(J( B(n) ))))) ) \
+    ) \
+    /**/
+#define C_INDIRECT() C
+
+#define K(x) x
+
+( K(K(K(K(K( C(3) ))))) )
+// ( ( ( 1 ) ) ( ( 1 ) ( 1 2 ) ) ( ( 1 ) ( 1 2 ) ( 1 2 3 ) ) )</pre></div></div>
+<hr>
+<h4>Library Support</h4>
+<div><p>
+			In the infinite <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./lists.html">list</a> example, notice the use of the custom <code>HEAD</code> and <code>TAIL</code> macros instead of the <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/list/core.html#LIST_HEAD" class="primary">CHAOS_PP_LIST_HEAD</a></code> and <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/list/core.html#LIST_TAIL" class="primary">CHAOS_PP_LIST_TAIL</a></code> library primitives.
+			This replication is purposeful.
+			Except in a very few situations, the library currently is not designed to handle user input that contains <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./active-arguments.html">active arguments</a> that invoke library primitives.
+			Therefore, <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./active-arguments.html">active arguments</a>, unless directly constructed by library primitives, should never be passed to library primitives.
+			The reason for this restriction is that library primitives often internally use other library primitives.
+			If an <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./active-arguments.html">active argument</a>, using a specific library primitive, passes through that same primitive, the usage of that primitive inside the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./active-arguments.html">active argument</a> will fail to expand.
+			This failure can cause unexpected results or even compilation errors.
+			The library primitives that any given library primitive uses internally are implementation details that are not documented and should not be considered stable.
+			Therefore, there is no guarantee that a library primitive that is used by an <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./active-arguments.html">active argument</a> is not also used by a library primitive to which the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./active-arguments.html">active argument</a> is passed.
+			The following illustrates such behavior:
+			</p></div>
+<div><div><pre>#define BUILD(n) BUILD_I(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arithmetic/inc.html#INC" class="primary">CHAOS_PP_INC</a></code>(n), n)
+#define BUILD_I(n, r) \
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/recursion/basic.html#DEFER" class="primary">CHAOS_PP_DEFER</a></code>(BUILD_INDIRECT)()( \
+        <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arithmetic/inc.html#INC" class="primary">CHAOS_PP_INC</a></code>(n), <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/cat.html#PRIMITIVE_CAT" class="primary">CHAOS_PP_PRIMITIVE_CAT</a></code>(r, n) \
+    ) \
+    /**/
+#define BUILD_INDIRECT() BUILD_I
+
+#define ID(x) x
+
+ID(ID(ID( BUILD(1) ))) // BUILD_INDIRECT()( 6, 12345 )
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/cat.html#CAT" class="primary">CHAOS_PP_CAT</a></code>(BUILD(1) x, y) // failure!</pre></div></div>
+<div><p>
+			Here, the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./active-arguments.html">active argument</a> constructed by <code>BUILD(1)</code> passes through <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/cat.html#CAT" class="primary">CHAOS_PP_CAT</a></code>.
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/cat.html#CAT" class="primary">CHAOS_PP_CAT</a></code> macro happens to pass its arguments on to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/cat.html#PRIMITIVE_CAT" class="primary">CHAOS_PP_PRIMITIVE_CAT</a></code> internally which causes the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./active-arguments.html">active argument</a> to pass through <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/cat.html#PRIMITIVE_CAT" class="primary">CHAOS_PP_PRIMITIVE_CAT</a></code>.
+			This, in turn, causes the use of <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/cat.html#PRIMITIVE_CAT" class="primary">CHAOS_PP_PRIMITIVE_CAT</a></code> in the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./active-arguments.html">active argument</a> to fail to expand--causing an unexpected garbage result.
+			This is a simplistic example where it is relatively easy to figure out what went wrong, but that is not always the case.
+		</p></div>
+<div><p>
+			There are a few library primitives that intentionally construct <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./active-arguments.html">active arguments</a>.
+			The most common of these are <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/recursion/basic.html#DEFER" class="primary">CHAOS_PP_DEFER</a></code>, <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/recursion/basic.html#OBSTRUCT" class="primary">CHAOS_PP_OBSTRUCT</a></code>, and other macros that simply delay invocation of a macro through some number of scans.
+			Other examples include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/recursion/delve.html#DELVE" class="primary">CHAOS_PP_DELVE</a></code> and <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/recursion/rail.html#RAIL" class="primary">CHAOS_PP_RAIL</a></code>.
+			In general, the library is designed to handle these <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./active-arguments.html">active arguments</a> provided that the specific library primitive used does not require the argument to be in a specific form.
+			For example, passing an <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./active-arguments.html">active argument</a> to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arithmetic/inc.html#INC" class="primary">CHAOS_PP_INC</a></code> is invalid because <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arithmetic/inc.html#INC" class="primary">CHAOS_PP_INC</a></code> requires a number between <code>0</code> and <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/limits.html#LIMIT_MAG" class="primary">CHAOS_PP_LIMIT_MAG</a></code>, and an <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./active-arguments.html">active argument</a> is not a number.
+			On the other hand, <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/tuple/elem.html#TUPLE_ELEM" class="primary">CHAOS_PP_TUPLE_ELEM</a></code> does not require that the elements of the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuple</a> it is accessing be in any particular form:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/recursion/delve.html#HALT" class="primary">CHAOS_PP_HALT</a></code>(
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/tuple/elem.html#TUPLE_ELEM" class="primary">CHAOS_PP_TUPLE_ELEM</a></code>(3, 0, (<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/recursion/delve.html#DELVE" class="primary">CHAOS_PP_DELVE</a></code>(), x, y))
+)</pre></div></div>
+<div><p>
+			Future versions of the library may support <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./active-arguments.html">active arguments</a> more generally.
+		</p></div>
+<hr>
+<h4>Postscript</h4>
+<div><p>
+			It is worth noting that an entire recursion engine can be built by the manipulation of <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./active-arguments.html">active arguments</a>.
+			A simplistic example is demonstrated here (this one uses variadics as a change of pace).
+			</p></div>
+<div><div><pre>#define EVAL(...) \
+    A(A(A(__VA_ARGS__))) \
+    /**/
+#define A(...) B(B(B(__VA_ARGS__)))
+#define B(...) C(C(C(__VA_ARGS__)))
+#define C(...) D(D(D(__VA_ARGS__)))
+#define D(...) E(E(E(__VA_ARGS__)))
+#define E(...) __VA_ARGS__
+
+#define REPEAT(count, macro, ...) \
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/control/when.html#WHEN" class="primary">CHAOS_PP_WHEN</a></code>(count)( \
+        REPEAT_INDIRECT <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/recursion/basic.html#OBSTRUCT" class="primary">CHAOS_PP_OBSTRUCT</a></code>()()( \
+            <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arithmetic/dec.html#DEC" class="primary">CHAOS_PP_DEC</a></code>(count), macro, __VA_ARGS__ \
+        ) \
+        macro <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/recursion/basic.html#OBSTRUCT" class="primary">CHAOS_PP_OBSTRUCT</a></code>()( \
+            <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arithmetic/dec.html#DEC" class="primary">CHAOS_PP_DEC</a></code>(count), __VA_ARGS__ \
+        ) \
+    ) \
+    /**/
+#define REPEAT_INDIRECT() REPEAT
+
+#define PARAM(n, ...) <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/punctuation/comma_if.html#COMMA_IF" class="primary">CHAOS_PP_COMMA_IF</a></code>(n) __VA_ARGS__ ## n
+
+EVAL( REPEAT(100, PARAM, class T) ) // class T0, class T1, ... class T99
+
+#define FIXED(n, ...) <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/punctuation/comma_if.html#COMMA_IF" class="primary">CHAOS_PP_COMMA_IF</a></code>(n) __VA_ARGS__
+#define TTP(n, ...) \
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/punctuation/comma_if.html#COMMA_IF" class="primary">CHAOS_PP_COMMA_IF</a></code>(n) \
+        template&lt;REPEAT(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arithmetic/inc.html#INC" class="primary">CHAOS_PP_INC</a></code>(n), FIXED, class)&gt; class __VA_ARGS__ ## n \
+    /**/
+
+EVAL( REPEAT(3, TTP, T) )
+// template&lt;class&gt; class T0,
+// template&lt;class, class&gt; class T1,
+// template&lt;class, class, class&gt; class T2</pre></div></div>
+<div><p>
+			This form of recursion engine, while interesting, has several major drawbacks.
+			Most of them can be minimized, in one way or another, but a fundamental problem is efficiency.
+			Eventually, the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./active-arguments.html">active argument</a> reaches a terminal state--at which point it no longer changes--and no further scans are required to produce the final result.
+			However, further scans are applied anyway--exponentially.
+			Another drawback is that this approach effectively enforces a continuation style because it destroys call-and-return semantics.
+			In the above example, the result of the "nested" use of <code>REPEAT</code> is not needed for further calculation, so it isn't an issue.
+			That is not always the case.
+		</p></div>
+<div><p>
+			(The library uses a form of recursion very similar to this.
+			The major difference is that there is no outer controller that applies a massive number of scans to its argument.
+			Instead, there is only an identity macro that causes its argument to be scanned twice--where the first scan yields a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./deferral.html">deferred</a> use of another identity macro (and so on).
+			This creates a cascading effect that terminates when another identity macro is not generated.
+			Thus, all activity stops when a particular algorithm completes.)
+		</p></div>
+</body>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="./license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</html>

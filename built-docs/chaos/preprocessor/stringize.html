@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>stringize.h - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="../.././style.css">
+</head>
+<body>
+<p>
+	The <code>stringize.h</code> header defines stringizing macros.
+</p>
+<h4>Usage</h4>
+<pre class="box">#include <code><a class="header" href="../.././chaos/preprocessor/stringize.html">&lt;chaos/preprocessor/stringize.h&gt;</a></code></pre>
+<h4>Contents</h4>
+<ul>
+<li><code><a class="primary" href="#PRIMITIVE_STRINGIZE">CHAOS_PP_PRIMITIVE_STRINGIZE</a></code></li>
+<li><code><a class="primary" href="#STRINGIZE">CHAOS_PP_STRINGIZE</a></code></li>
+</ul>
+<hr>
+<a name="STRINGIZE"></a><h3 class="primary">CHAOS_PP_STRINGIZE</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/stringize.html#STRINGIZE" class="primary">CHAOS_PP_STRINGIZE</a></code> macro stringizes its argument after it has been expanded.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/stringize.html#STRINGIZE" class="primary">CHAOS_PP_STRINGIZE</a></code>(...)</pre>
+<dl>
+<dt>[<var>...</var>]</dt>
+<dd><p>
+			The argument to be stringized.
+		</p></dd>
+</dl>
+<h4>Usage <small>- C/C++ Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/stringize.html#STRINGIZE" class="primary">CHAOS_PP_STRINGIZE</a></code>(x)</pre>
+<dl>
+<dt><var>x</var></dt>
+<dd><p>
+			The argument to be stringized.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro stringizes its argument with the stringizing operator.
+		</p></div>
+<div><div><pre>#__VA_ARGS__ // C99
+#x           // C and C++</pre></div></div>
+<div><p>
+		This macro allows its argument to expand on input.
+		This macro's sibling, <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/stringize.html#PRIMITIVE_STRINGIZE" class="primary">CHAOS_PP_PRIMITIVE_STRINGIZE</a></code>, does <em>not</em> provide this delay.
+	</p></div>
+<div><p>
+		Both leading and trailing whitespace are removed from the argument when it is stringized, and internal whitespace separations are each condensed to a single space character.
+		</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/stringize.html#STRINGIZE" class="primary">CHAOS_PP_STRINGIZE</a></code>( abc ) // "abc"
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/stringize.html#STRINGIZE" class="primary">CHAOS_PP_STRINGIZE</a></code>(1   2) // "1 2"</pre></div></div>
+<div><p>
+		In C99, if <code>__VA_ARGS__</code> expands to a placemarker, this macro expands to an empty string literal.
+		</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/stringize.html#STRINGIZE" class="primary">CHAOS_PP_STRINGIZE</a></code>() // ""</pre></div></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../.././chaos/preprocessor/string/charize.html#CHARIZE">CHAOS_PP_CHARIZE</a></code></li>
+<li><code><a class="primary" href="../.././chaos/preprocessor/stringize.html#PRIMITIVE_STRINGIZE">CHAOS_PP_PRIMITIVE_STRINGIZE</a></code></li>
+<li><code><a class="primary" href="../.././chaos/preprocessor/wstringize.html#PRIMITIVE_WSTRINGIZE">CHAOS_PP_PRIMITIVE_WSTRINGIZE</a></code></li>
+<li><code><a class="primary" href="../.././chaos/preprocessor/wstringize.html#WSTRINGIZE">CHAOS_PP_WSTRINGIZE</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/stringize.html" class="header">&lt;chaos/preprocessor/stringize.h&gt;</a></code>
+
+#define A text
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/stringize.html#STRINGIZE" class="primary">CHAOS_PP_STRINGIZE</a></code>(A) // "text"</pre>
+<hr>
+<a name="STRINGIZE_ID"></a><h3 class="secondary">CHAOS_PP_STRINGIZE_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/stringize.html#STRINGIZE_ID" class="secondary">CHAOS_PP_STRINGIZE_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/stringize.html#STRINGIZE" class="primary">CHAOS_PP_STRINGIZE</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/stringize.html#STRINGIZE_ID" class="secondary">CHAOS_PP_STRINGIZE_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro exists only for uniformity with other macros that require indirect invocation.
+				</p></div>
+<hr>
+<a name="STRINGIZE_"></a><h3 class="secondary">CHAOS_PP_STRINGIZE_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/stringize.html#STRINGIZE_" class="secondary">CHAOS_PP_STRINGIZE_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/stringize.html#STRINGIZE" class="primary">CHAOS_PP_STRINGIZE</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/stringize.html#STRINGIZE_" class="secondary">CHAOS_PP_STRINGIZE_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/stringize.html#STRINGIZE" class="primary">CHAOS_PP_STRINGIZE</a></code>)</pre></div></div>
+<hr>
+<a name="PRIMITIVE_STRINGIZE"></a><h3 class="primary">CHAOS_PP_PRIMITIVE_STRINGIZE</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/stringize.html#PRIMITIVE_STRINGIZE" class="primary">CHAOS_PP_PRIMITIVE_STRINGIZE</a></code> macro stringizes its argument before it is expanded.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/stringize.html#PRIMITIVE_STRINGIZE" class="primary">CHAOS_PP_PRIMITIVE_STRINGIZE</a></code>(...)</pre>
+<dl>
+<dt>[<var>...</var>]</dt>
+<dd><p>
+			The argument to be stringized.
+		</p></dd>
+</dl>
+<h4>Usage <small>- C/C++ Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/stringize.html#PRIMITIVE_STRINGIZE" class="primary">CHAOS_PP_PRIMITIVE_STRINGIZE</a></code>(x)</pre>
+<dl>
+<dt><var>x</var></dt>
+<dd><p>
+			The argument to be stringized.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro behaves identically to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/stringize.html#STRINGIZE" class="primary">CHAOS_PP_STRINGIZE</a></code> except that it does not allow its argument to expand before it is stringized.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../.././chaos/preprocessor/string/charize.html#CHARIZE">CHAOS_PP_CHARIZE</a></code></li>
+<li><code><a class="primary" href="../.././chaos/preprocessor/wstringize.html#PRIMITIVE_WSTRINGIZE">CHAOS_PP_PRIMITIVE_WSTRINGIZE</a></code></li>
+<li><code><a class="primary" href="../.././chaos/preprocessor/stringize.html#STRINGIZE">CHAOS_PP_STRINGIZE</a></code></li>
+<li><code><a class="primary" href="../.././chaos/preprocessor/wstringize.html#WSTRINGIZE">CHAOS_PP_WSTRINGIZE</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/stringize.html" class="header">&lt;chaos/preprocessor/stringize.h&gt;</a></code>
+
+#define A text
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/stringize.html#PRIMITIVE_STRINGIZE" class="primary">CHAOS_PP_PRIMITIVE_STRINGIZE</a></code>(A) // "A"</pre>
+<hr>
+<a name="PRIMITIVE_STRINGIZE_ID"></a><h3 class="secondary">CHAOS_PP_PRIMITIVE_STRINGIZE_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/stringize.html#PRIMITIVE_STRINGIZE_ID" class="secondary">CHAOS_PP_PRIMITIVE_STRINGIZE_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/stringize.html#PRIMITIVE_STRINGIZE" class="primary">CHAOS_PP_PRIMITIVE_STRINGIZE</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/stringize.html#PRIMITIVE_STRINGIZE_ID" class="secondary">CHAOS_PP_PRIMITIVE_STRINGIZE_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro exists only for uniformity with other macros that require indirect invocation.
+				</p></div>
+<hr>
+<a name="PRIMITIVE_STRINGIZE_"></a><h3 class="secondary">CHAOS_PP_PRIMITIVE_STRINGIZE_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/stringize.html#PRIMITIVE_STRINGIZE_" class="secondary">CHAOS_PP_PRIMITIVE_STRINGIZE_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/stringize.html#PRIMITIVE_STRINGIZE" class="primary">CHAOS_PP_PRIMITIVE_STRINGIZE</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/stringize.html#PRIMITIVE_STRINGIZE_" class="secondary">CHAOS_PP_PRIMITIVE_STRINGIZE_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/stringize.html#PRIMITIVE_STRINGIZE" class="primary">CHAOS_PP_PRIMITIVE_STRINGIZE</a></code>)</pre></div></div>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="../.././license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</body>
+</html>

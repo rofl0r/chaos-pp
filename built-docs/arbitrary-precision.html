@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Arbitrary-Precision Arithmetic - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+<body>
+<p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./arbitrary-precision.html">arbitrary-precision arithmetic</a> component supports arithmetic, relational, and equality operations on signed integers of any precision.
+		</p>
+<hr>
+<h4>Representation</h4>
+<div><p>
+			Positive <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./arbitrary-precision.html">arbitrary-precision values</a> are represented as a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./sequences.html">sequence</a> of base-10 digits.
+			For example, the value +123 is represented as <code>(1)(2)(3)</code>.
+			Negative values are represented as a parenthesized <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./sequences.html">sequence</a> of base-10 digits.
+			For example, the value -123 is represented as <code>((1)(2)(3))</code>.
+		</p></div>
+<hr>
+<h4>Conversion</h4>
+<div><p>
+			The library supplies primitives that convert between various formats.
+			The first of these is <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arbitrary/promote.html#ARBITRARY_PROMOTE" class="primary">CHAOS_PP_ARBITRARY_PROMOTE</a></code> which converts a simple integer range from <code>0</code> to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/limits.html#LIMIT_MAG" class="primary">CHAOS_PP_LIMIT_MAG</a></code> to an <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./arbitrary-precision.html">arbitrary-precision value</a> (e.g. <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arbitrary/promote.html#ARBITRARY_PROMOTE" class="primary">CHAOS_PP_ARBITRARY_PROMOTE</a></code>(123)</code>).
+			Negative values can be specified by prefixing the number with a parenthesized negation operator (e.g. <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arbitrary/promote.html#ARBITRARY_PROMOTE" class="primary">CHAOS_PP_ARBITRARY_PROMOTE</a></code>((-)123)</code>).
+		</p></div>
+<div><p>
+			The second conversion primitive is <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arbitrary/literal.html#ARBITRARY_LITERAL" class="primary">CHAOS_PP_ARBITRARY_LITERAL</a></code> which converts a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./strings.html">string</a> of digits to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./arbitrary-precision.html">arbitrary-precision value</a> (e.g. <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arbitrary/literal.html#ARBITRARY_LITERAL" class="primary">CHAOS_PP_ARBITRARY_LITERAL</a></code>(1 2 3)</code>).
+			Negative values can be specified by again prefixing the digits with a parenthesized negation operator (e.g. <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arbitrary/literal.html#ARBITRARY_LITERAL" class="primary">CHAOS_PP_ARBITRARY_LITERAL</a></code>((-)1 2 3)</code>).
+		</p></div>
+<div><p>
+			The third conversion primitive is <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arbitrary/bool.html#ARBITRARY_BOOL" class="primary">CHAOS_PP_ARBITRARY_BOOL</a></code> which converts a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./arbitrary-precision.html">arbitrary-precision value</a> to a Boolean value (i.e. either <code>0</code> or <code>1</code>).
+		</p></div>
+<div><p>
+			The last conversion primitive is <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arbitrary/demote.html#ARBITRARY_DEMOTE" class="primary">CHAOS_PP_ARBITRARY_DEMOTE</a></code> which converts an <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./arbitrary-precision.html">arbitrary-precision value</a> to a simple integer (e.g. <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arbitrary/demote.html#ARBITRARY_DEMOTE" class="primary">CHAOS_PP_ARBITRARY_DEMOTE</a></code>((1)(2)(3))</code>).
+			If the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./arbitrary-precision.html">arbitrary-precision value</a> is negative, the result is prefixed with a negation operator (e.g. <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arbitrary/demote.html#ARBITRARY_DEMOTE" class="primary">CHAOS_PP_ARBITRARY_DEMOTE</a></code>(((1)(2)(3)))</code> expands to <code>-123</code>).
+		</p></div>
+<hr>
+<h4>Arithmetic Operators</h4>
+<div><p>
+			The basic arithmetic operations are all available on <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./arbitrary-precision.html">arbitrary-precision values</a>.
+			The following table summarizes these operations and their equivalents in C or C++:
+			</p></div>
+<div><div><table cellspacing="0">
+<tr>
+<td><code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arbitrary/add.html#ARBITRARY_ADD" class="primary">CHAOS_PP_ARBITRARY_ADD</a></code>(x, y)</code></td>
+<td class="expression"><code>x + y</code></td>
+</tr>
+<tr>
+<td><code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arbitrary/dec.html#ARBITRARY_DEC" class="primary">CHAOS_PP_ARBITRARY_DEC</a></code>(x)</code></td>
+<td class="expression"><code>x - 1</code></td>
+</tr>
+<tr>
+<td><code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arbitrary/div.html#ARBITRARY_DIV" class="primary">CHAOS_PP_ARBITRARY_DIV</a></code>(x, y)</code></td>
+<td class="expression"><code>x / y</code></td>
+</tr>
+<tr>
+<td><code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arbitrary/inc.html#ARBITRARY_INC" class="primary">CHAOS_PP_ARBITRARY_INC</a></code>(x)</code></td>
+<td class="expression"><code>x + 1</code></td>
+</tr>
+<tr>
+<td><code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arbitrary/mul.html#ARBITRARY_MUL" class="primary">CHAOS_PP_ARBITRARY_MUL</a></code>(x, y)</code></td>
+<td class="expression"><code>x * y</code></td>
+</tr>
+<tr>
+<td><code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arbitrary/mod.html#ARBITRARY_MOD" class="primary">CHAOS_PP_ARBITRARY_MOD</a></code>(x, y)</code></td>
+<td class="expression"><code>x % y</code></td>
+</tr>
+<tr>
+<td><code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arbitrary/neg.html#ARBITRARY_NEG" class="primary">CHAOS_PP_ARBITRARY_NEG</a></code>(x)</code></td>
+<td class="expression"><code>-x</code></td>
+</tr>
+<tr>
+<td><code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arbitrary/sub.html#ARBITRARY_SUB" class="primary">CHAOS_PP_ARBITRARY_SUB</a></code>(x, y)</code></td>
+<td class="expression"><code>x - y</code></td>
+</tr>
+</table></div></div>
+<hr>
+<h4>Equality &amp; Relational Operators</h4>
+<div><p>
+			The basic equality and relation operators are provided as well.
+			The following table summarizes these operations and their equivalents in C or C++.
+			</p></div>
+<div><div><table cellspacing="0">
+<tr>
+<td><code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arbitrary/equal.html#ARBITRARY_EQUAL" class="primary">CHAOS_PP_ARBITRARY_EQUAL</a></code>(x, y)</code></td>
+<td class="expression"><code>x == y</code></td>
+</tr>
+<tr>
+<td><code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arbitrary/greater.html#ARBITRARY_GREATER" class="primary">CHAOS_PP_ARBITRARY_GREATER</a></code>(x, y)</code></td>
+<td class="expression"><code>x &gt; y</code></td>
+</tr>
+<tr>
+<td><code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arbitrary/greater_equal.html#ARBITRARY_GREATER_EQUAL" class="primary">CHAOS_PP_ARBITRARY_GREATER_EQUAL</a></code>(x, y)</code></td>
+<td class="expression"><code>x &gt;= y</code></td>
+</tr>
+<tr>
+<td><code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arbitrary/less.html#ARBITRARY_LESS" class="primary">CHAOS_PP_ARBITRARY_LESS</a></code>(x, y)</code></td>
+<td class="expression"><code>x &lt; y</code></td>
+</tr>
+<tr>
+<td><code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arbitrary/less_equal.html#ARBITRARY_LESS_EQUAL" class="primary">CHAOS_PP_ARBITRARY_LESS_EQUAL</a></code>(x, y)</code></td>
+<td class="expression"><code>x &lt;= y</code></td>
+</tr>
+<tr>
+<td><code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arbitrary/not_equal.html#ARBITRARY_NOT_EQUAL" class="primary">CHAOS_PP_ARBITRARY_NOT_EQUAL</a></code>(x, y)</code></td>
+<td class="expression"><code>x != y</code></td>
+</tr>
+</table></div></div>
+</body>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="./license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</html>

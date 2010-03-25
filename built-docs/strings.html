@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Strings - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+<body>
+<p>
+			A <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./strings.html">string</a> is a data structure consisting of a series of space-separated letters, numerals, or underscores.
+			For example,
+			</p>
+<div><pre>a b c</pre></div>
+<p>
+			is a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./strings.html">string</a> containing three elements, <code>a</code>, <code>b</code>, and <code>c</code>.
+		</p>
+<p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./strings.html">string</a>-specific primitives are located in the <code>chaos/preprocessor/string</code> subdirectory.
+		</p>
+<hr>
+<h4>Restricted Domain</h4>
+<div><p>
+			<a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./strings.html">Strings</a>, unlike other data structures, have a restricted domain of possible element values.
+			Each element <em>must</em> be a single letter (from <code>a</code> to <code>z</code> or from <code>A</code> to <code>Z</code>), a numeral (from <code>0</code> to <code>9</code>), or an underscore (<code>_</code>).
+			Any other character is invalid, and any operation that inserts an invalid character invalidates the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./strings.html">string</a>.
+			The invocation of an algorithm on an invalid <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./strings.html">string</a> is undefined and will likely cause catastrophic failure.
+		</p></div>
+<div><p>
+			Note that it <em>is</em> safe to use the core <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./strings.html">string</a> operations defined in <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/string/core.html" class="header">&lt;chaos/preprocessor/string/core.h&gt;</a></code> with invalid <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./strings.html">strings</a> provided that the invalid element is never the first element of the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./strings.html">string</a>.
+			For example,
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/string/core.html#STRING_HEAD" class="primary">CHAOS_PP_STRING_HEAD</a></code>(a xyz b) // a
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/string/core.html#STRING_TAIL" class="primary">CHAOS_PP_STRING_TAIL</a></code>(a xyz b) // xyz b
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/string/core.html#STRING_HEAD" class="primary">CHAOS_PP_STRING_HEAD</a></code>(xyz b)   // invalid</pre></div></div>
+<div><p>
+			This allowance makes it possible to reuse the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./strings.html">string</a> data type in the creation of, for example, and extensible string data type.
+			However, such use requires extreme care.
+		</p></div>
+<hr>
+<h4>Using Strings as Generic Data Structures</h4>
+<div><p>
+			<a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./strings.html">Strings</a> can be used as <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./generics.html">generic data structures</a> if the the <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/string/core.html" class="header">&lt;chaos/preprocessor/string/core.h&gt;</a></code> header is included.
+			For example,
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/algorithm/concat.html#CONCAT" class="primary">CHAOS_PP_CONCAT</a></code>((<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/string/core.html#STRING" class="primary">CHAOS_PP_STRING</a></code>) C h a o s) // Chaos</pre></div></div>
+<hr>
+<h4>Nil Strings</h4>
+<div><p>
+			In C (prior to C99) and C++, there is no such thing as a nil <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./strings.html">string</a>.
+			However, the special value <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/string/core.html#STRING_NIL" class="primary">CHAOS_PP_STRING_NIL</a></code>()</code> can be used to indicate a nil <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./strings.html">string</a> to the core <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./strings.html">string</a> operations defined in <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/string/core.html" class="header">&lt;chaos/preprocessor/string/core.h&gt;</a></code>--thus allowing the generic algorithms to operate on nil <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./strings.html">strings</a> in a temporal fashion.
+			The other <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./strings.html">string</a>-specific primitives, on the other hand, do not recognize <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/string/core.html#STRING_NIL" class="primary">CHAOS_PP_STRING_NIL</a></code>()</code>.
+			Therefore, a "would-be" nil <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./strings.html">string</a> result from a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./strings.html">string</a>-specific primitive is undefined.
+			The result of generic algorithm that yields a nil <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./strings.html">string</a> is well-defined provided that it is used only as a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./generics.html">generic data structure</a>--meaning that it can be passed to other generic algorithms, etc.--or used by the core operations in <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/string/core.html" class="header">&lt;chaos/preprocessor/string/core.h&gt;</a></code> after the type prefix is stripped.
+			For example,
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/algorithm/append.html#APPEND" class="primary">CHAOS_PP_APPEND</a></code>(
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/algorithm/drop.html#DROP" class="primary">CHAOS_PP_DROP</a></code>(3, (<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/string/core.html#STRING" class="primary">CHAOS_PP_STRING</a></code>) a b c),
+    (<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/string/core.html#STRING" class="primary">CHAOS_PP_STRING</a></code>) x y
+)
+// (<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/string/core.html#STRING" class="primary">CHAOS_PP_STRING</a></code>) x y</pre></div></div>
+<div><p>
+			In C99, nil <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./strings.html">strings</a> are well-defined as "nothing", which is accepted as the representation of nil by all <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./strings.html">string</a> primitives.
+		</p></div>
+</body>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="./license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</html>

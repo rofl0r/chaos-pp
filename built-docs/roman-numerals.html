@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Example: Roman Numerals - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+<body>
+<p>
+			<em>NOTE: THIS DOCUMENT IS INCOMPLETE.</em>
+		</p>
+<p>
+			This is a fun example that converts decimal values to Roman numerals (and vice versa).
+		</p>
+<hr>
+<h4>Conversion to Roman Numerals</h4>
+<div><p>
+			This is a runtime C++ version with no error-checking or domain validation....
+			</p></div>
+<div><div><pre>#include &lt;iostream&gt;
+#include &lt;string&gt;
+    
+const std::string Roman(unsigned long x) {
+    std::string r;
+    const char* const table[4][10] = {
+        { "", "M", "MM", "MMM" },
+        { "", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM" },
+        { "", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC" },
+        { "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" }
+    };
+    for (int i = 0, j = 1000; i &lt; 4; ++i, j /= 10) {
+        r += table[i][x / j];
+        x %= j;
+    }
+    return r;
+}
+
+int main(void) {
+    std::cout
+        &lt;&lt; "1977 == " &lt;&lt; Roman(1977) &lt;&lt; '\n'
+        &lt;&lt; "2004 == " &lt;&lt; Roman(2004) &lt;&lt; '\n';
+    return 0;
+}</pre></div></div>
+<div><p>
+			This is a preprocessor version (that assumes variadics and placemarkers)....
+			</p></div>
+<div><div><pre>#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/algorithm/for_each_i.html" class="header">&lt;chaos/preprocessor/algorithm/for_each_i.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/config.html" class="header">&lt;chaos/preprocessor/config.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/recursion/expr.html" class="header">&lt;chaos/preprocessor/recursion/expr.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/seq/elem.html" class="header">&lt;chaos/preprocessor/seq/elem.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/string/core.html" class="header">&lt;chaos/preprocessor/string/core.h&gt;</a></code>
+
+#if <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/config.html#VARIADICS" class="primary">CHAOS_PP_VARIADICS</a></code>
+
+#define ROMAN(string) ROMAN_S(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/recursion/expr.html#STATE" class="primary">CHAOS_PP_STATE</a></code>(), string)
+#define ROMAN_S(s, string) \
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/recursion/expr.html#EXPR" class="primary">CHAOS_PP_EXPR</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/algorithm/for_each_i.html#FOR_EACH_I" class="primary">CHAOS_PP_FOR_EACH_I</a></code>( \
+        TARGET, (<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/string/core.html#STRING" class="primary">CHAOS_PP_STRING</a></code>) string \
+    )) \
+    /**/
+
+#define TARGET(s, n, x) \
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/seq/elem.html#SEQ_ELEM" class="primary">CHAOS_PP_SEQ_ELEM</a></code>( \
+        x, \
+        <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/seq/elem.html#SEQ_ELEM" class="primary">CHAOS_PP_SEQ_ELEM</a></code>( \
+            n, \
+            PATTERN(M, !, !) \
+            PATTERN(C, D, M) \
+            PATTERN(X, L, C) \
+            PATTERN(I, V, X) \
+        ) \
+    ) \
+    /**/
+
+#define PATTERN(a, b, c) \
+    ( \
+        ()(a)(a a)(a a a)(a b)(b)(b a)(b a a)(b a a a)(a c) \
+    ) \
+    /**/
+
+ROMAN(1 9 7 7) // M C M L X X V I I
+ROMAN(2 0 0 4) // M M I V
+
+#endif</pre></div></div>
+<hr>
+<h4>Conversion to Arabic Numerals</h4>
+<div><p>
+			This is a runtime C++ version with no error-checking or domain validation....
+			</p></div>
+<div><div><pre>#include &lt;iostream&gt;
+#include &lt;string&gt;
+    
+unsigned long Arabic(const std::string&amp; x) {
+    const struct {
+        inline int operator()(char c) const {
+            switch (c) {
+                case 'M': return 6;
+                case 'D': return 5;
+                case 'C': return 4;
+                case 'L': return 3;
+                case 'X': return 2;
+                case 'V': return 1;
+                case 'I': return 0;
+                default:
+                    throw c;
+            }
+        }
+    } rank = { };
+    unsigned long r = 0;
+    const unsigned long table[] = { 1, 5, 10, 50, 100, 500, 1000 };
+    for (std::string::const_iterator i(x.begin()); i != x.end(); ++i) {
+        if (i + 1 != x.end() &amp;&amp; rank(i[1]) &gt; rank(*i)) {
+            r -= table[rank(*i)];
+        }
+        else {
+            r += table[rank(*i)];
+        }
+    }
+    return r;
+}
+
+int main(void) {
+    std::cout
+        &lt;&lt; Arabic("MCMLXXVII") &lt;&lt; '\n'
+        &lt;&lt; Arabic("MMIV") &lt;&lt; '\n';
+    return 0;
+}</pre></div></div>
+<div><p>
+			This is a preprocessor version (that assumes variadics and placemarkers)....
+			</p></div>
+<div><div><pre>#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/algorithm/cast.html" class="header">&lt;chaos/preprocessor/algorithm/cast.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arbitrary/add.html" class="header">&lt;chaos/preprocessor/arbitrary/add.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arbitrary/sub.html" class="header">&lt;chaos/preprocessor/arbitrary/sub.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/cat.html" class="header">&lt;chaos/preprocessor/cat.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/comparison/greater.html" class="header">&lt;chaos/preprocessor/comparison/greater.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/config.html" class="header">&lt;chaos/preprocessor/config.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/control/iif.html" class="header">&lt;chaos/preprocessor/control/iif.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/control/while.html" class="header">&lt;chaos/preprocessor/control/while.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/generics/strip.html" class="header">&lt;chaos/preprocessor/generics/strip.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/recursion/expr.html" class="header">&lt;chaos/preprocessor/recursion/expr.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/seq/core.html" class="header">&lt;chaos/preprocessor/seq/core.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/string/core.html" class="header">&lt;chaos/preprocessor/string/core.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/tuple/elem.html" class="header">&lt;chaos/preprocessor/tuple/elem.h&gt;</a></code>
+
+#if <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/config.html#VARIADICS" class="primary">CHAOS_PP_VARIADICS</a></code>
+
+#define ARABIC(string) ARABIC_S(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/recursion/expr.html#STATE" class="primary">CHAOS_PP_STATE</a></code>(), string)
+#define ARABIC_S(s, string) \
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/control/iif.html#IIF" class="primary">CHAOS_PP_IIF</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/string/core.html#STRING_IS_CONS" class="primary">CHAOS_PP_STRING_IS_CONS</a></code>(string))( \
+        <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/generics/strip.html#STRIP" class="primary">CHAOS_PP_STRIP</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/algorithm/cast.html#CAST" class="primary">CHAOS_PP_CAST</a></code>( \
+            <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/string/core.html#STRING" class="primary">CHAOS_PP_STRING</a></code>, \
+            (<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/seq/core.html#SEQ" class="primary">CHAOS_PP_SEQ</a></code>) <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/tuple/elem.html#VARIADIC_ELEM" class="primary">CHAOS_PP_VARIADIC_ELEM</a></code>( \
+                2, \
+                <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/recursion/expr.html#EXPR_S" class="primary">CHAOS_PP_EXPR_S</a></code>(s)(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/control/while.html#WHILE_S" class="secondary">CHAOS_PP_WHILE_S</a></code>( \
+                    s, PRED, OP, \
+                    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/string/core.html#STRING_HEAD" class="primary">CHAOS_PP_STRING_HEAD</a></code>(string), \
+                    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/string/core.html#STRING_TAIL" class="primary">CHAOS_PP_STRING_TAIL</a></code>(string 0), \
+                    (0) \
+                )) \
+            ) \
+        )), \
+        0 \
+    ) \
+    /**/
+
+#define PRED(s, first, rest, x) <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/string/core.html#STRING_IS_CONS" class="primary">CHAOS_PP_STRING_IS_CONS</a></code>(rest)
+
+#define OP(s, first, rest, x) \
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/string/core.html#STRING_HEAD" class="primary">CHAOS_PP_STRING_HEAD</a></code>(rest), <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/string/core.html#STRING_TAIL" class="primary">CHAOS_PP_STRING_TAIL</a></code>(rest), \
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/control/iif.html#IIF" class="primary">CHAOS_PP_IIF</a></code>( \
+        <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/comparison/greater.html#GREATER" class="primary">CHAOS_PP_GREATER</a></code>( \
+            TABLE(0, <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/string/core.html#STRING_HEAD" class="primary">CHAOS_PP_STRING_HEAD</a></code>(rest)), \
+            TABLE(0, first) \
+        ) \
+    )( \
+        <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arbitrary/sub.html#ARBITRARY_SUB" class="primary">CHAOS_PP_ARBITRARY_SUB</a></code>, <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/arbitrary/add.html#ARBITRARY_ADD" class="primary">CHAOS_PP_ARBITRARY_ADD</a></code> \
+    )(x, TABLE(1, first)) \
+    /**/
+
+#define TABLE(n, letter) \
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/tuple/elem.html#VARIADIC_ELEM" class="primary">CHAOS_PP_VARIADIC_ELEM</a></code>( \
+        n, \
+        <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/cat.html#PRIMITIVE_CAT" class="primary">CHAOS_PP_PRIMITIVE_CAT</a></code>(TABLE_, letter) \
+    ) \
+    /**/
+#define TABLE_0 0, (0) // rogue value
+#define TABLE_I 1, (1)
+#define TABLE_V 2, (5)
+#define TABLE_X 3, (1)(0)
+#define TABLE_L 4, (5)(0)
+#define TABLE_C 5, (1)(0)(0)
+#define TABLE_D 6, (5)(0)(0)
+#define TABLE_M 7, (1)(0)(0)(0)
+
+ARABIC(M C M L X X V I I) // 1 9 7 7
+ARABIC(M M I V)           // 2 0 0 4
+
+#endif</pre></div></div>
+</body>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="./license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</html>

@@ -1,0 +1,754 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>limits.h - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="../.././style.css">
+</head>
+<body>
+<p>
+	The <code>limits.h</code> header defines macros that specify the physical limits of various library facilities.
+</p>
+<h4>Usage</h4>
+<pre class="box">#include <code><a class="header" href="../.././chaos/preprocessor/limits.html">&lt;chaos/preprocessor/limits.h&gt;</a></code></pre>
+<h4>Contents</h4>
+<ul>
+<li><code><a class="primary" href="#LIMIT_AS_ARGS">CHAOS_PP_LIMIT_AS_ARGS</a></code></li>
+<li><code><a class="primary" href="#LIMIT_AUTO_CAT">CHAOS_PP_LIMIT_AUTO_CAT</a></code></li>
+<li><code><a class="primary" href="#LIMIT_BIND">CHAOS_PP_LIMIT_BIND</a></code></li>
+<li><code><a class="primary" href="#LIMIT_BLOCK">CHAOS_PP_LIMIT_BLOCK</a></code></li>
+<li><code><a class="primary" href="#LIMIT_CLOSURE">CHAOS_PP_LIMIT_CLOSURE</a></code></li>
+<li><code><a class="primary" href="#LIMIT_CONTEXT">CHAOS_PP_LIMIT_CONTEXT</a></code></li>
+<li><code><a class="primary" href="#LIMIT_EQUALIZE">CHAOS_PP_LIMIT_EQUALIZE</a></code></li>
+<li><code><a class="primary" href="#LIMIT_EXPANDER">CHAOS_PP_LIMIT_EXPANDER</a></code></li>
+<li><code><a class="primary" href="#LIMIT_EXPR">CHAOS_PP_LIMIT_EXPR</a></code></li>
+<li><code><a class="primary" href="#LIMIT_HIGHER_ORDER">CHAOS_PP_LIMIT_HIGHER_ORDER</a></code></li>
+<li><code><a class="primary" href="#LIMIT_ITERATION">CHAOS_PP_LIMIT_ITERATION</a></code></li>
+<li><code><a class="primary" href="#LIMIT_ITERATION_DEPTH">CHAOS_PP_LIMIT_ITERATION_DEPTH</a></code></li>
+<li><code><a class="primary" href="#LIMIT_LAMBDA">CHAOS_PP_LIMIT_LAMBDA</a></code></li>
+<li><code><a class="primary" href="#LIMIT_MAG">CHAOS_PP_LIMIT_MAG</a></code></li>
+<li><code><a class="primary" href="#LIMIT_PHASE">CHAOS_PP_LIMIT_PHASE</a></code></li>
+<li><code><a class="primary" href="#LIMIT_PLACEHOLDERS">CHAOS_PP_LIMIT_PLACEHOLDERS</a></code></li>
+<li><code><a class="primary" href="#LIMIT_SLOT">CHAOS_PP_LIMIT_SLOT</a></code></li>
+<li><code><a class="primary" href="#LIMIT_SLOT_VALUE">CHAOS_PP_LIMIT_SLOT_VALUE</a></code></li>
+<li><code><a class="primary" href="#LIMIT_TUPLE">CHAOS_PP_LIMIT_TUPLE</a></code></li>
+<li><code><a class="primary" href="#LIMIT_VARIADIC_CAT">CHAOS_PP_LIMIT_VARIADIC_CAT</a></code></li>
+</ul>
+<hr>
+<a name="LIMIT_AS_ARGS"></a><h3 class="primary">CHAOS_PP_LIMIT_AS_ARGS</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_AS_ARGS" class="primary">CHAOS_PP_LIMIT_AS_ARGS</a></code> macro expands to the maximum arity that is transformable by <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/facilities/as_args.html#AS_ARGS" class="primary">CHAOS_PP_AS_ARGS</a></code>.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_AS_ARGS" class="primary">CHAOS_PP_LIMIT_AS_ARGS</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+		This macro currently expands to <code>5</code>.
+	</p></div>
+<hr>
+<a name="LIMIT_AS_ARGS_ID"></a><h3 class="secondary">CHAOS_PP_LIMIT_AS_ARGS_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_AS_ARGS_ID" class="secondary">CHAOS_PP_LIMIT_AS_ARGS_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_AS_ARGS" class="primary">CHAOS_PP_LIMIT_AS_ARGS</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_AS_ARGS_ID" class="secondary">CHAOS_PP_LIMIT_AS_ARGS_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_AS_ARGS" class="primary">CHAOS_PP_LIMIT_AS_ARGS</a></code> to be passed around without expansion.
+				</p></div>
+<hr>
+<a name="LIMIT_AS_ARGS_"></a><h3 class="secondary">CHAOS_PP_LIMIT_AS_ARGS_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_AS_ARGS_" class="secondary">CHAOS_PP_LIMIT_AS_ARGS_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_AS_ARGS" class="primary">CHAOS_PP_LIMIT_AS_ARGS</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_AS_ARGS_" class="secondary">CHAOS_PP_LIMIT_AS_ARGS_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_AS_ARGS_ID" class="secondary">CHAOS_PP_LIMIT_AS_ARGS_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="LIMIT_AUTO_CAT"></a><h3 class="primary">CHAOS_PP_LIMIT_AUTO_CAT</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_AUTO_CAT" class="primary">CHAOS_PP_LIMIT_AUTO_CAT</a></code> macro expands to the maximum number of nested concatenations supported by <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/extended/auto_cat.html#AUTO_CAT" class="primary">CHAOS_PP_AUTO_CAT</a></code> and <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/extended/auto_cat.html#PRIMITIVE_AUTO_CAT" class="primary">CHAOS_PP_PRIMITIVE_AUTO_CAT</a></code>.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_AUTO_CAT" class="primary">CHAOS_PP_LIMIT_AUTO_CAT</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+		This macro currently expands to <code>16</code>.
+	</p></div>
+<hr>
+<a name="LIMIT_AUTO_CAT_ID"></a><h3 class="secondary">CHAOS_PP_LIMIT_AUTO_CAT_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_AUTO_CAT_ID" class="secondary">CHAOS_PP_LIMIT_AUTO_CAT_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_AUTO_CAT" class="primary">CHAOS_PP_LIMIT_AUTO_CAT</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_AUTO_CAT_ID" class="secondary">CHAOS_PP_LIMIT_AUTO_CAT_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_AUTO_CAT" class="primary">CHAOS_PP_LIMIT_AUTO_CAT</a></code> to be passed around without expansion.
+				</p></div>
+<hr>
+<a name="LIMIT_AUTO_CAT_"></a><h3 class="secondary">CHAOS_PP_LIMIT_AUTO_CAT_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_AUTO_CAT_" class="secondary">CHAOS_PP_LIMIT_AUTO_CAT_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_AUTO_CAT" class="primary">CHAOS_PP_LIMIT_AUTO_CAT</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_AUTO_CAT_" class="secondary">CHAOS_PP_LIMIT_AUTO_CAT_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_AUTO_CAT_ID" class="secondary">CHAOS_PP_LIMIT_AUTO_CAT_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="LIMIT_BIND"></a><h3 class="primary">CHAOS_PP_LIMIT_BIND</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_BIND" class="primary">CHAOS_PP_LIMIT_BIND</a></code> macro expands to the maximum number of nested applications of <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/facilities/bind.html#BIND" class="primary">CHAOS_PP_BIND</a></code>.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_BIND" class="primary">CHAOS_PP_LIMIT_BIND</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+		This macro currently expands to <code>16</code>.
+	</p></div>
+<hr>
+<a name="LIMIT_BIND_ID"></a><h3 class="secondary">CHAOS_PP_LIMIT_BIND_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_BIND_ID" class="secondary">CHAOS_PP_LIMIT_BIND_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_BIND" class="primary">CHAOS_PP_LIMIT_BIND</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_BIND_ID" class="secondary">CHAOS_PP_LIMIT_BIND_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_BIND" class="primary">CHAOS_PP_LIMIT_BIND</a></code> to be passed around without expansion.
+				</p></div>
+<hr>
+<a name="LIMIT_BIND_"></a><h3 class="secondary">CHAOS_PP_LIMIT_BIND_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_BIND_" class="secondary">CHAOS_PP_LIMIT_BIND_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_BIND" class="primary">CHAOS_PP_LIMIT_BIND</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_BIND_" class="secondary">CHAOS_PP_LIMIT_BIND_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_BIND_ID" class="secondary">CHAOS_PP_LIMIT_BIND_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="LIMIT_BLOCK"></a><h3 class="primary">CHAOS_PP_LIMIT_BLOCK</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_BLOCK" class="primary">CHAOS_PP_LIMIT_BLOCK</a></code> macro expands to the maximum amount of <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././deferral.html">deferral</a> supported by <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/recursion/block.html#BLOCK" class="primary">CHAOS_PP_BLOCK</a></code>.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_BLOCK" class="primary">CHAOS_PP_LIMIT_BLOCK</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+		This macro currently expands to <code>5</code>.
+	</p></div>
+<hr>
+<a name="LIMIT_BLOCK_ID"></a><h3 class="secondary">CHAOS_PP_LIMIT_BLOCK_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_BLOCK_ID" class="secondary">CHAOS_PP_LIMIT_BLOCK_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_BLOCK" class="primary">CHAOS_PP_LIMIT_BLOCK</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_BLOCK_ID" class="secondary">CHAOS_PP_LIMIT_BLOCK_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_BLOCK" class="primary">CHAOS_PP_LIMIT_BLOCK</a></code> to be passed around without expansion.
+				</p></div>
+<hr>
+<a name="LIMIT_BLOCK_"></a><h3 class="secondary">CHAOS_PP_LIMIT_BLOCK_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_BLOCK_" class="secondary">CHAOS_PP_LIMIT_BLOCK_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_BLOCK" class="primary">CHAOS_PP_LIMIT_BLOCK</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_BLOCK_" class="secondary">CHAOS_PP_LIMIT_BLOCK_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_BLOCK_ID" class="secondary">CHAOS_PP_LIMIT_BLOCK_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="LIMIT_CLOSURE"></a><h3 class="primary">CHAOS_PP_LIMIT_CLOSURE</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_CLOSURE" class="primary">CHAOS_PP_LIMIT_CLOSURE</a></code> macro expands to the maximum number of arguments supported by the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././closures.html">closure</a> mechanism.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_CLOSURE" class="primary">CHAOS_PP_LIMIT_CLOSURE</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+		This macro currently expands to <code>25</code>.
+	</p></div>
+<hr>
+<a name="LIMIT_CLOSURE_ID"></a><h3 class="secondary">CHAOS_PP_LIMIT_CLOSURE_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_CLOSURE_ID" class="secondary">CHAOS_PP_LIMIT_CLOSURE_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_CLOSURE" class="primary">CHAOS_PP_LIMIT_CLOSURE</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_CLOSURE_ID" class="secondary">CHAOS_PP_LIMIT_CLOSURE_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_CLOSURE" class="primary">CHAOS_PP_LIMIT_CLOSURE</a></code> to be passed around without expansion.
+				</p></div>
+<hr>
+<a name="LIMIT_CLOSURE_"></a><h3 class="secondary">CHAOS_PP_LIMIT_CLOSURE_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_CLOSURE_" class="secondary">CHAOS_PP_LIMIT_CLOSURE_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_CLOSURE" class="primary">CHAOS_PP_LIMIT_CLOSURE</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_CLOSURE_" class="secondary">CHAOS_PP_LIMIT_CLOSURE_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_CLOSURE_ID" class="secondary">CHAOS_PP_LIMIT_CLOSURE_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="LIMIT_CONTEXT"></a><h3 class="primary">CHAOS_PP_LIMIT_CONTEXT</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_CONTEXT" class="primary">CHAOS_PP_LIMIT_CONTEXT</a></code> macro expands to the maximum number of nested contexts supported by <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/recursion/context.html#CONTEXT" class="primary">CHAOS_PP_CONTEXT</a></code>.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_CONTEXT" class="primary">CHAOS_PP_LIMIT_CONTEXT</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+		This macro currently expands to <code>16</code>.
+	</p></div>
+<hr>
+<a name="LIMIT_CONTEXT_ID"></a><h3 class="secondary">CHAOS_PP_LIMIT_CONTEXT_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_CONTEXT_ID" class="secondary">CHAOS_PP_LIMIT_CONTEXT_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_CONTEXT" class="primary">CHAOS_PP_LIMIT_CONTEXT</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_CONTEXT_ID" class="secondary">CHAOS_PP_LIMIT_CONTEXT_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_CONTEXT" class="primary">CHAOS_PP_LIMIT_CONTEXT</a></code> to be passed around without expansion.
+				</p></div>
+<hr>
+<a name="LIMIT_CONTEXT_"></a><h3 class="secondary">CHAOS_PP_LIMIT_CONTEXT_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_CONTEXT_" class="secondary">CHAOS_PP_LIMIT_CONTEXT_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_CONTEXT" class="primary">CHAOS_PP_LIMIT_CONTEXT</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_CONTEXT_" class="secondary">CHAOS_PP_LIMIT_CONTEXT_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_CONTEXT_ID" class="secondary">CHAOS_PP_LIMIT_CONTEXT_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="LIMIT_EQUALIZE"></a><h3 class="primary">CHAOS_PP_LIMIT_EQUALIZE</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_EQUALIZE" class="primary">CHAOS_PP_LIMIT_EQUALIZE</a></code> macro expands to the maximum number of <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././equalization.html">equalizing scans</a> supported by <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/recursion/equalize.html#EQUALIZE" class="primary">CHAOS_PP_EQUALIZE</a></code>.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_EQUALIZE" class="primary">CHAOS_PP_LIMIT_EQUALIZE</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+		This macro currently expands to <code>25</code>.
+	</p></div>
+<hr>
+<a name="LIMIT_EQUALIZE_ID"></a><h3 class="secondary">CHAOS_PP_LIMIT_EQUALIZE_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_EQUALIZE_ID" class="secondary">CHAOS_PP_LIMIT_EQUALIZE_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_EQUALIZE" class="primary">CHAOS_PP_LIMIT_EQUALIZE</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_EQUALIZE_ID" class="secondary">CHAOS_PP_LIMIT_EQUALIZE_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_EQUALIZE" class="primary">CHAOS_PP_LIMIT_EQUALIZE</a></code> to be passed around without expansion.
+				</p></div>
+<hr>
+<a name="LIMIT_EQUALIZE_"></a><h3 class="secondary">CHAOS_PP_LIMIT_EQUALIZE_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_EQUALIZE_" class="secondary">CHAOS_PP_LIMIT_EQUALIZE_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_EQUALIZE" class="primary">CHAOS_PP_LIMIT_EQUALIZE</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_EQUALIZE_" class="secondary">CHAOS_PP_LIMIT_EQUALIZE_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_EQUALIZE_ID" class="secondary">CHAOS_PP_LIMIT_EQUALIZE_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="LIMIT_EXPANDER"></a><h3 class="primary">CHAOS_PP_LIMIT_EXPANDER</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_EXPANDER" class="primary">CHAOS_PP_LIMIT_EXPANDER</a></code> macro expands to the maximum arity supported by <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/facilities/expander.html#EXPANDER" class="primary">CHAOS_PP_EXPANDER</a></code>.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_EXPANDER" class="primary">CHAOS_PP_LIMIT_EXPANDER</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+		This macro currently expands to <code>5</code>.
+	</p></div>
+<hr>
+<a name="LIMIT_EXPANDER_ID"></a><h3 class="secondary">CHAOS_PP_LIMIT_EXPANDER_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_EXPANDER_ID" class="secondary">CHAOS_PP_LIMIT_EXPANDER_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_EXPANDER" class="primary">CHAOS_PP_LIMIT_EXPANDER</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_EXPANDER_ID" class="secondary">CHAOS_PP_LIMIT_EXPANDER_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_EXPANDER" class="primary">CHAOS_PP_LIMIT_EXPANDER</a></code> to be passed around without expansion.
+				</p></div>
+<hr>
+<a name="LIMIT_EXPANDER_"></a><h3 class="secondary">CHAOS_PP_LIMIT_EXPANDER_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_EXPANDER_" class="secondary">CHAOS_PP_LIMIT_EXPANDER_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_EXPANDER" class="primary">CHAOS_PP_LIMIT_EXPANDER</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_EXPANDER_" class="secondary">CHAOS_PP_LIMIT_EXPANDER_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_EXPANDER_ID" class="secondary">CHAOS_PP_LIMIT_EXPANDER_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="LIMIT_EXPR"></a><h3 class="primary">CHAOS_PP_LIMIT_EXPR</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_EXPR" class="primary">CHAOS_PP_LIMIT_EXPR</a></code> macro expands to the maximum number of abstract <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././recursion.html">recursion steps</a> supported by the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././recursion.html">recursion backend</a>.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_EXPR" class="primary">CHAOS_PP_LIMIT_EXPR</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+		This macro currently expands to <code>512</code>.
+	</p></div>
+<hr>
+<a name="LIMIT_EXPR_ID"></a><h3 class="secondary">CHAOS_PP_LIMIT_EXPR_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_EXPR_ID" class="secondary">CHAOS_PP_LIMIT_EXPR_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_EXPR" class="primary">CHAOS_PP_LIMIT_EXPR</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_EXPR_ID" class="secondary">CHAOS_PP_LIMIT_EXPR_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_EXPR" class="primary">CHAOS_PP_LIMIT_EXPR</a></code> to be passed around without expansion.
+				</p></div>
+<hr>
+<a name="LIMIT_EXPR_"></a><h3 class="secondary">CHAOS_PP_LIMIT_EXPR_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_EXPR_" class="secondary">CHAOS_PP_LIMIT_EXPR_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_EXPR" class="primary">CHAOS_PP_LIMIT_EXPR</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_EXPR_" class="secondary">CHAOS_PP_LIMIT_EXPR_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_EXPR_ID" class="secondary">CHAOS_PP_LIMIT_EXPR_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="LIMIT_HIGHER_ORDER"></a><h3 class="primary">CHAOS_PP_LIMIT_HIGHER_ORDER</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_HIGHER_ORDER" class="primary">CHAOS_PP_LIMIT_HIGHER_ORDER</a></code> macro expands to the maximum number of <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././higher-order.html">higher-order entry points</a> supported by the <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/recursion/higher_order.html#HIGHER_ORDER" class="primary">CHAOS_PP_HIGHER_ORDER</a></code>.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_HIGHER_ORDER" class="primary">CHAOS_PP_LIMIT_HIGHER_ORDER</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+		This macro currently expands to <code>8</code>.
+	</p></div>
+<hr>
+<a name="LIMIT_HIGHER_ORDER_ID"></a><h3 class="secondary">CHAOS_PP_LIMIT_HIGHER_ORDER_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_HIGHER_ORDER_ID" class="secondary">CHAOS_PP_LIMIT_HIGHER_ORDER_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_HIGHER_ORDER" class="primary">CHAOS_PP_LIMIT_HIGHER_ORDER</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_HIGHER_ORDER_ID" class="secondary">CHAOS_PP_LIMIT_HIGHER_ORDER_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_HIGHER_ORDER" class="primary">CHAOS_PP_LIMIT_HIGHER_ORDER</a></code> to be passed around without expansion.
+				</p></div>
+<hr>
+<a name="LIMIT_HIGHER_ORDER_"></a><h3 class="secondary">CHAOS_PP_LIMIT_HIGHER_ORDER_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_HIGHER_ORDER_" class="secondary">CHAOS_PP_LIMIT_HIGHER_ORDER_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_HIGHER_ORDER" class="primary">CHAOS_PP_LIMIT_HIGHER_ORDER</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_HIGHER_ORDER_" class="secondary">CHAOS_PP_LIMIT_HIGHER_ORDER_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_HIGHER_ORDER_ID" class="secondary">CHAOS_PP_LIMIT_HIGHER_ORDER_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="LIMIT_ITERATION"></a><h3 class="primary">CHAOS_PP_LIMIT_ITERATION</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_ITERATION" class="primary">CHAOS_PP_LIMIT_ITERATION</a></code> macro expands to the maximum number of iterations per dimension supported by the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././file-iteration.html">file-iteration</a> mechanism and the maximum number of iterations supported by the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././local-iteration.html">local-iteration</a> mechanism.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_ITERATION" class="primary">CHAOS_PP_LIMIT_ITERATION</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+		This macro currently expands to <code>512</code>.
+	</p></div>
+<hr>
+<a name="LIMIT_ITERATION_ID"></a><h3 class="secondary">CHAOS_PP_LIMIT_ITERATION_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_ITERATION_ID" class="secondary">CHAOS_PP_LIMIT_ITERATION_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_ITERATION" class="primary">CHAOS_PP_LIMIT_ITERATION</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_ITERATION_ID" class="secondary">CHAOS_PP_LIMIT_ITERATION_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_ITERATION" class="primary">CHAOS_PP_LIMIT_ITERATION</a></code> to be passed around without expansion.
+				</p></div>
+<hr>
+<a name="LIMIT_ITERATION_"></a><h3 class="secondary">CHAOS_PP_LIMIT_ITERATION_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_ITERATION_" class="secondary">CHAOS_PP_LIMIT_ITERATION_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_ITERATION" class="primary">CHAOS_PP_LIMIT_ITERATION</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_ITERATION_" class="secondary">CHAOS_PP_LIMIT_ITERATION_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_ITERATION_ID" class="secondary">CHAOS_PP_LIMIT_ITERATION_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="LIMIT_ITERATION_DEPTH"></a><h3 class="primary">CHAOS_PP_LIMIT_ITERATION_DEPTH</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_ITERATION_DEPTH" class="primary">CHAOS_PP_LIMIT_ITERATION_DEPTH</a></code> macro expands to the maximum number of dimensions supported by the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././file-iteration.html">file-iteration</a> mechanism.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_ITERATION_DEPTH" class="primary">CHAOS_PP_LIMIT_ITERATION_DEPTH</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+		This macro currently expands to <code>5</code>.
+	</p></div>
+<hr>
+<a name="LIMIT_ITERATION_DEPTH_ID"></a><h3 class="secondary">CHAOS_PP_LIMIT_ITERATION_DEPTH_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_ITERATION_DEPTH_ID" class="secondary">CHAOS_PP_LIMIT_ITERATION_DEPTH_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_ITERATION_DEPTH" class="primary">CHAOS_PP_LIMIT_ITERATION_DEPTH</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_ITERATION_DEPTH_ID" class="secondary">CHAOS_PP_LIMIT_ITERATION_DEPTH_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_ITERATION_DEPTH" class="primary">CHAOS_PP_LIMIT_ITERATION_DEPTH</a></code> to be passed around without expansion.
+				</p></div>
+<hr>
+<a name="LIMIT_ITERATION_DEPTH_"></a><h3 class="secondary">CHAOS_PP_LIMIT_ITERATION_DEPTH_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_ITERATION_DEPTH_" class="secondary">CHAOS_PP_LIMIT_ITERATION_DEPTH_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_ITERATION_DEPTH" class="primary">CHAOS_PP_LIMIT_ITERATION_DEPTH</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_ITERATION_DEPTH_" class="secondary">CHAOS_PP_LIMIT_ITERATION_DEPTH_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_ITERATION_DEPTH_ID" class="secondary">CHAOS_PP_LIMIT_ITERATION_DEPTH_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="LIMIT_LAMBDA"></a><h3 class="primary">CHAOS_PP_LIMIT_LAMBDA</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_LAMBDA" class="primary">CHAOS_PP_LIMIT_LAMBDA</a></code> macro expands to the maximum number of <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././tuples.html">tuple</a> elements supported by the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ mechanism</a> without the use of the <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/lambda/ops.html#OVERRIDE" class="primary">CHAOS_PP_OVERRIDE</a></code> operator.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_LAMBDA" class="primary">CHAOS_PP_LIMIT_LAMBDA</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+		This macro currently expands to <code>50</code>.
+	</p></div>
+<hr>
+<a name="LIMIT_LAMBDA_ID"></a><h3 class="secondary">CHAOS_PP_LIMIT_LAMBDA_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_LAMBDA_ID" class="secondary">CHAOS_PP_LIMIT_LAMBDA_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_LAMBDA" class="primary">CHAOS_PP_LIMIT_LAMBDA</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_LAMBDA_ID" class="secondary">CHAOS_PP_LIMIT_LAMBDA_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_LAMBDA" class="primary">CHAOS_PP_LIMIT_LAMBDA</a></code> to be passed around without expansion.
+				</p></div>
+<hr>
+<a name="LIMIT_LAMBDA_"></a><h3 class="secondary">CHAOS_PP_LIMIT_LAMBDA_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_LAMBDA_" class="secondary">CHAOS_PP_LIMIT_LAMBDA_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_LAMBDA" class="primary">CHAOS_PP_LIMIT_LAMBDA</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_LAMBDA_" class="secondary">CHAOS_PP_LIMIT_LAMBDA_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_LAMBDA_ID" class="secondary">CHAOS_PP_LIMIT_LAMBDA_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="LIMIT_MAG"></a><h3 class="primary">CHAOS_PP_LIMIT_MAG</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_MAG" class="primary">CHAOS_PP_LIMIT_MAG</a></code> macro expands to the maximum numeric magnitude supported by the library (not including the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././arbitrary-precision.html">arbitrary-precision</a> arithmetic mechanism).
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_MAG" class="primary">CHAOS_PP_LIMIT_MAG</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+		This macro currently expands to <code>512</code>.
+	</p></div>
+<hr>
+<a name="LIMIT_MAG_ID"></a><h3 class="secondary">CHAOS_PP_LIMIT_MAG_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_MAG_ID" class="secondary">CHAOS_PP_LIMIT_MAG_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_MAG" class="primary">CHAOS_PP_LIMIT_MAG</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_MAG_ID" class="secondary">CHAOS_PP_LIMIT_MAG_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_MAG" class="primary">CHAOS_PP_LIMIT_MAG</a></code> to be passed around without expansion.
+				</p></div>
+<hr>
+<a name="LIMIT_MAG_"></a><h3 class="secondary">CHAOS_PP_LIMIT_MAG_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_MAG_" class="secondary">CHAOS_PP_LIMIT_MAG_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_MAG" class="primary">CHAOS_PP_LIMIT_MAG</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_MAG_" class="secondary">CHAOS_PP_LIMIT_MAG_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_MAG_ID" class="secondary">CHAOS_PP_LIMIT_MAG_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="LIMIT_PHASE"></a><h3 class="primary">CHAOS_PP_LIMIT_PHASE</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_PHASE" class="primary">CHAOS_PP_LIMIT_PHASE</a></code> macro expands to the maximum amount of <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././deferral.html">deferral phasing</a> supported by <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/recursion/phase.html#PHASE" class="primary">CHAOS_PP_PHASE</a></code>.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_PHASE" class="primary">CHAOS_PP_LIMIT_PHASE</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+		This macro currently expands to <code>5</code>.
+	</p></div>
+<hr>
+<a name="LIMIT_PHASE_ID"></a><h3 class="secondary">CHAOS_PP_LIMIT_PHASE_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_PHASE_ID" class="secondary">CHAOS_PP_LIMIT_PHASE_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_PHASE" class="primary">CHAOS_PP_LIMIT_PHASE</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_PHASE_ID" class="secondary">CHAOS_PP_LIMIT_PHASE_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_PHASE" class="primary">CHAOS_PP_LIMIT_PHASE</a></code> to be passed around without expansion.
+				</p></div>
+<hr>
+<a name="LIMIT_PHASE_"></a><h3 class="secondary">CHAOS_PP_LIMIT_PHASE_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_PHASE_" class="secondary">CHAOS_PP_LIMIT_PHASE_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_PHASE" class="primary">CHAOS_PP_LIMIT_PHASE</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_PHASE_" class="secondary">CHAOS_PP_LIMIT_PHASE_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_PHASE_ID" class="secondary">CHAOS_PP_LIMIT_PHASE_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="LIMIT_PLACEHOLDERS"></a><h3 class="primary">CHAOS_PP_LIMIT_PLACEHOLDERS</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_PLACEHOLDERS" class="primary">CHAOS_PP_LIMIT_PLACEHOLDERS</a></code> macro expands to the maximum number of addressable <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ placeholders</a>.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_PLACEHOLDERS" class="primary">CHAOS_PP_LIMIT_PLACEHOLDERS</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+		This macro currently expands to <code>25</code>.
+	</p></div>
+<hr>
+<a name="LIMIT_PLACEHOLDERS_ID"></a><h3 class="secondary">CHAOS_PP_LIMIT_PLACEHOLDERS_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_PLACEHOLDERS_ID" class="secondary">CHAOS_PP_LIMIT_PLACEHOLDERS_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_PLACEHOLDERS" class="primary">CHAOS_PP_LIMIT_PLACEHOLDERS</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_PLACEHOLDERS_ID" class="secondary">CHAOS_PP_LIMIT_PLACEHOLDERS_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_PLACEHOLDERS" class="primary">CHAOS_PP_LIMIT_PLACEHOLDERS</a></code> to be passed around without expansion.
+				</p></div>
+<hr>
+<a name="LIMIT_PLACEHOLDERS_"></a><h3 class="secondary">CHAOS_PP_LIMIT_PLACEHOLDERS_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_PLACEHOLDERS_" class="secondary">CHAOS_PP_LIMIT_PLACEHOLDERS_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_PLACEHOLDERS" class="primary">CHAOS_PP_LIMIT_PLACEHOLDERS</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_PLACEHOLDERS_" class="secondary">CHAOS_PP_LIMIT_PLACEHOLDERS_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_PLACEHOLDERS_ID" class="secondary">CHAOS_PP_LIMIT_PLACEHOLDERS_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="LIMIT_SLOT"></a><h3 class="primary">CHAOS_PP_LIMIT_SLOT</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_SLOT" class="primary">CHAOS_PP_LIMIT_SLOT</a></code> macro expands to the maximum number of <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././evaluated-slots.html">evaluated slots</a> supported by the library.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_SLOT" class="primary">CHAOS_PP_LIMIT_SLOT</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+		This macro currently expands to <code>5</code>.
+	</p></div>
+<hr>
+<a name="LIMIT_SLOT_ID"></a><h3 class="secondary">CHAOS_PP_LIMIT_SLOT_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_SLOT_ID" class="secondary">CHAOS_PP_LIMIT_SLOT_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_SLOT" class="primary">CHAOS_PP_LIMIT_SLOT</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_SLOT_ID" class="secondary">CHAOS_PP_LIMIT_SLOT_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_SLOT" class="primary">CHAOS_PP_LIMIT_SLOT</a></code> to be passed around without expansion.
+				</p></div>
+<hr>
+<a name="LIMIT_SLOT_"></a><h3 class="secondary">CHAOS_PP_LIMIT_SLOT_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_SLOT_" class="secondary">CHAOS_PP_LIMIT_SLOT_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_SLOT" class="primary">CHAOS_PP_LIMIT_SLOT</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_SLOT_" class="secondary">CHAOS_PP_LIMIT_SLOT_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_SLOT_ID" class="secondary">CHAOS_PP_LIMIT_SLOT_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="LIMIT_SLOT_VALUE"></a><h3 class="primary">CHAOS_PP_LIMIT_SLOT_VALUE</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_SLOT_VALUE" class="primary">CHAOS_PP_LIMIT_SLOT_VALUE</a></code> macro expands to the maximum number of digits storable in an <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././evaluated-slots.html">evaluated slot</a>.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_SLOT_VALUE" class="primary">CHAOS_PP_LIMIT_SLOT_VALUE</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+		This macro currently expands to <code>10</code>.
+	</p></div>
+<hr>
+<a name="LIMIT_SLOT_VALUE_ID"></a><h3 class="secondary">CHAOS_PP_LIMIT_SLOT_VALUE_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_SLOT_VALUE_ID" class="secondary">CHAOS_PP_LIMIT_SLOT_VALUE_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_SLOT_VALUE" class="primary">CHAOS_PP_LIMIT_SLOT_VALUE</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_SLOT_VALUE_ID" class="secondary">CHAOS_PP_LIMIT_SLOT_VALUE_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_SLOT_VALUE" class="primary">CHAOS_PP_LIMIT_SLOT_VALUE</a></code> to be passed around without expansion.
+				</p></div>
+<hr>
+<a name="LIMIT_SLOT_VALUE_"></a><h3 class="secondary">CHAOS_PP_LIMIT_SLOT_VALUE_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_SLOT_VALUE_" class="secondary">CHAOS_PP_LIMIT_SLOT_VALUE_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_SLOT_VALUE" class="primary">CHAOS_PP_LIMIT_SLOT_VALUE</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_SLOT_VALUE_" class="secondary">CHAOS_PP_LIMIT_SLOT_VALUE_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_SLOT_VALUE_ID" class="secondary">CHAOS_PP_LIMIT_SLOT_VALUE_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="LIMIT_TUPLE"></a><h3 class="primary">CHAOS_PP_LIMIT_TUPLE</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_TUPLE" class="primary">CHAOS_PP_LIMIT_TUPLE</a></code> macro expands to the maximum number of <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././tuples.html">tuple</a> elements supported by <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././tuples.html">tuple</a>-specific primitives.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_TUPLE" class="primary">CHAOS_PP_LIMIT_TUPLE</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+		This macro currently expands to <code>25</code>.
+	</p></div>
+<hr>
+<a name="LIMIT_TUPLE_ID"></a><h3 class="secondary">CHAOS_PP_LIMIT_TUPLE_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_TUPLE_ID" class="secondary">CHAOS_PP_LIMIT_TUPLE_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_TUPLE" class="primary">CHAOS_PP_LIMIT_TUPLE</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_TUPLE_ID" class="secondary">CHAOS_PP_LIMIT_TUPLE_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_TUPLE" class="primary">CHAOS_PP_LIMIT_TUPLE</a></code> to be passed around without expansion.
+				</p></div>
+<hr>
+<a name="LIMIT_TUPLE_"></a><h3 class="secondary">CHAOS_PP_LIMIT_TUPLE_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_TUPLE_" class="secondary">CHAOS_PP_LIMIT_TUPLE_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_TUPLE" class="primary">CHAOS_PP_LIMIT_TUPLE</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_TUPLE_" class="secondary">CHAOS_PP_LIMIT_TUPLE_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_TUPLE_ID" class="secondary">CHAOS_PP_LIMIT_TUPLE_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="LIMIT_VARIADIC_CAT"></a><h3 class="primary">CHAOS_PP_LIMIT_VARIADIC_CAT</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_VARIADIC_CAT" class="primary">CHAOS_PP_LIMIT_VARIADIC_CAT</a></code> macro expands to the maximum number of elements that can be simultaneously concatenated by <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/extended/variadic_cat.html#VARIADIC_CAT" class="primary">CHAOS_PP_VARIADIC_CAT</a></code>.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_VARIADIC_CAT" class="primary">CHAOS_PP_LIMIT_VARIADIC_CAT</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+		This macro currently expands to <code>25</code>.
+	</p></div>
+<hr>
+<a name="LIMIT_VARIADIC_CAT_ID"></a><h3 class="secondary">CHAOS_PP_LIMIT_VARIADIC_CAT_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_VARIADIC_CAT_ID" class="secondary">CHAOS_PP_LIMIT_VARIADIC_CAT_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_VARIADIC_CAT" class="primary">CHAOS_PP_LIMIT_VARIADIC_CAT</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_VARIADIC_CAT_ID" class="secondary">CHAOS_PP_LIMIT_VARIADIC_CAT_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_VARIADIC_CAT" class="primary">CHAOS_PP_LIMIT_VARIADIC_CAT</a></code> to be passed around without expansion.
+				</p></div>
+<hr>
+<a name="LIMIT_VARIADIC_CAT_"></a><h3 class="secondary">CHAOS_PP_LIMIT_VARIADIC_CAT_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_VARIADIC_CAT_" class="secondary">CHAOS_PP_LIMIT_VARIADIC_CAT_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_VARIADIC_CAT" class="primary">CHAOS_PP_LIMIT_VARIADIC_CAT</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_VARIADIC_CAT_" class="secondary">CHAOS_PP_LIMIT_VARIADIC_CAT_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/limits.html#LIMIT_VARIADIC_CAT_ID" class="secondary">CHAOS_PP_LIMIT_VARIADIC_CAT_ID</a></code>)()</pre></div></div>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="../.././license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</body>
+</html>

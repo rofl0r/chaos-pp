@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>config.h - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="../.././style.css">
+</head>
+<body>
+<p>
+	The <code>config.h</code> header defines library configuration macros.
+</p>
+<h4>Usage</h4>
+<pre class="box">#include <code><a class="header" href="../.././chaos/preprocessor/config.html">&lt;chaos/preprocessor/config.h&gt;</a></code></pre>
+<h4>Contents</h4>
+<ul><li><code><a class="primary" href="#VARIADICS">CHAOS_PP_VARIADICS</a></code></li></ul>
+<hr>
+<a name="VARIADICS"></a><h3 class="primary">CHAOS_PP_VARIADICS</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/config.html#VARIADICS" class="primary">CHAOS_PP_VARIADICS</a></code> macro determines whether the library supports C99 facilities such as variadic macros and placemarkers.
+	</p>
+<h4>Usage </h4>
+<pre class="box">#define <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/config.html#VARIADICS" class="primary">CHAOS_PP_VARIADICS</a></code> x</pre>
+<dl>
+<dt>[<var>x</var>]</dt>
+<dd><p>
+			The value that determines whether variadics and placemarkers are supported.
+		</p></dd>
+</dl>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/config.html#VARIADICS" class="primary">CHAOS_PP_VARIADICS</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+		This macro defaults to <code>1</code> if the preprocessor is a C99 preprocessor.
+		Otherwise, it defaults to <code>0</code>.
+	</p></div>
+<div><p>
+		This macro may be defined by the user prior to the inclusion of any library headers to explicitly enable or disable the use of variadics and placemarkers in the library.
+		If this macro <em>is</em> defined by the user, the library redefines it such that it expands to either <code>0</code> or <code>1</code>.
+		If it is defined by the user with an empty replacement list or is defined as non-zero, the library redefines it as <code>1</code>.
+		Otherwise, the library redefines it as <code>0</code>.
+	</p></div>
+<div><p>
+		If the user defines this macro as an expression (as opposed to a number), the expression should be enclosed in parentheses to avoid interference with the redefinition process.
+		</p></div>
+<div><div><pre>#define <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/config.html#VARIADICS" class="primary">CHAOS_PP_VARIADICS</a></code> (A + B)</pre></div></div>
+<div><p>
+		This macro may further be used in user code to distinguish between variadic macro and placemarker support and the lack thereof.
+	</p></div>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/config.html" class="header">&lt;chaos/preprocessor/config.h&gt;</a></code>
+
+#if <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/config.html#VARIADICS" class="primary">CHAOS_PP_VARIADICS</a></code>
+    // ...
+#else
+    // ...
+#endif</pre>
+<hr>
+<a name="VARIADICS_ID"></a><h3 class="secondary">CHAOS_PP_VARIADICS_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/config.html#VARIADICS_ID" class="secondary">CHAOS_PP_VARIADICS_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/config.html#VARIADICS" class="primary">CHAOS_PP_VARIADICS</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/config.html#VARIADICS_ID" class="secondary">CHAOS_PP_VARIADICS_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/config.html#VARIADICS" class="primary">CHAOS_PP_VARIADICS</a></code> to be passed around without expansion.
+				</p></div>
+<hr>
+<a name="VARIADICS_"></a><h3 class="secondary">CHAOS_PP_VARIADICS_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/config.html#VARIADICS_" class="secondary">CHAOS_PP_VARIADICS_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/config.html#VARIADICS" class="primary">CHAOS_PP_VARIADICS</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/config.html#VARIADICS_" class="secondary">CHAOS_PP_VARIADICS_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/config.html#VARIADICS_ID" class="secondary">CHAOS_PP_VARIADICS_ID</a></code>)()</pre></div></div>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="../.././license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</body>
+</html>

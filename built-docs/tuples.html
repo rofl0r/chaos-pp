@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Tuples - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+<body>
+<p>
+			A <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuple</a> is a parenthesized series of comma-separated elements.
+			For example,
+			</p>
+<div><pre>(a, b, c)</pre></div>
+<p>
+			is a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuple</a> containing three elements, <code>a</code>, <code>b</code>, and <code>c</code>.
+		</p>
+<p>
+			<a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">Tuples</a> are fast and, for the most part, easy to use.
+			However, in C (prior to C99) and C++, access to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuple</a> requires knowledge of its size.
+			Even in C99, several <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuple</a>-specific primitives--such as <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/tuple/reverse.html#TUPLE_REVERSE" class="primary">CHAOS_PP_TUPLE_REVERSE</a></code>--require the size of the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuple</a> as an argument.
+			(Note that it is possible to deduce the size of a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuple</a> in C99.)
+		</p>
+<p>
+			<a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">Tuples</a> provide random access to their contained elements.
+		</p>
+<p>
+			In C (prior to C99) and C++, <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuples</a> can contain only up to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/limits.html#LIMIT_TUPLE" class="primary">CHAOS_PP_LIMIT_TUPLE</a></code> elements.
+			In C99, <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuples</a> can contain any number of elements, but random access to the contained elements is still provided only for elements with indices ranging from <code>0</code> to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/limits.html#LIMIT_TUPLE" class="primary">CHAOS_PP_LIMIT_TUPLE</a></code> - 1.
+			(Several other <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuple</a>-specific primitives--such as <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/tuple/reverse.html#TUPLE_REVERSE" class="primary">CHAOS_PP_TUPLE_REVERSE</a></code>--are also limited in this way.)
+		</p>
+<p>
+			<a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">Tuples</a> cannot contain elements with any arity other than unary even in C99.
+			However, they can contain nested <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuples</a> or other data structures that contain multiple elements.
+			For example, the following is a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuple</a> of <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./lists.html">lists</a>:
+			</p>
+<div><pre>( (a, (b, (c, ...))), (x, (y, (z, ...))) )</pre></div>
+<p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuple</a>-specific primitives are located in the <code>chaos/preprocessor/tuple</code> subdirectory.
+		</p>
+<hr>
+<h4>Nil Tuples</h4>
+<div><p>
+			Because <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuples</a> have the syntactic form of an argument list, there is an inherent ambiguity in the representation of a nil <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuple</a>.
+			Consider the macro the following macro definitions and invocations:
+			</p></div>
+<div><div><pre>#define A()
+#define B(x)
+
+A()
+B(1)</pre></div></div>
+<div><p>
+			The <code>A</code> macro is defined as nullary, while the <code>B</code> macro is defined as unary.
+			When <code>A</code> is invoked, it is invoked with the first of two forms of nil <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuple</a> used by the library--nullary parentheses, <code>()</code>.
+			When <code>B</code> is invoked, it is invoked with a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuple</a> that is clearly unary.
+			However, with the introduction of placemarkers in C99, the distinction is no longer clear.
+			For example,
+			</p></div>
+<div><div><pre>B()</pre></div></div>
+<div><p>
+			Here, <code>B</code> is invoked with what appears to be, but isn't, a nil <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuple</a>.
+			It is invoked with a unary <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuple</a> whose only element is empty.
+			(This is why <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/detection/is_unary.html#IS_UNARY" class="primary">CHAOS_PP_IS_UNARY</a></code>(())</code> expands to <code>1</code> in C99.)
+			Fundamentally, this is no different than a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuple</a> of greater arity with empty elements.
+			</p></div>
+<div><div><pre>(,,)</pre></div></div>
+<div><p>
+			Several problems arise from this situation when using <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuples</a> as data structures.
+			The first is that there is no general way of detecting the difference between <code>()</code> and <code>(1)</code>.
+			It is possible to get fairly close in various ways by restricting the types of elements, but a general solution is impossible.
+		</p></div>
+<div><p>
+			Even if such detection <em>was</em> possible, another problem surfaces.
+			Consider again the <code>(,,)</code> <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuple</a>, and consider an algorithm that operates on each element of a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuple</a>.
+			If the algorithm was to attempt to individually process elements one-by-one, it might use <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/tuple/core.html#TUPLE_HEAD" class="primary">CHAOS_PP_TUPLE_HEAD</a></code> and <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/tuple/core.html#TUPLE_TAIL" class="primary">CHAOS_PP_TUPLE_TAIL</a></code>.
+			Everything is fine for <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/tuple/core.html#TUPLE_TAIL" class="primary">CHAOS_PP_TUPLE_TAIL</a></code>((,,))</code> (which yields <code>(,)</code>).
+			However, <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/tuple/core.html#TUPLE_TAIL" class="primary">CHAOS_PP_TUPLE_TAIL</a></code>((,))</code> yields <code>()</code> (i.e. the theoretical nil <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuple</a>), and an element has been silently skipped.
+		</p></div>
+<div><p>
+			The underlying problem is that emptiness (or "nothing") is a useful and perfectly valid form of data in its own right.
+		</p></div>
+<div><p>
+			As a consequence, algorithms and primitives that operate on <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuples</a> <em>algorithmically</em> need to use a distinct representation for nil that has no ambiguity.
+			This representation is <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/tuple/core.html#TUPLE_NIL" class="primary">CHAOS_PP_TUPLE_NIL</a></code>()</code> which simply expands to nothing.
+			This model always treats <code>()</code> as a unary <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuple</a>, and <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/tuple/core.html#TUPLE_TAIL" class="primary">CHAOS_PP_TUPLE_TAIL</a></code>(())</code> expands to nothing.
+		</p></div>
+<div><p>
+			Note that this issue arises only with algorithms and primitives that operate on <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuples</a> algorithmically, and <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuples</a> can only be operated on algorithmically in C99.
+			Thus, all <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuple</a>-specific primitives present in C (prior to C99) and C++ operate on <code>()</code> nil <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuples</a>.
+			(For compatibility, these primitives are semantically identical in C99.)
+		</p></div>
+<div><p>
+			It is sometimes necessary to convert an empty nil <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuple</a> to a <code>()</code> nil <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuple</a>.
+			One such case is when the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuple</a> is to be directly used as an argument list.
+			This can be accomplished with code such as the following:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/tuple/as_args.html#TUPLE_AS_ARGS" class="primary">CHAOS_PP_TUPLE_AS_ARGS</a></code>((a, b, c)) // (a, b, c)
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/tuple/as_args.html#TUPLE_AS_ARGS" class="primary">CHAOS_PP_TUPLE_AS_ARGS</a></code>()          // ()</pre></div></div>
+<div><p>
+			However, no conversion in the other direction is possible.
+		</p></div>
+<hr>
+<h4>Using Tuples as Generic Data Structures</h4>
+<div><p>
+			In C99, <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuples</a> can be used as <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./generics.html">generic data structures</a> if the <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/tuple/core.html" class="header">&lt;chaos/preprocessor/tuple/core.h&gt;</a></code> header is included.
+			For example,
+			</p></div>
+<div><div><pre>#define MACRO(s, x, _) &lt; x &gt;
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/recursion/expr.html#EXPR" class="primary">CHAOS_PP_EXPR</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/algorithm/for_each.html#FOR_EACH" class="primary">CHAOS_PP_FOR_EACH</a></code>(
+    MACRO, (<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/tuple/core.html#TUPLE" class="primary">CHAOS_PP_TUPLE</a></code>) (x, y, z), ~
+))
+// &lt; x &gt; &lt; y &gt; &lt; z &gt;</pre></div></div>
+<div><p>
+			(Note that <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuples</a> used as generic data structures use the empty nil <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuple</a> representation.)
+		</p></div>
+</body>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="./license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</html>

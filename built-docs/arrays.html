@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Arrays - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+<body>
+<p>
+			An <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./arrays.html">array</a> is a data structure consisting of two fields: a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuple</a> of elements and the size of that <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuple</a>.
+			These fields are structured as a binary <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuple</a> whose first element is the size and whose second element is the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuple</a> of elements contained in the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./arrays.html">array</a>.
+			For example,
+			</p>
+<div><pre>(3, (a, b, c))</pre></div>
+<p>
+			is an <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./arrays.html">array</a> containing three elements, <code>a</code>, <code>b</code>, and <code>c</code>.
+		</p>
+<p>
+			The primary strength of <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./arrays.html">arrays</a> is that they store their own size.
+			Because of this, access to elements does not require the size as it does for <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuples</a> in C (prior to C99) and C++.
+			This allows macro arguments to be variable in size and allows those sizes to change without the user explicitly having to keep track of the size independently.
+		</p>
+<p>
+			Like <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuples</a>, <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./arrays.html">arrays</a> provide random access to their contained elements.
+		</p>
+<p>
+			In C (prior to C99) and C++, <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./arrays.html">arrays</a> can contain only up to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/limits.html#LIMIT_TUPLE" class="primary">CHAOS_PP_LIMIT_TUPLE</a></code> elements.
+			In C99, <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./arrays.html">arrays</a> can contain up to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/limits.html#LIMIT_MAG" class="primary">CHAOS_PP_LIMIT_MAG</a></code> elements, but random access to the contained elements is still provided only for elements with indices ranging from <code>0</code> to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/limits.html#LIMIT_TUPLE" class="primary">CHAOS_PP_LIMIT_TUPLE</a></code> - 1.
+			(Several other <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./arrays.html">array</a>-specific primitives--such as <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/array/reverse.html#ARRAY_REVERSE" class="primary">CHAOS_PP_ARRAY_REVERSE</a></code>--are also limited in this way.)
+		</p>
+<p>
+			<a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./arrays.html">Arrays</a> cannot contain elements with any arity other than unary even in C99.
+			However, they can contain nested <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./arrays.html">arrays</a> or other data structures that contain multiple elements.
+			For example, the following is an <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./arrays.html">array</a> of <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./tuples.html">tuples</a>:
+			</p>
+<div><pre>(2, ((a, b, c), (x, y, z)))</pre></div>
+<p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./arrays.html">array</a>-specific primitives are located in the <code>chaos/preprocessor/array</code> subdirectory.
+		</p>
+<hr>
+<h4>Using Arrays as Generic Data Structures</h4>
+<div><p>
+			<a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./arrays.html">Arrays</a> can be used as <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./generics.html">generic data structures</a> if the <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/array/core.html" class="header">&lt;chaos/preprocessor/array/core.h&gt;</a></code> header is included.
+			For example,
+			</p></div>
+<div><div><pre>#define MACRO(s, x, _) !x
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/recursion/expr.html#EXPR" class="primary">CHAOS_PP_EXPR</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/algorithm/for_each.html#FOR_EACH" class="primary">CHAOS_PP_FOR_EACH</a></code>(
+    MACRO, (<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/array/core.html#ARRAY" class="primary">CHAOS_PP_ARRAY</a></code>) (3, (x, y, z)), ~
+))
+// !x !y !z</pre></div></div>
+<div><p>
+			However, in C (prior to C99) and C++, an <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./arrays.html">array</a> must never grow larger than <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/limits.html#LIMIT_TUPLE" class="primary">CHAOS_PP_LIMIT_TUPLE</a></code> elements.
+			Likewise, in C99, an <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="./arrays.html">array</a> must never grow beyond <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="./chaos/preprocessor/limits.html#LIMIT_MAG" class="primary">CHAOS_PP_LIMIT_MAG</a></code> elements.
+			If this happens, the result is undefined and will likely cause catastrophic failure.
+		</p></div>
+</body>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="./license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</html>

@@ -1,0 +1,620 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>seq/core.h - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="../../.././style.css">
+</head>
+<body>
+<p>
+	The <code>seq/core.h</code> header defines the core <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a> operations necessary to use a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a> as a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././generics.html">generic data structure</a>.
+</p>
+<h4>Usage</h4>
+<pre class="box">#include <code><a class="header" href="../../.././chaos/preprocessor/seq/core.html">&lt;chaos/preprocessor/seq/core.h&gt;</a></code></pre>
+<h4>Contents</h4>
+<ul>
+<li><code><a class="primary" href="#SEQ">CHAOS_PP_SEQ</a></code></li>
+<li><code><a class="primary" href="#SEQ_CONS">CHAOS_PP_SEQ_CONS</a></code></li>
+<li><code><a class="primary" href="#SEQ_HEAD">CHAOS_PP_SEQ_HEAD</a></code></li>
+<li><code><a class="primary" href="#SEQ_IS_CONS">CHAOS_PP_SEQ_IS_CONS</a></code></li>
+<li><code><a class="primary" href="#SEQ_IS_NIL">CHAOS_PP_SEQ_IS_NIL</a></code></li>
+<li><code><a class="primary" href="#SEQ_ITEM">CHAOS_PP_SEQ_ITEM</a></code></li>
+<li><code><a class="primary" href="#SEQ_NIL">CHAOS_PP_SEQ_NIL</a></code></li>
+<li><code><a class="primary" href="#SEQ_TAG">CHAOS_PP_SEQ_TAG</a></code></li>
+<li><code><a class="primary" href="#SEQ_TAIL">CHAOS_PP_SEQ_TAIL</a></code></li>
+</ul>
+<hr>
+<a name="SEQ"></a><h3 class="primary">CHAOS_PP_SEQ</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ" class="primary">CHAOS_PP_SEQ</a></code> macro designates the name of the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a> data structure.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ" class="primary">CHAOS_PP_SEQ</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+		This macro expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ" class="primary">CHAOS_PP_SEQ</a></code>.
+		In other words, the identifier <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ" class="primary">CHAOS_PP_SEQ</a></code> is defined as itself.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/array/core.html#ARRAY">CHAOS_PP_ARRAY</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/list/core.html#LIST">CHAOS_PP_LIST</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/string/core.html#STRING">CHAOS_PP_STRING</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/core.html#TUPLE">CHAOS_PP_TUPLE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/variadic/core.html#VARIADIC_SEQ">CHAOS_PP_VARIADIC_SEQ</a></code></li>
+</ul>
+<hr>
+<a name="SEQ_ID"></a><h3 class="secondary">CHAOS_PP_SEQ_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_ID" class="secondary">CHAOS_PP_SEQ_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ" class="primary">CHAOS_PP_SEQ</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_ID" class="secondary">CHAOS_PP_SEQ_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro exists only for uniformity with other macros that require indirect invocation.
+				</p></div>
+<hr>
+<a name="SEQ_"></a><h3 class="secondary">CHAOS_PP_SEQ_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_" class="secondary">CHAOS_PP_SEQ_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ" class="primary">CHAOS_PP_SEQ</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_" class="secondary">CHAOS_PP_SEQ_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ" class="primary">CHAOS_PP_SEQ</a></code>)</pre></div></div>
+<hr>
+<a name="SEQ_TAG"></a><h3 class="primary">CHAOS_PP_SEQ_TAG</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_TAG" class="primary">CHAOS_PP_SEQ_TAG</a></code> macro is an identity macro used to compare type names.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_TAG" class="primary">CHAOS_PP_SEQ_TAG</a></code>(tag)</pre>
+<dl>
+<dt><var>tag</var></dt>
+<dd><p>
+			The tag used to distinguish between data structures.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro is used by generic algorithms to compare the types of <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././generics.html">generic data structures</a>.
+		It should be used for no other purpose.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/array/core.html#ARRAY_TAG">CHAOS_PP_ARRAY_TAG</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/list/core.html#LIST_TAG">CHAOS_PP_LIST_TAG</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/string/core.html#STRING_TAG">CHAOS_PP_STRING_TAG</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/generics/core.html#TAG">CHAOS_PP_TAG</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_TAG">CHAOS_PP_TUPLE_TAG</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/variadic/core.html#VARIADIC_SEQ_TAG">CHAOS_PP_VARIADIC_SEQ_TAG</a></code></li>
+</ul>
+<hr>
+<a name="SEQ_TAG_ID"></a><h3 class="secondary">CHAOS_PP_SEQ_TAG_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_TAG_ID" class="secondary">CHAOS_PP_SEQ_TAG_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_TAG" class="primary">CHAOS_PP_SEQ_TAG</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_TAG_ID" class="secondary">CHAOS_PP_SEQ_TAG_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro exists only for uniformity with other macros that require indirect invocation.
+				</p></div>
+<hr>
+<a name="SEQ_TAG_"></a><h3 class="secondary">CHAOS_PP_SEQ_TAG_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_TAG_" class="secondary">CHAOS_PP_SEQ_TAG_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_TAG" class="primary">CHAOS_PP_SEQ_TAG</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_TAG_" class="secondary">CHAOS_PP_SEQ_TAG_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_TAG" class="primary">CHAOS_PP_SEQ_TAG</a></code>)</pre></div></div>
+<hr>
+<a name="SEQ_NIL"></a><h3 class="primary">CHAOS_PP_SEQ_NIL</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_NIL" class="primary">CHAOS_PP_SEQ_NIL</a></code> macro expands to a nil <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a>.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_NIL" class="primary">CHAOS_PP_SEQ_NIL</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+		In C99, this macro expands to nothing.
+		(More generally, a nil <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a> is an empty sequence of preprocessing tokens.)
+		In C++ (and C prior to C99), there is no such thing as a nil <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a> because "nothing" cannot be passed as an argument.
+		Hence, in C++ (and C prior to C99), this macro expands to a rogue value (that is uniquely recognized by the other macros in this header) such that generic algorithms can behave <em>as if</em> nil <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequences</a> exist.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/array/core.html#ARRAY_NIL">CHAOS_PP_ARRAY_NIL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/list/core.html#LIST_NIL">CHAOS_PP_LIST_NIL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/generics/core.html#NIL">CHAOS_PP_NIL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/string/core.html#STRING_NIL">CHAOS_PP_STRING_NIL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_NIL">CHAOS_PP_TUPLE_NIL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/variadic/core.html#VARIADIC_SEQ_NIL">CHAOS_PP_VARIADIC_SEQ_NIL</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html" class="header">&lt;chaos/preprocessor/config.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html" class="header">&lt;chaos/preprocessor/seq/core.h&gt;</a></code>
+
+#if <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html#VARIADICS" class="primary">CHAOS_PP_VARIADICS</a></code>
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_NIL" class="primary">CHAOS_PP_SEQ_NIL</a></code>() //
+
+#else
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_NIL" class="primary">CHAOS_PP_SEQ_NIL</a></code>() // unspecified
+
+#endif
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_CONS" class="primary">CHAOS_PP_SEQ_CONS</a></code>(
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_CONS" class="primary">CHAOS_PP_SEQ_CONS</a></code>(
+        <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_NIL" class="primary">CHAOS_PP_SEQ_NIL</a></code>(),
+        b
+    ),
+    a
+)
+// (a)(b)</pre>
+<hr>
+<a name="SEQ_NIL_ID"></a><h3 class="secondary">CHAOS_PP_SEQ_NIL_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_NIL_ID" class="secondary">CHAOS_PP_SEQ_NIL_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_NIL" class="primary">CHAOS_PP_SEQ_NIL</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_NIL_ID" class="secondary">CHAOS_PP_SEQ_NIL_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro exists only for uniformity with other macros that require indirect invocation.
+				</p></div>
+<hr>
+<a name="SEQ_NIL_"></a><h3 class="secondary">CHAOS_PP_SEQ_NIL_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_NIL_" class="secondary">CHAOS_PP_SEQ_NIL_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_NIL" class="primary">CHAOS_PP_SEQ_NIL</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_NIL_" class="secondary">CHAOS_PP_SEQ_NIL_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_NIL" class="primary">CHAOS_PP_SEQ_NIL</a></code>)</pre></div></div>
+<hr>
+<a name="SEQ_CONS"></a><h3 class="primary">CHAOS_PP_SEQ_CONS</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_CONS" class="primary">CHAOS_PP_SEQ_CONS</a></code> macro appends an element to the head of a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a>.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_CONS" class="primary">CHAOS_PP_SEQ_CONS</a></code>(seq, ...)</pre>
+<dl>
+<dt>[<var>seq</var>]</dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a> to which <code>__VA_ARGS__</code> is to be appended.
+		</p></dd>
+<dt>[<var>...</var>]</dt>
+<dd><p>
+			The element to be appended to the head of <var>seq</var>.
+		</p></dd>
+</dl>
+<h4>Usage <small>- C/C++ Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_CONS" class="primary">CHAOS_PP_SEQ_CONS</a></code>(seq, x)</pre>
+<dl>
+<dt><var>seq</var></dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a> to which <var>x</var> is to be appended.
+		</p></dd>
+<dt><var>x</var></dt>
+<dd><p>
+			The element to be appended to the head of <var>seq</var>.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a> containing the elements of <var>seq</var> with <var>x</var> (or <code>__VA_ARGS__</code>) appended to the head.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/array/core.html#ARRAY_CONS">CHAOS_PP_ARRAY_CONS</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/generics/core.html#CONS">CHAOS_PP_CONS</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/list/core.html#LIST_CONS">CHAOS_PP_LIST_CONS</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/string/core.html#STRING_CONS">CHAOS_PP_STRING_CONS</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_CONS">CHAOS_PP_TUPLE_CONS</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/variadic/core.html#VARIADIC_SEQ_CONS">CHAOS_PP_VARIADIC_SEQ_CONS</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html" class="header">&lt;chaos/preprocessor/config.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html" class="header">&lt;chaos/preprocessor/seq/core.h&gt;</a></code>
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_CONS" class="primary">CHAOS_PP_SEQ_CONS</a></code>((y)(z), x) // (x)(y)(z)
+
+#if <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html#VARIADICS" class="primary">CHAOS_PP_VARIADICS</a></code>
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_CONS" class="primary">CHAOS_PP_SEQ_CONS</a></code>((a, b)(c, d), +, -) // (+, -)(a, b)(c, d)
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_CONS" class="primary">CHAOS_PP_SEQ_CONS</a></code>(, x)                // (x)
+
+#else
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_CONS" class="primary">CHAOS_PP_SEQ_CONS</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_NIL" class="primary">CHAOS_PP_SEQ_NIL</a></code>(), *) // (*)
+
+#endif</pre>
+<hr>
+<a name="SEQ_CONS_ID"></a><h3 class="secondary">CHAOS_PP_SEQ_CONS_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_CONS_ID" class="secondary">CHAOS_PP_SEQ_CONS_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_CONS" class="primary">CHAOS_PP_SEQ_CONS</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_CONS_ID" class="secondary">CHAOS_PP_SEQ_CONS_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_CONS" class="primary">CHAOS_PP_SEQ_CONS</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="SEQ_CONS_"></a><h3 class="secondary">CHAOS_PP_SEQ_CONS_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_CONS_" class="secondary">CHAOS_PP_SEQ_CONS_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_CONS" class="primary">CHAOS_PP_SEQ_CONS</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_CONS_" class="secondary">CHAOS_PP_SEQ_CONS_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_CONS_ID" class="secondary">CHAOS_PP_SEQ_CONS_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="SEQ_ITEM"></a><h3 class="primary">CHAOS_PP_SEQ_ITEM</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_ITEM" class="primary">CHAOS_PP_SEQ_ITEM</a></code> macro is an identity macro used to encapsulate elements.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_ITEM" class="primary">CHAOS_PP_SEQ_ITEM</a></code>(...)</pre>
+<dl>
+<dt>[<var>...</var>]</dt>
+<dd><p>
+			The element of a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a> to be encapsulated.
+		</p></dd>
+</dl>
+<h4>Usage <small>- C/C++ Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_ITEM" class="primary">CHAOS_PP_SEQ_ITEM</a></code>(x)</pre>
+<dl>
+<dt><var>x</var></dt>
+<dd><p>
+			The element of a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a> to be encapsulated.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro is used by generic algorithms to encapsulate elements before they are passed to user-defined macros.
+	</p></div>
+<div><p>
+		Though elements of a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a> <em>can</em> have more than one sub-element in C99, this macro assumes that each element is the same arity.
+		As such, it is a simple identity macro.
+		(The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/variadic/core.html#VARIADIC_SEQ_ITEM" class="primary">CHAOS_PP_VARIADIC_SEQ_ITEM</a></code> macro, on the other hand, assumes that elements have differing arities.)
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/array/core.html#ARRAY_ITEM">CHAOS_PP_ARRAY_ITEM</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/generics/core.html#ITEM">CHAOS_PP_ITEM</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/list/core.html#LIST_ITEM">CHAOS_PP_LIST_ITEM</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/string/core.html#STRING_ITEM">CHAOS_PP_STRING_ITEM</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_ITEM">CHAOS_PP_TUPLE_ITEM</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/variadic/core.html#VARIADIC_SEQ_ITEM">CHAOS_PP_VARIADIC_SEQ_ITEM</a></code></li>
+</ul>
+<hr>
+<a name="SEQ_ITEM_ID"></a><h3 class="secondary">CHAOS_PP_SEQ_ITEM_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_ITEM_ID" class="secondary">CHAOS_PP_SEQ_ITEM_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_ITEM" class="primary">CHAOS_PP_SEQ_ITEM</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_ITEM_ID" class="secondary">CHAOS_PP_SEQ_ITEM_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_ITEM" class="primary">CHAOS_PP_SEQ_ITEM</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="SEQ_ITEM_"></a><h3 class="secondary">CHAOS_PP_SEQ_ITEM_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_ITEM_" class="secondary">CHAOS_PP_SEQ_ITEM_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_ITEM" class="primary">CHAOS_PP_SEQ_ITEM</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_ITEM_" class="secondary">CHAOS_PP_SEQ_ITEM_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_ITEM_ID" class="secondary">CHAOS_PP_SEQ_ITEM_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="SEQ_HEAD"></a><h3 class="primary">CHAOS_PP_SEQ_HEAD</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_HEAD" class="primary">CHAOS_PP_SEQ_HEAD</a></code> macro extracts the first element from a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a>.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_HEAD" class="primary">CHAOS_PP_SEQ_HEAD</a></code>(seq)</pre>
+<dl>
+<dt><var>seq</var></dt>
+<dd><p>
+			The non-nil <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a> whose first element is to be extracted.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro expands to the first element contained in <var>seq</var>.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/array/core.html#ARRAY_HEAD">CHAOS_PP_ARRAY_HEAD</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/generics/core.html#HEAD">CHAOS_PP_HEAD</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/list/core.html#LIST_HEAD">CHAOS_PP_LIST_HEAD</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/core.html#SEQ_TAIL">CHAOS_PP_SEQ_TAIL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/string/core.html#STRING_HEAD">CHAOS_PP_STRING_HEAD</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_HEAD">CHAOS_PP_TUPLE_HEAD</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/variadic/core.html#VARIADIC_SEQ_HEAD">CHAOS_PP_VARIADIC_SEQ_HEAD</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html" class="header">&lt;chaos/preprocessor/config.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html" class="header">&lt;chaos/preprocessor/seq/core.h&gt;</a></code>
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_HEAD" class="primary">CHAOS_PP_SEQ_HEAD</a></code>((1)(2)(3)) // 1
+
+#if <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html#VARIADICS" class="primary">CHAOS_PP_VARIADICS</a></code>
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_HEAD" class="primary">CHAOS_PP_SEQ_HEAD</a></code>((a, b)(c, d)(e, f)) // a, b
+
+#endif</pre>
+<hr>
+<a name="SEQ_HEAD_ID"></a><h3 class="secondary">CHAOS_PP_SEQ_HEAD_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_HEAD_ID" class="secondary">CHAOS_PP_SEQ_HEAD_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_HEAD" class="primary">CHAOS_PP_SEQ_HEAD</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_HEAD_ID" class="secondary">CHAOS_PP_SEQ_HEAD_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_HEAD" class="primary">CHAOS_PP_SEQ_HEAD</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="SEQ_HEAD_"></a><h3 class="secondary">CHAOS_PP_SEQ_HEAD_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_HEAD_" class="secondary">CHAOS_PP_SEQ_HEAD_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_HEAD" class="primary">CHAOS_PP_SEQ_HEAD</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_HEAD_" class="secondary">CHAOS_PP_SEQ_HEAD_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_HEAD_ID" class="secondary">CHAOS_PP_SEQ_HEAD_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="SEQ_TAIL"></a><h3 class="primary">CHAOS_PP_SEQ_TAIL</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_TAIL" class="primary">CHAOS_PP_SEQ_TAIL</a></code> macro removes the first element from a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a>.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_TAIL" class="primary">CHAOS_PP_SEQ_TAIL</a></code>(seq)</pre>
+<dl>
+<dt><var>seq</var></dt>
+<dd><p>
+			The non-nil <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a> whose first element is to be removed.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a> containing all of the elements of <var>seq</var> except the first.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/array/core.html#ARRAY_TAIL">CHAOS_PP_ARRAY_TAIL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/list/core.html#LIST_TAIL">CHAOS_PP_LIST_TAIL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/core.html#SEQ_HEAD">CHAOS_PP_SEQ_HEAD</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/string/core.html#STRING_TAIL">CHAOS_PP_STRING_TAIL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/generics/core.html#TAIL">CHAOS_PP_TAIL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_TAIL">CHAOS_PP_TUPLE_TAIL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/variadic/core.html#VARIADIC_SEQ_TAIL">CHAOS_PP_VARIADIC_SEQ_TAIL</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html" class="header">&lt;chaos/preprocessor/config.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html" class="header">&lt;chaos/preprocessor/seq/core.h&gt;</a></code>
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_TAIL" class="primary">CHAOS_PP_SEQ_TAIL</a></code>((a)(b)(c)) // (b)(c)
+
+#if <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html#VARIADICS" class="primary">CHAOS_PP_VARIADICS</a></code>
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_TAIL" class="primary">CHAOS_PP_SEQ_TAIL</a></code>((a, b)(c)(d, e, f)) // (c)(d, e, f)
+
+#endif</pre>
+<hr>
+<a name="SEQ_TAIL_ID"></a><h3 class="secondary">CHAOS_PP_SEQ_TAIL_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_TAIL_ID" class="secondary">CHAOS_PP_SEQ_TAIL_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_TAIL" class="primary">CHAOS_PP_SEQ_TAIL</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_TAIL_ID" class="secondary">CHAOS_PP_SEQ_TAIL_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_TAIL" class="primary">CHAOS_PP_SEQ_TAIL</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="SEQ_TAIL_"></a><h3 class="secondary">CHAOS_PP_SEQ_TAIL_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_TAIL_" class="secondary">CHAOS_PP_SEQ_TAIL_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_TAIL" class="primary">CHAOS_PP_SEQ_TAIL</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_TAIL_" class="secondary">CHAOS_PP_SEQ_TAIL_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_TAIL_ID" class="secondary">CHAOS_PP_SEQ_TAIL_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="SEQ_IS_CONS"></a><h3 class="primary">CHAOS_PP_SEQ_IS_CONS</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_IS_CONS" class="primary">CHAOS_PP_SEQ_IS_CONS</a></code> macro is a predicate that test whether a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a> is non-nil.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_IS_CONS" class="primary">CHAOS_PP_SEQ_IS_CONS</a></code>(seq)</pre>
+<dl>
+<dt>[<var>seq</var>]</dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a> to be tested.
+		</p></dd>
+</dl>
+<h4>Usage <small>- C/C++ Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_IS_CONS" class="primary">CHAOS_PP_SEQ_IS_CONS</a></code>(seq)</pre>
+<dl>
+<dt><var>seq</var></dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a> to be tested.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		If <var>seq</var> is non-nil, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/array/core.html#ARRAY_IS_CONS">CHAOS_PP_ARRAY_IS_CONS</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/generics/core.html#IS_CONS">CHAOS_PP_IS_CONS</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/list/core.html#LIST_IS_CONS">CHAOS_PP_LIST_IS_CONS</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/core.html#SEQ_IS_NIL">CHAOS_PP_SEQ_IS_NIL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/string/core.html#STRING_IS_CONS">CHAOS_PP_STRING_IS_CONS</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_IS_CONS">CHAOS_PP_TUPLE_IS_CONS</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/variadic/core.html#VARIADIC_SEQ_IS_CONS">CHAOS_PP_VARIADIC_SEQ_IS_CONS</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html" class="header">&lt;chaos/preprocessor/config.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html" class="header">&lt;chaos/preprocessor/seq/core.h&gt;</a></code>
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_IS_CONS" class="primary">CHAOS_PP_SEQ_IS_CONS</a></code>((1)(2)(3))          // 1
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_IS_CONS" class="primary">CHAOS_PP_SEQ_IS_CONS</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_NIL" class="primary">CHAOS_PP_SEQ_NIL</a></code>()) // 0
+
+#if <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html#VARIADICS" class="primary">CHAOS_PP_VARIADICS</a></code>
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_IS_CONS" class="primary">CHAOS_PP_SEQ_IS_CONS</a></code>()             // 0
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_IS_CONS" class="primary">CHAOS_PP_SEQ_IS_CONS</a></code>((a, b)(c, d)) // 1
+
+#endif</pre>
+<hr>
+<a name="SEQ_IS_CONS_ID"></a><h3 class="secondary">CHAOS_PP_SEQ_IS_CONS_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_IS_CONS_ID" class="secondary">CHAOS_PP_SEQ_IS_CONS_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_IS_CONS" class="primary">CHAOS_PP_SEQ_IS_CONS</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_IS_CONS_ID" class="secondary">CHAOS_PP_SEQ_IS_CONS_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro exists only for uniformity with other macros that require indirect invocation.
+				</p></div>
+<hr>
+<a name="SEQ_IS_CONS_"></a><h3 class="secondary">CHAOS_PP_SEQ_IS_CONS_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_IS_CONS_" class="secondary">CHAOS_PP_SEQ_IS_CONS_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_IS_CONS" class="primary">CHAOS_PP_SEQ_IS_CONS</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_IS_CONS_" class="secondary">CHAOS_PP_SEQ_IS_CONS_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_IS_CONS" class="primary">CHAOS_PP_SEQ_IS_CONS</a></code>)</pre></div></div>
+<hr>
+<a name="SEQ_IS_NIL"></a><h3 class="primary">CHAOS_PP_SEQ_IS_NIL</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_IS_NIL" class="primary">CHAOS_PP_SEQ_IS_NIL</a></code> macro is a predicate that tests whether a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a> is nil.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_IS_NIL" class="primary">CHAOS_PP_SEQ_IS_NIL</a></code>(seq)</pre>
+<dl>
+<dt>[<var>seq</var>]</dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a> to be tested.
+		</p></dd>
+</dl>
+<h4>Usage <small>- C/C++ Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_IS_NIL" class="primary">CHAOS_PP_SEQ_IS_NIL</a></code>(seq)</pre>
+<dl>
+<dt><var>seq</var></dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a> to be tested.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		If <var>seq</var> is nil, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/array/core.html#ARRAY_IS_NIL">CHAOS_PP_ARRAY_IS_NIL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/generics/core.html#IS_NIL">CHAOS_PP_IS_NIL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/list/core.html#LIST_IS_NIL">CHAOS_PP_LIST_IS_NIL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/core.html#SEQ_IS_CONS">CHAOS_PP_SEQ_IS_CONS</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/string/core.html#STRING_IS_NIL">CHAOS_PP_STRING_IS_NIL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_IS_NIL">CHAOS_PP_TUPLE_IS_NIL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/variadic/core.html#VARIADIC_SEQ_IS_NIL">CHAOS_PP_VARIADIC_SEQ_IS_NIL</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html" class="header">&lt;chaos/preprocessor/config.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html" class="header">&lt;chaos/preprocessor/seq/core.h&gt;</a></code>
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_IS_NIL" class="primary">CHAOS_PP_SEQ_IS_NIL</a></code>((a)(b)(c))          // 0
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_IS_NIL" class="primary">CHAOS_PP_SEQ_IS_NIL</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_NIL" class="primary">CHAOS_PP_SEQ_NIL</a></code>()) // 1
+
+#if <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html#VARIADICS" class="primary">CHAOS_PP_VARIADICS</a></code>
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_IS_NIL" class="primary">CHAOS_PP_SEQ_IS_NIL</a></code>()             // 1
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_IS_NIL" class="primary">CHAOS_PP_SEQ_IS_NIL</a></code>((a, b)(c, d)) // 0
+
+#endif</pre>
+<hr>
+<a name="SEQ_IS_NIL_ID"></a><h3 class="secondary">CHAOS_PP_SEQ_IS_NIL_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_IS_NIL_ID" class="secondary">CHAOS_PP_SEQ_IS_NIL_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_IS_NIL" class="primary">CHAOS_PP_SEQ_IS_NIL</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_IS_NIL_ID" class="secondary">CHAOS_PP_SEQ_IS_NIL_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro exists only for uniformity with other macros that require indirect invocation.
+				</p></div>
+<hr>
+<a name="SEQ_IS_NIL_"></a><h3 class="secondary">CHAOS_PP_SEQ_IS_NIL_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_IS_NIL_" class="secondary">CHAOS_PP_SEQ_IS_NIL_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_IS_NIL" class="primary">CHAOS_PP_SEQ_IS_NIL</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_IS_NIL_" class="secondary">CHAOS_PP_SEQ_IS_NIL_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ_IS_NIL" class="primary">CHAOS_PP_SEQ_IS_NIL</a></code>)</pre></div></div>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="../../.././license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</body>
+</html>

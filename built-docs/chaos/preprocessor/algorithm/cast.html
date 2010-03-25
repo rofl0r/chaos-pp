@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>algorithm/cast.h - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="../../.././style.css">
+</head>
+<body>
+<p>
+	The <code>algorithm/cast.h</code> header defines an algorithm that converts a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././generics.html">generic data structure</a> to another type.
+</p>
+<h4>Usage</h4>
+<pre class="box">#include <code><a class="header" href="../../.././chaos/preprocessor/algorithm/cast.html">&lt;chaos/preprocessor/algorithm/cast.h&gt;</a></code></pre>
+<h4>Contents</h4>
+<ul><li><code><a class="primary" href="#CAST">CHAOS_PP_CAST</a></code></li></ul>
+<hr>
+<a name="CAST"></a><h3 class="primary">CHAOS_PP_CAST</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/cast.html#CAST" class="primary">CHAOS_PP_CAST</a></code> macro converts its second argument to the type specified by its first argument.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/cast.html#CAST" class="primary">CHAOS_PP_CAST</a></code>(type, g)</pre>
+<dl>
+<dt><var>type</var></dt>
+<dd><p>
+			The type to which <var>g</var> is to be converted.
+		</p></dd>
+<dt><var>g</var></dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././generics.html">generic data structure</a> to be converted.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././generics.html">generic data structure</a> of type <var>type</var> containing the elements of <var>g</var>.
+		If <var>g</var> is already of type <var>type</var>, this macro expands to <var>g</var> without performing any conversion.
+	</p></div>
+<div><p>
+		This macro assumes that <var>g</var> <em>can</em> be converted to type <var>type</var>.
+		The algorithm does not attempt to verify that the resulting data structure is actually a valid data structure of the specified type.
+		For example, the following produces an invalid <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././strings.html">string</a>:
+		</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/cast.html#CAST" class="primary">CHAOS_PP_CAST</a></code>(
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/core.html#STRING" class="primary">CHAOS_PP_STRING</a></code>, (<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ" class="primary">CHAOS_PP_SEQ</a></code>) (+)(-)(*)(/)(%)
+)
+// invalid</pre></div></div>
+<div><p>
+		The efficiency of the algorithm's use of the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././recursion.html">recursion backend</a> can be described in terms of the number of <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././recursion.html">recursion steps</a> required to complete the algorithm.
+		The asymptotic upper bound of O(<var class="external">n</var>+1), where <var class="external">n</var> is the number of elements in <var>g</var>, occurs when <var>g</var> is not of type <var>type</var>.
+		The asymptotic lower bound of Ω(0) occurs when <var>g</var> is already of type <var>type</var>.
+	</p></div>
+<div><p>
+		This macro uses <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././bypass-semantics.html">bypass semantics</a>.
+		If <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././bypass-semantics.html">bypass semantics</a> are already in effect, <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/cast.html#CAST_BYPASS" class="secondary">CHAOS_PP_CAST_BYPASS</a></code> must be used instead.
+	</p></div>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/cast.html" class="header">&lt;chaos/preprocessor/algorithm/cast.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/list/core.html" class="header">&lt;chaos/preprocessor/list/core.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/core.html" class="header">&lt;chaos/preprocessor/string/core.h&gt;</a></code>
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/cast.html#CAST" class="primary">CHAOS_PP_CAST</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/list/core.html#LIST" class="primary">CHAOS_PP_LIST</a></code>, (<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/core.html#SEQ" class="primary">CHAOS_PP_SEQ</a></code>) (C)(H)(A)(O)(S))
+// (<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/list/core.html#LIST" class="primary">CHAOS_PP_LIST</a></code>) (C, (H, (A, (O, (S, ...)))))</pre>
+<hr>
+<a name="CAST_ID"></a><h3 class="secondary">CHAOS_PP_CAST_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/cast.html#CAST_ID" class="secondary">CHAOS_PP_CAST_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/cast.html#CAST" class="primary">CHAOS_PP_CAST</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/cast.html#CAST_ID" class="secondary">CHAOS_PP_CAST_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/cast.html#CAST" class="primary">CHAOS_PP_CAST</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="CAST_"></a><h3 class="secondary">CHAOS_PP_CAST_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/cast.html#CAST_" class="secondary">CHAOS_PP_CAST_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/cast.html#CAST" class="primary">CHAOS_PP_CAST</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/cast.html#CAST_" class="secondary">CHAOS_PP_CAST_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/cast.html#CAST_ID" class="secondary">CHAOS_PP_CAST_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="CAST_BYPASS"></a><h3 class="alternate">CHAOS_PP_CAST_BYPASS</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/cast.html#CAST_BYPASS" class="secondary">CHAOS_PP_CAST_BYPASS</a></code> macro behaves identically to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/cast.html#CAST" class="primary">CHAOS_PP_CAST</a></code> except that it is parametized by the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././bypass-semantics.html">bypass recursion state</a>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/cast.html#CAST_BYPASS" class="secondary">CHAOS_PP_CAST_BYPASS</a></code>(s, type, g)</pre>
+<dl>
+<dt><var>s</var></dt>
+<dd><p>
+				The current <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././bypass-semantics.html">bypass recursion state</a>.
+			</p></dd>
+<dt><var>type</var></dt>
+<dd><p>
+			The type to which <var>g</var> is to be converted.
+		</p></dd>
+<dt><var>g</var></dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././generics.html">generic data structure</a> to be converted.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+			If <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././bypass-semantics.html">bypass semantics</a> are already in effect, this macro must be used instead of <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/cast.html#CAST" class="primary">CHAOS_PP_CAST</a></code>.
+		</p></div>
+<hr>
+<a name="CAST_BYPASS_ID"></a><h3 class="secondary">CHAOS_PP_CAST_BYPASS_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/cast.html#CAST_BYPASS_ID" class="secondary">CHAOS_PP_CAST_BYPASS_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/cast.html#CAST_BYPASS" class="secondary">CHAOS_PP_CAST_BYPASS</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/cast.html#CAST_BYPASS_ID" class="secondary">CHAOS_PP_CAST_BYPASS_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/cast.html#CAST_BYPASS" class="secondary">CHAOS_PP_CAST_BYPASS</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="CAST_BYPASS_"></a><h3 class="secondary">CHAOS_PP_CAST_BYPASS_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/cast.html#CAST_BYPASS_" class="secondary">CHAOS_PP_CAST_BYPASS_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/cast.html#CAST_BYPASS" class="secondary">CHAOS_PP_CAST_BYPASS</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/cast.html#CAST_BYPASS_" class="secondary">CHAOS_PP_CAST_BYPASS_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/cast.html#CAST_BYPASS_ID" class="secondary">CHAOS_PP_CAST_BYPASS_ID</a></code>)()</pre></div></div>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="../../.././license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</body>
+</html>

@@ -1,0 +1,331 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>repetition/for.h - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="../../.././style.css">
+</head>
+<body>
+<p>
+	The <code>repetition/for.h</code> header defines a predicated repetition algorithm.
+</p>
+<h4>Usage</h4>
+<pre class="box">#include <code><a class="header" href="../../.././chaos/preprocessor/repetition/for.html">&lt;chaos/preprocessor/repetition/for.h&gt;</a></code></pre>
+<h4>Contents</h4>
+<ul><li><code><a class="primary" href="#FOR">CHAOS_PP_FOR</a></code></li></ul>
+<hr>
+<a name="FOR"></a><h3 class="primary">CHAOS_PP_FOR</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/repetition/for.html#FOR" class="primary">CHAOS_PP_FOR</a></code> macro is a predicated repetition construct.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR" class="primary">CHAOS_PP_EXPR</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/repetition/for.html#FOR" class="primary">CHAOS_PP_FOR</a></code>(pred, op, macro, ...))</pre>
+<dl>
+<dt><var>pred</var></dt>
+<dd>
+<p>
+				The predicate to be used to determine whether the algorithm should continue.
+				This predicate must be either a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				</p>
+<div><pre>pred(s, state<sup>†</sup>)</pre></div>
+<p>
+				<sup>†</sup>
+				The <var>state</var> pseudo-parameter must be either <code>...</code> or the number of parameters that corresponds to the number of arguments in the initial state, <code>__VA_ARGS__</code>.
+			</p>
+</dd>
+<dt><var>op</var></dt>
+<dd>
+<p>
+				The operation to be used to iterate the state.
+				This operation must be either a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				</p>
+<div><pre>op(s, state<sup>†</sup>)</pre></div>
+<p>
+				<sup>†</sup>
+				The <var>state</var> pseudo-parameter must be either <code>...</code> or the number of parameters that corresponds to the number of arguments in the initial state, <code>__VA_ARGS__</code>.
+			</p>
+</dd>
+<dt><var>macro</var></dt>
+<dd>
+<p>
+				The target to be repeated.
+				This target must be either a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				</p>
+<div><pre>macro(s, state<sup>†</sup>)</pre></div>
+<p>
+				<sup>†</sup>
+				The <var>state</var> pseudo-parameter must be either <code>...</code> or the number of parameters that corresponds to the number of arguments in the initial state, <code>__VA_ARGS__</code>.
+			</p>
+</dd>
+<dt>[<var>...</var>]</dt>
+<dd><p>
+			The initial state.
+		</p></dd>
+</dl>
+<h4>Usage <small>- C/C++ Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR" class="primary">CHAOS_PP_EXPR</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/repetition/for.html#FOR" class="primary">CHAOS_PP_FOR</a></code>(pred, op, macro, state))</pre>
+<dl>
+<dt><var>pred</var></dt>
+<dd>
+<p>
+			The predicate to be used to determine whether the algorithm should continue.
+			This predicate must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			</p>
+<div><pre>pred(s, state)</pre></div>
+</dd>
+<dt><var>op</var></dt>
+<dd>
+<p>
+			The operation to be used to iterate the state.
+			This operation must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			</p>
+<div><pre>op(s, state)</pre></div>
+</dd>
+<dt><var>macro</var></dt>
+<dd>
+<p>
+			The target to be repeated.
+			This target must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			</p>
+<div><pre>macro(s, state)</pre></div>
+</dd>
+<dt><var>state</var></dt>
+<dd><p>
+			The initial state.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/repetition/for.html#FOR" class="primary">CHAOS_PP_FOR</a></code> macro itself expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././deferral.html">deferred expression</a> in terms of <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#NEXT" class="primary">CHAOS_PP_NEXT</a></code>(s)</code>.
+		This <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././deferral.html">deferred expression</a>, when invoked by <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR" class="primary">CHAOS_PP_EXPR</a></code>, expands to the result of repeating the target while iterating the state until the predicate expands to <code>0</code>.
+		This is illustrated by the following pseudo-code:
+		</p></div>
+<div><div><pre>macro(s, state)  macro(s, op(s, state)) ... macro(s, op(s, ... op(s, state) ... ))</pre></div></div>
+<div><p>
+		The predicate, operation, and target are all invoked with the current <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././recursion.html">recursion state</a> (<var>s</var>) and the current state (<var>state</var> or <code>__VA_ARGS__</code>).
+		The predicate must expand to <code>0</code>, <code>1</code>, or a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././deferral.html">deferred expression</a> in terms of <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#NEXT" class="primary">CHAOS_PP_NEXT</a></code>(s)</code> that expands to either <code>0</code> or <code>1</code>.
+		If the predicate ultimately expands to <code>0</code>, the algorithm terminates.
+		Otherwise, the target is invoked with the current state, the operation is applied to the current state to yield a new state, and the algorithm continues.
+		Both the target and the operation may expand to <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././deferral.html">deferred expressions</a> in terms of <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#NEXT" class="primary">CHAOS_PP_NEXT</a></code>(s)</code>.
+		Expansion to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././deferral.html">deferred expression</a> allows the predicate, operation, and target to recurse on themselves if necessary.
+	</p></div>
+<div><p>
+		Invocations of the target (but not the predicate and operation) are trampolined such that each invocation is invoked with <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#NEXT" class="primary">CHAOS_PP_NEXT</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#NEXT" class="primary">CHAOS_PP_NEXT</a></code>(s))</code>, where <var>s</var> is the original <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././recursion.html">recursion state</a> at the beginning of the algorithm (i.e. <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#STATE" class="primary">CHAOS_PP_STATE</a></code>()</code>).
+		This maximizes the utility of the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././recursion.html">recursion backend</a>.
+	</p></div>
+<div><p>
+		Ignoring the complexity of <var>pred</var>, <var>op</var>, and <var>macro</var> (each of which is invoked once for each variation of the state), each iteration of the state requires only a single <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././recursion.html">recursion step</a>.		
+	</p></div>
+<div><p>
+		This macro deduces the current <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././recursion.html">recursion state</a> and invokes <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/repetition/for.html#FOR_S" class="secondary">CHAOS_PP_FOR_S</a></code>.
+		If the current <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././recursion.html">recursion state</a> is already known, direct use of <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/repetition/for.html#FOR_S" class="secondary">CHAOS_PP_FOR_S</a></code> is more efficient.
+	</p></div>
+<div><p>
+		This macro may not be used if <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././bypass-semantics.html">bypass semantics</a> are in effect.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/repetition/auto/for.html#AUTO_FOR">CHAOS_PP_AUTO_FOR</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/repetition/auto/for_aux.html#AUTO_FOR_AUX">CHAOS_PP_AUTO_FOR_AUX</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/repetition/auto/repeat.html#AUTO_REPEAT">CHAOS_PP_AUTO_REPEAT</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/repetition/auto/repeat_from_to.html#AUTO_REPEAT_FROM_TO">CHAOS_PP_AUTO_REPEAT_FROM_TO</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/repetition/auto/repeat_shifted.html#AUTO_REPEAT_SHIFTED">CHAOS_PP_AUTO_REPEAT_SHIFTED</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/repetition/for_aux.html#FOR_AUX">CHAOS_PP_FOR_AUX</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/repetition/parametric/for_aux.html#FOR_AUX_PARAMETRIC">CHAOS_PP_FOR_AUX_PARAMETRIC</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/repetition/x/for_aux.html#FOR_AUX_X">CHAOS_PP_FOR_AUX_X</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/repetition/parametric/for.html#FOR_PARAMETRIC">CHAOS_PP_FOR_PARAMETRIC</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/repetition/x/for.html#FOR_X">CHAOS_PP_FOR_X</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/repetition/repeat.html#REPEAT">CHAOS_PP_REPEAT</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/repetition/repeat_from_to.html#REPEAT_FROM_TO">CHAOS_PP_REPEAT_FROM_TO</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/repetition/parametric/repeat_from_to.html#REPEAT_FROM_TO_PARAMETRIC">CHAOS_PP_REPEAT_FROM_TO_PARAMETRIC</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/repetition/x/repeat_from_to.html#REPEAT_FROM_TO_X">CHAOS_PP_REPEAT_FROM_TO_X</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/repetition/parametric/repeat.html#REPEAT_PARAMETRIC">CHAOS_PP_REPEAT_PARAMETRIC</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/repetition/repeat_shifted.html#REPEAT_SHIFTED">CHAOS_PP_REPEAT_SHIFTED</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/repetition/parametric/repeat_shifted.html#REPEAT_SHIFTED_PARAMETRIC">CHAOS_PP_REPEAT_SHIFTED_PARAMETRIC</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/repetition/x/repeat_shifted.html#REPEAT_SHIFTED_X">CHAOS_PP_REPEAT_SHIFTED_X</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/repetition/x/repeat.html#REPEAT_X">CHAOS_PP_REPEAT_X</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/arithmetic/dec.html" class="header">&lt;chaos/preprocessor/arithmetic/dec.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html" class="header">&lt;chaos/preprocessor/config.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html" class="header">&lt;chaos/preprocessor/lambda/ops.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/logical/bool.html" class="header">&lt;chaos/preprocessor/logical/bool.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html" class="header">&lt;chaos/preprocessor/recursion/expr.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/repetition/for.html" class="header">&lt;chaos/preprocessor/repetition/for.h&gt;</a></code>
+
+#define PRED(s, x) <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/logical/bool.html#BOOL" class="primary">CHAOS_PP_BOOL</a></code>(x)
+#define OP(s, x) <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/arithmetic/dec.html#DEC" class="primary">CHAOS_PP_DEC</a></code>(x)
+#define MACRO(s, x) { x }
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR" class="primary">CHAOS_PP_EXPR</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/repetition/for.html#FOR" class="primary">CHAOS_PP_FOR</a></code>(
+    PRED, OP, MACRO, 3
+))
+// { 3 } { 2 } { 1 }
+
+#if <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html#VARIADICS" class="primary">CHAOS_PP_VARIADICS</a></code>
+
+??=include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#PLACEHOLDERS" class="primary">CHAOS_PP_PLACEHOLDERS</a></code>(1)
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR" class="primary">CHAOS_PP_EXPR</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/repetition/for.html#FOR" class="primary">CHAOS_PP_FOR</a></code>(
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/logical/bool.html#BOOL_" class="secondary">CHAOS_PP_BOOL_</a></code>(_1), <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/arithmetic/dec.html#DEC_" class="secondary">CHAOS_PP_DEC_</a></code>(_1),
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>({) _1 },
+    3
+))
+// { 3 } { 2 } { 1 }
+
+??=include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#PLACEHOLDERS" class="primary">CHAOS_PP_PLACEHOLDERS</a></code>(0)
+
+#endif</pre>
+<hr>
+<a name="FOR_ID"></a><h3 class="secondary">CHAOS_PP_FOR_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/repetition/for.html#FOR_ID" class="secondary">CHAOS_PP_FOR_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/repetition/for.html#FOR" class="primary">CHAOS_PP_FOR</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/repetition/for.html#FOR_ID" class="secondary">CHAOS_PP_FOR_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/repetition/for.html#FOR" class="primary">CHAOS_PP_FOR</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="FOR_"></a><h3 class="secondary">CHAOS_PP_FOR_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/repetition/for.html#FOR_" class="secondary">CHAOS_PP_FOR_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/repetition/for.html#FOR" class="primary">CHAOS_PP_FOR</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/repetition/for.html#FOR_" class="secondary">CHAOS_PP_FOR_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/repetition/for.html#FOR_ID" class="secondary">CHAOS_PP_FOR_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="FOR_S"></a><h3 class="alternate">CHAOS_PP_FOR_S</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/repetition/for.html#FOR_S" class="secondary">CHAOS_PP_FOR_S</a></code> macro behaves identically to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/repetition/for.html#FOR" class="primary">CHAOS_PP_FOR</a></code> except that it is parametized by the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././recursion.html">recursion state</a>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR_S" class="primary">CHAOS_PP_EXPR_S</a></code>(s)(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/repetition/for.html#FOR_S" class="secondary">CHAOS_PP_FOR_S</a></code>(s, pred, op, macro, ...))</pre>
+<dl>
+<dt><var>s</var></dt>
+<dd><p>
+				The current <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././recursion.html">recursion state</a>.
+			</p></dd>
+<dt><var>pred</var></dt>
+<dd>
+<p>
+				The predicate to be used to determine whether the algorithm should continue.
+				This predicate must be either a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				</p>
+<div><pre>pred(s, state<sup>†</sup>)</pre></div>
+<p>
+				<sup>†</sup>
+				The <var>state</var> pseudo-parameter must be either <code>...</code> or the number of parameters that corresponds to the number of arguments in the initial state, <code>__VA_ARGS__</code>.
+			</p>
+</dd>
+<dt><var>op</var></dt>
+<dd>
+<p>
+				The operation to be used to iterate the state.
+				This operation must be either a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				</p>
+<div><pre>op(s, state<sup>†</sup>)</pre></div>
+<p>
+				<sup>†</sup>
+				The <var>state</var> pseudo-parameter must be either <code>...</code> or the number of parameters that corresponds to the number of arguments in the initial state, <code>__VA_ARGS__</code>.
+			</p>
+</dd>
+<dt><var>macro</var></dt>
+<dd>
+<p>
+				The target to be repeated.
+				This target must be either a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				</p>
+<div><pre>macro(s, state<sup>†</sup>)</pre></div>
+<p>
+				<sup>†</sup>
+				The <var>state</var> pseudo-parameter must be either <code>...</code> or the number of parameters that corresponds to the number of arguments in the initial state, <code>__VA_ARGS__</code>.
+			</p>
+</dd>
+<dt>[<var>...</var>]</dt>
+<dd><p>
+			The initial state.
+		</p></dd>
+</dl>
+<h4>Usage <small>- C/C++ Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR_S" class="primary">CHAOS_PP_EXPR_S</a></code>(s)(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/repetition/for.html#FOR_S" class="secondary">CHAOS_PP_FOR_S</a></code>(s, pred, op, macro, state))</pre>
+<dl>
+<dt><var>s</var></dt>
+<dd><p>
+				The current <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././recursion.html">recursion state</a>.
+			</p></dd>
+<dt><var>pred</var></dt>
+<dd>
+<p>
+			The predicate to be used to determine whether the algorithm should continue.
+			This predicate must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			</p>
+<div><pre>pred(s, state)</pre></div>
+</dd>
+<dt><var>op</var></dt>
+<dd>
+<p>
+			The operation to be used to iterate the state.
+			This operation must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			</p>
+<div><pre>op(s, state)</pre></div>
+</dd>
+<dt><var>macro</var></dt>
+<dd>
+<p>
+			The target to be repeated.
+			This target must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			</p>
+<div><pre>macro(s, state)</pre></div>
+</dd>
+<dt><var>state</var></dt>
+<dd><p>
+			The initial state.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+			This macro may not be used if <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././bypass-semantics.html">bypass semantics</a> are in effect.
+		</p></div>
+<hr>
+<a name="FOR_S_ID"></a><h3 class="secondary">CHAOS_PP_FOR_S_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/repetition/for.html#FOR_S_ID" class="secondary">CHAOS_PP_FOR_S_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/repetition/for.html#FOR_S" class="secondary">CHAOS_PP_FOR_S</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/repetition/for.html#FOR_S_ID" class="secondary">CHAOS_PP_FOR_S_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/repetition/for.html#FOR_S" class="secondary">CHAOS_PP_FOR_S</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="FOR_S_"></a><h3 class="secondary">CHAOS_PP_FOR_S_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/repetition/for.html#FOR_S_" class="secondary">CHAOS_PP_FOR_S_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/repetition/for.html#FOR_S" class="secondary">CHAOS_PP_FOR_S</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/repetition/for.html#FOR_S_" class="secondary">CHAOS_PP_FOR_S_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/repetition/for.html#FOR_S_ID" class="secondary">CHAOS_PP_FOR_S_ID</a></code>)()</pre></div></div>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="../../.././license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</body>
+</html>

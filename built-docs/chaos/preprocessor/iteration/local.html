@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>iteration/local.h - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="../../.././style.css">
+</head>
+<body>
+<p>
+	The <code>iteration/local.h</code> header defines the interface to the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././local-iteration.html">local-iteration</a> mechanism.
+</p>
+<h4>Usage</h4>
+<pre class="box">#include <code><a class="header" href="../../.././chaos/preprocessor/iteration/local.html">&lt;chaos/preprocessor/iteration/local.h&gt;</a></code></pre>
+<h4>Contents</h4>
+<ul>
+<li><code><a class="primary" href="#LOCAL_ITERATE">CHAOS_PP_LOCAL_ITERATE</a></code></li>
+<li><code><a class="primary" href="#LOCAL_LIMITS">CHAOS_PP_LOCAL_LIMITS</a></code></li>
+<li><code><a class="primary" href="#LOCAL_MACRO">CHAOS_PP_LOCAL_MACRO</a></code></li>
+</ul>
+<hr>
+<a name="LOCAL_LIMITS"></a><h3 class="primary">CHAOS_PP_LOCAL_LIMITS</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/iteration/local.html#LOCAL_LIMITS" class="primary">CHAOS_PP_LOCAL_LIMITS</a></code> macro is a user-defined <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././named-externals.html">named external argument</a> that specifies the lower and upper bounds of a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././local-iteration.html">local-iteration</a>.
+	</p>
+<h4>Usage </h4>
+<pre class="box">#define <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/iteration/local.html#LOCAL_LIMITS" class="primary">CHAOS_PP_LOCAL_LIMITS</a></code> (lower, upper)</pre>
+<dl>
+<dt><var>lower</var></dt>
+<dd><p>
+			The lower bound of the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././local-iteration.html">local-iteration</a>.
+			Valid values range from <code>0</code> to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/limits.html#LIMIT_ITERATION" class="primary">CHAOS_PP_LIMIT_ITERATION</a></code>.
+		</p></dd>
+<dt><var>upper</var></dt>
+<dd><p>
+			The upper bound of the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././local-iteration.html">local-iteration</a>.
+			Valid values range from <code>0</code> to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/limits.html#LIMIT_ITERATION" class="primary">CHAOS_PP_LIMIT_ITERATION</a></code>.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro is defined by the user to specify the boundaries of a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././local-iteration.html">local-iteration</a>.
+		It is automatically undefined by the library.
+	</p></div>
+<div><p>
+		Both <var>lower</var> and <var>upper</var> parameters are fully evaluated.
+		This implies that they may contain arithmetic, logical, and bitwise expressions.
+		</p></div>
+<div><div><pre>#define <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/iteration/local.html#LOCAL_LIMITS" class="primary">CHAOS_PP_LOCAL_LIMITS</a></code> (S, S + 10)</pre></div></div>
+<div><p>
+		Note that if <var>upper</var> is <em>less</em> than <var>lower</var>, the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././local-iteration.html">local-iteration</a> mechanism will iterate in reverse.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/iteration/local.html#LOCAL_ITERATE">CHAOS_PP_LOCAL_ITERATE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/iteration/local.html#LOCAL_MACRO">CHAOS_PP_LOCAL_MACRO</a></code></li>
+</ul>
+<hr>
+<a name="LOCAL_MACRO"></a><h3 class="primary">CHAOS_PP_LOCAL_MACRO</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/iteration/local.html#LOCAL_MACRO" class="primary">CHAOS_PP_LOCAL_MACRO</a></code> macro is a user-defined <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././named-externals.html">named external argument</a> that specifies the iterated macro of a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././local-iteration.html">local-iteration</a>.
+	</p>
+<h4>Usage </h4>
+<pre class="box">#define <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/iteration/local.html#LOCAL_MACRO" class="primary">CHAOS_PP_LOCAL_MACRO</a></code>(n) rep</pre>
+<dl>
+<dt><var>n</var></dt>
+<dd><p>
+			The current iteration value.
+		</p></dd>
+<dt>[<var>rep</var>]</dt>
+<dd><p>
+			The replacement list to be repeated.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro is defined by the user to specify the iterated macro of a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././local-iteration.html">local-iteration</a>.
+		It is automatically undefined by the library.
+	</p></div>
+<div><p>
+		This macro is repeatedly invoked by the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././local-iteration.html">local-iteration</a> mechanism with values in the range specified by <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/iteration/local.html#LOCAL_LIMITS" class="primary">CHAOS_PP_LOCAL_LIMITS</a></code>.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/iteration/local.html#LOCAL_ITERATE">CHAOS_PP_LOCAL_ITERATE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/iteration/local.html#LOCAL_LIMITS">CHAOS_PP_LOCAL_LIMITS</a></code></li>
+</ul>
+<hr>
+<a name="LOCAL_ITERATE"></a><h3 class="primary">CHAOS_PP_LOCAL_ITERATE</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/iteration/local.html#LOCAL_ITERATE" class="primary">CHAOS_PP_LOCAL_ITERATE</a></code> macro is used to initiate a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././local-iteration.html">local-iteration</a>.
+	</p>
+<h4>Usage </h4>
+<pre class="box">??=include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/iteration/local.html#LOCAL_ITERATE" class="primary">CHAOS_PP_LOCAL_ITERATE</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+		Both the <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/iteration/local.html#LOCAL_LIMITS" class="primary">CHAOS_PP_LOCAL_LIMITS</a></code> macro and the <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/iteration/local.html#LOCAL_MACRO" class="primary">CHAOS_PP_LOCAL_MACRO</a></code> macro must be defined prior to initiating a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././local-iteration.html">local-iteration</a>.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/iteration/local.html#LOCAL_LIMITS">CHAOS_PP_LOCAL_LIMITS</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/iteration/local.html#LOCAL_MACRO">CHAOS_PP_LOCAL_MACRO</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include &lt;iostream&gt;
+
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/identity.html" class="header">&lt;chaos/preprocessor/facilities/identity.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/intercept.html" class="header">&lt;chaos/preprocessor/facilities/intercept.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/iteration/local.html" class="header">&lt;chaos/preprocessor/iteration/local.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/repetition/enum_params.html" class="header">&lt;chaos/preprocessor/repetition/enum_params.h&gt;</a></code>
+
+template&lt;class&gt; char arity(void);
+
+#define ARITY(id) (sizeof(arity&lt;id&gt;()) - 1)
+
+#define <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/iteration/local.html#LOCAL_LIMITS" class="primary">CHAOS_PP_LOCAL_LIMITS</a></code> (0, 5)
+#define <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/iteration/local.html#LOCAL_MACRO" class="primary">CHAOS_PP_LOCAL_MACRO</a></code>(n) \
+    template&lt; \
+        template&lt; \
+            <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/repetition/enum_params.html#ENUM_PARAMS" class="primary">CHAOS_PP_ENUM_PARAMS</a></code>(n, class <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/intercept.html#INTERCEPT" class="primary">CHAOS_PP_INTERCEPT</a></code>) \
+        &gt; class \
+    &gt; char (&amp; arity(void))[n + 1]; \
+    /**/
+
+??=include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/iteration/local.html#LOCAL_ITERATE" class="primary">CHAOS_PP_LOCAL_ITERATE</a></code>()
+
+class X { };
+template&lt;class&gt; class Y { };
+template&lt;class, class&gt; class Z { };
+
+int main(int argc, char* argv[]) {
+    std::cout
+        &lt;&lt; ARITY(X) &lt;&lt; ' '
+        &lt;&lt; ARITY(Y) &lt;&lt; ' '
+        &lt;&lt; ARITY(Z) &lt;&lt; '\n';
+    return 0;
+}</pre>
+<hr>
+<a name="LOCAL_ITERATE_ID"></a><h3 class="secondary">CHAOS_PP_LOCAL_ITERATE_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/iteration/local.html#LOCAL_ITERATE_ID" class="secondary">CHAOS_PP_LOCAL_ITERATE_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/iteration/local.html#LOCAL_ITERATE" class="primary">CHAOS_PP_LOCAL_ITERATE</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/iteration/local.html#LOCAL_ITERATE_ID" class="secondary">CHAOS_PP_LOCAL_ITERATE_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro exists only for uniformity with other macros that require indirect invocation.
+				</p></div>
+<hr>
+<a name="LOCAL_ITERATE_"></a><h3 class="secondary">CHAOS_PP_LOCAL_ITERATE_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/iteration/local.html#LOCAL_ITERATE_" class="secondary">CHAOS_PP_LOCAL_ITERATE_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/iteration/local.html#LOCAL_ITERATE" class="primary">CHAOS_PP_LOCAL_ITERATE</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/iteration/local.html#LOCAL_ITERATE_" class="secondary">CHAOS_PP_LOCAL_ITERATE_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/iteration/local.html#LOCAL_ITERATE" class="primary">CHAOS_PP_LOCAL_ITERATE</a></code>)</pre></div></div>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="../../.././license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</body>
+</html>

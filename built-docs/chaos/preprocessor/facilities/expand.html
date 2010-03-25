@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>facilities/expand.h - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="../../.././style.css">
+</head>
+<body>
+<p>
+	The <code>facilities/expand.h</code> header defines a macro used to cause a singular delayed expansion.
+</p>
+<h4>Usage</h4>
+<pre class="box">#include <code><a class="header" href="../../.././chaos/preprocessor/facilities/expand.html">&lt;chaos/preprocessor/facilities/expand.h&gt;</a></code></pre>
+<h4>Contents</h4>
+<ul><li><code><a class="primary" href="#EXPAND">CHAOS_PP_EXPAND</a></code></li></ul>
+<hr>
+<a name="EXPAND"></a><h3 class="primary">CHAOS_PP_EXPAND</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/expand.html#EXPAND" class="primary">CHAOS_PP_EXPAND</a></code> macro effectively causes its argument to expand twice.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/expand.html#EXPAND" class="primary">CHAOS_PP_EXPAND</a></code>(...)</pre>
+<dl>
+<dt>[<var>...</var>]</dt>
+<dd><p>
+			The argument to be expanded.
+		</p></dd>
+</dl>
+<h4>Usage <small>- C/C++ Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/expand.html#EXPAND" class="primary">CHAOS_PP_EXPAND</a></code>(x)</pre>
+<dl>
+<dt><var>x</var></dt>
+<dd><p>
+			The argument to be expanded.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro expands to its argument.
+	</p></div>
+<div><p>
+		The argument <var>x</var> (or <code>__VA_ARGS__</code>) is scanned for macro replacement once on entry to this macro and again during the rescanning of this macro's replacement list.
+	</p></div>
+<div><p>
+		The result of the use of this macro in a context that causes the expansion of a library primitive during the secondary expansion is undefined.
+		</p></div>
+<div><div><pre>#define ARGS (text)
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/expand.html#EXPAND" class="primary">CHAOS_PP_EXPAND</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/wstringize.html#WSTRINGIZE" class="primary">CHAOS_PP_WSTRINGIZE</a></code> ARGS) // undefined</pre></div></div>
+<div><p>
+		Secondary expansion of library primitives such as the above may or may not work as desired depending on whether the primitive internally uses <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/expand.html#EXPAND" class="primary">CHAOS_PP_EXPAND</a></code>.
+	</p></div>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/expand.html" class="header">&lt;chaos/preprocessor/facilities/expand.h&gt;</a></code>
+
+#define MACRO(a, b) a + b
+#define ARGS (1, 2)
+
+MACRO ARGS                  // MACRO (1 + 2)
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/expand.html#EXPAND" class="primary">CHAOS_PP_EXPAND</a></code>(MACRO ARGS) // 1 + 2</pre>
+<hr>
+<a name="EXPAND_ID"></a><h3 class="secondary">CHAOS_PP_EXPAND_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/expand.html#EXPAND_ID" class="secondary">CHAOS_PP_EXPAND_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/expand.html#EXPAND" class="primary">CHAOS_PP_EXPAND</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/expand.html#EXPAND_ID" class="secondary">CHAOS_PP_EXPAND_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/expand.html#EXPAND" class="primary">CHAOS_PP_EXPAND</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="EXPAND_"></a><h3 class="secondary">CHAOS_PP_EXPAND_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/expand.html#EXPAND_" class="secondary">CHAOS_PP_EXPAND_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/expand.html#EXPAND" class="primary">CHAOS_PP_EXPAND</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/expand.html#EXPAND_" class="secondary">CHAOS_PP_EXPAND_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/expand.html#EXPAND_ID" class="secondary">CHAOS_PP_EXPAND_ID</a></code>)()</pre></div></div>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="../../.././license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</body>
+</html>

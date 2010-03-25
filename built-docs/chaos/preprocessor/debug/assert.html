@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>debug/assert.h - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="../../.././style.css">
+</head>
+<body>
+<p>
+	The <code>debug/assert.h</code> header defines assertion macros.
+</p>
+<h4>Usage</h4>
+<pre class="box">#include <code><a class="header" href="../../.././chaos/preprocessor/debug/assert.html">&lt;chaos/preprocessor/debug/assert.h&gt;</a></code></pre>
+<h4>Contents</h4>
+<ul>
+<li><code><a class="primary" href="#ASSERT">CHAOS_PP_ASSERT</a></code></li>
+<li><code><a class="primary" href="#ASSERT_MSG">CHAOS_PP_ASSERT_MSG</a></code></li>
+</ul>
+<hr>
+<a name="ASSERT"></a><h3 class="primary">CHAOS_PP_ASSERT</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/debug/assert.html#ASSERT" class="primary">CHAOS_PP_ASSERT</a></code> macro intentionally causes an error if its argument is zero.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/debug/assert.html#ASSERT" class="primary">CHAOS_PP_ASSERT</a></code>(cond)</pre>
+<dl>
+<dt><var>cond</var></dt>
+<dd><p>
+			The condition used to trigger the assertion.
+			Valid values range from <code>0</code> to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/limits.html#LIMIT_MAG" class="primary">CHAOS_PP_LIMIT_MAG</a></code>.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		If <var>cond</var> evaluates to non-zero, this macro expands to nothing.
+		Otherwise, it intentionally causes an error.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/debug/assert.html#ASSERT_MSG">CHAOS_PP_ASSERT_MSG</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/debug/failure.html#FAILURE">CHAOS_PP_FAILURE</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html" class="header">&lt;chaos/preprocessor/config.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/debug/assert.html" class="header">&lt;chaos/preprocessor/debug/assert.h&gt;</a></code>
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/debug/assert.html#ASSERT" class="primary">CHAOS_PP_ASSERT</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html#VARIADICS" class="primary">CHAOS_PP_VARIADICS</a></code>)</pre>
+<hr>
+<a name="ASSERT_ID"></a><h3 class="secondary">CHAOS_PP_ASSERT_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/debug/assert.html#ASSERT_ID" class="secondary">CHAOS_PP_ASSERT_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/debug/assert.html#ASSERT" class="primary">CHAOS_PP_ASSERT</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/debug/assert.html#ASSERT_ID" class="secondary">CHAOS_PP_ASSERT_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro exists only for uniformity with other macros that require indirect invocation.
+				</p></div>
+<hr>
+<a name="ASSERT_"></a><h3 class="secondary">CHAOS_PP_ASSERT_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/debug/assert.html#ASSERT_" class="secondary">CHAOS_PP_ASSERT_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/debug/assert.html#ASSERT" class="primary">CHAOS_PP_ASSERT</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/debug/assert.html#ASSERT_" class="secondary">CHAOS_PP_ASSERT_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/debug/assert.html#ASSERT" class="primary">CHAOS_PP_ASSERT</a></code>)</pre></div></div>
+<hr>
+<a name="ASSERT_MSG"></a><h3 class="primary">CHAOS_PP_ASSERT_MSG</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/debug/assert.html#ASSERT_MSG" class="primary">CHAOS_PP_ASSERT_MSG</a></code> macro expands to a user-specified message if its first argument is <code>0</code>.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/debug/assert.html#ASSERT_MSG" class="primary">CHAOS_PP_ASSERT_MSG</a></code>(cond, ...)</pre>
+<dl>
+<dt><var>cond</var></dt>
+<dd><p>
+			The condition used to trigger the assertion.
+			Valid values range from <code>0</code> to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/limits.html#LIMIT_MAG" class="primary">CHAOS_PP_LIMIT_MAG</a></code>.
+		</p></dd>
+<dt>[<var>...</var>]</dt>
+<dd><p>
+			The resulting message if <var>cond</var> is <code>0</code>.
+		</p></dd>
+</dl>
+<h4>Usage <small>- C/C++ Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/debug/assert.html#ASSERT_MSG" class="primary">CHAOS_PP_ASSERT_MSG</a></code>(cond, msg)</pre>
+<dl>
+<dt><var>cond</var></dt>
+<dd><p>
+			The condition used to trigger the assertion.
+			Valid values range from <code>0</code> to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/limits.html#LIMIT_MAG" class="primary">CHAOS_PP_LIMIT_MAG</a></code>.
+		</p></dd>
+<dt><var>msg</var></dt>
+<dd><p>
+			The resulting message if <var>cond</var> is <code>0</code>.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		If <var>cond</var> evaluates to non-zero, this macro expands to nothing.
+		Otherwise, it expands to <var>msg</var> or <code>__VA_ARGS__</code>.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/debug/assert.html#ASSERT">CHAOS_PP_ASSERT</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/debug/failure.html#FAILURE">CHAOS_PP_FAILURE</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html" class="header">&lt;chaos/preprocessor/config.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/debug/assert.html" class="header">&lt;chaos/preprocessor/debug/assert.h&gt;</a></code>
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/debug/assert.html#ASSERT_MSG" class="primary">CHAOS_PP_ASSERT_MSG</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html#VARIADICS" class="primary">CHAOS_PP_VARIADICS</a></code>, "Variadic macros are required";)</pre>
+<hr>
+<a name="ASSERT_MSG_ID"></a><h3 class="secondary">CHAOS_PP_ASSERT_MSG_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/debug/assert.html#ASSERT_MSG_ID" class="secondary">CHAOS_PP_ASSERT_MSG_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/debug/assert.html#ASSERT_MSG" class="primary">CHAOS_PP_ASSERT_MSG</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/debug/assert.html#ASSERT_MSG_ID" class="secondary">CHAOS_PP_ASSERT_MSG_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro exists only for uniformity with other macros that require indirect invocation.
+				</p></div>
+<hr>
+<a name="ASSERT_MSG_"></a><h3 class="secondary">CHAOS_PP_ASSERT_MSG_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/debug/assert.html#ASSERT_MSG_" class="secondary">CHAOS_PP_ASSERT_MSG_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/debug/assert.html#ASSERT_MSG" class="primary">CHAOS_PP_ASSERT_MSG</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/debug/assert.html#ASSERT_MSG_" class="secondary">CHAOS_PP_ASSERT_MSG_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/debug/assert.html#ASSERT_MSG" class="primary">CHAOS_PP_ASSERT_MSG</a></code>)</pre></div></div>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="../../.././license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</body>
+</html>

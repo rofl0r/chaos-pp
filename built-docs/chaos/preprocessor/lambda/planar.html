@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>lambda/planar.h - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="../../.././style.css">
+</head>
+<body>
+<p>
+	The <code>lambda/planar.h</code> header defines macros used to abstract the difference between the invocation of a macro and a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a>.
+</p>
+<h4>Usage</h4>
+<pre class="box">#include <code><a class="header" href="../../.././chaos/preprocessor/lambda/planar.html">&lt;chaos/preprocessor/lambda/planar.h&gt;</a></code></pre>
+<h4>Contents</h4>
+<ul>
+<li><code><a class="primary" href="#PLANAR">CHAOS_PP_PLANAR</a></code></li>
+<li><code><a class="primary" href="#PLANAR_CLOSE">CHAOS_PP_PLANAR_CLOSE</a></code></li>
+</ul>
+<hr>
+<a name="PLANAR"></a><h3 class="primary">CHAOS_PP_PLANAR</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/planar.html#PLANAR" class="primary">CHAOS_PP_PLANAR</a></code> macro abstracts the difference between a partial invocation of a macro and a partial invocation of a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a>.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/planar.html#PLANAR" class="primary">CHAOS_PP_PLANAR</a></code>(x)()(s, x)</pre>
+<dl>
+<dt><var>x</var></dt>
+<dd><p>
+			The macro name or <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> to be invoked.
+		</p></dd>
+<dt><var>s</var></dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././recursion.html">recursion state</a> in terms of which the resulting <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././deferral.html">deferred expression</a> is to be generated.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro expands to an <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././deferral.html">deferred expression</a> in terms of <var>s</var>.
+		This <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././deferral.html">deferred expression</a>, when invoked, expands to another <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././deferral.html">deferred expression</a> in terms of <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#NEXT" class="primary">CHAOS_PP_NEXT</a></code>(s)</code>.
+		This last <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././deferral.html">deferred expression</a> contains the <em>first half</em> of an invocation of <var>x</var>.
+		This is demonstrated by the following pseudo-code:
+		</p></div>
+<div><div><pre>x(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#NEXT" class="primary">CHAOS_PP_NEXT</a></code>(s),</pre></div></div>
+<div><p>
+		Note that the above pseudo-code is dramatically simplified from the actual result.
+		It is intended to be illustrative only.
+	</p></div>
+<div><p>
+		The partial invocation mentioned previously must be closed before <var>x</var> is actually invoked.
+		This is accomplished with <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/planar.html#PLANAR_CLOSE" class="primary">CHAOS_PP_PLANAR_CLOSE</a></code>, with any other arguments to <var>x</var> beyond <var>s</var> in between:
+		</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/planar.html#PLANAR" class="primary">CHAOS_PP_PLANAR</a></code>(x)()(s, x) ... <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/planar.html#PLANAR_CLOSE" class="primary">CHAOS_PP_PLANAR_CLOSE</a></code>()</pre></div></div>
+<div><p>
+		For example, the expression...
+		</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/planar.html#PLANAR" class="primary">CHAOS_PP_PLANAR</a></code>(MACRO)()(s, MACRO) p, q <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/planar.html#PLANAR_CLOSE" class="primary">CHAOS_PP_PLANAR_CLOSE</a></code>()</pre></div></div>
+<div><p>
+		roughly results in...
+		</p></div>
+<div><div><pre>MACRO(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#NEXT" class="primary">CHAOS_PP_NEXT</a></code>(s), p, q)</pre></div></div>
+<div><p>
+		The primarily utility of <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/planar.html#PLANAR" class="primary">CHAOS_PP_PLANAR</a></code> and <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/planar.html#PLANAR_CLOSE" class="primary">CHAOS_PP_PLANAR_CLOSE</a></code> is that usage allows the the arguments in between the <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/planar.html#PLANAR" class="primary">CHAOS_PP_PLANAR</a></code> and <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/planar.html#PLANAR_CLOSE" class="primary">CHAOS_PP_PLANAR_CLOSE</a></code> invocations to fully expand before <var>x</var> is ever invoked--even if the arguments are other uses of <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/planar.html#PLANAR" class="primary">CHAOS_PP_PLANAR</a></code> and <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/planar.html#PLANAR_CLOSE" class="primary">CHAOS_PP_PLANAR_CLOSE</a></code>.
+		This allows direct use of the token-pasting and stringizing operators inside <var>x</var>.
+		The result is effectively a trampolined invocation of <var>x</var>, but it is unlike <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/trampoline.html#TRAMPOLINE" class="primary">CHAOS_PP_TRAMPOLINE</a></code> because it spends a single <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././recursion.html">recursion step</a>.
+	</p></div>
+<div><p>
+		Normal usage consists of invoking <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/planar.html#PLANAR" class="primary">CHAOS_PP_PLANAR</a></code> without the trailing invocations, passing that result around, and finishing the invocation at another time.
+		This avoids repeatedly detecting the difference between a macro name and a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a>.
+		</p></div>
+<div><div><pre>#define MACRO(s, x) MACRO_I(s, x, <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/planar.html#PLANAR" class="primary">CHAOS_PP_PLANAR</a></code>(x))
+#define MACRO_I(s, x, _x) _x()(s, x) ~ <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/planar.html#PLANAR_CLOSE" class="primary">CHAOS_PP_PLANAR_CLOSE</a></code>()</pre></div></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/lambda/call.html#CALL">CHAOS_PP_CALL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/lambda/planar.html#PLANAR_CLOSE">CHAOS_PP_PLANAR_CLOSE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/lambda/route.html#ROUTE">CHAOS_PP_ROUTE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/lambda/trampoline.html#TRAMPOLINE">CHAOS_PP_TRAMPOLINE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/lambda/route.html#WAYPOINT">CHAOS_PP_WAYPOINT</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/cat.html" class="header">&lt;chaos/preprocessor/cat.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html" class="header">&lt;chaos/preprocessor/config.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/iif.html" class="header">&lt;chaos/preprocessor/control/iif.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/inline_when.html" class="header">&lt;chaos/preprocessor/control/inline_when.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/planar.html" class="header">&lt;chaos/preprocessor/lambda/planar.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html" class="header">&lt;chaos/preprocessor/recursion/expr.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/infuse.html" class="header">&lt;chaos/preprocessor/seq/infuse.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/eat.html" class="header">&lt;chaos/preprocessor/tuple/eat.h&gt;</a></code>
+
+#if <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html#VARIADICS" class="primary">CHAOS_PP_VARIADICS</a></code>
+
+#define FOLD_RIGHT(op, seq, ...) \
+    FOLD_RIGHT_S(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#STATE" class="primary">CHAOS_PP_STATE</a></code>(), op, seq, __VA_ARGS__) \
+    /**/
+#define FOLD_RIGHT_S(s, op, seq, ...) \
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR_S" class="primary">CHAOS_PP_EXPR_S</a></code>(s)(FOLD_RIGHT_I( \
+        <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/infuse.html#SEQ_INFUSE" class="primary">CHAOS_PP_SEQ_INFUSE</a></code>( \
+            seq, \
+            1, <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#NEXT" class="primary">CHAOS_PP_NEXT</a></code>(s), op, <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/planar.html#PLANAR" class="primary">CHAOS_PP_PLANAR</a></code>(op) \
+        )(0,), \
+        __VA_ARGS__ \
+    )) \
+    /**/
+#define FOLD_RIGHT_I(bin, ...) \
+    FOLD_RIGHT_A bin __VA_ARGS__ FOLD_RIGHT_C bin \
+    /**/
+#define FOLD_RIGHT_A_INDIRECT() FOLD_RIGHT_A
+#define FOLD_RIGHT_A(bit, ...) \
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/iif.html#IIF" class="primary">CHAOS_PP_IIF</a></code>(bit)( \
+        FOLD_RIGHT_B, <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/eat.html#EAT" class="primary">CHAOS_PP_EAT</a></code> \
+    )(__VA_ARGS__) \
+    /**/
+#define FOLD_RIGHT_B(s, op, _o, ...) \
+    _o()(s, op) __VA_ARGS__, FOLD_RIGHT_A_INDIRECT \
+    /**/
+#define FOLD_RIGHT_C_INDIRECT() FOLD_RIGHT_C
+#define FOLD_RIGHT_C(bit, ...) \
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/inline_when.html#INLINE_WHEN" class="primary">CHAOS_PP_INLINE_WHEN</a></code>(bit)( \
+        <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/planar.html#PLANAR_CLOSE" class="primary">CHAOS_PP_PLANAR_CLOSE</a></code>() FOLD_RIGHT_C_INDIRECT \
+    ) \
+    /**/
+
+#define OP(s, elem, state) state ## elem
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR" class="primary">CHAOS_PP_EXPR</a></code>(FOLD_RIGHT(
+    OP, (a)(b)(c),
+))
+// cba
+
+??=include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#PLACEHOLDERS" class="primary">CHAOS_PP_PLACEHOLDERS</a></code>(1)
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR" class="primary">CHAOS_PP_EXPR</a></code>(FOLD_RIGHT(
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/cat.html#PRIMITIVE_CAT_" class="secondary">CHAOS_PP_PRIMITIVE_CAT_</a></code>(_2, _1),
+    (a)(b)(c),
+))
+// cba
+
+??=include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#PLACEHOLDERS" class="primary">CHAOS_PP_PLACEHOLDERS</a></code>(0)
+
+#endif</pre>
+<hr>
+<a name="PLANAR_ID"></a><h3 class="secondary">CHAOS_PP_PLANAR_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/planar.html#PLANAR_ID" class="secondary">CHAOS_PP_PLANAR_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/planar.html#PLANAR" class="primary">CHAOS_PP_PLANAR</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/planar.html#PLANAR_ID" class="secondary">CHAOS_PP_PLANAR_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro exists only for uniformity with other macros that require indirect invocation.
+				</p></div>
+<hr>
+<a name="PLANAR_"></a><h3 class="secondary">CHAOS_PP_PLANAR_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/planar.html#PLANAR_" class="secondary">CHAOS_PP_PLANAR_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/planar.html#PLANAR" class="primary">CHAOS_PP_PLANAR</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/planar.html#PLANAR_" class="secondary">CHAOS_PP_PLANAR_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/planar.html#PLANAR" class="primary">CHAOS_PP_PLANAR</a></code>)</pre></div></div>
+<hr>
+<a name="PLANAR_CLOSE"></a><h3 class="primary">CHAOS_PP_PLANAR_CLOSE</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/planar.html#PLANAR_CLOSE" class="primary">CHAOS_PP_PLANAR_CLOSE</a></code> macro closes a partial invocation introduced by <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/planar.html#PLANAR" class="primary">CHAOS_PP_PLANAR</a></code>.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/planar.html#PLANAR_CLOSE" class="primary">CHAOS_PP_PLANAR_CLOSE</a></code>()</pre>
+<h4>See Also</h4>
+<ul><li><code><a class="primary" href="../../.././chaos/preprocessor/lambda/planar.html#PLANAR">CHAOS_PP_PLANAR</a></code></li></ul>
+<hr>
+<a name="PLANAR_CLOSE_ID"></a><h3 class="secondary">CHAOS_PP_PLANAR_CLOSE_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/planar.html#PLANAR_CLOSE_ID" class="secondary">CHAOS_PP_PLANAR_CLOSE_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/planar.html#PLANAR_CLOSE" class="primary">CHAOS_PP_PLANAR_CLOSE</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/planar.html#PLANAR_CLOSE_ID" class="secondary">CHAOS_PP_PLANAR_CLOSE_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro exists only for uniformity with other macros that require indirect invocation.
+				</p></div>
+<hr>
+<a name="PLANAR_CLOSE_"></a><h3 class="secondary">CHAOS_PP_PLANAR_CLOSE_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/planar.html#PLANAR_CLOSE_" class="secondary">CHAOS_PP_PLANAR_CLOSE_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/planar.html#PLANAR_CLOSE" class="primary">CHAOS_PP_PLANAR_CLOSE</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/planar.html#PLANAR_CLOSE_" class="secondary">CHAOS_PP_PLANAR_CLOSE_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/planar.html#PLANAR_CLOSE" class="primary">CHAOS_PP_PLANAR_CLOSE</a></code>)</pre></div></div>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="../../.././license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</body>
+</html>

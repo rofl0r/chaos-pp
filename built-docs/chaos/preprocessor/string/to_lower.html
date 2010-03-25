@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>string/to_lower.h - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="../../.././style.css">
+</head>
+<body>
+<p>
+	The <code>string/to_lower.h</code> header defines an algorithm that converts a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././strings.html">string</a> to lowercase.
+</p>
+<h4>Usage</h4>
+<pre class="box">#include <code><a class="header" href="../../.././chaos/preprocessor/string/to_lower.html">&lt;chaos/preprocessor/string/to_lower.h&gt;</a></code></pre>
+<h4>Contents</h4>
+<ul>
+<li><code><a class="primary" href="#STRING_TO_LOWER">CHAOS_PP_STRING_TO_LOWER</a></code></li>
+<li><code><a class="primary" href="#TO_LOWER">CHAOS_PP_TO_LOWER</a></code></li>
+</ul>
+<hr>
+<a name="TO_LOWER"></a><h3 class="primary">CHAOS_PP_TO_LOWER</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#TO_LOWER" class="primary">CHAOS_PP_TO_LOWER</a></code> macro converts a character to lowercase.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#TO_LOWER" class="primary">CHAOS_PP_TO_LOWER</a></code>(c)</pre>
+<dl>
+<dt><var>c</var></dt>
+<dd><p>
+			The character to be converted to lowercase.
+			Valid values are the numerals (<code>0</code> through <code>9</code>), the alphabetic characters in the basic source character set (<code>a</code> through <code>z</code> and <code>A</code> through <code>Z</code>), and the underscore (<code>_</code>).
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		If <var>c</var> is an uppercase letter, this macro expands to the letter's lowercase equivalent.
+		Otherwise, it expands to <var>c</var>.
+	</p></div>
+<h4>See Also</h4>
+<ul><li><code><a class="primary" href="../../.././chaos/preprocessor/string/to_upper.html#TO_UPPER">CHAOS_PP_TO_UPPER</a></code></li></ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html" class="header">&lt;chaos/preprocessor/string/to_lower.h&gt;</a></code>
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#TO_LOWER" class="primary">CHAOS_PP_TO_LOWER</a></code>(a) // a
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#TO_LOWER" class="primary">CHAOS_PP_TO_LOWER</a></code>(A) // a
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#TO_LOWER" class="primary">CHAOS_PP_TO_LOWER</a></code>(0) // 0
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#TO_LOWER" class="primary">CHAOS_PP_TO_LOWER</a></code>(_) // _</pre>
+<hr>
+<a name="TO_LOWER_ID"></a><h3 class="secondary">CHAOS_PP_TO_LOWER_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#TO_LOWER_ID" class="secondary">CHAOS_PP_TO_LOWER_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#TO_LOWER" class="primary">CHAOS_PP_TO_LOWER</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#TO_LOWER_ID" class="secondary">CHAOS_PP_TO_LOWER_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#TO_LOWER" class="primary">CHAOS_PP_TO_LOWER</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="TO_LOWER_"></a><h3 class="secondary">CHAOS_PP_TO_LOWER_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#TO_LOWER_" class="secondary">CHAOS_PP_TO_LOWER_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#TO_LOWER" class="primary">CHAOS_PP_TO_LOWER</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#TO_LOWER_" class="secondary">CHAOS_PP_TO_LOWER_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#TO_LOWER_ID" class="secondary">CHAOS_PP_TO_LOWER_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="STRING_TO_LOWER"></a><h3 class="primary">CHAOS_PP_STRING_TO_LOWER</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#STRING_TO_LOWER" class="primary">CHAOS_PP_STRING_TO_LOWER</a></code> macro converts its argument to lowercase.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#STRING_TO_LOWER" class="primary">CHAOS_PP_STRING_TO_LOWER</a></code>(string)</pre>
+<dl>
+<dt>[<var>string</var>]</dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././strings.html">string</a> to be converted to lowercase.
+		</p></dd>
+</dl>
+<h4>Usage <small>- C/C++ Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#STRING_TO_LOWER" class="primary">CHAOS_PP_STRING_TO_LOWER</a></code>(string)</pre>
+<dl>
+<dt><var>string</var></dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././strings.html">string</a> to be converted to lowercase.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././strings.html">string</a> containing the elements of <var>string</var> converted to lowercase.
+		For example,
+		</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#STRING_TO_LOWER" class="primary">CHAOS_PP_STRING_TO_LOWER</a></code>(C H A O S) // c h a o s</pre></div></div>
+<div><p>
+		This macro uses <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././bypass-semantics.html">bypass semantics</a>.
+		If <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././bypass-semantics.html">bypass semantics</a> are already in effect, <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#STRING_TO_LOWER_BYPASS" class="secondary">CHAOS_PP_STRING_TO_LOWER_BYPASS</a></code> must be used instead.
+	</p></div>
+<h4>See Also</h4>
+<ul><li><code><a class="primary" href="../../.././chaos/preprocessor/string/to_upper.html#STRING_TO_UPPER">CHAOS_PP_STRING_TO_UPPER</a></code></li></ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/concat.html" class="header">&lt;chaos/preprocessor/algorithm/concat.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/core.html" class="header">&lt;chaos/preprocessor/string/core.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html" class="header">&lt;chaos/preprocessor/string/to_lower.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_upper.html" class="header">&lt;chaos/preprocessor/string/to_upper.h&gt;</a></code>
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/concat.html#CONCAT" class="primary">CHAOS_PP_CONCAT</a></code>(
+    (<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/core.html#STRING" class="primary">CHAOS_PP_STRING</a></code>) <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#STRING_TO_LOWER" class="primary">CHAOS_PP_STRING_TO_LOWER</a></code>(
+        A B c _ 1 0
+    )
+)
+// abc_10
+
+#define PROPER(string) \
+    PROPER_I(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#STRING_TO_LOWER" class="primary">CHAOS_PP_STRING_TO_LOWER</a></code>(string)) \
+    /**/
+#define PROPER_I(string) \
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_upper.html#TO_UPPER" class="primary">CHAOS_PP_TO_UPPER</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/core.html#STRING_HEAD" class="primary">CHAOS_PP_STRING_HEAD</a></code>(string)) \
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/core.html#STRING_TAIL" class="primary">CHAOS_PP_STRING_TAIL</a></code>(string) \
+    /**/
+
+PROPER(C H A O S) // C h a o s</pre>
+<hr>
+<a name="STRING_TO_LOWER_ID"></a><h3 class="secondary">CHAOS_PP_STRING_TO_LOWER_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#STRING_TO_LOWER_ID" class="secondary">CHAOS_PP_STRING_TO_LOWER_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#STRING_TO_LOWER" class="primary">CHAOS_PP_STRING_TO_LOWER</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#STRING_TO_LOWER_ID" class="secondary">CHAOS_PP_STRING_TO_LOWER_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#STRING_TO_LOWER" class="primary">CHAOS_PP_STRING_TO_LOWER</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="STRING_TO_LOWER_"></a><h3 class="secondary">CHAOS_PP_STRING_TO_LOWER_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#STRING_TO_LOWER_" class="secondary">CHAOS_PP_STRING_TO_LOWER_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#STRING_TO_LOWER" class="primary">CHAOS_PP_STRING_TO_LOWER</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#STRING_TO_LOWER_" class="secondary">CHAOS_PP_STRING_TO_LOWER_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#STRING_TO_LOWER_ID" class="secondary">CHAOS_PP_STRING_TO_LOWER_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="STRING_TO_LOWER_BYPASS"></a><h3 class="alternate">CHAOS_PP_STRING_TO_LOWER_BYPASS</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#STRING_TO_LOWER_BYPASS" class="secondary">CHAOS_PP_STRING_TO_LOWER_BYPASS</a></code> macro behaves identically to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#STRING_TO_LOWER" class="primary">CHAOS_PP_STRING_TO_LOWER</a></code> except that it is parametized by the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././bypass-semantics.html">bypass recursion state</a>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#STRING_TO_LOWER_BYPASS" class="secondary">CHAOS_PP_STRING_TO_LOWER_BYPASS</a></code>(s, string)</pre>
+<dl>
+<dt><var>s</var></dt>
+<dd><p>
+				The current <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././bypass-semantics.html">bypass recursion state</a>.
+			</p></dd>
+<dt>[<var>string</var>]</dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././strings.html">string</a> to be converted to lowercase.
+		</p></dd>
+</dl>
+<h4>Usage <small>- C/C++ Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#STRING_TO_LOWER_BYPASS" class="secondary">CHAOS_PP_STRING_TO_LOWER_BYPASS</a></code>(s, string)</pre>
+<dl>
+<dt><var>s</var></dt>
+<dd><p>
+				The current <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././bypass-semantics.html">bypass recursion state</a>.
+			</p></dd>
+<dt><var>string</var></dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././strings.html">string</a> to be converted to lowercase.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+			If <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././bypass-semantics.html">bypass semantics</a> are already in effect, this macro must be used instead of <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#STRING_TO_LOWER" class="primary">CHAOS_PP_STRING_TO_LOWER</a></code>.
+		</p></div>
+<hr>
+<a name="STRING_TO_LOWER_BYPASS_ID"></a><h3 class="secondary">CHAOS_PP_STRING_TO_LOWER_BYPASS_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#STRING_TO_LOWER_BYPASS_ID" class="secondary">CHAOS_PP_STRING_TO_LOWER_BYPASS_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#STRING_TO_LOWER_BYPASS" class="secondary">CHAOS_PP_STRING_TO_LOWER_BYPASS</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#STRING_TO_LOWER_BYPASS_ID" class="secondary">CHAOS_PP_STRING_TO_LOWER_BYPASS_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#STRING_TO_LOWER_BYPASS" class="secondary">CHAOS_PP_STRING_TO_LOWER_BYPASS</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="STRING_TO_LOWER_BYPASS_"></a><h3 class="secondary">CHAOS_PP_STRING_TO_LOWER_BYPASS_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#STRING_TO_LOWER_BYPASS_" class="secondary">CHAOS_PP_STRING_TO_LOWER_BYPASS_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#STRING_TO_LOWER_BYPASS" class="secondary">CHAOS_PP_STRING_TO_LOWER_BYPASS</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#STRING_TO_LOWER_BYPASS_" class="secondary">CHAOS_PP_STRING_TO_LOWER_BYPASS_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/to_lower.html#STRING_TO_LOWER_BYPASS_ID" class="secondary">CHAOS_PP_STRING_TO_LOWER_BYPASS_ID</a></code>)()</pre></div></div>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="../../.././license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</body>
+</html>

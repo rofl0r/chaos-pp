@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>logical/bitxnor.h - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="../../.././style.css">
+</head>
+<body>
+<p>
+	The <code>logical/bitxnor.h</code> header defines a logical XNOR operator.
+</p>
+<h4>Usage</h4>
+<pre class="box">#include <code><a class="header" href="../../.././chaos/preprocessor/logical/bitxnor.html">&lt;chaos/preprocessor/logical/bitxnor.h&gt;</a></code></pre>
+<h4>Contents</h4>
+<ul><li><code><a class="primary" href="#BITXNOR">CHAOS_PP_BITXNOR</a></code></li></ul>
+<hr>
+<a name="BITXNOR"></a><h3 class="primary">CHAOS_PP_BITXNOR</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/logical/bitxnor.html#BITXNOR" class="primary">CHAOS_PP_BITXNOR</a></code> macro expands to the logical XNOR of its operands.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/logical/bitxnor.html#BITXNOR" class="primary">CHAOS_PP_BITXNOR</a></code>(x)(y)</pre>
+<dl>
+<dt><var>x</var></dt>
+<dd><p>
+			The left operand.
+			Valid values are <code>0</code> and <code>1</code>.
+		</p></dd>
+<dt><var>y</var></dt>
+<dd><p>
+			The right operand.
+			Valid values are <code>0</code> and <code>1</code>.		
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		If either <var>x</var> or <var>y</var> is <code>1</code> exclusively, this macro expands to <code>0</code>.
+		Otherwise, it expands to <code>1</code>.
+	</p></div>
+<div><p>
+		This macro does <em>not</em> perform Boolean conversions on its operands.
+		If this conversion is desirable, <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/logical/xnor.html#XNOR" class="primary">CHAOS_PP_XNOR</a></code> may be used instead.
+	</p></div>
+<h4>See Also</h4>
+<ul><li><code><a class="primary" href="../../.././chaos/preprocessor/logical/xnor.html#XNOR">CHAOS_PP_XNOR</a></code></li></ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/debug/failure.html" class="header">&lt;chaos/preprocessor/debug/failure.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/logical/bitxnor.html" class="header">&lt;chaos/preprocessor/logical/bitxnor.h&gt;</a></code>
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/logical/bitxnor.html#BITXNOR" class="primary">CHAOS_PP_BITXNOR</a></code>(0)(1) // 0
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/logical/bitxnor.html#BITXNOR" class="primary">CHAOS_PP_BITXNOR</a></code>(1)(1) // 1</pre>
+<hr>
+<a name="BITXNOR_ID"></a><h3 class="secondary">CHAOS_PP_BITXNOR_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/logical/bitxnor.html#BITXNOR_ID" class="secondary">CHAOS_PP_BITXNOR_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/logical/bitxnor.html#BITXNOR" class="primary">CHAOS_PP_BITXNOR</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/logical/bitxnor.html#BITXNOR_ID" class="secondary">CHAOS_PP_BITXNOR_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro exists only for uniformity with other macros that require indirect invocation.
+				</p></div>
+<hr>
+<a name="BITXNOR_"></a><h3 class="secondary">CHAOS_PP_BITXNOR_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/logical/bitxnor.html#BITXNOR_" class="secondary">CHAOS_PP_BITXNOR_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/logical/bitxnor.html#BITXNOR" class="primary">CHAOS_PP_BITXNOR</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/logical/bitxnor.html#BITXNOR_" class="secondary">CHAOS_PP_BITXNOR_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/logical/bitxnor.html#BITXNOR" class="primary">CHAOS_PP_BITXNOR</a></code>)</pre></div></div>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="../../.././license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</body>
+</html>

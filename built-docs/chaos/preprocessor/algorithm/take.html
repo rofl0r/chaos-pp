@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>algorithm/take.h - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="../../.././style.css">
+</head>
+<body>
+<p>
+	The <code>algorithm/take.h</code> header defines an algorithm that extracts a user-specified number of elements from the beginning of a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././generics.html">generic data structure</a>.
+</p>
+<h4>Usage</h4>
+<pre class="box">#include <code><a class="header" href="../../.././chaos/preprocessor/algorithm/take.html">&lt;chaos/preprocessor/algorithm/take.h&gt;</a></code></pre>
+<h4>Contents</h4>
+<ul><li><code><a class="primary" href="#TAKE">CHAOS_PP_TAKE</a></code></li></ul>
+<hr>
+<a name="TAKE"></a><h3 class="primary">CHAOS_PP_TAKE</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/take.html#TAKE" class="primary">CHAOS_PP_TAKE</a></code> macro extracts the number of elements specified by its first argument from its second argument.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/take.html#TAKE" class="primary">CHAOS_PP_TAKE</a></code>(n, g)</pre>
+<dl>
+<dt><var>n</var></dt>
+<dd><p>
+			The number of elements to be extracted.
+			Valid values range from <code>0</code> to <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/size.html#SIZE" class="primary">CHAOS_PP_SIZE</a></code>(g)</code>.
+		</p></dd>
+<dt><var>g</var></dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././generics.html">generic data structure</a> from which elements are to be extracted.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././generics.html">generic data structure</a> of the same type as <var>g</var> containing the first <var>n</var> elements of <var>g</var>.
+	</p></div>
+<div><p>
+		The efficiency of the algorithm's use of the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././recursion.html">recursion backend</a> can be described in terms of the number of <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././recursion.html">recursion steps</a> required to complete the algorithm.
+		The asymptotic upper and lower bounds are Θ(<var class="external">n</var>+1), where <var class="external">n</var> is the argument <code>n</code>.
+	</p></div>
+<div><p>
+		This macro uses <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././bypass-semantics.html">bypass semantics</a>.
+		If <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././bypass-semantics.html">bypass semantics</a> are already in effect, <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/take.html#TAKE_BYPASS" class="secondary">CHAOS_PP_TAKE_BYPASS</a></code> must be used instead.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/algorithm/drop.html#DROP">CHAOS_PP_DROP</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/algorithm/range.html#RANGE">CHAOS_PP_RANGE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/drop.html#SEQ_DROP">CHAOS_PP_SEQ_DROP</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/range.html#SEQ_RANGE">CHAOS_PP_SEQ_RANGE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/take.html#SEQ_TAKE">CHAOS_PP_SEQ_TAKE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/drop.html#TUPLE_DROP">CHAOS_PP_TUPLE_DROP</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/range.html#TUPLE_RANGE">CHAOS_PP_TUPLE_RANGE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/take.html#TUPLE_TAKE">CHAOS_PP_TUPLE_TAKE</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/take.html" class="header">&lt;chaos/preprocessor/algorithm/take.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/array/core.html" class="header">&lt;chaos/preprocessor/array/core.h&gt;</a></code>
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/take.html#TAKE" class="primary">CHAOS_PP_TAKE</a></code>(2, (<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/array/core.html#ARRAY" class="primary">CHAOS_PP_ARRAY</a></code>) (5, (a, b, c, d, e)))
+// (<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/array/core.html#ARRAY" class="primary">CHAOS_PP_ARRAY</a></code>) (2, (a, b))</pre>
+<hr>
+<a name="TAKE_ID"></a><h3 class="secondary">CHAOS_PP_TAKE_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/take.html#TAKE_ID" class="secondary">CHAOS_PP_TAKE_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/take.html#TAKE" class="primary">CHAOS_PP_TAKE</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/take.html#TAKE_ID" class="secondary">CHAOS_PP_TAKE_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/take.html#TAKE" class="primary">CHAOS_PP_TAKE</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="TAKE_"></a><h3 class="secondary">CHAOS_PP_TAKE_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/take.html#TAKE_" class="secondary">CHAOS_PP_TAKE_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/take.html#TAKE" class="primary">CHAOS_PP_TAKE</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/take.html#TAKE_" class="secondary">CHAOS_PP_TAKE_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/take.html#TAKE_ID" class="secondary">CHAOS_PP_TAKE_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="TAKE_BYPASS"></a><h3 class="alternate">CHAOS_PP_TAKE_BYPASS</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/take.html#TAKE_BYPASS" class="secondary">CHAOS_PP_TAKE_BYPASS</a></code> macro behaves identically to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/take.html#TAKE" class="primary">CHAOS_PP_TAKE</a></code> except that it is parametized by the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././bypass-semantics.html">bypass recursion state</a>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/take.html#TAKE_BYPASS" class="secondary">CHAOS_PP_TAKE_BYPASS</a></code>(s, n, g)</pre>
+<dl>
+<dt><var>s</var></dt>
+<dd><p>
+				The current <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././bypass-semantics.html">bypass recursion state</a>.
+			</p></dd>
+<dt><var>n</var></dt>
+<dd><p>
+			The number of elements to be extracted.
+			Valid values range from <code>0</code> to <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/size.html#SIZE" class="primary">CHAOS_PP_SIZE</a></code>(g)</code>.
+		</p></dd>
+<dt><var>g</var></dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././generics.html">generic data structure</a> from which elements are to be extracted.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+			If <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././bypass-semantics.html">bypass semantics</a> are already in effect, this macro must be used instead of <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/take.html#TAKE" class="primary">CHAOS_PP_TAKE</a></code>.
+		</p></div>
+<hr>
+<a name="TAKE_BYPASS_ID"></a><h3 class="secondary">CHAOS_PP_TAKE_BYPASS_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/take.html#TAKE_BYPASS_ID" class="secondary">CHAOS_PP_TAKE_BYPASS_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/take.html#TAKE_BYPASS" class="secondary">CHAOS_PP_TAKE_BYPASS</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/take.html#TAKE_BYPASS_ID" class="secondary">CHAOS_PP_TAKE_BYPASS_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/take.html#TAKE_BYPASS" class="secondary">CHAOS_PP_TAKE_BYPASS</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="TAKE_BYPASS_"></a><h3 class="secondary">CHAOS_PP_TAKE_BYPASS_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/take.html#TAKE_BYPASS_" class="secondary">CHAOS_PP_TAKE_BYPASS_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/take.html#TAKE_BYPASS" class="secondary">CHAOS_PP_TAKE_BYPASS</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/take.html#TAKE_BYPASS_" class="secondary">CHAOS_PP_TAKE_BYPASS_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/take.html#TAKE_BYPASS_ID" class="secondary">CHAOS_PP_TAKE_BYPASS_ID</a></code>)()</pre></div></div>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="../../.././license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</body>
+</html>

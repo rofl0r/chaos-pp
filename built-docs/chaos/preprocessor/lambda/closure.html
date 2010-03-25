@@ -1,0 +1,306 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>lambda/closure.h - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="../../.././style.css">
+</head>
+<body>
+<p>
+	The <code>lambda/closure.h</code> header defines the interface to the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././closures.html">closure</a> mechanism.
+</p>
+<h4>Usage</h4>
+<pre class="box">#include <code><a class="header" href="../../.././chaos/preprocessor/lambda/closure.html">&lt;chaos/preprocessor/lambda/closure.h&gt;</a></code></pre>
+<h4>Contents</h4>
+<ul>
+<li><code><a class="primary" href="#CLOSURE">CHAOS_PP_CLOSURE</a></code></li>
+<li><code><a class="primary" href="#DIRECT_CLOSURE">CHAOS_PP_DIRECT_CLOSURE</a></code></li>
+<li><code><a class="primary" href="#DISPATCH">CHAOS_PP_DISPATCH</a></code></li>
+<li><code><a class="primary" href="#IS_BOUND">CHAOS_PP_IS_BOUND</a></code></li>
+</ul>
+<hr>
+<a name="CLOSURE"></a><h3 class="primary">CHAOS_PP_CLOSURE</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#CLOSURE" class="primary">CHAOS_PP_CLOSURE</a></code> macro forms a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././closures.html">closure</a> on an indirection macro.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#CLOSURE" class="primary">CHAOS_PP_CLOSURE</a></code>(macro, arity)</pre>
+<dl>
+<dt><var>macro</var></dt>
+<dd>
+<p>
+			The macro that, when invoked, produces the macro on which a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././closures.html">closure</a> is to be formed.
+			This argument must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			</p>
+<div><pre>macro()</pre></div>
+<p>
+			The invocation of <var>macro</var> must expand to a macro name that refers to a macro capable of being invoked with <var>arity</var> arguments.
+		</p>
+</dd>
+<dt><var>arity</var></dt>
+<dd><p>
+			The arity of the macro on which a closure is to be formed.
+			Valid values range from <code>0</code> to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/limits.html#LIMIT_CLOSURE" class="primary">CHAOS_PP_LIMIT_CLOSURE</a></code>.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././closures.html">closure</a> on <var>macro</var> that requires a minimum of <var>arity</var> arguments to be fully bound.
+		When fully bound and dispatched, this <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././closures.html">closure</a> expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././deferral.html">deferred expression</a> similar to the following pseudo-code:
+		</p></div>
+<div><div><pre>macro()(arg[0], arg[1], ... arg[arity])</pre></div></div>
+<div><p>
+		The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././closures.html">closure</a> produced by this macro performs an indirection.
+		This prevents the actual macro name to which the indirection refers from passing through itself in certain situations.
+		If this indirection is undesirable, <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#DIRECT_CLOSURE" class="primary">CHAOS_PP_DIRECT_CLOSURE</a></code> may be used instead.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/lambda/closure.html#DIRECT_CLOSURE">CHAOS_PP_DIRECT_CLOSURE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/lambda/closure.html#DISPATCH">CHAOS_PP_DISPATCH</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/lambda/closure.html#IS_BOUND">CHAOS_PP_IS_BOUND</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html" class="header">&lt;chaos/preprocessor/lambda/closure.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html" class="header">&lt;chaos/preprocessor/recursion/expr.h&gt;</a></code>
+
+#define A(a, b, c) { a, b, c }
+#define A_ID() A
+
+#define B(a, b) { a, b }
+#define B_ID() B
+
+#define X(cl) Y(cl(x))
+#define Y(cl) Z(cl(y))
+#define Z(cl) <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR" class="primary">CHAOS_PP_EXPR</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#DISPATCH" class="primary">CHAOS_PP_DISPATCH</a></code>(cl(z)))
+
+X(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#CLOSURE" class="primary">CHAOS_PP_CLOSURE</a></code>(A_ID, 3)) // { x, y, z }
+X(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#CLOSURE" class="primary">CHAOS_PP_CLOSURE</a></code>(B_ID, 2)) // { x, y }</pre>
+<hr>
+<a name="CLOSURE_ID"></a><h3 class="secondary">CHAOS_PP_CLOSURE_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#CLOSURE_ID" class="secondary">CHAOS_PP_CLOSURE_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#CLOSURE" class="primary">CHAOS_PP_CLOSURE</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#CLOSURE_ID" class="secondary">CHAOS_PP_CLOSURE_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro exists only for uniformity with other macros that require indirect invocation.
+				</p></div>
+<hr>
+<a name="CLOSURE_"></a><h3 class="secondary">CHAOS_PP_CLOSURE_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#CLOSURE_" class="secondary">CHAOS_PP_CLOSURE_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#CLOSURE" class="primary">CHAOS_PP_CLOSURE</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#CLOSURE_" class="secondary">CHAOS_PP_CLOSURE_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#CLOSURE" class="primary">CHAOS_PP_CLOSURE</a></code>)</pre></div></div>
+<hr>
+<a name="DIRECT_CLOSURE"></a><h3 class="primary">CHAOS_PP_DIRECT_CLOSURE</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#DIRECT_CLOSURE" class="primary">CHAOS_PP_DIRECT_CLOSURE</a></code> macro forms a closure on a macro.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#DIRECT_CLOSURE" class="primary">CHAOS_PP_DIRECT_CLOSURE</a></code>(macro, arity)</pre>
+<dl>
+<dt><var>macro</var></dt>
+<dd><p>
+			The macro on which a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././closures.html">closure</a> is to be formed.
+			This macro must be capable of being invoked with <var>arity</var> arguments.
+		</p></dd>
+<dt><var>arity</var></dt>
+<dd><p>
+			The arity of the macro on which a closure is to be formed.
+			Valid values range from <code>0</code> to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/limits.html#LIMIT_CLOSURE" class="primary">CHAOS_PP_LIMIT_CLOSURE</a></code>.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro behaves identically to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#CLOSURE" class="primary">CHAOS_PP_CLOSURE</a></code> except that it does not perform an indirection.
+		This is illustrated by the following pseudo-code:
+		</p></div>
+<div><div><pre>macro(arg[0], arg[1], ... arg[arity])</pre></div></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/lambda/closure.html#CLOSURE">CHAOS_PP_CLOSURE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/lambda/closure.html#DISPATCH">CHAOS_PP_DISPATCH</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/lambda/closure.html#IS_BOUND">CHAOS_PP_IS_BOUND</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html" class="header">&lt;chaos/preprocessor/lambda/closure.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html" class="header">&lt;chaos/preprocessor/recursion/expr.h&gt;</a></code>
+
+#define MACRO(a, b) int[a][b]
+
+#define X(cl) Y(cl(x))
+#define Y(cl) <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR" class="primary">CHAOS_PP_EXPR</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#DISPATCH" class="primary">CHAOS_PP_DISPATCH</a></code>(cl(y)))
+
+X(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#DIRECT_CLOSURE" class="primary">CHAOS_PP_DIRECT_CLOSURE</a></code>(MACRO, 2)) // int[x][y]</pre>
+<hr>
+<a name="DIRECT_CLOSURE_ID"></a><h3 class="secondary">CHAOS_PP_DIRECT_CLOSURE_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#DIRECT_CLOSURE_ID" class="secondary">CHAOS_PP_DIRECT_CLOSURE_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#DIRECT_CLOSURE" class="primary">CHAOS_PP_DIRECT_CLOSURE</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#DIRECT_CLOSURE_ID" class="secondary">CHAOS_PP_DIRECT_CLOSURE_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#DIRECT_CLOSURE" class="primary">CHAOS_PP_DIRECT_CLOSURE</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="DIRECT_CLOSURE_"></a><h3 class="secondary">CHAOS_PP_DIRECT_CLOSURE_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#DIRECT_CLOSURE_" class="secondary">CHAOS_PP_DIRECT_CLOSURE_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#DIRECT_CLOSURE" class="primary">CHAOS_PP_DIRECT_CLOSURE</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#DIRECT_CLOSURE_" class="secondary">CHAOS_PP_DIRECT_CLOSURE_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#DIRECT_CLOSURE_ID" class="secondary">CHAOS_PP_DIRECT_CLOSURE_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="IS_BOUND"></a><h3 class="primary">CHAOS_PP_IS_BOUND</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#IS_BOUND" class="primary">CHAOS_PP_IS_BOUND</a></code> macro determines if a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././closures.html">closure</a> has enough arguments bound to be dispatched.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#IS_BOUND" class="primary">CHAOS_PP_IS_BOUND</a></code>(cl)</pre>
+<dl>
+<dt><var>cl</var></dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././closures.html">closure</a> to be tested.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		If <var>cl</var> is fully bound, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/lambda/closure.html#CLOSURE">CHAOS_PP_CLOSURE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/lambda/closure.html#DIRECT_CLOSURE">CHAOS_PP_DIRECT_CLOSURE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/lambda/closure.html#DISPATCH">CHAOS_PP_DISPATCH</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/iif.html" class="header">&lt;chaos/preprocessor/control/iif.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html" class="header">&lt;chaos/preprocessor/lambda/closure.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html" class="header">&lt;chaos/preprocessor/recursion/expr.h&gt;</a></code>
+
+#define A(a) { a }
+#define B(a, b) { a + b }
+
+#define X(cl) <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR" class="primary">CHAOS_PP_EXPR</a></code>(Y(cl(1)))
+#define Y(cl) \
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/iif.html#IIF" class="primary">CHAOS_PP_IIF</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#IS_BOUND" class="primary">CHAOS_PP_IS_BOUND</a></code>(cl))( \
+        <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#DISPATCH" class="primary">CHAOS_PP_DISPATCH</a></code>(cl), \
+        Z(cl(2)) \
+    ) \
+    /**/
+#define Z(cl) <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#DISPATCH" class="primary">CHAOS_PP_DISPATCH</a></code>(cl)
+
+X(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#DIRECT_CLOSURE" class="primary">CHAOS_PP_DIRECT_CLOSURE</a></code>(A, 1)) // { 1 }
+X(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#DIRECT_CLOSURE" class="primary">CHAOS_PP_DIRECT_CLOSURE</a></code>(B, 2)) // { 1 + 2 }</pre>
+<hr>
+<a name="IS_BOUND_ID"></a><h3 class="secondary">CHAOS_PP_IS_BOUND_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#IS_BOUND_ID" class="secondary">CHAOS_PP_IS_BOUND_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#IS_BOUND" class="primary">CHAOS_PP_IS_BOUND</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#IS_BOUND_ID" class="secondary">CHAOS_PP_IS_BOUND_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro exists only for uniformity with other macros that require indirect invocation.
+				</p></div>
+<hr>
+<a name="IS_BOUND_"></a><h3 class="secondary">CHAOS_PP_IS_BOUND_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#IS_BOUND_" class="secondary">CHAOS_PP_IS_BOUND_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#IS_BOUND" class="primary">CHAOS_PP_IS_BOUND</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#IS_BOUND_" class="secondary">CHAOS_PP_IS_BOUND_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#IS_BOUND" class="primary">CHAOS_PP_IS_BOUND</a></code>)</pre></div></div>
+<hr>
+<a name="DISPATCH"></a><h3 class="primary">CHAOS_PP_DISPATCH</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#DISPATCH" class="primary">CHAOS_PP_DISPATCH</a></code> macro dispatches a fully bound <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././closures.html">closure</a>.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#DISPATCH" class="primary">CHAOS_PP_DISPATCH</a></code>(cl)</pre>
+<dl>
+<dt><var>cl</var></dt>
+<dd><p>
+			The fully bound <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././closures.html">closure</a> to be dispatched.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro produces a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././deferral.html">deferred expression</a> that dispatches <var>cl</var>.
+		This <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././deferral.html">deferred expression</a> takes one of the following two forms depending on whether <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#CLOSURE" class="primary">CHAOS_PP_CLOSURE</a></code> or <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#DIRECT_CLOSURE" class="primary">CHAOS_PP_DIRECT_CLOSURE</a></code> was used to form the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././closures.html">closure</a>:
+		</p></div>
+<div><div><pre>macro()(arg[0], arg[1], ... arg[2])
+macro(arg[0], arg[1], ... arg[2])</pre></div></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/lambda/closure.html#CLOSURE">CHAOS_PP_CLOSURE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/lambda/closure.html#DIRECT_CLOSURE">CHAOS_PP_DIRECT_CLOSURE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/lambda/closure.html#IS_BOUND">CHAOS_PP_IS_BOUND</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html" class="header">&lt;chaos/preprocessor/lambda/closure.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html" class="header">&lt;chaos/preprocessor/recursion/expr.h&gt;</a></code>
+
+#define MACRO(a, b) #a #b
+
+#define I \
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#DISPATCH" class="primary">CHAOS_PP_DISPATCH</a></code>( \
+        <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#DIRECT_CLOSURE" class="primary">CHAOS_PP_DIRECT_CLOSURE</a></code>(MACRO, 2)(x)(y) \
+    ) \
+    /**/
+
+I                // MACRO(x, y)
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR" class="primary">CHAOS_PP_EXPR</a></code>(I) // "x" "y"</pre>
+<hr>
+<a name="DISPATCH_ID"></a><h3 class="secondary">CHAOS_PP_DISPATCH_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#DISPATCH_ID" class="secondary">CHAOS_PP_DISPATCH_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#DISPATCH" class="primary">CHAOS_PP_DISPATCH</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#DISPATCH_ID" class="secondary">CHAOS_PP_DISPATCH_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#DISPATCH" class="primary">CHAOS_PP_DISPATCH</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="DISPATCH_"></a><h3 class="secondary">CHAOS_PP_DISPATCH_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#DISPATCH_" class="secondary">CHAOS_PP_DISPATCH_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#DISPATCH" class="primary">CHAOS_PP_DISPATCH</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#DISPATCH_" class="secondary">CHAOS_PP_DISPATCH_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/closure.html#DISPATCH_ID" class="secondary">CHAOS_PP_DISPATCH_ID</a></code>)()</pre></div></div>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="../../.././license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>seq/zip.h - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="../../.././style.css">
+</head>
+<body>
+<p>
+	The <code>seq/zip.h</code> header defines a macro that encapsulates each element of a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a>.
+</p>
+<h4>Usage</h4>
+<pre class="box">#include <code><a class="header" href="../../.././chaos/preprocessor/seq/zip.html">&lt;chaos/preprocessor/seq/zip.h&gt;</a></code></pre>
+<h4>Contents</h4>
+<ul>
+<li><code><a class="primary" href="#SEQ_UNZIP">CHAOS_PP_SEQ_UNZIP</a></code></li>
+<li><code><a class="primary" href="#SEQ_ZIP">CHAOS_PP_SEQ_ZIP</a></code></li>
+</ul>
+<hr>
+<a name="SEQ_ZIP"></a><h3 class="primary">CHAOS_PP_SEQ_ZIP</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/zip.html#SEQ_ZIP" class="primary">CHAOS_PP_SEQ_ZIP</a></code> macro encapsulates each element of its argument.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/zip.html#SEQ_ZIP" class="primary">CHAOS_PP_SEQ_ZIP</a></code>(seq)</pre>
+<dl>
+<dt>[<var>seq</var>]</dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a> whose elements are to be encapsulated.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a> containing each element of <var>seq</var> enclosed in parentheses.
+		This is illustrated by the following pseudo-code:
+		</p></div>
+<div><div><pre>((seq[0]))((seq[1])) ... ((seq[length(seq) - 1]))</pre></div></div>
+<div><p>
+		This macro is used primarily by algorithms that operate specifically on <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">variadic sequences</a>.
+		Normally, such algorithms "zip" the entire <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a> on which they operate and invoke the corresponding non-variadic <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a> algorithm.
+		(The purpose of doing such a thing is to prevent an argument clash with the state or auxiliary data arguments of various algorithms.)
+	</p></div>
+<h4>See Also</h4>
+<ul><li><code><a class="primary" href="../../.././chaos/preprocessor/seq/zip.html#SEQ_UNZIP">CHAOS_PP_SEQ_UNZIP</a></code></li></ul>
+<hr>
+<a name="SEQ_ZIP_ID"></a><h3 class="secondary">CHAOS_PP_SEQ_ZIP_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/zip.html#SEQ_ZIP_ID" class="secondary">CHAOS_PP_SEQ_ZIP_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/zip.html#SEQ_ZIP" class="primary">CHAOS_PP_SEQ_ZIP</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/zip.html#SEQ_ZIP_ID" class="secondary">CHAOS_PP_SEQ_ZIP_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/zip.html#SEQ_ZIP" class="primary">CHAOS_PP_SEQ_ZIP</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="SEQ_ZIP_"></a><h3 class="secondary">CHAOS_PP_SEQ_ZIP_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/zip.html#SEQ_ZIP_" class="secondary">CHAOS_PP_SEQ_ZIP_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/zip.html#SEQ_ZIP" class="primary">CHAOS_PP_SEQ_ZIP</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/zip.html#SEQ_ZIP_" class="secondary">CHAOS_PP_SEQ_ZIP_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/zip.html#SEQ_ZIP_ID" class="secondary">CHAOS_PP_SEQ_ZIP_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="SEQ_UNZIP"></a><h3 class="primary">CHAOS_PP_SEQ_UNZIP</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/zip.html#SEQ_UNZIP" class="primary">CHAOS_PP_SEQ_UNZIP</a></code> macro restores a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a> previously encoded with <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/zip.html#SEQ_ZIP" class="primary">CHAOS_PP_SEQ_ZIP</a></code>.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/zip.html#SEQ_UNZIP" class="primary">CHAOS_PP_SEQ_UNZIP</a></code>(seq)</pre>
+<dl>
+<dt>[<var>seq</var>]</dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a> to be restored.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro removes the parentheses from each element of <var>seq</var>.
+		Consequently, each element of <var>seq</var> must actually <em>be</em> parenthesized.
+		</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/zip.html#SEQ_UNZIP" class="primary">CHAOS_PP_SEQ_UNZIP</a></code>(
+    ((a, b))((x, y, z))((p))
+)
+// (a, b)(x, y, z)(p)</pre></div></div>
+<div><p>
+		This macro is used primarily by <em>some</em> algorithms that operate specifically on <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">variadic sequences</a>.
+		Such algorithms "zip" the entire <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a> on which they operate and invoke the corresponding non-variadic <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a> algorithm.
+		The result of that invocation is subsequently "unzipped" to yield the final result.
+		(An example of such an algorithm is <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/variadic/filter.html#VARIADIC_SEQ_FILTER" class="primary">CHAOS_PP_VARIADIC_SEQ_FILTER</a></code>.)
+	</p></div>
+<h4>See Also</h4>
+<ul><li><code><a class="primary" href="../../.././chaos/preprocessor/seq/zip.html#SEQ_ZIP">CHAOS_PP_SEQ_ZIP</a></code></li></ul>
+<hr>
+<a name="SEQ_UNZIP_ID"></a><h3 class="secondary">CHAOS_PP_SEQ_UNZIP_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/zip.html#SEQ_UNZIP_ID" class="secondary">CHAOS_PP_SEQ_UNZIP_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/zip.html#SEQ_UNZIP" class="primary">CHAOS_PP_SEQ_UNZIP</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/zip.html#SEQ_UNZIP_ID" class="secondary">CHAOS_PP_SEQ_UNZIP_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/zip.html#SEQ_UNZIP" class="primary">CHAOS_PP_SEQ_UNZIP</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="SEQ_UNZIP_"></a><h3 class="secondary">CHAOS_PP_SEQ_UNZIP_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/zip.html#SEQ_UNZIP_" class="secondary">CHAOS_PP_SEQ_UNZIP_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/zip.html#SEQ_UNZIP" class="primary">CHAOS_PP_SEQ_UNZIP</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/zip.html#SEQ_UNZIP_" class="secondary">CHAOS_PP_SEQ_UNZIP_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/zip.html#SEQ_UNZIP_ID" class="secondary">CHAOS_PP_SEQ_UNZIP_ID</a></code>)()</pre></div></div>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="../../.././license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</body>
+</html>

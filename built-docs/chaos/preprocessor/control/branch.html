@@ -1,0 +1,236 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>control/branch.h - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="../../.././style.css">
+</head>
+<body>
+<p>
+	The <code>control/branch.h</code> header defines a branching control construct.
+</p>
+<h4>Usage</h4>
+<pre class="box">#include <code><a class="header" href="../../.././chaos/preprocessor/control/branch.html">&lt;chaos/preprocessor/control/branch.h&gt;</a></code></pre>
+<h4>Contents</h4>
+<ul><li><code><a class="primary" href="#BRANCH">CHAOS_PP_BRANCH</a></code></li></ul>
+<hr>
+<a name="BRANCH"></a><h3 class="primary">CHAOS_PP_BRANCH</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/branch.html#BRANCH" class="primary">CHAOS_PP_BRANCH</a></code> macro selects a branch of execution.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/branch.html#BRANCH" class="primary">CHAOS_PP_BRANCH</a></code> if elif else (0xENDIF)</pre>
+<dl>
+<dt><var>if</var></dt>
+<dd>
+<p>
+			The initial "if" branch.
+			This must be one of the following forms:
+			</p>
+<div><pre>(0xIF)(cond)(...)
+(0xIIF)(bit)(...)</pre></div>
+<p>
+			Valid values for the <var>cond</var> argument range from <code>0</code> to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/limits.html#LIMIT_MAG" class="primary">CHAOS_PP_LIMIT_MAG</a></code>.
+			Valid values for the <var>bit</var> argument are <code>0</code> and <code>1</code>.
+		</p>
+</dd>
+<dt>[<var>elif</var>]</dt>
+<dd>
+<p>
+			Zero or more "else-if" branches, where each branch is one of the following forms:
+			</p>
+<div><pre>(0xELIF)(cond)(...)
+(0xELIIF)(bit)(...)</pre></div>
+<p>
+			Valid values for the <var>cond</var> argument range from <code>0</code> to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/limits.html#LIMIT_MAG" class="primary">CHAOS_PP_LIMIT_MAG</a></code>.
+			Valid values for the <var>bit</var> argument are <code>0</code> and <code>1</code>.
+		</p>
+</dd>
+<dt>[<var>else</var>]</dt>
+<dd>
+<p>
+			The "else" branch.
+			If this branch exists, it must be in the in the following form:
+			</p>
+<div><pre>(0xELSE)(...)</pre></div>
+</dd>
+</dl>
+<h4>Usage <small>- C/C++ Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/branch.html#BRANCH" class="primary">CHAOS_PP_BRANCH</a></code> if elif else (0xENDIF)</pre>
+<dl>
+<dt><var>if</var></dt>
+<dd>
+<p>
+			The initial "if" branch.
+			This must be one of the following forms:
+			</p>
+<div><pre>(0xIF)(cond)(expr)
+(0xIIF)(bit)(expr)</pre></div>
+<p>
+			Valid values for the <var>cond</var> argument range from <code>0</code> to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/limits.html#LIMIT_MAG" class="primary">CHAOS_PP_LIMIT_MAG</a></code>.
+			Valid values for the <var>bit</var> argument are <code>0</code> and <code>1</code>.
+		</p>
+</dd>
+<dt>[<var>elif</var>]</dt>
+<dd>
+<p>
+			Zero or more "else-if" branches, where each branch is one of the following forms:
+			</p>
+<div><pre>(0xELIF)(cond)(expr)
+(0xELIIF)(bit)(expr)</pre></div>
+<p>
+			Valid values for the <var>cond</var> argument range from <code>0</code> to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/limits.html#LIMIT_MAG" class="primary">CHAOS_PP_LIMIT_MAG</a></code>.
+			Valid values for the <var>bit</var> argument are <code>0</code> and <code>1</code>.
+		</p>
+</dd>
+<dt>[<var>else</var>]</dt>
+<dd>
+<p>
+			The "else" branch.
+			If this branch exists, it must be in the in the following form:
+			</p>
+<div><pre>(0xELSE)(expr)</pre></div>
+</dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		Each <var>cond</var> or <var>bit</var> condition is checked in order.
+		If a <var>cond</var> is non-zero or a <var>bit</var> is <code>1</code>, the entire construct expands to the <var>expr</var> or <code>__VA_ARGS__</code> associated with the associated branch.
+		If all <var>cond</var> and <var>bit</var> conditions evaluate to <code>0</code>, this macro expands to the <var>expr</var> or <code>__VA_ARGS__</code> associated with the "else" branch.
+		If no "else" branch exists, this macro expands to nothing.
+	</p></div>
+<div><p>
+		The behavior of this macro is illustrated in the following example:
+		</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/branch.html#BRANCH" class="primary">CHAOS_PP_BRANCH</a></code>
+    (0xIF)(X)(A)
+    (0xELIF)(Y)(B)
+    (0xELIF)(Z)(C)
+    (0xELSE)(D)
+    (0xENDIF)</pre></div></div>
+<div><p>
+		In this example, if <code>X</code> evaluates to non-zero, the entire construct, from <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/branch.html#BRANCH" class="primary">CHAOS_PP_BRANCH</a></code> to <code>(0xENDIF)</code> expands to <code>A</code>.
+		Otherwise, if <code>Y</code> evaluates to non-zero, the construct expands to <code>B</code>.
+		Otherwise, if <code>Z</code> evaluates to non-zero, the construct expands to <code>C</code>.
+		Otherwise, the construct expands to <code>D</code>.
+	</p></div>
+<div><p>
+		Note that any number of "else-if" branches may exist, though no "else-if" branches are required.
+		Also note that the "else" branch need not exist.
+		For example, the following lines are roughly equivalent to <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/inline_when.html#INLINE_WHEN" class="primary">CHAOS_PP_INLINE_WHEN</a></code>(bit)(expr)</code> and <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/iif.html#IIF" class="primary">CHAOS_PP_IIF</a></code>(bit)(T, F)</code> respectively:
+		</p></div>
+<div><div><pre>    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/branch.html#BRANCH" class="primary">CHAOS_PP_BRANCH</a></code>(0xIIF)(bit)(expr)(0xENDIF)
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/branch.html#BRANCH" class="primary">CHAOS_PP_BRANCH</a></code>(0xIIF)(bit)(T)(0xELSEIF)(F)(0xENDIF)</pre></div></div>
+<div><p>
+		They are not equivalent because the <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/branch.html#BRANCH" class="primary">CHAOS_PP_BRANCH</a></code> construct expands to a value that cannot directly expand against trailing invocations such as,
+		</p></div>
+<div><div><pre>#define A() !
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/branch.html#BRANCH" class="primary">CHAOS_PP_BRANCH</a></code>(0xIIF)(1)(A)(0xENDIF)() // A ()
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/inline_when.html#INLINE_WHEN" class="primary">CHAOS_PP_INLINE_WHEN</a></code>(1)(A)()            // !</pre></div></div>
+<div><p>
+		In order to make the above expand as desired, the result of <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/branch.html#BRANCH" class="primary">CHAOS_PP_BRANCH</a></code> needs to be "cleaned" with an identity macro such as <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/expand.html#EXPAND" class="primary">CHAOS_PP_EXPAND</a></code>.
+		</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/expand.html#EXPAND" class="primary">CHAOS_PP_EXPAND</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/branch.html#BRANCH" class="primary">CHAOS_PP_BRANCH</a></code>(0xIIF)(1)(A)(0xENDIF))() // !</pre></div></div>
+<div><p>
+		In C99, the <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/iif.html#IIF" class="primary">CHAOS_PP_IIF</a></code> case above is also not equivalent because only the "else" branch of the <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/iif.html#IIF" class="primary">CHAOS_PP_IIF</a></code> invocation may be variadic.
+	</p></div>
+<div><p>
+		Every element of this branching construct is lazy.
+		In other words, the <var>expr</var> or <code>__VA_ARGS__</code> for a particular branch is not evaluated unless it is selected.
+		Further, each <var>cond</var> or <var>bit</var> is not evaluates unless all previous <var>cond</var> and <var>bit</var> values evaluated to <code>0</code>.
+		</p></div>
+<div><div><pre>#define VALID() 1
+#define INVALID() VALID(!) // too many arguments
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/branch.html#BRANCH" class="primary">CHAOS_PP_BRANCH</a></code>
+    (0xIIF)(1)(
+        VALID()
+    )
+    (0xELIIF)(INVALID())(
+        INVALID()
+    )
+    (0xENDIF)</pre></div></div>
+<div><p>
+		If any one of the <code>INVALID()</code> invocations was actually invoked, and error would be produced.
+		Because the construct is lazy, however, none of the <code>INVALID()</code> invocations is invoked.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/control/if.html#IF">CHAOS_PP_IF</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/control/iif.html#IIF">CHAOS_PP_IIF</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/control/inline_unless.html#INLINE_UNLESS">CHAOS_PP_INLINE_UNLESS</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/control/inline_when.html#INLINE_WHEN">CHAOS_PP_INLINE_WHEN</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/control/placemarker_if.html#PLACEMARKER_IF">CHAOS_PP_PLACEMARKER_IF</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/control/unless.html#UNLESS">CHAOS_PP_UNLESS</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/control/when.html#WHEN">CHAOS_PP_WHEN</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/arithmetic/machine/add.html" class="header">&lt;chaos/preprocessor/arithmetic/machine/add.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html" class="header">&lt;chaos/preprocessor/config.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/branch.html" class="header">&lt;chaos/preprocessor/control/branch.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/basic.html" class="header">&lt;chaos/preprocessor/recursion/basic.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html" class="header">&lt;chaos/preprocessor/recursion/expr.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html" class="header">&lt;chaos/preprocessor/tuple/core.h&gt;</a></code>
+
+#if <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html#VARIADICS" class="primary">CHAOS_PP_VARIADICS</a></code>
+
+#define ADD(...) \
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR" class="primary">CHAOS_PP_EXPR</a></code>(ADD_I( \
+        <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/basic.html#OBSTRUCT" class="primary">CHAOS_PP_OBSTRUCT</a></code>(), <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#NEXT" class="primary">CHAOS_PP_NEXT</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#STATE" class="primary">CHAOS_PP_STATE</a></code>()), \
+        (__VA_ARGS__) \
+    )) \
+    /**/
+#define ADD_INDIRECT() ADD_I
+#define ADD_I(_, s, tuple) \
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/branch.html#BRANCH" class="primary">CHAOS_PP_BRANCH</a></code> _ \
+        (0xIIF)(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_IS_CONS" class="primary">CHAOS_PP_TUPLE_IS_CONS</a></code>(tuple))( \
+            <code xmlns:header-name="/pp-book/header-name.xsl"><a class="unknown" href="../../.././unknown.html">CHAOS_PP_ADD_MACHINE_S</a></code> _( \
+                s, <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_HEAD" class="primary">CHAOS_PP_TUPLE_HEAD</a></code> _(tuple), \
+                <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR_S" class="primary">CHAOS_PP_EXPR_S</a></code>(s) _(ADD_INDIRECT _()( \
+                    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/basic.html#OBSTRUCT" class="primary">CHAOS_PP_OBSTRUCT</a></code> _(), <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#NEXT" class="primary">CHAOS_PP_NEXT</a></code>(s), \
+                    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_TAIL" class="primary">CHAOS_PP_TUPLE_TAIL</a></code> _(tuple) \
+                )) \
+            ) \
+        ) \
+        (0xELSE)(0) \
+        (0xENDIF) \
+    /**/
+
+ADD(1, 2, 3, 4, 5, 6, 7, 8, 9) // 45
+
+#endif</pre>
+<hr>
+<a name="BRANCH_ID"></a><h3 class="secondary">CHAOS_PP_BRANCH_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/branch.html#BRANCH_ID" class="secondary">CHAOS_PP_BRANCH_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/branch.html#BRANCH" class="primary">CHAOS_PP_BRANCH</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/branch.html#BRANCH_ID" class="secondary">CHAOS_PP_BRANCH_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro exists only for uniformity with other macros that require indirect invocation.
+				</p></div>
+<hr>
+<a name="BRANCH_"></a><h3 class="secondary">CHAOS_PP_BRANCH_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/branch.html#BRANCH_" class="secondary">CHAOS_PP_BRANCH_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/branch.html#BRANCH" class="primary">CHAOS_PP_BRANCH</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/branch.html#BRANCH_" class="secondary">CHAOS_PP_BRANCH_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/branch.html#BRANCH" class="primary">CHAOS_PP_BRANCH</a></code>)</pre></div></div>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="../../.././license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</body>
+</html>

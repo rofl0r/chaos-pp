@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>recursion/phase.h - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="../../.././style.css">
+</head>
+<body>
+<p>
+	The <code>recursion/phase.h</code> header defines a macro used to relatively alter the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././deferral.html">deferral phase</a> of an expression.
+</p>
+<h4>Usage</h4>
+<pre class="box">#include <code><a class="header" href="../../.././chaos/preprocessor/recursion/phase.html">&lt;chaos/preprocessor/recursion/phase.h&gt;</a></code></pre>
+<h4>Contents</h4>
+<ul><li><code><a class="primary" href="#PHASE">CHAOS_PP_PHASE</a></code></li></ul>
+<hr>
+<a name="PHASE"></a><h3 class="primary">CHAOS_PP_PHASE</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/phase.html#PHASE" class="primary">CHAOS_PP_PHASE</a></code> macro is used to relatively alter the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././deferral.html">deferral phase</a> of an expression.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/phase.html#PHASE" class="primary">CHAOS_PP_PHASE</a></code>(offset)(n, macro)</pre>
+<dl>
+<dt><var>offset</var></dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././deferral.html">deferral phase</a> offset.
+			Valid values range from <code>0</code> to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/limits.html#LIMIT_PHASE" class="primary">CHAOS_PP_LIMIT_PHASE</a></code> - <var>n</var>.
+		</p></dd>
+<dt><var>n</var></dt>
+<dd><p>
+			The base <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././deferral.html">deferral</a> quantity.
+			Valid values range from <code>0</code> to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/limits.html#LIMIT_PHASE" class="primary">CHAOS_PP_LIMIT_PHASE</a></code> - <var>offset</var>.
+		</p></dd>
+<dt><var>macro</var></dt>
+<dd><p>
+			The macro whose invocation is to be <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././deferral.html">deferred</a>.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././deferral.html">defers</a> the invocation of <var>macro</var> through <var>offset</var> + <var>base</var> scans.
+	</p></div>
+<div><p>
+		Typical usage involves passing either the first part of the above invocation (i.e. <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/phase.html#PHASE" class="primary">CHAOS_PP_PHASE</a></code>(offset)</code>) to another macro that is written in terms of the rest of the invocation.
+		For example,
+		</p></div>
+<div><div><pre>#define A(p) \
+    p(0, B)() p(1, B)() p(2, B)() \
+    /**/
+#define B() 1
+
+A(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/phase.html#PHASE" class="primary">CHAOS_PP_PHASE</a></code>(0)) // #1
+A(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/phase.html#PHASE" class="primary">CHAOS_PP_PHASE</a></code>(1)) // #2</pre></div></div>
+<div><p>
+		The first invocation expands to three invocations of <code>B</code>.
+		Of these, the first is actually invoked, the second is delayed through one scan, and the third is delayed through two scans.
+		The second invocation has the effect of increasing the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././deferral.html">deferral</a> of each of these by <code>1</code>.
+		The first of the three resulting invocations is delayed through one scan, the second is delayed through two scans, and the third is delayed through three scans.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/recursion/block.html#BLOCK">CHAOS_PP_BLOCK</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/recursion/basic.html#DEFER">CHAOS_PP_DEFER</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/recursion/delay.html#DELAY">CHAOS_PP_DELAY</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/recursion/basic.html#OBSTRUCT">CHAOS_PP_OBSTRUCT</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/recursion/rail.html#RAIL">CHAOS_PP_RAIL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/recursion/rail.html#UNSAFE_RAIL">CHAOS_PP_UNSAFE_RAIL</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/arithmetic/dec.html" class="header">&lt;chaos/preprocessor/arithmetic/dec.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/arithmetic/sub.html" class="header">&lt;chaos/preprocessor/arithmetic/sub.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/comparison/not_equal.html" class="header">&lt;chaos/preprocessor/comparison/not_equal.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/if.html" class="header">&lt;chaos/preprocessor/control/if.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/iif.html" class="header">&lt;chaos/preprocessor/control/iif.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/limits.html" class="header">&lt;chaos/preprocessor/limits.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html" class="header">&lt;chaos/preprocessor/recursion/expr.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/phase.html" class="header">&lt;chaos/preprocessor/recursion/phase.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/eat.html" class="header">&lt;chaos/preprocessor/tuple/eat.h&gt;</a></code>
+
+#define REPEAT(count, macro, data) \
+    REPEAT_S(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#STATE" class="primary">CHAOS_PP_STATE</a></code>(), count, macro, data) \
+    /**/
+#define REPEAT_S(s, count, macro, data) \
+    REPEAT_I( \
+        <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#NEXT" class="primary">CHAOS_PP_NEXT</a></code>(s), <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#NEXT" class="primary">CHAOS_PP_NEXT</a></code>(s), \
+        count, macro, data \
+    ) \
+    /**/
+#define REPEAT_INDIRECT() REPEAT_I
+#define REPEAT_I(s, o, count, macro, data) \
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/if.html#IF" class="primary">CHAOS_PP_IF</a></code>(count)( \
+        <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/iif.html#IIF" class="primary">CHAOS_PP_IIF</a></code>( \
+            <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/comparison/not_equal.html#NOT_EQUAL" class="primary">CHAOS_PP_NOT_EQUAL</a></code>(s, <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/limits.html#LIMIT_EXPR" class="primary">CHAOS_PP_LIMIT_EXPR</a></code>) \
+        )( \
+            REPEAT_II, REPEAT_III \
+        ), \
+        <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/eat.html#TUPLE_EAT" class="primary">CHAOS_PP_TUPLE_EAT</a></code>(6) \
+    )(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/phase.html#PHASE" class="primary">CHAOS_PP_PHASE</a></code>(0), s, o, <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/arithmetic/dec.html#DEC" class="primary">CHAOS_PP_DEC</a></code>(count), macro, data) \
+    /**/
+#define REPEAT_II(_, s, o, count, macro, data) \
+    _(1, <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR_S" class="primary">CHAOS_PP_EXPR_S</a></code>)(s)(_(1, REPEAT_INDIRECT)()( \
+        <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#NEXT" class="primary">CHAOS_PP_NEXT</a></code>(s), o, count, macro, data \
+    )) \
+    _(1, macro)(s, count, data) \
+    /**/
+#define REPEAT_III(_, s, o, count, macro, data) \
+    REPEAT_II(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/phase.html#PHASE" class="primary">CHAOS_PP_PHASE</a></code>(1), o, o, count, macro, data) \
+    /**/
+
+#define S <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/arithmetic/sub.html#SUB" class="primary">CHAOS_PP_SUB</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/limits.html#LIMIT_EXPR" class="primary">CHAOS_PP_LIMIT_EXPR</a></code>, 6)
+#define MACRO(s, n, data) n
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR_S" class="primary">CHAOS_PP_EXPR_S</a></code>(S)(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR_S" class="primary">CHAOS_PP_EXPR_S</a></code>(S)(
+    REPEAT_S(S, 10, MACRO, ~)
+))
+// 0 1 2 3 4 5 6 7 8 9</pre>
+<hr>
+<a name="PHASE_ID"></a><h3 class="secondary">CHAOS_PP_PHASE_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/phase.html#PHASE_ID" class="secondary">CHAOS_PP_PHASE_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/phase.html#PHASE" class="primary">CHAOS_PP_PHASE</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/phase.html#PHASE_ID" class="secondary">CHAOS_PP_PHASE_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro exists only for uniformity with other macros that require indirect invocation.
+				</p></div>
+<hr>
+<a name="PHASE_"></a><h3 class="secondary">CHAOS_PP_PHASE_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/phase.html#PHASE_" class="secondary">CHAOS_PP_PHASE_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/phase.html#PHASE" class="primary">CHAOS_PP_PHASE</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/phase.html#PHASE_" class="secondary">CHAOS_PP_PHASE_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/phase.html#PHASE" class="primary">CHAOS_PP_PHASE</a></code>)</pre></div></div>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="../../.././license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</body>
+</html>

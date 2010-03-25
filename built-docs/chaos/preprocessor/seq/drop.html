@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>seq/drop.h - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="../../.././style.css">
+</head>
+<body>
+<p>
+	The <code>seq/drop.h</code> header defines a macro that yields the remainder of a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a> after removing a user-specified number of elements.
+</p>
+<h4>Usage</h4>
+<pre class="box">#include <code><a class="header" href="../../.././chaos/preprocessor/seq/drop.html">&lt;chaos/preprocessor/seq/drop.h&gt;</a></code></pre>
+<h4>Contents</h4>
+<ul><li><code><a class="primary" href="#SEQ_DROP">CHAOS_PP_SEQ_DROP</a></code></li></ul>
+<hr>
+<a name="SEQ_DROP"></a><h3 class="primary">CHAOS_PP_SEQ_DROP</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/drop.html#SEQ_DROP" class="primary">CHAOS_PP_SEQ_DROP</a></code> macro removes the number of elements specified by its first argument from the head of its second argument.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/drop.html#SEQ_DROP" class="primary">CHAOS_PP_SEQ_DROP</a></code>(n, seq)</pre>
+<dl>
+<dt><var>n</var></dt>
+<dd><p>
+			The number of elements to be removed.
+			Valid values range from <code>0</code> to <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/size.html#SEQ_SIZE" class="primary">CHAOS_PP_SEQ_SIZE</a></code>(seq)</code>.
+		</p></dd>
+<dt>[<var>seq</var>]</dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a> from which elements are to be removed.
+		</p></dd>
+</dl>
+<h4>Usage <small>- C/C++ Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/drop.html#SEQ_DROP" class="primary">CHAOS_PP_SEQ_DROP</a></code>(n, seq)</pre>
+<dl>
+<dt><var>n</var></dt>
+<dd><p>
+			The number of elements to be removed.
+			Valid values range from <code>0</code> to <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/size.html#SEQ_SIZE" class="primary">CHAOS_PP_SEQ_SIZE</a></code>(seq)</code>.
+		</p></dd>
+<dt><var>seq</var></dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a> from which elements are to be removed.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a> containing all but the first <var>n</var> elements of <var>seq</var>.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/algorithm/drop.html#DROP">CHAOS_PP_DROP</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/algorithm/range.html#RANGE">CHAOS_PP_RANGE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/range.html#SEQ_RANGE">CHAOS_PP_SEQ_RANGE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/take.html#SEQ_TAKE">CHAOS_PP_SEQ_TAKE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/algorithm/take.html#TAKE">CHAOS_PP_TAKE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/drop.html#TUPLE_DROP">CHAOS_PP_TUPLE_DROP</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/range.html#TUPLE_RANGE">CHAOS_PP_TUPLE_RANGE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/take.html#TUPLE_TAKE">CHAOS_PP_TUPLE_TAKE</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html" class="header">&lt;chaos/preprocessor/config.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/drop.html" class="header">&lt;chaos/preprocessor/seq/drop.h&gt;</a></code>
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/drop.html#SEQ_DROP" class="primary">CHAOS_PP_SEQ_DROP</a></code>(2, (a)(b)(c)(d)) // (c)(d)
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/drop.html#SEQ_DROP" class="primary">CHAOS_PP_SEQ_DROP</a></code>(0, (x)(y)(z))    // (x)(y)(z)
+
+#if <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html#VARIADICS" class="primary">CHAOS_PP_VARIADICS</a></code>
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/drop.html#SEQ_DROP" class="primary">CHAOS_PP_SEQ_DROP</a></code>(0,) //
+
+#endif</pre>
+<hr>
+<a name="SEQ_DROP_ID"></a><h3 class="secondary">CHAOS_PP_SEQ_DROP_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/drop.html#SEQ_DROP_ID" class="secondary">CHAOS_PP_SEQ_DROP_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/drop.html#SEQ_DROP" class="primary">CHAOS_PP_SEQ_DROP</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/drop.html#SEQ_DROP_ID" class="secondary">CHAOS_PP_SEQ_DROP_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/drop.html#SEQ_DROP" class="primary">CHAOS_PP_SEQ_DROP</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="SEQ_DROP_"></a><h3 class="secondary">CHAOS_PP_SEQ_DROP_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/drop.html#SEQ_DROP_" class="secondary">CHAOS_PP_SEQ_DROP_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/drop.html#SEQ_DROP" class="primary">CHAOS_PP_SEQ_DROP</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/drop.html#SEQ_DROP_" class="secondary">CHAOS_PP_SEQ_DROP_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/drop.html#SEQ_DROP_ID" class="secondary">CHAOS_PP_SEQ_DROP_ID</a></code>)()</pre></div></div>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="../../.././license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</body>
+</html>

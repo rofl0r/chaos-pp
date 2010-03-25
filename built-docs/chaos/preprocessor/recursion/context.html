@@ -1,0 +1,277 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>recursion/context.h - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="../../.././style.css">
+</head>
+<body>
+<p>
+	The <code>recursion/context.h</code> header defines macros used to store and retrieve context data.
+</p>
+<h4>Usage</h4>
+<pre class="box">#include <code><a class="header" href="../../.././chaos/preprocessor/recursion/context.html">&lt;chaos/preprocessor/recursion/context.h&gt;</a></code></pre>
+<h4>Contents</h4>
+<ul>
+<li><code><a class="primary" href="#ABSOLUTE">CHAOS_PP_ABSOLUTE</a></code></li>
+<li><code><a class="primary" href="#CONTEXT">CHAOS_PP_CONTEXT</a></code></li>
+<li><code><a class="primary" href="#RELATIVE">CHAOS_PP_RELATIVE</a></code></li>
+<li><code><a class="primary" href="#RETRIEVE">CHAOS_PP_RETRIEVE</a></code></li>
+</ul>
+<hr>
+<a name="CONTEXT"></a><h3 class="primary">CHAOS_PP_CONTEXT</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#CONTEXT" class="primary">CHAOS_PP_CONTEXT</a></code> creates a retrievable context.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#CONTEXT" class="primary">CHAOS_PP_CONTEXT</a></code>(bit)(...)</pre>
+<dl>
+<dt><var>bit</var></dt>
+<dd><p>
+			The context data to be created.
+			Valid values are <code>0</code> and <code>1</code>.
+		</p></dd>
+<dt>[<var>...</var>]</dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././deferral.html">deferred expression</a> to be expanded within the context.
+		</p></dd>
+</dl>
+<h4>Usage <small>- C/C++ Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#CONTEXT" class="primary">CHAOS_PP_CONTEXT</a></code>(bit)(x)</pre>
+<dl>
+<dt><var>bit</var></dt>
+<dd><p>
+			The context data to be created.
+			Valid values are <code>0</code> and <code>1</code>.
+		</p></dd>
+<dt><var>x</var></dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././deferral.html">deferred expression</a> to be expanded within the context.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro introduces a context value which can be retrieved via <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#RETRIEVE" class="primary">CHAOS_PP_RETRIEVE</a></code>, <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#ABSOLUTE" class="primary">CHAOS_PP_ABSOLUTE</a></code>, or <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#RELATIVE" class="primary">CHAOS_PP_RELATIVE</a></code>.
+		If <var>bit</var> expands to <code>0</code>, then a directly nested invocation of <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#RETRIEVE" class="primary">CHAOS_PP_RETRIEVE</a></code> inside the <var>x</var> or <code>__VA_ARGS__</code> will expand to <code>0</code>.
+		Otherwise, it will expand to <code>1</code>.
+		</p></div>
+<div><div><pre>#define MACRO() <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#RETRIEVE" class="primary">CHAOS_PP_RETRIEVE</a></code>()
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#CONTEXT" class="primary">CHAOS_PP_CONTEXT</a></code>(0)(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/basic.html#DEFER" class="primary">CHAOS_PP_DEFER</a></code>(MACRO)()) // 0
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#CONTEXT" class="primary">CHAOS_PP_CONTEXT</a></code>(1)(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/basic.html#DEFER" class="primary">CHAOS_PP_DEFER</a></code>(MACRO)()) // 1</pre></div></div>
+<div><p>
+		This macro employs <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././recursion.html">automatic recursion</a>, and allows the establishment of up to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/limits.html#LIMIT_CONTEXT" class="primary">CHAOS_PP_LIMIT_CONTEXT</a></code> nested contexts.
+		The most current context can be accessed with <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#RETRIEVE" class="primary">CHAOS_PP_RETRIEVE</a></code>, contexts relative to the current context can be accessed with <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#RELATIVE" class="primary">CHAOS_PP_RELATIVE</a></code>, and absolute contexts can be accessed with <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#ABSOLUTE" class="primary">CHAOS_PP_ABSOLUTE</a></code>.
+	</p></div>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/basic.html" class="header">&lt;chaos/preprocessor/recursion/basic.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html" class="header">&lt;chaos/preprocessor/recursion/context.h&gt;</a></code>
+
+#define A() <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#CONTEXT" class="primary">CHAOS_PP_CONTEXT</a></code>(0)(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/basic.html#DEFER" class="primary">CHAOS_PP_DEFER</a></code>(B)())
+#define B() <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#CONTEXT" class="primary">CHAOS_PP_CONTEXT</a></code>(1)(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/basic.html#DEFER" class="primary">CHAOS_PP_DEFER</a></code>(C)())
+#define C() \
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#ABSOLUTE" class="primary">CHAOS_PP_ABSOLUTE</a></code>(1) \
+        <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#ABSOLUTE" class="primary">CHAOS_PP_ABSOLUTE</a></code>(2) \
+            <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#RETRIEVE" class="primary">CHAOS_PP_RETRIEVE</a></code>() \
+    /**/
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#CONTEXT" class="primary">CHAOS_PP_CONTEXT</a></code>(1)(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/basic.html#DEFER" class="primary">CHAOS_PP_DEFER</a></code>(A)()) // 1 0 1</pre>
+<hr>
+<a name="CONTEXT_ID"></a><h3 class="secondary">CHAOS_PP_CONTEXT_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#CONTEXT_ID" class="secondary">CHAOS_PP_CONTEXT_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#CONTEXT" class="primary">CHAOS_PP_CONTEXT</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#CONTEXT_ID" class="secondary">CHAOS_PP_CONTEXT_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro exists only for uniformity with other macros that require indirect invocation.
+				</p></div>
+<hr>
+<a name="CONTEXT_"></a><h3 class="secondary">CHAOS_PP_CONTEXT_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#CONTEXT_" class="secondary">CHAOS_PP_CONTEXT_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#CONTEXT" class="primary">CHAOS_PP_CONTEXT</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#CONTEXT_" class="secondary">CHAOS_PP_CONTEXT_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#CONTEXT" class="primary">CHAOS_PP_CONTEXT</a></code>)</pre></div></div>
+<hr>
+<a name="ABSOLUTE"></a><h3 class="primary">CHAOS_PP_ABSOLUTE</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#ABSOLUTE" class="primary">CHAOS_PP_ABSOLUTE</a></code> macro retrieves the context value of a context at an absolute position.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#ABSOLUTE" class="primary">CHAOS_PP_ABSOLUTE</a></code>(n)</pre>
+<dl>
+<dt><var>n</var></dt>
+<dd><p>
+			The index of the context frame whose context value is to be retrieved.
+			Valid values range from <code>1</code> to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/limits.html#LIMIT_CONTEXT" class="primary">CHAOS_PP_LIMIT_CONTEXT</a></code>.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro expands to the context value at position <var>n</var>.
+		If no context is present at position <var>n</var>, this macro expands to nothing.
+	</p></div>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/basic.html" class="header">&lt;chaos/preprocessor/recursion/basic.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html" class="header">&lt;chaos/preprocessor/recursion/context.h&gt;</a></code>
+
+#define A() <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#CONTEXT" class="primary">CHAOS_PP_CONTEXT</a></code>(0)(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/basic.html#DEFER" class="primary">CHAOS_PP_DEFER</a></code>(B)())
+#define B() <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#CONTEXT" class="primary">CHAOS_PP_CONTEXT</a></code>(1)(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/basic.html#DEFER" class="primary">CHAOS_PP_DEFER</a></code>(C)())
+#define C() \
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#ABSOLUTE" class="primary">CHAOS_PP_ABSOLUTE</a></code>(1) \
+        <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#ABSOLUTE" class="primary">CHAOS_PP_ABSOLUTE</a></code>(2) \
+            <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#ABSOLUTE" class="primary">CHAOS_PP_ABSOLUTE</a></code>(3) \
+    /**/
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#CONTEXT" class="primary">CHAOS_PP_CONTEXT</a></code>(0)(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/basic.html#DEFER" class="primary">CHAOS_PP_DEFER</a></code>(A)()) // 0 0 1</pre>
+<hr>
+<a name="ABSOLUTE_ID"></a><h3 class="secondary">CHAOS_PP_ABSOLUTE_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#ABSOLUTE_ID" class="secondary">CHAOS_PP_ABSOLUTE_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#ABSOLUTE" class="primary">CHAOS_PP_ABSOLUTE</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#ABSOLUTE_ID" class="secondary">CHAOS_PP_ABSOLUTE_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro exists only for uniformity with other macros that require indirect invocation.
+				</p></div>
+<hr>
+<a name="ABSOLUTE_"></a><h3 class="secondary">CHAOS_PP_ABSOLUTE_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#ABSOLUTE_" class="secondary">CHAOS_PP_ABSOLUTE_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#ABSOLUTE" class="primary">CHAOS_PP_ABSOLUTE</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#ABSOLUTE_" class="secondary">CHAOS_PP_ABSOLUTE_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#ABSOLUTE" class="primary">CHAOS_PP_ABSOLUTE</a></code>)</pre></div></div>
+<hr>
+<a name="RELATIVE"></a><h3 class="primary">CHAOS_PP_RELATIVE</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#RELATIVE" class="primary">CHAOS_PP_RELATIVE</a></code> macro retrieves the context value of a context relative to the current context.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#RELATIVE" class="primary">CHAOS_PP_RELATIVE</a></code>(n)</pre>
+<dl>
+<dt><var>n</var></dt>
+<dd><p>
+			The offset from the current context to the context frame whose context value is to be retrieved.
+			Valid values range <code>0</code> to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/limits.html#LIMIT_CONTEXT" class="primary">CHAOS_PP_LIMIT_CONTEXT</a></code> - 1.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro expands to the context value of the context <var>n</var> outer frames from the current context frame.
+		In other words, <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#RELATIVE" class="primary">CHAOS_PP_RELATIVE</a></code>(0) expands to the current context value, <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#RELATIVE" class="primary">CHAOS_PP_RELATIVE</a></code>(1) expands to the next outer context, <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#RELATIVE" class="primary">CHAOS_PP_RELATIVE</a></code>(2) expands to the next outer context after that, and so on.
+		If no context exists <var>n</var> frames outward, this macro expands to <code>0</code>.
+	</p></div>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/basic.html" class="header">&lt;chaos/preprocessor/recursion/basic.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html" class="header">&lt;chaos/preprocessor/recursion/context.h&gt;</a></code>
+
+#define A() <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#CONTEXT" class="primary">CHAOS_PP_CONTEXT</a></code>(1)(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/basic.html#DEFER" class="primary">CHAOS_PP_DEFER</a></code>(B)())
+#define B() <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#CONTEXT" class="primary">CHAOS_PP_CONTEXT</a></code>(0)(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/basic.html#DEFER" class="primary">CHAOS_PP_DEFER</a></code>(C)())
+#define C() \
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#RELATIVE" class="primary">CHAOS_PP_RELATIVE</a></code>(0) \
+        <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#RELATIVE" class="primary">CHAOS_PP_RELATIVE</a></code>(1) \
+            <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#RELATIVE" class="primary">CHAOS_PP_RELATIVE</a></code>(2) \
+    /**/
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#CONTEXT" class="primary">CHAOS_PP_CONTEXT</a></code>(1)(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/basic.html#DEFER" class="primary">CHAOS_PP_DEFER</a></code>(A)()) // 0 1 1</pre>
+<hr>
+<a name="RELATIVE_ID"></a><h3 class="secondary">CHAOS_PP_RELATIVE_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#RELATIVE_ID" class="secondary">CHAOS_PP_RELATIVE_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#RELATIVE" class="primary">CHAOS_PP_RELATIVE</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#RELATIVE_ID" class="secondary">CHAOS_PP_RELATIVE_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro exists only for uniformity with other macros that require indirect invocation.
+				</p></div>
+<hr>
+<a name="RELATIVE_"></a><h3 class="secondary">CHAOS_PP_RELATIVE_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#RELATIVE_" class="secondary">CHAOS_PP_RELATIVE_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#RELATIVE" class="primary">CHAOS_PP_RELATIVE</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#RELATIVE_" class="secondary">CHAOS_PP_RELATIVE_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#RELATIVE" class="primary">CHAOS_PP_RELATIVE</a></code>)</pre></div></div>
+<hr>
+<a name="RETRIEVE"></a><h3 class="primary">CHAOS_PP_RETRIEVE</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#RETRIEVE" class="primary">CHAOS_PP_RETRIEVE</a></code> macro retrieves the context value of the most current context.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#RETRIEVE" class="primary">CHAOS_PP_RETRIEVE</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+		If the most current context value is <code>1</code>, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</p></div>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/inline_when.html" class="header">&lt;chaos/preprocessor/control/inline_when.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/basic.html" class="header">&lt;chaos/preprocessor/recursion/basic.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html" class="header">&lt;chaos/preprocessor/recursion/context.h&gt;</a></code>
+
+#define A(x) \
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/inline_when.html#INLINE_WHEN" class="primary">CHAOS_PP_INLINE_WHEN</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#RETRIEVE" class="primary">CHAOS_PP_RETRIEVE</a></code>())(x B) \
+    /**/
+#define B(x) \
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/inline_when.html#INLINE_WHEN" class="primary">CHAOS_PP_INLINE_WHEN</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#RETRIEVE" class="primary">CHAOS_PP_RETRIEVE</a></code>())(x A) \
+    /**/
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#CONTEXT" class="primary">CHAOS_PP_CONTEXT</a></code>(1)(
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/basic.html#DEFER" class="primary">CHAOS_PP_DEFER</a></code>(A)(+)(-)(*)(/)(%)
+)(...)
+// + - * / %</pre>
+<hr>
+<a name="RETRIEVE_ID"></a><h3 class="secondary">CHAOS_PP_RETRIEVE_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#RETRIEVE_ID" class="secondary">CHAOS_PP_RETRIEVE_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#RETRIEVE" class="primary">CHAOS_PP_RETRIEVE</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#RETRIEVE_ID" class="secondary">CHAOS_PP_RETRIEVE_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro exists only for uniformity with other macros that require indirect invocation.
+				</p></div>
+<hr>
+<a name="RETRIEVE_"></a><h3 class="secondary">CHAOS_PP_RETRIEVE_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#RETRIEVE_" class="secondary">CHAOS_PP_RETRIEVE_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#RETRIEVE" class="primary">CHAOS_PP_RETRIEVE</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#RETRIEVE_" class="secondary">CHAOS_PP_RETRIEVE_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/context.html#RETRIEVE" class="primary">CHAOS_PP_RETRIEVE</a></code>)</pre></div></div>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="../../.././license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</body>
+</html>

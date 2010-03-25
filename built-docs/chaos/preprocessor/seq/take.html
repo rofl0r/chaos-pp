@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>seq/take.h - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="../../.././style.css">
+</head>
+<body>
+<p>
+	The <code>seq/take.h</code> header defines a macro that extracts a user-specified number of elements from the beginning of a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a>.
+</p>
+<h4>Usage</h4>
+<pre class="box">#include <code><a class="header" href="../../.././chaos/preprocessor/seq/take.html">&lt;chaos/preprocessor/seq/take.h&gt;</a></code></pre>
+<h4>Contents</h4>
+<ul><li><code><a class="primary" href="#SEQ_TAKE">CHAOS_PP_SEQ_TAKE</a></code></li></ul>
+<hr>
+<a name="SEQ_TAKE"></a><h3 class="primary">CHAOS_PP_SEQ_TAKE</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/take.html#SEQ_TAKE" class="primary">CHAOS_PP_SEQ_TAKE</a></code> macro extracts the number of elements specified by its first argument from it second argument.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/take.html#SEQ_TAKE" class="primary">CHAOS_PP_SEQ_TAKE</a></code>(n, seq)</pre>
+<dl>
+<dt><var>n</var></dt>
+<dd><p>
+			The number of elements to be extracted.
+			Valid values range from <code>0</code> to <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/size.html#SEQ_SIZE" class="primary">CHAOS_PP_SEQ_SIZE</a></code>(seq)</code>.
+		</p></dd>
+<dt>[<var>seq</var>]</dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a> from which elements are to be extracted.
+		</p></dd>
+</dl>
+<h4>Usage <small>- C/C++ Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/take.html#SEQ_TAKE" class="primary">CHAOS_PP_SEQ_TAKE</a></code>(n, seq)</pre>
+<dl>
+<dt><var>n</var></dt>
+<dd><p>
+			The number of elements to be extracted.
+			Valid values range from <code>0</code> to <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/size.html#SEQ_SIZE" class="primary">CHAOS_PP_SEQ_SIZE</a></code>(seq)</code>.
+		</p></dd>
+<dt><var>seq</var></dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a> from which elements are to be extracted.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a> containing the first <var>n</var> elements of <var>seq</var>.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/algorithm/drop.html#DROP">CHAOS_PP_DROP</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/algorithm/range.html#RANGE">CHAOS_PP_RANGE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/drop.html#SEQ_DROP">CHAOS_PP_SEQ_DROP</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/range.html#SEQ_RANGE">CHAOS_PP_SEQ_RANGE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/algorithm/take.html#TAKE">CHAOS_PP_TAKE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/drop.html#TUPLE_DROP">CHAOS_PP_TUPLE_DROP</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/range.html#TUPLE_RANGE">CHAOS_PP_TUPLE_RANGE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/take.html#TUPLE_TAKE">CHAOS_PP_TUPLE_TAKE</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html" class="header">&lt;chaos/preprocessor/config.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/take.html" class="header">&lt;chaos/preprocessor/seq/take.h&gt;</a></code>
+
+#define A (a)(b)(c)(d)(e)
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/take.html#SEQ_TAKE" class="primary">CHAOS_PP_SEQ_TAKE</a></code>(3, A) // (a)(b)(c)
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/take.html#SEQ_TAKE" class="primary">CHAOS_PP_SEQ_TAKE</a></code>(0, A) //
+
+#if <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html#VARIADICS" class="primary">CHAOS_PP_VARIADICS</a></code>
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/take.html#SEQ_TAKE" class="primary">CHAOS_PP_SEQ_TAKE</a></code>(2, (a, b)(c)(d, e, f)) // (a, b)(c)
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/take.html#SEQ_TAKE" class="primary">CHAOS_PP_SEQ_TAKE</a></code>(0,) //
+
+#endif</pre>
+<hr>
+<a name="SEQ_TAKE_ID"></a><h3 class="secondary">CHAOS_PP_SEQ_TAKE_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/take.html#SEQ_TAKE_ID" class="secondary">CHAOS_PP_SEQ_TAKE_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/take.html#SEQ_TAKE" class="primary">CHAOS_PP_SEQ_TAKE</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/take.html#SEQ_TAKE_ID" class="secondary">CHAOS_PP_SEQ_TAKE_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/take.html#SEQ_TAKE" class="primary">CHAOS_PP_SEQ_TAKE</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="SEQ_TAKE_"></a><h3 class="secondary">CHAOS_PP_SEQ_TAKE_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/take.html#SEQ_TAKE_" class="secondary">CHAOS_PP_SEQ_TAKE_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/take.html#SEQ_TAKE" class="primary">CHAOS_PP_SEQ_TAKE</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/take.html#SEQ_TAKE_" class="secondary">CHAOS_PP_SEQ_TAKE_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/take.html#SEQ_TAKE_ID" class="secondary">CHAOS_PP_SEQ_TAKE_ID</a></code>)()</pre></div></div>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="../../.././license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</body>
+</html>

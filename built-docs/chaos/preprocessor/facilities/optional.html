@@ -1,0 +1,376 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>facilities/optional.h - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="../../.././style.css">
+</head>
+<body>
+<p>
+	The <code>facilities/optional.h</code> header defines facilities used to create <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././true-optionals.html">true-optional arguments</a>.
+</p>
+<h4>Usage</h4>
+<pre class="box">#include <code><a class="header" href="../../.././chaos/preprocessor/facilities/optional.html">&lt;chaos/preprocessor/facilities/optional.h&gt;</a></code></pre>
+<h4>Contents</h4>
+<ul>
+<li><code><a class="primary" href="#EXPOSE">CHAOS_PP_EXPOSE</a></code></li>
+<li><code><a class="primary" href="#IS_OPTIONAL">CHAOS_PP_IS_OPTIONAL</a></code></li>
+<li><code><a class="primary" href="#NON_OPTIONAL">CHAOS_PP_NON_OPTIONAL</a></code></li>
+<li><code><a class="primary" href="#OPTIONAL">CHAOS_PP_OPTIONAL</a></code></li>
+<li><code><a class="primary" href="#PACK_OPTIONAL">CHAOS_PP_PACK_OPTIONAL</a></code></li>
+</ul>
+<hr>
+<a name="IS_OPTIONAL"></a><h3 class="primary">CHAOS_PP_IS_OPTIONAL</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#IS_OPTIONAL" class="primary">CHAOS_PP_IS_OPTIONAL</a></code> macro tests whether a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././true-optionals.html">true-optional argument</a> is unused.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#IS_OPTIONAL" class="primary">CHAOS_PP_IS_OPTIONAL</a></code>(...)</pre>
+<dl>
+<dt>[<var>...</var>]</dt>
+<dd><p>
+			The argument to be tested.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		If <code>__VA_ARGS__</code> contains only a single argument, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/facilities/optional.html#EXPOSE">CHAOS_PP_EXPOSE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/facilities/optional.html#NON_OPTIONAL">CHAOS_PP_NON_OPTIONAL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/facilities/optional.html#OPTIONAL">CHAOS_PP_OPTIONAL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/facilities/optional.html#PACK_OPTIONAL">CHAOS_PP_PACK_OPTIONAL</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html" class="header">&lt;chaos/preprocessor/config.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html" class="header">&lt;chaos/preprocessor/facilities/optional.h&gt;</a></code>
+
+#if <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html#VARIADICS" class="primary">CHAOS_PP_VARIADICS</a></code>
+
+#define MACRO(...) <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#IS_OPTIONAL" class="primary">CHAOS_PP_IS_OPTIONAL</a></code>(__VA_ARGS__)
+
+MACRO(a)    // 1
+MACRO(a, b) // 0
+
+#endif</pre>
+<hr>
+<a name="IS_OPTIONAL_ID"></a><h3 class="secondary">CHAOS_PP_IS_OPTIONAL_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#IS_OPTIONAL_ID" class="secondary">CHAOS_PP_IS_OPTIONAL_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#IS_OPTIONAL" class="primary">CHAOS_PP_IS_OPTIONAL</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#IS_OPTIONAL_ID" class="secondary">CHAOS_PP_IS_OPTIONAL_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro exists only for uniformity with other macros that require indirect invocation.
+				</p></div>
+<hr>
+<a name="IS_OPTIONAL_"></a><h3 class="secondary">CHAOS_PP_IS_OPTIONAL_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#IS_OPTIONAL_" class="secondary">CHAOS_PP_IS_OPTIONAL_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#IS_OPTIONAL" class="primary">CHAOS_PP_IS_OPTIONAL</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#IS_OPTIONAL_" class="secondary">CHAOS_PP_IS_OPTIONAL_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#IS_OPTIONAL" class="primary">CHAOS_PP_IS_OPTIONAL</a></code>)</pre></div></div>
+<hr>
+<a name="OPTIONAL"></a><h3 class="primary">CHAOS_PP_OPTIONAL</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#OPTIONAL" class="primary">CHAOS_PP_OPTIONAL</a></code> macro extracts a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././true-optionals.html">true-optional argument</a>.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#OPTIONAL" class="primary">CHAOS_PP_OPTIONAL</a></code>(...)</pre>
+<dl>
+<dt>[<var>...</var>]</dt>
+<dd><p>
+			The argument from which a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././true-optionals.html">true-optional argument</a> is to be extracted.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		If <code>__VA_ARGS__</code> contains more than a single argument, this macro expands to the arguments following the first.
+		Otherwise, it expands to nothing.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/facilities/optional.html#EXPOSE">CHAOS_PP_EXPOSE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/facilities/optional.html#IS_OPTIONAL">CHAOS_PP_IS_OPTIONAL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/facilities/optional.html#NON_OPTIONAL">CHAOS_PP_NON_OPTIONAL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/facilities/optional.html#PACK_OPTIONAL">CHAOS_PP_PACK_OPTIONAL</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html" class="header">&lt;chaos/preprocessor/config.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html" class="header">&lt;chaos/preprocessor/facilities/optional.h&gt;</a></code>
+
+#if <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html#VARIADICS" class="primary">CHAOS_PP_VARIADICS</a></code>
+
+#define MACRO(...) \
+    MACRO_I( \
+        <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#NON_OPTIONAL" class="primary">CHAOS_PP_NON_OPTIONAL</a></code>(__VA_ARGS__), \
+        <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#OPTIONAL" class="primary">CHAOS_PP_OPTIONAL</a></code>(__VA_ARGS__) \
+    ) \
+    /**/
+#define MACRO_I(a, ...) (a)-(__VA_ARGS__)
+
+MACRO(1)    // (1)-()
+MACRO(1, 2) // (1)-(2)
+
+#endif</pre>
+<hr>
+<a name="OPTIONAL_ID"></a><h3 class="secondary">CHAOS_PP_OPTIONAL_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#OPTIONAL_ID" class="secondary">CHAOS_PP_OPTIONAL_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#OPTIONAL" class="primary">CHAOS_PP_OPTIONAL</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#OPTIONAL_ID" class="secondary">CHAOS_PP_OPTIONAL_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#OPTIONAL" class="primary">CHAOS_PP_OPTIONAL</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="OPTIONAL_"></a><h3 class="secondary">CHAOS_PP_OPTIONAL_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#OPTIONAL_" class="secondary">CHAOS_PP_OPTIONAL_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#OPTIONAL" class="primary">CHAOS_PP_OPTIONAL</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#OPTIONAL_" class="secondary">CHAOS_PP_OPTIONAL_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#OPTIONAL_ID" class="secondary">CHAOS_PP_OPTIONAL_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="NON_OPTIONAL"></a><h3 class="primary">CHAOS_PP_NON_OPTIONAL</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#NON_OPTIONAL" class="primary">CHAOS_PP_NON_OPTIONAL</a></code> macro extracts the non-optional argument to which a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././true-optionals.html">true-optional argument</a> may be attached.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#NON_OPTIONAL" class="primary">CHAOS_PP_NON_OPTIONAL</a></code>(...)</pre>
+<dl>
+<dt>[<var>...</var>]</dt>
+<dd><p>
+			The argument from which the non-optional argument is to be extracted.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro expands to the first argument of <code>__VA_ARGS__</code>.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/facilities/optional.html#EXPOSE">CHAOS_PP_EXPOSE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/facilities/optional.html#IS_OPTIONAL">CHAOS_PP_IS_OPTIONAL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/facilities/optional.html#OPTIONAL">CHAOS_PP_OPTIONAL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/facilities/optional.html#PACK_OPTIONAL">CHAOS_PP_PACK_OPTIONAL</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html" class="header">&lt;chaos/preprocessor/config.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html" class="header">&lt;chaos/preprocessor/facilities/optional.h&gt;</a></code>
+
+#define MACRO(...) <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#NON_OPTIONAL" class="primary">CHAOS_PP_NON_OPTIONAL</a></code>(__VA_ARGS__)
+
+MACRO(a)    // a
+MACRO(a, b) // a</pre>
+<hr>
+<a name="NON_OPTIONAL_ID"></a><h3 class="secondary">CHAOS_PP_NON_OPTIONAL_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#NON_OPTIONAL_ID" class="secondary">CHAOS_PP_NON_OPTIONAL_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#NON_OPTIONAL" class="primary">CHAOS_PP_NON_OPTIONAL</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#NON_OPTIONAL_ID" class="secondary">CHAOS_PP_NON_OPTIONAL_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#NON_OPTIONAL" class="primary">CHAOS_PP_NON_OPTIONAL</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="NON_OPTIONAL_"></a><h3 class="secondary">CHAOS_PP_NON_OPTIONAL_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#NON_OPTIONAL_" class="secondary">CHAOS_PP_NON_OPTIONAL_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#NON_OPTIONAL" class="primary">CHAOS_PP_NON_OPTIONAL</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#NON_OPTIONAL_" class="secondary">CHAOS_PP_NON_OPTIONAL_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#NON_OPTIONAL_ID" class="secondary">CHAOS_PP_NON_OPTIONAL_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="PACK_OPTIONAL"></a><h3 class="primary">CHAOS_PP_PACK_OPTIONAL</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#PACK_OPTIONAL" class="primary">CHAOS_PP_PACK_OPTIONAL</a></code> argument is used to preserve a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././true-optionals.html">true-optional argument</a> (or lack thereof) in subsequent invocations.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#PACK_OPTIONAL" class="primary">CHAOS_PP_PACK_OPTIONAL</a></code>(...)</pre>
+<dl>
+<dt>[<var>...</var>]</dt>
+<dd><p>
+			The argument whose <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././true-optionals.html">true-optional argument</a> is to be packed.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		If <code>__VA_ARGS__</code> contains more than a single argument, this macro expands to an expression of the form...
+		</p></div>
+<div><div><pre>(, args)</pre></div></div>
+<div><p>
+		...where <code>args</code> is a placeholder for all the arguments in <code>__VA_ARGS__</code> except the first.
+		Otherwise, this macro expands to nullary parentheses.
+	</p></div>
+<div><p>
+		The result of this macro is subsequently unpacked by <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#EXPOSE" class="primary">CHAOS_PP_EXPOSE</a></code> in a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././deferral.html">deferred context</a> context to propogate a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././true-optionals.html">true-optional argument</a>.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/facilities/optional.html#EXPOSE">CHAOS_PP_EXPOSE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/facilities/optional.html#IS_OPTIONAL">CHAOS_PP_IS_OPTIONAL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/facilities/optional.html#NON_OPTIONAL">CHAOS_PP_NON_OPTIONAL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/facilities/optional.html#OPTIONAL">CHAOS_PP_OPTIONAL</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/arithmetic/dec.html" class="header">&lt;chaos/preprocessor/arithmetic/dec.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html" class="header">&lt;chaos/preprocessor/config.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/when.html" class="header">&lt;chaos/preprocessor/control/when.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html" class="header">&lt;chaos/preprocessor/facilities/optional.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/basic.html" class="header">&lt;chaos/preprocessor/recursion/basic.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html" class="header">&lt;chaos/preprocessor/recursion/expr.h&gt;</a></code>
+
+#if <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html#VARIADICS" class="primary">CHAOS_PP_VARIADICS</a></code>
+
+#define REPEAT(count, ...) \
+    REPEAT_S(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#STATE" class="primary">CHAOS_PP_STATE</a></code>(), count, __VA_ARGS__) \
+    /**/
+#define REPEAT_S(s, count, ...) \
+    REPEAT_I( \
+        <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/basic.html#OBSTRUCT" class="primary">CHAOS_PP_OBSTRUCT</a></code>(), <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#NEXT" class="primary">CHAOS_PP_NEXT</a></code>(s), count, \
+        <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#NON_OPTIONAL" class="primary">CHAOS_PP_NON_OPTIONAL</a></code>(__VA_ARGS__), \
+        <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#PACK_OPTIONAL" class="primary">CHAOS_PP_PACK_OPTIONAL</a></code>(__VA_ARGS__) \
+    ) \
+    /**/
+#define REPEAT_INDIRECT() REPEAT_I
+#define REPEAT_I(_, s, count, macro, data) \
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/when.html#WHEN" class="primary">CHAOS_PP_WHEN</a></code> _(count)( \
+        <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR_S" class="primary">CHAOS_PP_EXPR_S</a></code>(s) _(REPEAT_INDIRECT _()( \
+            <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/basic.html#OBSTRUCT" class="primary">CHAOS_PP_OBSTRUCT</a></code> _(), <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#NEXT" class="primary">CHAOS_PP_NEXT</a></code>(s), \
+            <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/arithmetic/dec.html#DEC" class="primary">CHAOS_PP_DEC</a></code>(count), macro, data \
+        )) \
+        macro _(s, <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/arithmetic/dec.html#DEC" class="primary">CHAOS_PP_DEC</a></code>(count) <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#EXPOSE" class="primary">CHAOS_PP_EXPOSE</a></code>(data)) \
+    ) \
+    /**/
+
+#define M1(s, n) &lt; n &gt;
+#define M2(s, n, data) &lt; n, data &gt;
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR" class="primary">CHAOS_PP_EXPR</a></code>(REPEAT(3, M1))    // &lt; 0 &gt; &lt; 1 &gt; &lt; 2 &gt;
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR" class="primary">CHAOS_PP_EXPR</a></code>(REPEAT(3, M2, ~)) // &lt; 0, ~ &gt; &lt; 1, ~ &gt; &lt; 2, ~ &gt;
+
+#endif</pre>
+<hr>
+<a name="PACK_OPTIONAL_ID"></a><h3 class="secondary">CHAOS_PP_PACK_OPTIONAL_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#PACK_OPTIONAL_ID" class="secondary">CHAOS_PP_PACK_OPTIONAL_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#PACK_OPTIONAL" class="primary">CHAOS_PP_PACK_OPTIONAL</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#PACK_OPTIONAL_ID" class="secondary">CHAOS_PP_PACK_OPTIONAL_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#PACK_OPTIONAL" class="primary">CHAOS_PP_PACK_OPTIONAL</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="PACK_OPTIONAL_"></a><h3 class="secondary">CHAOS_PP_PACK_OPTIONAL_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#PACK_OPTIONAL_" class="secondary">CHAOS_PP_PACK_OPTIONAL_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#PACK_OPTIONAL" class="primary">CHAOS_PP_PACK_OPTIONAL</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#PACK_OPTIONAL_" class="secondary">CHAOS_PP_PACK_OPTIONAL_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#PACK_OPTIONAL_ID" class="secondary">CHAOS_PP_PACK_OPTIONAL_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="EXPOSE"></a><h3 class="primary">CHAOS_PP_EXPOSE</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#EXPOSE" class="primary">CHAOS_PP_EXPOSE</a></code> macro unpacks an argument previously packed with <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#PACK_OPTIONAL" class="primary">CHAOS_PP_PACK_OPTIONAL</a></code>.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#EXPOSE" class="primary">CHAOS_PP_EXPOSE</a></code>(pack)</pre>
+<dl>
+<dt><var>pack</var></dt>
+<dd><p>
+			The parenthetic expression to be unpacked.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		In C99, this macro expands to the contents of the parenthetic expression <var>pack</var> (which may or may not contain a leading comma).
+		</p></div>
+<div><div><pre>#define A ()
+#define B (, data)
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#EXPOSE" class="primary">CHAOS_PP_EXPOSE</a></code>(A) //
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#EXPOSE" class="primary">CHAOS_PP_EXPOSE</a></code>(B) // , data</pre></div></div>
+<div><p>
+		In C and C++, <var>pack</var> must be a unary parenthetic expression, and this macro expands to the element contained by the unary parenthetic expression plus a leading comma.
+		</p></div>
+<div><div><pre>#define A (data)
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#EXPOSE" class="primary">CHAOS_PP_EXPOSE</a></code>(A) // , data</pre></div></div>
+<div><p>
+		This macro is used to propogate <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././true-optionals.html">true-optional arguments</a> in <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././deferral.html">deferred contexts</a>.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/facilities/optional.html#IS_OPTIONAL">CHAOS_PP_IS_OPTIONAL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/facilities/optional.html#NON_OPTIONAL">CHAOS_PP_NON_OPTIONAL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/facilities/optional.html#OPTIONAL">CHAOS_PP_OPTIONAL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/facilities/optional.html#PACK_OPTIONAL">CHAOS_PP_PACK_OPTIONAL</a></code></li>
+</ul>
+<hr>
+<a name="EXPOSE_ID"></a><h3 class="secondary">CHAOS_PP_EXPOSE_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#EXPOSE_ID" class="secondary">CHAOS_PP_EXPOSE_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#EXPOSE" class="primary">CHAOS_PP_EXPOSE</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#EXPOSE_ID" class="secondary">CHAOS_PP_EXPOSE_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#EXPOSE" class="primary">CHAOS_PP_EXPOSE</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="EXPOSE_"></a><h3 class="secondary">CHAOS_PP_EXPOSE_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#EXPOSE_" class="secondary">CHAOS_PP_EXPOSE_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#EXPOSE" class="primary">CHAOS_PP_EXPOSE</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#EXPOSE_" class="secondary">CHAOS_PP_EXPOSE_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/optional.html#EXPOSE_ID" class="secondary">CHAOS_PP_EXPOSE_ID</a></code>)()</pre></div></div>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="../../.././license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</body>
+</html>

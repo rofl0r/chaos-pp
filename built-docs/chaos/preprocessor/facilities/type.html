@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>facilities/type.h - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="../../.././style.css">
+</head>
+<body>
+<p>
+	The <code>facilities/type.h</code> header defines a macro used to non-intrusively encode types that contain open commas.
+</p>
+<h4>Usage</h4>
+<pre class="box">#include <code><a class="header" href="../../.././chaos/preprocessor/facilities/type.html">&lt;chaos/preprocessor/facilities/type.h&gt;</a></code></pre>
+<h4>Contents</h4>
+<ul>
+<li><code><a class="primary" href="#BEGIN">CHAOS_PP_BEGIN</a></code></li>
+<li><code><a class="primary" href="#END">CHAOS_PP_END</a></code></li>
+<li><code><a class="primary" href="#TYPE">CHAOS_PP_TYPE</a></code></li>
+<li><code><a class="primary" href="#TYPE_II">CHAOS_PP_TYPE_II</a></code></li>
+</ul>
+<hr>
+<a name="TYPE"></a><h3 class="primary">CHAOS_PP_TYPE</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#TYPE" class="primary">CHAOS_PP_TYPE</a></code> macro is a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././rails.html">rail</a> used to encode types that contain open commas.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#TYPE" class="primary">CHAOS_PP_TYPE</a></code>(...)</pre>
+<dl>
+<dt>[<var>...</var>]</dt>
+<dd><p>
+			The type containing open commas to be encoded.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro expands to <code>__VA_ARGS__</code> when (and only when) the context introduced by the <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/rail.html#WALL" class="primary">CHAOS_PP_WALL</a></code> macro is present.
+	</p></div>
+<div><p>
+		The common use case for this macro is currently theoretical, as C++ does not yet allow variadic arguments.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/facilities/encode.html#DECODE">CHAOS_PP_DECODE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/facilities/encode.html#ENCODE">CHAOS_PP_ENCODE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/facilities/type.html#TYPE_II">CHAOS_PP_TYPE_II</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/recursion/rail.html#WALL">CHAOS_PP_WALL</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html" class="header">&lt;chaos/preprocessor/config.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html" class="header">&lt;chaos/preprocessor/facilities/type.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/rail.html" class="header">&lt;chaos/preprocessor/recursion/rail.h&gt;</a></code>
+
+#if <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html#VARIADICS" class="primary">CHAOS_PP_VARIADICS</a></code>
+
+#define MACRO(type) type
+
+MACRO(int) // int
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/rail.html#WALL" class="primary">CHAOS_PP_WALL</a></code>(
+    MACRO(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#TYPE" class="primary">CHAOS_PP_TYPE</a></code>(std::pair&lt;int, int&gt;))
+)
+// std::pair&lt;int, int&gt;
+
+#endif</pre>
+<hr>
+<a name="TYPE_ID"></a><h3 class="secondary">CHAOS_PP_TYPE_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#TYPE_ID" class="secondary">CHAOS_PP_TYPE_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#TYPE" class="primary">CHAOS_PP_TYPE</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#TYPE_ID" class="secondary">CHAOS_PP_TYPE_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#TYPE" class="primary">CHAOS_PP_TYPE</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="TYPE_"></a><h3 class="secondary">CHAOS_PP_TYPE_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#TYPE_" class="secondary">CHAOS_PP_TYPE_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#TYPE" class="primary">CHAOS_PP_TYPE</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#TYPE_" class="secondary">CHAOS_PP_TYPE_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#TYPE_ID" class="secondary">CHAOS_PP_TYPE_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="TYPE_II"></a><h3 class="primary">CHAOS_PP_TYPE_II</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#TYPE_II" class="primary">CHAOS_PP_TYPE_II</a></code> macro is a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././rails.html">rail</a> used to encode types that contain open commas.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#TYPE_II" class="primary">CHAOS_PP_TYPE_II</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#BEGIN" class="primary">CHAOS_PP_BEGIN</a></code> type <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#END" class="primary">CHAOS_PP_END</a></code>)</pre>
+<dl>
+<dt>[<var>type</var>]</dt>
+<dd><p>
+			The name of a type containing any number of open commas.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro, combined with <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#BEGIN" class="primary">CHAOS_PP_BEGIN</a></code> and <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#END" class="primary">CHAOS_PP_END</a></code>, expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././deferral.html">deferred expression</a> that expands to <var>type</var> when (and only when) the context introduced by the <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/rail.html#WALL" class="primary">CHAOS_PP_WALL</a></code> macro is present.
+	</p></div>
+<div><p>
+		This macro is used to pass types that contain open commas--even in when variadics are not enabled--<em>without having to count commas</em>.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/facilities/encode.html#DECODE">CHAOS_PP_DECODE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/facilities/encode.html#ENCODE">CHAOS_PP_ENCODE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/facilities/type.html#TYPE">CHAOS_PP_TYPE</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html" class="header">&lt;chaos/preprocessor/facilities/type.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html" class="header">&lt;chaos/preprocessor/recursion/expr.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/rail.html" class="header">&lt;chaos/preprocessor/recursion/rail.h&gt;</a></code>
+
+#define A(x) B(x)
+#define B(x) C(x)
+#define C(x) D(x)
+#define D(x) x
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR" class="primary">CHAOS_PP_EXPR</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/rail.html#WALL" class="primary">CHAOS_PP_WALL</a></code>(
+    A(
+        <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#TYPE_II" class="primary">CHAOS_PP_TYPE_II</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#BEGIN" class="primary">CHAOS_PP_BEGIN</a></code> std::pair&lt;int, int&gt; <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#END" class="primary">CHAOS_PP_END</a></code>)
+    )
+))
+// std::pair&lt;int, int&gt;</pre>
+<hr>
+<a name="TYPE_II_ID"></a><h3 class="secondary">CHAOS_PP_TYPE_II_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#TYPE_II_ID" class="secondary">CHAOS_PP_TYPE_II_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#TYPE_II" class="primary">CHAOS_PP_TYPE_II</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#TYPE_II_ID" class="secondary">CHAOS_PP_TYPE_II_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#TYPE_II" class="primary">CHAOS_PP_TYPE_II</a></code> to be passed around without expansion.
+				</p></div>
+<hr>
+<a name="TYPE_II_"></a><h3 class="secondary">CHAOS_PP_TYPE_II_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#TYPE_II_" class="secondary">CHAOS_PP_TYPE_II_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#TYPE_II" class="primary">CHAOS_PP_TYPE_II</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#TYPE_II_" class="secondary">CHAOS_PP_TYPE_II_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#TYPE_II_ID" class="secondary">CHAOS_PP_TYPE_II_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="BEGIN"></a><h3 class="primary">CHAOS_PP_BEGIN</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#BEGIN" class="primary">CHAOS_PP_BEGIN</a></code> macro is used as part of the usage of <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#TYPE_II" class="primary">CHAOS_PP_TYPE_II</a></code>.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#BEGIN" class="primary">CHAOS_PP_BEGIN</a></code></pre>
+<h4>See Also</h4>
+<ul><li><code><a class="primary" href="../../.././chaos/preprocessor/facilities/type.html#TYPE_II">CHAOS_PP_TYPE_II</a></code></li></ul>
+<hr>
+<a name="BEGIN_ID"></a><h3 class="secondary">CHAOS_PP_BEGIN_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#BEGIN_ID" class="secondary">CHAOS_PP_BEGIN_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#BEGIN" class="primary">CHAOS_PP_BEGIN</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#BEGIN_ID" class="secondary">CHAOS_PP_BEGIN_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#BEGIN" class="primary">CHAOS_PP_BEGIN</a></code> to be passed around without expansion.
+				</p></div>
+<hr>
+<a name="BEGIN_"></a><h3 class="secondary">CHAOS_PP_BEGIN_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#BEGIN_" class="secondary">CHAOS_PP_BEGIN_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#BEGIN" class="primary">CHAOS_PP_BEGIN</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#BEGIN_" class="secondary">CHAOS_PP_BEGIN_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#BEGIN_ID" class="secondary">CHAOS_PP_BEGIN_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="END"></a><h3 class="primary">CHAOS_PP_END</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#END" class="primary">CHAOS_PP_END</a></code> macro is used as part of the usage of <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#TYPE_II" class="primary">CHAOS_PP_TYPE_II</a></code>.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#END" class="primary">CHAOS_PP_END</a></code></pre>
+<h4>See Also</h4>
+<ul><li><code><a class="primary" href="../../.././chaos/preprocessor/facilities/type.html#TYPE_II">CHAOS_PP_TYPE_II</a></code></li></ul>
+<hr>
+<a name="END_ID"></a><h3 class="secondary">CHAOS_PP_END_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#END_ID" class="secondary">CHAOS_PP_END_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#END" class="primary">CHAOS_PP_END</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#END_ID" class="secondary">CHAOS_PP_END_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#END" class="primary">CHAOS_PP_END</a></code> to be passed around without expansion.
+				</p></div>
+<hr>
+<a name="END_"></a><h3 class="secondary">CHAOS_PP_END_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#END_" class="secondary">CHAOS_PP_END_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#END" class="primary">CHAOS_PP_END</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#END_" class="secondary">CHAOS_PP_END_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/type.html#END_ID" class="secondary">CHAOS_PP_END_ID</a></code>)()</pre></div></div>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="../../.././license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</body>
+</html>

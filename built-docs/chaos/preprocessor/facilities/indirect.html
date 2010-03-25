@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>facilities/indirect.h - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="../../.././style.css">
+</head>
+<body>
+<p>
+	The <code>facilities/indirect.h</code> header defines a macro used to facilitate sequential indirection.
+</p>
+<h4>Usage</h4>
+<pre class="box">#include <code><a class="header" href="../../.././chaos/preprocessor/facilities/indirect.html">&lt;chaos/preprocessor/facilities/indirect.h&gt;</a></code></pre>
+<h4>Contents</h4>
+<ul><li><code><a class="primary" href="#INDIRECT">CHAOS_PP_INDIRECT</a></code></li></ul>
+<hr>
+<a name="INDIRECT"></a><h3 class="primary">CHAOS_PP_INDIRECT</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/indirect.html#INDIRECT" class="primary">CHAOS_PP_INDIRECT</a></code> macro facilitates sequential indirection.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/indirect.html#INDIRECT" class="primary">CHAOS_PP_INDIRECT</a></code>(n)(macro)</pre>
+<dl>
+<dt><var>n</var></dt>
+<dd><p>
+			The value to be indirected to <var>macro</var>.
+			Valid values range from <code>0</code> to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/limits.html#LIMIT_MAG" class="primary">CHAOS_PP_LIMIT_MAG</a></code>.
+		</p></dd>
+<dt><var>macro</var></dt>
+<dd>
+<p>
+			The macro to be invoked with <var>n</var>.
+			This argument must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			</p>
+<div><pre>macro(n)</pre></div>
+</dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro facilitates sequential indirection that passes a value from on iteration to the next.
+		It halves the number of macros required to implement this type of operation.
+	</p></div>
+<div><p>
+		This macro invokes <var>macro</var> with <var>n</var>.
+		The intent is that <var>macro(n)</var> expands to another macro such that <var>n</var> is preserved through encoding in a macro name.
+		For example,
+		</p></div>
+<div><div><pre>#define ABC(n) ABC_ ## n
+#define ABC_0(x) x <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/indirect.html#INDIRECT" class="primary">CHAOS_PP_INDIRECT</a></code>(0)
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/indirect.html#INDIRECT" class="primary">CHAOS_PP_INDIRECT</a></code>(0)(ABC)(a)(ABC)(b)(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/eat.html#EAT" class="primary">CHAOS_PP_EAT</a></code>) // a b</pre></div></div>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/arithmetic/inc.html" class="header">&lt;chaos/preprocessor/arithmetic/inc.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/if.html" class="header">&lt;chaos/preprocessor/control/if.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/indirect.html" class="header">&lt;chaos/preprocessor/facilities/indirect.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html" class="header">&lt;chaos/preprocessor/recursion/expr.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/for_each.html" class="header">&lt;chaos/preprocessor/seq/for_each.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/rem.html" class="header">&lt;chaos/preprocessor/tuple/rem.h&gt;</a></code>
+
+#define COUNT(seq) \
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR" class="primary">CHAOS_PP_EXPR</a></code>( \
+        <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/indirect.html#INDIRECT" class="primary">CHAOS_PP_INDIRECT</a></code>(0) \
+        <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR" class="primary">CHAOS_PP_EXPR</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/for_each.html#SEQ_FOR_EACH" class="primary">CHAOS_PP_SEQ_FOR_EACH</a></code>( \
+            COUNT_A, seq, ~ \
+        )) \
+        (<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/rem.html#REM" class="primary">CHAOS_PP_REM</a></code>) \
+    ) \
+    /**/
+#define COUNT_A(s, x, _) (COUNT_B)(x)
+#define COUNT_B(n) COUNT_ ## n
+#define COUNT_C(n, x) \
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/indirect.html#INDIRECT" class="primary">CHAOS_PP_INDIRECT</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/if.html#IF" class="primary">CHAOS_PP_IF</a></code>(x)( \
+        <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/arithmetic/inc.html#INC" class="primary">CHAOS_PP_INC</a></code>(n), n \
+    )) \
+    /**/
+#define COUNT_0(x) COUNT_C(0, x)
+#define COUNT_1(x) COUNT_C(1, x)
+#define COUNT_2(x) COUNT_C(2, x)
+#define COUNT_3(x) COUNT_C(3, x)
+#define COUNT_4(x) COUNT_C(4, x)
+#define COUNT_5(x) COUNT_C(5, x)
+// ...
+
+COUNT((1)(0)(3)(2)(0)(0)) // 3
+COUNT((0)(0)(0)(2)(0)(0)) // 1</pre>
+<hr>
+<a name="INDIRECT_ID"></a><h3 class="secondary">CHAOS_PP_INDIRECT_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/indirect.html#INDIRECT_ID" class="secondary">CHAOS_PP_INDIRECT_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/indirect.html#INDIRECT" class="primary">CHAOS_PP_INDIRECT</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/indirect.html#INDIRECT_ID" class="secondary">CHAOS_PP_INDIRECT_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro exists only for uniformity with other macros that require indirect invocation.
+				</p></div>
+<hr>
+<a name="INDIRECT_"></a><h3 class="secondary">CHAOS_PP_INDIRECT_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/indirect.html#INDIRECT_" class="secondary">CHAOS_PP_INDIRECT_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/indirect.html#INDIRECT" class="primary">CHAOS_PP_INDIRECT</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/indirect.html#INDIRECT_" class="secondary">CHAOS_PP_INDIRECT_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/facilities/indirect.html#INDIRECT" class="primary">CHAOS_PP_INDIRECT</a></code>)</pre></div></div>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="../../.././license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</body>
+</html>

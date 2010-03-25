@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>tuple/eat.h - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="../../.././style.css">
+</head>
+<body>
+<p>
+	The <code>tuple/eat.h</code> header defines a macro that eats a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a>.
+</p>
+<h4>Usage</h4>
+<pre class="box">#include <code><a class="header" href="../../.././chaos/preprocessor/tuple/eat.html">&lt;chaos/preprocessor/tuple/eat.h&gt;</a></code></pre>
+<h4>Contents</h4>
+<ul>
+<li><code><a class="primary" href="#EAT">CHAOS_PP_EAT</a></code></li>
+<li><code><a class="primary" href="#TUPLE_EAT">CHAOS_PP_TUPLE_EAT</a></code></li>
+</ul>
+<hr>
+<a name="TUPLE_EAT"></a><h3 class="primary">CHAOS_PP_TUPLE_EAT</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/eat.html#TUPLE_EAT" class="primary">CHAOS_PP_TUPLE_EAT</a></code> macro eats a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a> of the specified size.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/eat.html#TUPLE_EAT" class="primary">CHAOS_PP_TUPLE_EAT</a></code>(size) tuple</pre>
+<dl>
+<dt>[<var>size</var>]</dt>
+<dd><p>
+			This argument exists only for compatibility.
+			It is otherwise ignored.
+		</p></dd>
+<dt><var>tuple</var></dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a> to be eaten.
+		</p></dd>
+</dl>
+<h4>Usage <small>- C/C++ Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/eat.html#TUPLE_EAT" class="primary">CHAOS_PP_TUPLE_EAT</a></code>(size) tuple</pre>
+<dl>
+<dt><var>size</var></dt>
+<dd><p>
+			The size of the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a> to be eaten.
+			Valid values range from <code>0</code> to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/limits.html#LIMIT_TUPLE" class="primary">CHAOS_PP_LIMIT_TUPLE</a></code>.
+		</p></dd>
+<dt><var>tuple</var></dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a> to be eaten.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/eat.html#TUPLE_EAT" class="primary">CHAOS_PP_TUPLE_EAT</a></code> macro itself expands to a macro capable of being invoked against a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a> of arity <var>size</var>.
+		This macro, when invoked against <var>tuple</var>, expands to nothing.
+		</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/eat.html#TUPLE_EAT" class="primary">CHAOS_PP_TUPLE_EAT</a></code>(3)(a, b, c) //</pre></div></div>
+<div><p>
+		Note that in C99, the <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/eat.html#TUPLE_EAT" class="primary">CHAOS_PP_TUPLE_EAT</a></code> macro expands to a macro capable of being invoked against a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a> of <em>any</em> arity.
+		The <var>size</var> parameter is ignored.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/eat.html#EAT">CHAOS_PP_EAT</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/rem.html#TUPLE_REM">CHAOS_PP_TUPLE_REM</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/arithmetic/dec.html" class="header">&lt;chaos/preprocessor/arithmetic/dec.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/if.html" class="header">&lt;chaos/preprocessor/control/if.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/limits.html" class="header">&lt;chaos/preprocessor/limits.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/basic.html" class="header">&lt;chaos/preprocessor/recursion/basic.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html" class="header">&lt;chaos/preprocessor/recursion/expr.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/eat.html" class="header">&lt;chaos/preprocessor/tuple/eat.h&gt;</a></code>
+
+#define T_MINUS(n) T_MINUS_BYPASS(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/limits.html#LIMIT_EXPR" class="primary">CHAOS_PP_LIMIT_EXPR</a></code>, n)
+#define T_MINUS_BYPASS(s, n) \
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR_S" class="primary">CHAOS_PP_EXPR_S</a></code>(s)(T_MINUS_I( \
+        <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#PREV" class="primary">CHAOS_PP_PREV</a></code>(s), n \
+    )) \
+    /**/
+#define T_MINUS_INDIRECT() T_MINUS_I
+#define T_MINUS_I(s, n) \
+    n <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/if.html#IF" class="primary">CHAOS_PP_IF</a></code>(n)( \
+        T_MINUS_II, ?! <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/eat.html#TUPLE_EAT" class="primary">CHAOS_PP_TUPLE_EAT</a></code>(3) \
+    )(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/basic.html#OBSTRUCT" class="primary">CHAOS_PP_OBSTRUCT</a></code>(), s, n) \
+    /**/
+#define T_MINUS_II(_, s, n) \
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR_S" class="primary">CHAOS_PP_EXPR_S</a></code>(s) _(T_MINUS_INDIRECT _()( \
+        <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#PREV" class="primary">CHAOS_PP_PREV</a></code>(s), <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/arithmetic/dec.html#DEC" class="primary">CHAOS_PP_DEC</a></code>(n) \
+    )) \
+    /**/
+
+T_MINUS(10) // 10 9 8 7 6 5 4 3 2 1 0 ?!</pre>
+<hr>
+<a name="TUPLE_EAT_ID"></a><h3 class="secondary">CHAOS_PP_TUPLE_EAT_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/eat.html#TUPLE_EAT_ID" class="secondary">CHAOS_PP_TUPLE_EAT_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/eat.html#TUPLE_EAT" class="primary">CHAOS_PP_TUPLE_EAT</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/eat.html#TUPLE_EAT_ID" class="secondary">CHAOS_PP_TUPLE_EAT_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro exists only for uniformity with other macros that require indirect invocation.
+				</p></div>
+<hr>
+<a name="TUPLE_EAT_"></a><h3 class="secondary">CHAOS_PP_TUPLE_EAT_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/eat.html#TUPLE_EAT_" class="secondary">CHAOS_PP_TUPLE_EAT_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/eat.html#TUPLE_EAT" class="primary">CHAOS_PP_TUPLE_EAT</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/eat.html#TUPLE_EAT_" class="secondary">CHAOS_PP_TUPLE_EAT_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/eat.html#TUPLE_EAT" class="primary">CHAOS_PP_TUPLE_EAT</a></code>)</pre></div></div>
+<hr>
+<a name="EAT"></a><h3 class="primary">CHAOS_PP_EAT</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/eat.html#EAT" class="primary">CHAOS_PP_EAT</a></code> macro eats a unary <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a> in C++ (or C prior to C99) or a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a> of any arity in C99.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/eat.html#EAT" class="primary">CHAOS_PP_EAT</a></code> tuple</pre>
+<dl>
+<dt><var>tuple</var></dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a> to be eaten.
+		</p></dd>
+</dl>
+<h4>Usage <small>- C/C++ Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/eat.html#EAT" class="primary">CHAOS_PP_EAT</a></code> tuple</pre>
+<dl>
+<dt><var>tuple</var></dt>
+<dd><p>
+			The unary <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a> to be eaten.
+		</p></dd>
+</dl>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/rem.html#REM">CHAOS_PP_REM</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/eat.html#TUPLE_EAT">CHAOS_PP_TUPLE_EAT</a></code></li>
+</ul>
+<hr>
+<a name="EAT_ID"></a><h3 class="secondary">CHAOS_PP_EAT_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/eat.html#EAT_ID" class="secondary">CHAOS_PP_EAT_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/eat.html#EAT" class="primary">CHAOS_PP_EAT</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/eat.html#EAT_ID" class="secondary">CHAOS_PP_EAT_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro exists only for uniformity with other macros that require indirect invocation.
+				</p></div>
+<hr>
+<a name="EAT_"></a><h3 class="secondary">CHAOS_PP_EAT_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/eat.html#EAT_" class="secondary">CHAOS_PP_EAT_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/eat.html#EAT" class="primary">CHAOS_PP_EAT</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/eat.html#EAT_" class="secondary">CHAOS_PP_EAT_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/eat.html#EAT" class="primary">CHAOS_PP_EAT</a></code>)</pre></div></div>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="../../.././license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</body>
+</html>

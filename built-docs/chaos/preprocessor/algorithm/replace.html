@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>algorithm/replace.h - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="../../.././style.css">
+</head>
+<body>
+<p>
+	The <code>algorithm/replace.h</code> header defines an algorithm that replaces an element in a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././generics.html">generic data structure</a>.
+</p>
+<h4>Usage</h4>
+<pre class="box">#include <code><a class="header" href="../../.././chaos/preprocessor/algorithm/replace.html">&lt;chaos/preprocessor/algorithm/replace.h&gt;</a></code></pre>
+<h4>Contents</h4>
+<ul><li><code><a class="primary" href="#REPLACE">CHAOS_PP_REPLACE</a></code></li></ul>
+<hr>
+<a name="REPLACE"></a><h3 class="primary">CHAOS_PP_REPLACE</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/replace.html#REPLACE" class="primary">CHAOS_PP_REPLACE</a></code> macro replaces the element at the index specified by its first argument in its second argument with the element specified by its third argument.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/replace.html#REPLACE" class="primary">CHAOS_PP_REPLACE</a></code>(i, g, ...)</pre>
+<dl>
+<dt><var>i</var></dt>
+<dd><p>
+			The zero-based index of the element to be replaced.
+			Valid values range from <code>0</code> to <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/size.html#SIZE" class="primary">CHAOS_PP_SIZE</a></code>(g)</code> - 1.
+		</p></dd>
+<dt><var>g</var></dt>
+<dd><p>
+			The non-nil <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././generics.html">generic data structure</a> in which an element is to be replaced.
+		</p></dd>
+<dt>[<var>...</var>]</dt>
+<dd><p>
+			The element used to replace the element at index <var>i</var> in <var>g</var>.
+		</p></dd>
+</dl>
+<h4>Usage <small>- C/C++ Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/replace.html#REPLACE" class="primary">CHAOS_PP_REPLACE</a></code>(i, g, x)</pre>
+<dl>
+<dt><var>i</var></dt>
+<dd><p>
+			The zero-based index of the element to be replaced.
+			Valid values range from <code>0</code> to <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/size.html#SIZE" class="primary">CHAOS_PP_SIZE</a></code>(g)</code> - 1.
+		</p></dd>
+<dt><var>g</var></dt>
+<dd><p>
+			The non-nil <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././generics.html">generic data structure</a> in which an element is to be replaced.
+		</p></dd>
+<dt><var>x</var></dt>
+<dd><p>
+			The element used to replace the element at index <var>i</var> in <var>g</var>.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././generics.html">generic data structure</a> of the same type as <var>g</var> containing the elements of <var>g</var> except with the <var>i</var>-th element replaced by <var>x</var> (or <code>__VA_ARGS__</code>).
+	</p></div>
+<div><p>
+		The efficiency of the algorithm's use of the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././recursion.html">recursion backend</a> can be described in terms of the number of <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././recursion.html">recursion steps</a> required to complete the algorithm.
+		The asymptotic upper and lower bounds are Θ(<var class="external">i</var>+1), where <var class="external">i</var> is <var>i</var>.
+	</p></div>
+<div><p>
+		This macro uses <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././bypass-semantics.html">bypass semantics</a>.
+		If <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././bypass-semantics.html">bypass semantics</a> are already in effect, <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/replace.html#REPLACE_BYPASS" class="secondary">CHAOS_PP_REPLACE_BYPASS</a></code> must be used instead.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/replace.html#SEQ_REPLACE">CHAOS_PP_SEQ_REPLACE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/replace.html#TUPLE_REPLACE">CHAOS_PP_TUPLE_REPLACE</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/replace.html" class="header">&lt;chaos/preprocessor/algorithm/replace.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html" class="header">&lt;chaos/preprocessor/config.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html" class="header">&lt;chaos/preprocessor/tuple/core.h&gt;</a></code>
+
+#if <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html#VARIADICS" class="primary">CHAOS_PP_VARIADICS</a></code>
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/replace.html#REPLACE" class="primary">CHAOS_PP_REPLACE</a></code>(2, (<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE" class="primary">CHAOS_PP_TUPLE</a></code>) (a, b, c, d), !)
+// (<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE" class="primary">CHAOS_PP_TUPLE</a></code>) (a, b, !, d)
+
+#endif</pre>
+<hr>
+<a name="REPLACE_ID"></a><h3 class="secondary">CHAOS_PP_REPLACE_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/replace.html#REPLACE_ID" class="secondary">CHAOS_PP_REPLACE_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/replace.html#REPLACE" class="primary">CHAOS_PP_REPLACE</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/replace.html#REPLACE_ID" class="secondary">CHAOS_PP_REPLACE_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/replace.html#REPLACE" class="primary">CHAOS_PP_REPLACE</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="REPLACE_"></a><h3 class="secondary">CHAOS_PP_REPLACE_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/replace.html#REPLACE_" class="secondary">CHAOS_PP_REPLACE_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/replace.html#REPLACE" class="primary">CHAOS_PP_REPLACE</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/replace.html#REPLACE_" class="secondary">CHAOS_PP_REPLACE_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/replace.html#REPLACE_ID" class="secondary">CHAOS_PP_REPLACE_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="REPLACE_BYPASS"></a><h3 class="alternate">CHAOS_PP_REPLACE_BYPASS</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/replace.html#REPLACE_BYPASS" class="secondary">CHAOS_PP_REPLACE_BYPASS</a></code> macro behaves identically to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/replace.html#REPLACE" class="primary">CHAOS_PP_REPLACE</a></code> except that it is parametized by the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././bypass-semantics.html">bypass recursion state</a>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/replace.html#REPLACE_BYPASS" class="secondary">CHAOS_PP_REPLACE_BYPASS</a></code>(s, i, g, ...)</pre>
+<dl>
+<dt><var>s</var></dt>
+<dd><p>
+				The current <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././bypass-semantics.html">bypass recursion state</a>.
+			</p></dd>
+<dt><var>i</var></dt>
+<dd><p>
+			The zero-based index of the element to be replaced.
+			Valid values range from <code>0</code> to <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/size.html#SIZE" class="primary">CHAOS_PP_SIZE</a></code>(g)</code> - 1.
+		</p></dd>
+<dt><var>g</var></dt>
+<dd><p>
+			The non-nil <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././generics.html">generic data structure</a> in which an element is to be replaced.
+		</p></dd>
+<dt>[<var>...</var>]</dt>
+<dd><p>
+			The element used to replace the element at index <var>i</var> in <var>g</var>.
+		</p></dd>
+</dl>
+<h4>Usage <small>- C/C++ Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/replace.html#REPLACE_BYPASS" class="secondary">CHAOS_PP_REPLACE_BYPASS</a></code>(s, i, g, x)</pre>
+<dl>
+<dt><var>s</var></dt>
+<dd><p>
+				The current <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././bypass-semantics.html">bypass recursion state</a>.
+			</p></dd>
+<dt><var>i</var></dt>
+<dd><p>
+			The zero-based index of the element to be replaced.
+			Valid values range from <code>0</code> to <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/size.html#SIZE" class="primary">CHAOS_PP_SIZE</a></code>(g)</code> - 1.
+		</p></dd>
+<dt><var>g</var></dt>
+<dd><p>
+			The non-nil <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././generics.html">generic data structure</a> in which an element is to be replaced.
+		</p></dd>
+<dt><var>x</var></dt>
+<dd><p>
+			The element used to replace the element at index <var>i</var> in <var>g</var>.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+			If <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././bypass-semantics.html">bypass semantics</a> are already in effect, this macro must be used instead of <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/replace.html#REPLACE" class="primary">CHAOS_PP_REPLACE</a></code>.
+		</p></div>
+<hr>
+<a name="REPLACE_BYPASS_ID"></a><h3 class="secondary">CHAOS_PP_REPLACE_BYPASS_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/replace.html#REPLACE_BYPASS_ID" class="secondary">CHAOS_PP_REPLACE_BYPASS_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/replace.html#REPLACE_BYPASS" class="secondary">CHAOS_PP_REPLACE_BYPASS</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/replace.html#REPLACE_BYPASS_ID" class="secondary">CHAOS_PP_REPLACE_BYPASS_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/replace.html#REPLACE_BYPASS" class="secondary">CHAOS_PP_REPLACE_BYPASS</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="REPLACE_BYPASS_"></a><h3 class="secondary">CHAOS_PP_REPLACE_BYPASS_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/replace.html#REPLACE_BYPASS_" class="secondary">CHAOS_PP_REPLACE_BYPASS_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/replace.html#REPLACE_BYPASS" class="secondary">CHAOS_PP_REPLACE_BYPASS</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/replace.html#REPLACE_BYPASS_" class="secondary">CHAOS_PP_REPLACE_BYPASS_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/replace.html#REPLACE_BYPASS_ID" class="secondary">CHAOS_PP_REPLACE_BYPASS_ID</a></code>)()</pre></div></div>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="../../.././license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</body>
+</html>

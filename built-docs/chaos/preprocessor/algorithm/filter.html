@@ -1,0 +1,367 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>algorithm/filter.h - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="../../.././style.css">
+</head>
+<body>
+<p>
+	The <code>algorithm/filter.h</code> header defines an algorithm that filters elements from a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././generics.html">generic data structure</a> according to a user-specified criteria.
+</p>
+<h4>Usage</h4>
+<pre class="box">#include <code><a class="header" href="../../.././chaos/preprocessor/algorithm/filter.html">&lt;chaos/preprocessor/algorithm/filter.h&gt;</a></code></pre>
+<h4>Contents</h4>
+<ul><li><code><a class="primary" href="#FILTER">CHAOS_PP_FILTER</a></code></li></ul>
+<hr>
+<a name="FILTER"></a><h3 class="primary">CHAOS_PP_FILTER</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/filter.html#FILTER" class="primary">CHAOS_PP_FILTER</a></code> macro filters elements from its second argument according to the criteria specified by its first argument.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR" class="primary">CHAOS_PP_EXPR</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/filter.html#FILTER" class="primary">CHAOS_PP_FILTER</a></code>(pred, g))</pre>
+<dl>
+<dt><var>pred</var></dt>
+<dd>
+<p>
+				The predicate that determines whether an element is to remain in the resulting <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././generics.html">generic data structure</a>.
+				This predicate must be either a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				</p>
+<div><pre>pred(s, elem<sup>†</sup>)</pre></div>
+<p>
+				<sup>†</sup>
+				If the type of <var>g</var> is non-variadic, <var>elem</var> must be either <code>...</code> or the number of parameters that corresponds to the number of sub-elements in each element of <var>g</var>.
+				Otherwise, <var>elem</var> must be <code>...</code> or a single parameter.
+			</p>
+</dd>
+<dt><var>g</var></dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././generics.html">generic data structure</a> to be filtered.
+		</p></dd>
+</dl>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR" class="primary">CHAOS_PP_EXPR</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/filter.html#FILTER" class="primary">CHAOS_PP_FILTER</a></code>(pred, g, ...))</pre>
+<dl>
+<dt><var>pred</var></dt>
+<dd>
+<p>
+				The predicate that determines whether an element is to remain in the resulting <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././generics.html">generic data structure</a>.
+				This predicate must be either a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				</p>
+<div><pre>pred(s, elem<sup>†</sup>, data<sup>‡</sup>)</pre></div>
+<p>
+				<sup>†</sup>
+				If the type of <var>g</var> is non-variadic, <var>elem</var> must be the number of parameters that corresponds to the number of sub-elements in each element of <var>g</var>.
+				Otherwise, <var>elem</var> must be a single parameter.
+			</p>
+<p>
+				<sup>‡</sup>
+				The <var>data</var> pseudo-parameter must be either <code>...</code> or the number of parameters that corresponds to the number of arguments in the auxiliary data, <code>__VA_ARGS__</code>.
+			</p>
+</dd>
+<dt><var>g</var></dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././generics.html">generic data structure</a> to be filtered.
+		</p></dd>
+<dt>[<var>...</var>]</dt>
+<dd><p>
+			Auxiliary data to be passed through the algorithm to the predicate.
+		</p></dd>
+</dl>
+<h4>Usage <small>- C/C++ Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR" class="primary">CHAOS_PP_EXPR</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/filter.html#FILTER" class="primary">CHAOS_PP_FILTER</a></code>(pred, g, data))</pre>
+<dl>
+<dt><var>pred</var></dt>
+<dd>
+<p>
+			The predicate that determines whether an element is to remain in the resulting <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././generics.html">generic data structure</a>.
+			This predicate must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			</p>
+<div><pre>pred(s, elem, data)</pre></div>
+</dd>
+<dt><var>g</var></dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././generics.html">generic data structure</a> to be filtered.
+		</p></dd>
+<dt><var>data</var></dt>
+<dd><p>
+			Auxiliary data to be passed through the algorithm to the predicate.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/filter.html#FILTER" class="primary">CHAOS_PP_FILTER</a></code> macro itself expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././deferral.html">deferred expression</a> in terms of <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#NEXT" class="primary">CHAOS_PP_NEXT</a></code>(s)</code>.
+		This <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././deferral.html">deferred expression</a>, when invoked by <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR" class="primary">CHAOS_PP_EXPR</a></code>, expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././generics.html">generic data structure</a> of the same type as <var>g</var> that contains the elements for which the predicate expands to <code>1</code>.
+	</p></div>
+<div><p>
+		The predicate is invoked for each element in <var>g</var> with the current <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././recursion.html">recursion state</a> (<var>s</var>), the current element (<var>elem</var>), and, if it exists, the auxiliary data (<var>data</var> or <code>__VA_ARGS__</code>).
+		This invocation must expand to <code>0</code>, <code>1</code>, or a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././deferral.html">deferred expression</a> in terms of <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#NEXT" class="primary">CHAOS_PP_NEXT</a></code>(s)</code> that expands to either <code>0</code> or <code>1</code>.
+		Expansion to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././deferral.html">deferred expression</a> allows the predicate to recurse on itself if necessary.
+	</p></div>
+<div><p>
+		In C99, it is possible to omit the auxiliary data argument altogether.
+		This is different than passing "nothing" as the auxiliary data.
+		</p></div>
+<div><div><pre>#define D (<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE" class="primary">CHAOS_PP_TUPLE</a></code>) (a, b, c)
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR" class="primary">CHAOS_PP_EXPR</a></code>(
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/filter.html#FILTER" class="primary">CHAOS_PP_FILTER</a></code>(PRED, D,) // #1
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/filter.html#FILTER" class="primary">CHAOS_PP_FILTER</a></code>(PRED, D)  // #2
+)</pre></div></div>
+<div><p>
+		The first line passes "nothing" as the auxiliary data, which causes <code>PRED</code> to be invoked as (e.g.)...
+		</p></div>
+<div><div><pre>PRED(s, a,)</pre></div></div>
+<div><p>
+		The second line omits the auxiliary data, which causes <code>PRED</code> to be invoked as (e.g.)...
+		</p></div>
+<div><div><pre>PRED(s, a)</pre></div></div>
+<div><p>
+		The fundamental difference is that, in the first line, the auxiliary data is empty (which might have a valid meaning as data), but, in the second line, <em>there is no auxiliary data</em>.
+		Hence, the algorithm is overloaded on a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././true-optionals.html">true-optional parameter</a>.
+	</p></div>
+<div><p>
+		Invocations of the predicate are trampolined such that each invocation is invoked with <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#NEXT" class="primary">CHAOS_PP_NEXT</a></code>(s)</code>, where <var>s</var> is the original <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././recursion.html">recursion state</a> at the beginning of the algorithm (i.e. <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#STATE" class="primary">CHAOS_PP_STATE</a></code>()</code>).
+		This maximizes the utility of the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././recursion.html">recursion backend</a>.
+	</p></div>
+<div><p>
+		Ignoring the complexity of <var>pred</var> (which is invoked once for each element in <var>g</var>), the efficiency of the algorithm's use of the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././recursion.html">recursion backend</a> can be described in terms of the number of <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././recursion.html">recursion steps</a> required to complete the algorithm.
+		The asymptotic upper and lower bounds are Θ(<var class="external">n</var>+1), where <var class="external">n</var> is the number of elements in <var>g</var>.
+	</p></div>
+<div><p>
+		This macro deduces the current <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././recursion.html">recursion state</a> and invokes <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/filter.html#FILTER_S" class="secondary">CHAOS_PP_FILTER_S</a></code>.
+		If the current <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././recursion.html">recursion state</a> is already known, direct use of <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/filter.html#FILTER_S" class="secondary">CHAOS_PP_FILTER_S</a></code> is more efficient.
+	</p></div>
+<div><p>
+		This macro may not be used if <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././bypass-semantics.html">bypass semantics</a> are in effect.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/algorithm/auto/filter.html#AUTO_FILTER">CHAOS_PP_AUTO_FILTER</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/algorithm/x/filter.html#FILTER_X">CHAOS_PP_FILTER_X</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/auto/filter.html#SEQ_AUTO_FILTER">CHAOS_PP_SEQ_AUTO_FILTER</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/filter.html#SEQ_FILTER">CHAOS_PP_SEQ_FILTER</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/auto/filter.html#TUPLE_AUTO_FILTER">CHAOS_PP_TUPLE_AUTO_FILTER</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/filter.html#TUPLE_FILTER">CHAOS_PP_TUPLE_FILTER</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/variadic/auto/filter.html#VARIADIC_SEQ_AUTO_FILTER">CHAOS_PP_VARIADIC_SEQ_AUTO_FILTER</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/variadic/filter.html#VARIADIC_SEQ_FILTER">CHAOS_PP_VARIADIC_SEQ_FILTER</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/filter.html" class="header">&lt;chaos/preprocessor/algorithm/filter.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html" class="header">&lt;chaos/preprocessor/config.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html" class="header">&lt;chaos/preprocessor/lambda/ops.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/logical/bool.html" class="header">&lt;chaos/preprocessor/logical/bool.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html" class="header">&lt;chaos/preprocessor/recursion/expr.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/core.html" class="header">&lt;chaos/preprocessor/string/core.h&gt;</a></code>
+
+#define P1(s, elem, _) <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/logical/bool.html#BOOL" class="primary">CHAOS_PP_BOOL</a></code>(elem)
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR" class="primary">CHAOS_PP_EXPR</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/filter.html#FILTER" class="primary">CHAOS_PP_FILTER</a></code>(
+    P1, (<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/core.html#STRING" class="primary">CHAOS_PP_STRING</a></code>) 1 0 2 0 3, ~
+))
+// (<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/core.html#STRING" class="primary">CHAOS_PP_STRING</a></code>) 1 2 3
+
+#if <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html#VARIADICS" class="primary">CHAOS_PP_VARIADICS</a></code>
+
+#define P2(s, elem) <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/logical/bool.html#BOOL" class="primary">CHAOS_PP_BOOL</a></code>(elem)
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR" class="primary">CHAOS_PP_EXPR</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/filter.html#FILTER" class="primary">CHAOS_PP_FILTER</a></code>(
+    P2, (<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/core.html#STRING" class="primary">CHAOS_PP_STRING</a></code>) 1 0 2 0 3
+))
+// (<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/core.html#STRING" class="primary">CHAOS_PP_STRING</a></code>) 1 2 3
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR" class="primary">CHAOS_PP_EXPR</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/filter.html#FILTER" class="primary">CHAOS_PP_FILTER</a></code>(
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/logical/bool.html#BOOL_" class="secondary">CHAOS_PP_BOOL_</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#ARG" class="primary">CHAOS_PP_ARG</a></code>(1)),
+    (<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/core.html#STRING" class="primary">CHAOS_PP_STRING</a></code>) 1 0 2 0 3
+))
+// (<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/core.html#STRING" class="primary">CHAOS_PP_STRING</a></code>) 1 2 3
+
+#endif</pre>
+<hr>
+<a name="FILTER_ID"></a><h3 class="secondary">CHAOS_PP_FILTER_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/filter.html#FILTER_ID" class="secondary">CHAOS_PP_FILTER_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/filter.html#FILTER" class="primary">CHAOS_PP_FILTER</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/filter.html#FILTER_ID" class="secondary">CHAOS_PP_FILTER_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/filter.html#FILTER" class="primary">CHAOS_PP_FILTER</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="FILTER_"></a><h3 class="secondary">CHAOS_PP_FILTER_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/filter.html#FILTER_" class="secondary">CHAOS_PP_FILTER_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/filter.html#FILTER" class="primary">CHAOS_PP_FILTER</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/filter.html#FILTER_" class="secondary">CHAOS_PP_FILTER_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/filter.html#FILTER_ID" class="secondary">CHAOS_PP_FILTER_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="FILTER_S"></a><h3 class="alternate">CHAOS_PP_FILTER_S</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/filter.html#FILTER_S" class="secondary">CHAOS_PP_FILTER_S</a></code> macro behaves identically to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/filter.html#FILTER" class="primary">CHAOS_PP_FILTER</a></code> except that it is parametized by the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././recursion.html">recursion state</a>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR_S" class="primary">CHAOS_PP_EXPR_S</a></code>(s)(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/filter.html#FILTER_S" class="secondary">CHAOS_PP_FILTER_S</a></code>(s, pred, g))</pre>
+<dl>
+<dt><var>s</var></dt>
+<dd><p>
+				The current <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././recursion.html">recursion state</a>.
+			</p></dd>
+<dt><var>pred</var></dt>
+<dd>
+<p>
+				The predicate that determines whether an element is to remain in the resulting <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././generics.html">generic data structure</a>.
+				This predicate must be either a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				</p>
+<div><pre>pred(s, elem<sup>†</sup>)</pre></div>
+<p>
+				<sup>†</sup>
+				If the type of <var>g</var> is non-variadic, <var>elem</var> must be either <code>...</code> or the number of parameters that corresponds to the number of sub-elements in each element of <var>g</var>.
+				Otherwise, <var>elem</var> must be <code>...</code> or a single parameter.
+			</p>
+</dd>
+<dt><var>g</var></dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././generics.html">generic data structure</a> to be filtered.
+		</p></dd>
+</dl>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR_S" class="primary">CHAOS_PP_EXPR_S</a></code>(s)(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/filter.html#FILTER_S" class="secondary">CHAOS_PP_FILTER_S</a></code>(s, pred, g, ...))</pre>
+<dl>
+<dt><var>s</var></dt>
+<dd><p>
+				The current <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././recursion.html">recursion state</a>.
+			</p></dd>
+<dt><var>pred</var></dt>
+<dd>
+<p>
+				The predicate that determines whether an element is to remain in the resulting <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././generics.html">generic data structure</a>.
+				This predicate must be either a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				</p>
+<div><pre>pred(s, elem<sup>†</sup>, data<sup>‡</sup>)</pre></div>
+<p>
+				<sup>†</sup>
+				If the type of <var>g</var> is non-variadic, <var>elem</var> must be the number of parameters that corresponds to the number of sub-elements in each element of <var>g</var>.
+				Otherwise, <var>elem</var> must be a single parameter.
+			</p>
+<p>
+				<sup>‡</sup>
+				The <var>data</var> pseudo-parameter must be either <code>...</code> or the number of parameters that corresponds to the number of arguments in the auxiliary data, <code>__VA_ARGS__</code>.
+			</p>
+</dd>
+<dt><var>g</var></dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././generics.html">generic data structure</a> to be filtered.
+		</p></dd>
+<dt>[<var>...</var>]</dt>
+<dd><p>
+			Auxiliary data to be passed through the algorithm to the predicate.
+		</p></dd>
+</dl>
+<h4>Usage <small>- C/C++ Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR_S" class="primary">CHAOS_PP_EXPR_S</a></code>(s)(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/filter.html#FILTER_S" class="secondary">CHAOS_PP_FILTER_S</a></code>(s, pred, g, data))</pre>
+<dl>
+<dt><var>s</var></dt>
+<dd><p>
+				The current <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././recursion.html">recursion state</a>.
+			</p></dd>
+<dt><var>pred</var></dt>
+<dd>
+<p>
+			The predicate that determines whether an element is to remain in the resulting <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././generics.html">generic data structure</a>.
+			This predicate must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			</p>
+<div><pre>pred(s, elem, data)</pre></div>
+</dd>
+<dt><var>g</var></dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././generics.html">generic data structure</a> to be filtered.
+		</p></dd>
+<dt><var>data</var></dt>
+<dd><p>
+			Auxiliary data to be passed through the algorithm to the predicate.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+			This macro may not be used if <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././bypass-semantics.html">bypass semantics</a> are in effect.
+		</p></div>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/filter.html" class="header">&lt;chaos/preprocessor/algorithm/filter.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html" class="header">&lt;chaos/preprocessor/config.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/iif.html" class="header">&lt;chaos/preprocessor/control/iif.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/detection/is_variadic.html" class="header">&lt;chaos/preprocessor/detection/is_variadic.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/generics/core.html" class="header">&lt;chaos/preprocessor/generics/core.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/basic.html" class="header">&lt;chaos/preprocessor/recursion/basic.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html" class="header">&lt;chaos/preprocessor/recursion/expr.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html" class="header">&lt;chaos/preprocessor/tuple/core.h&gt;</a></code>
+
+#if <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html#VARIADICS" class="primary">CHAOS_PP_VARIADICS</a></code>
+
+#define PRED(s, elem) \
+    PRED_I(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/basic.html#OBSTRUCT" class="primary">CHAOS_PP_OBSTRUCT</a></code>(), <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#NEXT" class="primary">CHAOS_PP_NEXT</a></code>(s), elem) \
+    /**/
+#define PRED_I(_, s, elem) \
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/control/iif.html#IIF" class="primary">CHAOS_PP_IIF</a></code> _(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/detection/is_variadic.html#IS_VARIADIC" class="primary">CHAOS_PP_IS_VARIADIC</a></code>(elem))( \
+        <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/generics/core.html#IS_CONS" class="primary">CHAOS_PP_IS_CONS</a></code> _( \
+            <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR_S" class="primary">CHAOS_PP_EXPR_S</a></code>(s) _(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/filter.html#FILTER_S" class="secondary">CHAOS_PP_FILTER_S</a></code> _( \
+                s, PRED_INDIRECT _(), (<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE" class="primary">CHAOS_PP_TUPLE</a></code>) elem \
+            )) \
+        ), \
+        elem \
+    ) \
+    /**/
+#define PRED_INDIRECT() PRED
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR" class="primary">CHAOS_PP_EXPR</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/filter.html#FILTER" class="primary">CHAOS_PP_FILTER</a></code>(
+    PRED,
+    (<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE" class="primary">CHAOS_PP_TUPLE</a></code>)
+        (1, 0, ((0, 0), 0), 0, (0, (0, 1), 0), 1, (1, 1))
+))
+// (<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE" class="primary">CHAOS_PP_TUPLE</a></code>) (1, (0, (0, 1), 0), 1, (1, 1))
+
+#endif</pre>
+<hr>
+<a name="FILTER_S_ID"></a><h3 class="secondary">CHAOS_PP_FILTER_S_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/filter.html#FILTER_S_ID" class="secondary">CHAOS_PP_FILTER_S_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/filter.html#FILTER_S" class="secondary">CHAOS_PP_FILTER_S</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/filter.html#FILTER_S_ID" class="secondary">CHAOS_PP_FILTER_S_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/filter.html#FILTER_S" class="secondary">CHAOS_PP_FILTER_S</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="FILTER_S_"></a><h3 class="secondary">CHAOS_PP_FILTER_S_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/filter.html#FILTER_S_" class="secondary">CHAOS_PP_FILTER_S_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/filter.html#FILTER_S" class="secondary">CHAOS_PP_FILTER_S</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/filter.html#FILTER_S_" class="secondary">CHAOS_PP_FILTER_S_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/filter.html#FILTER_S_ID" class="secondary">CHAOS_PP_FILTER_S_ID</a></code>)()</pre></div></div>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="../../.././license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</body>
+</html>

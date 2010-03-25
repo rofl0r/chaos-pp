@@ -1,0 +1,572 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>tuple/core.h - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="../../.././style.css">
+</head>
+<body>
+<p>
+	The <code>tuple/core.h</code> header defines the core <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a> operations necessary to use a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a> as a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././generics.html">generic data structure</a>.
+</p>
+<h4>Usage</h4>
+<pre class="box">#include <code><a class="header" href="../../.././chaos/preprocessor/tuple/core.html">&lt;chaos/preprocessor/tuple/core.h&gt;</a></code></pre>
+<h4>Contents</h4>
+<ul>
+<li><code><a class="primary" href="#TUPLE">CHAOS_PP_TUPLE</a></code></li>
+<li><code><a class="primary" href="#TUPLE_CONS">CHAOS_PP_TUPLE_CONS</a></code></li>
+<li><code><a class="primary" href="#TUPLE_HEAD">CHAOS_PP_TUPLE_HEAD</a></code></li>
+<li><code><a class="primary" href="#TUPLE_IS_CONS">CHAOS_PP_TUPLE_IS_CONS</a></code></li>
+<li><code><a class="primary" href="#TUPLE_IS_NIL">CHAOS_PP_TUPLE_IS_NIL</a></code></li>
+<li><code><a class="primary" href="#TUPLE_ITEM">CHAOS_PP_TUPLE_ITEM</a></code></li>
+<li><code><a class="primary" href="#TUPLE_NIL">CHAOS_PP_TUPLE_NIL</a></code></li>
+<li><code><a class="primary" href="#TUPLE_TAG">CHAOS_PP_TUPLE_TAG</a></code></li>
+<li><code><a class="primary" href="#TUPLE_TAIL">CHAOS_PP_TUPLE_TAIL</a></code></li>
+</ul>
+<hr>
+<a name="TUPLE"></a><h3 class="primary">CHAOS_PP_TUPLE</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE" class="primary">CHAOS_PP_TUPLE</a></code> macro designates the name of the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a> data structure.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE" class="primary">CHAOS_PP_TUPLE</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+		This macro expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE" class="primary">CHAOS_PP_TUPLE</a></code>.
+		In other words, the identifier <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE" class="primary">CHAOS_PP_TUPLE</a></code> is defined as itself.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/array/core.html#ARRAY">CHAOS_PP_ARRAY</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/list/core.html#LIST">CHAOS_PP_LIST</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/core.html#SEQ">CHAOS_PP_SEQ</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/string/core.html#STRING">CHAOS_PP_STRING</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/variadic/core.html#VARIADIC_SEQ">CHAOS_PP_VARIADIC_SEQ</a></code></li>
+</ul>
+<hr>
+<a name="TUPLE_ID"></a><h3 class="secondary">CHAOS_PP_TUPLE_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_ID" class="secondary">CHAOS_PP_TUPLE_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE" class="primary">CHAOS_PP_TUPLE</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_ID" class="secondary">CHAOS_PP_TUPLE_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro exists only for uniformity with other macros that require indirect invocation.
+				</p></div>
+<hr>
+<a name="TUPLE_"></a><h3 class="secondary">CHAOS_PP_TUPLE_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_" class="secondary">CHAOS_PP_TUPLE_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE" class="primary">CHAOS_PP_TUPLE</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_" class="secondary">CHAOS_PP_TUPLE_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE" class="primary">CHAOS_PP_TUPLE</a></code>)</pre></div></div>
+<hr>
+<a name="TUPLE_TAG"></a><h3 class="primary">CHAOS_PP_TUPLE_TAG</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_TAG" class="primary">CHAOS_PP_TUPLE_TAG</a></code> macro is an identity macro used to compare type names.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_TAG" class="primary">CHAOS_PP_TUPLE_TAG</a></code>(tag)</pre>
+<dl>
+<dt><var>tag</var></dt>
+<dd><p>
+			The tag used to distinguish between data structures.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro is used by generic algorithms to compare the types of <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././generics.html">generic data structure</a>.
+		It should be used for no other purpose.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/array/core.html#ARRAY_TAG">CHAOS_PP_ARRAY_TAG</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/list/core.html#LIST_TAG">CHAOS_PP_LIST_TAG</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/core.html#SEQ_TAG">CHAOS_PP_SEQ_TAG</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/string/core.html#STRING_TAG">CHAOS_PP_STRING_TAG</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/generics/core.html#TAG">CHAOS_PP_TAG</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/variadic/core.html#VARIADIC_SEQ_TAG">CHAOS_PP_VARIADIC_SEQ_TAG</a></code></li>
+</ul>
+<hr>
+<a name="TUPLE_TAG_ID"></a><h3 class="secondary">CHAOS_PP_TUPLE_TAG_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_TAG_ID" class="secondary">CHAOS_PP_TUPLE_TAG_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_TAG" class="primary">CHAOS_PP_TUPLE_TAG</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_TAG_ID" class="secondary">CHAOS_PP_TUPLE_TAG_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro exists only for uniformity with other macros that require indirect invocation.
+				</p></div>
+<hr>
+<a name="TUPLE_TAG_"></a><h3 class="secondary">CHAOS_PP_TUPLE_TAG_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_TAG_" class="secondary">CHAOS_PP_TUPLE_TAG_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_TAG" class="primary">CHAOS_PP_TUPLE_TAG</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_TAG_" class="secondary">CHAOS_PP_TUPLE_TAG_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_TAG" class="primary">CHAOS_PP_TUPLE_TAG</a></code>)</pre></div></div>
+<hr>
+<a name="TUPLE_NIL"></a><h3 class="primary">CHAOS_PP_TUPLE_NIL</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_NIL" class="primary">CHAOS_PP_TUPLE_NIL</a></code> macro expands to a nil <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a>.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_NIL" class="primary">CHAOS_PP_TUPLE_NIL</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+		This macro expands to nothing.
+	</p></div>
+<div><p>
+		Note that a nil <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a> is an empty sequence of preprocessing tokens.
+		In particular, when a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a> is used a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././generics.html">generic data structure</a>, nullary parentheses (e.g. <code>()</code>) are considered to be a unary <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a>.
+		(This differs from the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a>-specific macros which treat <code>()</code> as a zero-element <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a>.)
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/array/core.html#ARRAY_NIL">CHAOS_PP_ARRAY_NIL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/list/core.html#LIST_NIL">CHAOS_PP_LIST_NIL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/generics/core.html#NIL">CHAOS_PP_NIL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/core.html#SEQ_NIL">CHAOS_PP_SEQ_NIL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/string/core.html#STRING_NIL">CHAOS_PP_STRING_NIL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/variadic/core.html#VARIADIC_SEQ_NIL">CHAOS_PP_VARIADIC_SEQ_NIL</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html" class="header">&lt;chaos/preprocessor/config.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html" class="header">&lt;chaos/preprocessor/tuple/core.h&gt;</a></code>
+
+#if <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html#VARIADICS" class="primary">CHAOS_PP_VARIADICS</a></code>
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_NIL" class="primary">CHAOS_PP_TUPLE_NIL</a></code>()                         //
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_CONS" class="primary">CHAOS_PP_TUPLE_CONS</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_NIL" class="primary">CHAOS_PP_TUPLE_NIL</a></code>(), +) // (+)
+
+#endif</pre>
+<hr>
+<a name="TUPLE_NIL_ID"></a><h3 class="secondary">CHAOS_PP_TUPLE_NIL_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_NIL_ID" class="secondary">CHAOS_PP_TUPLE_NIL_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_NIL" class="primary">CHAOS_PP_TUPLE_NIL</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_NIL_ID" class="secondary">CHAOS_PP_TUPLE_NIL_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro exists only for uniformity with other macros that require indirect invocation.
+				</p></div>
+<hr>
+<a name="TUPLE_NIL_"></a><h3 class="secondary">CHAOS_PP_TUPLE_NIL_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_NIL_" class="secondary">CHAOS_PP_TUPLE_NIL_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_NIL" class="primary">CHAOS_PP_TUPLE_NIL</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_NIL_" class="secondary">CHAOS_PP_TUPLE_NIL_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_NIL" class="primary">CHAOS_PP_TUPLE_NIL</a></code>)</pre></div></div>
+<hr>
+<a name="TUPLE_CONS"></a><h3 class="primary">CHAOS_PP_TUPLE_CONS</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_CONS" class="primary">CHAOS_PP_TUPLE_CONS</a></code> macro appends an element to the head of a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a>.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_CONS" class="primary">CHAOS_PP_TUPLE_CONS</a></code>(tuple, x)</pre>
+<dl>
+<dt>[<var>tuple</var>]</dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a> to which <var>x</var> is to be appended.
+		</p></dd>
+<dt>[<var>x</var>]</dt>
+<dd><p>
+			The element to be appended to the head of <var>tuple</var>.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a> containing the elements of <var>tuple</var> with <var>x</var> appended to the head.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/array/core.html#ARRAY_CONS">CHAOS_PP_ARRAY_CONS</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/generics/core.html#CONS">CHAOS_PP_CONS</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/list/core.html#LIST_CONS">CHAOS_PP_LIST_CONS</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/core.html#SEQ_CONS">CHAOS_PP_SEQ_CONS</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/string/core.html#STRING_CONS">CHAOS_PP_STRING_CONS</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/variadic/core.html#VARIADIC_SEQ_CONS">CHAOS_PP_VARIADIC_SEQ_CONS</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html" class="header">&lt;chaos/preprocessor/config.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html" class="header">&lt;chaos/preprocessor/tuple/core.h&gt;</a></code>
+
+#if <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html#VARIADICS" class="primary">CHAOS_PP_VARIADICS</a></code>
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_CONS" class="primary">CHAOS_PP_TUPLE_CONS</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_NIL" class="primary">CHAOS_PP_TUPLE_NIL</a></code>(), a) // (a)
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_CONS" class="primary">CHAOS_PP_TUPLE_CONS</a></code>(, a)                     // (a)
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_CONS" class="primary">CHAOS_PP_TUPLE_CONS</a></code>((), a)                   // (, a)
+
+#endif</pre>
+<hr>
+<a name="TUPLE_CONS_ID"></a><h3 class="secondary">CHAOS_PP_TUPLE_CONS_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_CONS_ID" class="secondary">CHAOS_PP_TUPLE_CONS_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_CONS" class="primary">CHAOS_PP_TUPLE_CONS</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_CONS_ID" class="secondary">CHAOS_PP_TUPLE_CONS_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_CONS" class="primary">CHAOS_PP_TUPLE_CONS</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="TUPLE_CONS_"></a><h3 class="secondary">CHAOS_PP_TUPLE_CONS_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_CONS_" class="secondary">CHAOS_PP_TUPLE_CONS_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_CONS" class="primary">CHAOS_PP_TUPLE_CONS</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_CONS_" class="secondary">CHAOS_PP_TUPLE_CONS_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_CONS_ID" class="secondary">CHAOS_PP_TUPLE_CONS_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="TUPLE_ITEM"></a><h3 class="primary">CHAOS_PP_TUPLE_ITEM</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_ITEM" class="primary">CHAOS_PP_TUPLE_ITEM</a></code> macro is an identity macro used to encapsulate elements.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_ITEM" class="primary">CHAOS_PP_TUPLE_ITEM</a></code>(x)</pre>
+<dl>
+<dt>[<var>x</var>]</dt>
+<dd><p>
+			The element of a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a> to be encapsulated.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro is used by generic algorithms to encapsulate elements before they are passed to user-defined macros.
+		Elements in a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a> cannot be variadic.
+		Therefore, this macro is a simple identity macro.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/array/core.html#ARRAY_ITEM">CHAOS_PP_ARRAY_ITEM</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/generics/core.html#ITEM">CHAOS_PP_ITEM</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/list/core.html#LIST_ITEM">CHAOS_PP_LIST_ITEM</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/core.html#SEQ_ITEM">CHAOS_PP_SEQ_ITEM</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/string/core.html#STRING_ITEM">CHAOS_PP_STRING_ITEM</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/variadic/core.html#VARIADIC_SEQ_ITEM">CHAOS_PP_VARIADIC_SEQ_ITEM</a></code></li>
+</ul>
+<hr>
+<a name="TUPLE_ITEM_ID"></a><h3 class="secondary">CHAOS_PP_TUPLE_ITEM_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_ITEM_ID" class="secondary">CHAOS_PP_TUPLE_ITEM_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_ITEM" class="primary">CHAOS_PP_TUPLE_ITEM</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_ITEM_ID" class="secondary">CHAOS_PP_TUPLE_ITEM_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_ITEM" class="primary">CHAOS_PP_TUPLE_ITEM</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="TUPLE_ITEM_"></a><h3 class="secondary">CHAOS_PP_TUPLE_ITEM_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_ITEM_" class="secondary">CHAOS_PP_TUPLE_ITEM_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_ITEM" class="primary">CHAOS_PP_TUPLE_ITEM</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_ITEM_" class="secondary">CHAOS_PP_TUPLE_ITEM_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_ITEM_ID" class="secondary">CHAOS_PP_TUPLE_ITEM_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="TUPLE_HEAD"></a><h3 class="primary">CHAOS_PP_TUPLE_HEAD</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_HEAD" class="primary">CHAOS_PP_TUPLE_HEAD</a></code> macro extracts the first element from a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a>.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_HEAD" class="primary">CHAOS_PP_TUPLE_HEAD</a></code>(tuple)</pre>
+<dl>
+<dt><var>tuple</var></dt>
+<dd><p>
+			The non-nil <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a> whose first element is to be extracted.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro expands to the first element contained in <var>tuple</var>.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/array/core.html#ARRAY_HEAD">CHAOS_PP_ARRAY_HEAD</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/generics/core.html#HEAD">CHAOS_PP_HEAD</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/list/core.html#LIST_HEAD">CHAOS_PP_LIST_HEAD</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/core.html#SEQ_HEAD">CHAOS_PP_SEQ_HEAD</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/string/core.html#STRING_HEAD">CHAOS_PP_STRING_HEAD</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_TAIL">CHAOS_PP_TUPLE_TAIL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/variadic/core.html#VARIADIC_SEQ_HEAD">CHAOS_PP_VARIADIC_SEQ_HEAD</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html" class="header">&lt;chaos/preprocessor/config.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html" class="header">&lt;chaos/preprocessor/tuple/core.h&gt;</a></code>
+
+#if <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html#VARIADICS" class="primary">CHAOS_PP_VARIADICS</a></code>
+
+#define DATA() (a, b, c)
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_HEAD" class="primary">CHAOS_PP_TUPLE_HEAD</a></code>(DATA()) // a
+
+#endif</pre>
+<hr>
+<a name="TUPLE_HEAD_ID"></a><h3 class="secondary">CHAOS_PP_TUPLE_HEAD_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_HEAD_ID" class="secondary">CHAOS_PP_TUPLE_HEAD_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_HEAD" class="primary">CHAOS_PP_TUPLE_HEAD</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_HEAD_ID" class="secondary">CHAOS_PP_TUPLE_HEAD_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_HEAD" class="primary">CHAOS_PP_TUPLE_HEAD</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="TUPLE_HEAD_"></a><h3 class="secondary">CHAOS_PP_TUPLE_HEAD_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_HEAD_" class="secondary">CHAOS_PP_TUPLE_HEAD_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_HEAD" class="primary">CHAOS_PP_TUPLE_HEAD</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_HEAD_" class="secondary">CHAOS_PP_TUPLE_HEAD_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_HEAD_ID" class="secondary">CHAOS_PP_TUPLE_HEAD_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="TUPLE_TAIL"></a><h3 class="primary">CHAOS_PP_TUPLE_TAIL</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_TAIL" class="primary">CHAOS_PP_TUPLE_TAIL</a></code> macro removes the first element from a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a>.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_TAIL" class="primary">CHAOS_PP_TUPLE_TAIL</a></code>(tuple)</pre>
+<dl>
+<dt><var>tuple</var></dt>
+<dd><p>
+			The non-nil <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a> whose first element is to be removed.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a> containing all of the elements of <var>tuple</var> except the first.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/array/core.html#ARRAY_TAIL">CHAOS_PP_ARRAY_TAIL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/list/core.html#LIST_TAIL">CHAOS_PP_LIST_TAIL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/core.html#SEQ_TAIL">CHAOS_PP_SEQ_TAIL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/string/core.html#STRING_TAIL">CHAOS_PP_STRING_TAIL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/generics/core.html#TAIL">CHAOS_PP_TAIL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_HEAD">CHAOS_PP_TUPLE_HEAD</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/variadic/core.html#VARIADIC_SEQ_TAIL">CHAOS_PP_VARIADIC_SEQ_TAIL</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html" class="header">&lt;chaos/preprocessor/config.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html" class="header">&lt;chaos/preprocessor/tuple/core.h&gt;</a></code>
+
+#if <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html#VARIADICS" class="primary">CHAOS_PP_VARIADICS</a></code>
+
+#define DATA() (a, b, c)
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_TAIL" class="primary">CHAOS_PP_TUPLE_TAIL</a></code>(DATA()) // (b, c)
+
+#endif</pre>
+<hr>
+<a name="TUPLE_TAIL_ID"></a><h3 class="secondary">CHAOS_PP_TUPLE_TAIL_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_TAIL_ID" class="secondary">CHAOS_PP_TUPLE_TAIL_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_TAIL" class="primary">CHAOS_PP_TUPLE_TAIL</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_TAIL_ID" class="secondary">CHAOS_PP_TUPLE_TAIL_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_TAIL" class="primary">CHAOS_PP_TUPLE_TAIL</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="TUPLE_TAIL_"></a><h3 class="secondary">CHAOS_PP_TUPLE_TAIL_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_TAIL_" class="secondary">CHAOS_PP_TUPLE_TAIL_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_TAIL" class="primary">CHAOS_PP_TUPLE_TAIL</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_TAIL_" class="secondary">CHAOS_PP_TUPLE_TAIL_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_TAIL_ID" class="secondary">CHAOS_PP_TUPLE_TAIL_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="TUPLE_IS_CONS"></a><h3 class="primary">CHAOS_PP_TUPLE_IS_CONS</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_IS_CONS" class="primary">CHAOS_PP_TUPLE_IS_CONS</a></code> macro is a predicate that tests whether a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a> is non-nil.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_IS_CONS" class="primary">CHAOS_PP_TUPLE_IS_CONS</a></code>(tuple)</pre>
+<dl>
+<dt>[<var>tuple</var>]</dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a> to be tested.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		If <var>tuple</var> is non-nil, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/array/core.html#ARRAY_IS_CONS">CHAOS_PP_ARRAY_IS_CONS</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/generics/core.html#IS_CONS">CHAOS_PP_IS_CONS</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/list/core.html#LIST_IS_CONS">CHAOS_PP_LIST_IS_CONS</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/core.html#SEQ_IS_CONS">CHAOS_PP_SEQ_IS_CONS</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/string/core.html#STRING_IS_CONS">CHAOS_PP_STRING_IS_CONS</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_IS_NIL">CHAOS_PP_TUPLE_IS_NIL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/variadic/core.html#VARIADIC_SEQ_IS_CONS">CHAOS_PP_VARIADIC_SEQ_IS_CONS</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html" class="header">&lt;chaos/preprocessor/config.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html" class="header">&lt;chaos/preprocessor/tuple/core.h&gt;</a></code>
+
+#if <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html#VARIADICS" class="primary">CHAOS_PP_VARIADICS</a></code>
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_IS_CONS" class="primary">CHAOS_PP_TUPLE_IS_CONS</a></code>()                     // 0
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_IS_CONS" class="primary">CHAOS_PP_TUPLE_IS_CONS</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_NIL" class="primary">CHAOS_PP_TUPLE_NIL</a></code>()) // 0
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_IS_CONS" class="primary">CHAOS_PP_TUPLE_IS_CONS</a></code>((x, y, z))            // 1
+
+#endif</pre>
+<hr>
+<a name="TUPLE_IS_CONS_ID"></a><h3 class="secondary">CHAOS_PP_TUPLE_IS_CONS_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_IS_CONS_ID" class="secondary">CHAOS_PP_TUPLE_IS_CONS_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_IS_CONS" class="primary">CHAOS_PP_TUPLE_IS_CONS</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_IS_CONS_ID" class="secondary">CHAOS_PP_TUPLE_IS_CONS_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro exists only for uniformity with other macros that require indirect invocation.
+				</p></div>
+<hr>
+<a name="TUPLE_IS_CONS_"></a><h3 class="secondary">CHAOS_PP_TUPLE_IS_CONS_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_IS_CONS_" class="secondary">CHAOS_PP_TUPLE_IS_CONS_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_IS_CONS" class="primary">CHAOS_PP_TUPLE_IS_CONS</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_IS_CONS_" class="secondary">CHAOS_PP_TUPLE_IS_CONS_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_IS_CONS" class="primary">CHAOS_PP_TUPLE_IS_CONS</a></code>)</pre></div></div>
+<hr>
+<a name="TUPLE_IS_NIL"></a><h3 class="primary">CHAOS_PP_TUPLE_IS_NIL</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_IS_NIL" class="primary">CHAOS_PP_TUPLE_IS_NIL</a></code> macro is a predicate that tests whether a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a> is nil.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_IS_NIL" class="primary">CHAOS_PP_TUPLE_IS_NIL</a></code>(tuple)</pre>
+<dl>
+<dt>[<var>tuple</var>]</dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a> to be tested.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		If <var>tuple</var> is nil, this macro expands to <code>1</code>.
+		Otherwise, it expands to <code>0</code>.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/array/core.html#ARRAY_IS_NIL">CHAOS_PP_ARRAY_IS_NIL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/generics/core.html#IS_NIL">CHAOS_PP_IS_NIL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/list/core.html#LIST_IS_NIL">CHAOS_PP_LIST_IS_NIL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/core.html#SEQ_IS_NIL">CHAOS_PP_SEQ_IS_NIL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/string/core.html#STRING_IS_NIL">CHAOS_PP_STRING_IS_NIL</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_IS_CONS">CHAOS_PP_TUPLE_IS_CONS</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/variadic/core.html#VARIADIC_SEQ_IS_NIL">CHAOS_PP_VARIADIC_SEQ_IS_NIL</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html" class="header">&lt;chaos/preprocessor/config.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html" class="header">&lt;chaos/preprocessor/tuple/core.h&gt;</a></code>
+
+#if <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html#VARIADICS" class="primary">CHAOS_PP_VARIADICS</a></code>
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_IS_NIL" class="primary">CHAOS_PP_TUPLE_IS_NIL</a></code>()                     // 1
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_IS_NIL" class="primary">CHAOS_PP_TUPLE_IS_NIL</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_NIL" class="primary">CHAOS_PP_TUPLE_NIL</a></code>()) // 1
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_IS_NIL" class="primary">CHAOS_PP_TUPLE_IS_NIL</a></code>((x, y, z))            // 0
+
+#endif</pre>
+<hr>
+<a name="TUPLE_IS_NIL_ID"></a><h3 class="secondary">CHAOS_PP_TUPLE_IS_NIL_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_IS_NIL_ID" class="secondary">CHAOS_PP_TUPLE_IS_NIL_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_IS_NIL" class="primary">CHAOS_PP_TUPLE_IS_NIL</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_IS_NIL_ID" class="secondary">CHAOS_PP_TUPLE_IS_NIL_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro exists only for uniformity with other macros that require indirect invocation.
+				</p></div>
+<hr>
+<a name="TUPLE_IS_NIL_"></a><h3 class="secondary">CHAOS_PP_TUPLE_IS_NIL_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_IS_NIL_" class="secondary">CHAOS_PP_TUPLE_IS_NIL_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_IS_NIL" class="primary">CHAOS_PP_TUPLE_IS_NIL</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_IS_NIL_" class="secondary">CHAOS_PP_TUPLE_IS_NIL_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html#TUPLE_IS_NIL" class="primary">CHAOS_PP_TUPLE_IS_NIL</a></code>)</pre></div></div>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="../../.././license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</body>
+</html>

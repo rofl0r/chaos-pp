@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>punctuation/comma_if.h - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="../../.././style.css">
+</head>
+<body>
+<p>
+	The <code>punctuation/comma_if.h</code> header defines a macro that conditionally expands to a comma.
+</p>
+<h4>Usage</h4>
+<pre class="box">#include <code><a class="header" href="../../.././chaos/preprocessor/punctuation/comma_if.html">&lt;chaos/preprocessor/punctuation/comma_if.h&gt;</a></code></pre>
+<h4>Contents</h4>
+<ul><li><code><a class="primary" href="#COMMA_IF">CHAOS_PP_COMMA_IF</a></code></li></ul>
+<hr>
+<a name="COMMA_IF"></a><h3 class="primary">CHAOS_PP_COMMA_IF</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/punctuation/comma_if.html#COMMA_IF" class="primary">CHAOS_PP_COMMA_IF</a></code> macro expands to a comma if its argument is non-zero.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/punctuation/comma_if.html#COMMA_IF" class="primary">CHAOS_PP_COMMA_IF</a></code>(cond)</pre>
+<dl>
+<dt><var>cond</var></dt>
+<dd><p>
+			The condition that determines whether the macro should expand to a comma.
+			Valid values range from <code>0</code> to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/limits.html#LIMIT_MAG" class="primary">CHAOS_PP_LIMIT_MAG</a></code>.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		If <var>cond</var> is non-zero, this macro expands to a comma preprocessing token.
+		Otherwise, it expands to nothing.
+	</p></div>
+<h4>See Also</h4>
+<ul><li><code><a class="primary" href="../../.././chaos/preprocessor/punctuation/comma.html#COMMA">CHAOS_PP_COMMA</a></code></li></ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/punctuation/comma_if.html" class="header">&lt;chaos/preprocessor/punctuation/comma_if.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html" class="header">&lt;chaos/preprocessor/recursion/expr.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/repetition/repeat.html" class="header">&lt;chaos/preprocessor/repetition/repeat.h&gt;</a></code>
+
+#define MACRO(s, n, _) \
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/punctuation/comma_if.html#COMMA_IF" class="primary">CHAOS_PP_COMMA_IF</a></code>(n) class T ## n \
+    /**/
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR" class="primary">CHAOS_PP_EXPR</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/repetition/repeat.html#REPEAT" class="primary">CHAOS_PP_REPEAT</a></code>(
+    3, MACRO, ~
+))
+// class T0, class T1, class T2</pre>
+<hr>
+<a name="COMMA_IF_ID"></a><h3 class="secondary">CHAOS_PP_COMMA_IF_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/punctuation/comma_if.html#COMMA_IF_ID" class="secondary">CHAOS_PP_COMMA_IF_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/punctuation/comma_if.html#COMMA_IF" class="primary">CHAOS_PP_COMMA_IF</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/punctuation/comma_if.html#COMMA_IF_ID" class="secondary">CHAOS_PP_COMMA_IF_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro exists only for uniformity with other macros that require indirect invocation.
+				</p></div>
+<hr>
+<a name="COMMA_IF_"></a><h3 class="secondary">CHAOS_PP_COMMA_IF_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/punctuation/comma_if.html#COMMA_IF_" class="secondary">CHAOS_PP_COMMA_IF_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/punctuation/comma_if.html#COMMA_IF" class="primary">CHAOS_PP_COMMA_IF</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/punctuation/comma_if.html#COMMA_IF_" class="secondary">CHAOS_PP_COMMA_IF_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/punctuation/comma_if.html#COMMA_IF" class="primary">CHAOS_PP_COMMA_IF</a></code>)</pre></div></div>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="../../.././license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</body>
+</html>

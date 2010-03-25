@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>seq/concat.h - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="../../.././style.css">
+</head>
+<body>
+<p>
+	The <code>seq/concat.h</code> header defines an algorithm that concatenates the elements of a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a>.
+</p>
+<h4>Usage</h4>
+<pre class="box">#include <code><a class="header" href="../../.././chaos/preprocessor/seq/concat.html">&lt;chaos/preprocessor/seq/concat.h&gt;</a></code></pre>
+<h4>Contents</h4>
+<ul><li><code><a class="primary" href="#SEQ_CONCAT">CHAOS_PP_SEQ_CONCAT</a></code></li></ul>
+<hr>
+<a name="SEQ_CONCAT"></a><h3 class="primary">CHAOS_PP_SEQ_CONCAT</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/concat.html#SEQ_CONCAT" class="primary">CHAOS_PP_SEQ_CONCAT</a></code> macro concatenates the elements of its argument.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/concat.html#SEQ_CONCAT" class="primary">CHAOS_PP_SEQ_CONCAT</a></code>(seq)</pre>
+<dl>
+<dt>[<var>seq</var>]</dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a> whose elements are to be concatenated.
+		</p></dd>
+</dl>
+<h4>Usage <small>- C/C++ Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/concat.html#SEQ_CONCAT" class="primary">CHAOS_PP_SEQ_CONCAT</a></code>(seq)</pre>
+<dl>
+<dt><var>seq</var></dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././sequences.html">sequence</a> whose elements are to be concatenated.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro performs an ordered concatenation of the elements of <var>seq</var> beginning with the first element.
+		This is illustrated by the following pseudo-code:
+		</p></div>
+<div><div><pre>( ... ((seq[0] ## seq[1]) ## seq[2]) ... ## seq[length(seq) - 1])</pre></div></div>
+<div><p>
+		In C99, if <var>seq</var> contains non-unary elements, the sub-elements of each element will also be concatenated.
+		For example,
+		</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/concat.html#SEQ_CONCAT" class="primary">CHAOS_PP_SEQ_CONCAT</a></code>((a, b)(c, d)) // abcd</pre></div></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/extended/auto_cat.html#AUTO_CAT">CHAOS_PP_AUTO_CAT</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/cat.html#CAT">CHAOS_PP_CAT</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/algorithm/concat.html#CONCAT">CHAOS_PP_CONCAT</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/extended/partial_cat.html#PARTIAL_CAT">CHAOS_PP_PARTIAL_CAT</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/extended/auto_cat.html#PRIMITIVE_AUTO_CAT">CHAOS_PP_PRIMITIVE_AUTO_CAT</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/cat.html#PRIMITIVE_CAT">CHAOS_PP_PRIMITIVE_CAT</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/extended/reverse_cat.html#PRIMITIVE_REVERSE_CAT">CHAOS_PP_PRIMITIVE_REVERSE_CAT</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/extended/reverse_cat.html#REVERSE_CAT">CHAOS_PP_REVERSE_CAT</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/concat.html#TUPLE_CONCAT">CHAOS_PP_TUPLE_CONCAT</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/extended/variadic_cat.html#VARIADIC_CAT">CHAOS_PP_VARIADIC_CAT</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/concat.html" class="header">&lt;chaos/preprocessor/seq/concat.h&gt;</a></code>
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/concat.html#SEQ_CONCAT" class="primary">CHAOS_PP_SEQ_CONCAT</a></code>((a)(b)(c)(d)(e)) // abcde</pre>
+<hr>
+<a name="SEQ_CONCAT_ID"></a><h3 class="secondary">CHAOS_PP_SEQ_CONCAT_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/concat.html#SEQ_CONCAT_ID" class="secondary">CHAOS_PP_SEQ_CONCAT_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/concat.html#SEQ_CONCAT" class="primary">CHAOS_PP_SEQ_CONCAT</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/concat.html#SEQ_CONCAT_ID" class="secondary">CHAOS_PP_SEQ_CONCAT_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/concat.html#SEQ_CONCAT" class="primary">CHAOS_PP_SEQ_CONCAT</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="SEQ_CONCAT_"></a><h3 class="secondary">CHAOS_PP_SEQ_CONCAT_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/concat.html#SEQ_CONCAT_" class="secondary">CHAOS_PP_SEQ_CONCAT_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/concat.html#SEQ_CONCAT" class="primary">CHAOS_PP_SEQ_CONCAT</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/concat.html#SEQ_CONCAT_" class="secondary">CHAOS_PP_SEQ_CONCAT_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/seq/concat.html#SEQ_CONCAT_ID" class="secondary">CHAOS_PP_SEQ_CONCAT_ID</a></code>)()</pre></div></div>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="../../.././license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</body>
+</html>

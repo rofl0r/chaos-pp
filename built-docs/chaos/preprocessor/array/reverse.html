@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>array/reverse.h - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="../../.././style.css">
+</head>
+<body>
+<p>
+	The <code>array/reverse.h</code> header defines a macro that reverses the elements in an <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././arrays.html">array</a>.
+</p>
+<h4>Usage</h4>
+<pre class="box">#include <code><a class="header" href="../../.././chaos/preprocessor/array/reverse.html">&lt;chaos/preprocessor/array/reverse.h&gt;</a></code></pre>
+<h4>Contents</h4>
+<ul><li><code><a class="primary" href="#ARRAY_REVERSE">CHAOS_PP_ARRAY_REVERSE</a></code></li></ul>
+<hr>
+<a name="ARRAY_REVERSE"></a><h3 class="primary">CHAOS_PP_ARRAY_REVERSE</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/array/reverse.html#ARRAY_REVERSE" class="primary">CHAOS_PP_ARRAY_REVERSE</a></code> macro reverses the elements in an <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././arrays.html">array</a>.
+	</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/array/reverse.html#ARRAY_REVERSE" class="primary">CHAOS_PP_ARRAY_REVERSE</a></code>(array)</pre>
+<dl>
+<dt><var>array</var></dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././arrays.html">array</a> whose elements are to be reversed.
+			This <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././arrays.html">array</a> must contain <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/limits.html#LIMIT_TUPLE" class="primary">CHAOS_PP_LIMIT_TUPLE</a></code> or less elements.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro expands to an <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././arrays.html">array</a> containing the elements of <var>array</var> in reverse order.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/algorithm/reverse.html#REVERSE">CHAOS_PP_REVERSE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/reverse.html#SEQ_REVERSE">CHAOS_PP_SEQ_REVERSE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/reverse.html#SEQ_REVERSE_DUPLEX">CHAOS_PP_SEQ_REVERSE_DUPLEX</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/reverse.html#TUPLE_REVERSE">CHAOS_PP_TUPLE_REVERSE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/reverse.html#TUPLE_REVERSE_ALT">CHAOS_PP_TUPLE_REVERSE_ALT</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/array/reverse.html" class="header">&lt;chaos/preprocessor/array/reverse.h&gt;</a></code>
+
+#define DATA() (3, (a, b, c))
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/array/reverse.html#ARRAY_REVERSE" class="primary">CHAOS_PP_ARRAY_REVERSE</a></code>(DATA()) // (3, (c, b, a))</pre>
+<hr>
+<a name="ARRAY_REVERSE_ID"></a><h3 class="secondary">CHAOS_PP_ARRAY_REVERSE_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/array/reverse.html#ARRAY_REVERSE_ID" class="secondary">CHAOS_PP_ARRAY_REVERSE_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/array/reverse.html#ARRAY_REVERSE" class="primary">CHAOS_PP_ARRAY_REVERSE</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/array/reverse.html#ARRAY_REVERSE_ID" class="secondary">CHAOS_PP_ARRAY_REVERSE_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/array/reverse.html#ARRAY_REVERSE" class="primary">CHAOS_PP_ARRAY_REVERSE</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="ARRAY_REVERSE_"></a><h3 class="secondary">CHAOS_PP_ARRAY_REVERSE_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/array/reverse.html#ARRAY_REVERSE_" class="secondary">CHAOS_PP_ARRAY_REVERSE_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/array/reverse.html#ARRAY_REVERSE" class="primary">CHAOS_PP_ARRAY_REVERSE</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/array/reverse.html#ARRAY_REVERSE_" class="secondary">CHAOS_PP_ARRAY_REVERSE_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/array/reverse.html#ARRAY_REVERSE_ID" class="secondary">CHAOS_PP_ARRAY_REVERSE_ID</a></code>)()</pre></div></div>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="../../.././license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</body>
+</html>

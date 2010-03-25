@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>tuple/fold_right_aux.h - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="../../.././style.css">
+</head>
+<body>
+<p>
+	The <code>tuple/fold_right_aux.h</code> header defines an algorithm that accumulates the elements of a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a> from the last element to the first element.
+</p>
+<h4>Usage</h4>
+<pre class="box">#include <code><a class="header" href="../../.././chaos/preprocessor/tuple/fold_right_aux.html">&lt;chaos/preprocessor/tuple/fold_right_aux.h&gt;</a></code></pre>
+<h4>Contents</h4>
+<ul><li><code><a class="primary" href="#TUPLE_FOLD_RIGHT_AUX">CHAOS_PP_TUPLE_FOLD_RIGHT_AUX</a></code></li></ul>
+<hr>
+<a name="TUPLE_FOLD_RIGHT_AUX"></a><h3 class="primary">CHAOS_PP_TUPLE_FOLD_RIGHT_AUX</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/fold_right_aux.html#TUPLE_FOLD_RIGHT_AUX" class="primary">CHAOS_PP_TUPLE_FOLD_RIGHT_AUX</a></code> macro accumulates the elements of its second argument with the operation specified by its first argument.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR" class="primary">CHAOS_PP_EXPR</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/fold_right_aux.html#TUPLE_FOLD_RIGHT_AUX" class="primary">CHAOS_PP_TUPLE_FOLD_RIGHT_AUX</a></code>(op, tuple, data, ...))</pre>
+<dl>
+<dt><var>op</var></dt>
+<dd>
+<p>
+				The operation that is to be used to accumulate the elements of <var>tuple</var>.
+				This operation must be either a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				</p>
+<div><pre>op(s, elem, data<sup>†</sup>, state<sup>‡</sup>)</pre></div>
+<p>
+				<sup>†</sup>
+				If the auxiliary data is parenthetic, the <var>data</var> pseudo-aprameter must be the number of parameters that corresponds to the number of sub-elements in the auxiliary data.
+				Otherwise, it must be a single parameter.
+			</p>
+<p>
+				<sup>‡</sup>
+				The <var>state</var> pseudo-parameter must be either <code>...</code> or the number of parameters that corresponds to the number of arguments in the accumulation state, <code>__VA_ARGS__</code>.
+			</p>
+</dd>
+<dt>[<var>tuple</var>]</dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a> whose elements are to be accumulated.
+		</p></dd>
+<dt>[<var>...</var>]</dt>
+<dd><p>
+			The initial state of the accumulation.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/fold_right_aux.html#TUPLE_FOLD_RIGHT_AUX" class="primary">CHAOS_PP_TUPLE_FOLD_RIGHT_AUX</a></code> macro itself expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././deferral.html">deferred expression</a> in terms of <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#NEXT" class="primary">CHAOS_PP_NEXT</a></code>(s)</code>.
+		This <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././deferral.html">deferred expression</a>, when invoked by <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR" class="primary">CHAOS_PP_EXPR</a></code>, expands to the result of accumulating the elements of <var>tuple</var>, from right to left, with the user-specified operation.
+		This is illustrated by the following pseudo-code (where <code>N</code> is the index of the last element in <var>tuple</var>):
+		</p></div>
+<div><div><pre>op(s, tuple[0], data, op(s, tuple[1], data, ... op(s, tuple[N], data, state) ... ))</pre></div></div>
+<div><p>
+		An invocation of the operation with the current <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././recursion.html">recursion state</a> (<var>s</var>), a particular element (<var>elem</var>), the auxiliary data (<var>data</var>) and the current state (<code>__VA_ARGS__</code>) expands to a new state used in the accumulation of subsequent elements (or as the final result of the algorithm if no further elements exist).
+		The operation may also expand to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././deferral.html">deferred expression</a> in terms of <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#NEXT" class="primary">CHAOS_PP_NEXT</a></code>(s)</code> that expands to a new state.
+		Expansion to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././deferral.html">deferred expression</a> allows the operation to recurse on itself if necessary.
+	</p></div>
+<div><p>
+		Invocations of the operation are trampolined such that each invocation is invoked with <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#NEXT" class="primary">CHAOS_PP_NEXT</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#NEXT" class="primary">CHAOS_PP_NEXT</a></code>(s))</code>, where <var>s</var> is the original <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././recursion.html">recursion state</a> at the beginning of the algorithm (i.e. <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#STATE" class="primary">CHAOS_PP_STATE</a></code>()</code>).
+		This maximizes the utility of the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././recursion.html">recursion backend</a>.
+	</p></div>
+<div><p>
+		The auxiliary data, <var>data</var>, is treated differently depending on whether it is parenthetic.
+		If <var>data</var> is non-parenthetic, it is passed directly to the operation as a single argument.
+		If <var>data</var> is a parenthetic expression of any arity, its sub-elements are passed to the operation as individual arguments.
+	</p></div>
+<div><p>
+		Ignoring the complexity of <var>op</var> (which is invoked once for each element in <var>tuple</var>), the efficiency of the algorithm's use of the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././recursion.html">recursion backend</a> can be described in terms of the number of <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././recursion.html">recursion steps</a> required to complete the algorithm.
+		The asymptotic upper and lower bounds are <a href="complexity/fold_right_aux.gif">Θ</a>, where <var class="external">n</var> is the number of elements in <var>tuple</var>.
+	</p></div>
+<div><p>
+		This macro operates on the nil <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a> representation used by the core <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a> operations defined in <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/core.html" class="header">&lt;chaos/preprocessor/tuple/core.h&gt;</a></code>.
+		Specifically, <code>()</code> is a one-element <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a>, not a zero-element <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a>.
+	</p></div>
+<div><p>
+		This macro deduces the current <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././recursion.html">recursion state</a> and invokes <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/fold_right_aux.html#TUPLE_FOLD_RIGHT_AUX_S" class="secondary">CHAOS_PP_TUPLE_FOLD_RIGHT_AUX_S</a></code>.
+		If the current <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././recursion.html">recursion state</a> is already known, direct use of <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/fold_right_aux.html#TUPLE_FOLD_RIGHT_AUX_S" class="secondary">CHAOS_PP_TUPLE_FOLD_RIGHT_AUX_S</a></code> is more efficient.
+	</p></div>
+<div><p>
+		This macro may not be used if <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././bypass-semantics.html">bypass semantics</a> are in effect.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/algorithm/fold_right.html#FOLD_RIGHT">CHAOS_PP_FOLD_RIGHT</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/algorithm/fold_right_aux.html#FOLD_RIGHT_AUX">CHAOS_PP_FOLD_RIGHT_AUX</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/algorithm/x/fold_right_aux.html#FOLD_RIGHT_AUX_X">CHAOS_PP_FOLD_RIGHT_AUX_X</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/algorithm/x/fold_right.html#FOLD_RIGHT_X">CHAOS_PP_FOLD_RIGHT_X</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/auto/fold_right.html#SEQ_AUTO_FOLD_RIGHT">CHAOS_PP_SEQ_AUTO_FOLD_RIGHT</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/auto/fold_right_aux.html#SEQ_AUTO_FOLD_RIGHT_AUX">CHAOS_PP_SEQ_AUTO_FOLD_RIGHT_AUX</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/fold_right.html#SEQ_FOLD_RIGHT">CHAOS_PP_SEQ_FOLD_RIGHT</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/fold_right_aux.html#SEQ_FOLD_RIGHT_AUX">CHAOS_PP_SEQ_FOLD_RIGHT_AUX</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/auto/fold_right.html#TUPLE_AUTO_FOLD_RIGHT">CHAOS_PP_TUPLE_AUTO_FOLD_RIGHT</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/auto/fold_right_aux.html#TUPLE_AUTO_FOLD_RIGHT_AUX">CHAOS_PP_TUPLE_AUTO_FOLD_RIGHT_AUX</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/fold_left_aux.html#TUPLE_FOLD_LEFT_AUX">CHAOS_PP_TUPLE_FOLD_LEFT_AUX</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/fold_right.html#TUPLE_FOLD_RIGHT">CHAOS_PP_TUPLE_FOLD_RIGHT</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/variadic/auto/fold_right.html#VARIADIC_SEQ_AUTO_FOLD_RIGHT">CHAOS_PP_VARIADIC_SEQ_AUTO_FOLD_RIGHT</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/variadic/auto/fold_right_aux.html#VARIADIC_SEQ_AUTO_FOLD_RIGHT_AUX">CHAOS_PP_VARIADIC_SEQ_AUTO_FOLD_RIGHT_AUX</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/variadic/fold_right.html#VARIADIC_SEQ_FOLD_RIGHT">CHAOS_PP_VARIADIC_SEQ_FOLD_RIGHT</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/variadic/fold_right_aux.html#VARIADIC_SEQ_FOLD_RIGHT_AUX">CHAOS_PP_VARIADIC_SEQ_FOLD_RIGHT_AUX</a></code></li>
+</ul>
+<hr>
+<a name="TUPLE_FOLD_RIGHT_AUX_ID"></a><h3 class="secondary">CHAOS_PP_TUPLE_FOLD_RIGHT_AUX_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/fold_right_aux.html#TUPLE_FOLD_RIGHT_AUX_ID" class="secondary">CHAOS_PP_TUPLE_FOLD_RIGHT_AUX_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/fold_right_aux.html#TUPLE_FOLD_RIGHT_AUX" class="primary">CHAOS_PP_TUPLE_FOLD_RIGHT_AUX</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/fold_right_aux.html#TUPLE_FOLD_RIGHT_AUX_ID" class="secondary">CHAOS_PP_TUPLE_FOLD_RIGHT_AUX_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/fold_right_aux.html#TUPLE_FOLD_RIGHT_AUX" class="primary">CHAOS_PP_TUPLE_FOLD_RIGHT_AUX</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="TUPLE_FOLD_RIGHT_AUX_"></a><h3 class="secondary">CHAOS_PP_TUPLE_FOLD_RIGHT_AUX_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/fold_right_aux.html#TUPLE_FOLD_RIGHT_AUX_" class="secondary">CHAOS_PP_TUPLE_FOLD_RIGHT_AUX_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/fold_right_aux.html#TUPLE_FOLD_RIGHT_AUX" class="primary">CHAOS_PP_TUPLE_FOLD_RIGHT_AUX</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/fold_right_aux.html#TUPLE_FOLD_RIGHT_AUX_" class="secondary">CHAOS_PP_TUPLE_FOLD_RIGHT_AUX_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/fold_right_aux.html#TUPLE_FOLD_RIGHT_AUX_ID" class="secondary">CHAOS_PP_TUPLE_FOLD_RIGHT_AUX_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="TUPLE_FOLD_RIGHT_AUX_S"></a><h3 class="alternate">CHAOS_PP_TUPLE_FOLD_RIGHT_AUX_S</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/fold_right_aux.html#TUPLE_FOLD_RIGHT_AUX_S" class="secondary">CHAOS_PP_TUPLE_FOLD_RIGHT_AUX_S</a></code> macro behaves identically to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/fold_right_aux.html#TUPLE_FOLD_RIGHT_AUX" class="primary">CHAOS_PP_TUPLE_FOLD_RIGHT_AUX</a></code> except that it is parametized by the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././recursion.html">recursion state</a>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html#EXPR_S" class="primary">CHAOS_PP_EXPR_S</a></code>(s)(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/fold_right_aux.html#TUPLE_FOLD_RIGHT_AUX_S" class="secondary">CHAOS_PP_TUPLE_FOLD_RIGHT_AUX_S</a></code>(s, op, tuple, ...))</pre>
+<dl>
+<dt><var>s</var></dt>
+<dd><p>
+				The current <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././recursion.html">recursion state</a>.
+			</p></dd>
+<dt><var>op</var></dt>
+<dd>
+<p>
+				The operation that is to be used to accumulate the elements of <var>tuple</var>.
+				This operation must be either a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				</p>
+<div><pre>op(s, elem, data<sup>†</sup>, state<sup>‡</sup>)</pre></div>
+<p>
+				<sup>†</sup>
+				If the auxiliary data is parenthetic, the <var>data</var> pseudo-aprameter must be the number of parameters that corresponds to the number of sub-elements in the auxiliary data.
+				Otherwise, it must be a single parameter.
+			</p>
+<p>
+				<sup>‡</sup>
+				The <var>state</var> pseudo-parameter must be either <code>...</code> or the number of parameters that corresponds to the number of arguments in the accumulation state, <code>__VA_ARGS__</code>.
+			</p>
+</dd>
+<dt>[<var>tuple</var>]</dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a> whose elements are to be accumulated.
+		</p></dd>
+<dt>[<var>...</var>]</dt>
+<dd><p>
+			The initial state of the accumulation.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+			This macro may not be used if <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././bypass-semantics.html">bypass semantics</a> are in effect.
+		</p></div>
+<hr>
+<a name="TUPLE_FOLD_RIGHT_AUX_S_ID"></a><h3 class="secondary">CHAOS_PP_TUPLE_FOLD_RIGHT_AUX_S_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/fold_right_aux.html#TUPLE_FOLD_RIGHT_AUX_S_ID" class="secondary">CHAOS_PP_TUPLE_FOLD_RIGHT_AUX_S_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/fold_right_aux.html#TUPLE_FOLD_RIGHT_AUX_S" class="secondary">CHAOS_PP_TUPLE_FOLD_RIGHT_AUX_S</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/fold_right_aux.html#TUPLE_FOLD_RIGHT_AUX_S_ID" class="secondary">CHAOS_PP_TUPLE_FOLD_RIGHT_AUX_S_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/fold_right_aux.html#TUPLE_FOLD_RIGHT_AUX_S" class="secondary">CHAOS_PP_TUPLE_FOLD_RIGHT_AUX_S</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="TUPLE_FOLD_RIGHT_AUX_S_"></a><h3 class="secondary">CHAOS_PP_TUPLE_FOLD_RIGHT_AUX_S_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/fold_right_aux.html#TUPLE_FOLD_RIGHT_AUX_S_" class="secondary">CHAOS_PP_TUPLE_FOLD_RIGHT_AUX_S_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/fold_right_aux.html#TUPLE_FOLD_RIGHT_AUX_S" class="secondary">CHAOS_PP_TUPLE_FOLD_RIGHT_AUX_S</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/fold_right_aux.html#TUPLE_FOLD_RIGHT_AUX_S_" class="secondary">CHAOS_PP_TUPLE_FOLD_RIGHT_AUX_S_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/fold_right_aux.html#TUPLE_FOLD_RIGHT_AUX_S_ID" class="secondary">CHAOS_PP_TUPLE_FOLD_RIGHT_AUX_S_ID</a></code>)()</pre></div></div>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="../../.././license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</body>
+</html>

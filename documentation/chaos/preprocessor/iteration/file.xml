@@ -136,7 +136,7 @@
 		The <ITERATION_DEPTH/> macro expands to the current <link id="file-iteration"/> depth.
 	</abstract>
 	<usage>
-		<syntax><ITERATION_DEPTH/>()</syntax>
+		<syntax><ITERATION_DEPTH/></syntax>
 	</usage>
 	<para>
 		If a <link id="file-iteration"/> is not in progress, this macro expands to <code>0</code>.
@@ -155,7 +155,7 @@
 		<syntax><FRAME_ITERATION/>(i)</syntax>
 		<param id="i">
 			The dimension whose iteration value is to be retrieved.
-			Valid values range from <code>1</code> to <code><ITERATION_DEPTH/>()</code>.
+			Valid values range from <code>1</code> to <code><ITERATION_DEPTH/></code>.
 		</param>
 	</usage>
 	<para>
@@ -175,7 +175,7 @@
 		
 		#endif // FILE_H
 		
-		#elif <ITERATION_DEPTH/>() == 1
+		#elif <ITERATION_DEPTH/> == 1
 		
 		#define <ITERATION_PARAMS/> \
 		    (1)(<ITERATION/>())("file.h") \
@@ -201,7 +201,7 @@
 		<syntax><FRAME_START/>(i)</syntax>
 		<param id="i">
 			The dimension whose lower bound is to be retrieved.
-			Valid values range from <code>1</code> to <code><ITERATION_DEPTH/>()</code>.
+			Valid values range from <code>1</code> to <code><ITERATION_DEPTH/></code>.
 		</param>
 	</usage>
 	<para>
@@ -219,7 +219,7 @@
 		<syntax><FRAME_FINISH/>(i)</syntax>
 		<param id="i">
 			The dimension whose upper bound is to be retrieved.
-			Valid values range from <code>1</code> to <code><ITERATION_DEPTH/>()</code>.
+			Valid values range from <code>1</code> to <code><ITERATION_DEPTH/></code>.
 		</param>
 	</usage>
 	<para>
@@ -237,7 +237,7 @@
 		<syntax><FRAME_FLAGS/>(i)</syntax>
 		<param id="i">
 			The dimension whose associated flags is are to be retrieved.
-			Valid values range from <code>1</code> to <code><ITERATION_DEPTH/>()</code>.
+			Valid values range from <code>1</code> to <code><ITERATION_DEPTH/></code>.
 		</param>
 	</usage>
 	<para>
@@ -255,12 +255,12 @@
 		<syntax><RELATIVE_ITERATION/>(i)</syntax>
 		<param id="i">
 			The offset to the dimension whose iteration value is to be retrieved.
-			Valid values range from <code>0</code> to <code><ITERATION_DEPTH/>()</code> - 1.
+			Valid values range from <code>0</code> to <code><ITERATION_DEPTH/></code> - 1.
 		</param>
 	</usage>
 	<para>
 		The <var>i</var> argument is interpreted as the dimensional offset <em>backwards</em>.
-		Hence, <code><RELATIVE_ITERATION/>(0)</code> is equivalent to <code><ITERATION/>()</code>, <code><RELATIVE_ITERATION/>(1)</code> is equivalent to <code><FRAME_ITERATION/>(<DEC/>(<ITERATION_DEPTH/>()))</code> (i.e. the iteration value of the next outer iteration), and so on.
+		Hence, <code><RELATIVE_ITERATION/>(0)</code> is equivalent to <code><ITERATION/>()</code>, <code><RELATIVE_ITERATION/>(1)</code> is equivalent to <code><FRAME_ITERATION/>(<DEC/>(<ITERATION_DEPTH/>))</code> (i.e. the iteration value of the next outer iteration), and so on.
 	</para>
 	<para>
 		This macro may only be used if a <link id="file-iteration"/> is in progress.
@@ -277,7 +277,7 @@
 		<syntax><RELATIVE_START/>(i)</syntax>
 		<param id="i">
 			The offset to the dimension whose lower bound is to be retrieved.
-			Valid values range from <code>0</code> to <code><ITERATION_DEPTH/>()</code> - 1.
+			Valid values range from <code>0</code> to <code><ITERATION_DEPTH/></code> - 1.
 		</param>
 	</usage>
 	<para>
@@ -298,7 +298,7 @@
 		<syntax><RELATIVE_FINISH/>(i)</syntax>
 		<param id="i">
 			The offset to the dimension whose upper bound is to be retrieved.
-			Valid values range from <code>0</code> to <code><ITERATION_DEPTH/>()</code> - 1.
+			Valid values range from <code>0</code> to <code><ITERATION_DEPTH/></code> - 1.
 		</param>
 	</usage>
 	<para>
@@ -319,7 +319,7 @@
 		<syntax><RELATIVE_FLAGS/>(i)</syntax>
 		<param id="i">
 			The offset to the dimension whose associated flags is are to be retrieved.
-			Valid values range from <code>0</code> to <code><ITERATION_DEPTH/>()</code> - 1.
+			Valid values range from <code>0</code> to <code><ITERATION_DEPTH/></code> - 1.
 		</param>
 	</usage>
 	<para>
@@ -356,7 +356,7 @@
 		
 		#endif // FILE_H
 		
-		#elif <ITERATION_DEPTH/>() == 1
+		#elif <ITERATION_DEPTH/> == 1
 		
 		I == <ITERATION/>()
 		

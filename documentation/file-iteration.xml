@@ -325,14 +325,14 @@
 				
 				    #endif // FILE_H
 				
-				#elif <ITERATION_DEPTH/>() == 1
+				#elif <ITERATION_DEPTH/> == 1
 				
 				    (<ITERATION/>())
 				
 				    #define <ITERATION_PARAMS/> (1)(<ITERATION/>())("file.h")
 				    ??=include <ITERATE/>()
 				
-				#elif <ITERATION_DEPTH/>() == 2
+				#elif <ITERATION_DEPTH/> == 2
 				
 				    <ITERATION/>()
 				
@@ -818,7 +818,7 @@
 				
 				    #endif // CLOSURE_HPP
 				
-				#elif <ITERATION_DEPTH/>() == 1
+				#elif <ITERATION_DEPTH/> == 1
 				
 				    #define i <FRAME_ITERATION/>(1)
 				    

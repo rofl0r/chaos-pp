@@ -1,0 +1,277 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>algorithm/x/transform.h - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="../../../.././style.css">
+</head>
+<body>
+<p>
+	The <code>algorithm/x/transform.h</code> header defines an <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././exponentials.html">exponential</a> algorithm that transforms the elements of a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././generics.html">generic data structure</a> with a user-specified operation which can be <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././parametrics.html">parametrically resumed</a>.
+</p>
+<h4>Usage</h4>
+<pre class="box">#include <code><a class="header" href="../../../.././chaos/preprocessor/algorithm/x/transform.html">&lt;chaos/preprocessor/algorithm/x/transform.h&gt;</a></code></pre>
+<h4>Contents</h4>
+<ul><li><code><a class="primary" href="#TRANSFORM_X">CHAOS_PP_TRANSFORM_X</a></code></li></ul>
+<hr>
+<a name="TRANSFORM_X"></a><h3 class="primary">CHAOS_PP_TRANSFORM_X</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/x/transform.html#TRANSFORM_X" class="primary">CHAOS_PP_TRANSFORM_X</a></code> macro transforms each element of its third argument with the operation specified by its second argument.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/recursion/expr.html#EXPR" class="primary">CHAOS_PP_EXPR</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/x/transform.html#TRANSFORM_X" class="primary">CHAOS_PP_TRANSFORM_X</a></code>(size, op, g))</pre>
+<dl>
+<dt><var>op</var></dt>
+<dd>
+<p>
+				The operation used to transform each element of <var>g</var>.
+				This operation must be either a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././lambda.html">λ expression</a> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				</p>
+<div><pre>op(s, elem<sup>†</sup>)</pre></div>
+<p>
+				<sup>†</sup>
+				If the type of <var>g</var> is non-variadic, <var>elem</var> must be <code>...</code> or the number of parameters that corresponds to the number of sub-elements in each element of <var>g</var>.
+				Otherwise, <var>elem</var> must be <code>...</code> or a single parameter.
+			</p>
+</dd>
+<dt><var>g</var></dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././generics.html">generic data structure</a> whose elements are to be transformed.
+		</p></dd>
+</dl>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/recursion/expr.html#EXPR" class="primary">CHAOS_PP_EXPR</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/x/transform.html#TRANSFORM_X" class="primary">CHAOS_PP_TRANSFORM_X</a></code>(size, op, g, ...))</pre>
+<dl>
+<dt><var>op</var></dt>
+<dd>
+<p>
+				The operation used to transform each element of <var>g</var>.
+				This operation must be either a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././lambda.html">λ expression</a> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				</p>
+<div><pre>op(s, elem<sup>†</sup>, data<sup>‡</sup>)</pre></div>
+<p>
+				<sup>†</sup>
+				If the type of <var>g</var> is non-variadic, <var>elem</var> must be the number of parameters that corresponds to the number of sub-elements in each element of <var>g</var>.
+				Otherwise, <var>elem</var> must be a single parameter.
+			</p>
+<p>
+				<sup>‡</sup>
+				The <var>data</var> pseudo-parameter must be either <code>...</code> or the number of parameters that corresponds to the number of arguments in the auxiliary data, <code>__VA_ARGS__</code>.
+			</p>
+</dd>
+<dt><var>g</var></dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././generics.html">generic data structure</a> whose elements are to be transformed.
+		</p></dd>
+<dt>[<var>...</var>]</dt>
+<dd><p>
+			Auxiliary data to be passed through the algorithm to the operation.
+		</p></dd>
+</dl>
+<h4>Usage <small>- C/C++ Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/recursion/expr.html#EXPR" class="primary">CHAOS_PP_EXPR</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/x/transform.html#TRANSFORM_X" class="primary">CHAOS_PP_TRANSFORM_X</a></code>(size, op, g, data))</pre>
+<dl>
+<dt><var>op</var></dt>
+<dd>
+<p>
+			The operation used to transform each element of <var>g</var>.
+			This operation must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			</p>
+<div><pre>op(s, elem, data)</pre></div>
+</dd>
+<dt><var>g</var></dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././generics.html">generic data structure</a> whose elements are to be transformed.
+		</p></dd>
+<dt><var>data</var></dt>
+<dd><p>
+			Auxiliary data to be passed through the algorithm to the operation.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro behaves identically to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/transform.html#TRANSFORM" class="primary">CHAOS_PP_TRANSFORM</a></code> except that the invocations of the operation are <em>not</em> trampolined, the algorithm makes <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././exponentials.html">exponential</a> use of the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././recursion.html">recursion backend</a>, and the algorithm itself yields a trampolined <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././deferral.html">deferred expression</a> whenever the number of <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././recursion.html">recursion steps</a> is exhausted.
+		This allows for <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././parametrics.html">parametric resumption</a>.
+	</p></div>
+<div><p>
+		This algorithm maintains a buffer of <var>size</var> <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././recursion.html">recursion steps</a> available at all times.
+		This guarantees that the operation has <em>at least</em> <var>size</var> <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././recursion.html">recursion steps</a> available whenever it is invoked.
+	</p></div>
+<div><p>
+		The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././exponentials.html">exponential</a> structure of the <code>X</code>-suffixed algorithms yields a total of <a href="../../../.././alpha.gif">α</a> <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././recursion.html">recursion steps</a>, where <var class="external">p</var> is the number of <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././parametrics.html">parametric resumptions</a> plus the initial entry, <var class="external">s<sub>ω</sub></var> is <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/limits.html#LIMIT_EXPR" class="primary">CHAOS_PP_LIMIT_EXPR</a></code>, <var class="external">s</var> is the current <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././recursion.html">recursion state</a> at the beginning of the algorithm (i.e. <code><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/recursion/expr.html#STATE" class="primary">CHAOS_PP_STATE</a></code>()</code>), <var class="external">s<sub>δ</sub></var> is the buffer size, and <var class="external">z</var> is the exponential base.
+		Currently, <var class="external">z</var> is fixed at two in the <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/x/transform.html#TRANSFORM_X" class="primary">CHAOS_PP_TRANSFORM_X</a></code> algorithm (though it could easily be increased), which reduces the equation to <a href="../../../.././beta.gif">β</a>.
+		Ignoring the complexity of <var>op</var> (which is invoked once for each element in <var>g</var>), the efficiency of the algorithm's use of the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././recursion.html">recursion backend</a> can be described in terms of the number of <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././recursion.html">recursion steps</a> required to complete the algorithm.
+		The aysmptotic upper and lower bounds are Θ(2<var class="external">n</var>+1), where <var class="external">n</var> is the number of elements in <var>g</var>.
+		These bounds preserve all low-order terms, which implies that the algorithm can process exactly <a href="complexity/transform.gif">γ</a> elements.
+	</p></div>
+<div><p>
+		This macro deduces the current <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././recursion.html">recursion state</a> and invokes <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/x/transform.html#TRANSFORM_X_S" class="secondary">CHAOS_PP_TRANSFORM_X_S</a></code>.
+		If the the current <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././recursion.html">recursion state</a> is already known, direct use of <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/x/transform.html#TRANSFORM_X_S" class="secondary">CHAOS_PP_TRANSFORM_X_S</a></code> is more efficient.
+	</p></div>
+<div><p>
+		This macro may not be used if <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././bypass-semantics.html">bypass semantics</a> are in effect.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../../.././chaos/preprocessor/algorithm/auto/transform.html#AUTO_TRANSFORM">CHAOS_PP_AUTO_TRANSFORM</a></code></li>
+<li><code><a class="primary" href="../../../.././chaos/preprocessor/seq/auto/transform.html#SEQ_AUTO_TRANSFORM">CHAOS_PP_SEQ_AUTO_TRANSFORM</a></code></li>
+<li><code><a class="primary" href="../../../.././chaos/preprocessor/seq/transform.html#SEQ_TRANSFORM">CHAOS_PP_SEQ_TRANSFORM</a></code></li>
+<li><code><a class="primary" href="../../../.././chaos/preprocessor/algorithm/transform.html#TRANSFORM">CHAOS_PP_TRANSFORM</a></code></li>
+<li><code><a class="primary" href="../../../.././chaos/preprocessor/tuple/auto/transform.html#TUPLE_AUTO_TRANSFORM">CHAOS_PP_TUPLE_AUTO_TRANSFORM</a></code></li>
+<li><code><a class="primary" href="../../../.././chaos/preprocessor/tuple/transform.html#TUPLE_TRANSFORM">CHAOS_PP_TUPLE_TRANSFORM</a></code></li>
+<li><code><a class="primary" href="../../../.././chaos/preprocessor/seq/variadic/auto/transform.html#VARIADIC_SEQ_AUTO_TRANSFORM">CHAOS_PP_VARIADIC_SEQ_AUTO_TRANSFORM</a></code></li>
+<li><code><a class="primary" href="../../../.././chaos/preprocessor/seq/variadic/transform.html#VARIADIC_SEQ_TRANSFORM">CHAOS_PP_VARIADIC_SEQ_TRANSFORM</a></code></li>
+</ul>
+<hr>
+<a name="TRANSFORM_X_ID"></a><h3 class="secondary">CHAOS_PP_TRANSFORM_X_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/x/transform.html#TRANSFORM_X_ID" class="secondary">CHAOS_PP_TRANSFORM_X_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/x/transform.html#TRANSFORM_X" class="primary">CHAOS_PP_TRANSFORM_X</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/x/transform.html#TRANSFORM_X_ID" class="secondary">CHAOS_PP_TRANSFORM_X_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/x/transform.html#TRANSFORM_X" class="primary">CHAOS_PP_TRANSFORM_X</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="TRANSFORM_X_"></a><h3 class="secondary">CHAOS_PP_TRANSFORM_X_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/x/transform.html#TRANSFORM_X_" class="secondary">CHAOS_PP_TRANSFORM_X_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/x/transform.html#TRANSFORM_X" class="primary">CHAOS_PP_TRANSFORM_X</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/x/transform.html#TRANSFORM_X_" class="secondary">CHAOS_PP_TRANSFORM_X_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/x/transform.html#TRANSFORM_X_ID" class="secondary">CHAOS_PP_TRANSFORM_X_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="TRANSFORM_X_S"></a><h3 class="alternate">CHAOS_PP_TRANSFORM_X_S</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/x/transform.html#TRANSFORM_X_S" class="secondary">CHAOS_PP_TRANSFORM_X_S</a></code> macro behaves identically to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/x/transform.html#TRANSFORM_X" class="primary">CHAOS_PP_TRANSFORM_X</a></code> except that it is parametized by the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././recursion.html">recursion state</a>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/recursion/expr.html#EXPR_S" class="primary">CHAOS_PP_EXPR_S</a></code>(s)(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/x/transform.html#TRANSFORM_X_S" class="secondary">CHAOS_PP_TRANSFORM_X_S</a></code>(s, op, g))</pre>
+<dl>
+<dt><var>s</var></dt>
+<dd><p>
+				The current <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././recursion.html">recursion state</a>.
+			</p></dd>
+<dt><var>op</var></dt>
+<dd>
+<p>
+				The operation used to transform each element of <var>g</var>.
+				This operation must be either a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././lambda.html">λ expression</a> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				</p>
+<div><pre>op(s, elem<sup>†</sup>)</pre></div>
+<p>
+				<sup>†</sup>
+				If the type of <var>g</var> is non-variadic, <var>elem</var> must be <code>...</code> or the number of parameters that corresponds to the number of sub-elements in each element of <var>g</var>.
+				Otherwise, <var>elem</var> must be <code>...</code> or a single parameter.
+			</p>
+</dd>
+<dt><var>g</var></dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././generics.html">generic data structure</a> whose elements are to be transformed.
+		</p></dd>
+</dl>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/recursion/expr.html#EXPR_S" class="primary">CHAOS_PP_EXPR_S</a></code>(s)(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/x/transform.html#TRANSFORM_X_S" class="secondary">CHAOS_PP_TRANSFORM_X_S</a></code>(s, op, g, ...))</pre>
+<dl>
+<dt><var>s</var></dt>
+<dd><p>
+				The current <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././recursion.html">recursion state</a>.
+			</p></dd>
+<dt><var>op</var></dt>
+<dd>
+<p>
+				The operation used to transform each element of <var>g</var>.
+				This operation must be either a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././lambda.html">λ expression</a> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				</p>
+<div><pre>op(s, elem<sup>†</sup>, data<sup>‡</sup>)</pre></div>
+<p>
+				<sup>†</sup>
+				If the type of <var>g</var> is non-variadic, <var>elem</var> must be the number of parameters that corresponds to the number of sub-elements in each element of <var>g</var>.
+				Otherwise, <var>elem</var> must be a single parameter.
+			</p>
+<p>
+				<sup>‡</sup>
+				The <var>data</var> pseudo-parameter must be either <code>...</code> or the number of parameters that corresponds to the number of arguments in the auxiliary data, <code>__VA_ARGS__</code>.
+			</p>
+</dd>
+<dt><var>g</var></dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././generics.html">generic data structure</a> whose elements are to be transformed.
+		</p></dd>
+<dt>[<var>...</var>]</dt>
+<dd><p>
+			Auxiliary data to be passed through the algorithm to the operation.
+		</p></dd>
+</dl>
+<h4>Usage <small>- C/C++ Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/recursion/expr.html#EXPR_S" class="primary">CHAOS_PP_EXPR_S</a></code>(s)(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/x/transform.html#TRANSFORM_X_S" class="secondary">CHAOS_PP_TRANSFORM_X_S</a></code>(s, op, g, data))</pre>
+<dl>
+<dt><var>s</var></dt>
+<dd><p>
+				The current <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././recursion.html">recursion state</a>.
+			</p></dd>
+<dt><var>op</var></dt>
+<dd>
+<p>
+			The operation used to transform each element of <var>g</var>.
+			This operation must be a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+			</p>
+<div><pre>op(s, elem, data)</pre></div>
+</dd>
+<dt><var>g</var></dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././generics.html">generic data structure</a> whose elements are to be transformed.
+		</p></dd>
+<dt><var>data</var></dt>
+<dd><p>
+			Auxiliary data to be passed through the algorithm to the operation.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+			This macro may not be used if <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././bypass-semantics.html">bypass semantics</a> are in effect.
+		</p></div>
+<hr>
+<a name="TRANSFORM_X_S_ID"></a><h3 class="secondary">CHAOS_PP_TRANSFORM_X_S_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/x/transform.html#TRANSFORM_X_S_ID" class="secondary">CHAOS_PP_TRANSFORM_X_S_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/x/transform.html#TRANSFORM_X_S" class="secondary">CHAOS_PP_TRANSFORM_X_S</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/x/transform.html#TRANSFORM_X_S_ID" class="secondary">CHAOS_PP_TRANSFORM_X_S_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/x/transform.html#TRANSFORM_X_S" class="secondary">CHAOS_PP_TRANSFORM_X_S</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="TRANSFORM_X_S_"></a><h3 class="secondary">CHAOS_PP_TRANSFORM_X_S_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/x/transform.html#TRANSFORM_X_S_" class="secondary">CHAOS_PP_TRANSFORM_X_S_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/x/transform.html#TRANSFORM_X_S" class="secondary">CHAOS_PP_TRANSFORM_X_S</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/x/transform.html#TRANSFORM_X_S_" class="secondary">CHAOS_PP_TRANSFORM_X_S_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/x/transform.html#TRANSFORM_X_S_ID" class="secondary">CHAOS_PP_TRANSFORM_X_S_ID</a></code>)()</pre></div></div>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="../../../.././license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</body>
+</html>

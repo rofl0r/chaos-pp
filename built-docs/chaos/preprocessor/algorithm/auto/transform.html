@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>algorithm/auto/transform.h - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="../../../.././style.css">
+</head>
+<body>
+<p>
+	The <code>algorithm/auto/transform.h</code> header defines an algorithm that transforms the elements of a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././generics.html">generic data structure</a> with a user-specified operation.
+</p>
+<h4>Usage</h4>
+<pre class="box">#include <code><a class="header" href="../../../.././chaos/preprocessor/algorithm/auto/transform.html">&lt;chaos/preprocessor/algorithm/auto/transform.h&gt;</a></code></pre>
+<h4>Contents</h4>
+<ul><li><code><a class="primary" href="#AUTO_TRANSFORM">CHAOS_PP_AUTO_TRANSFORM</a></code></li></ul>
+<hr>
+<a name="AUTO_TRANSFORM"></a><h3 class="primary">CHAOS_PP_AUTO_TRANSFORM</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/auto/transform.html#AUTO_TRANSFORM" class="primary">CHAOS_PP_AUTO_TRANSFORM</a></code> macro transforms each element of its second argument with the operation specified by its first argument.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/auto/transform.html#AUTO_TRANSFORM" class="primary">CHAOS_PP_AUTO_TRANSFORM</a></code>(op, g)</pre>
+<dl>
+<dt><var>op</var></dt>
+<dd>
+<p>
+				The operation to be used to transform each element of <var>g</var>.
+				This operation must be either a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././lambda.html">λ expression</a> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				</p>
+<div><pre>op(s, elem<sup>†</sup>)</pre></div>
+<p>
+				<sup>†</sup>
+				If the type of <var>g</var> is non-variadic, <var>elem</var> must be <code>...</code> or the number of parameters that corresponds to the number of sub-elements in each element of <var>g</var>.
+				Otherwise, <var>elem</var> must be <code>...</code> or a single parameter.
+			</p>
+</dd>
+<dt><var>g</var></dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././generics.html">generic data structure</a> whose elements are to be transformed.
+		</p></dd>
+</dl>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/auto/transform.html#AUTO_TRANSFORM" class="primary">CHAOS_PP_AUTO_TRANSFORM</a></code>(op, g, ...)</pre>
+<dl>
+<dt><var>op</var></dt>
+<dd>
+<p>
+				The operation to be used to transform each element of <var>g</var>.
+				This operation must be either a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././lambda.html">λ expression</a> or a macro name that refers to a macro with a signature compatible with the following pseudo-signature:
+				</p>
+<div><pre>op(s, elem<sup>†</sup>, data<sup>‡</sup>)</pre></div>
+<p>
+				<sup>†</sup>
+				If the type of <var>g</var> is non-variadic, <var>elem</var> must be the number of parameters that corresponds to the number of sub-elements in each element of <var>g</var>.
+				Otherwise, <var>elem</var> must be a single parameter.
+			</p>
+<p>
+				<sup>‡</sup>
+				The <var>data</var> pseudo-parameter must be either <code>...</code> or the number of parameters that corresponds to the number of arguments in the auxiliary data, <code>__VA_ARGS__</code>.
+			</p>
+</dd>
+<dt><var>g</var></dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././generics.html">generic data structure</a> whose elements are to be transformed.
+		</p></dd>
+<dt>[<var>...</var>]</dt>
+<dd><p>
+			Auxiliary data to be passed through the algorithm to the operation.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/auto/transform.html#AUTO_TRANSFORM" class="primary">CHAOS_PP_AUTO_TRANSFORM</a></code> macro is a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././higher-order.html">higher-order thunk</a> that deduces the current <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././higher-order.html">higher-order entry point</a> and invokes <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/transform.html#TRANSFORM" class="primary">CHAOS_PP_TRANSFORM</a></code>.
+	</p></div>
+<div><p>
+		This macro may not be used if <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././bypass-semantics.html">bypass semantics</a> are in effect.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../../.././chaos/preprocessor/seq/auto/transform.html#SEQ_AUTO_TRANSFORM">CHAOS_PP_SEQ_AUTO_TRANSFORM</a></code></li>
+<li><code><a class="primary" href="../../../.././chaos/preprocessor/seq/transform.html#SEQ_TRANSFORM">CHAOS_PP_SEQ_TRANSFORM</a></code></li>
+<li><code><a class="primary" href="../../../.././chaos/preprocessor/algorithm/transform.html#TRANSFORM">CHAOS_PP_TRANSFORM</a></code></li>
+<li><code><a class="primary" href="../../../.././chaos/preprocessor/algorithm/x/transform.html#TRANSFORM_X">CHAOS_PP_TRANSFORM_X</a></code></li>
+<li><code><a class="primary" href="../../../.././chaos/preprocessor/tuple/auto/transform.html#TUPLE_AUTO_TRANSFORM">CHAOS_PP_TUPLE_AUTO_TRANSFORM</a></code></li>
+<li><code><a class="primary" href="../../../.././chaos/preprocessor/tuple/transform.html#TUPLE_TRANSFORM">CHAOS_PP_TUPLE_TRANSFORM</a></code></li>
+<li><code><a class="primary" href="../../../.././chaos/preprocessor/seq/variadic/auto/transform.html#VARIADIC_SEQ_AUTO_TRANSFORM">CHAOS_PP_VARIADIC_SEQ_AUTO_TRANSFORM</a></code></li>
+<li><code><a class="primary" href="../../../.././chaos/preprocessor/seq/variadic/transform.html#VARIADIC_SEQ_TRANSFORM">CHAOS_PP_VARIADIC_SEQ_TRANSFORM</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/auto/transform.html" class="header">&lt;chaos/preprocessor/algorithm/auto/transform.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/arithmetic/dec.html" class="header">&lt;chaos/preprocessor/arithmetic/dec.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/array/core.html" class="header">&lt;chaos/preprocessor/array/core.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/config.html" class="header">&lt;chaos/preprocessor/config.h&gt;</a></code>
+#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/lambda/ops.html" class="header">&lt;chaos/preprocessor/lambda/ops.h&gt;</a></code>
+
+#if <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/config.html#VARIADICS" class="primary">CHAOS_PP_VARIADICS</a></code>
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/auto/transform.html#AUTO_TRANSFORM" class="primary">CHAOS_PP_AUTO_TRANSFORM</a></code>(
+    <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/arithmetic/dec.html#DEC_" class="secondary">CHAOS_PP_DEC_</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/lambda/ops.html#ARG" class="primary">CHAOS_PP_ARG</a></code>(1)),
+    (<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/array/core.html#ARRAY" class="primary">CHAOS_PP_ARRAY</a></code>) (5, (1, 2, 3, 4, 5))
+)
+// (5, (0, 1, 2, 3, 4))
+
+#endif</pre>
+<hr>
+<a name="AUTO_TRANSFORM_ID"></a><h3 class="secondary">CHAOS_PP_AUTO_TRANSFORM_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/auto/transform.html#AUTO_TRANSFORM_ID" class="secondary">CHAOS_PP_AUTO_TRANSFORM_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/auto/transform.html#AUTO_TRANSFORM" class="primary">CHAOS_PP_AUTO_TRANSFORM</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/auto/transform.html#AUTO_TRANSFORM_ID" class="secondary">CHAOS_PP_AUTO_TRANSFORM_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/auto/transform.html#AUTO_TRANSFORM" class="primary">CHAOS_PP_AUTO_TRANSFORM</a></code> to be passed around without expansion.
+				</p></div>
+<hr>
+<a name="AUTO_TRANSFORM_"></a><h3 class="secondary">CHAOS_PP_AUTO_TRANSFORM_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/auto/transform.html#AUTO_TRANSFORM_" class="secondary">CHAOS_PP_AUTO_TRANSFORM_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/auto/transform.html#AUTO_TRANSFORM" class="primary">CHAOS_PP_AUTO_TRANSFORM</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/auto/transform.html#AUTO_TRANSFORM_" class="secondary">CHAOS_PP_AUTO_TRANSFORM_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../../.././chaos/preprocessor/algorithm/auto/transform.html#AUTO_TRANSFORM_ID" class="secondary">CHAOS_PP_AUTO_TRANSFORM_ID</a></code>)()</pre></div></div>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="../../../.././license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</body>
+</html>

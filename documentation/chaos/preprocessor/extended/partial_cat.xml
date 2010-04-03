@@ -89,4 +89,45 @@
 	<derivative id="PARTIAL_CAT_ID"/>
 </macro>
 
+<macro id="PARTIAL_CAT_II" group="concatenation">
+	<abstract>
+		The <PARTIAL_CAT_II/> macro is a concatenation macro that selectively allows each argument to expand before concatenation.
+	</abstract>
+	<usage lang="C99">
+		<syntax><PARTIAL_CAT_II/>(i, j)(, a, ...)</syntax>
+		<param id="i">
+			The argument that determines whether <var>a</var> is allowed to expand.
+			Valid values are <code>0</code> and <code>1</code>.
+		</param>
+		<param id="j">
+			The argument that determines whether <code>__VA_ARGS__</code> is allowed to expand.
+			Valid values are <code>0</code> and <code>1</code>.
+		</param>
+		<param id="a" optional="1">
+			The left operand of the concatenation.
+		</param>
+		<param id="..." optional="1">
+			The right operand of the concatenation.
+		</param>
+	</usage>
+	<para>
+		This macro concatenates the rightmost preprocessing token of <var>a</var> to the leftmost preprocessing token of <var>b</var> or <code>__VA_ARGS__</code>.
+	</para>
+	<para>
+		If <var>i</var> is <code>1</code>, <var>a</var> is allowed to expand prior to concatenation.
+		Otherwise, it is not allowed to expand prior to concatenation.
+		Likewise, if <var>j</var> is <code>1</code>, <var>b</var> or <code>__VA_ARGS__</code> is allowed to expand prior to concatenation.
+		Otherwise, it is not allowed to expand prior to concatenation.
+	</para>
+	<para>
+		Note that the first argument of the second argument group must be a placeholder (i.e. empty).
+	</para>
+	<listing>
+		#include <chaos-preprocessor-extended-partial_cat.h/>
+
+		<PARTIAL_CAT_II/>(0, 1)(, __LINE__, __LINE__) // __LINE__4
+	</listing>
+	<derivative id="PARTIAL_CAT_II_ID"/>
+</macro>
+
 </header>

@@ -14,6 +14,7 @@
 #
 # include <chaos/preprocessor/cat.h>
 # include <chaos/preprocessor/config.h>
+# include <chaos/preprocessor/extended/variadic_cat.h>
 # include <chaos/preprocessor/lambda/ops.h>
 #
 # /* CHAOS_PP_PARTIAL_CAT */
@@ -38,5 +39,16 @@
 # /* CHAOS_PP_PARTIAL */
 #
 # define CHAOS_PP_PARTIAL
+#
+# /* CHAOS_PP_PARTIAL_CAT_II */
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_PP_PARTIAL_CAT_II(i, j) CHAOS_PP_VARIADIC_CAT(CHAOS_IP_PARTIAL_CAT_II_, i, j)
+#    define CHAOS_PP_PARTIAL_CAT_II_ID() CHAOS_PP_PARTIAL_CAT_II
+#    define CHAOS_IP_PARTIAL_CAT_II_00(p, ...) CHAOS_PP_PRIMITIVE_CAT(p ## __VA_ARGS__)
+#    define CHAOS_IP_PARTIAL_CAT_II_01(p, a, ...) CHAOS_PP_PRIMITIVE_CAT(p ## a, __VA_ARGS__)
+#    define CHAOS_IP_PARTIAL_CAT_II_10(p, a, ...) CHAOS_PP_PRIMITIVE_CAT(a, p ## __VA_ARGS__)
+#    define CHAOS_IP_PARTIAL_CAT_II_11(p, ...) CHAOS_PP_PRIMITIVE_CAT(__VA_ARGS__)
+# endif
 #
 # endif

@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html xmlns:copyright="/pp-book/copyright.xsl" xmlns:lookup="/pp-book/lookup.xsl" xmlns:spacing="/pp-book/spacing.xsl" xmlns:whitespace="/pp-book/whitespace.xsl">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ustringize.h - Chaos Preprocessor Library</title>
+<link rel="stylesheet" type="text/css" href="../.././style.css">
+</head>
+<body>
+<p>
+	The <code>ustringize.h</code> header defines stringizing macros for producing Unicode string literals.
+</p>
+<h4>Usage</h4>
+<pre class="box">#include <code><a class="header" href="../.././chaos/preprocessor/ustringize.html">&lt;chaos/preprocessor/ustringize.h&gt;</a></code></pre>
+<h4>Contents</h4>
+<ul>
+<li><code><a class="primary" href="#PRIMITIVE_USTRINGIZE">CHAOS_PP_PRIMITIVE_USTRINGIZE</a></code></li>
+<li><code><a class="primary" href="#USTRINGIZE">CHAOS_PP_USTRINGIZE</a></code></li>
+</ul>
+<hr>
+<a name="USTRINGIZE"></a><h3 class="primary">CHAOS_PP_USTRINGIZE</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/ustringize.html#USTRINGIZE" class="primary">CHAOS_PP_USTRINGIZE</a></code> macro stringizes its argument after it has been expanded.
+	</p>
+<h4>Usage <small>- C++0x Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/ustringize.html#USTRINGIZE" class="primary">CHAOS_PP_USTRINGIZE</a></code>(n)(...)</pre>
+<dl>
+<dt><var>n</var></dt>
+<dd><p>
+			The type of encoding of the resulting string literal.
+			Valid values are <code>8</code>, <code>16</code>, and <code>32</code>.
+		</p></dd>
+<dt>[<var>...</var>]</dt>
+<dd><p>
+			The argument to be stringized.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro allows its argument to expand on input.
+		This macro's sibling, <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/ustringize.html#PRIMITIVE_USTRINGIZE" class="primary">CHAOS_PP_PRIMITIVE_USTRINGIZE</a></code>, does <em>not</em> provide this delay.
+	</p></div>
+<div><p>
+		If <var>n</var> is <code>8</code>, the resulting string literal is encoded in UTF-8 such as in <code>u8"text"</code>.
+		If <var>n</var> is <code>16</code>, the resulting string literal is encoded in UTF-16 such as in <code>u"text"</code>.
+		If <var>n</var> is <code>32</code>, the resulting string literal is encoded in UTF-32 such as in <code>U"text"</code>.
+	</p></div>
+<div><p>
+		Both leading and trailing whitespace are removed from the argument when it is stringized, and internal whitespace separations are each condensed to a single space character.
+		</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/ustringize.html#USTRINGIZE" class="primary">CHAOS_PP_USTRINGIZE</a></code>(8)( abc )  // u8"abc"
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/ustringize.html#USTRINGIZE" class="primary">CHAOS_PP_USTRINGIZE</a></code>(32)(1   2) // U"1 2"</pre></div></div>
+<div><p>
+		If <code>__VA_ARGS__</code> expands to a placemarker, this macro expands to an empty wide string literal.
+		</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/ustringize.html#USTRINGIZE" class="primary">CHAOS_PP_USTRINGIZE</a></code>(16)() // u""</pre></div></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../.././chaos/preprocessor/string/charize.html#CHARIZE">CHAOS_PP_CHARIZE</a></code></li>
+<li><code><a class="primary" href="../.././chaos/preprocessor/stringize.html#PRIMITIVE_STRINGIZE">CHAOS_PP_PRIMITIVE_STRINGIZE</a></code></li>
+<li><code><a class="primary" href="../.././chaos/preprocessor/ustringize.html#PRIMITIVE_USTRINGIZE">CHAOS_PP_PRIMITIVE_USTRINGIZE</a></code></li>
+<li><code><a class="primary" href="../.././chaos/preprocessor/wstringize.html#PRIMITIVE_WSTRINGIZE">CHAOS_PP_PRIMITIVE_WSTRINGIZE</a></code></li>
+<li><code><a class="primary" href="../.././chaos/preprocessor/stringize.html#STRINGIZE">CHAOS_PP_STRINGIZE</a></code></li>
+<li><code><a class="primary" href="../.././chaos/preprocessor/wstringize.html#WSTRINGIZE">CHAOS_PP_WSTRINGIZE</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/ustringize.html" class="header">&lt;chaos/preprocessor/ustringize.h&gt;</a></code>
+
+#define A text
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/ustringize.html#USTRINGIZE" class="primary">CHAOS_PP_USTRINGIZE</a></code>(32)(A) // U"text"</pre>
+<hr>
+<a name="USTRINGIZE_ID"></a><h3 class="secondary">CHAOS_PP_USTRINGIZE_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/ustringize.html#USTRINGIZE_ID" class="secondary">CHAOS_PP_USTRINGIZE_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/ustringize.html#USTRINGIZE" class="primary">CHAOS_PP_USTRINGIZE</a></code>.
+		</p>
+<h4>Usage <small>- C++0x Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/ustringize.html#USTRINGIZE_ID" class="secondary">CHAOS_PP_USTRINGIZE_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro exists only for uniformity with other macros that require indirect invocation.
+				</p></div>
+<hr>
+<a name="USTRINGIZE_"></a><h3 class="secondary">CHAOS_PP_USTRINGIZE_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/ustringize.html#USTRINGIZE_" class="secondary">CHAOS_PP_USTRINGIZE_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/ustringize.html#USTRINGIZE" class="primary">CHAOS_PP_USTRINGIZE</a></code>.
+		</p>
+<h4>Usage <small>- C++0x Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/ustringize.html#USTRINGIZE_" class="secondary">CHAOS_PP_USTRINGIZE_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/ustringize.html#USTRINGIZE" class="primary">CHAOS_PP_USTRINGIZE</a></code>)</pre></div></div>
+<hr>
+<a name="PRIMITIVE_USTRINGIZE"></a><h3 class="primary">CHAOS_PP_PRIMITIVE_USTRINGIZE</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/ustringize.html#PRIMITIVE_USTRINGIZE" class="primary">CHAOS_PP_PRIMITIVE_USTRINGIZE</a></code> macro stringizes its argument before it is expanded.
+	</p>
+<h4>Usage <small>- C++0x Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/ustringize.html#PRIMITIVE_USTRINGIZE" class="primary">CHAOS_PP_PRIMITIVE_USTRINGIZE</a></code>(n)(...)</pre>
+<dl>
+<dt><var>n</var></dt>
+<dd><p>
+			The type of encoding of the resulting string literal.
+			Valid values are <code>8</code>, <code>16</code>, and <code>32</code>.
+		</p></dd>
+<dt>[<var>...</var>]</dt>
+<dd><p>
+			The argument to be stringized.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro behaves identically to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/ustringize.html#USTRINGIZE" class="primary">CHAOS_PP_USTRINGIZE</a></code> except that it does not allow its argument to expand before it is wide-stringized.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../.././chaos/preprocessor/string/charize.html#CHARIZE">CHAOS_PP_CHARIZE</a></code></li>
+<li><code><a class="primary" href="../.././chaos/preprocessor/stringize.html#PRIMITIVE_STRINGIZE">CHAOS_PP_PRIMITIVE_STRINGIZE</a></code></li>
+<li><code><a class="primary" href="../.././chaos/preprocessor/wstringize.html#PRIMITIVE_WSTRINGIZE">CHAOS_PP_PRIMITIVE_WSTRINGIZE</a></code></li>
+<li><code><a class="primary" href="../.././chaos/preprocessor/stringize.html#STRINGIZE">CHAOS_PP_STRINGIZE</a></code></li>
+<li><code><a class="primary" href="../.././chaos/preprocessor/ustringize.html#USTRINGIZE">CHAOS_PP_USTRINGIZE</a></code></li>
+<li><code><a class="primary" href="../.././chaos/preprocessor/wstringize.html#WSTRINGIZE">CHAOS_PP_WSTRINGIZE</a></code></li>
+</ul>
+<h4>Sample Code</h4>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/ustringize.html" class="header">&lt;chaos/preprocessor/ustringize.h&gt;</a></code>
+
+#define A text
+
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/ustringize.html#PRIMITIVE_USTRINGIZE" class="primary">CHAOS_PP_PRIMITIVE_USTRINGIZE</a></code>(32)(A) // U"A"</pre>
+<hr>
+<a name="PRIMITIVE_USTRINGIZE_ID"></a><h3 class="secondary">CHAOS_PP_PRIMITIVE_USTRINGIZE_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/ustringize.html#PRIMITIVE_USTRINGIZE_ID" class="secondary">CHAOS_PP_PRIMITIVE_USTRINGIZE_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/ustringize.html#PRIMITIVE_USTRINGIZE" class="primary">CHAOS_PP_PRIMITIVE_USTRINGIZE</a></code>.
+		</p>
+<h4>Usage <small>- C++0x Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/ustringize.html#PRIMITIVE_USTRINGIZE_ID" class="secondary">CHAOS_PP_PRIMITIVE_USTRINGIZE_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro exists only for uniformity with other macros that require indirect invocation.
+				</p></div>
+<hr>
+<a name="PRIMITIVE_USTRINGIZE_"></a><h3 class="secondary">CHAOS_PP_PRIMITIVE_USTRINGIZE_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/ustringize.html#PRIMITIVE_USTRINGIZE_" class="secondary">CHAOS_PP_PRIMITIVE_USTRINGIZE_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/ustringize.html#PRIMITIVE_USTRINGIZE" class="primary">CHAOS_PP_PRIMITIVE_USTRINGIZE</a></code>.
+		</p>
+<h4>Usage <small>- C++0x Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/ustringize.html#PRIMITIVE_USTRINGIZE_" class="secondary">CHAOS_PP_PRIMITIVE_USTRINGIZE_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../.././chaos/preprocessor/ustringize.html#PRIMITIVE_USTRINGIZE" class="primary">CHAOS_PP_PRIMITIVE_USTRINGIZE</a></code>)</pre></div></div>
+<hr>
+<address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
+<address>
+				Distributed under the <a href="../.././license.html">Boost Software License, Version 1.0</a>.
+				See <a href="http://chaos-pp.sourceforge.net">http://chaos-pp.sourceforge.net</a> for the most recent version of this document.
+			</address>
+</body>
+</html>

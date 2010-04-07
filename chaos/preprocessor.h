@@ -38,6 +38,7 @@
 # include <chaos/preprocessor/string.h>
 # include <chaos/preprocessor/stringize.h>
 # include <chaos/preprocessor/tuple.h>
+# include <chaos/preprocessor/ustringize.h>
 # include <chaos/preprocessor/wstringize.h>
 #
 # endif

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- **************************************************************************
+     *                                                                        *
+     *    (C) Copyright Paul Mensonides 2003-2005.                            *
+     *                                                                        *
+     *    Distributed under the Boost Software License, Version 1.0.          *
+     *    (See accompanying file LICENSE).                                    *
+     *                                                                        *
+     *    See http://chaos-pp.sourceforge.net for the most recent version.    *
+     *                                                                        *
+     ************************************************************************** -->
+
+<header name="chaos/preprocessor/ustringize.h" author="Paul Mensonides" date="2003-2005">
+<overview>
+	The <self/> header defines stringizing macros for producing Unicode string literals.
+</overview>
+
+<macro id="USTRINGIZE" group="stringizing">
+	<abstract>
+		The <USTRINGIZE/> macro stringizes its argument after it has been expanded.
+	</abstract>
+	<usage lang="C++0x">
+		<syntax><USTRINGIZE/>(n)(...)</syntax>
+		<param id="n">
+			The type of encoding of the resulting string literal.
+			Valid values are <code>8</code>, <code>16</code>, and <code>32</code>.
+		</param>
+		<param id="..." optional="1">
+			The argument to be stringized.
+		</param>
+	</usage>
+	<para>
+		This macro allows its argument to expand on input.
+		This macro's sibling, <PRIMITIVE_USTRINGIZE/>, does <em>not</em> provide this delay.
+	</para>
+	<para>
+		If <var>n</var> is <code>8</code>, the resulting string literal is encoded in UTF-8 such as in <code>u8"text"</code>.
+		If <var>n</var> is <code>16</code>, the resulting string literal is encoded in UTF-16 such as in <code>u"text"</code>.
+		If <var>n</var> is <code>32</code>, the resulting string literal is encoded in UTF-32 such as in <code>U"text"</code>.
+	</para>
+	<para>
+		Both leading and trailing whitespace are removed from the argument when it is stringized, and internal whitespace separations are each condensed to a single space character.
+		<snippet>
+			<USTRINGIZE/>(8)( abc )  // u8"abc"
+			<USTRINGIZE/>(32)(1   2) // U"1 2"
+		</snippet>
+	</para>
+	<para>
+		If <code>__VA_ARGS__</code> expands to a placemarker, this macro expands to an empty wide string literal.
+		<snippet>
+			<USTRINGIZE/>(16)() // u""
+		</snippet>
+	</para>
+	<listing>
+		#include <chaos-preprocessor-ustringize.h/>
+		
+		#define A text
+		
+		<USTRINGIZE/>(32)(A) // U"text"
+	</listing>
+	<derivative id="USTRINGIZE_ID" lang="C++0x"/>
+	<derivative id="USTRINGIZE_" lang="C++0x"/>
+</macro>
+
+<macro id="PRIMITIVE_USTRINGIZE" group="stringizing">
+	<abstract>
+		The <PRIMITIVE_USTRINGIZE/> macro stringizes its argument before it is expanded.
+	</abstract>
+	<usage lang="C++0x">
+		<syntax><PRIMITIVE_USTRINGIZE/>(n)(...)</syntax>
+		<param id="n">
+			The type of encoding of the resulting string literal.
+			Valid values are <code>8</code>, <code>16</code>, and <code>32</code>.
+		</param>
+		<param id="..." optional="1">
+			The argument to be stringized.
+		</param>
+	</usage>
+	<para>
+		This macro behaves identically to <USTRINGIZE/> except that it does not allow its argument to expand before it is wide-stringized.
+	</para>
+	<listing>
+		#include <chaos-preprocessor-ustringize.h/>
+		
+		#define A text
+		
+		<PRIMITIVE_USTRINGIZE/>(32)(A) // U"A"
+	</listing>
+	<derivative id="PRIMITIVE_USTRINGIZE_ID" lang="C++0x"/>
+	<derivative id="PRIMITIVE_USTRINGIZE_" lang="C++0x"/>
+</macro>
+
+</header>

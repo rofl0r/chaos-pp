@@ -746,6 +746,7 @@
 				<header name="to_string.h"/>
 				<header name="transform.h"/>
 			</directory>
+			<header name="ustringize.h"/>
 			<header name="wstringize.h"/>
 		</directory>
 	</directory>

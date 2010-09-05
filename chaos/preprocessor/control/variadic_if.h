@@ -9,24 +9,20 @@
 #  *                                                                    *
 #  ******************************************************************** */
 #
-# ifndef CHAOS_PREPROCESSOR_CONTROL_H
-# define CHAOS_PREPROCESSOR_CONTROL_H
+# ifndef CHAOS_PREPROCESSOR_CONTROL_VARIADIC_IF_H
+# define CHAOS_PREPROCESSOR_CONTROL_VARIADIC_IF_H
 #
-# include <chaos/preprocessor/control/auto.h>
-# include <chaos/preprocessor/control/branch.h>
-# include <chaos/preprocessor/control/if.h>
-# include <chaos/preprocessor/control/iif.h>
-# include <chaos/preprocessor/control/include_if.h>
-# include <chaos/preprocessor/control/inline_unless.h>
-# include <chaos/preprocessor/control/inline_when.h>
-# include <chaos/preprocessor/control/null.h>
-# include <chaos/preprocessor/control/placemarker_if.h>
-# include <chaos/preprocessor/control/unless.h>
-# include <chaos/preprocessor/control/variadic_if.h>
+# include <chaos/preprocessor/config.h>
 # include <chaos/preprocessor/control/variadic_iif.h>
-# include <chaos/preprocessor/control/when.h>
-# include <chaos/preprocessor/control/while.h>
-# include <chaos/preprocessor/control/while_aux.h>
-# include <chaos/preprocessor/control/x.h>
+# include <chaos/preprocessor/lambda/ops.h>
+# include <chaos/preprocessor/logical/bool.h>
+#
+# /* CHAOS_PP_VARIADIC_IF */
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_PP_VARIADIC_IF(cond) CHAOS_PP_VARIADIC_IIF(CHAOS_PP_BOOL(cond))
+#    define CHAOS_PP_VARIADIC_IF_ID() CHAOS_PP_VARIADIC_IF
+#    define CHAOS_PP_VARIADIC_IF_ CHAOS_PP_LAMBDA(CHAOS_PP_VARIADIC_IF)
+# endif
 #
 # endif

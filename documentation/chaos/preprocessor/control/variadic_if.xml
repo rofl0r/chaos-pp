@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- **************************************************************************
+     *                                                                        *
+     *    (C) Copyright Paul Mensonides 2003-2005.                            *
+     *                                                                        *
+     *    Distributed under the Boost Software License, Version 1.0.          *
+     *    (See accompanying file LICENSE).                                    *
+     *                                                                        *
+     *    See http://chaos-pp.sourceforge.net for the most recent version.    *
+     *                                                                        *
+     ************************************************************************** -->
+
+<header name="chaos/preprocessor/control/variadic_if.h" author="Paul Mensonides" date="2011">
+<overview>
+	The <self/> header defines a macro that acts as an "if-else" construct.
+</overview>
+
+<macro id="VARIADIC_IF" group="if">
+	<abstract>
+		The <VARIADIC_IF/> macro expands to one of two alternatives depending on its first argument.
+	</abstract>
+	<usage lang="C99">
+		<syntax><VARIADIC_IF/>(cond)(...)(...)</syntax>
+		<param id="cond">
+			The condition that determines whether the macro expands to the first or second <code>__VA_ARGS__</code>.
+			Valid values range from <code>0</code> to <LIMIT_MAG/>.
+		</param>
+		<param id="..." optional="1">
+			The resulting expression if <var>bit</var> is non-zero.  This is the first of the two <code>__VA_ARGS__</code> in the syntax.
+		</param>
+		<param id="..." optional="1">
+			The resulting expression if <var>bit</var> is <code>0</code>.  This is the second of the two <code>__VA_ARGS__</code> in the syntax.
+		</param>
+	</usage>
+	<para>
+		If <var>cond</var> expands to <code>0</code>, this macro expands to the second <code>__VA_ARGS__</code>.
+		Otherwise, it expands to the first <code>__VA_ARGS__</code>.
+	</para>
+	<para>
+		This macro performs a Boolean conversion on <var>cond</var>.
+		If this conversion is undesirable, <VARIADIC_IIF/> may be used instead.
+	</para>
+	<para>
+		This macro is lazy.
+		If <var>cond</var> is non-zero, only the first <code>__VA_ARGS__</code> is evaluated.
+		Likewise, if <var>bit</var> is <code>0</code>, only the second <code>__VA_ARGS__</code> is evaluated.
+	</para>
+	<para>
+		This macro is similar to <IF/> except that it allows variadic content in its <em>true</em> branch at the cost of preventing expansion of a function-like macros resulting from that branch.
+		<snippet>
+			#define A() 1
+			#define B() 2
+
+			<VARIADIC_IF/>(1)(A, B)() // A()
+			<VARIADIC_IF/>(0)(A, B)() // 2
+		</snippet>
+	</para>
+	<derivative id="VARIADIC_IF_ID" lang="C99"/>
+	<derivative id="VARIADIC_IF_" lang="C99"/>
+</macro>
+
+</header>

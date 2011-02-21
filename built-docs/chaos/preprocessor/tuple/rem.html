@@ -14,6 +14,7 @@
 <h4>Contents</h4>
 <ul>
 <li><code><a class="primary" href="#REM">CHAOS_PP_REM</a></code></li>
+<li><code><a class="primary" href="#REM_CTOR">CHAOS_PP_REM_CTOR</a></code></li>
 <li><code><a class="primary" href="#TUPLE_REM">CHAOS_PP_TUPLE_REM</a></code></li>
 <li><code><a class="primary" href="#TUPLE_REM_CTOR">CHAOS_PP_TUPLE_REM_CTOR</a></code></li>
 </ul>
@@ -63,6 +64,7 @@
 <h4>See Also</h4>
 <ul>
 <li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/rem.html#REM">CHAOS_PP_REM</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/rem.html#REM_CTOR">CHAOS_PP_REM_CTOR</a></code></li>
 <li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/eat.html#TUPLE_EAT">CHAOS_PP_TUPLE_EAT</a></code></li>
 <li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/rem.html#TUPLE_REM_CTOR">CHAOS_PP_TUPLE_REM_CTOR</a></code></li>
 </ul>
@@ -162,6 +164,7 @@ A((1, 2), (3, 4)) // 1 + 2 + 3 + 4</pre>
 <h4>See Also</h4>
 <ul>
 <li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/rem.html#REM">CHAOS_PP_REM</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/rem.html#REM_CTOR">CHAOS_PP_REM_CTOR</a></code></li>
 <li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/rem.html#TUPLE_REM">CHAOS_PP_TUPLE_REM</a></code></li>
 </ul>
 <hr>
@@ -218,6 +221,7 @@ A((1, 2), (3, 4)) // 1 + 2 + 3 + 4</pre>
 <h4>See Also</h4>
 <ul>
 <li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/eat.html#EAT">CHAOS_PP_EAT</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/rem.html#REM_CTOR">CHAOS_PP_REM_CTOR</a></code></li>
 <li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/rem.html#TUPLE_REM">CHAOS_PP_TUPLE_REM</a></code></li>
 <li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/rem.html#TUPLE_REM_CTOR">CHAOS_PP_TUPLE_REM_CTOR</a></code></li>
 </ul>
@@ -316,6 +320,59 @@ A((1, 2), (3, 4)) // 1 + 2 + 3 + 4</pre>
 			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
 			</p></div>
 <div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/rem.html#REM_ID" class="secondary">CHAOS_PP_REM_ID</a></code>)()</pre></div></div>
+<hr>
+<a name="REM_CTOR"></a><h3 class="primary">CHAOS_PP_REM_CTOR</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/rem.html#REM_CTOR" class="primary">CHAOS_PP_REM_CTOR</a></code> macro removes the parentheses from a unary <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a> in C++ (and C prior to C99) or from a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a> of any arity in C99.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/rem.html#REM_CTOR" class="primary">CHAOS_PP_REM_CTOR</a></code>(tuple)</pre>
+<dl>
+<dt><var>tuple</var></dt>
+<dd><p>
+			The <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a> from which parentheses are to be removed.
+		</p></dd>
+</dl>
+<h4>Usage <small>- C/C++ Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/rem.html#REM_CTOR" class="primary">CHAOS_PP_REM_CTOR</a></code>(tuple)</pre>
+<dl>
+<dt><var>tuple</var></dt>
+<dd><p>
+			The unary <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././tuples.html">tuple</a> from which parentheses are to be removed.
+		</p></dd>
+</dl>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/rem.html#REM">CHAOS_PP_REM</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/rem.html#TUPLE_REM">CHAOS_PP_TUPLE_REM</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/rem.html#TUPLE_REM_CTOR">CHAOS_PP_TUPLE_REM_CTOR</a></code></li>
+</ul>
+<hr>
+<a name="REM_CTOR_ID"></a><h3 class="secondary">CHAOS_PP_REM_CTOR_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/rem.html#REM_CTOR_ID" class="secondary">CHAOS_PP_REM_CTOR_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/rem.html#REM_CTOR" class="primary">CHAOS_PP_REM_CTOR</a></code>.
+		</p>
+<h4>Usage </h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/rem.html#REM_CTOR_ID" class="secondary">CHAOS_PP_REM_CTOR_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro effectively allows <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/rem.html#REM_CTOR" class="primary">CHAOS_PP_REM_CTOR</a></code> to pass through itself without becoming disabled.
+				</p></div>
+<hr>
+<a name="REM_CTOR_"></a><h3 class="secondary">CHAOS_PP_REM_CTOR_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/rem.html#REM_CTOR_" class="secondary">CHAOS_PP_REM_CTOR_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/rem.html#REM_CTOR" class="primary">CHAOS_PP_REM_CTOR</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/rem.html#REM_CTOR_" class="secondary">CHAOS_PP_REM_CTOR_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/rem.html#REM_CTOR_ID" class="secondary">CHAOS_PP_REM_CTOR_ID</a></code>)()</pre></div></div>
 <hr>
 <address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
 <address>

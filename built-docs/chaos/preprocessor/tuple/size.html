@@ -15,6 +15,8 @@
 <ul>
 <li><code><a class="primary" href="#TUPLE_QUICK_SIZE">CHAOS_PP_TUPLE_QUICK_SIZE</a></code></li>
 <li><code><a class="primary" href="#TUPLE_SIZE">CHAOS_PP_TUPLE_SIZE</a></code></li>
+<li><code><a class="primary" href="#VARIADIC_QUICK_SIZE">CHAOS_PP_VARIADIC_QUICK_SIZE</a></code></li>
+<li><code><a class="primary" href="#VARIADIC_SIZE">CHAOS_PP_VARIADIC_SIZE</a></code></li>
 </ul>
 <hr>
 <a name="TUPLE_QUICK_SIZE"></a><h3 class="primary">CHAOS_PP_TUPLE_QUICK_SIZE</h3>
@@ -49,6 +51,8 @@
 <li><code><a class="primary" href="../../.././chaos/preprocessor/seq/size.html#SEQ_SIZE_ALT">CHAOS_PP_SEQ_SIZE_ALT</a></code></li>
 <li><code><a class="primary" href="../../.././chaos/preprocessor/algorithm/size.html#SIZE">CHAOS_PP_SIZE</a></code></li>
 <li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/size.html#TUPLE_SIZE">CHAOS_PP_TUPLE_SIZE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/size.html#VARIADIC_QUICK_SIZE">CHAOS_PP_VARIADIC_QUICK_SIZE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/size.html#VARIADIC_SIZE">CHAOS_PP_VARIADIC_SIZE</a></code></li>
 </ul>
 <h4>Sample Code</h4>
 <pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/config.html" class="header">&lt;chaos/preprocessor/config.h&gt;</a></code>
@@ -123,6 +127,8 @@
 <li><code><a class="primary" href="../../.././chaos/preprocessor/seq/size.html#SEQ_SIZE_ALT">CHAOS_PP_SEQ_SIZE_ALT</a></code></li>
 <li><code><a class="primary" href="../../.././chaos/preprocessor/algorithm/size.html#SIZE">CHAOS_PP_SIZE</a></code></li>
 <li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/size.html#TUPLE_QUICK_SIZE">CHAOS_PP_TUPLE_QUICK_SIZE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/size.html#VARIADIC_QUICK_SIZE">CHAOS_PP_VARIADIC_QUICK_SIZE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/size.html#VARIADIC_SIZE">CHAOS_PP_VARIADIC_SIZE</a></code></li>
 </ul>
 <hr>
 <a name="TUPLE_SIZE_ID"></a><h3 class="secondary">CHAOS_PP_TUPLE_SIZE_ID</h3>
@@ -196,6 +202,161 @@
 			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
 			</p></div>
 <div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/size.html#TUPLE_SIZE_BYPASS" class="secondary">CHAOS_PP_TUPLE_SIZE_BYPASS</a></code>)</pre></div></div>
+<hr>
+<a name="VARIADIC_QUICK_SIZE"></a><h3 class="primary">CHAOS_PP_VARIADIC_QUICK_SIZE</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/size.html#VARIADIC_QUICK_SIZE" class="primary">CHAOS_PP_VARIADIC_QUICK_SIZE</a></code> macro counts the its arguments.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/size.html#VARIADIC_QUICK_SIZE" class="primary">CHAOS_PP_VARIADIC_QUICK_SIZE</a></code>(...)</pre>
+<dl>
+<dt>[<var>...</var>]</dt>
+<dd><p>
+			The arguments to be counted.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro expands to the number of arguments it is passed.
+		If <code>__VA_ARGS__</code> contains more that <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/limits.html#LIMIT_TUPLE" class="primary">CHAOS_PP_LIMIT_TUPLE</a></code> arguments, the result is <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././saturation.html">saturated</a> to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/limits.html#LIMIT_TUPLE" class="primary">CHAOS_PP_LIMIT_TUPLE</a></code>.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/array/size.html#ARRAY_SIZE">CHAOS_PP_ARRAY_SIZE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/size.html#SEQ_SIZE">CHAOS_PP_SEQ_SIZE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/size.html#SEQ_SIZE_ALT">CHAOS_PP_SEQ_SIZE_ALT</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/algorithm/size.html#SIZE">CHAOS_PP_SIZE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/size.html#TUPLE_QUICK_SIZE">CHAOS_PP_TUPLE_QUICK_SIZE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/size.html#TUPLE_SIZE">CHAOS_PP_TUPLE_SIZE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/size.html#VARIADIC_SIZE">CHAOS_PP_VARIADIC_SIZE</a></code></li>
+</ul>
+<hr>
+<a name="VARIADIC_QUICK_SIZE_ID"></a><h3 class="secondary">CHAOS_PP_VARIADIC_QUICK_SIZE_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/size.html#VARIADIC_QUICK_SIZE_ID" class="secondary">CHAOS_PP_VARIADIC_QUICK_SIZE_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/size.html#VARIADIC_QUICK_SIZE" class="primary">CHAOS_PP_VARIADIC_QUICK_SIZE</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/size.html#VARIADIC_QUICK_SIZE_ID" class="secondary">CHAOS_PP_VARIADIC_QUICK_SIZE_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro exists only for uniformity with other macros that require indirect invocation.
+				</p></div>
+<hr>
+<a name="VARIADIC_QUICK_SIZE_"></a><h3 class="secondary">CHAOS_PP_VARIADIC_QUICK_SIZE_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/size.html#VARIADIC_QUICK_SIZE_" class="secondary">CHAOS_PP_VARIADIC_QUICK_SIZE_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/size.html#VARIADIC_QUICK_SIZE" class="primary">CHAOS_PP_VARIADIC_QUICK_SIZE</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/size.html#VARIADIC_QUICK_SIZE_" class="secondary">CHAOS_PP_VARIADIC_QUICK_SIZE_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/size.html#VARIADIC_QUICK_SIZE" class="primary">CHAOS_PP_VARIADIC_QUICK_SIZE</a></code>)</pre></div></div>
+<hr>
+<a name="VARIADIC_SIZE"></a><h3 class="primary">CHAOS_PP_VARIADIC_SIZE</h3>
+<p>
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/size.html#VARIADIC_SIZE" class="primary">CHAOS_PP_VARIADIC_SIZE</a></code> macro counts the its arguments.
+	</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/size.html#VARIADIC_SIZE" class="primary">CHAOS_PP_VARIADIC_SIZE</a></code>(...)</pre>
+<dl>
+<dt>[<var>...</var>]</dt>
+<dd><p>
+			The arguments to be counted.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+		This macro expands to the number of arguments it is passed.
+		If <code>__VA_ARGS__</code> contains more that <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/limits.html#LIMIT_MAG" class="primary">CHAOS_PP_LIMIT_MAG</a></code> arguments, the result is <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././saturation.html">saturated</a> to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/limits.html#LIMIT_MAG" class="primary">CHAOS_PP_LIMIT_MAG</a></code>.
+	</p></div>
+<h4>See Also</h4>
+<ul>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/array/size.html#ARRAY_SIZE">CHAOS_PP_ARRAY_SIZE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/size.html#SEQ_SIZE">CHAOS_PP_SEQ_SIZE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/seq/size.html#SEQ_SIZE_ALT">CHAOS_PP_SEQ_SIZE_ALT</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/algorithm/size.html#SIZE">CHAOS_PP_SIZE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/size.html#TUPLE_QUICK_SIZE">CHAOS_PP_TUPLE_QUICK_SIZE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/size.html#TUPLE_SIZE">CHAOS_PP_TUPLE_SIZE</a></code></li>
+<li><code><a class="primary" href="../../.././chaos/preprocessor/tuple/size.html#VARIADIC_QUICK_SIZE">CHAOS_PP_VARIADIC_QUICK_SIZE</a></code></li>
+</ul>
+<hr>
+<a name="VARIADIC_SIZE_ID"></a><h3 class="secondary">CHAOS_PP_VARIADIC_SIZE_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/size.html#VARIADIC_SIZE_ID" class="secondary">CHAOS_PP_VARIADIC_SIZE_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/size.html#VARIADIC_SIZE" class="primary">CHAOS_PP_VARIADIC_SIZE</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/size.html#VARIADIC_SIZE_ID" class="secondary">CHAOS_PP_VARIADIC_SIZE_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro exists only for uniformity with other macros that require indirect invocation.
+				</p></div>
+<hr>
+<a name="VARIADIC_SIZE_"></a><h3 class="secondary">CHAOS_PP_VARIADIC_SIZE_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/size.html#VARIADIC_SIZE_" class="secondary">CHAOS_PP_VARIADIC_SIZE_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/size.html#VARIADIC_SIZE" class="primary">CHAOS_PP_VARIADIC_SIZE</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/size.html#VARIADIC_SIZE_" class="secondary">CHAOS_PP_VARIADIC_SIZE_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/size.html#VARIADIC_SIZE" class="primary">CHAOS_PP_VARIADIC_SIZE</a></code>)</pre></div></div>
+<hr>
+<a name="VARIADIC_SIZE_BYPASS"></a><h3 class="alternate">CHAOS_PP_VARIADIC_SIZE_BYPASS</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/size.html#VARIADIC_SIZE_BYPASS" class="secondary">CHAOS_PP_VARIADIC_SIZE_BYPASS</a></code> macro behaves identically to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/size.html#VARIADIC_SIZE" class="primary">CHAOS_PP_VARIADIC_SIZE</a></code> except that it is parametized by the <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././bypass-semantics.html">bypass recursion state</a>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/size.html#VARIADIC_SIZE_BYPASS" class="secondary">CHAOS_PP_VARIADIC_SIZE_BYPASS</a></code>(s, ...)</pre>
+<dl>
+<dt><var>s</var></dt>
+<dd><p>
+				The current <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././bypass-semantics.html">bypass recursion state</a>.
+			</p></dd>
+<dt>[<var>...</var>]</dt>
+<dd><p>
+			The arguments to be counted.
+		</p></dd>
+</dl>
+<h4>Remarks</h4>
+<div><p>
+			If <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././bypass-semantics.html">bypass semantics</a> are already in effect, this macro must be used instead of <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/size.html#VARIADIC_SIZE" class="primary">CHAOS_PP_VARIADIC_SIZE</a></code>.
+		</p></div>
+<hr>
+<a name="VARIADIC_SIZE_BYPASS_ID"></a><h3 class="secondary">CHAOS_PP_VARIADIC_SIZE_BYPASS_ID</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/size.html#VARIADIC_SIZE_BYPASS_ID" class="secondary">CHAOS_PP_VARIADIC_SIZE_BYPASS_ID</a></code> macro indirectly expands to <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/size.html#VARIADIC_SIZE_BYPASS" class="secondary">CHAOS_PP_VARIADIC_SIZE_BYPASS</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/size.html#VARIADIC_SIZE_BYPASS_ID" class="secondary">CHAOS_PP_VARIADIC_SIZE_BYPASS_ID</a></code>()</pre>
+<h4>Remarks</h4>
+<div><p>
+					This macro exists only for uniformity with other macros that require indirect invocation.
+				</p></div>
+<hr>
+<a name="VARIADIC_SIZE_BYPASS_"></a><h3 class="secondary">CHAOS_PP_VARIADIC_SIZE_BYPASS_</h3>
+<p>
+			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/size.html#VARIADIC_SIZE_BYPASS_" class="secondary">CHAOS_PP_VARIADIC_SIZE_BYPASS_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/size.html#VARIADIC_SIZE_BYPASS" class="secondary">CHAOS_PP_VARIADIC_SIZE_BYPASS</a></code>.
+		</p>
+<h4>Usage <small>- C99 Specific</small>
+</h4>
+<pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/size.html#VARIADIC_SIZE_BYPASS_" class="secondary">CHAOS_PP_VARIADIC_SIZE_BYPASS_</a></code></pre>
+<h4>Remarks</h4>
+<div><p>
+			This macro is a shorthand form of the following <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ binding</a>:
+			</p></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/lambda/ops.html#LAMBDA" class="primary">CHAOS_PP_LAMBDA</a></code>(<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/tuple/size.html#VARIADIC_SIZE_BYPASS" class="secondary">CHAOS_PP_VARIADIC_SIZE_BYPASS</a></code>)</pre></div></div>
 <hr>
 <address>© Copyright <a href="mailto:pmenso57@users.sourceforge.net">Paul Mensonides</a> 2003-2005</address>
 <address>

@@ -220,4 +220,24 @@
 	<derivative id="REM_" lang="C99"/>
 </macro>
 
+<macro id="REM_CTOR" type="indirect" group="rem">
+	<abstract>
+		The <REM_CTOR/> macro removes the parentheses from a unary <link id="tuple"/> in C++ (and C prior to C99) or from a <link id="tuple"/> of any arity in C99.
+	</abstract>
+	<usage lang="C99">
+		<syntax><REM_CTOR/>(tuple)</syntax>
+		<param id="tuple">
+			The <link id="tuple"/> from which parentheses are to be removed.
+		</param>
+	</usage>
+	<usage lang="C/C++">
+		<syntax><REM_CTOR/>(tuple)</syntax>
+		<param id="tuple">
+			The unary <link id="tuple"/> from which parentheses are to be removed.
+		</param>
+	</usage>
+	<derivative id="REM_CTOR_ID"/>
+	<derivative id="REM_CTOR_" lang="C99"/>
+</macro>
+
 </header>

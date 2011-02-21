@@ -89,4 +89,47 @@
 	</derivative>
 </macro>
 
+<macro id="VARIADIC_QUICK_SIZE" group="size">
+	<abstract>
+		The <VARIADIC_QUICK_SIZE/> macro counts the its arguments.
+	</abstract>
+	<usage lang="C99">
+		<syntax><VARIADIC_QUICK_SIZE/>(...)</syntax>
+		<param id="..." optional="1">
+			The arguments to be counted.
+		</param>
+	</usage>
+	<para>
+		This macro expands to the number of arguments it is passed.
+		If <code>__VA_ARGS__</code> contains more that <LIMIT_TUPLE/> arguments, the result is <link id="saturated"/> to <LIMIT_TUPLE/>.
+	</para>
+	<derivative id="VARIADIC_QUICK_SIZE_ID" lang="C99"/>
+	<derivative id="VARIADIC_QUICK_SIZE_" lang="C99"/>
+</macro>
+
+<macro id="VARIADIC_SIZE" group="size">
+	<abstract>
+		The <VARIADIC_SIZE/> macro counts the its arguments.
+	</abstract>
+	<usage lang="C99">
+		<syntax><VARIADIC_SIZE/>(...)</syntax>
+		<param id="..." optional="1">
+			The arguments to be counted.
+		</param>
+	</usage>
+	<para>
+		This macro expands to the number of arguments it is passed.
+		If <code>__VA_ARGS__</code> contains more that <LIMIT_MAG/> arguments, the result is <link id="saturated"/> to <LIMIT_MAG/>.
+	</para>
+	<derivative id="VARIADIC_SIZE_ID" lang="C99"/>
+	<derivative id="VARIADIC_SIZE_" lang="C99"/>
+	<derivative id="VARIADIC_SIZE_BYPASS">
+		<usage lang="C99">
+			<syntax><VARIADIC_SIZE_BYPASS/>(s, ...)</syntax>
+		</usage>
+		<derivative id="VARIADIC_SIZE_BYPASS_ID" lang="C99"/>
+		<derivative id="VARIADIC_SIZE_BYPASS_" lang="C99"/>
+	</derivative>
+</macro>
+
 </header>

@@ -16,6 +16,8 @@
 # $3 == destination path
 # $4 == regular expression
 
+# example: ./build ../documentation{/library.xml,} ../built-docs ".*"
+
 clear
 
 echo expanding library...

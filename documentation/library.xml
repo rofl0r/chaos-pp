@@ -365,6 +365,8 @@
 				<header name="null.h"/>
 				<header name="placemarker_if.h"/>
 				<header name="unless.h"/>
+				<header name="variadic_if.h"/>
+				<header name="variadic_iif.h"/>
 				<header name="when.h"/>
 				<header name="while.h"/>
 				<header name="while_aux.h"/>

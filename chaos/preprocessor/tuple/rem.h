@@ -78,4 +78,13 @@
 #
 # define CHAOS_PP_REM_ID() CHAOS_PP_REM
 #
+# /* CHAOS_PP_REM_CTOR */
+#
+# define CHAOS_PP_REM_CTOR(tuple) CHAOS_PP_REM tuple
+# define CHAOS_PP_REM_CTOR_ID() CHAOS_PP_REM_CTOR
+#
+# if CHAOS_PP_VARIADICS
+#    define CHAOS_PP_REM_CTOR_ CHAOS_PP_LAMBDA(CHAOS_PP_REM_CTOR_ID)()
+# endif
+#
 # endif

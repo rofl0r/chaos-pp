@@ -23,7 +23,7 @@
 	<usage lang="C++0x">
 		<syntax><UCHARIZE/>(n)(c)</syntax>
 		<param id="n">
-			The type of encoding of the resulting string literal.
+			The type of encoding of the resulting character literal.
 			Valid values are <code>8</code>, <code>16</code>, and <code>32</code>.
 		</param>
 		<param id="c">
@@ -40,15 +40,12 @@
 		</snippet>
 	</para>
 	<listing>
-		#include <chaos-preprocessor-algorithm-for_each.h/>
-		#include <chaos-preprocessor-recursion-expr.h/>
-		#include <chaos-preprocessor-string-core.h/>
 		#include <chaos-preprocessor-string-ucharize.h/>
 		
-		CHAOS_PP_UCHARIZE(32)(a) // U'a'
+		<UCHARIZE/>(32)(a) // U'a'
 	</listing>
 	<derivative id="UCHARIZE_ID"/>
-	<derivative id="UCHARIZE_" lang="C99"/>
+	<derivative id="UCHARIZE_" lang="C++0x"/>
 </macro>
 
 </header>

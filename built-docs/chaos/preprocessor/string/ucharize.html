@@ -24,7 +24,7 @@
 <dl>
 <dt><var>n</var></dt>
 <dd><p>
-			The type of encoding of the resulting string literal.
+			The type of encoding of the resulting character literal.
 			Valid values are <code>8</code>, <code>16</code>, and <code>32</code>.
 		</p></dd>
 <dt><var>c</var></dt>
@@ -52,12 +52,9 @@
 <li><code><a class="primary" href="../../.././chaos/preprocessor/wstringize.html#WSTRINGIZE">CHAOS_PP_WSTRINGIZE</a></code></li>
 </ul>
 <h4>Sample Code</h4>
-<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/algorithm/for_each.html" class="header">&lt;chaos/preprocessor/algorithm/for_each.h&gt;</a></code>
-#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/recursion/expr.html" class="header">&lt;chaos/preprocessor/recursion/expr.h&gt;</a></code>
-#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/core.html" class="header">&lt;chaos/preprocessor/string/core.h&gt;</a></code>
-#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/ucharize.html" class="header">&lt;chaos/preprocessor/string/ucharize.h&gt;</a></code>
+<pre class="box">#include <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/ucharize.html" class="header">&lt;chaos/preprocessor/string/ucharize.h&gt;</a></code>
 
-CHAOS_PP_UCHARIZE(32)(a) // U'a'</pre>
+<code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/ucharize.html#UCHARIZE" class="primary">CHAOS_PP_UCHARIZE</a></code>(32)(a) // U'a'</pre>
 <hr>
 <a name="UCHARIZE_ID"></a><h3 class="secondary">CHAOS_PP_UCHARIZE_ID</h3>
 <p>
@@ -74,7 +71,7 @@ CHAOS_PP_UCHARIZE(32)(a) // U'a'</pre>
 <p>
 			The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/ucharize.html#UCHARIZE_" class="secondary">CHAOS_PP_UCHARIZE_</a></code> macro expands to a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././lambda.html">λ expression</a> representing <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/ucharize.html#UCHARIZE" class="primary">CHAOS_PP_UCHARIZE</a></code>.
 		</p>
-<h4>Usage <small>- C99 Specific</small>
+<h4>Usage <small>- C++0x Specific</small>
 </h4>
 <pre class="box"><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/ucharize.html#UCHARIZE_" class="secondary">CHAOS_PP_UCHARIZE_</a></code></pre>
 <h4>Remarks</h4>

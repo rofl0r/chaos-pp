@@ -676,6 +676,8 @@
 				<header name="core.h"/>
 				<header name="to_lower.h"/>
 				<header name="to_upper.h"/>
+				<header name="ucharize.h"/>
+				<header name="wcharize.h"/>
 			</directory>
 			<header name="stringize.h"/>
 			<header name="tuple.h"/>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- **************************************************************************
+     *                                                                        *
+     *    (C) Copyright Paul Mensonides 2003-2011.                            *
+     *                                                                        *
+     *    Distributed under the Boost Software License, Version 1.0.          *
+     *    (See accompanying file LICENSE).                                    *
+     *                                                                        *
+     *    See http://chaos-pp.sourceforge.net for the most recent version.    *
+     *                                                                        *
+     ************************************************************************** -->
+
+<header name="chaos/preprocessor/string/ucharize.h" author="Paul Mensonides" date="2003-2011">
+<overview>
+	The <self/> header defines a macro that converts a character to a UTF-8, UTF-16, or UTF-32 character literal.
+</overview>
+
+<macro id="UCHARIZE" group="stringizing">
+	<abstract>
+		The <UCHARIZE/> macro converts its argument to a UTF-8, UTF-16, or UTF-32 character literal.
+	</abstract>
+	<usage lang="C++0x">
+		<syntax><UCHARIZE/>(n)(c)</syntax>
+		<param id="n">
+			The type of encoding of the resulting string literal.
+			Valid values are <code>8</code>, <code>16</code>, and <code>32</code>.
+		</param>
+		<param id="c">
+			The character to be converted.
+			Valid values are the underscore (<code>_</code>), the decimal numerals (<code>0</code> through <code>9</code>), and the lowercase and uppercase letters (<code>a</code> through <code>z</code> and <code>A</code> through <code>Z</code>).
+		</param>
+	</usage>
+	<para>
+		This macro is <em>not</em> a general-purpose "charizing" macro.
+		Input to this macro is restricted to characters that can be elements in a <link id="string"/> data structure.
+		For example,
+		<snippet>
+			<UCHARIZE/>(8)(+) // invalid
+		</snippet>
+	</para>
+	<listing>
+		#include <chaos-preprocessor-algorithm-for_each.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		#include <chaos-preprocessor-string-core.h/>
+		#include <chaos-preprocessor-string-ucharize.h/>
+		
+		CHAOS_PP_UCHARIZE(32)(a) // U'a'
+	</listing>
+	<derivative id="UCHARIZE_ID"/>
+	<derivative id="UCHARIZE_" lang="C99"/>
+</macro>
+
+</header>

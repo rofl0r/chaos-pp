@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- **************************************************************************
+     *                                                                        *
+     *    (C) Copyright Paul Mensonides 2003-2011.                            *
+     *                                                                        *
+     *    Distributed under the Boost Software License, Version 1.0.          *
+     *    (See accompanying file LICENSE).                                    *
+     *                                                                        *
+     *    See http://chaos-pp.sourceforge.net for the most recent version.    *
+     *                                                                        *
+     ************************************************************************** -->
+
+<header name="chaos/preprocessor/string/wcharize.h" author="Paul Mensonides" date="2003-2011">
+<overview>
+	The <self/> header defines a macro that converts a character to a wide character literal.
+</overview>
+
+<macro id="WCHARIZE" group="stringizing">
+	<abstract>
+		The <WCHARIZE/> macro converts its argument to a wide character literal.
+	</abstract>
+	<usage>
+		<syntax><WCHARIZE/>(c)</syntax>
+		<param id="c">
+			The character to be converted.
+			Valid values are the underscore (<code>_</code>), the decimal numerals (<code>0</code> through <code>9</code>), and the lowercase and uppercase letters (<code>a</code> through <code>z</code> and <code>A</code> through <code>Z</code>).
+		</param>
+	</usage>
+	<para>
+		This macro is <em>not</em> a general-purpose "charizing" macro.
+		Input to this macro is restricted to characters that can be elements in a <link id="string"/> data structure.
+		For example,
+		<snippet>
+			<WCHARIZE/>(+) // invalid
+		</snippet>
+	</para>
+	<listing>
+		#include <chaos-preprocessor-algorithm-for_each.h/>
+		#include <chaos-preprocessor-recursion-expr.h/>
+		#include <chaos-preprocessor-string-core.h/>
+		#include <chaos-preprocessor-string-wcharize.h/>
+		
+		#define TO_WCHAR_SEQ(string) \
+		    <EXPR/>(<FOR_EACH/>( \
+		        TO_CHAR_SEQ_I, (<STRING/>) string, ~ \
+		    )) \
+		    /**/
+		
+		#define TO_WCHAR_SEQ_I(s, c, _) (<WCHARIZE/>(c))
+		
+		TO_CHAR_SEQ(t e m p l a t e) // (L't')(L'e')(L'm')(L'p')(L'l')(L'a')(L't')(L'e')
+	</listing>
+	<derivative id="WCHARIZE_ID"/>
+	<derivative id="WCHARIZE_" lang="C99"/>
+</macro>
+
+</header>

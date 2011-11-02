@@ -18,7 +18,7 @@
 
 <macro id="VARIADICS" type="object">
 	<abstract>
-		The <VARIADICS/> macro determines whether the library supports C99 facilities such as variadic macros and placemarkers.
+		The <VARIADICS/> macro determines whether the library supports C99/C++0x facilities such as variadic macros and placemarkers.
 	</abstract>
 	<usage>
 		<syntax>#define <VARIADICS/> x</syntax>

@@ -30,7 +30,7 @@
 		<syntax><VARIADICS/></syntax>
 	</usage>
 	<para>
-		This macro defaults to <code>1</code> if the preprocessor is a C99 preprocessor.
+		This macro defaults to <code>1</code> if the preprocessor is a C99/C++0x preprocessor.
 		Otherwise, it defaults to <code>0</code>.
 	</para>
 	<para>

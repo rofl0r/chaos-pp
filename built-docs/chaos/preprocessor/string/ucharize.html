@@ -7,7 +7,7 @@
 </head>
 <body>
 <p>
-	The <code>string/ucharize.h</code> header defines a macro that converts a character to a UTF-8, UTF-16, or UTF-32 character literal.
+	The <code>string/ucharize.h</code> header defines a macro that converts a character to a UTF-16 or UTF-32 character literal.
 </p>
 <h4>Usage</h4>
 <pre class="box">#include <code><a class="header" href="../../.././chaos/preprocessor/string/ucharize.html">&lt;chaos/preprocessor/string/ucharize.h&gt;</a></code></pre>
@@ -16,7 +16,7 @@
 <hr>
 <a name="UCHARIZE"></a><h3 class="primary">CHAOS_PP_UCHARIZE</h3>
 <p>
-		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/ucharize.html#UCHARIZE" class="primary">CHAOS_PP_UCHARIZE</a></code> macro converts its argument to a UTF-8, UTF-16, or UTF-32 character literal.
+		The <code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/ucharize.html#UCHARIZE" class="primary">CHAOS_PP_UCHARIZE</a></code> macro converts its argument to a UTF-16 or UTF-32 character literal.
 	</p>
 <h4>Usage <small>- C++0x Specific</small>
 </h4>
@@ -25,7 +25,7 @@
 <dt><var>n</var></dt>
 <dd><p>
 			The type of encoding of the resulting character literal.
-			Valid values are <code>8</code>, <code>16</code>, and <code>32</code>.
+			Valid values are <code>16</code> and <code>32</code>.
 		</p></dd>
 <dt><var>c</var></dt>
 <dd><p>
@@ -39,7 +39,7 @@
 		Input to this macro is restricted to characters that can be elements in a <a xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl" href="../../.././strings.html">string</a> data structure.
 		For example,
 		</p></div>
-<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/ucharize.html#UCHARIZE" class="primary">CHAOS_PP_UCHARIZE</a></code>(8)(+) // invalid</pre></div></div>
+<div><div><pre><code xmlns:header-name="/pp-book/header-name.xsl" xmlns:string="/pp-book/string.xsl"><a href="../../.././chaos/preprocessor/string/ucharize.html#UCHARIZE" class="primary">CHAOS_PP_UCHARIZE</a></code>(16)(+) // invalid</pre></div></div>
 <h4>See Also</h4>
 <ul>
 <li><code><a class="primary" href="../../.././chaos/preprocessor/string/charize.html#CHARIZE">CHAOS_PP_CHARIZE</a></code></li>
